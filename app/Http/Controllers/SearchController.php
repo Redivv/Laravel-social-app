@@ -6,7 +6,13 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function index( ?int $age_min = null, ?int $age_max = null, ?string $username = null) {
-        return view('searcher');
+    public function index() {
+        $data = request()->validate([
+            'name' => ['string', 'max:255'],
+            'age-min' => ['integer', 'min:18', 'lt:age-max'],
+            'age-max' => ['integer', 'min:18', 'gt:age-min']
+        ]);
+
+        return view('searcher')->withData($data);
     }
 }

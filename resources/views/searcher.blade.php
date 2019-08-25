@@ -7,18 +7,20 @@
                 <div class="form-row">
                     <div class="col-7">
                         <label for="username">{{__('searcher.username')}}</label>
-                        <input type="text" id="username" name="username" aria-label="Nazwa Użytkownika" value="{{old('username')}}" class="form-control">
+                        <input type="text" id="username" name="username" aria-label="Nazwa Użytkownika" value="{{old('username')}}" class="form-control @error('username') is-invalid @enderror">
                     </div>
                     <div class="col">
                         <label for="age-min">{{__('searcher.age')}}</label>
                         <div class="input-group">
-                            <input id="age-min" name="age-min" type="number" placeholder="Min" aria-label="Minimalny Wiek" value="{{old('age-min')}}" class="form-control">
-                            <input id="age-max" name="age-max" type="number" placeholder="Max" aria-label="Maksymalny Wiek" value="{{old('age-max')}}" class="form-control">
+                            <input id="age-min" name="age-min" type="number" placeholder="Min" min="18" aria-label="Minimalny Wiek" value="{{old('age-min')}}" class="form-control @error('age-min') is-invalid @enderror">
+                            <input id="age-max" name="age-max" type="number" placeholder="Max" min="18" aria-label="Maksymalny Wiek" value="{{old('age-max')}}" class="form-control @error('age-max') is-invalid @enderror">
                         </div>
                     </div>
                 </div>
             </div>
             <button class="btn btn-primary" type="submit">{{__('searcher.search')}}</button>
         </form>
+        <hr>
+        @include('partials.error')
     </div>
 @endsection
