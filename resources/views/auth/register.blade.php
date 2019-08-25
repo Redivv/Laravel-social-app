@@ -26,6 +26,24 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="birth_year" class="col-md-4 col-form-label text-md-right">{{ __('registeration.age') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="birth_year" class="form-control @error('birth_year') is-invalid @enderror" name="birth_year" required>
+                                    @for ($year = date("Y")-1; $year >= 1950; $year --)
+                                        <option value="{{$year}}">{{$year}}</option>
+                                    @endfor
+                                </select>
+
+                                @error('birth_year')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ __('registeration.young') }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
