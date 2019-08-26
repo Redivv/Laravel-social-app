@@ -22,5 +22,19 @@
         </form>
         <hr>
         @include('partials.error')
+        @if ($results)
+            <div dusk="search_results_box" class="search-results">
+                <h3 dusk="search_results_header">
+                    @if (count($results) === 0)
+                        Nie znaleziono użytkowników w podanych kryteriach
+                    @else
+                        Ilość wyników: {{count($results)}}
+                    @endif
+                </h3>
+                @foreach ($results as $result)
+                    {{$result->name}}
+                @endforeach
+            </div>
+        @endif
     </div>
 @endsection
