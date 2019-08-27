@@ -29,7 +29,7 @@ class RegisterationTest extends TestCase
         $this->assertCount(1, $users = User::all());
         $this->assertAuthenticatedAs($user = $users->first());
         $this->assertEquals('Boi', $user->name);
-        $this->assertEquals('2000', $user->birth_year);
+        $this->assertEquals('19', $user->age);
     }
 
     /** @test */

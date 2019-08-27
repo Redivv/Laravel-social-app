@@ -12,8 +12,8 @@
                     <div class="col">
                         <label for="age-min">{{__('searcher.age')}}</label>
                         <div class="input-group">
-                            <input id="age-min" name="age-min" type="number" placeholder="Min" min="18" aria-label="Minimalny Wiek" value="{{old('age-min')}}" class="form-control @error('age-min') is-invalid @enderror">
-                            <input id="age-max" name="age-max" type="number" placeholder="Max" min="18" aria-label="Maksymalny Wiek" value="{{old('age-max')}}" class="form-control @error('age-max') is-invalid @enderror">
+                            <input id="age-min" name="age-min" type="number" placeholder="Min" min="18" aria-label="{{__('searcher.min-age')}}" value="{{old('age-min')}}" class="form-control @error('age-min') is-invalid @enderror">
+                            <input id="age-max" name="age-max" type="number" placeholder="Max" min="18" aria-label="{{__('searcher.max-age')}}" value="{{old('age-max')}}" class="form-control @error('age-max') is-invalid @enderror">
                         </div>
                     </div>
                 </div>
@@ -26,9 +26,9 @@
             <div dusk="search_results_box" class="search-results">
                 <h3 dusk="search_results_header">
                     @if (count($results) === 0)
-                        Nie znaleziono użytkowników w podanych kryteriach
+                        {{__('searcher.not_found')}}
                     @else
-                        Ilość wyników: {{count($results)}}
+                        {{__('searcher.results',['number' => count($results)])}}
                     @endif
                 </h3>
                 @foreach ($results as $result)

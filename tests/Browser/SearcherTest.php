@@ -7,7 +7,7 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Chrome;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class KurwaTest extends DuskTestCase
+class SearcherTest extends DuskTestCase
 {
 
     /**

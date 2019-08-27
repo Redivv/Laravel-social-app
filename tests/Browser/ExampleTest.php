@@ -7,7 +7,7 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Chrome;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class KurwaTest extends DuskTestCase
+class ExampleTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
