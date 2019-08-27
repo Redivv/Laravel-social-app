@@ -76,4 +76,46 @@ class SearcherTest extends DuskTestCase
         
         $user->delete();
     }
+
+    /** @test */
+    public function test_Logged_in_user_can_see_simmillar_aged_users()
+    {
+        $user = factory(User::class)->create();
+
+        $users = factory(User::class,10)->create();
+
+
+        $response = $this->browse(function($browser) use ($user){
+            $browser->loginAs($user)
+                ->visit('/searcher')
+                ->assertPathIs('//searcher')
+                ->assertSeeIn('@search_results_header', 'Osoby w podobnym do Twojego wieku');
+        });
+
+        $users = User::all();
+
+        foreach ($users as $user) {
+            $user->delete();
+        }
+    }
+
+    /** @test */
+    public function test_guests__wont_see_simmillar_aged_users()
+    {
+        $users = factory(User::class,10)->create();
+
+
+        $response = $this->browse(function($browser){
+            $browser->visit('/searcher')
+                ->assertPathIs('//searcher')
+                ->assertDontSee('Osoby w podobnym do Twojego wieku');
+        });
+
+        $users = User::all();
+
+        foreach ($users as $user) {
+            $user->delete();
+        }
+    }
+    
 }
