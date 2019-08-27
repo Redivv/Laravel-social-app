@@ -12,9 +12,17 @@
 */
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect()->route('searcher');
+    }
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/searcher', 'SearchController@index')->name('searcher');
+
+Route::prefix('user')->group(function(){
+    Route::get('/home', 'HomeController@index')->name('home');
+});
+
