@@ -20,9 +20,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/searcher', 'SearchController@index')->name('searcher');
+Route::get('searcher', 'SearchController@index')->name('searcher');
 
 Route::prefix('user')->group(function(){
     Route::get('/home', 'HomeController@index')->name('home');
+});
+
+Route::get('notification', function(){
+    return view('notification-test');
+});
+
+Route::get('test', function () {
+    event(new App\Events\MessageSent('Someone'));
+    return "Event has been sent!";
 });
 
