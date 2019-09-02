@@ -13,14 +13,9 @@ return [
             'app_key'       => env('PUSHER_APP_KEY', ''),
             'app_secret'    => env('PUSHER_APP_SECRET', ''),
             'options' => [
-                'cluster' => 'eu',
+                'cluster' => env('PUSHER_APP_CLUSTER', ''),
                 'encrypted' => true
             ]
         ],
-    'oembed' => [
-        'enabled' => true,
-        'url' => '',
-        'key' => ''
-    ]
     ]
 ];

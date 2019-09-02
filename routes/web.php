@@ -23,11 +23,19 @@ Auth::routes();
 Route::get('searcher', 'SearchController@index')->name('searcher');
 
 Route::prefix('user')->group(function(){
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('home', 'HomeController@index')->name('home');
+    Route::get('talk', 'HomeController@chat')->name('chat');
 });
 
 Route::get('notification', function(){
     return view('notification-test');
+});
+
+Route::get('message/{id}', 'MessageController@chatHistory')->name('message.read');
+
+Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+   Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new');
+   Route::delete('message/delete/{id}', 'MessageController@ajaxDeleteMessage')->name('message.delete');
 });
 
 Route::get('test', function () {
