@@ -58,8 +58,11 @@ class MessageController extends Controller
             }
             
             if ($message = Talk::user(Auth::id())->sendMessageByUserId($userId, $body)) {
+                $lel = compact('message');
                 $html = view('ajax.newMessageHtml', compact('message'))->render();
-                return response()->json(['status'=>'success', 'html'=>$html], 200);
+                $threads = Talk::user(Auth::id())->getInbox('desc',0,1);
+                $html2 = view('ajax.newThreadHtml', compact('threads'))->render();
+                return response()->json(['status'=>'success', 'html'=>$html, 'html2'=>$html2, 'receiver_id'=>$userId], 200);
             }
         }
     }

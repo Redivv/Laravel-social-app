@@ -22,6 +22,10 @@ $(document).ready(function () {
         request.done(function (response) {
             if (response.status == 'success') {
                 $('#talkMessages').append(response.html);
+                var $thread = $('#user-'+response.receiver_id);
+                if($thread.length)
+                    $('#user-'+response.receiver_id).remove();
+                $('#people-list .list').prepend(response.html2);
                 tag[0].reset();
             }
         });

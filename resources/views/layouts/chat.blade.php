@@ -35,7 +35,6 @@
                 <div class="chat-with">No Thread Selected</div>
             @endif
         </div>
-        <i class="fa fa-star"></i>
       </div> <!-- end chat-header -->
       
       @yield('content')
@@ -76,8 +75,25 @@
             data.message +
             '</div>' +
             '</li>';
-
             $('#talkMessages').append(html);
+
+            html = '<li id="user-'+data.sender.id+'" class="clearfix">'+
+              '<a href="/message/'+data.sender.id+'">'+
+                '<div class="about">'+
+                  '<div class="name">'+data.sender.name+'</div>'+
+                  '<div class="status">'+
+                   '<span>'+data.message.substring(0,20)+'</span>'+
+                  '</div>'
+               '</div>'
+              '</a>'
+            '</li>';
+
+            var $thread = $('#user-'+data.sender.id);
+            if($thread.length)
+                $('#user-'+data.sender.id).remove();
+            $('#people-list .list').prepend(html);
+
+            console.log(data);
         }
 
     </script>
