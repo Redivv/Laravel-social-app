@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
       <meta name="csrf-token" content="{{csrf_token()}}">
-    <title>Chatt</title>
+    <title>Chat</title>
     
     
     <link rel="stylesheet" href="{{asset('chat/css/reset.css')}}">
@@ -25,7 +25,7 @@
       <div class="chat-header clearfix">
         <div class="chat-about">
             @if(isset($user))
-                <div class="chat-with">{{'Chat with ' . @$user->name}}</div>
+                <div class="chat-with">{{@$user->name}}</div>
             @else
                 <div class="chat-with">No Thread Selected</div>
             @endif
@@ -61,16 +61,18 @@
         }
 
         var msgshow = function(data) {
-            var html = '<li id="message-' + data.id + '">' +
-            '<div class="message-data">' +
-            '<span class="message-data-name"> <a href="#" class="talkDeleteMessage" data-message-id="' + data.id + '" title="Delete Messag"><i class="fa fa-close" style="margin-right: 3px;"></i></a>' + data.sender.name + '</span>' +
-            '<span class="message-data-time">1 Second ago</span>' +
-            '</div>' +
-            '<div class="message my-message">' +
-            data.message +
-            '</div>' +
-            '</li>';
-            $('#talkMessages').append(html);
+            if($("div.chat-with").text() == data.sender.name){
+              var html = '<li id="message-' + data.id + '">' +
+              '<div class="message-data">' +
+              '<span class="message-data-name"> <a href="#" class="talkDeleteMessage" data-message-id="' + data.id + '" title="Delete Messag"><i class="fa fa-close" style="margin-right: 3px;"></i></a>' + data.sender.name + '</span>' +
+              '<span class="message-data-time">1 Second {{__("chat.time")}}</span>' +
+              '</div>' +
+              '<div class="message my-message">' +
+              data.message +
+              '</div>' +
+              '</li>';
+              $('#talkMessages').append(html);
+            }
 
             html = '<li id="user-'+data.sender.id+'" class="clearfix">'+
               '<a href="/message/'+data.sender.id+'">'+
