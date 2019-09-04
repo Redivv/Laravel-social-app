@@ -2,4 +2,5 @@
 
 return [
     'time'  => 'temu',
+    'seen'  => 'Odczytano',
 ];

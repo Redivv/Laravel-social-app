@@ -3,7 +3,9 @@
 $green: #86BB71;
 $blue: #94C2ED;
 $orange: #E38968;
+$red: #c72906;
 $gray: #92959E;
+$white: #fafafa;
 
 *, *:before, *:after {
   box-sizing: border-box;
@@ -49,10 +51,7 @@ body {
   ul {
     padding: 20px;
     height: 770px;
- 
-    
-    
-    
+
     li {
       padding-bottom: 20px;
     }
@@ -73,6 +72,10 @@ body {
   
   .status {
     color: $gray;
+  }
+
+  .name{
+    color:$white;
   }
   
 }
@@ -166,6 +169,15 @@ body {
       
       &:after {
         border-bottom-color: $blue;
+        left: 93%;
+      }
+    }
+
+    .temporary-message{
+      background: $red;
+
+      &:after {
+        border-bottom-color: $red;
         left: 93%;
       }
     }

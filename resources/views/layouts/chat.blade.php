@@ -18,12 +18,7 @@
   </head>
 
   <body>
-<div class="header">
-    <div class="container header-brand">
-        <a href="{{url('/')}}" class="brand">Chat</a>
-    </div>
-</div>
-      <div class="container clearfix body">
+    <div class="container clearfix body">
    @include('partials.peoplelist')
     
     <div class="chat">
@@ -55,7 +50,7 @@
 
 
       <script>
-          var __baseUrl = "{{url('/')}}"
+          var __baseUrl = "{{url('/')}}";
       </script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="{{asset('chat/js/talk.js')}}"></script>
