@@ -36,6 +36,7 @@ Route::get('message/{id}', 'MessageController@chatHistory')->name('message.read'
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
    Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new');
    Route::delete('message/delete/{id}', 'MessageController@ajaxDeleteMessage')->name('message.delete');
+   Route::patch('message/seen/{id}', 'MessageController@ajaxSeenMessage')->name('message.seen');
 });
 
 Route::get('test', function () {

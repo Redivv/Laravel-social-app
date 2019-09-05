@@ -2,15 +2,20 @@
 <html >
   <head>
     <meta charset="UTF-8">
-      <meta name="csrf-token" content="{{csrf_token()}}">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <title>Chat</title>
-    
+    <script>
+      window.Laravel = {!! json_encode([
+          'user' => auth()->check() ? auth()->user()->id : null,
+      ]) !!};
+    </script>
     
     <link rel="stylesheet" href="{{asset('chat/css/reset.css')}}">
 
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
 
-        <link rel="stylesheet" href="{{asset('chat/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('chat/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
     
     
@@ -18,10 +23,10 @@
   </head>
 
   <body>
-    <div class="container clearfix body">
+    <div class="container p-0 clearfix body">
    @include('partials.peoplelist')
     
-    <div class="chat">
+    <div class="chat col-lg-8">
       <div class="chat-header clearfix">
         <div class="chat-about">
             @if(isset($user))
@@ -53,6 +58,7 @@
           var __baseUrl = "{{url('/')}}";
       </script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src={{asset('js/app.js')}}></script>
     <script src="{{asset('chat/js/talk.js')}}"></script>
 
     <script>
@@ -72,6 +78,18 @@
               '</div>' +
               '</li>';
               $('#talkMessages').append(html);
+              
+              $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+              });
+
+              var request = $.ajax({
+                method: "post",
+                url: __baseUrl+'/ajax/message/seen/'+data.id,
+                data: {"_method": "PATCH", "sender": data.sender.id}
+              });
             }
 
             html = '<li id="user-'+data.sender.id+'" class="clearfix">'+
@@ -90,8 +108,16 @@
                 $('#user-'+data.sender.id).remove();
             $('#people-list .list').prepend(html);
 
-            console.log(data);
         }
+
+        Echo.private(`seen.` + window.Laravel.user)
+          .listen('MessagesWereSeen', (e) => {
+            $('#to-be-seen').removeClass('d-none');
+            $('#to-be-seen').removeAttr('id');
+
+            $('#to-be-seen-thread').removeClass('d-none');
+            $('#to-be-seen-thread').removeAttr('id');
+        });
 
     </script>
     {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['msgshow']]]) !!}

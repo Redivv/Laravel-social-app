@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\User;
 use Nahid\Talk\Facades\Talk;
+use App\Events\MessagesWereSeen;
 
 class MessageController extends Controller
 {
@@ -22,6 +24,15 @@ class MessageController extends Controller
         $user = null;
         $messages = [];
         if ($id != Auth::id()) {
+            $conversation_id = Talk::isConversationExists($id);
+            $amount = DB::table('messages')
+                ->where('conversation_id', $conversation_id)
+                ->where('user_id',$id)
+                ->update(['is_seen'=>1]);
+            if ($amount > 0) {
+                event(new MessagesWereSeen(intVal($id)));
+            }
+            
             $conversations = Talk::getMessagesByUserId($id, 0, 100);
             if(!$conversations) {
                 $user = User::find($id);
@@ -71,6 +82,20 @@ class MessageController extends Controller
     {
         if ($request->ajax()) {
             if(Talk::user(Auth::id())->deleteMessage($id)) {
+                return response()->json(['status'=>'success'], 200);
+            }
+
+            return response()->json(['status'=>'errors', 'msg'=>'something went wrong'], 401);
+        }
+    }
+
+    public function ajaxSeenMessage(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            if(Talk::user(Auth::id())->makeSeen($id)) {
+                $sender_id = $request->input('sender');
+                event(new MessagesWereSeen(intVal($sender_id)));
+
                 return response()->json(['status'=>'success'], 200);
             }
 

@@ -7,6 +7,7 @@
         <div class="status">
             <span class="fa fa-reply"></span>
         <span>{{substr($inbox->thread->message, 0, 20)}}</span>
+        <span id="to-be-seen-thread" class="fa fa-check d-none"></span> 
         </div>
     </div>
     </a>

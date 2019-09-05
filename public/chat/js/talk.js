@@ -22,7 +22,7 @@ $(document).ready(function () {
             if(dataTemp.trim()){
                 let html = '<li class="clearfix" id="to-be-replaced">'+
                     '<div class="message temporary-message float-right">'+
-                        dataTemp+
+                        unescape(dataTemp)+
                     '</div>'+
                 '</li>';
                 $('#talkMessages').append(html);

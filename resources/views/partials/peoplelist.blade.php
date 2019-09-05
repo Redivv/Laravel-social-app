@@ -1,4 +1,4 @@
-<div class="people-list" id="people-list">
+<div class="people-list col-lg-4" id="people-list">
     <div class="search" style="text-align: center">
         <a href="{{route('home')}}" style="font-size:16px; text-decoration:none; color: white;"><i class="fa fa-user"></i> {{auth()->user()->name}}</a>
     </div>
@@ -12,8 +12,13 @@
                 <div class="status">
                     @if(auth()->user()->id == $inbox->thread->sender->id)
                         <span class="fa fa-reply"></span>
+                        <span>{{substr($inbox->thread->message, 0, 20)}}</span>
+                        @if ($inbox->thread->is_seen)
+                        <span class="fa fa-check"></span> 
+                        @endif
+                    @else
+                        <span>{{substr($inbox->thread->message, 0, 20)}}</span>
                     @endif
-                    <span>{{substr($inbox->thread->message, 0, 20)}}</span>
                 </div>
             </div>
             </a>
