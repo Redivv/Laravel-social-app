@@ -9,5 +9,5 @@ return [
     'max-age-err'   => 'Maksymalny wiek musi wynosić przynajmniej 18 lat oraz być większy niż minimalny',
     'not_found'     => 'Nie znaleziono użytkowników w podanych kryteriach',
     'results'       => 'Ilość wyników: :number',
-    'results-age'       => 'Osoby w podobnym do Twojego wieku'
+    'results-age'   => 'Osoby w podobnym do Twojego wieku'
 ];
