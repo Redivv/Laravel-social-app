@@ -32,6 +32,7 @@ Route::get('notification', function(){
 });
 
 Route::get('message/{id}', 'MessageController@chatHistory')->name('message.read');
+Route::get('message', 'MessageController@index')->name('message.app');
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
    Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new');

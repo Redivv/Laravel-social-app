@@ -1,6 +1,7 @@
 <?php
 
 return [
-    'time'  => 'temu',
-    'seen'  => 'Odczytano',
+    'time'      => 'temu',
+    'seen'      => 'Odczytano',
+    'second'    => 'sekunda'
 ];

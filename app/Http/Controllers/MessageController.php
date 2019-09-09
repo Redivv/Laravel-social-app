@@ -17,6 +17,14 @@ class MessageController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $threads = Talk::user(Auth::id())->getInbox();
+        $user = null;
+        $messages = [];
+        return view('messages.conversations', compact('messages', 'user', 'threads'));
+    }
+
     public function chatHistory($id)
     {
         $threads = Talk::user(Auth::id())->getInbox();
@@ -30,6 +38,7 @@ class MessageController extends Controller
                 ->where('user_id',$id)
                 ->update(['is_seen'=>1]);
             if ($amount > 0) {
+                $threads = Talk::user(Auth::id())->getInbox();
                 event(new MessagesWereSeen(intVal($id)));
             }
             
@@ -92,11 +101,25 @@ class MessageController extends Controller
     public function ajaxSeenMessage(Request $request, $id)
     {
         if ($request->ajax()) {
-            if(Talk::user(Auth::id())->makeSeen($id)) {
+            if($id == 0){
                 $sender_id = $request->input('sender');
-                event(new MessagesWereSeen(intVal($sender_id)));
+                $conversation_id = Talk::user(Auth::id())->isConversationExists($sender_id);
+                $amount = DB::table('messages')
+                ->where('conversation_id', $conversation_id)
+                ->where('user_id',$sender_id)
+                ->update(['is_seen'=>1]);
+                if ($amount > 0) {
+                    event(new MessagesWereSeen(intVal($sender_id)));
+                }
+                return response()->json(['status'=>'success', 'seen_messages' => $amount], 200);
 
-                return response()->json(['status'=>'success'], 200);
+            }else{
+                if(Talk::user(Auth::id())->makeSeen($id)) {
+                    $sender_id = $request->input('sender');
+                    event(new MessagesWereSeen(intVal($sender_id)));
+
+                    return response()->json(['status'=>'success'], 200);
+                }
             }
 
             return response()->json(['status'=>'errors', 'msg'=>'something went wrong'], 401);

@@ -7,5 +7,5 @@
     <div class="message other-message float-right">
         {{$message->message}}
     </div>
-    <div id="to-be-seen" class="clearfix d-none"><span>{{__('chat.seen')}}</span></div>
+    <div class="seen_info clearfix d-none"><span>{{__('chat.seen')}}</span></div>
 </li>

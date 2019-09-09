@@ -7,20 +7,25 @@
             @if(!is_null($inbox->thread))
         <li id="user-{{$inbox->withUser->id}}" class="clearfix">
             <a href="{{route('message.read', ['id'=>$inbox->withUser->id])}}">
-            <div class="about">
-                <div class="name">{{$inbox->withUser->name}}</div>
-                <div class="status">
-                    @if(auth()->user()->id == $inbox->thread->sender->id)
+            @if(auth()->user()->id == $inbox->thread->sender->id)
+                <div class="about">
+                    <div class="name">{{$inbox->withUser->name}}</div>
+                    <div class="status">
                         <span class="fa fa-reply"></span>
                         <span>{{substr($inbox->thread->message, 0, 20)}}</span>
                         @if ($inbox->thread->is_seen)
-                        <span class="fa fa-check"></span> 
+                            <span class="fa fa-check"></span> 
                         @endif
-                    @else
-                        <span>{{substr($inbox->thread->message, 0, 20)}}</span>
-                    @endif
+                    </div>
                 </div>
-            </div>
+            @else
+                <div class="about @if(!$inbox->thread->is_seen) new @endif">
+                    <div class="name">{{$inbox->withUser->name}}</div>
+                    <div class="status">
+                        <span>{{substr($inbox->thread->message, 0, 20)}}</span>
+                    </div>
+                </div>
+            @endif
             </a>
         </li>
             @endif

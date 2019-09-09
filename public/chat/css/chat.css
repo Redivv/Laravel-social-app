@@ -72,6 +72,10 @@ body {
   color: #fafafa;
 }
 
+.people-list .new {
+  font-weight: bold;
+}
+
 .chat {
   width: 490px;
   float: left;

@@ -12,5 +12,6 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('public/chat/scss/style.scss', 'public/chat/css')
+    .sass('resources/sass/chat.scss', 'public/chat/css')
+    .js('resources/js/talk.js', 'public/chat/js')
     .sass('resources/sass/app.scss', 'public/css');

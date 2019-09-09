@@ -2,6 +2,7 @@
 <html >
   <head>
     <meta charset="UTF-8">
+    @include('partials.favicon')
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>Chat</title>
     <script>
@@ -14,7 +15,7 @@
 
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
 
-    <link rel="stylesheet" href="{{asset('chat/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('chat/css/chat.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
     
@@ -56,71 +57,52 @@
 
       <script>
           var __baseUrl = "{{url('/')}}";
+          var audioElement = document.createElement('audio');
       </script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src={{asset('js/app.js')}}></script>
     <script src="{{asset('chat/js/talk.js')}}"></script>
+    <script src="{{asset('chat/js/functions.js')}}"></script>
 
     <script>
-        var show = function(data) {
-            alert(data.sender.name + " - '" + data.message + "'");
-        }
+        var focus_status = true;
+        $(window).focus(function() {
+          focus_status = true;
+          user = '{{$user->id}}';
+          makeAllMessagesSeen(user);
+        }).blur(function() {
+          focus_status = false;
+        });
+        var new_messages = 0;
+        var title = $(document).prop('title');
+        console.log(focus_status);
 
-        var msgshow = function(data) {
+        var newmsg = function(data) {
+            new_messages++;
+            console.log(focus_status);
+            $(document).prop('title', '('+new_messages+') '+title);
+            playSound('{{asset("chat/new_message.mp3")}}', audioElement);
             if($("div.chat-with").text() == data.sender.name){
-              var html = '<li id="message-' + data.id + '">' +
-              '<div class="message-data">' +
-              '<span class="message-data-name"> <a href="#" class="talkDeleteMessage" data-message-id="' + data.id + '" title="Delete Messag"><i class="fa fa-close" style="margin-right: 3px;"></i></a>' + data.sender.name + '</span>' +
-              '<span class="message-data-time">1 Second {{__("chat.time")}}</span>' +
-              '</div>' +
-              '<div class="message my-message">' +
-              data.message +
-              '</div>' +
-              '</li>';
-              $('#talkMessages').append(html);
-              
-              $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-              });
+              addNewMessage(data,'{{__("chat.second")}}','{{__("chat.time")}}');
+              updateThreads(data);
+              if(focus_status){
+                makeOneMessageSeen(data);
+              }
 
-              var request = $.ajax({
-                method: "post",
-                url: __baseUrl+'/ajax/message/seen/'+data.id,
-                data: {"_method": "PATCH", "sender": data.sender.id}
-              });
+            }else{
+              updateThreads(data,'new');
             }
-
-            html = '<li id="user-'+data.sender.id+'" class="clearfix">'+
-              '<a href="/message/'+data.sender.id+'">'+
-                '<div class="about">'+
-                  '<div class="name">'+data.sender.name+'</div>'+
-                  '<div class="status">'+
-                   '<span>'+data.message.substring(0,20)+'</span>'+
-                  '</div>'
-               '</div>'
-              '</a>'
-            '</li>';
-
-            var $thread = $('#user-'+data.sender.id);
-            if($thread.length)
-                $('#user-'+data.sender.id).remove();
-            $('#people-list .list').prepend(html);
-
         }
 
         Echo.private(`seen.` + window.Laravel.user)
           .listen('MessagesWereSeen', (e) => {
-            $('#to-be-seen').removeClass('d-none');
-            $('#to-be-seen').removeAttr('id');
+            $('.seen_info').removeClass('d-none');
 
             $('#to-be-seen-thread').removeClass('d-none');
             $('#to-be-seen-thread').removeAttr('id');
         });
-
     </script>
-    {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['msgshow']]]) !!}
+    {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}
 
   </body>
 </html>
