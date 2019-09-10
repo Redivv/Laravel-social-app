@@ -43,9 +43,9 @@
       @if(isset($user))
         <div class="chat-message clearfix">
           <form action="" method="post" id="talkSendMessage">
-                <textarea name="message-data" id="message-data" placeholder ="Type your message" rows="3"></textarea>
+                <textarea name="message-data" id="message-data" placeholder ="{{__('chat.placeholder')}}" rows="3"></textarea>
                 <input type="hidden" name="_id" value="{{@request()->route('id')}}">
-                <button type="submit">Send</button>
+                <button type="submit">{{__('chat.send')}}</button>
           </form>
         </div> <!-- end chat-message -->
       @endif
@@ -58,6 +58,8 @@
       <script>
           var __baseUrl = "{{url('/')}}";
           var audioElement = document.createElement('audio');
+          var deleteConvo = "{{__('chat.deleteConvo')}}";
+          var deleteMessage = "{{__('chat.deleteMessage')}}";
       </script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src={{asset('js/app.js')}}></script>
@@ -68,8 +70,7 @@
         var focus_status = true;
         $(window).focus(function() {
           focus_status = true;
-          user = '{{$user->id}}';
-          makeAllMessagesSeen(user);
+          makeAllMessagesSeen(window.Laravel.user);
         }).blur(function() {
           focus_status = false;
         });

@@ -58,6 +58,14 @@ class MessageController extends Controller
         return view('messages.conversations', compact('messages', 'user', 'threads'));
     }
 
+    public function deleteConversation($id)
+    {
+        if ($conversation_id = Talk::user(Auth::id())->isConversationExists($id)) {
+            Talk::deleteConversations($conversation_id);
+            return redirect()->route('message.app');
+        }
+    }
+
     public function ajaxSendMessage(Request $request)
     {
         if ($request->ajax()) {

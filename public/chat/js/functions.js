@@ -18,6 +18,11 @@ function playSound(sound,element){
 
   function updateThreads(data, is_new = '') {
     var html = '<li id="user-'+data.sender.id+'" class="clearfix">'+
+          '<form action="/message/'+data.sender.id+'" class="talkDeleteConversation" method="POST">'+
+          '<input type="hidden" name="_method" value="DELETE">'+
+          '<input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'">'+
+          '<button class="btn btn-link btn-sm" type="submit"><i class="fa fa-close"></i></button>'+
+          '</form>'+
           '<a href="/message/'+data.sender.id+'">'+
             '<div class="about '+is_new+'">'+
               '<div class="name">'+data.sender.name+'</div>'+
@@ -32,6 +37,13 @@ function playSound(sound,element){
       $('#user-'+data.sender.id).remove();
     }
     $('#people-list .list').prepend(html);
+
+    $('.talkDeleteConversation').on('submit',function(e){
+      if(!confirm(deleteConvo)) {
+          e.preventDefault();
+      }   
+    });
+    
     }
 
     function makeOneMessageSeen(data) {

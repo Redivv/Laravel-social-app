@@ -31,8 +31,10 @@ Route::get('notification', function(){
     return view('notification-test');
 });
 
-Route::get('message/{id}', 'MessageController@chatHistory')->name('message.read');
 Route::get('message', 'MessageController@index')->name('message.app');
+Route::get('message/{id}', 'MessageController@chatHistory')->name('message.read');
+Route::delete('message/{id}', 'MessageController@deleteConversation')->name('conversation.delete');
+
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
    Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new');

@@ -42,6 +42,11 @@ $(document).ready(function () {
                 if($thread.length)
                     $('#user-'+response.receiver_id).remove();
                 $('#people-list .list').prepend(response.html2);
+                $('.talkDeleteConversation').on('submit',function(e){
+                    if(!confirm(deleteConvo)) {
+                        e.preventDefault();
+                    }   
+                });
             }
         });
 
@@ -56,7 +61,7 @@ $(document).ready(function () {
         id = tag.data('message-id');
         url = __baseUrl + '/ajax/message/delete/' + id;
 
-        if(!confirm('Do you want to delete this message?')) {
+        if(!confirm(deleteMessage)) {
             return false;
         }
 
@@ -74,4 +79,10 @@ $(document).ready(function () {
            }
         });
     })
+
+    $('.talkDeleteConversation').on('submit',function(e){
+        if(!confirm(deleteConvo)) {
+            e.preventDefault();
+        }   
+    });
 });
