@@ -6,3 +6,11 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Custom scss:
+
+// Scss related to app layout
+@import 'app-layout';
+
+// Scss related to login & register sites
+@import 'login-register';

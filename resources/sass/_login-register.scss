@@ -1,0 +1,22 @@
+.bg-pic-login{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1000;
+    background-image: url("/images/bg1-alltogether.jpg");
+    min-height: 80vh;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.login-info-window{
+    text-align: center;
+}
+.login-window{
+
+    margin: auto;
+    margin-top: 10%;
+
+}
