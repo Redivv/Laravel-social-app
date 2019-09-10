@@ -100,6 +100,7 @@ $(document).ready(function () {
     }
   });
   $("div.chat-history").scrollTop($('div.chat-history').prop('scrollHeight'));
+  $("div.chat-history").bind('scroll', chk_scroll);
   $('#talkSendMessage').on('submit', function (e) {
     e.preventDefault();
     var url, request, tag, data;
@@ -167,6 +168,32 @@ $(document).ready(function () {
     }
   });
 });
+
+function chk_scroll(e) {
+  var elem = $(e.currentTarget);
+
+  if (elem.scrollTop() == 0 && stop_pagi === false) {
+    pagi++;
+    var url = window.location.href;
+    var request = $.ajax({
+      method: "get",
+      url: url,
+      data: {
+        pagi: pagi
+      }
+    });
+    request.done(function (response) {
+      if (response.status == 'success') {
+        if (response.html != '') {
+          $('#talkMessages').prepend('<li id="top-msg"></li>');
+          $('#talkMessages').prepend(response.html);
+          $("div.chat-history").scrollTop($("div.chat-history").scrollTop() + $("#top-msg").position().top - $("div.chat-history").height() / 4 + $("#top-msg").height() / 4);
+          stop_pagi = response.stop;
+        }
+      }
+    });
+  }
+}
 
 /***/ }),
 

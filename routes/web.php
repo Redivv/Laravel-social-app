@@ -37,9 +37,10 @@ Route::delete('message/{id}', 'MessageController@deleteConversation')->name('con
 
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
-   Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new');
-   Route::delete('message/delete/{id}', 'MessageController@ajaxDeleteMessage')->name('message.delete');
-   Route::patch('message/seen/{id}', 'MessageController@ajaxSeenMessage')->name('message.seen');
+   Route::get('message/getMore/{pagi}','AjaxMessageController@ajaxGetMore')->name('message.pagi');
+   Route::post('message/send', 'AjaxMessageController@ajaxSendMessage')->name('message.new');
+   Route::delete('message/delete/{id}', 'AjaxMessageController@ajaxDeleteMessage')->name('message.delete');
+   Route::patch('message/seen/{id}', 'AjaxMessageController@ajaxSeenMessage')->name('message.seen');
 });
 
 Route::get('test', function () {

@@ -60,6 +60,8 @@
           var audioElement = document.createElement('audio');
           var deleteConvo = "{{__('chat.deleteConvo')}}";
           var deleteMessage = "{{__('chat.deleteMessage')}}";
+          var pagi = 0;
+          var stop_pagi = false;
       </script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src={{asset('js/app.js')}}></script>
@@ -74,9 +76,9 @@
         }).blur(function() {
           focus_status = false;
         });
+
         var new_messages = 0;
         var title = $(document).prop('title');
-        console.log(focus_status);
 
         var newmsg = function(data) {
             new_messages++;
