@@ -10663,7 +10663,11 @@ a.text-dark:focus {
 }
 
 .login-window {
+  border-radius: 50%;
   margin: auto;
   margin-top: 10%;
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
 }
 
