@@ -7,5 +7,7 @@ return [
     'seen'          => 'Odczytano',
     'second'        => 'sekunda',
     'deleteConvo'   =>  'Czy na pewno chcesz usunąć całą historię rozmowy?',
-    'deleteMessage' =>  'Czy na pewno chcesz usunąć wiadomość? (odbiorca nadal będzie mógł ją zobaczyć)'
+    'blockConvo'    =>  'Czy na pewno chcesz zablokować/wznowić działanie konwersacji?',
+    'deleteMessage' =>  'Czy na pewno chcesz usunąć wiadomość? (odbiorca nadal będzie mógł ją zobaczyć)',
+    'convoBlocked'  =>  'Konwersacja została zablokowana. Odnowić rozmowę może jedynie osoba blokująca'
 ];

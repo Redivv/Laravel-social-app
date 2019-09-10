@@ -81,4 +81,26 @@ class MessageController extends Controller
             return redirect()->route('message.app');
         }
     }
+
+    public function blockConversation($id)
+    {
+        if ($conversation_id = Talk::user(Auth::id())->isConversationExists($id)) {
+            $conversation_status = DB::table('conversations')->select('status')
+                    ->where('id', $conversation_id)
+                    ->get();
+            if ($conversation_status[0]->status == 1) {
+                DB::table('conversations')
+                    ->where('id', $conversation_id)
+                    ->update(['status' => 0,'block_id'=>Auth::id()]);
+                    return redirect()->route('message.app');
+            }else{
+                DB::table('conversations')
+                    ->where('id', $conversation_id)
+                    ->where('block_id', Auth::id())
+                    ->update(['status' => 1,'block_id'=>null]);
+                    return redirect()->route('message.read',['id'=>$id]);
+            }
+            
+        }
+    }
 }

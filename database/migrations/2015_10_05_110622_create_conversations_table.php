@@ -18,6 +18,7 @@ class CreateConversationsTable extends Migration
             $table->integer('user_one');
             $table->integer('user_two');
             $table->boolean('status');
+            $table->integer('block_id')->nullable()->default(null);
             $table->timestamps();
         });
     }

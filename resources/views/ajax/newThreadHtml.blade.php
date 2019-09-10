@@ -1,10 +1,15 @@
 @foreach($threads as $inbox)
     @if(!is_null($inbox->thread))
 <li id="user-{{$inbox->withUser->id}}" class="clearfix">
-    <form action="{{route('conversation.delete',['id'=>$inbox->withUser->id])}}" class="talkDeleteConversation" method="POST">
+    <form action="{{route('conversation.delete',['id'=>$inbox->withUser->id])}}" class="talkDeleteConversation float-left" method="POST">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <button class="btn btn-link btn-sm" type="submit"><i class="fa fa-close"></i></button>
+        <button class="btn btn-link btn-sm" type="submit"><i class="fas fa-times"></i></button>
+    </form>
+    <form action="{{route('conversation.block',['id'=>$inbox->withUser->id])}}" class="talkBlockConversation" method="POST">
+            <input type="hidden" name="_method" value="PATCH">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <button class="btn btn-link btn-sm" type="submit"><i class="fas fa-user-times"></i></button>
     </form>
     <a href="{{route('message.read', ['id'=>$inbox->withUser->id])}}">
     <div class="about">

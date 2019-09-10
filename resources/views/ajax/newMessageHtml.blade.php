@@ -5,7 +5,7 @@
         <a href="#" class="talkDeleteMessage" data-message-id="{{$message->id}}" title="Delete Message"><i class="fa fa-close"></i></a>
     </div>
     <div class="message other-message float-right">
-        {{$message->message}}
+        {{$message->toHtmlString()}}
     </div>
     <div class="seen_info clearfix d-none"><span>{{__('chat.seen')}}</span></div>
 </li>

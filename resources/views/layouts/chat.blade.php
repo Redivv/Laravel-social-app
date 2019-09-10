@@ -12,11 +12,9 @@
     </script>
     
     <link rel="stylesheet" href="{{asset('chat/css/reset.css')}}">
-
-    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
-
     <link rel="stylesheet" href="{{asset('chat/css/chat.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <script src={{asset('js/app.js')}}></script>
 
     
     
@@ -60,11 +58,11 @@
           var audioElement = document.createElement('audio');
           var deleteConvo = "{{__('chat.deleteConvo')}}";
           var deleteMessage = "{{__('chat.deleteMessage')}}";
+          var blockConvo = "{{__('chat.blockConvo')}}";
           var pagi = 0;
           var stop_pagi = false;
       </script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src={{asset('js/app.js')}}></script>
     <script src="{{asset('chat/js/talk.js')}}"></script>
     <script src="{{asset('chat/js/functions.js')}}"></script>
 

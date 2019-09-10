@@ -133,6 +133,17 @@ $(document).ready(function () {
             e.preventDefault();
           }
         });
+        $('.talkBlockConversation').on('submit', function (e) {
+          if (!confirm(blockConvo)) {
+            e.preventDefault();
+          }
+        });
+      }
+    });
+    request.fail(function (xhr) {
+      if (xhr.responseJSON.status == "blocked-user") {
+        alert(xhr.responseJSON.msg);
+        $('#to-be-replaced').remove();
       }
     });
   });
@@ -164,6 +175,11 @@ $(document).ready(function () {
   });
   $('.talkDeleteConversation').on('submit', function (e) {
     if (!confirm(deleteConvo)) {
+      e.preventDefault();
+    }
+  });
+  $('.talkBlockConversation').on('submit', function (e) {
+    if (!confirm(blockConvo)) {
       e.preventDefault();
     }
   });

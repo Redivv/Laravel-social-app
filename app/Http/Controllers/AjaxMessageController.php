@@ -31,18 +31,25 @@ class AjaxMessageController extends Controller
 
             $body = $request->input('message-data');
             $userId = $request->input('_id');
-
-
-            if($userId == Auth::id()){
-                return response()->json(['status'=>'errors', 'msg'=>'something went wrong'], 401);
-            }
+            Talk::setAuthUserId(Auth::id());
             
-            if ($message = Talk::user(Auth::id())->sendMessageByUserId($userId, $body)) {
-                $html = view('ajax.newMessageHtml', compact('message'))->render();
-                $threads = Talk::user(Auth::id())->getInbox('desc',0,1);
-                $html2 = view('ajax.newThreadHtml', compact('threads'))->render();
-                return response()->json(['status'=>'success', 'html'=>$html, 'html2'=>$html2, 'receiver_id'=>$userId], 200);
+            if($conversation_id = Talk::isConversationExists($userId)){
+                $conversation_status = DB::table('conversations')->select('status')
+                    ->where('id', $conversation_id)
+                    ->get();
+                if ($conversation_status[0]->status == 0) {
+                    return response()->json(['status'=>'blocked-user', 'msg'=>__('chat.convoBlocked')], 400);
+                }elseif($userId == Auth::id()){
+                    return response()->json(['status'=>'errors', 'msg'=>'something went wrong'], 400);
+                }
             }
+                
+                if ($message = Talk::sendMessageByUserId($userId, $body)) {
+                    $html = view('ajax.newMessageHtml', compact('message'))->render();
+                    $threads = Talk::user(Auth::id())->getInbox('desc',0,1);
+                    $html2 = view('ajax.newThreadHtml', compact('threads'))->render();
+                    return response()->json(['status'=>'success', 'html'=>$html, 'html2'=>$html2, 'receiver_id'=>$userId], 200);
+                }
         }
     }
 
