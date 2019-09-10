@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Nahid\Talk\Facades\Talk;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -14,6 +16,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        Talk::setAuthUserId(Auth::id());
     }
 
     /**
@@ -24,5 +27,10 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function chat()
+    {
+        return view('chat');
     }
 }
