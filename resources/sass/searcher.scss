@@ -1,0 +1,80 @@
+.searcher{
+
+    .form{
+
+        .form-group{
+
+            .form-row{
+                font-weight: bold;
+            }
+        }
+
+        .button{
+            background-color: $yellow;
+        }
+    }
+}
+
+.searchResults-header{
+    @include font-size(2rem);
+}
+
+.searchResults-box{
+
+    .searchResult{
+
+        .picture{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img{
+                width: 8em;
+                border-radius: 50%;
+            }
+        }
+
+        .data{
+            @media screen and (max-width: $breakpoint1) {
+                text-align: center;
+              }
+            .personalInfo-box{
+                
+                .name{
+                    @include font-size(1.8rem);
+                }
+
+                .age{
+                    @include font-size(0.9rem);
+                }
+            }
+
+            .city-box{
+
+                .city{
+                    @include font-size(1rem);
+                }
+            }
+
+            .description-box{
+
+                .description{
+                    @include font-size(1.1rem);
+                }
+            }
+        }
+
+        .icons{
+            @include font-size(1.5rem);
+            .ico{
+                @media screen and (max-width: $breakpoint1) {
+                    float: left;
+                    text-align: center;
+                  }
+                &:hover{
+                    cursor: pointer;
+                    color: $yellow;
+                }
+            }
+        }
+    }
+}

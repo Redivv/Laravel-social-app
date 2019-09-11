@@ -1,8 +1,8 @@
 @extends('layouts.default')
 
 @section('content')
-    <div class="container mt-3">
-        <form action="{{route('searcher')}}" method="get">
+    <div class="searcher container mt-3">
+        <form class="form" action="{{route('searcher')}}" method="get">
             <div class="form-group">
                 <div class="form-row">
                     <div class="col-7">
@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary" type="submit">{{__('searcher.search')}}</button>
+            <button class="btn button" type="submit">{{__('searcher.search')}}</button>
         </form>
         <hr>
         @if ($results)

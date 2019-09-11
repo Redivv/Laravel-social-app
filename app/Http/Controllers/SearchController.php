@@ -30,7 +30,7 @@ class SearchController extends Controller
             'age-max'  => ['integer', 'nullable', 'min:18', 'gte:age-min']
         ]);
 
-        $search_results = User::select('name');
+        $search_results = User::select('id','name','age','description as desc', 'city', 'picture');
 
         $validated_data['username'] === null ?: $search_results = $search_results->where('name', 'like', $validated_data['username'].'%');
         $validated_data['age-min'] === null && $validated_data['age-max'] === null ?: $search_results = $search_results->whereBetween('age', [$validated_data['age-min'],$validated_data['age-max']]);

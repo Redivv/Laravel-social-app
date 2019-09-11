@@ -16492,3 +16492,82 @@ readers do not read off random characters that represent icons */
   width: auto;
 }
 
+.searcher .form .form-group .form-row {
+  font-weight: bold;
+}
+
+.searcher .form .button {
+  background-color: #ffed4a;
+}
+
+.searchResults-header {
+  font-size: calc(1.325rem + 0.9vw);
+}
+
+@media (min-width: 1200px) {
+  .searchResults-header {
+    font-size: 2rem;
+  }
+}
+
+.searchResults-box .searchResult .picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchResults-box .searchResult .picture img {
+  width: 8em;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 992px) {
+  .searchResults-box .searchResult .data {
+    text-align: center;
+  }
+}
+
+.searchResults-box .searchResult .data .personalInfo-box .name {
+  font-size: calc(1.305rem + 0.66vw);
+}
+
+@media (min-width: 1200px) {
+  .searchResults-box .searchResult .data .personalInfo-box .name {
+    font-size: 1.8rem;
+  }
+}
+
+.searchResults-box .searchResult .data .personalInfo-box .age {
+  font-size: 0.9rem;
+}
+
+.searchResults-box .searchResult .data .city-box .city {
+  font-size: 1rem;
+}
+
+.searchResults-box .searchResult .data .description-box .description {
+  font-size: 1.1rem;
+}
+
+.searchResults-box .searchResult .icons {
+  font-size: calc(1.275rem + 0.3vw);
+}
+
+@media (min-width: 1200px) {
+  .searchResults-box .searchResult .icons {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .searchResults-box .searchResult .icons .ico {
+    float: left;
+    text-align: center;
+  }
+}
+
+.searchResults-box .searchResult .icons .ico:hover {
+  cursor: pointer;
+  color: #ffed4a;
+}
+
