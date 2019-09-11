@@ -10,7 +10,8 @@
         }
 
         .button{
-            background-color: $yellow;
+            background-color: $orange;
+            color:$white;
         }
     }
 }
@@ -72,7 +73,7 @@
                   }
                 &:hover{
                     cursor: pointer;
-                    color: $yellow;
+                    color: $orange;
                 }
             }
         }
