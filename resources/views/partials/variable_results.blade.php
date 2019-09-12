@@ -10,7 +10,7 @@
                     <div class="overlay"></div>
                     <a href="#">
                         <div class="overlay-content fadeIn-bottom">
-                            <span class="overlay-text">Zobacz Profil</span>
+                            <span class="overlay-text">{{__('searcher.see_profile')}}</span>
                         </div>
                     </a>
                 </div>
