@@ -13,7 +13,7 @@
   --purple: #9561e2;
   --pink: #f66d9b;
   --red: #e3342f;
-  --orange: #f7610c;
+  --orange: #f66103;
   --yellow: #ffed4a;
   --green: #38c172;
   --teal: #4dc0b5;
@@ -16497,7 +16497,7 @@ readers do not read off random characters that represent icons */
 }
 
 .searcher .form .button {
-  background-color: #f7610c;
+  background-color: #f66103;
   color: #ffffff;
 }
 
@@ -16512,9 +16512,53 @@ readers do not read off random characters that represent icons */
 }
 
 .searchResults-box .searchResult .picture {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.searchResults-box .searchResult .picture .overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  width: 8em;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  border-radius: 50%;
+  transition: all 0.4s ease-in-out 0s;
+}
+
+.searchResults-box .searchResult .picture:hover .overlay {
+  opacity: 1;
+}
+
+.searchResults-box .searchResult .picture .overlay-content {
+  position: absolute;
+  text-align: center;
+  width: 7em;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease-in-out 0s;
+  background-color: #f66103;
+}
+
+.searchResults-box .searchResult .picture .overlay-content .overlay-text {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.searchResults-box .searchResult .picture:hover .overlay-content {
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+}
+
+.searchResults-box .searchResult .picture .fadeIn-bottom {
+  top: 80%;
 }
 
 .searchResults-box .searchResult .picture img {
@@ -16539,6 +16583,7 @@ readers do not read off random characters that represent icons */
 }
 
 .searchResults-box .searchResult .data .personalInfo-box .age {
+  color: #a1a1a1;
   font-size: 0.9rem;
 }
 
@@ -16569,6 +16614,6 @@ readers do not read off random characters that represent icons */
 
 .searchResults-box .searchResult .icons .ico:hover {
   cursor: pointer;
-  color: #f7610c;
+  color: #f66103;
 }
 

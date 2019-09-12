@@ -11,7 +11,7 @@
 
         .button{
             background-color: $orange;
-            color:$white;
+            color: $white;
         }
     }
 }
@@ -25,9 +25,60 @@
     .searchResult{
 
         .picture{
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
+
+            .overlay {
+                background: rgba(0,0,0,0.5);
+                position: absolute;
+                width: 8em;
+                top: 0;
+                bottom: 0;
+                opacity: 0;
+                border-radius: 50%;
+                -webkit-transition: all 0.4s ease-in-out 0s;
+                -moz-transition: all 0.4s ease-in-out 0s;
+                transition: all 0.4s ease-in-out 0s;
+              }
+              
+              &:hover .overlay{
+                opacity: 1;
+              }
+              .overlay-content {
+                position: absolute;
+                text-align: center;
+                width: 7em;
+                top: 50%;
+                left: 50%;
+                opacity: 0;
+                -webkit-transform: translate(-50%, -50%);
+                -moz-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                -webkit-transition: all 0.3s ease-in-out 0s;
+                -moz-transition: all 0.3s ease-in-out 0s;
+                transition: all 0.3s ease-in-out 0s;
+                background-color: $orange;
+
+                .overlay-text{
+                    color: #fff;
+                    text-transform: uppercase;
+                    @include font-size(0.7rem);
+                }
+
+              }
+              
+              &:hover .overlay-content{
+                top: 50%;
+                left: 50%;
+                opacity: 1;
+              }
+              
+              .fadeIn-bottom{
+                top: 80%;
+              }
+
             img{
                 width: 8em;
                 border-radius: 50%;
@@ -45,6 +96,7 @@
                 }
 
                 .age{
+                    color:$grey;
                     @include font-size(0.9rem);
                 }
             }
