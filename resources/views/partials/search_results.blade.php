@@ -10,7 +10,13 @@
         <div class="searchResult container-fluid mb-4">
             <div class="row">
                 <div class="picture col-lg-2">
-                    <a class="text-reset" href="#"><img src="{{asset('img/profile-pictures/'.$result->picture)}}" alt=""></a>
+                    <img src="{{asset('img/profile-pictures/'.$result->picture)}}" alt="">
+                    <div class="overlay"></div>
+                    <a href="#">
+                        <div class="overlay-content fadeIn-bottom">
+                            <span class="overlay-text">Zobacz Profil</span>
+                        </div>
+                    </a>
                 </div>
                 <div class="data col-lg-8">
                      <div class="personalInfo-box"><span class="name">{{$result->name}}</span>  <span class="age">{{$result->age}}</span></div>
