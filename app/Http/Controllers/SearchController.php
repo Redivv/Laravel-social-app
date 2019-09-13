@@ -42,7 +42,7 @@ class SearchController extends Controller
 
     public function getSimmilarAgeUsers(object $authenticated_user) : object
     {
-        $search_results = User::select('name')
+        $search_results = User::select('id','name','age','description as desc', 'city', 'picture')
             ->whereBetween('age',[$authenticated_user->age-5,$authenticated_user->age+3])
             ->whereNotIn('id',[$authenticated_user->id])
             ->inRandomOrder()

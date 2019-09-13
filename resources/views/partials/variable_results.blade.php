@@ -1,4 +1,4 @@
-<div dusk="search_results_box" class="search-results">
+<div dusk="search_results_box" class="searchResults-box mt-3">
     <h3 dusk="search_results_header">
         {{__('searcher.results-age')}}
     </h3>
