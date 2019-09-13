@@ -68,9 +68,11 @@
 
     <script>
         var focus_status = true;
+
         $(window).focus(function() {
+          
           focus_status = true;
-          makeAllMessagesSeen(window.Laravel.user);
+          makeAllMessagesSeen('{{$sender}}');
         }).blur(function() {
           focus_status = false;
         });
@@ -80,7 +82,6 @@
 
         var newmsg = function(data) {
             new_messages++;
-            console.log(focus_status);
             $(document).prop('title', '('+new_messages+') '+title);
             playSound('{{asset("chat/new_message.mp3")}}', audioElement);
             if($("div.chat-with").text() == data.sender.name){

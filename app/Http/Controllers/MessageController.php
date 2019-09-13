@@ -70,7 +70,7 @@ class MessageController extends Controller
                 }
             }
 
-            return view('messages.conversations', compact('messages', 'user', 'threads'));
+            return view('messages.conversations', compact('messages', 'user', 'threads'))->withSender($id);
         }
     }
 
