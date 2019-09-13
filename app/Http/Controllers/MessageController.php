@@ -22,7 +22,7 @@ class MessageController extends Controller
         $threads = Talk::user(Auth::id())->getInbox();
         $user = null;
         $messages = [];
-        return view('messages.conversations', compact('messages', 'user', 'threads'));
+        return view('messages.conversations', compact('messages', 'user', 'threads'))->withSender(null);
     }
 
     public function chatHistory(Request $request, $id)
