@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm nav-bar-height">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}"> <!-- url should be changed: /user/home   -->
                    <!-- {{ config('app.name', 'default') }} -->
@@ -95,8 +95,14 @@
         </main>
     </div>
     <footer>
-        <div class="footer-right">
-            123-test
+        <div class="footer-container">
+            <div class="footer-left">
+                <img src="/img/safo_logo_white.png" height="64px" alt="logo-Safo">
+            </div>
+            <div class="footer-right"> 
+                    Copyright 2019 © Wipaka
+            </div>
+            <div class="clearfix"></div>
         </div>
     </footer>
 </body>
