@@ -13,6 +13,8 @@
 }
 .login-info-window{
     text-align: center;
+    color: rgb(172, 172, 172);
+    background-color: #000;
 }
 .login-window{
     border-radius: 50%;
@@ -21,4 +23,6 @@
     width: 400px;
     height: 400px;
     overflow: hidden;
+    text-align: center;
+    border: 0px;
 }

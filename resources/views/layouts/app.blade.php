@@ -48,6 +48,9 @@
                             <li class="nav-item">
                                     <a href="{{ url('/user/home') }}" class="nav-link">Dashboard</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/message') }}" class="nav-link">Chat</a>
+                            </li>
                         @endguest
                     </ul>
 
