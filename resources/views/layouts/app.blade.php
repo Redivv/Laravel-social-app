@@ -26,7 +26,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}"> <!-- url should be changed: /user/home   -->
                    <!-- {{ config('app.name', 'default') }} -->
-                   <img src="/images/safo_logo.jpg" height="50px" alt="Safo">
+                   <img src="/img/safo_logo.jpg" height="50px" alt="Safo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -94,5 +94,10 @@
             @yield('content')
         </main>
     </div>
+    <footer>
+        <div class="footer-right">
+            123-test
+        </div>
+    </footer>
 </body>
 </html>
