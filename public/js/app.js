@@ -47225,7 +47225,7 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "3d1ef10925ca3ce93420",
-  cluster: "eu",
+  cluster: "EU",
   encrypted: true
 });
 
@@ -47260,9 +47260,9 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Safo\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\Safo\resources\sass\chat.scss */"./resources/sass/chat.scss");
-module.exports = __webpack_require__(/*! D:\Safo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\sass\chat.scss */"./resources/sass/chat.scss");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

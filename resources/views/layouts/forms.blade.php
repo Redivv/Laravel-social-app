@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        @include('partials.favicon')
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    @include('partials.favicon')
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
-        <!-- Fonts -->
-        <link rel="dns-prefetch" href="//fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    </head>
-    <body class="pb-5">
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
+<body id="body-bg" class="pb-5">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm nav-bar-height">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}"> <!-- url should be changed: /user/home   -->
-                    <!-- {{ config('app.name', 'default') }} -->
-                    <img src="/img/safo_logo.jpg" height="50px" alt="Safo">
+                   <!-- {{ config('app.name', 'default') }} -->
+                   <img src="/img/safo_logo.jpg" height="50px" alt="Safo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('app.toggle_nav') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -69,8 +69,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                                         {{ __('app.logout') }}
                                     </a>
 
@@ -84,11 +84,11 @@
                 </div>
             </div>
         </nav>
-        <main>
+        <main class="py-4">
             @yield('content')
         </main>
         <footer id="footer" class="pt-2 pb-2">
             <span>Copyright 2019 &copy Wipaka</span>
         </footer>
-    </body>
+</body>
 </html>
