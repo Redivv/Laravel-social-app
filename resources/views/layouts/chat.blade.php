@@ -86,6 +86,7 @@
             playSound('{{asset("chat/new_message.mp3")}}', audioElement);
             if($("div.chat-with").text() == data.sender.name){
               addNewMessage(data,'{{__("chat.second")}}','{{__("chat.time")}}');
+              $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
               updateThreads(data);
               if(focus_status){
                 makeOneMessageSeen(data);

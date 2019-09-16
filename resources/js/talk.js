@@ -27,6 +27,7 @@ $(document).ready(function () {
                     '</div>'+
                 '</li>';
                 $('#talkMessages').append(html);
+                $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
             }
         }); 
 
@@ -39,6 +40,7 @@ $(document).ready(function () {
         request.done(function (response) {
             if (response.status == 'success') {
                 $('#to-be-replaced').replaceWith(response.html);
+                $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
                 var $thread = $('#user-'+response.receiver_id);
                 if($thread.length)
                     $('#user-'+response.receiver_id).remove();
