@@ -66,7 +66,7 @@ class SearchController extends Controller
     {
         $current_year = date('Y');
         $search_results = User::select('id','name','birth_year','description as desc', 'city', 'picture')
-            ->whereBetween('birth_year',[$current_year - ($authenticated_user->age+3), $current_year - ($authenticated_user->age-5)])
+            ->whereBetween('birth_year',[$authenticated_user->birth_year-5, $authenticated_user->birth_year+5])
             ->whereNotIn('id',[$authenticated_user->id])
             ->inRandomOrder()
             ->take(10)
