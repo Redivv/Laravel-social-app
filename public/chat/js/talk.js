@@ -152,7 +152,12 @@ $(document).ready(function () {
         $('#to-be-replaced').replaceWith(response.html);
         $("div.chat-history").scrollTop($('div.chat-history').prop('scrollHeight'));
         var $thread = $('#user-' + response.receiver_id);
-        if ($thread.length) $('#user-' + response.receiver_id).remove();
+
+        if ($thread.length) {
+          $('#user-' + response.receiver_id + '+hr').remove();
+          $('#user-' + response.receiver_id).remove();
+        }
+
         $('#people-list .list').prepend(response.html2);
         $('.talkDeleteConversation').on('submit', function (e) {
           if (!confirm(deleteConvo)) {
@@ -248,7 +253,7 @@ function chk_scroll(e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! X:\Programowanie\projekty\Safo\resources\js\talk.js */"./resources/js/talk.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\talk.js */"./resources/js/talk.js");
 
 
 /***/ })

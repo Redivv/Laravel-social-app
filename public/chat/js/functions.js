@@ -17,7 +17,7 @@ function playSound(sound,element){
  }
 
   function updateThreads(data, is_new = '') {
-    var html = '<li id="user-'+data.sender.id+'" class="clearfix">'+
+    var html = '<li id="user-'+data.sender.id+'" class="thread clearfix">'+
           '<form action="/message/'+data.sender.id+'" class="talkDeleteConversation float-left" method="POST">'+
           '<input type="hidden" name="_method" value="DELETE">'+
           '<input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'">'+
@@ -33,12 +33,14 @@ function playSound(sound,element){
               '<div class="name">'+data.sender.name+'</div>'+
               '<div class="status">'+
               '<span>'+data.message.substring(0,20)+'</span>'+
-              '</div>'
-          '</div>'
-          '</a>'
-        '</li>';
+              '</div>'+
+          '</div>'+
+          '</a>'+
+        '</li>'+
+        '<hr style="background-color:#f66103;">';
     var $thread = $('#user-'+data.sender.id);
     if($thread.length){
+      $('#user-'+data.sender.id+'+hr').remove();
       $('#user-'+data.sender.id).remove();
     }
     $('#people-list .list').prepend(html);

@@ -1,6 +1,6 @@
 @foreach($threads as $inbox)
     @if(!is_null($inbox->thread))
-<li id="user-{{$inbox->withUser->id}}" class="clearfix">
+<li id="user-{{$inbox->withUser->id}}" class="thread clearfix">
     <form action="{{route('conversation.delete',['id'=>$inbox->withUser->id])}}" class="talkDeleteConversation float-left" method="POST">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -22,5 +22,6 @@
     </div>
     </a>
 </li>
+<hr style="background-color:#f66103;">
     @endif
 @endforeach
