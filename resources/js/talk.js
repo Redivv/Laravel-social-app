@@ -1,19 +1,47 @@
 $(document).ready(function () {
+    // Setup Ajax csrf for future requests
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    // Scroll chat history to newest message on start
     $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
+
+    // Preload loading gif for immediate display
+    var img = new Image();
+    img.src = __baseUrl+"/chat/loading.gif";
+
+    // Bind scroll function to chat history for pagination request
     $( "div.chat-history" ).bind('scroll',chk_scroll);
 
+    // Enter key will send a message, Shift+enter will do normal break
+    var shift_pressed = false;
+    $('#message-data').keydown(function(e){
 
+        if(((e.keyCode || e.which) == 16)) {
+            shift_pressed = true;
+        }
+
+        if((((e.keyCode || e.which) == 13) && shift_pressed === false)) {
+            e.preventDefault();
+            $('#talkSendMessage').submit();
+        }
+    });
+    $('#message-data').keyup(function(e){
+        if(((e.keyCode || e.which) == 16)) {
+            shift_pressed = false;
+        }
+    });
+
+    // Sending a message dynamicly
     $('#talkSendMessage').on('submit', function(e) {
         e.preventDefault();
         var url, request, tag, data;
         tag = $(this);
         url = __baseUrl + '/ajax/message/send';
-        data = tag.serialize();
+        data = tag.serialize(); 
 
 
         $(document).one("ajaxSend", function(){
@@ -22,9 +50,7 @@ $(document).ready(function () {
             dataTemp = dataTemp.replace('message-data=','');
             if(dataTemp.trim()){
                 let html = '<li class="clearfix" id="to-be-replaced">'+
-                    '<div class="message temporary-message float-right">'+
-                        unescape(dataTemp)+
-                    '</div>'+
+                        '<img src="'+img.src+'">'+
                 '</li>';
                 $('#talkMessages').append(html);
                 $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
@@ -68,7 +94,7 @@ $(document).ready(function () {
 
     });
 
-
+    // Soft deleting a message dynamicly
     $('body').on('click', '.talkDeleteMessage', function (e) {
         e.preventDefault();
         var tag, url, id, request;
@@ -95,13 +121,12 @@ $(document).ready(function () {
            }
         });
     })
-
+    // Confirm blocking or deleting a Convo
     $('.talkDeleteConversation').on('submit',function(e){
         if(!confirm(deleteConvo)) {
             e.preventDefault();
         }   
     });
-
     $('.talkBlockConversation').on('submit',function(e){
         if(!confirm(blockConvo)) {
             e.preventDefault();
@@ -112,6 +137,7 @@ $(document).ready(function () {
     
 });
 
+// On full up scroll chat history try to load more messages
 function chk_scroll(e) {
     var elem = $(e.currentTarget);
     if (elem.scrollTop() == 0 && stop_pagi === false){
