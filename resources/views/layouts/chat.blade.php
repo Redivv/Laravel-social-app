@@ -38,10 +38,12 @@
       
       @yield('content')
       
+      <hr style="background-color:#f66103">
+
       @if(isset($user))
         <div class="chat-message clearfix">
-          <form action="" method="post" id="talkSendMessage">
-                <textarea name="message-data" id="message-data" placeholder ="{{__('chat.placeholder')}}" rows="3"></textarea>
+          <form action="" class="message_box" method="post" id="talkSendMessage">
+                <textarea style="border-color: Transparent !important;" name="message-data" id="message-data" placeholder ="{{__('chat.placeholder')}}" rows="3"></textarea>
                 <input type="hidden" name="_id" value="{{@request()->route('id')}}">
                 <button type="submit">{{__('chat.send')}}</button>
           </form>
