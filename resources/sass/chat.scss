@@ -249,7 +249,9 @@ body {
       
     }
     
-    button,label {
+    button {
+      margin-top:10px;
+      border-radius:15px;
       float: right;
       color: $white;
       font-size: 16px;
