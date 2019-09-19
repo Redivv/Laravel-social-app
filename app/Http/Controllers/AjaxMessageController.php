@@ -17,6 +17,16 @@ class AjaxMessageController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function ajaxGetMessage(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            if ($message = Talk::user(Auth::id())->readMessage($id)) {
+                $html = view('ajax.newMessageHtml', compact('message'))->render();
+                return response()->json(['status'=>'success', 'html'=>$html,], 200);
+            }
+        }
+    }
     
     public function ajaxSendMessage(Request $request)
     {

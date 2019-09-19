@@ -3,17 +3,19 @@ function playSound(sound,element){
     element.play();
   }
 
-  function addNewMessage(data,seconds_text,time_text) {
-    var html = '<li id="message-' + data.id + '">' +
-          '<div class="message-data">' +
-          '<span class="message-data-name"> <a href="#" class="talkDeleteMessage" data-message-id="' + data.id + '" title="Delete Message"><i class="fa fa-close" style="margin-right: 3px;"></i></a>' + data.sender.name + '</span>' +
-          '<span class="message-data-time">1 '+seconds_text+' '+time_text+'</span>' +
-          '</div>' +
-          '<div class="message my-message">' +
-          data.message +
-          '</div>' +
-          '</li>';
-    $('#talkMessages').append(html);
+  function addNewMessage(id) {
+    var request = $.ajax({
+      method: "get",
+      url: __baseUrl+'/ajax/message/get/'+id
+      });
+
+      request.done(function (response) {
+        if (response.status == 'success') {
+          console.log('kek');
+          console.log(response);
+          $('#talkMessages').append(response.html);
+        }
+      });
  }
 
   function updateThreads(data, is_new = '') {

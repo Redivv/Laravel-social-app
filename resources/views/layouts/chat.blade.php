@@ -85,7 +85,7 @@
             $(document).prop('title', '('+new_messages+') '+title);
             playSound('{{asset("chat/new_message.mp3")}}', audioElement);
             if($("div.chat-with").text() == data.sender.name){
-              addNewMessage(data,'{{__("chat.second")}}','{{__("chat.time")}}');
+              addNewMessage(data.id);
               $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
               updateThreads(data);
               if(focus_status){
