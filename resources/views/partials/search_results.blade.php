@@ -21,7 +21,7 @@
                 <div class="data col-lg-8">
                      <div class="personalInfo-box"><span class="name">{{$result->name}}</span>  <span class="age">{{$year - $result->birth_year}}</span></div>
                      <div class="city-box"><span class="city">{{$result->city}}</span></div>
-                     <div class="description-box"><span class="description">{{$result->desc}}</span></div>
+                     <div class="description-box"><span class="description">{!!nl2br(e($result->desc))!!}</span></div>
                 </div>
                 @auth
                   <div class="icons col-lg-2">

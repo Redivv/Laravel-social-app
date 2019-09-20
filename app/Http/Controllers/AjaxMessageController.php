@@ -39,7 +39,7 @@ class AjaxMessageController extends Controller
 
             $this->validate($request, $rules);
 
-            $body = $request->input('message-data');
+            $body = e($request->input('message-data'));
             $userId = $request->input('_id');
             Talk::setAuthUserId(Auth::id());
             
