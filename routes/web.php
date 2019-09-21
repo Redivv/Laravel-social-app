@@ -18,9 +18,9 @@ Auth::routes();
 Route::get('searcher', 'SearchController@index')->name('searcher');
 
 
-Route::get('profile', function(){
-    return view('profile');
-});
+Route::get('profile', 'ProfileController@index')->name('ProfileView');
+Route::post('profile', 'ProfileController@update');
+Route::get('profile/edit','ProfileController@edit')->name('ProfileEdition');
 
 Route::prefix('user')->group(function(){
     Route::get('home', 'HomeController@index')->name('home');
