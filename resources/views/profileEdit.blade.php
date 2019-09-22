@@ -1,41 +1,42 @@
-@extends('layouts.app')
+@extends('layouts.profile')
 
-@section('content')
-    
-    <div class="container card-body">
-        <div class="row">
-            <h1>Edit user data!</h1>
-        </div>
-        <form method="POST" action="/profile">
-            @csrf
-            <div class="row">
-                <label for="name" class="col-md-4 col-form-label">{{ __('name')  }}</label>
-            </div>
-            <div class="row form-group">
-                <div class="col-md-6">
-                    <input id="name" type="text" size="15" class="form-control" name="name" placeholder="{{ __('name') }}">
-                </div>
-            </div>
+@section('startform')
+<form action="">
+@endsection
 
-            <div class="row">
-                <label for="city" class="col-md-4 col-form-label">{{ __('city')  }}</label>
-            </div>
-            <div class="row form-group">
-                <div class="col-md-6">
-                    <input id="city" type="text" size="15" class="form-control" name="city" placeholder="{{ __('city') }}">
-                </div>
-            </div>
 
-            <div class="row">
-                <label for="description" class="col-md-4 col-form-label">{{ __('description')  }}</label>
-            </div>
-            <div class="row form-group">
-                <div class="col-md-6">
-                    <textarea id="description" type="text" cols="5" rows="4" class="form-control" name="description" placeholder="Opis"></textarea>
-                </div>
-            </div>
-            
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+@section('name')
+Nazwa:
+<input type="text" placeholder="{{ $user->name}}">
+@endsection
+
+@section('city')
+Miasto:
+<input type="text" placeholder="{{ $user->city}}">
+@endsection
+
+@section('email')
+E-mail:
+<input type="text" placeholder="{{ $user->email}}">
+@endsection
+
+@section('birth')
+Data urodzenia:
+<select id="birth_year" class="form-control @error('birth_year') is-invalid @enderror" name="birth_year" required>
+        @for ($year = date("Y")-1; $year >= 1950; $year --)
+            <option value="{{$year}}">{{$year}}</option>
+        @endfor
+    </select>
+@endsection
+
+@section('photo')
+Zdjęcie:
+<input type="file" placeholder="{{ $user->birth_year}}">
+@endsection
+@section('endform')
+
+@section('desc')
+<textarea name="description" id="description" cols="30" rows="10">{{ $user->description }}</textarea>
+@endsection
+</form>
 @endsection

@@ -12,9 +12,14 @@ class ProfileController extends Controller
     //
     public function index(){
 
-        $users = User::all();
+        if (Auth::check()) {
+            // The user is logged in...
+            $user = Auth::user();
 
-        return view('profile', compact('users'));
+        }
+        
+
+        return view('profile', compact('user'));
 
 
 
@@ -25,7 +30,13 @@ class ProfileController extends Controller
 
     public function edit(){
 
-        return view('profileEdit');
+        if (Auth::check()) {
+            // The user is logged in...
+            $user = Auth::user();
+
+        }
+
+        return view('profileEdit', compact('user'));
     }
 
     public function update(){
