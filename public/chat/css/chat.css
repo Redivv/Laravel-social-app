@@ -170,6 +170,10 @@ body {
   left: 93%;
 }
 
+.chat .chat-history .picture {
+  height: 250px;
+}
+
 .chat .chat-history .temporary-message {
   background: #c72906;
 }
@@ -200,7 +204,8 @@ body {
   cursor: pointer;
 }
 
-.chat .chat-message button {
+.chat .chat-message button,
+.chat .chat-message label {
   float: right;
   color: #94C2ED;
   font-size: 16px;
@@ -211,8 +216,19 @@ body {
   background: #F2F5F8;
 }
 
-.chat .chat-message button:hover {
+.chat .chat-message button:hover,
+.chat .chat-message label:hover {
   color: #75b1e8;
+}
+
+.chat .chat-message label {
+  float: none;
+}
+
+.chat .chat-message .thumb {
+  height: 75px;
+  border: 1px solid #000;
+  margin: 10px 5px 0 0;
 }
 
 .online,

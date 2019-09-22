@@ -16,8 +16,13 @@
         <div class="name">{{$inbox->withUser->name}}</div>
         <div class="status">
             <span class="fa fa-reply"></span>
-        <span>{{substr($inbox->thread->message, 0, 20)}}</span>
-        <span id="to-be-seen-thread" class="fa fa-check d-none"></span> 
+            <span>
+                @if ($inbox->thread->pictures)
+                    <i class="far fa-file-image"></i>
+                @endif
+                {{substr($inbox->thread->message, 0, 20)}}
+            </span>
+            <span id="to-be-seen-thread" class="fa fa-check d-none"></span> 
         </div>
     </div>
     </a>

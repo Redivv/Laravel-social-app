@@ -24,7 +24,12 @@
                     </div>
                     <div class="status">
                         <span class="fa fa-reply"></span>
-                        <span>{{substr($inbox->thread->message, 0, 20)}}</span>
+                        <span>
+                            @if ($inbox->thread->pictures)
+                                <i class="far fa-file-image"></i>
+                            @endif
+                            {{substr($inbox->thread->message, 0, 20)}}
+                        </span>
                         @if ($inbox->thread->is_seen)
                             <span class="fa fa-check"></span> 
                         @endif
@@ -34,7 +39,12 @@
                 <div class="about @if(!$inbox->thread->is_seen) new @endif">
                     <div class="name">{{$inbox->withUser->name}}</div>
                     <div class="status">
-                        <span>{{substr($inbox->thread->message, 0, 20)}}</span>
+                        <span>
+                            @if ($inbox->thread->pictures)
+                                <i class="far fa-file-image"></i>
+                            @endif
+                            {{substr($inbox->thread->message, 0, 20)}}
+                        </span>
                     </div>
                 </div>
             @endif

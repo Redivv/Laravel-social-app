@@ -92,13 +92,14 @@ class Talk
      *
      * @return \Nahid\Talk\Messages\Message
      */
-    protected function makeMessage($conversationId, $message)
+    protected function makeMessage($conversationId, $message = null, $pictures = null)
     {
         $message = $this->message->create([
-            'message' => $message,
+            'message'         => $message,
+            'pictures'        => $pictures,
             'conversation_id' => $conversationId,
-            'user_id' => $this->authUserId,
-            'is_seen' => 0,
+            'user_id'         => $this->authUserId,
+            'is_seen'         => 0,
         ]);
 
         $message->conversation->touch();
@@ -256,16 +257,16 @@ class Talk
      *
      * @return \Nahid\Talk\Messages\Message
      */
-    public function sendMessageByUserId($receiverId, $message)
+    public function sendMessageByUserId($receiverId, $message = null,$pictures = null)
     {
         if ($conversationId = $this->isConversationExists($receiverId)) {
-            $message = $this->makeMessage($conversationId, $message);
+            $message = $this->makeMessage($conversationId,$message,$pictures);
 
             return $message;
         }
 
         $convId = $this->newConversation($receiverId);
-        $message = $this->makeMessage($convId, $message);
+        $message = $this->makeMessage($convId, $message,$pictures);
 
         return $message;
     }
@@ -334,7 +335,7 @@ class Talk
     public function getConversationsById($conversationId, $offset = 0, $take = 20)
     {
         $conversations = $this->conversation->getMessagesById($conversationId, $this->authUserId, $offset, $take);
-
+        
         return $this->makeMessageCollection($conversations);
     }
 

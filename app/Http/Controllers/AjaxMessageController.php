@@ -23,7 +23,8 @@ class AjaxMessageController extends Controller
         if ($request->ajax()) {
             if ($message = Talk::user(Auth::id())->readMessage($id)) {
                 $html = view('ajax.newMessageHtml', compact('message'))->render();
-                return response()->json(['status'=>'success', 'html'=>$html,], 200);
+                return response()->json(['status'=>'success', 'html'=>$html], 200);
+                
             }
         }
     }
@@ -31,16 +32,29 @@ class AjaxMessageController extends Controller
     public function ajaxSendMessage(Request $request)
     {
         if ($request->ajax()) {
-            
             $rules = [
-                'message-data'=>'required',
+                'message-data'=>['required_without:pictures','string','nullable'],
+                'pictures.*'  =>['required_without:message-data','file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
                 '_id'=>'required'
             ];
 
             $this->validate($request, $rules);
 
-            $body = e($request->input('message-data'));
+            $body = (e($request->input('message-data')) == "") ? null : e($request->input('message-data')) ;
             $userId = $request->input('_id');
+            $pictures = $request->file('pictures');
+            $pictures_json = null;
+
+            if($pictures){
+                $pictures_json = array();
+                foreach ($pictures as $picture) {
+                    $imageName = mt_rand().'.'.$picture->getClientOriginalExtension();
+                    $picture->move(public_path('img/message-pictures'), $imageName);
+                    $pictures_json[] = $imageName;
+                }
+                $pictures_json = json_encode($pictures_json);
+            }
+
             Talk::setAuthUserId(Auth::id());
             
             if($conversation_id = Talk::isConversationExists($userId)){
@@ -53,10 +67,10 @@ class AjaxMessageController extends Controller
                     return response()->json(['status'=>'errors', 'msg'=>'something went wrong'], 400);
                 }
             }
-                
-                if ($message = Talk::sendMessageByUserId($userId, $body)) {
+
+                if ($message = Talk::sendMessageByUserId($userId, $body, $pictures_json)) {
                     $html = view('ajax.newMessageHtml', compact('message'))->render();
-                    $threads = Talk::user(Auth::id())->getInbox('desc',0,1);
+                    $threads = Talk::getInbox('desc',0,1);
                     $html2 = view('ajax.newThreadHtml', compact('threads'))->render();
                     return response()->json(['status'=>'success', 'html'=>$html, 'html2'=>$html2, 'receiver_id'=>$userId], 200);
                 }

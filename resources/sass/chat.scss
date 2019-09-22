@@ -177,6 +177,10 @@ body {
       }
     }
 
+    .picture{
+      height: 250px;
+    }
+
     .temporary-message{
       background: $red;
 
@@ -209,7 +213,7 @@ body {
       
     }
     
-    button {
+    button,label {
       float: right;
       color: $blue;
       font-size: 16px;
@@ -222,6 +226,14 @@ body {
       &:hover {
         color: darken($blue, 7%);
       }
+    }
+    label{
+      float:none;
+    }
+    .thumb{
+      height: 75px;
+      border: 1px solid #000;
+      margin: 10px 5px 0 0;
     }
   }
 }

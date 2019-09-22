@@ -11,8 +11,6 @@ function playSound(sound,element){
 
       request.done(function (response) {
         if (response.status == 'success') {
-          console.log('kek');
-          console.log(response);
           $('#talkMessages').append(response.html);
         }
       });
@@ -34,28 +32,35 @@ function playSound(sound,element){
             '<div class="about '+is_new+'">'+
               '<div class="name">'+data.sender.name+'</div>'+
               '<div class="status">'+
-              '<span>'+data.message.substring(0,20)+'</span>'+
-              '</div>'
-          '</div>'
-          '</a>'
+              '<span>';
+              if(data.pictures != null){
+                html += '<i class="far fa-file-image"></i> ';
+              }
+              if(data.message != null){
+                html += data.message.substring(0,20);
+              }
+              html += '</span>'+
+              '</div>'+
+          '</div>'+
+          '</a>'+
         '</li>';
-    var $thread = $('#user-'+data.sender.id);
-    if($thread.length){
-      $('#user-'+data.sender.id).remove();
-    }
-    $('#people-list .list').prepend(html);
+      var $thread = $('#user-'+data.sender.id);
+      if($thread.length){
+        $('#user-'+data.sender.id).remove();
+      }
+      $('#people-list .list').prepend(html);
 
-    $('.talkDeleteConversation').on('submit',function(e){
-      if(!confirm(deleteConvo)) {
-          e.preventDefault();
-      }   
-    });
+      $('.talkDeleteConversation').on('submit',function(e){
+        if(!confirm(deleteConvo)) {
+            e.preventDefault();
+        }   
+      });
 
-    $('.talkBlockConversation').on('submit',function(e){
-      if(!confirm(blockConvo)) {
-          e.preventDefault();
-      }   
-  });
+      $('.talkBlockConversation').on('submit',function(e){
+        if(!confirm(blockConvo)) {
+            e.preventDefault();
+        }   
+      });
     
     }
 

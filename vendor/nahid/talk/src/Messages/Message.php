@@ -18,6 +18,7 @@ class Message extends Model implements HtmlStringInterface
 
     public $fillable = [
         'message',
+        'pictures',
         'is_seen',
         'deleted_from_sender',
         'deleted_from_receiver',

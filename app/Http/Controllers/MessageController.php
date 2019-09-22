@@ -57,7 +57,7 @@ class MessageController extends Controller
                     event(new MessagesWereSeen(intVal($id)));
                 }
                 
-                $conversations = Talk::getMessagesByUserId($id, 0,10);
+                $conversations = Talk::user(Auth::id())->getMessagesByUserId($id, 0,10);
                 if(!$conversations) {
                     $user = User::find($id);
                 } else {

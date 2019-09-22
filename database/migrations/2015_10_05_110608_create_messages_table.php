@@ -15,7 +15,7 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('message');
+            $table->text('message')->nullable()->default(null);
             $table->longText('pictures')->nullable()->default(null);
             $table->boolean('is_seen')->default(0);
             $table->boolean('deleted_from_sender')->default(0);

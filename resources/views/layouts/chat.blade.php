@@ -40,7 +40,10 @@
       
       @if(isset($user))
         <div class="chat-message clearfix">
-          <form action="" method="post" id="talkSendMessage">
+          <form action="" method="post" id="talkSendMessage" enctype="multipart/form-data">
+                <label for="upload-pictures"><i class="far fa-images"></i></label>
+                <input id="upload-pictures" class="d-none" name="pictures[]" type="file" accept="image/*" multiple>
+                <output id="picture-preview"></output>
                 <textarea name="message-data" id="message-data" placeholder ="{{__('chat.placeholder')}}" rows="3"></textarea>
                 <input type="hidden" name="_id" value="{{@request()->route('id')}}">
                 <button type="submit">{{__('chat.send')}}</button>

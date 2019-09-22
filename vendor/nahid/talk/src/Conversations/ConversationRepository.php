@@ -181,17 +181,19 @@ class ConversationRepository extends Repository
     {
         return Conversation::with(
             [
-                'messages' => function ($query) use ($userId, $offset, $take) {
+                'messages' => function ($query) use ($conversationId,$userId, $offset, $take) {
                     $query->where(
-                        function ($qr) use ($userId) {
+                        function ($qr) use ($conversationId,$userId) {
                             $qr->where('user_id', '=', $userId)
-                                ->where('deleted_from_sender', 0);
+                                ->where('deleted_from_sender', 0)
+                                ->where('conversation_id', '=', $conversationId);
                         }
                     )
                         ->orWhere(
-                            function ($q) use ($userId) {
+                            function ($q) use ($conversationId,$userId) {
                                 $q->where('user_id', '!=', $userId)
-                                    ->where('deleted_from_receiver', 0);
+                                    ->where('deleted_from_receiver', 0)
+                                    ->where('conversation_id', '=', $conversationId);
                             }
                         );
 

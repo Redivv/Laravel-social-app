@@ -12,6 +12,11 @@
                             <a href="#" class="talkDeleteMessage" data-message-id="{{$message->id}}" title="Delete Message"><i class="fas fa-times"></i></a>
                         </div>
                         <div class="message other-message float-right">
+                            @if ($message->pictures)
+                                @foreach (json_decode($message->pictures) as $picture)
+                                    <img class="picture" src="{{asset('img/message-pictures/'.$picture)}}">
+                                @endforeach  
+                            @endif
                             {!!nl2br($message->toHtmlString()->toHtml())!!}
                         </div>
                         @if ($message->is_seen)
@@ -25,6 +30,11 @@
                             <span class="message-data-time">{{$message->humans_time}} {{__('chat.time')}}</span>
                         </div>
                         <div class="message my-message">
+                            @if ($message->pictures)
+                                @foreach (json_decode($message->pictures) as $picture)
+                                    <img class="picture" src="{{asset('img/message-pictures/'.$picture)}}">
+                                @endforeach  
+                            @endif
                             {!!nl2br($message->toHtmlString()->toHtml())!!}
                         </div>
                     </li>
