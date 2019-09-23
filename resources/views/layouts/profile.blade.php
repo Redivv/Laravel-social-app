@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
+@yield('startform')
     <div class="container m-5">
         <div class="row justify-content-center">
             <div class="col-md-6 bag-grey p-2">
-                    @yield('startform')
+                    
                 <div class="row justify-content-center">
                     <div class="col-md-6">
                         <p>

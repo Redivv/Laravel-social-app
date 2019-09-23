@@ -1,42 +1,46 @@
 @extends('layouts.profile')
 
 @section('startform')
-<form action="">
+<form action="/profile" method="POST">
+@csrf
+@method('patch')
+<input type="hidden" id="id" name="id" value="{{$user->id}}">
 @endsection
 
 
 @section('name')
 Nazwa:
-<input type="text" placeholder="{{ $user->name}}">
+<input id="name" name="name" type="text" value="{{ $user->name}}">
 @endsection
 
 @section('city')
 Miasto:
-<input type="text" placeholder="{{ $user->city}}">
+<input id="city" name="city" type="text" value="{{ $user->city}}">
 @endsection
 
 @section('email')
 E-mail:
-<input type="text" placeholder="{{ $user->email}}">
+{{-- <input id="email" name="email" type="text" value="{{ $user->email}}"> --}}
 @endsection
 
 @section('birth')
 Data urodzenia:
-<select id="birth_year" class="form-control @error('birth_year') is-invalid @enderror" name="birth_year" required>
+{{-- <select id="birth_year" class="form-control" name="birth_year">
         @for ($year = date("Y")-1; $year >= 1950; $year --)
             <option value="{{$year}}">{{$year}}</option>
         @endfor
-    </select>
+    </select> --}}
 @endsection
 
 @section('photo')
 Zdjęcie:
-<input type="file" placeholder="{{ $user->birth_year}}">
+<input type="file" >
 @endsection
-@section('endform')
 
 @section('desc')
 <textarea name="description" id="description" cols="30" rows="10">{{ $user->description }}</textarea>
 @endsection
-</form>
+@section('endform')
+<button type="submit">submit changes</button>
+
 @endsection

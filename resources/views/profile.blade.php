@@ -53,3 +53,7 @@
         {{ $user ->description }}
     @endif
 @endsection
+
+@section('endform')
+    <a href="/profile/edit">Edytuj profil</a>
+@endsection

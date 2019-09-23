@@ -41,6 +41,13 @@ class ProfileController extends Controller
 
     public function update(){
 
-        return request()->all();
+        $user= User::find(request('id'));
+
+        $user->city = request('city');
+        $user->description = request('description');
+
+        $user->save();
+
+        return redirect('/profile');
     }
 }

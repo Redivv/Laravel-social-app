@@ -19,7 +19,7 @@ Route::get('searcher', 'SearchController@index')->name('searcher');
 
 
 Route::get('profile', 'ProfileController@index')->name('ProfileView');
-Route::post('profile', 'ProfileController@update')->middleware('auth');
+Route::patch('profile', 'ProfileController@update')->middleware('auth');
 Route::get('profile/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');
 
 Route::prefix('user')->group(function(){
