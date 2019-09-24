@@ -48,7 +48,7 @@ class AjaxMessageController extends Controller
             if($pictures){
                 $pictures_json = array();
                 foreach ($pictures as $picture) {
-                    $imageName = mt_rand().'.'.$picture->getClientOriginalExtension();
+                    $imageName = mt_rand().'-'.time().'.'.$picture->getClientOriginalExtension();
                     $picture->move(public_path('img/message-pictures'), $imageName);
                     $pictures_json[] = $imageName;
                 }
@@ -99,14 +99,16 @@ class AjaxMessageController extends Controller
                 ->where('user_id',$sender_id)
                 ->update(['is_seen'=>1]);
                 if ($amount > 0) {
-                    event(new MessagesWereSeen(intVal($sender_id)));
+                    event(new MessagesWereSeen(intVal($sender_id), intVal($conversation_id)));
                 }
                 return response()->json(['status'=>'success', 'seen_messages' => $amount], 200);
 
             }else{
                 if(Talk::user(Auth::id())->makeSeen($id)) {
                     $sender_id = $request->input('sender');
-                    event(new MessagesWereSeen(intVal($sender_id)));
+                    $conversation_id = Talk::user(Auth::id())->isConversationExists($sender_id);
+                    
+                    event(new MessagesWereSeen(intVal($sender_id), intVal($conversation_id)));
 
                     return response()->json(['status'=>'success'], 200);
                 }

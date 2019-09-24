@@ -30,3 +30,21 @@
         @endif
     </div>
 @endsection
+
+@push('scripts')
+<script defer>
+    Echo.join('online')
+    .here((users) => {
+        this.users = users;
+        console.log(users);
+    })
+    .joining((user) => {
+        this.users.push(user);
+        console.log(users);
+    })
+    .leaving((user) => {
+    this.users = this.users.filter(u => (u.id !== user.id));
+    console.log(users);
+    })
+</script>
+@endpush

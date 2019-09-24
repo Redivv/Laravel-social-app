@@ -21,3 +21,9 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script defer>
+    Echo.join('online')
+</script>
+@endpush

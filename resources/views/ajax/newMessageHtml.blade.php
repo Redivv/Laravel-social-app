@@ -13,9 +13,7 @@
             @endif
             {!!nl2br($message->toHtmlString()->toHtml())!!}
         </div>
-        @if ($message->is_seen)
-            <div class="clearfix"><span>{{__('chat.seen')}}</span></div>
-        @endif
+        <div class="clearfix seen-info-{{$message->conversation_id}} d-none"><span>{{__('chat.seen')}}</span></div>
     </li>
 @else
     <li id="message-{{$message->id}}">

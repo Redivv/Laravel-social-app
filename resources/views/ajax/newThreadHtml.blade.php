@@ -12,6 +12,9 @@
             <button class="btn btn-link btn-sm" type="submit"><i class="fas fa-user-times"></i></button>
     </form>
     <a href="{{route('message.read', ['id'=>$inbox->withUser->id])}}">
+    <div class="profile-picture">
+        <img src="{{asset('img/profile-pictures/'.$inbox->withUser->picture)}}" alt="profile picture">
+    </div>
     <div class="about">
         <div class="name">{{$inbox->withUser->name}}</div>
         <div class="status">
@@ -22,7 +25,7 @@
                 @endif
                 {{substr($inbox->thread->message, 0, 20)}}
             </span>
-            <span id="to-be-seen-thread" class="fa fa-check d-none"></span> 
+            <span id="to-be-seen-thread-{{$inbox->thread->conversation_id}}" class="fa fa-check d-none"></span> 
         </div>
     </div>
     </a>

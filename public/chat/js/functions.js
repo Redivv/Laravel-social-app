@@ -29,6 +29,9 @@ function playSound(sound,element){
           '<button class="btn btn-link btn-sm" type="submit"><i class="fas fa-user-times"></i></button>'+
           '</form>'+
           '<a href="/message/'+data.sender.id+'">'+
+          '<div class="profile-picture">'+
+                '<img src="'+__baseUrl+'/img/profile-pictures/'+data.sender.picture+'" alt="profile picture">'+
+            '</div>'+
             '<div class="about '+is_new+'">'+
               '<div class="name">'+data.sender.name+'</div>'+
               '<div class="status">'+

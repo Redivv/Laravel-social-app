@@ -161,6 +161,7 @@ $(document).ready(function () {
             span.innerHTML = ['<img class="thumb" src="', e.target.result,
                                 '" title="', escape(theFile.name), '"/>'].join('');
             $('#picture-preview').prepend(span, null);
+            $('#message-data').focus();
             };
         })(f);
 

@@ -16,15 +16,17 @@ class MessagesWereSeen implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $sender_id;
+    public $conversation_id;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(int $sender_id)
+    public function __construct(int $sender_id, int $conversation_id)
     {
         $this->sender_id = $sender_id;
+        $this->conversation_id = $conversation_id;
     }
 
     /**
