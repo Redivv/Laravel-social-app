@@ -102,11 +102,25 @@
 
         Echo.private(`seen.` + window.Laravel.user)
           .listen('MessagesWereSeen', (e) => {
-            $('.seen_info').removeClass('d-none');
+            $('.seen-info-'+e.conversation_id).removeClass('d-none');
 
-            $('#to-be-seen-thread').removeClass('d-none');
-            $('#to-be-seen-thread').removeAttr('id');
+            $('#to-be-seen-thread-'+e.conversation_id).removeClass('d-none');
+            $('#to-be-seen-thread-'+e.conversation_id).removeAttr('id');
         });
+
+        Echo.join('online')
+          .here((users) => {
+              this.users = users;
+              console.log(users);
+          })
+          .joining((user) => {
+              this.users.push(user);
+              console.log(users);
+          })
+          .leaving((user) => {
+          this.users = this.users.filter(u => (u.id !== user.id));
+          console.log(users);
+          })
     </script>
     {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}
 

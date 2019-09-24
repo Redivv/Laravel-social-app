@@ -237,6 +237,7 @@ $(document).ready(function () {
           var span = document.createElement('span');
           span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
           $('#picture-preview').prepend(span, null);
+          $('#message-data').focus();
         };
       }(f); // Read in the image file as a data URL.
 

@@ -17,6 +17,9 @@
                     <button class="btn btn-link btn-sm" type="submit"><i class="fas fa-user-times"></i></button>
             </form>
             <a href="{{route('message.read', ['id'=>$inbox->withUser->id])}}">
+            <div class="profile-picture">
+                <img src="{{asset('img/profile-pictures/'.$inbox->withUser->picture)}}" alt="profile picture">
+            </div>
             @if(auth()->user()->id == $inbox->thread->sender->id)
                 <div class="about">
                     <div class="name">
@@ -32,6 +35,8 @@
                         </span>
                         @if ($inbox->thread->is_seen)
                             <span class="fa fa-check"></span> 
+                        @else
+                            <span id="to-be-seen-thread-{{$inbox->thread->conversation_id}}" class="fa fa-check d-none"></span> 
                         @endif
                     </div>
                 </div>

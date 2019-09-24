@@ -10,9 +10,6 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -90,5 +87,11 @@
         <footer id="footer" class="pt-2 pb-2">
             <span>Copyright 2019 &copy Wipaka</span>
         </footer>
+        
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}"></script>
+        
+        @stack('scripts')
+
     </body>
 </html>
