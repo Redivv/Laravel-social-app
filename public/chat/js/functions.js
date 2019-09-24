@@ -17,7 +17,7 @@ function playSound(sound,element){
  }
 
   function updateThreads(data, is_new = '') {
-    var html = '<li id="user-'+data.sender.id+'" class="clearfix">'+
+    var html = '<li data-id="'+data.sender.id+'" id="user-'+data.sender.id+'" class="clearfix thread">'+
           '<form action="/message/'+data.sender.id+'" class="talkDeleteConversation float-left" method="POST">'+
           '<input type="hidden" name="_method" value="DELETE">'+
           '<input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'">'+

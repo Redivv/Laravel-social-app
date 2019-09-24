@@ -3,7 +3,7 @@
         {{__('searcher.results-age')}}
     </h3>
     @foreach ($resultsVar as $result)
-        <div class="searchResult container-fluid mb-4">
+        <div data-id="{{$result->id}}" class="searchResult container-fluid mb-4">
             <div class="row">
                 <div class="picture col-lg-2">
                     <img src="{{asset('img/profile-pictures/'.$result->picture)}}" alt="">

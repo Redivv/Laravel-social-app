@@ -110,16 +110,30 @@
 
         Echo.join('online')
           .here((users) => {
-              this.users = users;
-              console.log(users);
+              this.active_id = new Array();
+              users.forEach(function(us){
+                  active_id.push(us.id);
+              })
+                  let active_idCopy = active_id;
+                  $('li.thread').each(function(){
+                      if (active_idCopy.length > 1) {
+                          if (active_idCopy.includes($(this).data('id'))) {
+                              $(this).addClass('activeUser');
+                              active_idCopy = active_idCopy.filter(u => (u !== $(this).data('id')));
+                          }
+                          console.log(active_id);
+                      }else{
+                          return false;
+                      }
+                  })
           })
           .joining((user) => {
-              this.users.push(user);
-              console.log(users);
+              this.active_id.push(user.id);
+              $('li.thread[data-id="'+user.id+'"]').addClass('activeUser');
           })
           .leaving((user) => {
-          this.users = this.users.filter(u => (u.id !== user.id));
-          console.log(users);
+          this.active_id = this.active_id.filter(u => (u !== user.id));
+          $('li.thread[data-id="'+user.id+'"]').removeClass('activeUser');
           })
     </script>
     {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}

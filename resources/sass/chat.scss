@@ -55,6 +55,12 @@ body {
     li {
       padding-bottom: 20px;
     }
+
+    li.thread.activeUser{
+      .name,.status{
+        color: $green;
+      }
+    }
   }
   
   .profile-picture{

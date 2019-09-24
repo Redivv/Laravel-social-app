@@ -16621,6 +16621,10 @@ readers do not read off random characters that represent icons */
   color: #f66103;
 }
 
+.searchResults-box div.searchResult.activeUser .name {
+  color: #38c172;
+}
+
 body {
   position: relative;
   margin: 0;
