@@ -249,7 +249,8 @@ body {
       
     }
     
-    button {
+    button,label{
+      text-align: center;
       margin-top:10px;
       border-radius:15px;
       float: right;

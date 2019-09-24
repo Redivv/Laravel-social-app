@@ -46,6 +46,7 @@ $(document).ready(function () {
 
             $(document).one("ajaxSend", function(){
                 tag[0].reset();
+                $('#picture-preview').empty();
                 let html = '<li class="clearfix" id="to-be-replaced">'+
                         '<img src="'+img.src+'">'+
                 '</li>';
@@ -67,8 +68,10 @@ $(document).ready(function () {
                     $('#to-be-replaced').replaceWith(response.html);
                     $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
                     var $thread = $('#user-'+response.receiver_id);
-                    if($thread.length)
+                    if($thread.length){
+                        $('#user-'+response.receiver_id+'+hr').remove();
                         $('#user-'+response.receiver_id).remove();
+                    }
                     $('#people-list .list').prepend(response.html2);
 
                     $('.talkDeleteConversation').on('submit',function(e){

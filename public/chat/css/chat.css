@@ -230,7 +230,9 @@ body {
   cursor: pointer;
 }
 
-.chat .chat-message button {
+.chat .chat-message button,
+.chat .chat-message label {
+  text-align: center;
   margin-top: 10px;
   border-radius: 15px;
   float: right;
@@ -246,7 +248,8 @@ body {
   transition: all 500ms ease;
 }
 
-.chat .chat-message button:hover {
+.chat .chat-message button:hover,
+.chat .chat-message label:hover {
   background-color: #a1a1a1 !important;
   cursor: pointer;
 }
