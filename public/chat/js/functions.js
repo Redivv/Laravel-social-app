@@ -17,7 +17,16 @@ function playSound(sound,element){
  }
 
   function updateThreads(data, is_new = '') {
-    var html = '<li data-id="'+data.sender.id+'" id="user-'+data.sender.id+'" class="clearfix thread">'+
+      var $thread = $('#user-'+data.sender.id);
+      var active_flag = '';
+      if($thread.length){
+        if ($('#user-'+data.sender.id).hasClass('activeUser')) {
+          active_flag = 'activeUser';
+        }
+        $('#user-'+data.sender.id+'+hr').remove();
+        $('#user-'+data.sender.id).remove();
+      }
+      var html = '<li data-id="'+data.sender.id+'" id="user-'+data.sender.id+'" class="clearfix thread '+active_flag+'">'+
           '<form action="/message/'+data.sender.id+'" class="talkDeleteConversation float-left" method="POST">'+
           '<input type="hidden" name="_method" value="DELETE">'+
           '<input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'">'+
@@ -46,11 +55,8 @@ function playSound(sound,element){
               '</div>'+
           '</div>'+
           '</a>'+
-        '</li>';
-      var $thread = $('#user-'+data.sender.id);
-      if($thread.length){
-        $('#user-'+data.sender.id).remove();
-      }
+      '</li>'+
+      '<hr style="background-color:#f66103;">';
       $('#people-list .list').prepend(html);
 
       $('.talkDeleteConversation').on('submit',function(e){

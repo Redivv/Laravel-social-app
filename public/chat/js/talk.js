@@ -152,13 +152,23 @@ $(document).ready(function () {
           $('#to-be-replaced').replaceWith(response.html);
           $("div.chat-history").scrollTop($('div.chat-history').prop('scrollHeight'));
           var $thread = $('#user-' + response.receiver_id);
+          var active_flag = true;
 
           if ($thread.length) {
+            if ($('#user-' + response.receiver_id).hasClass('activeUser')) {
+              active_flag = 'activeUser';
+            }
+
             $('#user-' + response.receiver_id + '+hr').remove();
             $('#user-' + response.receiver_id).remove();
           }
 
           $('#people-list .list').prepend(response.html2);
+
+          if (active_flag) {
+            $('#user-' + response.receiver_id).addClass('activeUser');
+          }
+
           $('.talkDeleteConversation').on('submit', function (e) {
             if (!confirm(deleteConvo)) {
               e.preventDefault();
