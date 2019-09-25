@@ -41,6 +41,9 @@
                                     <a href="{{ url('/user/home') }}" class="nav-link">{{__('app.dashboard')}}</a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ url('/profile') }}" class="nav-link">Profil</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ url('/message') }}" class="nav-link">{{__('app.chat')}}</a>
                             </li>
                         @endauth

@@ -12,7 +12,7 @@
                 <div class="picture col-lg-2">
                     <img src="{{asset('img/profile-pictures/'.$result->picture)}}" alt="">
                     <div class="overlay"></div>
-                    <a href="#">
+                    <a href="profile/{{$result->id }}">
                         <div class="overlay-content fadeIn-bottom">
                             <span class="overlay-text">{{__('searcher.see_profile')}}</span>
                         </div>
