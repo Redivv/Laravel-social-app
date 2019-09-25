@@ -1,7 +1,7 @@
 @extends('layouts.profile')
 
 @section('startform')
-<form action="/profile" method="POST">
+<form action="/profile" method="POST" enctype="multipart/form-data">
 @csrf
 @method('patch')
 <input type="hidden" id="id" name="id" value="{{$user->id}}">
@@ -34,7 +34,7 @@ Data urodzenia:
 
 @section('photo')
 Zdjęcie:
-<input type="file" >
+<input id="photo" name="photo" type="file" accept=".png,.jpg">
 @endsection
 
 @section('desc')

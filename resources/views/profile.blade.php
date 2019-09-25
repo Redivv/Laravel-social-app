@@ -55,5 +55,7 @@
 @endsection
 
 @section('endform')
+    @if($user->id == Auth::user()->id)
     <a href="/profile/edit">Edytuj profil</a>
+    @endif
 @endsection
