@@ -54,10 +54,10 @@ class MessageController extends Controller
                     ->update(['is_seen'=>1]);
                 if ($amount > 0) {
                     $threads = Talk::user(Auth::id())->getInbox();
-                    event(new MessagesWereSeen(intVal($id)));
+                    event(new MessagesWereSeen(intVal($id), intVal($conversation_id)));
                 }
                 
-                $conversations = Talk::getMessagesByUserId($id, 0,10);
+                $conversations = Talk::user(Auth::id())->getMessagesByUserId($id, 0,10);
                 if(!$conversations) {
                     $user = User::find($id);
                 } else {

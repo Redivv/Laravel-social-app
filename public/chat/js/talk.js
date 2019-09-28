@@ -1,1 +1,295 @@
-!function(e){var t={};function o(r){if(t[r])return t[r].exports;var n=t[r]={i:r,l:!1,exports:{}};return e[r].call(n.exports,n,n.exports,o),n.l=!0,n.exports}o.m=e,o.c=t,o.d=function(e,t,r){o.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},o.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},o.t=function(e,t){if(1&t&&(e=o(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(o.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var n in e)o.d(r,n,function(t){return e[t]}.bind(null,n));return r},o.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return o.d(t,"a",t),t},o.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},o.p="/",o(o.s=40)}({40:function(e,t,o){e.exports=o(41)},41:function(e,t){function o(e){if(0==$(e.currentTarget).scrollTop()&&!1===stop_pagi){pagi++;var t=window.location.href;$.ajax({method:"get",url:t,data:{pagi:pagi}}).done((function(e){"success"==e.status&&""!=e.html&&($("#talkMessages").prepend('<li id="top-msg"></li>'),$("#talkMessages").prepend(e.html),$("div.chat-history").scrollTop($("div.chat-history").scrollTop()+$("#top-msg").position().top-$("div.chat-history").height()/4+$("#top-msg").height()/4),stop_pagi=e.stop)}))}}$(document).ready((function(){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$("div.chat-history").scrollTop($("div.chat-history").prop("scrollHeight")),$("div.chat-history").bind("scroll",o),$("#talkSendMessage").on("submit",(function(e){var t,o,r,n;e.preventDefault(),o=$(this),t=__baseUrl+"/ajax/message/send",r=o.serialize(),$(document).one("ajaxSend",(function(){o[0].reset();var e=r.split("&")[0];if((e=e.replace("message-data=","")).trim()){var t='<li class="clearfix" id="to-be-replaced"><div class="message temporary-message float-right">'+unescape(e)+"</div></li>";$("#talkMessages").append(t),$("div.chat-history").scrollTop($("div.chat-history").prop("scrollHeight"))}})),(n=$.ajax({method:"post",url:t,data:r})).done((function(e){"success"==e.status&&($("#to-be-replaced").replaceWith(e.html),$("div.chat-history").scrollTop($("div.chat-history").prop("scrollHeight")),$("#user-"+e.receiver_id).length&&$("#user-"+e.receiver_id).remove(),$("#people-list .list").prepend(e.html2),$(".talkDeleteConversation").on("submit",(function(e){confirm(deleteConvo)||e.preventDefault()})),$(".talkBlockConversation").on("submit",(function(e){confirm(blockConvo)||e.preventDefault()})))})),n.fail((function(e){"blocked-user"==e.responseJSON.status&&(alert(e.responseJSON.msg),$("#to-be-replaced").remove())}))})),$("body").on("click",".talkDeleteMessage",(function(e){var t,o,r;if(e.preventDefault(),t=$(this),r=t.data("message-id"),o=__baseUrl+"/ajax/message/delete/"+r,!confirm(deleteMessage))return!1;$.ajax({method:"post",url:o,data:{_method:"DELETE"}}).done((function(e){"success"==e.status&&$("#message-"+r).hide(500,(function(){$(this).remove()}))}))})),$(".talkDeleteConversation").on("submit",(function(e){confirm(deleteConvo)||e.preventDefault()})),$(".talkBlockConversation").on("submit",(function(e){confirm(blockConvo)||e.preventDefault()}))}))}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./resources/js/talk.js":
+/*!******************************!*\
+  !*** ./resources/js/talk.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  // Setup Ajax csrf for future requests
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  }); // Scroll chat history to newest message on start
+
+  $("div.chat-history").scrollTop($('div.chat-history').prop('scrollHeight')); // Preload loading gif for immediate display
+
+  var img = new Image();
+  img.src = __baseUrl + "/chat/loading.gif"; // Bind scroll function to chat history for pagination request
+
+  $("div.chat-history").bind('scroll', chk_scroll); // Enter key will send a message, Shift+enter will do normal break
+
+  var shift_pressed = false;
+  $('#message-data').keydown(function (e) {
+    if ((e.keyCode || e.which) == 16) {
+      shift_pressed = true;
+    }
+
+    if ((e.keyCode || e.which) == 13 && shift_pressed === false) {
+      e.preventDefault();
+      $('#talkSendMessage').submit();
+    }
+  });
+  $('#message-data').keyup(function (e) {
+    if ((e.keyCode || e.which) == 16) {
+      shift_pressed = false;
+    }
+  }); // Sending a message dynamicly
+
+  $('#talkSendMessage').on('submit', function (e) {
+    e.preventDefault();
+
+    if ($('#message-data').val() || $('#upload-pictures').val()) {
+      var url, request, tag;
+      tag = $(this);
+      url = __baseUrl + '/ajax/message/send';
+      $(document).one("ajaxSend", function () {
+        tag[0].reset();
+        var html = '<li class="clearfix" id="to-be-replaced">' + '<img src="' + img.src + '">' + '</li>';
+        $('#talkMessages').append(html);
+        $("div.chat-history").scrollTop($('div.chat-history').prop('scrollHeight'));
+      });
+      var request = $.ajax({
+        method: "post",
+        url: url,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        data: new FormData(this)
+      });
+      request.done(function (response) {
+        if (response.status == 'success') {
+          $('#to-be-replaced').replaceWith(response.html);
+          $("div.chat-history").scrollTop($('div.chat-history').prop('scrollHeight'));
+          var $thread = $('#user-' + response.receiver_id);
+          if ($thread.length) $('#user-' + response.receiver_id).remove();
+          $('#people-list .list').prepend(response.html2);
+
+          if (active_id.includes(parseInt(response.receiver_id, 10))) {
+            $('#user-' + response.receiver_id).addClass('activeUser');
+          }
+
+          $('.talkDeleteConversation').on('submit', function (e) {
+            if (!confirm(deleteConvo)) {
+              e.preventDefault();
+            }
+          });
+          $('.talkBlockConversation').on('submit', function (e) {
+            if (!confirm(blockConvo)) {
+              e.preventDefault();
+            }
+          });
+        }
+      });
+      request.fail(function (xhr) {
+        if (xhr.responseJSON.status == "blocked-user") {
+          alert(xhr.responseJSON.msg);
+        }
+
+        $('#to-be-replaced').remove();
+      });
+    } else {
+      alert('Nie możesz wysłać pustej wiadomości');
+    }
+  }); // Soft deleting a message dynamicly
+
+  $('body').on('click', '.talkDeleteMessage', function (e) {
+    e.preventDefault();
+    var tag, url, id, request;
+    tag = $(this);
+    id = tag.data('message-id');
+    url = __baseUrl + '/ajax/message/delete/' + id;
+
+    if (!confirm(deleteMessage)) {
+      return false;
+    }
+
+    request = $.ajax({
+      method: "post",
+      url: url,
+      data: {
+        "_method": "DELETE"
+      }
+    });
+    request.done(function (response) {
+      if (response.status == 'success') {
+        $('#message-' + id).hide(500, function () {
+          $(this).remove();
+        });
+      }
+    });
+  }); // Confirm blocking or deleting a Convo
+
+  $('.talkDeleteConversation').on('submit', function (e) {
+    if (!confirm(deleteConvo)) {
+      e.preventDefault();
+    }
+  });
+  $('.talkBlockConversation').on('submit', function (e) {
+    if (!confirm(blockConvo)) {
+      e.preventDefault();
+    }
+  });
+  $('#upload-pictures').change(function (evt) {
+    var files = evt.target.files; // FileList object
+    // Empty the preview list
+
+    $('#picture-preview').empty(); // Loop through the FileList and render image files as thumbnails.
+
+    for (var i = 0, f; f = files[i]; i++) {
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        $(this).val("");
+        alert("Niewłaściwy Typ Pliku!");
+        $('#picture-preview').empty();
+        break;
+      }
+
+      var reader = new FileReader(); // Closure to capture the file information.
+
+      reader.onload = function (theFile) {
+        return function (e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+          $('#picture-preview').prepend(span, null);
+          $('#message-data').focus();
+        };
+      }(f); // Read in the image file as a data URL.
+
+
+      reader.readAsDataURL(f);
+    }
+  });
+}); // On full up scroll chat history try to load more messages
+
+function chk_scroll(e) {
+  var elem = $(e.currentTarget);
+
+  if (elem.scrollTop() == 0 && stop_pagi === false) {
+    pagi++;
+    var url = window.location.href;
+    var request = $.ajax({
+      method: "get",
+      url: url,
+      data: {
+        pagi: pagi
+      }
+    });
+    request.done(function (response) {
+      if (response.status == 'success') {
+        if (response.html != '') {
+          $('#talkMessages').prepend('<li id="top-msg"></li>');
+          $('#talkMessages').prepend(response.html);
+          $("div.chat-history").scrollTop($("div.chat-history").scrollTop() + $("#top-msg").position().top - $("div.chat-history").height() / 4 + $("#top-msg").height() / 4);
+          stop_pagi = response.stop;
+        }
+      }
+    });
+  }
+}
+
+/***/ }),
+
+/***/ 1:
+/*!************************************!*\
+  !*** multi ./resources/js/talk.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\talk.js */"./resources/js/talk.js");
+
+
+/***/ })
+
+/******/ });

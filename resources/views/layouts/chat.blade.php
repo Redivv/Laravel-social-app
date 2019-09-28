@@ -40,7 +40,10 @@
       
       @if(isset($user))
         <div class="chat-message clearfix">
-          <form action="" method="post" id="talkSendMessage">
+          <form action="" method="post" id="talkSendMessage" enctype="multipart/form-data">
+                <label for="upload-pictures"><i class="far fa-images"></i></label>
+                <input id="upload-pictures" class="d-none" name="pictures[]" type="file" accept="image/*" multiple>
+                <output id="picture-preview"></output>
                 <textarea name="message-data" id="message-data" placeholder ="{{__('chat.placeholder')}}" rows="3"></textarea>
                 <input type="hidden" name="_id" value="{{@request()->route('id')}}">
                 <button type="submit">{{__('chat.send')}}</button>
@@ -63,7 +66,6 @@
           var stop_pagi = false;
       </script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="{{asset('chat/js/talk.js')}}"></script>
     <script src="{{asset('chat/js/functions.js')}}"></script>
 
     <script>
@@ -85,7 +87,7 @@
             $(document).prop('title', '('+new_messages+') '+title);
             playSound('{{asset("chat/new_message.mp3")}}', audioElement);
             if($("div.chat-with").text() == data.sender.name){
-              addNewMessage(data,'{{__("chat.second")}}','{{__("chat.time")}}');
+              addNewMessage(data.id);
               $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
               updateThreads(data);
               if(focus_status){
@@ -99,12 +101,40 @@
 
         Echo.private(`seen.` + window.Laravel.user)
           .listen('MessagesWereSeen', (e) => {
-            $('.seen_info').removeClass('d-none');
+            $('.seen-info-'+e.conversation_id).removeClass('d-none');
 
-            $('#to-be-seen-thread').removeClass('d-none');
-            $('#to-be-seen-thread').removeAttr('id');
+            $('#to-be-seen-thread-'+e.conversation_id).removeClass('d-none');
+            $('#to-be-seen-thread-'+e.conversation_id).removeAttr('id');
         });
+
+        var active_id = new Array();
+        Echo.join('online')
+          .here((users) => {
+              users.forEach(function(us){
+                  active_id.push(us.id);
+              })
+                  let active_idCopy = active_id;
+                  $('li.thread').each(function(){
+                      if (active_idCopy.length > 1) {
+                          if (active_idCopy.includes($(this).data('id'))) {
+                              $(this).addClass('activeUser');
+                              active_idCopy = active_idCopy.filter(u => (u !== $(this).data('id')));
+                          }
+                      }else{
+                          return false;
+                      }
+                  })
+          })
+          .joining((user) => {
+              active_id.push(user.id);
+              $('li.thread[data-id="'+user.id+'"]').addClass('activeUser');
+          })
+          .leaving((user) => {
+          active_id = this.active_id.filter(u => (u !== user.id));
+          $('li.thread[data-id="'+user.id+'"]').removeClass('activeUser');
+          })
     </script>
+    <script src="{{asset('chat/js/talk.js')}}"></script>
     {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}
 
   </body>

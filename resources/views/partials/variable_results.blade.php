@@ -3,12 +3,12 @@
         {{__('searcher.results-age')}}
     </h3>
     @foreach ($resultsVar as $result)
-        <div class="searchResult container-fluid mb-4">
+        <div data-id="{{$result->id}}" class="searchResult container-fluid mb-4">
             <div class="row">
                 <div class="picture col-lg-2">
                     <img src="{{asset('img/profile-pictures/'.$result->picture)}}" alt="">
                     <div class="overlay"></div>
-                    <a href="#">
+                    <a href="profile/{{$result->id }}">
                         <div class="overlay-content fadeIn-bottom">
                             <span class="overlay-text">{{__('searcher.see_profile')}}</span>
                         </div>
@@ -17,7 +17,7 @@
                 <div class="data col-lg-8">
                      <div class="personalInfo-box"><span class="name">{{$result->name}}</span>  <span class="age">{{$year - $result->birth_year}}</span></div>
                      <div class="city-box"><span class="city">{{$result->city}}</span></div>
-                     <div class="description-box"><span class="description">{{$result->desc}}</span></div>
+                     <div class="description-box"><span class="description">{!!nl2br(e($result->desc))!!}</span></div>
                 </div>
                 @auth
                   <div class="icons col-lg-2">

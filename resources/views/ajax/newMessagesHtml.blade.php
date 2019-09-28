@@ -4,10 +4,15 @@
                         <div class="message-data align-right">
                             <span class="message-data-time" >{{$message->humans_time}} {{__('chat.time')}}</span> &nbsp; &nbsp;
                             <span class="message-data-name" >{{$message->sender->name}}</span>
-                            <a href="#" class="talkDeleteMessage" data-message-id="{{$message->id}}" title="Delete Message"><i class="fa fa-close"></i></a>
+                            <a href="#" class="talkDeleteMessage" data-message-id="{{$message->id}}" title="Delete Message"><i class="fas fa-times"></i></a>
                         </div>
                         <div class="message other-message float-right">
-                            {{$message->toHtmlString()}}
+                            @if ($message->pictures)
+                                @foreach (json_decode($message->pictures) as $picture)
+                                    <img class="picture" src="{{asset('img/message-pictures/'.$picture)}}">
+                                @endforeach  
+                            @endif
+                            {!!nl2br($message->toHtmlString()->toHtml())!!}
                         </div>
                         @if ($message->is_seen)
                             <div class="clearfix"><span>{{__('chat.seen')}}</span></div>
@@ -16,11 +21,16 @@
                 @else
                     <li id="message-{{$message->id}}">
                         <div class="message-data">
-                            <span class="message-data-name"> <a href="#" class="talkDeleteMessage" data-message-id="{{$message->id}}" title="Delete Messag"><i class="fa fa-close" style="margin-right: 3px;"></i></a>{{$message->sender->name}}</span>
+                            <span class="message-data-name"> <a href="#" class="talkDeleteMessage" data-message-id="{{$message->id}}" title="Delete Message"><i class="fas fa-times" style="margin-right: 3px;"></i></a>{{$message->sender->name}}</span>
                             <span class="message-data-time">{{$message->humans_time}} {{__('chat.time')}}</span>
                         </div>
                         <div class="message my-message">
-                            {{$message->toHtmlString()}}
+                            @if ($message->pictures)
+                                @foreach (json_decode($message->pictures) as $picture)
+                                    <img class="picture" src="{{asset('img/message-pictures/'.$picture)}}">
+                                @endforeach  
+                            @endif
+                            {!!nl2br($message->toHtmlString()->toHtml())!!}
                         </div>
                     </li>
                 @endif
