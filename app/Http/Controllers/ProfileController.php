@@ -35,7 +35,7 @@ class ProfileController extends Controller
             //If file is valid
             if (request()->file('photo')->isValid()){
                 //Change original name of the file
-                $filename = time().mt_rand(1000000, 9999999).mt_rand(1000000, 9999999).'.'.request('photo')->getClientOriginalExtension();
+                $filename = hash_file('haval160,4',request('photo')->getPathname()).'.'.request('photo')->getClientOriginalExtension();
                 request('photo')->move(public_path('img/profile-pictures/'), $filename);
                 $user->picture = $filename;
             }else{
@@ -45,7 +45,7 @@ class ProfileController extends Controller
         $user->city = request('city');
         $user->description = request('description');
         //Save changes in user profile
-        $user->save();
+        $user->update();
 
         //return request()->all();
         return redirect('profile');
