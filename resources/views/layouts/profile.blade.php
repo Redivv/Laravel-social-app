@@ -1,51 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
-@yield('startform')
-    <div class="container m-5">
+<div class="container m-5">
+    @yield('startform')
         <div class="row justify-content-center">
-            <div class="col-md-6 bag-grey p-2">
+            <div class="col-md-4 p-2">
                     
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <p>
+                <div class="row ">
+                    <div class="col-md-8">
+                        
                             @yield('name')
-                        </p>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <p>
+                        
                             @yield('city')
-                        </p>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <p>
+
                             @yield('email')
-                        </p>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <p>
+
                             @yield('birth')
-                        </p>
+
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 bag-pink"> 
+            <div class="col-md-6"> 
                 @yield('photo')
             </div>
+
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-8 bag-yellow">
+            <div class="col-md-8">
                 <p>
                     @yield('desc')
                 </p>
             </div>
         </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8 p-0">
+                <p>
+                    @yield('endform')
+                </p>
+            </div>
+        </div>
+        
     </div>
-@yield('endform')
 @endsection

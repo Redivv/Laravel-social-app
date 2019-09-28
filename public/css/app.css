@@ -16733,3 +16733,9 @@ main {
   background-color: #bbbbbb;
 }
 
+.profile-paragraph {
+  padding: 5px;
+  border-radius: 8px;
+  background-color: #f66103;
+}
+
