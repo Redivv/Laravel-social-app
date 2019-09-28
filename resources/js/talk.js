@@ -70,6 +70,9 @@ $(document).ready(function () {
                     if($thread.length)
                         $('#user-'+response.receiver_id).remove();
                     $('#people-list .list').prepend(response.html2);
+                    if (active_id.includes(parseInt(response.receiver_id,10))) {
+                        $('#user-'+response.receiver_id).addClass('activeUser');
+                    }
 
                     $('.talkDeleteConversation').on('submit',function(e){
                         if(!confirm(deleteConvo)) {

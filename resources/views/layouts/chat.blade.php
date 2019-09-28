@@ -66,7 +66,6 @@
           var stop_pagi = false;
       </script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="{{asset('chat/js/talk.js')}}"></script>
     <script src="{{asset('chat/js/functions.js')}}"></script>
 
     <script>
@@ -108,9 +107,9 @@
             $('#to-be-seen-thread-'+e.conversation_id).removeAttr('id');
         });
 
+        var active_id = new Array();
         Echo.join('online')
           .here((users) => {
-              this.active_id = new Array();
               users.forEach(function(us){
                   active_id.push(us.id);
               })
@@ -121,21 +120,21 @@
                               $(this).addClass('activeUser');
                               active_idCopy = active_idCopy.filter(u => (u !== $(this).data('id')));
                           }
-                          console.log(active_id);
                       }else{
                           return false;
                       }
                   })
           })
           .joining((user) => {
-              this.active_id.push(user.id);
+              active_id.push(user.id);
               $('li.thread[data-id="'+user.id+'"]').addClass('activeUser');
           })
           .leaving((user) => {
-          this.active_id = this.active_id.filter(u => (u !== user.id));
+          active_id = this.active_id.filter(u => (u !== user.id));
           $('li.thread[data-id="'+user.id+'"]').removeClass('activeUser');
           })
     </script>
+    <script src="{{asset('chat/js/talk.js')}}"></script>
     {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}
 
   </body>

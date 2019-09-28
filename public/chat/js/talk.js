@@ -153,6 +153,11 @@ $(document).ready(function () {
           var $thread = $('#user-' + response.receiver_id);
           if ($thread.length) $('#user-' + response.receiver_id).remove();
           $('#people-list .list').prepend(response.html2);
+
+          if (active_id.includes(parseInt(response.receiver_id, 10))) {
+            $('#user-' + response.receiver_id).addClass('activeUser');
+          }
+
           $('.talkDeleteConversation').on('submit', function (e) {
             if (!confirm(deleteConvo)) {
               e.preventDefault();
@@ -282,7 +287,7 @@ function chk_scroll(e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Safo\resources\js\talk.js */"./resources/js/talk.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\talk.js */"./resources/js/talk.js");
 
 
 /***/ })
