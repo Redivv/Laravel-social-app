@@ -48,7 +48,7 @@ class AjaxMessageController extends Controller
             if($pictures){
                 $pictures_json = array();
                 foreach ($pictures as $picture) {
-                    $imageName = mt_rand().'-'.time().'.'.$picture->getClientOriginalExtension();
+                    $imageName = hash_file('haval160,4',$picture->getPathname()).'.'.$picture->getClientOriginalExtension();
                     $picture->move(public_path('img/message-pictures'), $imageName);
                     $pictures_json[] = $imageName;
                 }
