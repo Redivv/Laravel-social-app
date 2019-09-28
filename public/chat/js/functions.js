@@ -20,6 +20,7 @@ function playSound(sound,element){
       var $thread = $('#user-'+data.sender.id);
       var active = '';
       if($thread.length){
+        $('#user-'+data.sender.id+'+hr').remove();
         $('#user-'+data.sender.id).remove();
       }
       if (active_id.includes(parseInt(data.sender.id,10))) {
@@ -54,7 +55,8 @@ function playSound(sound,element){
               '</div>'+
           '</div>'+
           '</a>'+
-      '</li>';
+      '</li>'+
+      '<hr style="background-color:#f66103;">';
       $('#people-list .list').prepend(html);
 
       $('.talkDeleteConversation').on('submit',function(e){
