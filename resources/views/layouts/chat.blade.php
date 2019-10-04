@@ -47,7 +47,7 @@
                 <input id="upload-pictures" class="d-none" name="pictures[]" type="file" accept="image/*" multiple>
                 <output id="picture-preview"></output>
                 <textarea style="border-color: Transparent !important;" name="message-data" id="message-data" placeholder ="{{__('chat.placeholder')}}" rows="3"></textarea>
-                <input type="hidden" name="_id" value="{{@request()->route('id')}}">
+                <input type="hidden" name="_id" value="{{$sender}}">
                 <button type="submit">{{__('chat.send')}}</button>
           </form>
         </div> <!-- end chat-message -->

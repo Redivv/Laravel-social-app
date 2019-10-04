@@ -64,10 +64,14 @@
     @endif
 @endsection
 
+
 @section('endform')
 <div>
-    @if($user->id == Auth::user()->id)
-    <a href="/profile/edit" class="btn form-btn">Edytuj swój profil</a>
-    @endif
+    @auth
+        @if($user->id == Auth::user()->id)
+        <a href="/profile/edit" class="btn form-btn">Edytuj swój profil</a>
+        @endif    
+    @endauth
+    
 </div>
 @endsection

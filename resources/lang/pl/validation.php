@@ -18,7 +18,7 @@ return [
     'after' => 'Pole :attribute musi być datą późniejszą niż :date.',
     'after_or_equal' => 'Pole :attribute musi być datą późniejszą, lub równą :date.',
     'alpha' => 'Pole :attribute może zawierać tylko litery',
-    'alpha_dash' => 'Pole :attribute może zawierać tylko litery, numery, cyfry i podkreślenia',
+    'alpha_dash' => 'Pole :attribute może zawierać tylko litery, numery, cyfry, podkreślenia i myślniki',
     'alpha_num' => 'Pole :attribute może zawierać tylko numery i cyfry',
     'array' => 'The :attribute must be an array.',
     'before' => 'The :attribute must be a date before :date.',
