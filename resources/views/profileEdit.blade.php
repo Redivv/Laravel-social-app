@@ -8,36 +8,36 @@
 
 
 @section('name')
-    Nazwa:
+    {{__('profile.username')}}:
     <input id="name" class="form-control" name="name" type="text" value="{{ $user->name}}">
 @endsection
 
 @section('city')
-    Miasto:
+    {{__('profile.city')}}:
     <input id="city" class="form-control" name="city" type="text" value="{{ $user->city}}">
 @endsection
 
 @section('email')
-    E-mail:
+    {{__('profile.email')}}:
     {{ $user->email}}
 @endsection
 
 @section('birth')
-    Rok urodzenia:
+    {{__('profile.birth')}}:
     {{ $user->birth_year }}
 @endsection
 
 @section('photo')
-    Zdjęcie:
+    {{__('profile.photo')}}:
     <input id="photo" name="photo" type="file" accept=".png,.jpg">
 @endsection
 
 @section('desc')
-    Opis:
+    {{__('profile.desc')}}:
     <textarea name="description" class="form-control" id="description" cols="30" rows="10">{{ $user->description }}</textarea>
 @endsection
 @section('endform')
-    <button type="submit" class="form-btn btn m-1" >submit changes</button>
+    <button type="submit" class="form-btn btn m-1" >{{__('profile.submit')}}</button>
     <a href="/profile" class="form-btn btn">Anuluj</a>
     </form>
 @endsection
