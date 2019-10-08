@@ -54,3 +54,13 @@ main{
     background-color: $orange;
     color: $white;
 }
+
+.profile-picture{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.invalid-feedback{
+    display: block;
+}
