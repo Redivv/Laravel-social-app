@@ -15,10 +15,7 @@
     <link rel="stylesheet" href="{{asset('chat/css/chat.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script src={{asset('js/app.js')}}></script>
-
-    
-    
-    
+        
   </head>
 
   <body>
@@ -136,6 +133,7 @@
           $('li.thread[data-id="'+user.id+'"]').removeClass('activeUser');
           })
     </script>
+    <script src="{{asset('js/emoji.js')}}"></script>
     <script src="{{asset('chat/js/talk.js')}}"></script>
     {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}
 

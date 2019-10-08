@@ -21,6 +21,7 @@ body {
 .people-list {
   width: 260px;
   float: left;
+  overflow-y: auto;
 }
 
 .people-list li form button:hover i {

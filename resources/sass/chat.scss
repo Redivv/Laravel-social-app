@@ -27,6 +27,7 @@ body {
 .people-list {
   width:260px;
   float: left;
+  overflow-y:auto;
 
   li{
     

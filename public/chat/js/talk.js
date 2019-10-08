@@ -93,6 +93,14 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 $(document).ready(function () {
   // Setup Ajax csrf for future requests
   $.ajaxSetup({
@@ -107,23 +115,7 @@ $(document).ready(function () {
   img.src = __baseUrl + "/chat/loading.gif"; // Bind scroll function to chat history for pagination request
 
   $("div.chat-history").bind('scroll', chk_scroll); // Enter key will send a message, Shift+enter will do normal break
-
-  var shift_pressed = false;
-  $('#message-data').keydown(function (e) {
-    if ((e.keyCode || e.which) == 16) {
-      shift_pressed = true;
-    }
-
-    if ((e.keyCode || e.which) == 13 && shift_pressed === false) {
-      e.preventDefault();
-      $('#talkSendMessage').submit();
-    }
-  });
-  $('#message-data').keyup(function (e) {
-    if ((e.keyCode || e.which) == 16) {
-      shift_pressed = false;
-    }
-  }); // Sending a message dynamicly
+  // Sending a message dynamicly
 
   $('#talkSendMessage').on('submit', function (e) {
     e.preventDefault();
@@ -134,6 +126,7 @@ $(document).ready(function () {
       url = __baseUrl + '/ajax/message/send';
       $(document).one("ajaxSend", function () {
         tag[0].reset();
+        $('.emojionearea-editor').empty();
         $('#picture-preview').empty();
         var html = '<li class="clearfix" id="to-be-replaced">' + '<img src="' + img.src + '">' + '</li>';
         $('#talkMessages').append(html);
@@ -184,6 +177,14 @@ $(document).ready(function () {
       request.fail(function (xhr) {
         if (xhr.responseJSON.status == "blocked-user") {
           alert(xhr.responseJSON.msg);
+        } else if (xhr.status == 422) {
+          for (var _i = 0, _Object$entries = Object.entries(xhr.responseJSON.errors); _i < _Object$entries.length; _i++) {
+            var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+                key = _Object$entries$_i[0],
+                value = _Object$entries$_i[1];
+
+            alert("B\u0142\u0105d ".concat(key, ": ").concat(value));
+          }
         }
 
         $('#to-be-replaced').remove();
@@ -253,12 +254,24 @@ $(document).ready(function () {
           var span = document.createElement('span');
           span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
           $('#picture-preview').prepend(span, null);
-          $('#message-data').focus();
+          $('.emojionearea-editor').focus();
         };
       }(f); // Read in the image file as a data URL.
 
 
       reader.readAsDataURL(f);
+    }
+  });
+  $('#message-data').emojioneArea({
+    filtersPosition: "bottom",
+    events: {
+      keypress: function keypress(editor, e) {
+        if ((e.keyCode || e.which) == 13) {
+          e.preventDefault();
+          $('#message-data').val(this.getText());
+          $('#talkSendMessage').submit();
+        }
+      }
     }
   });
 }); // On full up scroll chat history try to load more messages

@@ -16,24 +16,9 @@ $(document).ready(function () {
     // Bind scroll function to chat history for pagination request
     $( "div.chat-history" ).bind('scroll',chk_scroll);
 
+    
     // Enter key will send a message, Shift+enter will do normal break
-    var shift_pressed = false;
-    $('#message-data').keydown(function(e){
-
-        if(((e.keyCode || e.which) == 16)) {
-            shift_pressed = true;
-        }
-
-        if((((e.keyCode || e.which) == 13) && shift_pressed === false)) {
-            e.preventDefault();
-            $('#talkSendMessage').submit();
-        }
-    });
-    $('#message-data').keyup(function(e){
-        if(((e.keyCode || e.which) == 16)) {
-            shift_pressed = false;
-        }
-    });
+    
 
     // Sending a message dynamicly
     $('#talkSendMessage').on('submit', function(e) {
@@ -46,6 +31,7 @@ $(document).ready(function () {
 
             $(document).one("ajaxSend", function(){
                 tag[0].reset();
+                $('.emojionearea-editor').empty();
                 $('#picture-preview').empty();
                 let html = '<li class="clearfix" id="to-be-replaced">'+
                         '<img src="'+img.src+'">'+
@@ -97,6 +83,11 @@ $(document).ready(function () {
             request.fail(function (xhr){
                 if(xhr.responseJSON.status == "blocked-user"){
                     alert(xhr.responseJSON.msg);
+                }
+                else if(xhr.status == 422){
+                    for (let [key, value] of Object.entries(xhr.responseJSON.errors)) {
+                        alert(`Błąd ${key}: ${value}`);
+                    }
                 }
                 $('#to-be-replaced').remove();
             });
@@ -171,7 +162,7 @@ $(document).ready(function () {
             span.innerHTML = ['<img class="thumb" src="', e.target.result,
                                 '" title="', escape(theFile.name), '"/>'].join('');
             $('#picture-preview').prepend(span, null);
-            $('#message-data').focus();
+            $('.emojionearea-editor').focus();
             };
         })(f);
 
@@ -180,7 +171,19 @@ $(document).ready(function () {
         }
     })
 
-    
+    $('#message-data').emojioneArea({
+        filtersPosition: "bottom",
+        events: {
+            keypress: function(editor,e) {
+        
+                if(((e.keyCode || e.which) == 13)) {
+                    e.preventDefault();
+                    $('#message-data').val(this.getText());
+                    $('#talkSendMessage').submit();
+                }
+            }
+          }
+    });
     
 });
 
