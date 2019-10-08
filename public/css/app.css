@@ -16625,6 +16625,21 @@ readers do not read off random characters that represent icons */
   color: #38c172;
 }
 
+.searchResults-box ul.pagination {
+  justify-content: center;
+  align-items: center;
+}
+
+.searchResults-box ul.pagination .page-item .page-link {
+  color: #000;
+}
+
+.searchResults-box ul.pagination .page-item.active .page-link {
+  background-color: #f66103;
+  border-color: #f66103;
+  color: #ffffff;
+}
+
 body {
   position: relative;
   margin: 0;

@@ -138,4 +138,24 @@
             color: $green;
         }
     }
+
+    ul.pagination{
+        justify-content: center;
+        align-items: center;
+        
+        .page-item{
+
+            .page-link{
+                color:$black;
+            }
+
+            &.active{
+                .page-link{
+                    background-color: $orange;
+                    border-color: $orange;
+                    color: $white;
+                }
+            }
+        }
+    }
 }
