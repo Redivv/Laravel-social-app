@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use Nahid\Talk\Facades\Talk;
 use App\Events\MessagesWereSeen;
+use App\Notifications\NewMessage;
 
 class AjaxMessageController extends Controller
 {
@@ -69,6 +70,7 @@ class AjaxMessageController extends Controller
             }
 
                 if ($message = Talk::sendMessageByUserId($userId, $body, $pictures_json)) {
+                    User::find($userId)->notify(new NewMessage(Auth::id(),$body,isset($pictures_json)));
                     $html = view('ajax.newMessageHtml', compact('message'))->render();
                     $threads = Talk::getInbox('desc',0,1);
                     $html2 = view('ajax.newThreadHtml', compact('threads'))->render();
@@ -101,6 +103,12 @@ class AjaxMessageController extends Controller
                 if ($amount > 0) {
                     event(new MessagesWereSeen(intVal($sender_id), intVal($conversation_id)));
                 }
+                $notifications = Auth::user()->notifications()->where('type', 'App\Notifications\NewMessage')->get();
+                foreach ($notifications as $notification) {
+                    if($notification->data['sender_id'] === intVal($sender_id)){
+                        $notification->delete();
+                    }
+                }
                 return response()->json(['status'=>'success', 'seen_messages' => $amount], 200);
 
             }else{
@@ -109,6 +117,12 @@ class AjaxMessageController extends Controller
                     $conversation_id = Talk::user(Auth::id())->isConversationExists($sender_id);
                     
                     event(new MessagesWereSeen(intVal($sender_id), intVal($conversation_id)));
+                    $notifications = Auth::user()->notifications()->where('type', 'App\Notifications\NewMessage')->get();
+                    foreach ($notifications as $notification) {
+                        if($notification->data['sender_id'] === intVal($sender_id)){
+                            $notification->delete();
+                        }
+                    }
 
                     return response()->json(['status'=>'success'], 200);
                 }

@@ -57,6 +57,12 @@ class MessageController extends Controller
                     $threads = Talk::user(Auth::id())->getInbox();
                     event(new MessagesWereSeen(intVal($id), intVal($conversation_id)));
                 }
+                $notifications = Auth::user()->notifications()->where('type', 'App\Notifications\NewMessage')->get();
+                foreach ($notifications as $notification) {
+                    if($notification->data['sender_id'] === intVal($id)){
+                        $notification->delete();
+                    }
+                }
                 
                 $conversations = Talk::user(Auth::id())->getMessagesByUserId($id, 0,10);
                 if(!$conversations) {
