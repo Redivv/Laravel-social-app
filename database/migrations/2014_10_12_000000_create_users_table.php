@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->year('birth_year')->unsigned();
             $table->string('description', 255)->nullable()->default(null);
             $table->string('city', 255)->nullable()->default(null);
-            $table->string('picture')->default('default-picture.png');
+            $table->string('picture');
             $table->rememberToken();
             $table->timestamps();
         });

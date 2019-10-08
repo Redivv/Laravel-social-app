@@ -16721,6 +16721,16 @@ main {
   color: #ffffff;
 }
 
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.invalid-feedback {
+  display: block;
+}
+
 .bag-pink {
   background-color: #ff6fff;
 }
