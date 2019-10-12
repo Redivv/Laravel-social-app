@@ -17255,6 +17255,16 @@ main {
   color: #ffffff;
 }
 
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.invalid-feedback {
+  display: block;
+}
+
 html {
   font-size: 16px !important;
 }
