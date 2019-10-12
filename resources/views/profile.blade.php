@@ -1,4 +1,4 @@
-z@extends('layouts.profile')
+@extends('layouts.profile')
 
 @section('name')
 <p class="profile-paragraph">
