@@ -1,14 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container m-5">
+<div class="container m-5 profile_view">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     @yield('startform')
         <div class="row justify-content-center">
             <div class="col-md-4 p-2">
-                    
+                    <p class="profile_title"><i class="fas fa-user"></i> <b>Twój Profil</b><hr></p>
                 <div class="row ">
-                    <div class="col-md-8">
-                        
+                    <div class="col-md-10">
+
                             @yield('name')
                         
                             @yield('city')
@@ -20,8 +29,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6"> 
-                @yield('photo')
+            <div class="col-md-6">
+                    @yield('photo')
             </div>
 
         </div>
