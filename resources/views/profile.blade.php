@@ -52,7 +52,7 @@
             {{-- Tłumaczenie 'zdjęcia' --}}
             <p>{{__('profile.photo')}}:</p>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 foto_frame">
             {{-- pobieranie nazyw zdjęcia z DB i znalezienie go w folderze profile-pictures --}}
             <img style="object-fit: cover;" src="{{asset('img/profile-pictures/'.$user->picture)}}" alt="">
         </div>
@@ -65,7 +65,9 @@
         <i>{{__('profile.desc_err')}}</i>
     @else
         <br>
+        <div class="desc">
         {{ $user ->description }}
+        </div>
     @endif
 @endsection
 

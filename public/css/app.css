@@ -17255,31 +17255,56 @@ main {
   color: #ffffff;
 }
 
-.profile-picture {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+html {
+  font-size: 16px !important;
 }
 
-.invalid-feedback {
-  display: block;
+.profile_view {
+  padding: 20px 30px;
+  margin: 0 !important;
+  font-size: 1.1rem;
 }
 
-.bag-pink {
-  background-color: #ff6fff;
+.profile_view .small_box {
+  background-color: #f0f;
 }
 
-.bag-yellow {
-  background-color: #fbff00;
+.profile_view .foto_frame {
+  height: auto;
+  overflow: hidden;
+  padding: 5px;
 }
 
-.bag-grey {
-  background-color: #bbbbbb;
+.profile_view .foto_frame .foto {
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0.5px 0.5px 5px 0.5px rgba(0, 0, 0, 0.7);
+}
+
+.profile_view .button {
+  box-shadow: 0.5px 0.5px 5px 0.5px rgba(0, 0, 0, 0.7);
+}
+
+.profile_view .desc {
+  border-radius: 10px;
+  word-wrap: break-word;
+}
+
+.profile_view i {
+  font-size: 2rem;
+}
+
+.profile_view .profile_title {
+  font-size: 2rem;
+  margin-left: 7px;
 }
 
 .profile-paragraph {
-  padding: 5px;
-  border-radius: 8px;
+  padding: 10px;
+  border-radius: 10px;
   background-color: #f66103;
+  color: #ffffff;
+  box-shadow: 0.5px 0.5px 5px 0.5px rgba(0, 0, 0, 0.7);
 }
 

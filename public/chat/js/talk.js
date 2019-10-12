@@ -311,7 +311,7 @@ function chk_scroll(e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\talk.js */"./resources/js/talk.js");
+module.exports = __webpack_require__(/*! X:\Programowanie\projekty\Safo\resources\js\talk.js */"./resources/js/talk.js");
 
 
 /***/ })
