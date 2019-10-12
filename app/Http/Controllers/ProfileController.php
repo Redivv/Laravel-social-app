@@ -30,25 +30,25 @@ class ProfileController extends Controller
     public function update(){
 
         $user = Auth::user();
+
+        // If request is valid
+        request()->validate([
+            'photo'     =>  'mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
         //If there's a file
         if (request()->hasFile('photo')) {
-            //If file is valid
-            if (request()->file('photo')->isValid()){
-                //Change original name of the file
-                $filename = hash_file('haval160,4',request('photo')->getPathname()).'.'.request('photo')->getClientOriginalExtension();
-                request('photo')->move(public_path('img/profile-pictures/'), $filename);
-                $user->picture = $filename;
-            }else{
-               // php artisan drop table
-            }
+            //Change original name of the file
+            $filename = hash_file('haval160,4',request('photo')->getPathname()).'.'.request('photo')->getClientOriginalExtension();
+            request('photo')->move(public_path('img/profile-pictures/'), $filename);
+            $user->picture = $filename;
         }
         $user->city = request('city');
         $user->description = request('description');
         //Save changes in user profile
         $user->update();
 
-        //return request()->all();
-        return redirect('profile');
+        // return request('photo');
+        return redirect('profile')->with(['status' => 'Profile updated successfully.']);
     }
 
     public function visit(User $user){
