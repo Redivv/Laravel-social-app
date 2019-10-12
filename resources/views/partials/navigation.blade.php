@@ -82,5 +82,8 @@
             $('#newMessagesCount').html(newMessages);
         }
     </script>
-    {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}
+    @auth
+        {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}  
+    @endauth
+    
 @endpush
