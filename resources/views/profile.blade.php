@@ -3,7 +3,7 @@
 @section('name')
 <p class="profile-paragraph">
     {{-- Tłumaczenie 'nazwy' --}}
-    Nazwa: 
+    <b>Nazwa: </b>
     {{-- pobranie nazwy użytkownika z DB --}}
     {{ $user ->name }}
 </p>
@@ -12,7 +12,7 @@
 @section('city')
 <p class="profile-paragraph">
     {{-- Tłumaczenie 'miasta' --}}
-    Miasto: 
+    <b>Miasto: </b>
     {{-- Pobieranie miejsca zamieszkania użytkownika z DB (w razie braku System powie, że nie podano) --}}
     @if ( !$user ->city )
     {{-- Tłumaczenie 'nie podano' --}}
@@ -26,7 +26,7 @@
 @section('email')
 <p class="profile-paragraph">
     {{-- Tłumaczenie 'Adresu email' --}}
-    Adres E-mail: 
+    <b>Adres E-mail: </b>
     {{-- pobranie maila użytkownika z DB --}}
     {{ $user ->email }}
 </p>
@@ -35,7 +35,7 @@
 @section('birth')
 <p class="profile-paragraph">
     {{-- Tłumaczenie 'roku ur' --}}
-    Rok urodzenia: 
+    <b>Rok urodzenia: </b>
     {{-- pobranie roku ur użytkownika z DB --}}
     {{ $user ->birth_year }}
 </p>
@@ -45,29 +45,32 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             {{-- Tłumaczenie 'zdjęcia' --}}
-            <p>Zdjęcie:</p>
+            <p><b>Zdjęcie:</b></p>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 foto_frame">
             {{-- pobieranie nazyw zdjęcia z DB i znalezienie go w folderze profile-pictures --}}
-            <img src="{{asset('img/profile-pictures/'.$user->picture)}}" alt="">
+            <img class="foto" src="{{asset('img/profile-pictures/'.$user->picture)}}" alt="">
         </div>
     </div>
 @endsection
 @section('desc')
     {{-- Tłumaczenie 'opis' --}}
-    Opis:
+    <hr>
+    <b>Opis:</b>
     @if (!$user->description)
         <i>Brak opisu</i>
     @else
         <br>
+        <div class="desc">
         {{ $user ->description }}
+        </div>
     @endif
 @endsection
 
 @section('endform')
 <div>
     @if($user->id == Auth::user()->id)
-    <a href="/profile/edit" class="btn form-btn">Edytuj swój profil</a>
+    <a href="/profile/edit" style="margin-left:20px;" class="btn form-btn button"><b>Edytuj swój profil</b></a>
     @endif
 </div>
 @endsection
