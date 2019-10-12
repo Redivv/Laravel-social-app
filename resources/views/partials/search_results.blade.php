@@ -1,8 +1,6 @@
 <h3 class="searchResults-header" dusk="search_results_header">
     @if (count($results) === 0)
         {{__('searcher.not_found')}}
-    @else
-        {{__('searcher.results',['number' => count($results)])}}
     @endif
 </h3>
 <div class="searchResults-box mt-3" dusk="search_results_box">
@@ -12,7 +10,7 @@
                 <div class="picture col-lg-2">
                     <img src="{{asset('img/profile-pictures/'.$result->picture)}}" alt="">
                     <div class="overlay"></div>
-                    <a href="profile/{{$result->id }}">
+                    <a href="profile/{{$result->name}}">
                         <div class="overlay-content fadeIn-bottom">
                             <span class="overlay-text">{{__('searcher.see_profile')}}</span>
                         </div>
@@ -26,7 +24,7 @@
                 @auth
                   <div class="icons col-lg-2">
                     <div class="row">
-                        <div class="col ico"><a class="text-reset" href="{{route('message.read', ['id' => $result->id])}}"><i class="far fa-comment-dots"></i></a></div>
+                        <div class="col ico"><a class="text-reset" href="{{route('message.read', ['name' => $result->name])}}"><i class="far fa-comment-dots"></i></a></div>
                         <div class="col ico"><a class="text-reset" href="#"><i class="fas fa-user-plus"></i></a></div>
                         <div class="col ico"><a class="text-reset" href="#"><i class="fas fa-exclamation"></i></a></div>
                     </div>
@@ -35,4 +33,5 @@
             </div> 
         </div>
     @endforeach
+    {{$results->appends(['username' => request('username') ?? '', 'age-min' => request('age-min') ?? '', 'age-max' => request('age-max') ?? ''])->links()}}
 </div>

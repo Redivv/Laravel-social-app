@@ -37,7 +37,7 @@ function playSound(sound,element){
           '<input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'">'+
           '<button class="btn btn-link btn-sm" type="submit"><i class="fas fa-user-times"></i></button>'+
           '</form>'+
-          '<a href="/message/'+data.sender.id+'">'+
+          '<a href="/message/'+data.sender.name+'">'+
           '<div class="profile-picture">'+
                 '<img src="'+__baseUrl+'/img/profile-pictures/'+data.sender.picture+'" alt="profile picture">'+
             '</div>'+

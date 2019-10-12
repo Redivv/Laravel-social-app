@@ -7,5 +7,6 @@ return [
     'email'             => 'Email',
     'password'          => 'Hasło',
     'password-confirm'  => 'Potwierdź Hasło',
-    'register-button'   => 'Zarejestruj Się'
+    'register-button'   => 'Zarejestruj Się',
+    'profile-picture'   => 'Zdjęcie profilowe'
 ];

@@ -25,8 +25,9 @@ class MessageController extends Controller
         return view('messages.conversations', compact('messages', 'user', 'threads'))->withSender(null);
     }
 
-    public function chatHistory(Request $request, $id)
+    public function chatHistory(Request $request, $name)
     {
+        $id =  User::where('name', $name)->first()->id;
         if($request->ajax()){
             $pagi = $request->input('pagi');
             if($conversations = Talk::user(Auth::id())->getMessagesByUserId($id, 10*$pagi,20*$pagi)){
@@ -55,6 +56,12 @@ class MessageController extends Controller
                 if ($amount > 0) {
                     $threads = Talk::user(Auth::id())->getInbox();
                     event(new MessagesWereSeen(intVal($id), intVal($conversation_id)));
+                }
+                $notifications = Auth::user()->notifications()->where('type', 'App\Notifications\NewMessage')->get();
+                foreach ($notifications as $notification) {
+                    if($notification->data['sender_id'] === intVal($id)){
+                        $notification->delete();
+                    }
                 }
                 
                 $conversations = Talk::user(Auth::id())->getMessagesByUserId($id, 0,10);
@@ -98,7 +105,8 @@ class MessageController extends Controller
                     ->where('id', $conversation_id)
                     ->where('block_id', Auth::id())
                     ->update(['status' => 1,'block_id'=>null]);
-                    return redirect()->route('message.read',['id'=>$id]);
+                $name = User::find($id)->name;
+                return redirect()->route('message.read',['name'=>$name]);
             }
             
         }

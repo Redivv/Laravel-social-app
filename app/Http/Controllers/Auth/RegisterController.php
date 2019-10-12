@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/user/home';
+    protected $redirectTo = '/profile';
 
     /**
      * Create a new controller instance.
@@ -51,10 +51,11 @@ class RegisterController extends Controller
         $data['birth_year'] = intVal($data['birth_year']);
         
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'birth_year' => ['required', 'integer', 'between:1950,'.intVal(date('Y')-18)]
+            'name'              => ['required', 'string', 'alpha_dash', 'unique:users', 'max:255'],
+            'email'             => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'          => ['required', 'string', 'min:8', 'confirmed'],
+            'birth_year'        => ['required', 'integer', 'between:1950,'.intVal(date('Y')-18)],
+            'profile-picture'   => ['required', 'file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
         ]);
     }
 
@@ -66,11 +67,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $filename = hash_file('haval160,4',$data['profile-picture']->getPathname()).'.'.$data['profile-picture']->getClientOriginalExtension();
+        $data['profile-picture']->move(public_path('img/profile-pictures/'), $filename);
+        $data['profile-picture'] = $filename;
+        
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'birth_year' => $data['birth_year']
+            'name'          => $data['name'],
+            'email'         => $data['email'],
+            'password'      => Hash::make($data['password']),
+            'birth_year'    => $data['birth_year'],
+            'picture'       => $data['profile-picture']
         ]);
     }
 }

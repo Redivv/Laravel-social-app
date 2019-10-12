@@ -58,7 +58,7 @@ class SearchController extends Controller
 
         $request_data->user()   === null ?: $search_results = $search_results->whereNotIn('id',[$request_data->user()->id]);
 
-        $search_results = $search_results->orderBy('birth_year', 'desc')->get();
+        $search_results = $search_results->orderBy('birth_year', 'desc')->paginate(5);
         return $search_results;
     }
 

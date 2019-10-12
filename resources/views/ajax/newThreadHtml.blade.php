@@ -11,7 +11,7 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <button class="btn btn-link btn-sm" type="submit"><i class="fas fa-user-times"></i></button>
     </form>
-    <a href="{{route('message.read', ['id'=>$inbox->withUser->id])}}">
+    <a href="{{route('message.read', ['name'=>$inbox->withUser->name])}}">
     <div class="profile-picture">
         <img src="{{asset('img/profile-pictures/'.$inbox->withUser->picture)}}" alt="profile picture">
     </div>
@@ -23,7 +23,7 @@
                 @if ($inbox->thread->pictures)
                     <i class="far fa-file-image"></i>
                 @endif
-                {{substr($inbox->thread->message, 0, 20)}}
+                {!!nl2br(substr($inbox->thread->message, 0, 20))!!}
             </span>
             <span id="to-be-seen-thread-{{$inbox->thread->conversation_id}}" class="fa fa-check d-none"></span> 
         </div>
