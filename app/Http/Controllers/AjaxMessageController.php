@@ -132,10 +132,21 @@ class AjaxMessageController extends Controller
         }
     }
 
-    public function ajaxGetMore(Request $request)
+    public function pagiConversations(Request $request, $pagi)
     {
-        if($request->ajax()){
-            return response()->json(['status'=>'success'],200);
+        if ($request->ajax()) {
+            if($threads = Talk::user(Auth::id())->getInbox('desc',10*$pagi,20*$pagi)){
+               $html = view('ajax.newThreadHtml', compact('threads'))->render();
+               if (count($threads) < 10) {
+                    return response()->json(['status'=>'success','html'=>$html, 'stop' => true],200);  
+               }else{
+                    return response()->json(['status'=>'success','html'=>$html, 'stop' => false],200); 
+               }
+            }else{
+                return response()->json(['status'=>'errors', 'msg'=>'something went wrong'], 401);
+            }
+             
         }
+        
     }
 }

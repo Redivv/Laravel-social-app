@@ -41,9 +41,9 @@ class MessageController extends Controller
             }else{
                 return response()->json(['status'=>'errors', 'msg'=>'something went wrong'], 401);
             }
-            
+
         }else{
-            $threads = Talk::user(Auth::id())->getInbox();
+            $threads = Talk::user(Auth::id())->getInbox('desc',0,10);
 
             $user = null;
             $messages = [];

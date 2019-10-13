@@ -62,7 +62,9 @@
           var deleteMessage = "{{__('chat.deleteMessage')}}";
           var blockConvo = "{{__('chat.blockConvo')}}";
           var pagi = 0;
+          var pagi_convo = 0;
           var stop_pagi = false;
+          var stop_pagi_convo = false;
       </script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="{{asset('chat/js/functions.js')}}"></script>

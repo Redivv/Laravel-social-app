@@ -36,7 +36,7 @@ Route::patch('message/{id}', 'MessageController@blockConversation')->name('conve
 
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
-   Route::get('message/getMore/{pagi}','AjaxMessageController@ajaxGetMore')->name('message.pagi');
+   Route::get('message/getMore/{pagi}','AjaxMessageController@pagiConversations')->name('message.pagi');
    Route::get('message/get/{id}','AjaxMessageController@ajaxGetMessage')->name('message.get');
    Route::post('message/send', 'AjaxMessageController@ajaxSendMessage')->name('message.new');
    Route::delete('message/delete/{id}', 'AjaxMessageController@ajaxDeleteMessage')->name('message.delete');
