@@ -23,6 +23,11 @@ Route::patch('profile', 'ProfileController@update')->middleware('auth');
 Route::get('profile/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');
 Route::get('profile/{user}','ProfileController@visit');
 
+Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+    Route::put('tag/{name}', 'AjaxTagsController@addNew');
+    Route::delete('tag/{id}', 'AjaxTagsController@deleteTag');
+});
+
 
 Route::prefix('user')->group(function(){
     Route::get('home', 'HomeController@index')->name('home');

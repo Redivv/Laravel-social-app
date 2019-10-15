@@ -23,20 +23,18 @@
 </p>
 
 @endsection
-@section('email')
-<p class="profile-paragraph">
-    {{-- Tłumaczenie 'Adresu email' --}}
-    {{__('profile.email')}}: 
-    {{-- pobranie maila użytkownika z DB --}}
-    @if ($user->id == Auth::user()->id)
-    {{-- Tłumaczenie 'nie podano' --}}
-        {{ $user ->email }}
-    @else
-        <i>{{__('profile.email_hidden')}}</i>
-    @endif
-</p>
 
-@endsection
+@if ($user->id == Auth::user()->id)
+    @section('email')
+    <p class="profile-paragraph">
+        {{-- Tłumaczenie 'Adresu email' --}}
+        {{__('profile.email')}}: 
+        {{-- pobranie maila użytkownika z DB --}}
+        {{ $user ->email }}
+    </p>
+    @endsection
+@endif
+
 @section('birth')
 <p class="profile-paragraph">
     {{-- Tłumaczenie 'roku ur' --}}
@@ -72,6 +70,11 @@
     @endif
 @endsection
 
+@section('tags')
+<div>
+    Zainteresowania
+</div>
+@endsection
 
 @section('endform')
 <div>

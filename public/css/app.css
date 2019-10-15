@@ -17248,7 +17248,8 @@ main {
   transition: all 1s ease;
 }
 
-.form-btn {
+.form-btn,
+.tag {
   letter-spacing: 2px;
   text-transform: uppercase;
   background-color: #f66103;
@@ -17316,5 +17317,19 @@ html {
   background-color: #f66103;
   color: #ffffff;
   box-shadow: 0.5px 0.5px 5px 0.5px rgba(0, 0, 0, 0.7);
+}
+
+.tag:hover {
+  color: #ffffff;
+}
+
+.tag i {
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.5s ease;
+}
+
+.tag i:hover {
+  color: #000;
 }
 

@@ -42,8 +42,32 @@
     {{__('profile.desc')}}:
     <textarea name="description" class="form-control" id="description" cols="30" rows="10">{{ $user->description }}</textarea>
 @endsection
+
 @section('endform')
-    <button type="submit" style="margin-left:30px !important;" class="form-btn btn m-1 button" >{{__('profile.submit')}}</button>
-    <a href="/profile" class="form-btn btn">Anuluj</a>
+    <button type="submit" style="margin-left:30px !important;" class="form-btn btn m-1" >{{__('profile.submit')}}</button>
+    <a href="/profile" class="form-btn btn">{{__('profile.cancel')}}</a>
     </form>
+    <hr>
 @endsection
+@section('tags-form')
+    <form action="#" method="post" id="newTag_form">
+        <label for="newTag">{{__('profile.Tags')}}</label>
+        <input class="form-control" type="text" name="tag" id="newTag_input">
+        <button type="submit" class="form-btn btn mt-2" >{{__('profile.addTag')}}</button>
+    </form>
+    <output class="row">
+        <div class="col-md-2 btn tag">
+            Kek
+            
+            <i class="delete fas fa-times"></i>
+        </div>
+    </output>
+@endsection
+
+@push('scripts')
+    <script>
+        var delete_msg = "{{__('profile.deleteTag')}}";
+        var base_url = "{{url('/')}}";
+    </script>
+    <script src="{{asset('js/profile.js')}}"></script>
+@endpush

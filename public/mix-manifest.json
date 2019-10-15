@@ -4,5 +4,6 @@
     "/chat/css/chat.css": "/chat/css/chat.css",
     "/css/app.css": "/css/app.css",
     "/js/emojionearea.js": "/js/emojionearea.js",
+    "/js/profile.js": "/js/profile.js",
     "/js/register.js": "/js/register.js"
 }

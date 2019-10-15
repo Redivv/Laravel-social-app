@@ -44,7 +44,21 @@
         <div class="row justify-content-center">
             <div class="col-md-8 p-0">
                 <p>
+                    @yield('tags')
+                </p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8 p-0">
+                <p>
                     @yield('endform')
+                </p>
+            </div>
+        </div>
+        <div class="row justify-content-center text-center">
+            <div class="col-md-8 p-0">
+                <p>
+                    @yield('tags-form')
                 </p>
             </div>
         </div>
