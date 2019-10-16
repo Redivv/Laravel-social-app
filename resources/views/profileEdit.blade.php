@@ -50,17 +50,14 @@
     <hr>
 @endsection
 @section('tags-form')
-    <form action="#" method="post" id="newTag_form">
+    <form action="#" method="post" id="tagForm">
+        @csrf
         <label for="newTag">{{__('profile.Tags')}}</label>
-        <input class="form-control" type="text" name="tag" id="newTag_input">
+        <input class="form-control" type="text" name="tag" id="tagInput">
         <button type="submit" class="form-btn btn mt-2" >{{__('profile.addTag')}}</button>
     </form>
-    <output class="row">
-        <div class="col-md-2 btn tag">
-            Kek
-            
-            <i class="delete fas fa-times"></i>
-        </div>
+    <output class="tagList row mt-3">
+        @include('partials.tagListEdit')
     </output>
 @endsection
 

@@ -15,7 +15,8 @@ class ProfileController extends Controller
             // The user is logged in...
             $user = Auth::user();
         }
-        return view('profile', compact('user'));
+        $tags = $user->tagNames();
+        return view('profile')->with(compact('user'))->with(compact('tags'));
     }
 
     public function edit(){
@@ -24,7 +25,8 @@ class ProfileController extends Controller
             // The user is logged in...
             $user = Auth::user();
         }
-        return view('profileEdit', compact('user'));
+        $tags = $user->tagNames();
+        return view('profileEdit')->with(compact('user'))->with(compact('tags'));
     }
 
     public function update(){

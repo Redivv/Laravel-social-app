@@ -24,8 +24,8 @@ Route::get('profile/edit','ProfileController@edit')->middleware('auth')->name('P
 Route::get('profile/{user}','ProfileController@visit');
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
-    Route::put('tag/{name}', 'AjaxTagsController@addNew');
-    Route::delete('tag/{id}', 'AjaxTagsController@deleteTag');
+    Route::put('tag/addNew', 'AjaxTagsController@addNew');
+    Route::delete('tag/deleteTag', 'AjaxTagsController@deleteTag');
 });
 
 

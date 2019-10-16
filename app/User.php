@@ -6,9 +6,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Conner\Tagging\Taggable;
+
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Taggable;
 
     /**
      * The attributes that are mass assignable.

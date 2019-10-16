@@ -71,8 +71,9 @@
 @endsection
 
 @section('tags')
-<div>
-    Zainteresowania
+<div class="text-center"><h3>{{__('profile.Tags')}}<h3></div>
+<div class="tagList row mt-3">
+    @include('partials.tagList')
 </div>
 @endsection
 

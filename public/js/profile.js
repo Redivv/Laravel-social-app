@@ -104,46 +104,73 @@ $(document).ready(function () {
 });
 
 function main() {
-  $('#newTag_form').on('submit', function (e) {
+  var img = new Image();
+  img.src = base_url + "/chat/loading.gif";
+  $('#tagForm').on('submit', function (e) {
     e.preventDefault();
+    var data = $('#tagInput').val().trim();
 
-    if ($('#newTag_input').val().trim() !== '') {
-      var url = base_url + '/ajax/tag/' + $('#newTag_input').val().trim();
+    if (data !== '') {
+      var url = base_url + '/ajax/tag/addNew';
+      $(document).one("ajaxSend", function () {
+        $('#tagForm')[0].reset();
+        var html = ' <div id="load" class="col-md-2 ml-sm-0 ml-md-5 mt-3">' + '<img src="' + img.src + '">' + '</div>';
+        $('.tagList').append(html);
+      });
       var request = $.ajax({
         method: "post",
         url: url,
         data: {
+          "tag": data,
           "_method": "PUT"
         }
       });
       request.done(function (response) {
         if (response.status === "success") {
-          alert('Dziaba dziaba dziaba');
+          $('#load').replaceWith(response.html);
+          $('i.delete').on('click', function () {
+            deleteTag(this);
+          });
+        }
+      });
+      request.fail(function (xhr) {
+        if (xhr.responseJSON.status == "repeat") {
+          alert("To zainteresowanie zostało już dodane");
+          $('#load').remove();
         }
       });
     } else {
-      alert('spierdalaj');
+      alert('Nie możesz wysłać pustego formularza');
     }
-
-    $(this)[0].reset();
   });
   $('i.delete').on('click', function () {
-    if (confirm(delete_msg)) {
-      var url = base_url + '/ajax/tag/1';
-      var request = $.ajax({
-        method: "post",
-        url: url,
-        data: {
-          "_method": "DELETE"
-        }
-      });
-      request.done(function (response) {
-        if (response.status === 'success') {
-          alert('brykiety');
-        }
-      });
-    }
+    deleteTag(this);
   });
+}
+
+function deleteTag(tag) {
+  if (confirm(delete_msg)) {
+    var url = base_url + '/ajax/tag/deleteTag';
+    var data = $(tag).prev().html();
+    var request = $.ajax({
+      method: "post",
+      url: url,
+      data: {
+        "tag": data,
+        "_method": "DELETE"
+      }
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        $(tag).parent().remove();
+      }
+    });
+    request.fail(function (xhr) {
+      if (xhr.responseJSON.status == "not-found") {
+        alert("Nie znaleziono podanego tagu");
+      }
+    });
+  }
 }
 
 /***/ }),
