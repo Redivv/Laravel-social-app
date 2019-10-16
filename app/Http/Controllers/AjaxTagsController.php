@@ -20,7 +20,7 @@ class AjaxTagsController extends Controller
             if (end($tagsList) != Str::title($data['tag'])) {
                 return response()->json(['status' => 'repeat'],400);
             }else{
-                $html = view('partials.tagList')->withTags(array('tag' => $data['tag']))->render();
+                $html = view('partials.tagListEdit')->withTags(array('tag' => $data['tag']))->render();
                 return response()->json(['status' => 'success', 'html' => $html],200);
             }
         }
