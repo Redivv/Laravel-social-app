@@ -56,6 +56,46 @@ function main() {
         }
     });
 
+    $( "#tagInput" ).autocomplete({
+ 
+        source: function(request, response) {
+            $.ajax({
+                url: base_url+"/ajax/tag/autocompleteHobby",
+                data: {
+                    term : request.term
+                },
+                dataType: "json",
+                success: function(data){
+                    var resp = $.map(data,function(obj){
+                    return obj.name;
+                }); 
+                response(resp);
+                }
+            });
+        },
+        minLength: 1
+    });
+
+    $( "input#city" ).autocomplete({
+ 
+        source: function(request, response) {
+            $.ajax({
+                url: base_url+"/ajax/tag/autocompleteCity",
+                data: {
+                    term : request.term
+                },
+                dataType: "json",
+                success: function(data){
+                    var resp = $.map(data,function(obj){
+                    return obj.name;
+                }); 
+                response(resp);
+                }
+            });
+        },
+        minLength: 1
+    });
+
     $('i.delete').on('click',function(){
         deleteTag(this);
     });

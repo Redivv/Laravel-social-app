@@ -24,6 +24,8 @@ Route::get('profile/edit','ProfileController@edit')->middleware('auth')->name('P
 Route::get('profile/{user}','ProfileController@visit');
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+    Route::get('tag/autocompleteHobby', 'AjaxTagsController@autocompleteHobby');
+    Route::get('tag/autocompleteCity', 'AjaxTagsController@autocompleteCity');
     Route::put('tag/addNew', 'AjaxTagsController@addNew');
     Route::delete('tag/deleteTag', 'AjaxTagsController@deleteTag');
 });

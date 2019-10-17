@@ -6,6 +6,9 @@ use Auth;
 
 use Illuminate\Http\Request;
 
+use Conner\Tagging\Model\Tag;
+use App\City;
+
 class AjaxTagsController extends Controller
 {
     public function addNew(Request $request)
@@ -33,11 +36,37 @@ class AjaxTagsController extends Controller
         ]);
         $user = Auth::user();
         $tagsList = $user->tagNames();
-        if (array_search($data['tag'],$tagsList)) {
+        if (array_search(Str::title($data['tag']),$tagsList) !== false) {
             $user->untag($data['tag']);
             return response()->json(['status' => 'success'], 200);
         }else{
             return response()->json(['status' => 'not-found'], 406);
         }
     }
+
+    public function autocompleteHobby(Request $request)
+    {
+        $request->validate([
+            'term'  =>  ['required', 'string', 'max:255']
+        ]);
+        $search = Str::slug($request->get('term'));
+    
+        $result = Tag::where('slug', 'LIKE', $search.'%')->get();
+
+        return response()->json($result);
+            
+    } 
+
+    public function autocompleteCity(Request $request)
+    {
+        $request->validate([
+            'term'  =>  ['required', 'string', 'max:255']
+        ]);
+        $search = Str::slug($request->get('term'));
+    
+        $result = City::where('name_slug', 'LIKE', $search.'%')->get();
+
+        return response()->json($result);
+            
+    } 
 }
