@@ -14,7 +14,12 @@
 
 @section('city')
     {{__('profile.city')}}:
-    <input id="city" class="form-control" name="city" type="text" value="{{ $user->city}}">
+    @if (!$user->city_id)
+        <input id="city" class="form-control" name="city" type="text" value="">
+    @else
+        <input id="city" class="form-control" name="city" type="text" value="{{$user->city->name}}">
+    @endif
+    
 @endsection
 
 @section('email')

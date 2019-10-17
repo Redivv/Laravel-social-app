@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->year('birth_year')->unsigned();
             $table->text('description')->nullable()->default(null);
-            $table->string('city', 255)->nullable()->default(null);
+            $table->unsignedBigInteger('city_id')->nullable()->default(null);
             $table->string('picture');
             $table->rememberToken();
             $table->timestamps();

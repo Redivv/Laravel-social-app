@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'birth_year', 'picture'
+        'name', 'email', 'password', 'birth_year', 'picture','city_id'
     ];
 
     /**
@@ -47,5 +47,10 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'name';
+    }
+
+    public function city()
+    {
+        return $this->belongsTo('App\City', 'city_id', 'id');
     }
 }

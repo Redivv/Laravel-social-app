@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use App\User;
+use App\City;
 
 class ProfileController extends Controller
 {
@@ -35,7 +37,9 @@ class ProfileController extends Controller
 
         // If request is valid
         request()->validate([
-            'photo'     =>  'mimes:jpeg,png,jpg,gif|max:2048'
+            'photo'     =>  'mimes:jpeg,png,jpg,gif|max:2048',
+            'city'      =>  ['string','nullable','max:250'],
+            'description'   => ['string','nullable','max:500']
         ]);
         //If there's a file
         if (request()->hasFile('photo')) {
@@ -44,7 +48,14 @@ class ProfileController extends Controller
             request('photo')->move(public_path('img/profile-pictures/'), $filename);
             $user->picture = $filename;
         }
-        $user->city = request('city');
+        
+        $city = City::firstOrCreate([
+            'name'      => Str::title(request('city')),
+            'name_slug' => Str::slug(request('city'))
+        ]);
+
+        $user->city_id = $city->id;
+        
         $user->description = request('description');
         //Save changes in user profile
         $user->update();

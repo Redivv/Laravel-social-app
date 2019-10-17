@@ -14,11 +14,11 @@
     {{-- Tłumaczenie 'miasta' --}}
     {{__('profile.city')}}: 
     {{-- Pobieranie miejsca zamieszkania użytkownika z DB (w razie braku System powie, że nie podano) --}}
-    @if ( !$user ->city )
+    @if ( !$user->city_id )
     {{-- Tłumaczenie 'nie podano' --}}
         <i>{{__('profile.city_err')}}</i>
     @else
-        {{ $user ->city }}
+        {{ $user->city->name }}
     @endif
 </p>
 
