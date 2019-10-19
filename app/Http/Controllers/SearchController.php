@@ -43,7 +43,7 @@ class SearchController extends Controller
             ]);
         }
 
-        $search_results = User::select('id','name','birth_year','description as desc', 'city', 'picture');
+        $search_results = User::select('id','name','birth_year','description as desc', 'picture');
 
         $validated_data['username'] === null ?: $search_results = $search_results->where('name', 'like', $validated_data['username'].'%');
         
@@ -65,7 +65,7 @@ class SearchController extends Controller
     public function getSimmilarAgeUsers(object $authenticated_user) : object
     {
         $current_year = date('Y');
-        $search_results = User::select('id','name','birth_year','description as desc', 'city', 'picture')
+        $search_results = User::select('id','name','birth_year','description as desc', 'picture')
             ->whereBetween('birth_year',[$authenticated_user->birth_year-5, $authenticated_user->birth_year+5])
             ->whereNotIn('id',[$authenticated_user->id])
             ->inRandomOrder()

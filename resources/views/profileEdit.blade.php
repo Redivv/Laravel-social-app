@@ -66,6 +66,16 @@
     </output>
 @endsection
 
+@section('status')
+    
+    <input type="radio" name="status" id="status0" value="0" <?php if($user->hidden_status == 0){echo('checked');} ?>><label for="status0">0</label><br>
+    <input type="radio" name="status" id="status1" value="1" <?php if($user->hidden_status == 1){echo('checked');} ?>><label for="status1">1</label><br>
+    <input type="radio" name="status" id="status2" value="2" <?php if($user->hidden_status == 2){echo('checked');} ?>><label for="status2">2</label>
+
+
+@endsection
+
+
 @push('styles')
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 @endpush

@@ -31,6 +31,8 @@
             </div>
             <div class="col-md-6">
                     @yield('photo')
+
+                    @yield('status')
             </div>
 
         </div>

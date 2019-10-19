@@ -39,7 +39,8 @@ class ProfileController extends Controller
         request()->validate([
             'photo'     =>  'mimes:jpeg,png,jpg,gif|max:2048',
             'city'      =>  ['string','nullable','max:250'],
-            'description'   => ['string','nullable','max:500']
+            'description'   => ['string','nullable','max:500'],
+            'status'    =>  ['numeric', 'gte:0', 'lte:2' ]
         ]);
         //If there's a file
         if (request()->hasFile('photo')) {
@@ -55,7 +56,7 @@ class ProfileController extends Controller
         ]);
 
         $user->city_id = $city->id;
-        
+        $user->hidden_status = request('status');
         $user->description = request('description');
         //Save changes in user profile
         $user->update();
@@ -65,8 +66,22 @@ class ProfileController extends Controller
     }
 
     public function visit(User $user){
-
-        //Show user's profile 
-        return view('profile', compact('user'));
+        if(Auth::check()){
+            //Show user's profile 
+            $tags = $user->tagNames();
+            return view('profile')->with(compact('user'))->with(compact('tags'));
+        }else{
+            if($user->hidden_status == 0){
+                //Show user's profile 
+                $tags = $user->tagNames();
+                return view('profile')->with(compact('user'))->with(compact('tags'));
+            }elseif($user->hidden_status == 1){
+                return "prawie ukryty!";
+            }else{
+                return redirect('searcher')->with(['status' => 'Nie można wyświetlić profilu tego użytkownika']);
+            }
+        }
+        
+        
     }
 }
