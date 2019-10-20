@@ -6,9 +6,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Conner\Tagging\Taggable;
+
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Taggable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'birth_year', 'picture'
+        'name', 'email', 'password', 'birth_year', 'picture','city_id'
     ];
 
     /**
@@ -45,5 +47,10 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'name';
+    }
+
+    public function city()
+    {
+        return $this->belongsTo('App\City', 'city_id', 'id');
     }
 }

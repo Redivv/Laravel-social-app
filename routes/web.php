@@ -23,6 +23,13 @@ Route::patch('profile', 'ProfileController@update')->middleware('auth');
 Route::get('profile/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');
 Route::get('profile/{user}','ProfileController@visit');
 
+Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+    Route::get('tag/autocompleteHobby', 'AjaxTagsController@autocompleteHobby');
+    Route::get('tag/autocompleteCity', 'AjaxTagsController@autocompleteCity');
+    Route::put('tag/addNew', 'AjaxTagsController@addNew');
+    Route::delete('tag/deleteTag', 'AjaxTagsController@deleteTag');
+});
+
 
 Route::prefix('user')->group(function(){
     Route::get('home', 'HomeController@index')->name('home');
@@ -36,7 +43,7 @@ Route::patch('message/{id}', 'MessageController@blockConversation')->name('conve
 
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
-   Route::get('message/getMore/{pagi}','AjaxMessageController@ajaxGetMore')->name('message.pagi');
+   Route::get('message/getMore/{pagi}','AjaxMessageController@pagiConversations')->name('message.pagi');
    Route::get('message/get/{id}','AjaxMessageController@ajaxGetMessage')->name('message.get');
    Route::post('message/send', 'AjaxMessageController@ajaxSendMessage')->name('message.new');
    Route::delete('message/delete/{id}', 'AjaxMessageController@ajaxDeleteMessage')->name('message.delete');

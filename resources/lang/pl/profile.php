@@ -11,5 +11,10 @@ return [
     'desc_err'      => 'Brak opisu',
     'city_err'      => 'Nie podano miasta',
     'email_hidden'  => '---',
-    'see_profile'   => 'Zobacz Profil'
+    'see_profile'   => 'Zobacz Profil',
+    'cancel'        => 'Anuluj',
+    'Tags'          => 'Zainteresowania',
+    'addTag'        => 'Dodaj',
+    'deleteTag'     => 'Czy na pewno chcesz usunąć?',
+    'emptyTags'     => 'Nie dodano zainteresowań'
 ];

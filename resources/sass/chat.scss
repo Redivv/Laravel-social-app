@@ -27,7 +27,6 @@ body {
 .people-list {
   width:260px;
   float: left;
-  overflow-y:auto;
 
   li{
     
@@ -70,6 +69,7 @@ body {
   ul {
     padding: 20px;
     height: 770px;
+    overflow-y:auto;
 
     li {
       padding-bottom: 20px;

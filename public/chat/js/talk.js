@@ -114,7 +114,9 @@ $(document).ready(function () {
   var img = new Image();
   img.src = __baseUrl + "/chat/loading.gif"; // Bind scroll function to chat history for pagination request
 
-  $("div.chat-history").bind('scroll', chk_scroll); // Enter key will send a message, Shift+enter will do normal break
+  $("div.chat-history").bind('scroll', chk_scroll); // Bind scroll function to chat history for pagination request
+
+  $("ul.list").bind('scroll', chk_scroll_down); // Enter key will send a message, Shift+enter will do normal break
   // Sending a message dynamicly
 
   $('#talkSendMessage').on('submit', function (e) {
@@ -297,6 +299,29 @@ function chk_scroll(e) {
           $("div.chat-history").scrollTop($("div.chat-history").scrollTop() + $("#top-msg").position().top - $("div.chat-history").height() / 4 + $("#top-msg").height() / 4);
           stop_pagi = response.stop;
         }
+      }
+    });
+  }
+}
+
+function chk_scroll_down(e) {
+  var elem = $(e.currentTarget);
+
+  if ($(elem).scrollTop() + $(elem).innerHeight() >= $(elem)[0].scrollHeight && stop_pagi_convo === false) {
+    pagi_convo++;
+    var url = __baseUrl + '/ajax/message/getMore/' + pagi_convo;
+    console.log(url);
+    var request = $.ajax({
+      method: "get",
+      url: url,
+      data: {
+        pagi: pagi_convo
+      }
+    });
+    request.done(function (response) {
+      if (response.status == 'success') {
+        $(elem).append(response.html);
+        stop_pagi_convo = response.stop;
       }
     });
   }

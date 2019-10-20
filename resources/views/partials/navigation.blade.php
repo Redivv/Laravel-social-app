@@ -71,19 +71,18 @@
         </div>
     </div>
 </nav>
-@push('scripts')
-    <script>
-        let newMessages = $('#newMessagesCount').html();
-        if(newMessages.trim() == ""){
-            newMessages = 0;
-        }
-        var newmsg = function(data) {
-            newMessages++;
-            $('#newMessagesCount').html(newMessages);
-        }
-    </script>
-    @auth
-        {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}  
-    @endauth
-    
-@endpush
+@auth
+    @push('scripts')
+        <script>
+            let newMessages = $('#newMessagesCount').html();
+            if(newMessages.trim() == ""){
+                newMessages = 0;
+            }
+            var newmsg = function(data) {
+                newMessages++;
+                $('#newMessagesCount').html(newMessages);
+            }
+        </script>
+            {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}
+    @endpush
+@endauth

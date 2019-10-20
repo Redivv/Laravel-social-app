@@ -14,29 +14,29 @@
     {{-- Tłumaczenie 'miasta' --}}
     {{__('profile.city')}}: 
     {{-- Pobieranie miejsca zamieszkania użytkownika z DB (w razie braku System powie, że nie podano) --}}
-    @if ( !$user ->city )
+    @if ( !$user->city_id )
     {{-- Tłumaczenie 'nie podano' --}}
         <i>{{__('profile.city_err')}}</i>
     @else
-        {{ $user ->city }}
+        {{ $user->city->name }}
     @endif
 </p>
 
 @endsection
-@section('email')
-<p class="profile-paragraph">
-    {{-- Tłumaczenie 'Adresu email' --}}
-    {{__('profile.email')}}: 
-    {{-- pobranie maila użytkownika z DB --}}
-    @if ($user->id == Auth::user()->id)
-    {{-- Tłumaczenie 'nie podano' --}}
+
+@auth
+@if ($user->id == Auth::user()->id)
+    @section('email')
+    <p class="profile-paragraph">
+        {{-- Tłumaczenie 'Adresu email' --}}
+        {{__('profile.email')}}: 
+        {{-- pobranie maila użytkownika z DB --}}
         {{ $user ->email }}
-    @else
-        <i>{{__('profile.email_hidden')}}</i>
-    @endif
-</p>
+    </p>
+    @endsection
+@endif
+@endauth
 
-@endsection
 @section('birth')
 <p class="profile-paragraph">
     {{-- Tłumaczenie 'roku ur' --}}
@@ -72,6 +72,16 @@
     @endif
 @endsection
 
+@section('tags')
+<div class="text-center"><h3>{{__('profile.Tags')}}<h3></div>
+@if (count($tags) > 0)
+    <div class="tagList row mt-3 text-center">
+        @include('partials.tagList')
+    </div>
+@else
+    <div class="text-center text-muted mt-4"><h4>{{__('profile.emptyTags')}}<h4></div>
+@endif
+@endsection
 
 @section('endform')
 <div>
