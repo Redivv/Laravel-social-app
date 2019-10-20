@@ -24,6 +24,7 @@
 
 @endsection
 
+@auth
 @if ($user->id == Auth::user()->id)
     @section('email')
     <p class="profile-paragraph">
@@ -34,6 +35,7 @@
     </p>
     @endsection
 @endif
+@endauth
 
 @section('birth')
 <p class="profile-paragraph">
@@ -72,9 +74,13 @@
 
 @section('tags')
 <div class="text-center"><h3>{{__('profile.Tags')}}<h3></div>
-<div class="tagList row mt-3">
-    @include('partials.tagList')
-</div>
+@if (count($tags) > 0)
+    <div class="tagList row mt-3 text-center">
+        @include('partials.tagList')
+    </div>
+@else
+    <div class="text-center text-muted mt-4"><h4>{{__('profile.emptyTags')}}<h4></div>
+@endif
 @endsection
 
 @section('endform')

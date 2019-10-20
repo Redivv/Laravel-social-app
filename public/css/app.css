@@ -17024,6 +17024,18 @@ readers do not read off random characters that represent icons */
   color: #000;
 }
 
+.searcher .form #hobbyOutput ul {
+  list-style: none;
+}
+
+.searcher .form #hobbyOutput ul .hobby {
+  cursor: pointer;
+}
+
+.searcher .form #hobbyOutput ul .hobby:hover {
+  color: #e3342f;
+}
+
 .searchResults-header {
   font-size: calc(1.325rem + 0.9vw);
 }

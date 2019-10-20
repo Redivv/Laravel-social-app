@@ -67,6 +67,7 @@ class ProfileController extends Controller
     public function visit(User $user){
 
         //Show user's profile 
-        return view('profile', compact('user'));
+        $tags = $user->tagNames();
+        return view('profile')->with(compact('user'))->with(compact('tags'));
     }
 }

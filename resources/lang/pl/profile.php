@@ -15,5 +15,6 @@ return [
     'cancel'        => 'Anuluj',
     'Tags'          => 'Zainteresowania',
     'addTag'        => 'Dodaj',
-    'deleteTag'     => 'Czy na pewno chcesz usunąć?'
+    'deleteTag'     => 'Czy na pewno chcesz usunąć?',
+    'emptyTags'     => 'Nie dodano zainteresowań'
 ];

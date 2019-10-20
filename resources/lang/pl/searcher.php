@@ -10,5 +10,13 @@ return [
     'not_found'     => 'Nie znaleziono użytkowników w podanych kryteriach',
     'results'       => 'Ilość wyników: :number',
     'results-age'   => 'Osoby w podobnym wieku',
-    'see_profile'   => 'Zobacz Profil'
+    'see_profile'   => 'Zobacz Profil',
+    'hobby'         => 'Zainteresowania',
+    'add'           => 'Dodaj',
+    'city'          => 'Miasto',
+    'searchOptions' => 'Ustawienia Sortowania',
+    'registerDate'  => 'Data Dołączenia',
+    'allCities'     => 'Wszystkie Miasta',
+    'asc'           => 'Rosnąco',
+    'desc'          => 'Malejąco'
 ];

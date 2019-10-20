@@ -16,6 +16,18 @@
                 color: $black;
             }
         }
+
+        #hobbyOutput{
+            ul{
+                list-style: none;
+                .hobby{
+                    cursor: pointer;
+                    &:hover{
+                        color:$red;
+                    }
+                }
+            }
+        }
     }
 }
 
