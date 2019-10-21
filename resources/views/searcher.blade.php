@@ -42,37 +42,37 @@
                     <div class="col">
                         <label for="sort">{{__('searcher.searchOptions')}}</label>
                         <select class="form-control" name="sortOptions_crit" id="sort">
-                            @if (request('sortOptions_crit') == 'birth_year')
-                                <option value="birth_year" selected>{{__('searcher.age')}}</option>
+                            @if (request('sortOptions_crit') == 'created_at')
+                                <option value="birth_year">{{__('searcher.age')}}</option>
                                 <option value="name">{{__('searcher.username')}}</option>
-                                <option value="created_at">{{__('searcher.registerDate')}}</option>
+                                <option value="created_at" selected>{{__('searcher.registerDate')}}</option>
                             @elseif(request('sortOptions_crit') == 'name')
                                 <option value="birth_year">{{__('searcher.age')}}</option>
                                 <option value="name" selected>{{__('searcher.username')}}</option>
                                 <option value="created_at">{{__('searcher.registerDate')}}</option>
                             @else
-                                <option value="birth_year">{{__('searcher.age')}}</option>
+                                <option value="birth_year" selected>{{__('searcher.age')}}</option>
                                 <option value="name">{{__('searcher.username')}}</option>
-                                <option value="created_at" selected>{{__('searcher.registerDate')}}</option>
+                                <option value="created_at">{{__('searcher.registerDate')}}</option>
                             @endif
                         </select>
                         <div class="text-center">
-                            @if (request('sortOptions_dir') == 'desc')
-                                <div class="text-center form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio1" checked  value="desc">
-                                    <label class="form-check-label" for="inlineRadio1">{{__('searcher.asc')}}</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio2" value="asc">
-                                    <label class="form-check-label" for="inlineRadio2">{{__('searcher.desc')}}</label>
-                                </div>
-                            @else
+                            @if (request('sortOptions_dir') == 'asc')
                                 <div class="text-center form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio1" value="desc">
                                     <label class="form-check-label" for="inlineRadio1">{{__('searcher.asc')}}</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio2" checked value="asc">
+                                    <label class="form-check-label" for="inlineRadio2">{{__('searcher.desc')}}</label>
+                                </div>
+                            @else
+                                <div class="text-center form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio1" checked value="desc">
+                                    <label class="form-check-label" for="inlineRadio1">{{__('searcher.asc')}}</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio2" value="asc">
                                     <label class="form-check-label" for="inlineRadio2">{{__('searcher.desc')}}</label>
                                 </div>
                             @endif
