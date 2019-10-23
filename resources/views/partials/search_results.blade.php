@@ -5,7 +5,7 @@
 </h3>
 <div class="searchResults-box mt-3" dusk="search_results_box">
     @foreach ($results as $result)
-        <div data-id="{{$result->id}}" class="searchResult container-fluid mb-4">
+        <div data-id="{{$result->id}}" class="searchResult container-fluid mb-4 @if($result->status == 'online') activeUser @endif">
             <div class="row">
                 <div class="picture col-lg-2">
                     <img src="{{asset('img/profile-pictures/'.$result->picture)}}" alt="">

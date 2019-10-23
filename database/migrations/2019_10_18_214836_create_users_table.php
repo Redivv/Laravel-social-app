@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('api_token', 60)->unique()->nullable()->default(null);
             $table->year('birth_year')->unsigned();
             $table->text('description')->nullable()->default(null);
             $table->unsignedBigInteger('city_id')->nullable()->default(null)->index();
@@ -26,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('picture');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('status')->default('online');
 
             $table->foreign("city_id")->references('id')->on('cities');
         });

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+    Route::middleware(['auth:api'])->group(function () {
+        Route::patch('user/{user}/online', 'UserStatusController@setOnline');
+        Route::patch('user/{user}/offline', 'UserStatusController@setOffline');
+    });

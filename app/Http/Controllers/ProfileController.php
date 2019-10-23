@@ -13,23 +13,15 @@ class ProfileController extends Controller
 {
     //
     public function index(){
-        if (Auth::check()) {
-            // The user is logged in...
-            $user = Auth::user();
-            $tags = $user->tagNames();
-            return view('profile')->with(compact('user'))->with(compact('tags'));
-        }
-        else{
-            return redirect('login');
-        }
+        
+        $user = Auth::user();
+        $tags = $user->tagNames();
+        return view('profile')->with(compact('user'))->with(compact('tags'));
     }
 
     public function edit(){
+        $user = Auth::user();
 
-        if (Auth::check()) {
-            // The user is logged in...
-            $user = Auth::user();
-        }
         $tags = $user->tagNames();
         return view('profileEdit')->with(compact('user'))->with(compact('tags'));
     }

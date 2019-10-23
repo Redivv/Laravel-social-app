@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     @include('partials.favicon')
     <meta name="csrf-token" content="{{csrf_token()}}">
-    <title>Chat</title>
+    <title>{{ config('app.name', 'Safo') }}</title>
     <script>
       window.Laravel = {!! json_encode([
           'user' => auth()->check() ? auth()->user()->id : null,
@@ -26,9 +26,16 @@
       <div class="chat-header clearfix">
         <div class="chat-about">
             @if(isset($user))
-                <div class="chat-with">{{@$user->name}}</div>
+                <div class="chat-with">{{$user->name}}</div>
+                <div data-id="{{$user->id}}" id="status" class="text-muted">
+                    @if ($user->status == "online")
+                      {{__('chat.active')}}
+                    @else
+                      {{__('chat.lastActive')}} {{$user->updated_at->diffForHumans()}}
+                    @endif
+                </div>
             @else
-                <div class="chat-with">No Thread Selected</div>
+                <div class="chat-with">{{__('chat.noThread')}}</div>
             @endif
         </div>
       </div> <!-- end chat-header -->
@@ -56,14 +63,16 @@
 
 
       <script>
-          var __baseUrl = "{{url('/')}}";
-          var audioElement = document.createElement('audio');
-          var deleteConvo = "{{__('chat.deleteConvo')}}";
+        var audioElement  = document.createElement('audio');
+          var __baseUrl     = "{{url('/')}}";
+          var deleteConvo   = "{{__('chat.deleteConvo')}}";
           var deleteMessage = "{{__('chat.deleteMessage')}}";
-          var blockConvo = "{{__('chat.blockConvo')}}";
-          var pagi = 0;
-          var pagi_convo = 0;
-          var stop_pagi = false;
+          var blockConvo    = "{{__('chat.blockConvo')}}";
+          var badFileType   = "{{__('chat.badFileType')}}";
+
+          var pagi            = 0;
+          var pagi_convo      = 0;
+          var stop_pagi       = false;
           var stop_pagi_convo = false;
       </script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -110,30 +119,31 @@
 
         var active_id = new Array();
         Echo.join('online')
-          .here((users) => {
-              users.forEach(function(us){
-                  active_id.push(us.id);
-              })
-                  let active_idCopy = active_id;
-                  $('li.thread').each(function(){
-                      if (active_idCopy.length > 1) {
-                          if (active_idCopy.includes($(this).data('id'))) {
-                              $(this).addClass('activeUser');
-                              active_idCopy = active_idCopy.filter(u => (u !== $(this).data('id')));
-                          }
-                      }else{
-                          return false;
-                      }
-                  })
-          })
           .joining((user) => {
-              active_id.push(user.id);
-              $('li.thread[data-id="'+user.id+'"]').addClass('activeUser');
+              axios.patch('/api/user/'+ user.name +'/online', {
+                      api_token : user.api_token
+              });
           })
+
           .leaving((user) => {
-          active_id = this.active_id.filter(u => (u !== user.id));
-          $('li.thread[data-id="'+user.id+'"]').removeClass('activeUser');
+              axios.patch('/api/user/'+ user.name +'/offline', {
+                  api_token : user.api_token
+              });
           })
+
+          .listen('UserOnline', (e) => {
+              $('#user-'+e.user.id).addClass('activeUser');
+              if (e.user.id == $('#status').data('id')) {
+                  $('#status').html('{{__("chat.active")}}');
+              }
+          })
+
+          .listen('UserOffline', (e) => {
+              $('#user-'+e.user.id).removeClass('activeUser');
+              if (e.user.id == $('#status').data('id')) {
+                  $('#status').html('{{__("chat.lastActive1sec")}}');
+              }
+          });
     </script>
     <script src="{{asset('js/emoji.js')}}"></script>
     <script src="{{asset('chat/js/talk.js')}}"></script>

@@ -18,9 +18,11 @@ Auth::routes();
 Route::get('searcher', 'SearchController@index')->name('searcher');
 
 
-Route::get('profile', 'ProfileController@index')->name('ProfileView');
-Route::patch('profile', 'ProfileController@update')->middleware('auth');
-Route::get('profile/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');
+Route::middleware(['auth'])->group(function () {
+    Route::get('profile', 'ProfileController@index')->middleware('auth')->name('ProfileView');
+    Route::patch('profile', 'ProfileController@update')->middleware('auth');
+    Route::get('profile/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');
+});
 Route::get('profile/{user}','ProfileController@visit');
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
