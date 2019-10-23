@@ -19,7 +19,7 @@
                         @if ($user->status == "online")
                             {{__('profile.active')}}
                         @else
-                            {{__('provile.lastActive')}} {{$user->updated_at->diffForHumans()}}
+                            {{__('profile.lastActive')}} {{$user->updated_at->diffForHumans()}}
                         @endif
                     </p>
                     <hr>
