@@ -84,7 +84,7 @@ class SearchController extends Controller
             ->whereNotIn('hidden_status',[2])
             ->leftJoin('cities', 'users.city_id', '=', 'cities.id');
         }else{
-            $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.birth_year','cities.name as city')->leftJoin('cities', 'users.city_id', '=', 'cities.id');
+            $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.birth_year', 'users.status', 'cities.name as city')->leftJoin('cities', 'users.city_id', '=', 'cities.id');
 
         }
         $validated_data['username'] === null ?: $search_results = $search_results->where('users.name', 'like', $validated_data['username'].'%');

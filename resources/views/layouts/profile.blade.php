@@ -32,7 +32,7 @@
                         @guest
                             {{__('profile.profile')}} {{$user->name}}
                         @endguest
-                    </b><hr>
+                    </b>
                 </p>
                 <p data-id="{{$user->id}}" id="profileStatus" class="text-muted">
                     @if ($user->status == "online")
