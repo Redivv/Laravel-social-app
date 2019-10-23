@@ -14,6 +14,7 @@
 Route::get('/', 'Auth\RegisterController@showRegistrationForm');
 
 Auth::routes();
+Route::get('logout', 'LoginController@logout');
 
 Route::get('searcher', 'SearchController@index')->name('searcher');
 

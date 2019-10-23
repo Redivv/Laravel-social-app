@@ -44,4 +44,14 @@ class LoginController extends Controller
         $user->status = 'online';
         $user->update();
     }
+
+    public function logout()
+    {
+        $user = Auth::user();
+        $user->status = 'offline';
+        $user->update();
+
+        Auth::logout();
+        return redirect('/login');
+    }
 }
