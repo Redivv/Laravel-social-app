@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="searcher container mt-3">
-        <form class="form" action="{{route('searcher')}}" method="get">
+<div class="searcher container mt-3">
+    {{-- Wyświetla wszystkie powiadomienia typu 'status' z conrtollera --}}
+    @if (session('status'))
+        <div class="alert alert-info">
+            {{ session('status') }}
+        </div>
+    @endif
+    <form class="form" action="{{route('searcher')}}" method="get">
             <div class="form-group">
                 <div class="form-row">
                     <div class="col-7">

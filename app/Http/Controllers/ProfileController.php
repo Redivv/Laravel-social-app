@@ -16,9 +16,12 @@ class ProfileController extends Controller
         if (Auth::check()) {
             // The user is logged in...
             $user = Auth::user();
+            $tags = $user->tagNames();
+            return view('profile')->with(compact('user'))->with(compact('tags'));
         }
-        $tags = $user->tagNames();
-        return view('profile')->with(compact('user'))->with(compact('tags'));
+        else{
+            return redirect('login');
+        }
     }
 
     public function edit(){
@@ -61,24 +64,26 @@ class ProfileController extends Controller
         //Save changes in user profile
         $user->update();
 
-        // return request('photo');
         return redirect('profile')->with(['status' => 'Profile updated successfully.']);
     }
 
     public function visit(User $user){
-        if(Auth::check()){
-            //Show user's profile 
+        $user->email='Private data';  //Seeing other's email is impossible (safety reasons);
+        if(Auth::check()){ //If user's logged in, he can explore any profile
             $tags = $user->tagNames();
             return view('profile')->with(compact('user'))->with(compact('tags'));
         }else{
-            if($user->hidden_status == 0){
+            if($user->hidden_status == 0){ //Guests can freely see profile of any person with hidden_status==0;
                 //Show user's profile 
                 $tags = $user->tagNames();
                 return view('profile')->with(compact('user'))->with(compact('tags'));
-            }elseif($user->hidden_status == 1){
-                return "prawie ukryty!";
-            }else{
-                return redirect('searcher')->with(['status' => 'Nie można wyświetlić profilu tego użytkownika']);
+            }elseif($user->hidden_status == 1){ // Guests have restricted access to profile with hidden_status==1;
+                $user->description='err0000';
+                $user->city_id=null;
+                $user->birth_year='err0000';
+                return view('profile')->with(compact('user'))->with(['status' => 'Nie jesteś zalogowany']);
+            }else{ //Guests cannot find anyone with hidden_status==2, if they even try they get redirrected back to searcher (or mb register/login, dunno yet);
+                return redirect('searcher')->with(['status' => 'Nie można wyświetlić profilu użytkownika '.$user->name.' jako gość.']);
             }
         }
         

@@ -43,7 +43,7 @@ class SearchController extends Controller
             ]);
         }
 
-        if(!(Auth::check())){
+        if(!(Auth::check())){ //Guests cannot find users with hidden_status==2;
             $search_results = User::select('id','name','birth_year','description as desc', 'picture')
             ->whereNotIn('hidden_status',[2]);
         }else{

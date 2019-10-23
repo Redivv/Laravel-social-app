@@ -10,18 +10,20 @@
     
 @endsection
 @section('city')
-<p class="profile-paragraph">
-    {{-- Tłumaczenie 'miasta' --}}
-    {{__('profile.city')}}: 
-    {{-- Pobieranie miejsca zamieszkania użytkownika z DB (w razie braku System powie, że nie podano) --}}
-    @if ( !$user->city_id )
-    {{-- Tłumaczenie 'nie podano' --}}
-        <i>{{__('profile.city_err')}}</i>
-    @else
-        {{ $user->city->name }}
-    @endif
-</p>
-
+@if($user->birth_year!='err0000')
+    <p class="profile-paragraph">
+        {{-- Tłumaczenie 'miasta' --}}
+        {{__('profile.city')}}: 
+        {{-- Pobieranie miejsca zamieszkania użytkownika z DB (w razie braku System powie, że nie podano) --}}
+        @if ( !$user->city_id )
+            {{-- Tłumaczenie 'nie podano' --}}
+            <b class='text-danger'>{{__('profile.city_err')}}</b>
+        @else
+            {{ $user->city->name }}
+        @endif
+    </p>
+@else
+@endif
 @endsection
 
 @auth
@@ -38,18 +40,19 @@
 @endauth
 
 @section('birth')
-<p class="profile-paragraph">
-    {{-- Tłumaczenie 'roku ur' --}}
-    {{__('profile.birth')}}: 
-    {{-- pobranie roku ur użytkownika z DB --}}
-    {{ $user ->birth_year }}
-</p>
-
+    @if($user->birth_year!='err0000')
+        <p class="profile-paragraph">
+            {{__('profile.birth')}}: 
+            {{-- pobranie roku ur użytkownika z DB --}}
+            {{ $user ->birth_year }}
+        </p>
+    @else
+    @endif
 @endsection
+
 @section('photo')
     <div class="row justify-content-center">
         <div class="col-md-8">
-            {{-- Tłumaczenie 'zdjęcia' --}}
             <p>{{__('profile.photo')}}:</p>
         </div>
         <div class="col-md-8 foto_frame">
@@ -58,26 +61,32 @@
         </div>
     </div>
 @endsection
+
 @section('desc')
-    {{-- Tłumaczenie 'opis' --}}
     <hr>
+    @if($user->description=='err0000')
+        <b class='text-danger'>{{__('profile.access_err')}}</b>
+    @else
     {{__('profile.desc')}}:
     @if (!$user->description)
-        <i>{{__('profile.desc_err')}}</i>
+        {{__('profile.desc_err')}}
     @else
         <br>
         <div class="desc">
         {{ $user ->description }}
         </div>
     @endif
+    @endif
 @endsection
-
-    @section('tags')
+    
+@section('tags')
+    @if(Auth::check() || $user->hidden_status == 0)
         <div class="text-center"><h3>{{__('profile.Tags')}}<h3></div>
         <div class="tagList row mt-3">
             @include('partials.tagList')
         </div>
-    @endsection
+    @endif
+@endsection
 
 
 @section('endform')
@@ -87,6 +96,5 @@
         <a href="/profile/edit" style="margin-left:20px;" class="btn form-btn button"><b>{{__('profile.edit')}}</b></a>
         @endif    
     @endauth
-    
 </div>
 @endsection
