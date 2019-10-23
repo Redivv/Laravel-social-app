@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->year('birth_year')->unsigned();
             $table->text('description')->nullable()->default(null);
             $table->unsignedBigInteger('city_id')->nullable()->default(null)->index();
+            $table->integer('hidden_status')->default(0);
             $table->string('picture');
             $table->rememberToken();
             $table->timestamps();

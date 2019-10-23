@@ -79,8 +79,14 @@ class SearchController extends Controller
             ]);
         }
 
-        $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.birth_year','cities.name as city')->leftJoin('cities', 'users.city_id', '=', 'cities.id');
+        if(!(Auth::check())){ //Guests cannot find users with hidden_status==2;
+            $search_results = User::select('users.id','users.name','users.birth_year','users.description as desc', 'users.picture','cities.name as city')
+            ->whereNotIn('hidden_status',[2])
+            ->leftJoin('cities', 'users.city_id', '=', 'cities.id');
+        }else{
+            $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.birth_year','cities.name as city')->leftJoin('cities', 'users.city_id', '=', 'cities.id');
 
+        }
         $validated_data['username'] === null ?: $search_results = $search_results->where('users.name', 'like', $validated_data['username'].'%');
         
         $current_year = date('Y');
