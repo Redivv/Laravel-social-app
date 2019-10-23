@@ -25,5 +25,16 @@
 @push('scripts')
 <script defer>
     Echo.join('online')
+        .joining((user) => {
+            axios.patch('/api/user/'+ user.name +'/online', {
+                    api_token : user.api_token
+            });
+        })
+
+        .leaving((user) => {
+            axios.patch('/api/user/'+ user.name +'/offline', {
+                api_token : user.api_token
+            });
+        })
 </script>
 @endpush

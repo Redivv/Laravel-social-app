@@ -79,7 +79,7 @@ class SearchController extends Controller
             ]);
         }
 
-        $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.birth_year','cities.name as city')->leftJoin('cities', 'users.city_id', '=', 'cities.id');
+        $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.birth_year','users.status','cities.name as city')->leftJoin('cities', 'users.city_id', '=', 'cities.id');
 
         $validated_data['username'] === null ?: $search_results = $search_results->where('users.name', 'like', $validated_data['username'].'%');
         
@@ -110,7 +110,7 @@ class SearchController extends Controller
     public function getSimmilarAgeUsers(object $authenticated_user) : object
     {
         $current_year = date('Y');
-        $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.birth_year','cities.name as city')
+        $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.status','users.birth_year','cities.name as city')
             ->whereBetween('birth_year',[$authenticated_user->birth_year-5, $authenticated_user->birth_year+5])
             ->whereNotIn('users.id',[$authenticated_user->id])
             ->leftJoin('cities', 'users.city_id', '=', 'cities.id')

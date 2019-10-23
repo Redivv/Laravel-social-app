@@ -115,33 +115,29 @@
 </script>
 <script src="{{asset('js/searcher.js')}}"></script>
 
-<script defer>
+<script>
     Echo.join('online')
-    .here((users) => {
-        this.active_id = new Array();
-        users.forEach(function(us){
-            active_id.push(us.id);
+    
+        .joining((user) => {
+            axios.patch('/api/user/'+ user.name +'/online', {
+                    api_token : user.api_token
+            });
         })
-            let active_idCopy = active_id;
-            $('div.searchResult').each(function(){
-                if (active_idCopy.length > 1) {
-                    if (active_idCopy.includes($(this).data('id'))) {
-                        $(this).addClass('activeUser');
-                        active_idCopy = active_idCopy.filter(u => (u !== $(this).data('id')));
-                    }
-                    console.log(active_id);
-                }else{
-                    return false;
-                }
-            })
-    })
-    .joining((user) => {
-        this.active_id.push(user.id);
-        $('div.searchResult[data-id="'+user.id+'"]').addClass('activeUser');
-    })
-    .leaving((user) => {
-    this.active_id = this.active_id.filter(u => (u !== user.id));
-    $('div.searchResult[data-id="'+user.id+'"]').removeClass('activeUser');
-    })
+        .leaving((user) => {
+            axios.patch('/api/user/'+ user.name +'/offline', {
+                api_token : user.api_token
+            });
+        })
+
+        .listen('UserOnline', (e) => {
+            $('div.searchResult[data-id="'+e.user.id+'"]').addClass('activeUser');
+            this.friend = e.user;
+        })
+        
+        .listen('UserOffline', (e) => {
+            $('div.searchResult[data-id="'+e.user.id+'"]').removeClass('activeUser');
+            this.friend = e.user;
+        });
+        
 </script>
 @endpush

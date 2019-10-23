@@ -5,7 +5,7 @@
     <ul class="list">
         @foreach($threads as $inbox)
             @if(!is_null($inbox->thread))
-        <li data-id="{{$inbox->withUser->id}}" id="user-{{$inbox->withUser->id}}" class="clearfix thread">
+        <li data-id="{{$inbox->withUser->id}}" id="user-{{$inbox->withUser->id}}" class="clearfix thread @if($inbox->withUser->status == 'online') activeUser @endif">
             <form action="{{route('conversation.delete',['id'=>$inbox->withUser->id])}}" class="talkDeleteConversation float-left" method="POST">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
