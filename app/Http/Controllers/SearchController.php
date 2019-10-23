@@ -116,8 +116,13 @@ class SearchController extends Controller
     public function getSimmilarAgeUsers(object $authenticated_user) : object
     {
         $current_year = date('Y');
-        $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.status','users.birth_year','cities.name as city')
-            ->whereBetween('birth_year',[$authenticated_user->birth_year-5, $authenticated_user->birth_year+5])
+        if(!(Auth::check())){
+            $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.status','users.birth_year','cities.name as city')
+                ->whereNotIn('hidden_status',[2]);
+        }else{
+            $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.status','users.birth_year','cities.name as city');
+        }
+            $search_results = $search_results->whereBetween('birth_year',[$authenticated_user->birth_year-5, $authenticated_user->birth_year+5])
             ->whereNotIn('users.id',[$authenticated_user->id])
             ->leftJoin('cities', 'users.city_id', '=', 'cities.id')
             ->inRandomOrder()
