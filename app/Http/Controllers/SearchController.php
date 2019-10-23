@@ -43,8 +43,12 @@ class SearchController extends Controller
             ]);
         }
 
-        $search_results = User::select('id','name','birth_year','description as desc', 'picture');
-
+        if(!(Auth::check())){
+            $search_results = User::select('id','name','birth_year','description as desc', 'picture')
+            ->whereNotIn('hidden_status',[2]);
+        }else{
+            $search_results = User::select('id','name','birth_year','description as desc', 'picture');
+        }
         $validated_data['username'] === null ?: $search_results = $search_results->where('name', 'like', $validated_data['username'].'%');
         
         $current_year = date('Y');
