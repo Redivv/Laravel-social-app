@@ -19,9 +19,9 @@ Route::get('searcher', 'SearchController@index')->name('searcher');
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('profile', 'ProfileController@index')->middleware('auth')->name('ProfileView');
-    Route::patch('profile', 'ProfileController@update')->middleware('auth');
-    Route::get('profile/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');
+    Route::get('profile', 'ProfileController@index')->name('ProfileView');
+    Route::patch('profile', 'ProfileController@update');
+    Route::get('profile/edit','ProfileController@edit')->name('ProfileEdition');
 });
 Route::get('profile/{user}','ProfileController@visit');
 
