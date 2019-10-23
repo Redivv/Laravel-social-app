@@ -243,7 +243,7 @@ $(document).ready(function () {
       // Only process image files.
       if (!f.type.match('image.*')) {
         $(this).val("");
-        alert("Niewłaściwy Typ Pliku!");
+        alert(badFileType);
         $('#picture-preview').empty();
         break;
       }
