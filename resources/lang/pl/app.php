@@ -7,4 +7,5 @@ return [
     'chat'         => 'Rozmowy',
     'logout'       => 'Wyloguj Się',
     'toggle-nav'   => 'Rozwiń Menu',
+    'profile'      => 'Profil'
 ];

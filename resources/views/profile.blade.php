@@ -36,6 +36,11 @@
         {{ $user ->email }}
     </p>
     @endsection
+    @if (!$user->email_verified_at)
+        <div class="alert alert-danger" role="alert">
+            {{__('profile.verifyEmailAlert')}}
+        </div>
+    @endif
 @endif
 @endauth
 

@@ -13,18 +13,20 @@
 
 Route::get('/', 'Auth\RegisterController@showRegistrationForm');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+
 Route::get('logout', 'LoginController@logout');
 
 Route::get('searcher', 'SearchController@index')->name('searcher');
 
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('profile', 'ProfileController@index')->name('ProfileView');
+Route::get('profile', 'ProfileController@index')->middleware('auth')->name('ProfileView');
+Route::get('profile/{user}','ProfileController@visit');
+
+Route::middleware(['verified'])->group(function () {
     Route::patch('profile', 'ProfileController@update');
     Route::get('profile/edit','ProfileController@edit')->name('ProfileEdition');
 });
-Route::get('profile/{user}','ProfileController@visit');
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
     Route::get('tag/autocompleteHobby', 'AjaxTagsController@autocompleteHobby');

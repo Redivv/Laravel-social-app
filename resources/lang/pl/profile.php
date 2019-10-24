@@ -39,5 +39,6 @@ return [
     'emptyTags'         => 'Nie dodano zainteresowań',
     'active'            => 'Aktywny',
     'lastActive'        => 'Ostatnio Aktywny:',
-    'lastActive1sec'    => 'Ostatnio Aktywny: 1 sekunda temu'
+    'lastActive1sec'    => 'Ostatnio Aktywny: 1 sekunda temu',
+    'verifyEmailAlert'      => 'Konieczna weryfikacja adresu email. Aby korzystać z wszystkich funkcji portalu kliknij w link wysłany na podany adres email'
 ];
