@@ -25,7 +25,8 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token'    => Str::random(10),
         'birth_year'        => $faker->numberBetween(1950,2001),
         'description'       => $faker->text,
-        'city'              => $faker->city,
+        'city_id'           => $faker->numberBetween(1,5),
+        'hidden_status'     => $faker->numberBetween(0,2),
         'picture'           => 'default-picture.png'
 
     ];
