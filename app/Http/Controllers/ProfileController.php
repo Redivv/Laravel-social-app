@@ -42,7 +42,7 @@ class ProfileController extends Controller
             //Change original name of the file
             $filename = hash_file('haval160,4',request('photo')->getPathname()).'.'.request('photo')->getClientOriginalExtension();
             request('photo')->move(public_path('img/profile-pictures/'), $filename);
-            $user->picture = $filename;
+            $user->pending_picture = $filename;
         }
         
         $city = City::firstOrCreate([

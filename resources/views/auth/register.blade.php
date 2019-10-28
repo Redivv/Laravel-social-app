@@ -90,9 +90,10 @@
                                         </span>
                                     @enderror
                                     <output id="picture-preview"></output>
+                                    <div class="alert alert-info" role="alert">
+                                        {{__('registeration.infoAlert')}}
+                                    </div>
                                 </div>
-                                
-
                             </div>
                             
                             <button type="submit" class="form-btn btn btn-block">

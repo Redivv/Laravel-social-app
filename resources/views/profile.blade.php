@@ -64,6 +64,11 @@
             {{-- pobieranie nazyw zdjęcia z DB i znalezienie go w folderze profile-pictures --}}
             <img class="foto" src="{{asset('img/profile-pictures/'.$user->picture)}}" alt="">
         </div>
+        @if ($user->pending_picture)
+            <div class="mt-2 alert alert-info" role="alert">
+                {{__('profile.pictureInfo')}}
+            </div>
+        @endif
     </div>
 @endsection
 

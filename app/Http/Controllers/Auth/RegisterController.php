@@ -59,7 +59,7 @@ class RegisterController extends Controller
             'email'             => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'          => ['required', 'string', 'min:8', 'confirmed'],
             'birth_year'        => ['required', 'integer', 'between:1950,'.intVal(date('Y')-18)],
-            'profile-picture'   => ['required', 'file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
+            'profile-picture'   => ['file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
         ]);
     }
 
@@ -76,12 +76,12 @@ class RegisterController extends Controller
         $data['profile-picture'] = $filename;
         
         return User::create([
-            'name'          => $data['name'],
-            'email'         => $data['email'],
-            'password'      => Hash::make($data['password']),
-            'api_token'     => Str::random(60),
-            'birth_year'    => $data['birth_year'],
-            'picture'       => $data['profile-picture']
+            'name'                  => $data['name'],
+            'email'                 => $data['email'],
+            'password'              => Hash::make($data['password']),
+            'api_token'             => Str::random(60),
+            'birth_year'            => $data['birth_year'],
+            'pending_picture'       => $data['profile-picture']
         ]);
     }
 }

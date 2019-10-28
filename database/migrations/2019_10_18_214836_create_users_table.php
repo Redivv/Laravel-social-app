@@ -24,7 +24,8 @@ class CreateUsersTable extends Migration
             $table->text('description')->nullable()->default(null);
             $table->unsignedBigInteger('city_id')->nullable()->default(null)->index();
             $table->integer('hidden_status')->default(0);
-            $table->string('picture');
+            $table->string('picture')->default('default-picture.png');
+            $table->string('pending_picture')->nullable()->default(null);
             $table->rememberToken();
             $table->timestamps();
             $table->string('status')->default('online');

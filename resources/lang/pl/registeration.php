@@ -13,5 +13,6 @@ return [
     'verificationInfo1'         => 'Aby kontynuuować musisz zweryfikować swój adres email klikając w link wysłany na podany adres',
     'verificationInfo2'         => 'Jeśli nie otrzymałeś/aś maila',
     'verificationInfo3'         => 'kliknij tutaj aby wysłać go ponownie',
-    'newMail'     => 'Wysłano nowy link aktywacyjny'
+    'newMail'                   => 'Wysłano nowy link aktywacyjny',
+    'infoAlert'                 => 'W serwisie Safo zależy nam na autentyczności użytkowników. Nowe zdjęcia profilowe będą przesyłane do administracji w celu akceptacji'
 ];
