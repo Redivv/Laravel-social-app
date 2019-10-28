@@ -17,11 +17,17 @@
                         <a href="{{ url('/searcher') }}" class="nav-link">{{ __('app.searcher') }}</a>
                     </li>
                 @auth
+                    @if(auth()->user()->isAdmin())
+                        <li class="nav-item">
+                            <a href="{{ route('adminHome') }}" class="nav-link">{{__('app.adminDashboard')}}</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ route('Home') }}" class="nav-link">{{__('app.dashboard')}}</a>
+                        </li>
+                    @endif
                     <li class="nav-item">
-                            <a href="{{ url('/user/home') }}" class="nav-link">{{__('app.dashboard')}}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ url('/profile') }}" class="nav-link">Profil</a>
+                        <a href="{{ url('/profile') }}" class="nav-link">{{__('app.profile')}}</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/message') }}" class="nav-link">

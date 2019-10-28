@@ -107,7 +107,7 @@
 <div>
     @auth
         @if($user->id == Auth::user()->id)
-        <a href="/profile/edit" style="margin-left:20px;" class="btn form-btn button"><b>{{__('profile.edit')}}</b></a>
+        <a href="{{route('ProfileEdition')}}" style="margin-left:20px;" class="btn form-btn button"><b>{{__('profile.edit')}}</b></a>
         @endif    
     @endauth
 </div>

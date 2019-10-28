@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('status')->default('online');
+            $table->boolean('is_admin')->default(false);
 
             $table->foreign("city_id")->references('id')->on('cities');
         });

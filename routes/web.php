@@ -40,6 +40,10 @@ Route::prefix('user')->group(function(){
     Route::get('talk', 'HomeController@chat')->name('chat');
 });
 
+Route::prefix('admin')->group(function(){
+    Route::get('home', 'AdminController@index')->middleware('verified')->name('adminHome');
+});
+
 Route::get('message', 'MessageController@index')->name('message.app');
 Route::get('message/{name}', 'MessageController@chatHistory')->name('message.read');
 Route::delete('message/{id}', 'MessageController@deleteConversation')->name('conversation.delete');

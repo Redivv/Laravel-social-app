@@ -3033,7 +3033,8 @@ textarea.form-control.is-invalid {
   }
 }
 
-.btn {
+.btn,
+div.cookie-consent button {
   display: inline-block;
   font-weight: 400;
   color: #212529;
@@ -3053,24 +3054,30 @@ textarea.form-control.is-invalid {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .btn {
+  .btn,
+  div.cookie-consent button {
     transition: none;
   }
 }
 
-.btn:hover {
+.btn:hover,
+div.cookie-consent button:hover {
   color: #212529;
   text-decoration: none;
 }
 
 .btn:focus,
-.btn.focus {
+div.cookie-consent button:focus,
+.btn.focus,
+div.cookie-consent button.focus {
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
 }
 
 .btn.disabled,
-.btn:disabled {
+div.cookie-consent button.disabled,
+.btn:disabled,
+div.cookie-consent button:disabled {
   opacity: 0.65;
 }
 
@@ -3079,41 +3086,53 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 
-.btn-primary {
+.btn-primary,
+div.cookie-consent button {
   color: #ffffff;
   background-color: #3490dc;
   border-color: #3490dc;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+div.cookie-consent button:hover {
   color: #ffffff;
   background-color: #227dc7;
   border-color: #2176bd;
 }
 
 .btn-primary:focus,
-.btn-primary.focus {
+div.cookie-consent button:focus,
+.btn-primary.focus,
+div.cookie-consent button.focus {
   box-shadow: 0 0 0 0.2rem rgba(82, 161, 225, 0.5);
 }
 
 .btn-primary.disabled,
-.btn-primary:disabled {
+div.cookie-consent button.disabled,
+.btn-primary:disabled,
+div.cookie-consent button:disabled {
   color: #ffffff;
   background-color: #3490dc;
   border-color: #3490dc;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active,
+div.cookie-consent button:not(:disabled):not(.disabled):active,
 .btn-primary:not(:disabled):not(.disabled).active,
-.show > .btn-primary.dropdown-toggle {
+div.cookie-consent button:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle,
+div.cookie-consent .show > button.dropdown-toggle {
   color: #ffffff;
   background-color: #2176bd;
   border-color: #1f6fb2;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus,
+div.cookie-consent button:not(:disabled):not(.disabled):active:focus,
 .btn-primary:not(:disabled):not(.disabled).active:focus,
-.show > .btn-primary.dropdown-toggle:focus {
+div.cookie-consent button:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus,
+div.cookie-consent .show > button.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(82, 161, 225, 0.5);
 }
 
@@ -3695,7 +3714,8 @@ fieldset:disabled a.btn {
 }
 
 .btn-lg,
-.btn-group-lg > .btn {
+.btn-group-lg > .btn,
+div.cookie-consent .btn-group-lg > button {
   padding: 0.5rem 1rem;
   font-size: 1.125rem;
   line-height: 1.5;
@@ -3703,7 +3723,8 @@ fieldset:disabled a.btn {
 }
 
 .btn-sm,
-.btn-group-sm > .btn {
+.btn-group-sm > .btn,
+div.cookie-consent .btn-group-sm > button {
   padding: 0.25rem 0.5rem;
   font-size: 0.7875rem;
   line-height: 1.5;
@@ -4022,22 +4043,32 @@ input[type=button].btn-block {
 }
 
 .btn-group > .btn,
-.btn-group-vertical > .btn {
+div.cookie-consent .btn-group > button,
+.btn-group-vertical > .btn,
+div.cookie-consent .btn-group-vertical > button {
   position: relative;
   flex: 1 1 auto;
 }
 
 .btn-group > .btn:hover,
-.btn-group-vertical > .btn:hover {
+div.cookie-consent .btn-group > button:hover,
+.btn-group-vertical > .btn:hover,
+div.cookie-consent .btn-group-vertical > button:hover {
   z-index: 1;
 }
 
 .btn-group > .btn:focus,
+div.cookie-consent .btn-group > button:focus,
 .btn-group > .btn:active,
+div.cookie-consent .btn-group > button:active,
 .btn-group > .btn.active,
+div.cookie-consent .btn-group > button.active,
 .btn-group-vertical > .btn:focus,
+div.cookie-consent .btn-group-vertical > button:focus,
 .btn-group-vertical > .btn:active,
-.btn-group-vertical > .btn.active {
+div.cookie-consent .btn-group-vertical > button:active,
+.btn-group-vertical > .btn.active,
+div.cookie-consent .btn-group-vertical > button.active {
   z-index: 1;
 }
 
@@ -4052,18 +4083,23 @@ input[type=button].btn-block {
 }
 
 .btn-group > .btn:not(:first-child),
+div.cookie-consent .btn-group > button:not(:first-child),
 .btn-group > .btn-group:not(:first-child) {
   margin-left: -1px;
 }
 
 .btn-group > .btn:not(:last-child):not(.dropdown-toggle),
-.btn-group > .btn-group:not(:last-child) > .btn {
+div.cookie-consent .btn-group > button:not(:last-child):not(.dropdown-toggle),
+.btn-group > .btn-group:not(:last-child) > .btn,
+div.cookie-consent .btn-group > .btn-group:not(:last-child) > button {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
 .btn-group > .btn:not(:first-child),
-.btn-group > .btn-group:not(:first-child) > .btn {
+div.cookie-consent .btn-group > button:not(:first-child),
+.btn-group > .btn-group:not(:first-child) > .btn,
+div.cookie-consent .btn-group > .btn-group:not(:first-child) > button {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -4084,13 +4120,15 @@ input[type=button].btn-block {
 }
 
 .btn-sm + .dropdown-toggle-split,
-.btn-group-sm > .btn + .dropdown-toggle-split {
+.btn-group-sm > .btn + .dropdown-toggle-split,
+div.cookie-consent .btn-group-sm > button + .dropdown-toggle-split {
   padding-right: 0.375rem;
   padding-left: 0.375rem;
 }
 
 .btn-lg + .dropdown-toggle-split,
-.btn-group-lg > .btn + .dropdown-toggle-split {
+.btn-group-lg > .btn + .dropdown-toggle-split,
+div.cookie-consent .btn-group-lg > button + .dropdown-toggle-split {
   padding-right: 0.75rem;
   padding-left: 0.75rem;
 }
@@ -4102,34 +4140,44 @@ input[type=button].btn-block {
 }
 
 .btn-group-vertical > .btn,
+div.cookie-consent .btn-group-vertical > button,
 .btn-group-vertical > .btn-group {
   width: 100%;
 }
 
 .btn-group-vertical > .btn:not(:first-child),
+div.cookie-consent .btn-group-vertical > button:not(:first-child),
 .btn-group-vertical > .btn-group:not(:first-child) {
   margin-top: -1px;
 }
 
 .btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle),
-.btn-group-vertical > .btn-group:not(:last-child) > .btn {
+div.cookie-consent .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle),
+.btn-group-vertical > .btn-group:not(:last-child) > .btn,
+div.cookie-consent .btn-group-vertical > .btn-group:not(:last-child) > button {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
 .btn-group-vertical > .btn:not(:first-child),
-.btn-group-vertical > .btn-group:not(:first-child) > .btn {
+div.cookie-consent .btn-group-vertical > button:not(:first-child),
+.btn-group-vertical > .btn-group:not(:first-child) > .btn,
+div.cookie-consent .btn-group-vertical > .btn-group:not(:first-child) > button {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
 .btn-group-toggle > .btn,
-.btn-group-toggle > .btn-group > .btn {
+div.cookie-consent .btn-group-toggle > button,
+.btn-group-toggle > .btn-group > .btn,
+div.cookie-consent .btn-group-toggle > .btn-group > button {
   margin-bottom: 0;
 }
 
 .btn-group-toggle > .btn input[type=radio],
+div.cookie-consent .btn-group-toggle > button input[type=radio],
 .btn-group-toggle > .btn input[type=checkbox],
+div.cookie-consent .btn-group-toggle > button input[type=checkbox],
 .btn-group-toggle > .btn-group > .btn input[type=radio],
 .btn-group-toggle > .btn-group > .btn input[type=checkbox] {
   position: absolute;
@@ -4214,24 +4262,52 @@ input[type=button].btn-block {
 }
 
 .input-group-prepend .btn,
-.input-group-append .btn {
+.input-group-prepend div.cookie-consent button,
+div.cookie-consent .input-group-prepend button,
+.input-group-append .btn,
+.input-group-append div.cookie-consent button,
+div.cookie-consent .input-group-append button {
   position: relative;
   z-index: 2;
 }
 
 .input-group-prepend .btn:focus,
-.input-group-append .btn:focus {
+.input-group-prepend div.cookie-consent button:focus,
+div.cookie-consent .input-group-prepend button:focus,
+.input-group-append .btn:focus,
+.input-group-append div.cookie-consent button:focus,
+div.cookie-consent .input-group-append button:focus {
   z-index: 3;
 }
 
 .input-group-prepend .btn + .btn,
+.input-group-prepend div.cookie-consent button + .btn,
+div.cookie-consent .input-group-prepend button + .btn,
+.input-group-prepend div.cookie-consent .btn + button,
+div.cookie-consent .input-group-prepend .btn + button,
+.input-group-prepend div.cookie-consent button + button,
+div.cookie-consent .input-group-prepend button + button,
 .input-group-prepend .btn + .input-group-text,
+.input-group-prepend div.cookie-consent button + .input-group-text,
+div.cookie-consent .input-group-prepend button + .input-group-text,
 .input-group-prepend .input-group-text + .input-group-text,
 .input-group-prepend .input-group-text + .btn,
+.input-group-prepend div.cookie-consent .input-group-text + button,
+div.cookie-consent .input-group-prepend .input-group-text + button,
 .input-group-append .btn + .btn,
+.input-group-append div.cookie-consent button + .btn,
+div.cookie-consent .input-group-append button + .btn,
+.input-group-append div.cookie-consent .btn + button,
+div.cookie-consent .input-group-append .btn + button,
+.input-group-append div.cookie-consent button + button,
+div.cookie-consent .input-group-append button + button,
 .input-group-append .btn + .input-group-text,
+.input-group-append div.cookie-consent button + .input-group-text,
+div.cookie-consent .input-group-append button + .input-group-text,
 .input-group-append .input-group-text + .input-group-text,
-.input-group-append .input-group-text + .btn {
+.input-group-append .input-group-text + .btn,
+.input-group-append div.cookie-consent .input-group-text + button,
+div.cookie-consent .input-group-append .input-group-text + button {
   margin-left: -1px;
 }
 
@@ -4274,7 +4350,9 @@ input[type=button].btn-block {
 .input-group-lg > .input-group-prepend > .input-group-text,
 .input-group-lg > .input-group-append > .input-group-text,
 .input-group-lg > .input-group-prepend > .btn,
-.input-group-lg > .input-group-append > .btn {
+div.cookie-consent .input-group-lg > .input-group-prepend > button,
+.input-group-lg > .input-group-append > .btn,
+div.cookie-consent .input-group-lg > .input-group-append > button {
   padding: 0.5rem 1rem;
   font-size: 1.125rem;
   line-height: 1.5;
@@ -4291,7 +4369,9 @@ input[type=button].btn-block {
 .input-group-sm > .input-group-prepend > .input-group-text,
 .input-group-sm > .input-group-append > .input-group-text,
 .input-group-sm > .input-group-prepend > .btn,
-.input-group-sm > .input-group-append > .btn {
+div.cookie-consent .input-group-sm > .input-group-prepend > button,
+.input-group-sm > .input-group-append > .btn,
+div.cookie-consent .input-group-sm > .input-group-append > button {
   padding: 0.25rem 0.5rem;
   font-size: 0.7875rem;
   line-height: 1.5;
@@ -4304,20 +4384,26 @@ input[type=button].btn-block {
 }
 
 .input-group > .input-group-prepend > .btn,
+div.cookie-consent .input-group > .input-group-prepend > button,
 .input-group > .input-group-prepend > .input-group-text,
 .input-group > .input-group-append:not(:last-child) > .btn,
+div.cookie-consent .input-group > .input-group-append:not(:last-child) > button,
 .input-group > .input-group-append:not(:last-child) > .input-group-text,
 .input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+div.cookie-consent .input-group > .input-group-append:last-child > button:not(:last-child):not(.dropdown-toggle),
 .input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
 .input-group > .input-group-append > .btn,
+div.cookie-consent .input-group > .input-group-append > button,
 .input-group > .input-group-append > .input-group-text,
 .input-group > .input-group-prepend:not(:first-child) > .btn,
+div.cookie-consent .input-group > .input-group-prepend:not(:first-child) > button,
 .input-group > .input-group-prepend:not(:first-child) > .input-group-text,
 .input-group > .input-group-prepend:first-child > .btn:not(:first-child),
+div.cookie-consent .input-group > .input-group-prepend:first-child > button:not(:first-child),
 .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -5653,7 +5739,8 @@ a.badge:focus {
   display: none;
 }
 
-.btn .badge {
+.btn .badge,
+div.cookie-consent button .badge {
   position: relative;
   top: -1px;
 }
@@ -8742,6 +8829,7 @@ button.bg-dark:focus {
 }
 
 .ml-3,
+div.cookie-consent button,
 .mx-3 {
   margin-left: 1rem !important;
 }
@@ -17343,5 +17431,18 @@ html {
 
 .tag i:hover {
   color: #000;
+}
+
+div.cookie-consent {
+  padding: 1% 0;
+  width: 50%;
+  text-align: center;
+  color: #385d7a;
+  background-color: #e2f0fb;
+  border-color: #d6e9f9;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 

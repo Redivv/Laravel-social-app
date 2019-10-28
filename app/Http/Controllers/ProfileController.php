@@ -20,6 +20,7 @@ class ProfileController extends Controller
     }
 
     public function edit(){
+        
         $user = Auth::user();
 
         $tags = $user->tagNames();
@@ -32,10 +33,10 @@ class ProfileController extends Controller
 
         // If request is valid
         request()->validate([
-            'photo'     =>  'mimes:jpeg,png,jpg,gif|max:2048',
-            'city'      =>  ['string','nullable','max:250'],
+            'photo'         =>  'mimes:jpeg,png,jpg,gif|max:2048',
+            'city'          =>  ['string','nullable','max:250'],
             'description'   => ['string','nullable','max:500'],
-            'status'    =>  ['numeric', 'gte:0', 'lte:2' ]
+            'status'        =>  ['numeric', 'gte:0', 'lte:2' ]
         ]);
         //If there's a file
         if (request()->hasFile('photo')) {
