@@ -1,0 +1,40 @@
+@import 'variables';
+@import "~rfs/scss";
+
+main{
+    min-height: 80vh;
+
+    .tabsPills{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+       .nav-pills{
+            width: 100%;
+
+            & .nav-link.active{
+                background-color: $orange;
+            }
+        }
+        a{
+            margin-bottom: 1rem !important;
+            color: $blac; 
+            text-transform: uppercase;
+            font-weight: bold;
+        } 
+    }
+
+    .tabsContent{
+        #v-pills-profileTicket{
+            max-height: 60vh;
+            overflow-y: auto;
+            .form-btn{
+                @include font-size(0.7rem);
+                font-weight: bold;
+
+            }
+        }
+    }
+
+    
+}

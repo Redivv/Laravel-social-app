@@ -16,7 +16,7 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() &&  Auth::user()->is_admin === true) {
+        if (Auth::user() &&  Auth::user()->is_admin == true) {
             return $next($request);
         }else{
             return redirect(route('home'));

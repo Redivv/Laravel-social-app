@@ -1,0 +1,35 @@
+main {
+  min-height: 80vh;
+}
+
+main .tabsPills {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main .tabsPills .nav-pills {
+  width: 100%;
+}
+
+main .tabsPills .nav-pills .nav-link.active {
+  background-color: #f66103;
+}
+
+main .tabsPills a {
+  margin-bottom: 1rem !important;
+  color: #333333;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+main .tabsContent #v-pills-profileTicket {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+main .tabsContent #v-pills-profileTicket .form-btn {
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+

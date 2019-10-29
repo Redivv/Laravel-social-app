@@ -42,6 +42,11 @@ Route::prefix('user')->group(function(){
 
 Route::prefix('admin')->group(function(){
     Route::get('home', 'AdminController@index')->middleware('verified')->name('adminHome');
+
+    Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+        Route::get('tab', 'AdminController@getTabContent')->middleware('verified')->name('adminAjaxTab');
+    });
+    
 });
 
 Route::get('message', 'MessageController@index')->name('message.app');

@@ -1,7 +1,9 @@
 {
     "/chat/js/talk.js": "/chat/js/talk.js",
+    "/js/admin.js": "/js/admin.js",
     "/js/app.js": "/js/app.js",
     "/chat/css/chat.css": "/chat/css/chat.css",
+    "/css/adminPane.css": "/css/adminPane.css",
     "/css/app.css": "/css/app.css",
     "/js/emojionearea.js": "/js/emojionearea.js",
     "/js/profile.js": "/js/profile.js",

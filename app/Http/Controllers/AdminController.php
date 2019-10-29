@@ -14,6 +14,14 @@ class AdminController extends Controller
 
     public function index()
     {
-        dd('kuktas');
+        return view('adminPanel');
+    }
+
+    public function getTabContent(Request $request)
+    {
+        if ($request->ajax()) {
+            return response()->json(['status' => 'success'], 200);  
+        }
+          
     }
 }
