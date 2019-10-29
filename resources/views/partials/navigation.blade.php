@@ -23,7 +23,7 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a href="{{ route('Home') }}" class="nav-link">{{__('app.dashboard')}}</a>
+                            <a href="{{ route('home') }}" class="nav-link">{{__('app.dashboard')}}</a>
                         </li>
                     @endif
                     <li class="nav-item">
