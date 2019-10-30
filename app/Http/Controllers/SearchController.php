@@ -24,7 +24,9 @@ class SearchController extends Controller
             $search_results = $this->getSearchResults($request);
         }
         elseif (Auth::check()) {
-            $search_results_variable = $this->getSimmilarAgeUsers(Auth::user());
+            // $search_results_variable = $this->getSimmilarAgeUsers(Auth::user());
+            // $search_results_variable = $this->getSameRegionUsers(Auth::user());
+            $search_results_variable = $this->getSameHobbyUsers(Auth::user());
         }
         return view('searcher')->withResults($search_results)->withResultsVar($search_results_variable)->withYear(date('Y'))->withCities($cities);
     }
@@ -116,18 +118,43 @@ class SearchController extends Controller
     public function getSimmilarAgeUsers(object $authenticated_user) : object
     {
         $current_year = date('Y');
-        if(!(Auth::check())){
-            $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.status','users.birth_year','cities.name as city')
-                ->whereNotIn('hidden_status',[2]);
-        }else{
-            $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.status','users.birth_year','cities.name as city');
-        }
-            $search_results = $search_results->whereBetween('birth_year',[$authenticated_user->birth_year-5, $authenticated_user->birth_year+5])
+        $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.status','users.birth_year','cities.name as city');
+        $search_results = $search_results->whereBetween('birth_year',[$authenticated_user->birth_year-5, $authenticated_user->birth_year+5])
             ->whereNotIn('users.id',[$authenticated_user->id])
             ->leftJoin('cities', 'users.city_id', '=', 'cities.id')
             ->inRandomOrder()
             ->take(10)
             ->get();
         return $search_results;
+    }
+
+    public function getSameRegionUsers(object $authenticated_user) : object
+    {
+        $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.status','users.birth_year','cities.name as city');
+        $search_results = $search_results->where('city_id','=',$authenticated_user->city_id)
+            ->whereNotIn('users.id',[$authenticated_user->id])
+            ->leftJoin('cities', 'users.city_id', '=', 'cities.id')
+            ->inRandomOrder()
+            ->take(10)
+            ->get();
+        return $search_results;
+    }
+
+    public function getSameHobbyUsers(object $authenticated_user) : object
+    {
+        $userTags = $authenticated_user->tagNames();
+        $search_results = User::select('users.id','users.name','users.picture','users.description as desc','users.status','users.birth_year','cities.name as city');
+        $search_results = $search_results->withAnyTag($userTags)
+            ->whereNotIn('users.id',[$authenticated_user->id])
+            ->leftJoin('cities', 'users.city_id', '=', 'cities.id')
+            ->inRandomOrder()
+            ->take(10)
+            ->get();
+        return $search_results;
+    }
+
+    public function getRandomUsers() : object
+    {
+        # code...
     }
 }
