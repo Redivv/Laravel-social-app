@@ -1,6 +1,8 @@
 <h3 class="searchResults-header" dusk="search_results_header">
     @if (count($results) === 0)
         {{__('searcher.not_found')}}
+    @else
+        {{$header}}
     @endif
 </h3>
 <div class="searchResults-box mt-3" dusk="search_results_box">

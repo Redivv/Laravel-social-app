@@ -1,6 +1,6 @@
 <div dusk="search_results_box" class="searchResults-box mt-3">
     <h3 dusk="search_results_header">
-        {{__('searcher.results-age')}}
+        {{$header}}
     </h3>
     @foreach ($resultsVar as $result)
         <div data-id="{{$result->id}}" class="searchResult container-fluid mb-4 @if($result->status == 'online') activeUser @endif">
