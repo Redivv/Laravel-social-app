@@ -1,24 +1,24 @@
-@if (count($tickets) > 0)
+@if (count($elements) > 0)
     <table class="table table-fixed table-bordered table-hover">
         <thead class="thead-light">
             <tr>
                 <th scope="col">{{__('admin.profileTicketTable1')}}</th>
-                <th scope="col">{{__('admin.profileTicketTable2')}}</th>
+                <th scope="col">{{__('admin.userTicketTable1')}}</th>
                 <th scope="col">{{__('admin.profileTicketTable3')}}</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($tickets as $ticket)
+            @foreach ($elements as $element)
                 <tr>
                     <th scope="row">{{$ticket->data['user_name']}}</th>
-                    <td><img src="{{asset('img/profile-pictures/'.$ticket->data['image'])}}" alt="" srcset=""></td>
+                    <td><img src="{{asset('img/profile-pictures/'.$ticket->data['reason'])}}" alt="" srcset=""></td>
                     <td>
                         <form class="adminForm" method="post">
                             <button type="submit" class="btn form-btn acceptBtn">
-                            {{__('admin.accept')}} 
+                            {{__('admin.userDelete')}} 
                             </button>
                             <button type="submit" class="btn form-btn denyBtn">
-                                {{__('admin.refuse')}}
+                                {{__('admin.ignore')}}
                             </button>
                         </form>
                     </td>
@@ -26,9 +26,8 @@
             @endforeach
         </tbody>
     </table>
-    @else{
-        <div class="alert alert-danger" role="alert">
-                {{__('admin.noContent')}}
+    @else
+        <div class="alert alert-success" role="alert">
+                {{__('admin.noContentList')}}
         </div>
-    }
 @endif

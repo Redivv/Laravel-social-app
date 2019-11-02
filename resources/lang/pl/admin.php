@@ -6,5 +6,13 @@ return [
     'profileTicketTable2'       => 'Zdjęcie',
     'profileTicketTable3'       => 'Opcje',
     'accept'                    => 'Zaakceptuj',
-    'refuse'                    => 'Odrzuć'
+    'refuse'                    => 'Odrzuć',
+    'userTicket'                => 'Zgłoszeni Użytkownicy',
+    'userList'                  => 'Wszyscy Użytkownicy',
+    'tagList'                   => 'Zainteresowania Użytkowników',
+    'cityList'                  => 'Dodane Miasta',
+    'noContent'                 => 'Brak nowych zgłoszeń',
+    'userTicketTable1'          => 'Powód',
+    'userDelete'                => 'Usuń Użytkownika',
+    'ignore'                    => 'Ignoruj Zgłoszenie'
 ];

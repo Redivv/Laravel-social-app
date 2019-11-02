@@ -126,11 +126,12 @@ function renderContent(selected, img) {
   });
   request.done(function (response) {
     if (response.status === 'success') {
-      alert('kek');
+      $('#' + targetId + '-content').html(response.html);
     }
   });
   request.fail(function (xhr) {
-    console.log(xhr);
+    alert(xhr.responseJSON.message);
+    $('#' + targetId + '-content').html('');
   });
 }
 
