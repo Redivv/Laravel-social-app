@@ -10,8 +10,12 @@
     <div class="row">
         <div class="tabsPills col-md-4 col-sm-12">
             <div class="nav flex-column nav-pills" id="pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link tab" id="profileTicket" data-toggle="pill" href="#profileTicket-content" role="tab" aria-controls="profileTicket" aria-selected="true">{{__('admin.profileTicket')}}</a>
-                <a class="nav-link tab" id="userTicket" data-toggle="pill" href="#userTicket-content" role="tab" aria-controls="userTicket" aria-selected="true">{{__('admin.userTicket')}}</a>
+                <a class="nav-link tab" id="profileTicket" data-toggle="pill" href="#profileTicket-content" role="tab" aria-controls="profileTicket" aria-selected="true">
+                    {{__('admin.profileTicket')}}@if($pictureTickets != 0) - <span id="profileTicketCount" class="ticketCount">{{$pictureTickets}}</span>@endif
+                </a>
+                <a class="nav-link tab" id="userTicket" data-toggle="pill" href="#userTicket-content" role="tab" aria-controls="userTicket" aria-selected="true">
+                    {{__('admin.userTicket')}}@if($userTickets != 0) - <span id="userTicketCount" class="ticketCount">{{$userTickets}}</span>@endif
+                </a>
                 <hr>
                 <a class="nav-link tab" id="userList" data-toggle="pill" href="#userList-content" role="tab" aria-controls="userList" aria-selected="true">{{__('admin.userList')}}</a>
                 <a class="nav-link tab" id="tagList" data-toggle="pill" href="#tagList-content" role="tab" aria-controls="tagList" aria-selected="true">{{__('admin.tagList')}}</a>

@@ -14,7 +14,7 @@
                     <td><img src="{{asset('img/profile-pictures/'.$ticket->data['reason'])}}" alt="" srcset=""></td>
                     <td>
                         <form class="adminForm" method="post">
-                            <button type="submit" class="btn form-btn acceptBtn">
+                            <button type="submit" class="btn form-btn deleteBtn">
                             {{__('admin.userDelete')}} 
                             </button>
                             <button type="submit" class="btn form-btn denyBtn">

@@ -20,7 +20,9 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('adminPanel');
+        $pictureTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->get());
+        $userTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->get());
+        return view('adminPanel')->with('pictureTickets',$pictureTicketsAmount)->with('userTickets',$userTicketsAmount);
     }
 
     public function getTabContent(Request $request)
@@ -92,17 +94,18 @@ class AdminController extends Controller
         return $validTickets;
     }
 
-    public function getUsers() : array
+    public function getUsers() : object
     {
         return User::all();
     }
 
-    public function getTags() : array
+    public function getTags() : object
     {
+        $keke = Tag::first();
         return Tag::all();
     }
 
-    public function getCities() : array
+    public function getCities() : object
     {
         return City::all();
     }

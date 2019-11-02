@@ -14,18 +14,26 @@ main{
 
             & .nav-link.active{
                 background-color: $orange;
+                .ticketCount{
+                    color: $yellow;
+                }
             }
         }
         a{
             margin-bottom: 1rem !important;
+            padding: 5%;
             color: $blac; 
             text-transform: uppercase;
             font-weight: bold;
+            .ticketCount{
+                color: $red;
+            }
         } 
     }
 
     .tabsContent{
-        #v-pills-profileTicket{
+
+        div.tab-pane{
             max-height: 60vh;
             overflow-y: auto;
             .form-btn{
@@ -33,6 +41,9 @@ main{
                 font-weight: bold;
 
             }
+        }
+        .profilePicture{
+            max-width: 100px;
         }
     }
 
