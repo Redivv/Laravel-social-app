@@ -20,5 +20,6 @@ return [
     'tagListTable2'             => 'Ilość Użyć',
     'edit'                      => 'Edytuj',
     'delete'                    => 'Usuń',
-    'cityListTable2'            => 'Data Dodania'
+    'cityListTable2'            => 'Data Dodania',
+    'noContentList'             => 'Brak Elementów'
 ];

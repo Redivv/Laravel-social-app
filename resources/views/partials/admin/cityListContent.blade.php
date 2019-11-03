@@ -14,10 +14,11 @@
                     <td>{{$element->created_at}}</td>
                     <td>
                         <form class="adminForm" method="post">
-                            <button type="submit" class="btn form-btn editBtn">
+                            <button name="edit" type="submit" class="btn form-btn listBtn editBtn">
                                 {{__('admin.edit')}} 
                             </button>
-                            <button type="submit" class="btn form-btn deleteBtn">
+                            <input type="hidden" name="elementId" value="{{$element->id}}">
+                            <button name="delete" type="submit" class="btn form-btn listBtn deleteBtn">
                                 {{__('admin.delete')}} 
                             </button>
                         </form>

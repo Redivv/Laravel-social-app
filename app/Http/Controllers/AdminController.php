@@ -6,6 +6,8 @@ use Auth;
 use Illuminate\Http\Request;
 
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 use App\User;
 use App\City;
@@ -60,11 +62,88 @@ class AdminController extends Controller
                     
             }
             return response()->json(['status' => 'success', 'html' => $html], 200);  
+        }else{
+            return response()->json(['status' => 'error'], 400);  
         }
           
     }
 
-    public function getProfileTickets() : array
+    public function resolveTicket(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->validate([
+                'decision'     =>
+                    'string',
+                    Rule::in(['accept','refuse']),
+            ]);
+            $ticketId = substr($request->ticketId,9);
+            $ticket = Auth::user()->notifications()->where('id', $ticketId)->first();
+            if ($ticket) {
+                switch ($ticket->type) {
+                    case 'App\Notifications\NewProfilePicture':
+                        $this->resolveProfileTicket($ticket->data, $request->decision);
+                        break;
+                    case 'App\Notifications\UserFlagged':
+                        $this->resolveUserTicket($ticket->data, $request->decision);
+                        break;
+
+                    default:
+                        return response()->json(['status' => 'error'], 400);
+                        break;
+                }
+                $ticket->delete();
+            }
+            return response()->json(['status' => 'success'], 200);
+        }
+    }
+
+    public function resolveListRequest(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->validate([
+                'decision'     =>
+                    'string',
+                    Rule::in(['delete','edit']),
+                'target'       =>
+                    'string',
+                    Rule::in(['userList','tagList','cityList']),
+            ]);
+            $elementId = intVal(substr($request->elementId,10));
+            switch ($request->target) {
+                case 'userList':
+                    $selectedElement = User::find($elementId);
+                    if ($selectedElement) {
+                        $this->resolveUserList($selectedElement,$request->decision);
+                    }else{
+                        return response()->json(['status' => 'error'], 400);
+                    }
+                    break;
+                case 'tagList':
+                    $selectedElement = Tag::find($elementId);
+                    if ($selectedElement) {
+                        $this->resolveTagList($selectedElement,$request->decision,$request->editValue);
+                    }else{
+                        return response()->json(['status' => 'error'], 400);
+                    }
+                    break;
+                case 'cityList':
+                    $selectedElement = City::find($elementId);
+                    if ($selectedElement) {
+                        $this->resolveCityList($selectedElement,$request->decision,$request->editValue);
+                    }else{
+                        return response()->json(['status' => 'error'], 400);
+                    }
+                    break;
+                default:
+                    return response()->json(['status' => 'error'], 400);
+                    break;
+            }
+            return response()->json(['status' => 'success'], 200);
+        }
+        return response()->json(['status' => 'error'], 400);
+    }
+
+    private function getProfileTickets() : array
     {
         $tickets = Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->get();
         $validTickets = array();
@@ -79,7 +158,7 @@ class AdminController extends Controller
         return $validTickets;
     }
 
-    public function getUserTickets() : array
+    private function getUserTickets() : array
     {
         $tickets = Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->get();
         $validTickets = array();
@@ -94,19 +173,97 @@ class AdminController extends Controller
         return $validTickets;
     }
 
-    public function getUsers() : object
+    private function getUsers() : object
     {
         return User::all();
     }
 
-    public function getTags() : object
+    private function getTags() : object
     {
         $keke = Tag::first();
         return Tag::all();
     }
 
-    public function getCities() : object
+    private function getCities() : object
     {
         return City::all();
+    }
+
+    private function resolveProfileTicket(array $data, string $decision) : void
+    {
+        $validUser = User::where('name','=',$data['user_name'])->where('pending_picture','=',$data['image'])->first();
+        if($validUser){
+            switch ($decision) {
+                case 'accept':
+                    $validUser->picture = $validUser->pending_picture;
+                    $validUser->pending_picture = null;
+                    $validUser->update();
+                    break;
+                case 'refuse':
+                    $validUser->pending_picture = null;
+                    $validUser->update();
+                    $otherUser = User::where('pending_picture','=',$data['image'])->orWhere('picture','=',$data['image'])->first();
+                    if (!$otherUser) {
+                        unlink(public_path('img/profile-pictures/'.$data['image']));
+                    }
+                    break;
+            }
+        }
+    }
+
+    private function resolveUserTicket(array $data, string $decision) : void
+    {
+        $validUser = User::where('name','=',$data['user_name'])->first();
+        if($validUser){
+            switch ($decision) {
+                case 'accept':
+                    $validUser->delete();
+                    break;
+                case 'refuse':
+                    break;
+            }
+        }
+    }
+
+    private function resolveUserList(object $user,string $decision) : void
+    {
+        switch ($decision) {
+            case 'delete':
+                $user->delete();
+                break;
+        }
+    }
+
+    private function resolveTagList(object $tag, string $decision, ?string $edit)
+    {
+        switch ($decision) {
+            case 'delete':
+                DB::table('tagging_tagged')->where('tag_name','=',$tag->name)->where('tag_slug','=',$tag->slug)->delete();
+                $tag->delete();
+                break;
+            
+            case 'edit':
+                DB::table('tagging_tagged')->where('tag_name','=',$tag->name)->where('tag_slug','=',$tag->slug)->update(['tag_name' => Str::title($edit), 'tag_slug' => Str::slug($edit)]);
+                $tag->name = Str::title($edit);
+                $tag->slug = Str::slug($edit);
+                $tag->update();
+                break;
+        }
+    }
+
+    private function resolveCityList(object $city, string $decision, ?string $edit)
+    {
+        switch ($decision) {
+            case 'delete':
+                User::where('city_id','=',$city->id)->update(['city_id' => null]);
+                $city->delete();
+                break;
+            
+            case 'edit':
+                $city->name = Str::title($edit);
+                $city->name_slug = Str::slug($edit);
+                $city->update();
+                break;
+        }
     }
 }

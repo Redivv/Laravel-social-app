@@ -11,13 +11,14 @@
             @foreach ($tickets as $ticket)
                 <tr>
                     <th scope="row">{{$ticket->data['user_name']}}</th>
-                    <td><img src="{{asset('img/profile-pictures/'.$ticket->data['image'])}}" alt="" srcset=""></td>
+                    <td><img src="{{asset('img/profile-pictures/'.$ticket->data['image'])}}" class="profilePicture"></td>
                     <td>
-                        <form class="adminForm" method="post">
-                            <button type="submit" class="btn form-btn acceptBtn">
+                        <form class="adminForm" method="post" enctype="multipart/form-data">
+                            <button id="dasdas" name="accept" type="submit" class="btn ticketBtn form-btn acceptBtn">
                             {{__('admin.accept')}} 
                             </button>
-                            <button type="submit" class="btn form-btn denyBtn">
+                            <input type="hidden" name="ticketId" value="{{$ticket->id}}">
+                            <button name="refuse" type="submit" class="btn ticketBtn form-btn denyBtn">
                                 {{__('admin.refuse')}}
                             </button>
                         </form>
@@ -26,9 +27,8 @@
             @endforeach
         </tbody>
     </table>
-    @else{
-        <div class="alert alert-danger" role="alert">
+    @else
+        <div class="alert alert-success" role="alert">
                 {{__('admin.noContent')}}
         </div>
-    }
 @endif

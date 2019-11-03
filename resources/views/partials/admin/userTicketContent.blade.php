@@ -14,10 +14,11 @@
                     <td><img src="{{asset('img/profile-pictures/'.$ticket->data['reason'])}}" alt="" srcset=""></td>
                     <td>
                         <form class="adminForm" method="post">
-                            <button type="submit" class="btn form-btn deleteBtn">
+                            <button name="accept" type="submit" class="btn form-btn ticketBtn deleteBtn">
                             {{__('admin.userDelete')}} 
                             </button>
-                            <button type="submit" class="btn form-btn denyBtn">
+                            <input type="hidden" name="ticketId" value="{{$ticket->id}}">
+                            <button name="refuse" type="submit" class="btn form-btn ticketBtn denyBtn">
                                 {{__('admin.ignore')}}
                             </button>
                         </form>

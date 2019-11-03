@@ -52,7 +52,7 @@ class ProfileController extends Controller
             $admins = User::where('is_admin','=',1)->get();
 
             if($admins){
-                Notification::send($admins, new NewProfilePicture($data['name'],$data['profile-picture']));
+                Notification::send($admins, new NewProfilePicture($user->name,$filename));
             }
         }
         
@@ -67,7 +67,7 @@ class ProfileController extends Controller
         //Save changes in user profile
         $user->update();
 
-        return redirect('profile')->with(['status' => 'Profile updated successfully.']);
+        return redirect('profile')->with(['status' => __('profile.updated')]);
     }
 
     public function visit(User $user){

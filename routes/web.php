@@ -45,6 +45,8 @@ Route::prefix('admin')->group(function(){
 
     Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
         Route::get('tab', 'AdminController@getTabContent')->middleware('verified')->name('adminAjaxTab');
+        Route::patch('ticket','AdminController@resolveTicket')->middleware('verified')->name('adminAjaxTicket');
+        Route::patch('list','AdminController@resolveListRequest')->middleware('verified')->name('adminAjaxList');
     });
     
 });

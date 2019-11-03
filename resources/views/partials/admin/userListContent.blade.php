@@ -16,9 +16,10 @@
                     <td>{{$element->created_at}}</td>
                     <td>
                         <form class="adminForm" method="post">
-                            <button type="submit" class="btn form-btn deleteBtn">
+                            <button name="delete" type="submit" class="btn form-btn listBtn">
                             {{__('admin.userDelete')}} 
                             </button>
+                            <input type="hidden" name="elementId" value="{{$element->id}}">
                         </form>
                     </td>
                 </tr>
