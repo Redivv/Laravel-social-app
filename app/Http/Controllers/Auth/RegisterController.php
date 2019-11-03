@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 
 use App\User;
+use App\Notifications\NewProfilePicture;
+
+use Illuminate\Support\Facades\Notification;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -71,9 +74,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $filename = hash_file('haval160,4',$data['profile-picture']->getPathname()).'.'.$data['profile-picture']->getClientOriginalExtension();
-        $data['profile-picture']->move(public_path('img/profile-pictures/'), $filename);
-        $data['profile-picture'] = $filename;
+        if (isset($data['profile-picture'])) {
+            $filename = hash_file('haval160,4',$data['profile-picture']->getPathname()).'.'.$data['profile-picture']->getClientOriginalExtension();
+            $data['profile-picture']->move(public_path('img/profile-pictures/'), $filename);
+            $data['profile-picture'] = $filename;
+
+            $admins = User::where('is_admin','=',1)->get();
+
+            if($admins){
+                Notification::send($admins, new NewProfilePicture($data['name'],$data['profile-picture']));
+            }
+        }else{
+            $data['profile-picture'] = null;
+        }
         
         return User::create([
             'name'                  => $data['name'],

@@ -1,0 +1,51 @@
+@import 'variables';
+@import "~rfs/scss";
+
+main{
+    min-height: 80vh;
+
+    .tabsPills{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+       .nav-pills{
+            width: 100%;
+
+            & .nav-link.active{
+                background-color: $orange;
+                .ticketCount{
+                    color: $yellow;
+                }
+            }
+        }
+        a{
+            margin-bottom: 1rem !important;
+            padding: 5%;
+            color: $blac; 
+            text-transform: uppercase;
+            font-weight: bold;
+            .ticketCount{
+                color: $red;
+            }
+        } 
+    }
+
+    .tabsContent{
+
+        div.tab-pane{
+            max-height: 60vh;
+            overflow-y: auto;
+            .form-btn{
+                @include font-size(0.7rem);
+                font-weight: bold;
+
+            }
+        }
+        .profilePicture{
+            max-width: 100px;
+        }
+    }
+
+    
+}

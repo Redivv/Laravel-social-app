@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+
+use App\Notifications\NewProfilePicture;
+
+use Illuminate\Support\Facades\Notification;
 use App\User;
 use App\City;
 
@@ -44,6 +48,12 @@ class ProfileController extends Controller
             $filename = hash_file('haval160,4',request('photo')->getPathname()).'.'.request('photo')->getClientOriginalExtension();
             request('photo')->move(public_path('img/profile-pictures/'), $filename);
             $user->pending_picture = $filename;
+
+            $admins = User::where('is_admin','=',1)->get();
+
+            if($admins){
+                Notification::send($admins, new NewProfilePicture($user->name,$filename));
+            }
         }
         
         $city = City::firstOrCreate([
@@ -57,7 +67,7 @@ class ProfileController extends Controller
         //Save changes in user profile
         $user->update();
 
-        return redirect('profile')->with(['status' => 'Profile updated successfully.']);
+        return redirect('profile')->with(['status' => __('profile.updated')]);
     }
 
     public function visit(User $user){

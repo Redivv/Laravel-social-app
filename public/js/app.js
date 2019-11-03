@@ -46795,6 +46795,17 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 /***/ }),
 
+/***/ "./resources/sass/adminPane.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/adminPane.scss ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -46818,14 +46829,15 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /***/ }),
 
 /***/ 0:
-/*!****************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/chat.scss ./resources/sass/app.scss ***!
-  \****************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/chat.scss ./resources/sass/adminPane.scss ./resources/sass/app.scss ***!
+  \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\sass\chat.scss */"./resources/sass/chat.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\sass\adminPane.scss */"./resources/sass/adminPane.scss");
 module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\sass\app.scss */"./resources/sass/app.scss");
 
 

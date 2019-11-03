@@ -57,7 +57,7 @@ return [
         'array' => 'The :attribute must have :value items or more.',
     ],
     'image' => 'Pole :attribute musi być grafiką.',
-    'in' => 'The selected :attribute is invalid.',
+    'in' => 'Wartość :attribute jest błędna.',
     'in_array' => 'The :attribute field does not exist in :other.',
     'integer' => ' :attribute musi być liczbą całkowitą',
     'ip' => 'The :attribute must be a valid IP address.',
