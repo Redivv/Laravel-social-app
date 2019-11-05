@@ -20,3 +20,7 @@ Broadcast::channel('online', function ($user) {
         return $user->toArray();
     }
 });
+
+Broadcast::channel('users.{user_id}', function ($user, $id) {
+    return (int) $user->id === (int) $id;
+});

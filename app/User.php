@@ -58,4 +58,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->is_admin;
     }
+
+    public function receivesBroadcastNotificationsOn() {
+        return 'users.'.$this->id;
+    }
 }

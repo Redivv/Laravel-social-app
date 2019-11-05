@@ -39,6 +39,31 @@ main{
             .form-btn{
                 @include font-size(0.7rem);
                 font-weight: bold;
+            }
+            .fetchBtn{
+                cursor: pointer;
+                float: right;
+                color: $orange;
+                position: relative;
+                &.spin{
+                    i{
+                        animation-name: spin;
+                        animation-duration: 2000ms;
+                        animation-iteration-count: infinite;
+                        animation-timing-function: linear;
+                    }
+                }
+                &.new:after{
+                    content: '';
+                    width: 10px;
+                    height: 10px;
+                    background:$red;
+                    border-radius: 50%;
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    left: 68%;
+                }
 
             }
         }
@@ -48,4 +73,13 @@ main{
     }
 
     
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
 }

@@ -21,5 +21,6 @@ return [
     'edit'                      => 'Edytuj',
     'delete'                    => 'Usuń',
     'cityListTable2'            => 'Data Dodania',
-    'noContentList'             => 'Brak Elementów'
+    'noContentList'             => 'Brak Elementów',
+    'confirmMsg'                => 'Potwierdź Swoją Decyzję'
 ];

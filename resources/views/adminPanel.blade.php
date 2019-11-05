@@ -11,10 +11,10 @@
         <div class="tabsPills col-md-4 col-sm-12">
             <div class="nav flex-column nav-pills" id="pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link tab" id="profileTicket" data-toggle="pill" href="#profileTicket-content" role="tab" aria-controls="profileTicket" aria-selected="true">
-                    {{__('admin.profileTicket')}}@if($pictureTickets != 0)  <span id="profileTicketCount" class="ticketCount">{{$pictureTickets}}</span>@endif
+                    {{__('admin.profileTicket')}} <span id="profileTicketCount" class="ticketCount">@if($pictureTickets != 0){{$pictureTickets}}@endif</span>
                 </a>
                 <a class="nav-link tab" id="userTicket" data-toggle="pill" href="#userTicket-content" role="tab" aria-controls="userTicket" aria-selected="true">
-                    {{__('admin.userTicket')}}@if($userTickets != 0)  <span id="userTicketCount" class="ticketCount">{{$userTickets}}</span>@endif
+                    {{__('admin.userTicket')}} <span id="userTicketCount" class="ticketCount">@if($userTickets != 0){{$userTickets}}@endif</span>
                 </a>
                 <hr>
                 <a class="nav-link tab" id="userList" data-toggle="pill" href="#userList-content" role="tab" aria-controls="userList" aria-selected="true">{{__('admin.userList')}}</a>
@@ -39,22 +39,40 @@
 @push('scripts')
     <script>
         var __baseUrl = "{{url('/')}}";
+        var confirmMsg = "{{__('admin.confirmMsg')}}"
     </script>
 
     <script src="{{asset('js/admin.js')}}"></script>
     
     <script defer>
-            Echo.join('online')
-                .joining((user) => {
-                    axios.patch('/api/user/'+ user.name +'/online', {
-                            api_token : user.api_token
-                    });
-                })
+        Echo.private('users.'+window.Laravel.user)
+            .notification((notification) => {
+                switch (notification.type.replace(/\\/g,"/")) {
+                    case 'App/Notifications/NewProfilePicture':
+                        let currentAmount = $('#profileTicketCount').html().trim();
+                        if(currentAmount == ""){currentAmount = 0;}
+                        $('#profileTicketCount').html(parseInt(currentAmount)+1);
+                        $('#profileTicket-fetchBtn').addClass('new');
+                        break;
+                
+                    default:
+                        break;
+                }
         
-                .leaving((user) => {
-                    axios.patch('/api/user/'+ user.name +'/offline', {
+        });
+
+        Echo.join('online')
+            .joining((user) => {
+                axios.patch('/api/user/'+ user.name +'/online', {
                         api_token : user.api_token
-                    });
-                })
-        </script>
+                });
+            })
+    
+            .leaving((user) => {
+                axios.patch('/api/user/'+ user.name +'/offline', {
+                    api_token : user.api_token
+                });
+            })
+
+    </script>
 @endpush

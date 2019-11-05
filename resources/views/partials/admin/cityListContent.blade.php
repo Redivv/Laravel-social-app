@@ -4,7 +4,7 @@
             <tr>
                 <th scope="col">{{__('admin.tagListTable1')}}</th>
                 <th scope="col">{{__('admin.cityListTable2')}}</th>
-                <th scope="col">{{__('admin.profileTicketTable3')}}</th>
+                <th scope="col">{{__('admin.profileTicketTable3')}}<span id="cityList-fetchBtn" class="fetchBtn"><i class="fas fa-sync"></i></span></th>
             </tr>
         </thead>
         <tbody>

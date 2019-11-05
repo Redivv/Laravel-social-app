@@ -40,28 +40,33 @@ class AdminController extends Controller
             switch ($target['target']) {
                 case 'profileTicket':
                     $validTickets = $this->getProfileTickets();
+                    $amount = count($validTickets);
                     $html = view('partials.admin.profileTicketContent')->withTickets($validTickets)->render();
                     break;
                 
                 case 'userTicket':
                     $validTickets = $this->getUserTickets();
+                    $amount = count($validTickets);
                     $html = view('partials.admin.userTicketContent')->withTickets($validTickets)->render();
                     break;
                 case 'userList':
                     $elements = $this->getUsers();
+                    $amount = null;
                     $html = view('partials.admin.userListContent')->withElements($elements)->render();
                     break;
                 case 'tagList':
                     $elements = $this->getTags();
+                    $amount = null;
                     $html = view('partials.admin.tagListContent')->withElements($elements)->render();
                     break;
                 case 'cityList':
                     $elements = $this->getCities();
+                    $amount = null;
                     $html = view('partials.admin.cityListContent')->withElements($elements)->render();
                     break;
                     
             }
-            return response()->json(['status' => 'success', 'html' => $html], 200);  
+            return response()->json(['status' => 'success', 'html' => $html, 'amount' => $amount], 200);  
         }else{
             return response()->json(['status' => 'error'], 400);  
         }

@@ -42,7 +42,57 @@ main .tabsContent div.tab-pane .form-btn {
   font-weight: bold;
 }
 
+main .tabsContent div.tab-pane .fetchBtn {
+  cursor: pointer;
+  float: right;
+  color: #f66103;
+  position: relative;
+}
+
+main .tabsContent div.tab-pane .fetchBtn.spin i {
+  -webkit-animation-name: spin;
+          animation-name: spin;
+  -webkit-animation-duration: 2000ms;
+          animation-duration: 2000ms;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+main .tabsContent div.tab-pane .fetchBtn.new:after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #e3342f;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 68%;
+}
+
 main .tabsContent .profilePicture {
   max-width: 100px;
+}
+
+@-webkit-keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
