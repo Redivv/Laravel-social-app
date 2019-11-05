@@ -9,23 +9,20 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class NewProfilePicture extends Notification implements ShouldBroadcast
+class UserFlagged extends Notification
 {
-    
     use Queueable;
 
     public $user_name;
-    public $image;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user_name,$image)
+    public function __construct($user_name)
     {
         $this->user_name = $user_name;
-        $this->image = $image;
     }
 
     /**
@@ -48,8 +45,7 @@ class NewProfilePicture extends Notification implements ShouldBroadcast
     public function toArray($notifiable)
     {
         return [
-            'user_name'     => $this->user_name,
-            'image'         => $this->image,
+            'user_name'     => $this->user_name
         ];
     }
 

@@ -5,7 +5,7 @@
                 <th scope="col">{{__('admin.profileTicketTable1')}}</th>
                 <th scope="col">{{__('admin.profileTicketTable2')}}</th>
                 <th scope="col">{{__('admin.userListTable3')}}</th>
-                <th scope="col">{{__('admin.profileTicketTable3')}}</th>
+                <th scope="col">{{__('admin.profileTicketTable3')}}<span id="userList-fetchBtn" class="fetchBtn"><i class="fas fa-sync"></i></span></th>
             </tr>
         </thead>
         <tbody>

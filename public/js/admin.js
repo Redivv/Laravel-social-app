@@ -127,13 +127,77 @@ function renderContent(selected, img) {
   request.done(function (response) {
     if (response.status === 'success') {
       $('#' + targetId + '-content').html(response.html);
+
+      if (response.amount == 0) {
+        $('#' + targetId + 'Count').html('');
+      } else {
+        $('#' + targetId + 'Count').html(response.amount);
+      }
+
       $('button.ticketBtn').on('click', function (e) {
         e.preventDefault();
-        carryTicket(this, targetId);
+
+        if (confirm(confirmMsg)) {
+          carryTicket(this, targetId);
+        }
       });
       $('button.listBtn').on('click', function (e) {
         e.preventDefault();
-        carryList(this, targetId);
+
+        if (confirm(confirmMsg)) {
+          carryList(this, targetId);
+        }
+      });
+      $('span.fetchBtn').on('click', function () {
+        $(this).addClass('spin');
+        fetchContent(this);
+      });
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+    $('#' + targetId + '-content').html('');
+  });
+}
+
+function fetchContent(selected) {
+  var targetId = $(selected).attr('id').split('-');
+  targetId = targetId[0];
+  var url = __baseUrl + '/admin/ajax/tab';
+  var request = $.ajax({
+    method: 'get',
+    url: url,
+    data: {
+      target: targetId
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      $('#' + targetId + '-content').html(response.html);
+
+      if (response.amount == 0) {
+        $('#' + targetId + 'Count').html('');
+      } else {
+        $('#' + targetId + 'Count').html(response.amount);
+      }
+
+      $('button.ticketBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (confirm(confirmMsg)) {
+          carryTicket(this, targetId);
+        }
+      });
+      $('button.listBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (confirm(confirmMsg)) {
+          carryList(this, targetId);
+        }
+      });
+      $('span.fetchBtn').on('click', function () {
+        $(this).addClass('spin');
+        fetchContent(this);
       });
     }
   });
