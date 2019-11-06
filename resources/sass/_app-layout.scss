@@ -23,6 +23,14 @@ body{
             margin-left: auto;
         }
     }
+    .nav-link{
+        .badge{
+            color: $white;
+            background-color: $orange;
+            @include font-size(0.6rem);
+            padding: 0.2rem 0.3rem;
+        }
+    }
     .navMobile{
         display: none;
         @media screen and (max-width: $mobile-breakpoint) {
@@ -38,11 +46,7 @@ body{
             border-radius: 50%;
         }
         .dropdown-menu{
-            max-width: 25vw;
-            .systemNotifications{
-                right:15%;
-                left: unset;
-            }
+            min-width: 50vw;
         }
     }
     .navDesc{

@@ -17288,6 +17288,13 @@ body {
   }
 }
 
+.nav-bar-height .nav-link .badge {
+  color: #ffffff;
+  background-color: #f66103;
+  font-size: 0.6rem;
+  padding: 0.2rem 0.3rem;
+}
+
 .nav-bar-height .navMobile {
   display: none;
 }
@@ -17316,12 +17323,7 @@ body {
 }
 
 .nav-bar-height .navMobile .dropdown-menu {
-  max-width: 25vw;
-}
-
-.nav-bar-height .navMobile .dropdown-menu .systemNotifications {
-  right: 15%;
-  left: unset;
+  min-width: 50vw;
 }
 
 .nav-bar-height .navDesc {

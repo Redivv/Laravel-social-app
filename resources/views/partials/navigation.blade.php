@@ -11,35 +11,14 @@
                 <li class="nav-item">
 
                     <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="far fa-smile"></i>
+                        <i class="far fa-smile"></i><span class="badge userNotificationsCount badge-pill badge-warning">@if(count($notifications['chat']) > 0){{count($notifications['chat'])}}@endif</span>
                     </a>
 
                     {{-- User Notifications Mobile --}}
-                    <div class="dropdown-menu position-absolute userNotifications">
-                        <a class="dropdown-item container" href="#">
-                            <div class="row">
-                                <div class="notificationImage col-2">
-                                    <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
-                                </div>
-                                <div class="notificationDesc col-8">
-                                    <div class="col-12">Kek</div>
-                                    <div class="col-12">Kek</div>
-                                </div>
-                                
-                            </div>
-                        </a>
-                        <a class="dropdown-item container" href="#">
-                            <div class="row">
-                                <div class="notificationImage col-2">
-                                    <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
-                                </div>
-                                <div class="notificationDesc col-8">
-                                    <div class="col-12">Kek</div>
-                                    <div class="col-12">Kek</div>
-                                </div>
-                                
-                            </div>
-                        </a>
+                    <div class="dropdown-menu pl-2 pr-2 position-absolute userNotifications">
+                        @if (count($notifications['user']) == 0)
+                            <div class="text-center">Brak Powiadomień</div>
+                        @endif
                     </div>
 
                 </li>
@@ -48,32 +27,27 @@
 
                     <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="far fa-comment"></i>
+                        <span class="badge chatNotificationsCount badge-pill badge-warning">@if(count($notifications['chat']) > 0){{count($notifications['chat'])}}@endif</span>
                     </a>
 
                     {{-- Chat Notifications Mobile --}}
-                    <div class="dropdown-menu position-absolute chatNotifications">
-                        <a class="dropdown-item container" href="#">
-                            <div class="row">
-                                <div class="notificationImage col-2">
-                                    <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
+                    <div class="dropdown-menu pl-2 pr-2 position-absolute chatNotifications">
+                        @if (count($notifications['chat']) == 0)
+                            <div class="text-center">Brak Powiadomień</div>
+                        @endif
+                        @foreach ($notifications['chat'] as $chatNot)
+                            <a class="chat{{$chatNot['data']['sender_id']}} dropdown-item container" href="/message/{{$chatNot['senderName']}}">
+                                <div class="row">
+                                    <div class="notificationImage col-2">
+                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot['senderPicture'])}}" alt="" srcset="">
+                                    </div>
+                                    <div class="notificationDesc col-8">
+                                        <div class="col-12 font-weight-bold">{{$chatNot['senderName']}}</div>
+                                        <div class="col-12">{{$chatNot['data']['message_body']}}</div>
+                                    </div>
                                 </div>
-                                <div class="notificationDesc col-8">
-                                    <div class="col-12">Kek</div>
-                                    <div class="col-12">Kek</div>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item container" href="#">
-                            <div class="row">
-                                <div class="notificationImage col-2">
-                                    <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
-                                </div>
-                                <div class="notificationDesc col-8">
-                                    <div class="col-12">Kek</div>
-                                    <div class="col-12">Kek</div>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        @endforeach
                     </div>
 
                 </li>
@@ -81,17 +55,30 @@
                 <li class="nav-item">
 
                     <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="far fa-user"></i>
+                        <i class="far fa-user"></i><span class="badge systemNotificationsCount badge-pill badge-warning">@if(count($notifications['system']) > 0){{count($notifications['system'])}}@endif</span>
                     </a>
 
                     {{-- System Notifications Mobile --}}
-                    <div class="dropdown-menu systemNotifications position-absolute p-2">
-                        <a class="dropdown-item alert alert-info" href="#">
-                            Patch note
-                        </a>
-                        <a class="dropdown-item alert alert-warning" href="#">
-                            Ni ma taga
-                        </a>
+                    <div class="dropdown-menu pl-2 pr-2 systemNotifications position-absolute p-2">
+                        @if (count($notifications['system']) == 0)
+                            <div class="text-center">Brak Powiadomień</div>
+                        @endif
+                        @foreach ($notifications['system'] as $sysNot)
+                            @switch($sysNot['type'])
+                                @case('App\Notifications\NewProfilePicture')
+                                    <a class="{{str_replace('-','',$sysNot['id'])}} dropdown-item alert alert-info" href="/admin/home">
+                                        Zgłoszono Nowe Zdjęcie Profilowe
+                                    </a>
+                                    @break
+                                @case('App\Notifications\UserFlagged')
+                                    <a class="{{str_replace('-','',$sysNot['id'])}} dropdown-item alert alert-info" href="/admin/home">
+                                        Użytkownik Został Zgłoszony
+                                    </a>
+                                    @break
+                                @default
+                                    
+                            @endswitch
+                        @endforeach
                         <a class="dropdown-item alert alert-danger" href="#">
                             Odrzucono profilowe
                         </a>
@@ -133,11 +120,6 @@
                     <li class="nav-item">
                         <a href="{{ url('/message') }}" class="nav-link">
                             {{__('app.chat')}}
-                            <sub id="newMessagesCount" style="color:red">
-                                 @if (count($notifications) > 0)
-                                    {{count($notifications)}}
-                                 @endif
-                            </sub>
                         </a>
                     </li>
                 @endauth
@@ -150,33 +132,14 @@
                     <li class="nav-item">
 
                         <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="far fa-smile"></i>
+                            <i class="far fa-smile"></i><span class="badge userNotificationsCount badge-pill badge-warning">@if(count($notifications['user']) > 0){{count($notifications['chat'])}}@endif</span>
                         </a>
 
                         {{-- User Notifications --}}
                         <div class="dropdown-menu userNotifications">
-                            <a class="dropdown-item container" href="#">
-                                <div class="row">
-                                    <div class="notificationImage col-2">
-                                        <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
-                                    </div>
-                                    <div class="notificationDesc col-8">
-                                        <div class="col-12">Kek</div>
-                                        <div class="col-12">Kek</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item container" href="#">
-                                <div class="row">
-                                    <div class="notificationImage col-2">
-                                        <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
-                                    </div>
-                                    <div class="notificationDesc col-8">
-                                        <div class="col-12">Kek</div>
-                                        <div class="col-12">Kek</div>
-                                    </div>
-                                </div>
-                            </a>
+                            @if (count($notifications['user']) == 0)
+                                <div class="text-center">Brak Powiadomień</div>
+                            @endif
                         </div>
 
                     </li>
@@ -185,33 +148,27 @@
 
                         <a href="#" class="nav-link pr-4 pl-4" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <i class="far fa-comment"></i>
+                            <span id="desktopTalk" class="badge chatNotificationsCount badge-pill badge-warning">@if(count($notifications['chat']) > 0){{count($notifications['chat'])}}@endif</span>
                         </a>
 
                         {{-- Chat Notifications --}}
                         <div class="dropdown-menu chatNotifications">
-                            <a class="dropdown-item container" href="#">
+                            @if (count($notifications['chat']) == 0)
+                                <div class="text-center">Brak Powiadomień</div>
+                            @endif
+                            @foreach ($notifications['chat'] as $chatNot)
+                            <a class="chat{{$chatNot['data']['sender_id']}} dropdown-item container" href="/message/{{$chatNot['senderName']}}">
                                 <div class="row">
                                     <div class="notificationImage col-2">
-                                        <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
+                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot['senderPicture'])}}" alt="" srcset="">
                                     </div>
                                     <div class="notificationDesc col-8">
-                                        <div class="col-12">Kek</div>
-                                        <div class="col-12">Kek</div>
-                                    </div>
-                                    
-                                </div>
-                            </a>
-                            <a class="dropdown-item container" href="#">
-                                <div class="row">
-                                    <div class="notificationImage col-2">
-                                        <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
-                                    </div>
-                                    <div class="notificationDesc col-8">
-                                        <div class="col-12">Kek</div>
-                                        <div class="col-12">Kek</div>
+                                        <div class="col-12 font-weight-bold">{{$chatNot['senderName']}}</div>
+                                        <div class="col-12">{{$chatNot['data']['message_body']}}</div>
                                     </div>
                                 </div>
                             </a>
+                            @endforeach
                         </div>
 
                     </li>
@@ -219,17 +176,30 @@
                     <li class="nav-item">
 
                         <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="far fa-user"></i>
+                            <i class="far fa-user"></i><span id="descSys" class="badge systemNotificationsCount badge-pill badge-warning">@if(count($notifications['system']) > 0){{count($notifications['system'])}}@endif</span>
                         </a>
 
                         {{-- System Notifications --}}
                         <div class="dropdown-menu systemNotifications p-2">
-                            <a class="dropdown-item alert alert-info" href="#">
-                                Patch note
-                            </a>
-                            <a class="dropdown-item alert alert-warning" href="#">
-                                Ni ma taga
-                            </a>
+                            @if (count($notifications['system']) == 0)
+                                <div class="text-center">Brak Powiadomień</div>
+                            @endif
+                            @foreach ($notifications['system'] as $sysNot)
+                                @switch($sysNot['type'])
+                                    @case('App\Notifications\NewProfilePicture')
+                                        <a class="{{str_replace('-','',$sysNot['id'])}} dropdown-item alert alert-info" href="/admin/home">
+                                            Zgłoszono Nowe Zdjęcie Profilowe
+                                        </a>
+                                        @break
+                                    @case('App\Notifications\UserFlagged')
+                                        <a class="{{str_replace('-','',$sysNot['id'])}} dropdown-item alert alert-info" href="/admin/home">
+                                            Użytkownik Został Zgłoszony
+                                        </a>
+                                        @break
+                                    @default
+                                        
+                                @endswitch
+                            @endforeach
                             <a class="dropdown-item alert alert-danger" href="#">
                                 Odrzucono profilowe
                             </a>
@@ -282,15 +252,33 @@
 @auth
     @push('scripts')
         <script>
-            let newMessages = $('#newMessagesCount').html();
+            let newMessages = $('#desktopTalk').html();
             if(newMessages.trim() == ""){
                 newMessages = 0;
             }
             var newmsg = function(data) {
-                newMessages++;
-                $('#newMessagesCount').html(newMessages);
+                console.log(data);
+                let html = '<a class="chat'+data.sender.id+' dropdown-item container" href="/message/'+data.sender.name+'">'+
+                    '<div class="row">'+
+                        '<div class="notificationImage col-2">'+
+                            '<img class="notificationImage" src="/img/profile-pictures/'+data.sender.picture+'" alt="" srcset="">'+
+                        '</div>'+
+                        '<div class="notificationDesc col-8">'+
+                            '<div class="col-12 font-weight-bold">'+data.sender.name+'</div>'+
+                            '<div class="col-12">'+data.message+'</div>'+
+                        '</div>'+
+                    '</div>'+
+                '</a>';
+                if($('a.chat'+data.sender.id).length) {
+                    $('a.chat4').remove();
+                    $('.chatNotifications').prepend(html);
+                }else{
+                    newMessages++;
+                    $('.chatNotificationsCount').html(newMessages);
+                    $('.chatNotifications').prepend(html); 
+                }   
             }
         </script>
             {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}
     @endpush
-@endauth
+@endauth    

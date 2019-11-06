@@ -141,11 +141,21 @@ function carryTicket(decided,target) {
         if (response.status === 'success') {
             $(decided).parent().parent().parent().remove();
             let currentAmount = $('#'+target+'Count').text();
+            let currentAmountNot = $('#descSys').text();
+
             if (currentAmount-1 == 0) {
                 $('#'+target+'Count').html('');
             }else{
                 $('#'+target+'Count').html(currentAmount-1);
             }
+
+            if (currentAmountNot-1 == 0) {
+                $('.systemNotificationsCount').html('');
+            }else{
+                $('.systemNotificationsCount').html(currentAmountNot-1);
+            }
+            console.log(response.id);
+            $('a.'+response.id).remove();
         }
     });
     

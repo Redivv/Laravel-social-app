@@ -3,7 +3,9 @@
 namespace App\Http\View\Composers;
 
 use Illuminate\View\View;
+use Illuminate\Support\Arr;
 use Auth;
+use App\User;
 
 class NavigationComposer
 {   
@@ -18,7 +20,28 @@ class NavigationComposer
     public function __construct()
     {
         if(Auth::check()){
-            $this->notifications = Auth::user()->notifications()->where('type', 'App\Notifications\NewMessage')->get();
+            $notifications = Auth::user()->notifications()->get();
+            $notifications['chat'] = $notifications->whereIn('type',['App\Notifications\NewMessage'])->toArray();
+            $this->notifications['user'] = $notifications->whereIn('type',[])->toArray();
+            $this->notifications['system'] = $notifications->whereIn('type',['App\Notifications\NewProfilePicture','App\Notifications\UserFlagged'])->toArray();
+
+            if (count($notifications['chat']) > 0) {
+                $duplicateConvo = array();
+                foreach ($notifications['chat'] as $chatNot) {
+                    if (in_array($chatNot['data']['sender_id'],$duplicateConvo)) {
+                        continue;
+                    }else{
+                        $sender = User::find($chatNot['data']['sender_id']);
+                        $chatNot['senderName'] = $sender->name;
+                        $chatNot['senderPicture'] = $sender->picture;
+                        $this->notifications['chat'][] = $chatNot;
+                        $duplicateConvo[] = $chatNot['data']['sender_id'];
+                    }
+                }
+            }else{
+                $this->notifications['chat'] = array();
+            }
+
         }else{
             $this->notifications = null;
         }
