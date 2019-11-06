@@ -17260,6 +17260,7 @@ readers do not read off random characters that represent icons */
 }
 
 body {
+  overflow-x: hidden;
   position: relative;
   margin: 0;
   min-height: 100%;
@@ -17274,7 +17275,106 @@ body {
 }
 
 .nav-bar-height {
-  height: 10vh;
+  min-height: 10vh;
+}
+
+@media screen and (max-width: 767px) {
+  .nav-bar-height .navbar-brand {
+    margin-right: auto;
+  }
+
+  .nav-bar-height .navbar-toggler {
+    margin-left: auto;
+  }
+}
+
+.nav-bar-height .navMobile {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .nav-bar-height .navMobile {
+    display: flex;
+  }
+}
+
+.nav-bar-height .navMobile .navbarIcons {
+  display: inherit;
+  font-size: calc(1.275rem + 0.3vw);
+}
+
+@media (min-width: 1200px) {
+  .nav-bar-height .navMobile .navbarIcons {
+    font-size: 1.5rem;
+  }
+}
+
+.nav-bar-height .navMobile .notificationImage {
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
+}
+
+.nav-bar-height .navMobile .dropdown-menu {
+  max-width: 25vw;
+}
+
+.nav-bar-height .navMobile .dropdown-menu .systemNotifications {
+  right: 15%;
+  left: unset;
+}
+
+.nav-bar-height .navDesc {
+  display: flex;
+}
+
+@media screen and (max-width: 767px) {
+  .nav-bar-height .navDesc {
+    display: none;
+  }
+}
+
+.nav-bar-height .navDesc .navbarIcons {
+  display: inherit;
+  font-size: calc(1.275rem + 0.3vw);
+}
+
+@media (min-width: 1200px) {
+  .nav-bar-height .navDesc .navbarIcons {
+    font-size: 1.5rem;
+  }
+}
+
+.nav-bar-height .navDesc .notificationImage {
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
+}
+
+.nav-bar-height .navDesc .dropdown-menu {
+  min-width: 25vw;
+  left: -80%;
+}
+
+.nav-bar-height .systemNotifications a {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.nav-bar-height .systemNotifications .alert-info:hover {
+  background-color: #6574cd;
+}
+
+.nav-bar-height .systemNotifications .alert-warning:hover {
+  background-color: #ffed4a;
+}
+
+.nav-bar-height .systemNotifications .alert-danger:hover {
+  background-color: #e3342f;
+}
+
+.nav-bar-height .systemNotifications .alert-success:hover {
+  background-color: #38c172;
 }
 
 .py-4 {
@@ -17431,6 +17531,11 @@ html {
 
 .tag i:hover {
   color: #000;
+}
+
+html {
+  font-size: 2vw;
+  scroll-behavior: smooth;
 }
 
 div.cookie-consent {

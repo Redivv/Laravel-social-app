@@ -4,9 +4,110 @@
             <!-- {{ config('app.name', 'default') }} -->
             <img src="/img/safo_logo.jpg" height="50px" alt="Safo">
         </a>
+
+        <ul class="navbar-nav ml-auto mr-auto navMobile">
+            <div class="navbarIcons position-relative">
+
+                <li class="nav-item">
+
+                    <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="far fa-smile"></i>
+                    </a>
+
+                    {{-- User Notifications Mobile --}}
+                    <div class="dropdown-menu position-absolute userNotifications">
+                        <a class="dropdown-item container" href="#">
+                            <div class="row">
+                                <div class="notificationImage col-2">
+                                    <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
+                                </div>
+                                <div class="notificationDesc col-8">
+                                    <div class="col-12">Kek</div>
+                                    <div class="col-12">Kek</div>
+                                </div>
+                                
+                            </div>
+                        </a>
+                        <a class="dropdown-item container" href="#">
+                            <div class="row">
+                                <div class="notificationImage col-2">
+                                    <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
+                                </div>
+                                <div class="notificationDesc col-8">
+                                    <div class="col-12">Kek</div>
+                                    <div class="col-12">Kek</div>
+                                </div>
+                                
+                            </div>
+                        </a>
+                    </div>
+
+                </li>
+
+                <li class="nav-item pr-5 pl-5">
+
+                    <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="far fa-comment"></i>
+                    </a>
+
+                    {{-- Chat Notifications Mobile --}}
+                    <div class="dropdown-menu position-absolute chatNotifications">
+                        <a class="dropdown-item container" href="#">
+                            <div class="row">
+                                <div class="notificationImage col-2">
+                                    <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
+                                </div>
+                                <div class="notificationDesc col-8">
+                                    <div class="col-12">Kek</div>
+                                    <div class="col-12">Kek</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item container" href="#">
+                            <div class="row">
+                                <div class="notificationImage col-2">
+                                    <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
+                                </div>
+                                <div class="notificationDesc col-8">
+                                    <div class="col-12">Kek</div>
+                                    <div class="col-12">Kek</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="far fa-user"></i>
+                    </a>
+
+                    {{-- System Notifications Mobile --}}
+                    <div class="dropdown-menu systemNotifications position-absolute p-2">
+                        <a class="dropdown-item alert alert-info" href="#">
+                            Patch note
+                        </a>
+                        <a class="dropdown-item alert alert-warning" href="#">
+                            Ni ma taga
+                        </a>
+                        <a class="dropdown-item alert alert-danger" href="#">
+                            Odrzucono profilowe
+                        </a>
+                        <a class="dropdown-item alert alert-success" href="#">
+                            Przyjęto profilowe
+                        </a>
+                    </div>
+
+                </li>
+
+            </div>
+        </ul>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('app.toggle_nav') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
+        
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
@@ -42,8 +143,108 @@
                 @endauth
             </ul>
 
+            <!-- Navbar notification icons -->
+            <ul class="navbar-nav ml-auto pr-5 navDesc">
+                <div class="navbarIcons position-relative">
+
+                    <li class="nav-item">
+
+                        <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-smile"></i>
+                        </a>
+
+                        {{-- User Notifications --}}
+                        <div class="dropdown-menu userNotifications">
+                            <a class="dropdown-item container" href="#">
+                                <div class="row">
+                                    <div class="notificationImage col-2">
+                                        <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
+                                    </div>
+                                    <div class="notificationDesc col-8">
+                                        <div class="col-12">Kek</div>
+                                        <div class="col-12">Kek</div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item container" href="#">
+                                <div class="row">
+                                    <div class="notificationImage col-2">
+                                        <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
+                                    </div>
+                                    <div class="notificationDesc col-8">
+                                        <div class="col-12">Kek</div>
+                                        <div class="col-12">Kek</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a href="#" class="nav-link pr-4 pl-4" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-comment"></i>
+                        </a>
+
+                        {{-- Chat Notifications --}}
+                        <div class="dropdown-menu chatNotifications">
+                            <a class="dropdown-item container" href="#">
+                                <div class="row">
+                                    <div class="notificationImage col-2">
+                                        <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
+                                    </div>
+                                    <div class="notificationDesc col-8">
+                                        <div class="col-12">Kek</div>
+                                        <div class="col-12">Kek</div>
+                                    </div>
+                                    
+                                </div>
+                            </a>
+                            <a class="dropdown-item container" href="#">
+                                <div class="row">
+                                    <div class="notificationImage col-2">
+                                        <img class="notificationImage" src="{{asset('img/profile-pictures/default-picture.png')}}" alt="" srcset="">
+                                    </div>
+                                    <div class="notificationDesc col-8">
+                                        <div class="col-12">Kek</div>
+                                        <div class="col-12">Kek</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-user"></i>
+                        </a>
+
+                        {{-- System Notifications --}}
+                        <div class="dropdown-menu systemNotifications p-2">
+                            <a class="dropdown-item alert alert-info" href="#">
+                                Patch note
+                            </a>
+                            <a class="dropdown-item alert alert-warning" href="#">
+                                Ni ma taga
+                            </a>
+                            <a class="dropdown-item alert alert-danger" href="#">
+                                Odrzucono profilowe
+                            </a>
+                            <a class="dropdown-item alert alert-success" href="#">
+                                Przyjęto profilowe
+                            </a>
+                        </div>
+
+                    </li>
+
+                </div>
+            </ul>
+
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav">
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
@@ -55,6 +256,7 @@
                         </li>
                     @endif
                 @else
+
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>

@@ -33,6 +33,11 @@
 //Scss related do profile layout
 @import 'profile-layout';
 
+html{
+    font-size: 2vw;
+    scroll-behavior: smooth;
+}
+
 
 // Cookie Consent Styling
     div.cookie-consent{

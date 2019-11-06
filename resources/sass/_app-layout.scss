@@ -1,4 +1,5 @@
 body{
+    overflow-x: hidden;
     position: relative;
     margin: 0;
     min-height: 100%;
@@ -13,7 +14,74 @@ body{
 }
 
 .nav-bar-height{
-    height: 10vh;
+    min-height: 10vh;
+    @media screen and (max-width: $mobile-breakpoint) {
+        .navbar-brand{
+            margin-right: auto;
+        }
+        .navbar-toggler{
+            margin-left: auto;
+        }
+    }
+    .navMobile{
+        display: none;
+        @media screen and (max-width: $mobile-breakpoint) {
+            display: flex;
+        }
+        .navbarIcons{
+            display: inherit;
+            @include font-size(1.5rem);
+        }
+        .notificationImage{
+            max-width: 40px;
+            max-height: 40px;
+            border-radius: 50%;
+        }
+        .dropdown-menu{
+            max-width: 25vw;
+            .systemNotifications{
+                right:15%;
+                left: unset;
+            }
+        }
+    }
+    .navDesc{
+        display: flex;
+        @media screen and (max-width: $mobile-breakpoint) {
+            display: none;
+        }
+        .navbarIcons{
+            display: inherit;
+            @include font-size(1.5rem);
+        }
+        .notificationImage{
+            max-width: 40px;
+            max-height: 40px;
+            border-radius: 50%;
+        }
+        .dropdown-menu{
+            min-width: 25vw;
+            left: -80%;
+        }
+    }
+    .systemNotifications{
+        a{
+            margin-top: 0.5rem;
+            margin-bottom: 0;
+        }
+        .alert-info:hover{
+            background-color: $indigo;
+        }
+        .alert-warning:hover{
+            background-color: $yellow;
+        }
+        .alert-danger:hover{
+            background-color: $red;
+        }
+        .alert-success:hover{
+            background-color: $green;
+        }
+    }
 }
 
 .py-4{
