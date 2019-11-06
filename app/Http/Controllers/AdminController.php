@@ -98,7 +98,7 @@ class AdminController extends Controller
                 }
                 $ticket->delete();
             }
-            return response()->json(['status' => 'success','id' => str_replace('-','',$ticketId)], 200);
+            return response()->json(['status' => 'success'], 200);
         }
     }
 

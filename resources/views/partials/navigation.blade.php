@@ -36,7 +36,7 @@
                             <div class="text-center">Brak Powiadomień</div>
                         @endif
                         @foreach ($notifications['chat'] as $chatNot)
-                            <a class="chat{{$chatNot['data']['sender_id']}} dropdown-item container" href="/message/{{$chatNot['senderName']}}">
+                            <a class="chat-{{$chatNot['data']['sender_id']}} dropdown-item container" href="/message/{{$chatNot['senderName']}}">
                                 <div class="row">
                                     <div class="notificationImage col-2">
                                         <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot['senderPicture'])}}" alt="" srcset="">
@@ -66,12 +66,12 @@
                         @foreach ($notifications['system'] as $sysNot)
                             @switch($sysNot['type'])
                                 @case('App\Notifications\NewProfilePicture')
-                                    <a class="{{str_replace('-','',$sysNot['id'])}} dropdown-item alert alert-info" href="/admin/home">
+                                    <a class="{{$sysNot['id']}} dropdown-item alert alert-info" href="/admin/home">
                                         Zgłoszono Nowe Zdjęcie Profilowe
                                     </a>
                                     @break
                                 @case('App\Notifications\UserFlagged')
-                                    <a class="{{str_replace('-','',$sysNot['id'])}} dropdown-item alert alert-info" href="/admin/home">
+                                    <a class="{{$sysNot['id']}} dropdown-item alert alert-info" href="/admin/home">
                                         Użytkownik Został Zgłoszony
                                     </a>
                                     @break
@@ -157,7 +157,7 @@
                                 <div class="text-center">Brak Powiadomień</div>
                             @endif
                             @foreach ($notifications['chat'] as $chatNot)
-                            <a class="chat{{$chatNot['data']['sender_id']}} dropdown-item container" href="/message/{{$chatNot['senderName']}}">
+                            <a class="chat-{{$chatNot['data']['sender_id']}} dropdown-item container" href="/message/{{$chatNot['senderName']}}">
                                 <div class="row">
                                     <div class="notificationImage col-2">
                                         <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot['senderPicture'])}}" alt="" srcset="">
@@ -187,12 +187,12 @@
                             @foreach ($notifications['system'] as $sysNot)
                                 @switch($sysNot['type'])
                                     @case('App\Notifications\NewProfilePicture')
-                                        <a class="{{str_replace('-','',$sysNot['id'])}} dropdown-item alert alert-info" href="/admin/home">
+                                        <a class="{{$sysNot['id']}} dropdown-item alert alert-info" href="/admin/home">
                                             Zgłoszono Nowe Zdjęcie Profilowe
                                         </a>
                                         @break
                                     @case('App\Notifications\UserFlagged')
-                                        <a class="{{str_replace('-','',$sysNot['id'])}} dropdown-item alert alert-info" href="/admin/home">
+                                        <a class="{{$sysNot['id']}} dropdown-item alert alert-info" href="/admin/home">
                                             Użytkownik Został Zgłoszony
                                         </a>
                                         @break
@@ -258,7 +258,7 @@
             }
             var newmsg = function(data) {
                 console.log(data);
-                let html = '<a class="chat'+data.sender.id+' dropdown-item container" href="/message/'+data.sender.name+'">'+
+                let html = '<a class="chat-'+data.sender.id+' dropdown-item container" href="/message/'+data.sender.name+'">'+
                     '<div class="row">'+
                         '<div class="notificationImage col-2">'+
                             '<img class="notificationImage" src="/img/profile-pictures/'+data.sender.picture+'" alt="" srcset="">'+
@@ -269,8 +269,8 @@
                         '</div>'+
                     '</div>'+
                 '</a>';
-                if($('a.chat'+data.sender.id).length) {
-                    $('a.chat4').remove();
+                if($('a.chat-'+data.sender.id).length) {
+                    $('a.chat-4').remove();
                     $('.chatNotifications').prepend(html);
                 }else{
                     newMessages++;

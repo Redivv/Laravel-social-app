@@ -154,8 +154,7 @@ function carryTicket(decided,target) {
             }else{
                 $('.systemNotificationsCount').html(currentAmountNot-1);
             }
-            console.log(response.id);
-            $('a.'+response.id).remove();
+            $('a.'+ticketId.substring(9)).remove();
         }
     });
     
