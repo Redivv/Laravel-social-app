@@ -37,7 +37,9 @@ $(document).ready(function () {
                 $('.emojionearea-editor').empty();
                 $('#picture-preview').empty();
                 let html = '<li class="clearfix" id="to-be-replaced">'+
-                        '<img src="'+img.src+'">'+
+                                '<div class="spinner-border text-dark" role="status">'+
+                                    '<span class="sr-only">Loading...</span>'+
+                                '</div>'+
                 '</li>';
                 $('#talkMessages').append(html);
                 $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
@@ -150,7 +152,7 @@ $(document).ready(function () {
         // Only process image files.
         if (!f.type.match('image.*')) {
             $(this).val("");
-            alert("Niewłaściwy Typ Pliku!");
+            alert(badFileType);
             $('#picture-preview').empty();
             break;
         }

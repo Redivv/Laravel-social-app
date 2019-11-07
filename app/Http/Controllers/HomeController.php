@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Nahid\Talk\Facades\Talk;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -15,8 +15,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
-        Talk::setAuthUserId(Auth::id());
+        $this->middleware('verified');
+
     }
 
     /**
@@ -26,11 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->isAdmin()) {
+            return redirect(route('adminHome'));
+        }
         return view('home');
-    }
-
-    public function chat()
-    {
-        return view('chat');
     }
 }

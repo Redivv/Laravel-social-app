@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Conner\Tagging\Taggable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, Taggable;
 
@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'birth_year', 'picture','city_id'
+        'name', 'email', 'password', 'api_token', 'birth_year', 'pending_picture','city_id'
     ];
 
     /**
@@ -52,5 +52,14 @@ class User extends Authenticatable
     public function city()
     {
         return $this->belongsTo('App\City', 'city_id', 'id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
+
+    public function receivesBroadcastNotificationsOn() {
+        return 'users.'.$this->id;
     }
 }

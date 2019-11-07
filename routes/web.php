@@ -13,14 +13,18 @@
 
 Route::get('/', 'Auth\RegisterController@showRegistrationForm');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+
+Route::get('logout', 'Auth\LoginController@logout');
 
 Route::get('searcher', 'SearchController@index')->name('searcher');
 
+Route::middleware(['verified'])->group(function () {
+    Route::patch('profile', 'ProfileController@update');
+    Route::get('profile/edit','ProfileController@edit')->name('ProfileEdition');
+});
 
-Route::get('profile', 'ProfileController@index')->name('ProfileView');
-Route::patch('profile', 'ProfileController@update')->middleware('auth');
-Route::get('profile/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');
+Route::get('profile', 'ProfileController@index')->middleware('auth')->name('ProfileView');
 Route::get('profile/{user}','ProfileController@visit');
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
@@ -34,6 +38,17 @@ Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
 Route::prefix('user')->group(function(){
     Route::get('home', 'HomeController@index')->name('home');
     Route::get('talk', 'HomeController@chat')->name('chat');
+});
+
+Route::prefix('admin')->group(function(){
+    Route::get('home', 'AdminController@index')->middleware('verified')->name('adminHome');
+
+    Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+        Route::get('tab', 'AdminController@getTabContent')->middleware('verified')->name('adminAjaxTab');
+        Route::patch('ticket','AdminController@resolveTicket')->middleware('verified')->name('adminAjaxTicket');
+        Route::patch('list','AdminController@resolveListRequest')->middleware('verified')->name('adminAjaxList');
+    });
+    
 });
 
 Route::get('message', 'MessageController@index')->name('message.app');

@@ -32,3 +32,28 @@
 
 //Scss related do profile layout
 @import 'profile-layout';
+
+html{
+    font-size: 2vw;
+    scroll-behavior: smooth;
+}
+
+
+// Cookie Consent Styling
+    div.cookie-consent{
+        padding: 1% 0;
+        width: 50%;
+        text-align: center;
+        color:#385d7a;
+        background-color:#e2f0fb;
+        border-color:#d6e9f9;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        button{
+            @extend .btn;
+            @extend .btn-primary;
+            @extend .ml-3
+        }
+    }

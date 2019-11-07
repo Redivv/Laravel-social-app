@@ -1,0 +1,102 @@
+@import 'variables';
+@import "~rfs/scss";
+
+main{
+    min-height: 80vh;
+
+    .spinnerOverlay{
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        height: 100%;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background:rgba(0,0,0,0.8);
+        .spinner-border{
+            width: 5rem;
+            height: 5rem;
+            font-size: 1.5rem;
+        }
+    }
+
+    .tabsPills{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+       .nav-pills{
+            width: 100%;
+
+            & .nav-link.active{
+                background-color: $orange;
+                .ticketCount{
+                    color: $yellow;
+                }
+            }
+        }
+        a{
+            margin-bottom: 1rem !important;
+            padding: 5%;
+            color: $blac; 
+            text-transform: uppercase;
+            font-weight: bold;
+            .ticketCount{
+                color: $red;
+            }
+        } 
+    }
+
+    .tabsContent{
+
+        div.tab-pane{
+            max-height: 60vh;
+            overflow-y: auto;
+            .form-btn{
+                @include font-size(0.7rem);
+                font-weight: bold;
+            }
+            .fetchBtn{
+                cursor: pointer;
+                float: right;
+                color: $orange;
+                position: relative;
+                &.spin{
+                    i{
+                        animation-name: spin;
+                        animation-duration: 2000ms;
+                        animation-iteration-count: infinite;
+                        animation-timing-function: linear;
+                    }
+                }
+                &.new:after{
+                    content: '';
+                    width: 10px;
+                    height: 10px;
+                    background:$red;
+                    border-radius: 50%;
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    left: 68%;
+                }
+
+            }
+        }
+        .profilePicture{
+            max-width: 100px;
+        }
+    }
+
+    
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}

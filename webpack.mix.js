@@ -17,5 +17,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/searcher.js', 'public/js')
     .js('node_modules/emojionearea/dist/emojionearea.js', 'public/js')
     .js('resources/js/profile.js', 'public/js')
+    .js('resources/js/admin.js', 'public/js')
     .sass('resources/sass/chat.scss', 'public/chat/css')
+    .sass('resources/sass/adminPane.scss', 'public/css')
     .sass('resources/sass/app.scss', 'public/css');

@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+
 use App\User;
+use App\Notifications\NewProfilePicture;
+
+use Illuminate\Support\Facades\Notification;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -55,7 +62,7 @@ class RegisterController extends Controller
             'email'             => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'          => ['required', 'string', 'min:8', 'confirmed'],
             'birth_year'        => ['required', 'integer', 'between:1950,'.intVal(date('Y')-18)],
-            'profile-picture'   => ['required', 'file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
+            'profile-picture'   => ['file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
         ]);
     }
 
@@ -67,16 +74,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $filename = hash_file('haval160,4',$data['profile-picture']->getPathname()).'.'.$data['profile-picture']->getClientOriginalExtension();
-        $data['profile-picture']->move(public_path('img/profile-pictures/'), $filename);
-        $data['profile-picture'] = $filename;
+        if (isset($data['profile-picture'])) {
+            $filename = hash_file('haval160,4',$data['profile-picture']->getPathname()).'.'.$data['profile-picture']->getClientOriginalExtension();
+            $data['profile-picture']->move(public_path('img/profile-pictures/'), $filename);
+            $data['profile-picture'] = $filename;
+
+            $admins = User::where('is_admin','=',1)->get();
+
+            if($admins){
+                Notification::send($admins, new NewProfilePicture($data['name'],$data['profile-picture']));
+            }
+        }else{
+            $data['profile-picture'] = null;
+        }
         
         return User::create([
-            'name'          => $data['name'],
-            'email'         => $data['email'],
-            'password'      => Hash::make($data['password']),
-            'birth_year'    => $data['birth_year'],
-            'picture'       => $data['profile-picture']
+            'name'                  => $data['name'],
+            'email'                 => $data['email'],
+            'password'              => Hash::make($data['password']),
+            'api_token'             => Str::random(60),
+            'birth_year'            => $data['birth_year'],
+            'pending_picture'       => $data['profile-picture']
         ]);
     }
 }

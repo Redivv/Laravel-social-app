@@ -28,11 +28,10 @@
 
                             <div class="form-group row">
                                 <label for="birth_year" class="col-md-4 col-form-label text-md-right">{{ __('registeration.age') }}</label>
-
                                 <div class="col-md-6">
                                     <select id="birth_year" class="form-control @error('birth_year') is-invalid @enderror" name="birth_year" required>
                                         @for ($year = date("Y")-1; $year >= 1950; $year --)
-                                            <option value="{{$year}}">{{$year}}</option>
+                                            <option value="{{$year}}" @if(old('birth_year') == $year) selected @endif>{{$year}}</option>
                                         @endfor
                                     </select>
 
@@ -84,16 +83,17 @@
                                 <label for="profile-picture" class="col-md-4 col-form-label text-md-right">{{ __('registeration.profile-picture') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="profile-picture" type="file" class="form-control-file" name="profile-picture" required accept="image/*">
+                                    <input id="profile-picture" type="file" class="form-control-file" name="profile-picture" accept="image/*">
                                     @error('profile-picture')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                     <output id="picture-preview"></output>
+                                    <div class="alert alert-info" role="alert">
+                                        {{__('registeration.infoAlert')}}
+                                    </div>
                                 </div>
-                                
-
                             </div>
                             
                             <button type="submit" class="form-btn btn btn-block">
