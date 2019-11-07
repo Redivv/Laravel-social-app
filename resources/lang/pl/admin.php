@@ -22,5 +22,9 @@ return [
     'delete'                    => 'Usuń',
     'cityListTable2'            => 'Data Dodania',
     'noContentList'             => 'Brak Elementów',
-    'confirmMsg'                => 'Potwierdź Swoją Decyzję'
+    'confirmMsg'                => 'Potwierdź Swoją Decyzję',
+    'deletedUser-subject'       => 'Usunięcie Konta', 
+    'deletedUser-greet'         => 'Witaj ',
+    'deletedUser-message'       => 'Z przykrością zawiadamiamy, że Twoje konto w serwisie Safo zostało usunięte',
+    'deletedUser-messageInfo'   => 'Jeśli uważasz, że jesteś niewinny prosimy o kontakt w formie odpowiedzi na ten email',
 ];

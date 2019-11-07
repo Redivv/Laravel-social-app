@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use Carbon\Carbon;
+
 use App\User;
 use Nahid\Talk\Facades\Talk;
 use App\Events\MessagesWereSeen;
@@ -19,6 +21,9 @@ class MessageController extends Controller
 
     public function index()
     {
+        $offlineTimer = Carbon::now()->subMinutes(30)->toDateTimeString();
+        User::where('status','online')->where('updated_at','<',$offlineTimer)->update(['status' => 'offline', 'updated_at' => Carbon::now()->toDateTimeString()]);
+        
         $threads = Talk::user(Auth::id())->getInbox();
         $user = null;
         $messages = [];

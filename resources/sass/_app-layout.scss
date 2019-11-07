@@ -23,6 +23,10 @@ body{
             margin-left: auto;
         }
     }
+    .dropdown-menu{
+        max-height: 50vh;
+        overflow-y: auto;
+    }
     .nav-link{
         .badge{
             color: $white;

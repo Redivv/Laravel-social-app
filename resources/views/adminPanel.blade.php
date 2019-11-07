@@ -6,6 +6,11 @@
 
 
 @section('content')
+<div class="spinnerOverlay d-none">
+    <div class="spinner-border text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+    </div>
+</div>
 <div class="container-fluid">
     <div class="row">
         <div class="tabsPills col-md-4 col-sm-12">
@@ -26,7 +31,6 @@
             <div class="tab-content" id="tabContent">
                 <div class="tab-pane" id="profileTicket-content" role="tabpanel" aria-labelledby="profileTicket-tab"></div>
                 <div class="tab-pane" id="userTicket-content" role="tabpanel" aria-labelledby="userTicket-tab"></div>
-
                 <div class="tab-pane" id="userList-content" role="tabpanel" aria-labelledby="userList-tab"></div>
                 <div class="tab-pane" id="tagList-content" role="tabpanel" aria-labelledby="tagList-tab"></div>
                 <div class="tab-pane" id="cityList-content" role="tabpanel" aria-labelledby="cityList-tab"></div>

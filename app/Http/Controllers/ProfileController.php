@@ -20,6 +20,17 @@ class ProfileController extends Controller
         
         $user = Auth::user();
         $tags = $user->tagNames();
+
+        $profileNotifications = $user->notifications()->whereIn(
+            'type',
+            [
+                'App\Notifications\AcceptedPicture',
+                'App\Notifications\DeniedPicture'
+                ])->get();
+        
+        foreach ($profileNotifications as $profNot) {
+            $profNot->delete();
+        }
         return view('profile')->with(compact('user'))->with(compact('tags'));
     }
 

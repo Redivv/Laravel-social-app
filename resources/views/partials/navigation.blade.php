@@ -5,6 +5,7 @@
             <img src="/img/safo_logo.jpg" height="50px" alt="Safo">
         </a>
 
+        @auth
         <ul class="navbar-nav ml-auto mr-auto navMobile">
             <div class="navbarIcons position-relative">
 
@@ -75,22 +76,27 @@
                                         Użytkownik Został Zgłoszony
                                     </a>
                                     @break
+                                @case('App\Notifications\AcceptedPicture')
+                                    <a class="dropdown-item alert alert-success" href="/profile">
+                                        Przyjęto profilowe
+                                    </a>
+                                    @break
+                                @case('App\Notifications\DeniedPicture')
+                                    <a class="dropdown-item alert alert-danger" href="/profile">
+                                        Odrzucono profilowe
+                                    </a>
+                                    @break
                                 @default
                                     
                             @endswitch
                         @endforeach
-                        <a class="dropdown-item alert alert-danger" href="#">
-                            Odrzucono profilowe
-                        </a>
-                        <a class="dropdown-item alert alert-success" href="#">
-                            Przyjęto profilowe
-                        </a>
                     </div>
 
                 </li>
 
-            </div>
+            </div> 
         </ul>
+        @endauth
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('app.toggle_nav') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -125,6 +131,7 @@
                 @endauth
             </ul>
 
+            @auth
             <!-- Navbar notification icons -->
             <ul class="navbar-nav ml-auto pr-5 navDesc">
                 <div class="navbarIcons position-relative">
@@ -196,22 +203,27 @@
                                             Użytkownik Został Zgłoszony
                                         </a>
                                         @break
+                                    @case('App\Notifications\AcceptedPicture')
+                                        <a class="dropdown-item alert alert-success" href="/profile">
+                                            Przyjęto profilowe
+                                        </a>
+                                        @break
+                                    @case('App\Notifications\DeniedPicture')
+                                        <a class="dropdown-item alert alert-danger" href="/profile">
+                                            Odrzucono profilowe
+                                        </a>
+                                        @break
                                     @default
                                         
                                 @endswitch
                             @endforeach
-                            <a class="dropdown-item alert alert-danger" href="#">
-                                Odrzucono profilowe
-                            </a>
-                            <a class="dropdown-item alert alert-success" href="#">
-                                Przyjęto profilowe
-                            </a>
                         </div>
 
                     </li>
 
                 </div>
             </ul>
+            @endauth
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav">
@@ -251,6 +263,31 @@
 </nav>
 @auth
     @push('scripts')
+        <script>
+            Echo.private('users.'+window.Laravel.user)
+
+            .notification((notification) => {
+                let currentAmountNot = $('#descSys').text();
+
+                let html = '<a class="'+notification.id+' dropdown-item alert alert-info" href="/admin/home">'+
+                                        'Zgłoszono Nowe Zdjęcie Profilowe'+
+                            '</a>';
+
+                switch (notification.type.replace(/\\/g,"/")) {
+                    case 'App/Notifications/NewProfilePicture':
+                        $('.systemNotificationsCount').html(parseInt(currentAmountNot)+1);
+                        $('.systemNotifications').prepend(html);
+                        break;
+                    case 'App/Notifications/UserFlagged':
+                        $('.systemNotificationsCount').html(parseInt(currentAmountNot)+1);
+                        $('.systemNotifications').prepend(html);
+                        break;
+                    
+                }
+        
+            });
+        </script>
+
         <script>
             let newMessages = $('#desktopTalk').html();
             if(newMessages.trim() == ""){

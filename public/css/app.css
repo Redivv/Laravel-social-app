@@ -17288,6 +17288,11 @@ body {
   }
 }
 
+.nav-bar-height .dropdown-menu {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
 .nav-bar-height .nav-link .badge {
   color: #ffffff;
   background-color: #f66103;

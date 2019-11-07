@@ -103,18 +103,16 @@ $(document).ready(function () {
 });
 
 function main() {
-  var img = new Image();
-  img.src = __baseUrl + "/chat/loading.gif";
   $('a.tab').one('click', function () {
-    renderContent(this, img);
+    renderContent(this);
   });
 }
 
-function renderContent(selected, img) {
+function renderContent(selected) {
   var targetId = $(selected).attr('id');
   var url = __baseUrl + '/admin/ajax/tab';
   $(document).one("ajaxSend", function () {
-    var html = '<img src="' + img.src + '">';
+    var html = ' <div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>';
     $('#' + targetId + '-content').html(html);
   });
   var request = $.ajax({
@@ -138,6 +136,7 @@ function renderContent(selected, img) {
         e.preventDefault();
 
         if (confirm(confirmMsg)) {
+          $('.spinnerOverlay').removeClass('d-none');
           carryTicket(this, targetId);
         }
       });
@@ -185,6 +184,7 @@ function fetchContent(selected) {
         e.preventDefault();
 
         if (confirm(confirmMsg)) {
+          $('.spinnerOverlay').removeClass('d-none');
           carryTicket(this, targetId);
         }
       });
@@ -228,16 +228,17 @@ function carryTicket(decided, target) {
       if (currentAmount - 1 == 0) {
         $('#' + target + 'Count').html('');
       } else {
-        $('#' + target + 'Count').html(currentAmount - 1);
+        $('#' + target + 'Count').html(parseInt(currentAmount) - 1);
       }
 
       if (currentAmountNot - 1 == 0) {
         $('.systemNotificationsCount').html('');
       } else {
-        $('.systemNotificationsCount').html(currentAmountNot - 1);
+        $('.systemNotificationsCount').html(parseInt(currentAmountNot) - 1);
       }
 
       $('a.' + ticketId.substring(9)).remove();
+      $('.spinnerOverlay').addClass('d-none');
     }
   });
   request.fail(function (xhr) {
@@ -254,6 +255,7 @@ function carryList(decided, target) {
     var editValue = "";
   }
 
+  $('.spinnerOverlay').removeClass('d-none');
   var elementId = $(decided).parent().serialize();
   var request = $.ajax({
     method: 'post',
@@ -271,10 +273,12 @@ function carryList(decided, target) {
       switch (decision) {
         case 'delete':
           $(decided).parent().parent().parent().remove();
+          $('.spinnerOverlay').addClass('d-none');
           break;
 
         case 'edit':
           $(decided).parent().parent().prev().prev().html(editValue);
+          $('.spinnerOverlay').addClass('d-none');
       }
     }
   });

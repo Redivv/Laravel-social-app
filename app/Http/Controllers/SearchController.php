@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -18,6 +20,9 @@ class SearchController extends Controller
         $search_results = null;
         $search_results_variable = null;
         $cities = City::all();
+
+        $offlineTimer = Carbon::now()->subMinutes(30)->toDateTimeString();
+        User::where('status','online')->where('updated_at','<',$offlineTimer)->update(['status' => 'offline', 'updated_at' => Carbon::now()->toDateTimeString()]);
 
         
         if ($request->has(['username','age-min','age-max','city','sortOptions_crit','sortOptions_dir'])) {

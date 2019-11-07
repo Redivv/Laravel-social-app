@@ -13,6 +13,10 @@ use App\User;
 use App\City;
 use Conner\Tagging\Model\Tag;
 
+use App\Notifications\AcceptedPicture;
+use App\Notifications\UserDeleted;
+use App\Notifications\DeniedPicture;
+
 class AdminController extends Controller
 {
 
@@ -180,7 +184,7 @@ class AdminController extends Controller
 
     private function getUsers() : object
     {
-        return User::all();
+        return User::whereNotIn('id',[Auth::id()])->get();
     }
 
     private function getTags() : object
@@ -203,6 +207,7 @@ class AdminController extends Controller
                     $validUser->picture = $validUser->pending_picture;
                     $validUser->pending_picture = null;
                     $validUser->update();
+                    $validUser->notify(new AcceptedPicture($validUser->name,$validUser->picture));
                     break;
                 case 'refuse':
                     $validUser->pending_picture = null;
@@ -211,6 +216,7 @@ class AdminController extends Controller
                     if (!$otherUser) {
                         unlink(public_path('img/profile-pictures/'.$data['image']));
                     }
+                    $validUser->notify(new DeniedPicture($validUser->name));
                     break;
             }
         }
@@ -222,6 +228,7 @@ class AdminController extends Controller
         if($validUser){
             switch ($decision) {
                 case 'accept':
+                    $validUser->notify(new UserDeleted($validUser->name));
                     $validUser->delete();
                     break;
                 case 'refuse':
@@ -234,6 +241,12 @@ class AdminController extends Controller
     {
         switch ($decision) {
             case 'delete':
+                $convoId = DB::table('conversations')->select('id')->where('user_one',$user->id)->orWhere('user_two',$user->id)->get()->toArray();
+                foreach ($convoId as $convo) {
+                    DB::table('conversations')->where('id',$convo->id)->delete();
+                    DB::table('messages')->where('conversation_id',$convo->id)->delete();
+                }
+                $user->notify(new UserDeleted($user->name));
                 $user->delete();
                 break;
         }

@@ -6,6 +6,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Arr;
 use Auth;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class NavigationComposer
 {   
@@ -23,7 +24,15 @@ class NavigationComposer
             $notifications = Auth::user()->notifications()->get();
             $notifications['chat'] = $notifications->whereIn('type',['App\Notifications\NewMessage'])->toArray();
             $this->notifications['user'] = $notifications->whereIn('type',[])->toArray();
-            $this->notifications['system'] = $notifications->whereIn('type',['App\Notifications\NewProfilePicture','App\Notifications\UserFlagged'])->toArray();
+            $this->notifications['system'] = $notifications
+                ->whereIn(
+                    'type',
+                    [
+                        'App\Notifications\NewProfilePicture',
+                        'App\Notifications\UserFlagged',
+                        'App\Notifications\AcceptedPicture',
+                        'App\Notifications\DeniedPicture'
+                        ])->toArray();
 
             if (count($notifications['chat']) > 0) {
                 $duplicateConvo = array();
@@ -32,10 +41,15 @@ class NavigationComposer
                         continue;
                     }else{
                         $sender = User::find($chatNot['data']['sender_id']);
-                        $chatNot['senderName'] = $sender->name;
-                        $chatNot['senderPicture'] = $sender->picture;
-                        $this->notifications['chat'][] = $chatNot;
-                        $duplicateConvo[] = $chatNot['data']['sender_id'];
+                        if(!$sender){
+                            DB::table('notifications')->where('id',$chatNot['id'])->delete();
+                            continue;
+                        }else{
+                            $chatNot['senderName'] = $sender->name;
+                            $chatNot['senderPicture'] = $sender->picture;
+                            $this->notifications['chat'][] = $chatNot;
+                            $duplicateConvo[] = $chatNot['data']['sender_id'];
+                        }
                     }
                 }
             }else{

@@ -11,20 +11,19 @@ $(document).ready(function () {
 
 function main() {
 
-    var img = new Image();
-    img.src = __baseUrl+"/chat/loading.gif";
-
     $('a.tab').one('click',function () {
-        renderContent(this,img);
+        renderContent(this);
     })
 }
 
-function renderContent(selected,img) {
+function renderContent(selected) {
     let targetId = $(selected).attr('id');
     let url = __baseUrl+'/admin/ajax/tab';
 
     $(document).one("ajaxSend", function(){
-        let html = '<img src="'+img.src+'">';
+        let html = ' <div class="spinner-border text-dark" role="status">'+
+         '<span class="sr-only">Loading...</span>'+
+        '</div>';
         $('#'+targetId+'-content').html(html);
     });
 
@@ -47,6 +46,7 @@ function renderContent(selected,img) {
             $('button.ticketBtn').on('click',function(e) {
                 e.preventDefault();
                 if (confirm(confirmMsg)) {
+                    $('.spinnerOverlay').removeClass('d-none');
                     carryTicket(this,targetId);
                 }
             })
@@ -98,6 +98,7 @@ function fetchContent(selected) {
             $('button.ticketBtn').on('click',function(e) {
                 e.preventDefault();
                 if (confirm(confirmMsg)) {
+                    $('.spinnerOverlay').removeClass('d-none');
                     carryTicket(this,targetId);
                 }
             })
@@ -146,15 +147,16 @@ function carryTicket(decided,target) {
             if (currentAmount-1 == 0) {
                 $('#'+target+'Count').html('');
             }else{
-                $('#'+target+'Count').html(currentAmount-1);
+                $('#'+target+'Count').html(parseInt(currentAmount)-1);
             }
 
             if (currentAmountNot-1 == 0) {
                 $('.systemNotificationsCount').html('');
             }else{
-                $('.systemNotificationsCount').html(currentAmountNot-1);
+                $('.systemNotificationsCount').html(parseInt(currentAmountNot)-1);
             }
             $('a.'+ticketId.substring(9)).remove();
+            $('.spinnerOverlay').addClass('d-none');
         }
     });
     
@@ -171,6 +173,7 @@ function carryList(decided,target) {
     }else{
         var editValue = "";
     }
+    $('.spinnerOverlay').removeClass('d-none');
     let elementId = $(decided).parent().serialize();
 
     var request = $.ajax({
@@ -184,10 +187,12 @@ function carryList(decided,target) {
             switch (decision) {
                 case 'delete':
                     $(decided).parent().parent().parent().remove();
+                    $('.spinnerOverlay').addClass('d-none');
                     break;
             
                 case 'edit':
                     $(decided).parent().parent().prev().prev().html(editValue);
+                    $('.spinnerOverlay').addClass('d-none');
             }
         }
     });

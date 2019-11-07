@@ -130,7 +130,7 @@ $(document).ready(function () {
         tag[0].reset();
         $('.emojionearea-editor').empty();
         $('#picture-preview').empty();
-        var html = '<li class="clearfix" id="to-be-replaced">' + '<img src="' + img.src + '">' + '</li>';
+        var html = '<li class="clearfix" id="to-be-replaced">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</li>';
         $('#talkMessages').append(html);
         $("div.chat-history").scrollTop($('div.chat-history').prop('scrollHeight'));
       });
