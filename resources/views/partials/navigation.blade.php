@@ -78,12 +78,12 @@
                                     @break
                                 @case('App\Notifications\AcceptedPicture')
                                     <a class="dropdown-item alert alert-success" href="/profile">
-                                        Przyjęto profilowe
+                                        Twoje Zdjęcie Profilowe Zostało Zaakceptowane
                                     </a>
                                     @break
                                 @case('App\Notifications\DeniedPicture')
                                     <a class="dropdown-item alert alert-danger" href="/profile">
-                                        Odrzucono profilowe
+                                        Twoje Zdjęcie Profilowe Zostało Odrzucone
                                     </a>
                                     @break
                                 @default
@@ -205,12 +205,12 @@
                                         @break
                                     @case('App\Notifications\AcceptedPicture')
                                         <a class="dropdown-item alert alert-success" href="/profile">
-                                            Przyjęto profilowe
+                                            Twoje Zdjęcie Profilowe Zostało Zaakceptowane
                                         </a>
                                         @break
                                     @case('App\Notifications\DeniedPicture')
                                         <a class="dropdown-item alert alert-danger" href="/profile">
-                                            Odrzucono profilowe
+                                            Twoje Zdjęcie Profilowe Zostało Odrzucone
                                         </a>
                                         @break
                                     @default
@@ -268,17 +268,39 @@
 
             .notification((notification) => {
                 let currentAmountNot = $('#descSys').text();
+                if (currentAmountNot === "") {
+                    currentAmountNot = 0;
+                    $('.systemNotifications').html('');
+                }
 
-                let html = '<a class="'+notification.id+' dropdown-item alert alert-info" href="/admin/home">'+
-                                        'Zgłoszono Nowe Zdjęcie Profilowe'+
-                            '</a>';
+                let html;
 
                 switch (notification.type.replace(/\\/g,"/")) {
                     case 'App/Notifications/NewProfilePicture':
+                        html = '<a class="'+notification.id+' dropdown-item alert alert-info" href="/admin/home">'+
+                                        'Zgłoszono Nowe Zdjęcie Profilowe'+
+                                '</a>';
                         $('.systemNotificationsCount').html(parseInt(currentAmountNot)+1);
                         $('.systemNotifications').prepend(html);
                         break;
                     case 'App/Notifications/UserFlagged':
+                        html = '<a class="'+notification.id+' dropdown-item alert alert-info" href="/admin/home">'+
+                                        'Użytkownik Został Zgłoszony'+
+                                '</a>';
+                        $('.systemNotificationsCount').html(parseInt(currentAmountNot)+1);
+                        $('.systemNotifications').prepend(html);
+                        break;
+                    case 'App/Notifications/AcceptedPicture':
+                        html = '<a class="'+notification.id+' dropdown-item alert alert-success" href="/admin/home">'+
+                                        'Twoje Zdjęcie Profilowe Zostało Zaakceptowane'+
+                                '</a>';
+                        $('.systemNotificationsCount').html(parseInt(currentAmountNot)+1);
+                        $('.systemNotifications').prepend(html);
+                        break;
+                    case 'App/Notifications/DeniedPicture':
+                        html = '<a class="'+notification.id+' dropdown-item alert alert-danger" href="/admin/home">'+
+                                        'Twoje Zdjęcie Profilowe Zostało Odrzucone'+
+                                '</a>';
                         $('.systemNotificationsCount').html(parseInt(currentAmountNot)+1);
                         $('.systemNotifications').prepend(html);
                         break;

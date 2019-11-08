@@ -51,12 +51,19 @@
     <script defer>
         Echo.private('users.'+window.Laravel.user)
             .notification((notification) => {
+                let currentAmount;
                 switch (notification.type.replace(/\\/g,"/")) {
                     case 'App/Notifications/NewProfilePicture':
-                        let currentAmount = $('#profileTicketCount').html().trim();
+                        currentAmount = $('#profileTicketCount').html().trim();
                         if(currentAmount == ""){currentAmount = 0;}
                         $('#profileTicketCount').html(parseInt(currentAmount)+1);
                         $('#profileTicket-fetchBtn').addClass('new');
+                        break;
+                    case 'App/Notifications/UserFlagged':
+                        currentAmount = $('#userTicketCount').html().trim();
+                        if(currentAmount == ""){currentAmount = 0;}
+                        $('#userTicketCount').html(parseInt(currentAmount)+1);
+                        $('#userTicket-fetchBtn').addClass('new');
                         break;
                 
                     default:
