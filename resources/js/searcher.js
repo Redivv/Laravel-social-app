@@ -10,7 +10,7 @@ function main() {
         if (hobby.trim() != "") {
             addNewHobby(hobby);
         }
-    })
+    });
 
     $('div.hobbyCriteria').on('keydown',function(e) {
         if (e.keyCode == 13 || e.which == 13) {
@@ -20,13 +20,44 @@ function main() {
                 addNewHobby(hobby.trim());
             }   
         }
-    })
+    });
 
-    $('.hobby').on('click',function() {
-        if (confirm(deleteMsg)) {
-            $(this).remove();
+    
+    $('.reportBtn').on('click',function() {
+        let reportReason = prompt(reportUserReason);
+        if (reportReason.trim() == '') {
+            alert(reportUserReason);
+        }else{
+            $('.spinnerOverlay').removeClass('d-none');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            let userName = $(this).data('name');
+            let url = base_url+"/user/report";
+
+            var request = $.ajax({
+                method : 'post',
+                url: url,
+                data: {"_method": 'PUT', userName:userName, reason:reportReason.trim()}
+            });
+            
+            
+            request.done(function(response){
+                if (response.status === 'success') {
+                    $('.spinnerOverlay').addClass('d-none');
+                    alert(reportUserSuccess);
+                }
+            });
+            
+            
+            request.fail(function (xhr){
+                alert(xhr.responseJSON.message);
+            });
         }
-    })
+    });
 
     $( "#hobby" ).autocomplete({
  
@@ -50,10 +81,17 @@ function main() {
 }
 
 function addNewHobby(hobby) {
-    let html = '<span class="hobby mr-4 clearfix"><li>'+hobby+'</li>'+
-    '<input type="hidden" value="'+slug(hobby)+'" name="hobby[]"></span>';
+    let html = '<li class="hobby mr-4 clearfix"><span>'+hobby+'</span>'+
+    '<input type="hidden" value="'+slug(hobby)+'" name="hobby[]"></li>';
     $('#hobbyOutput>ul').append(html);
     $('input#hobby').val('');
+    
+
+    $('li.hobby').on('click',function() {
+        if (confirm(deleteMsg)) {
+            $(this).remove();
+        }
+    });
 }
 
 function slug(string) {

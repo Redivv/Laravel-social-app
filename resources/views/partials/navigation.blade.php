@@ -18,7 +18,7 @@
                     {{-- User Notifications Mobile --}}
                     <div class="dropdown-menu pl-2 pr-2 position-absolute userNotifications">
                         @if (count($notifications['user']) == 0)
-                            <div class="text-center">Brak Powiadomień</div>
+                            <div class="text-center">{{__('nav.noNotifications')}}</div>
                         @endif
                     </div>
 
@@ -34,7 +34,7 @@
                     {{-- Chat Notifications Mobile --}}
                     <div class="dropdown-menu pl-2 pr-2 position-absolute chatNotifications">
                         @if (count($notifications['chat']) == 0)
-                            <div class="text-center">Brak Powiadomień</div>
+                            <div class="text-center">{{__('nav.noNotifications')}}</div>
                         @endif
                         @foreach ($notifications['chat'] as $chatNot)
                             <a class="chat-{{$chatNot['data']['sender_id']}} dropdown-item container" href="/message/{{$chatNot['senderName']}}">
@@ -62,28 +62,28 @@
                     {{-- System Notifications Mobile --}}
                     <div class="dropdown-menu pl-2 pr-2 systemNotifications position-absolute p-2">
                         @if (count($notifications['system']) == 0)
-                            <div class="text-center">Brak Powiadomień</div>
+                            <div class="text-center">{{__('nav.noNotifications')}}</div>
                         @endif
                         @foreach ($notifications['system'] as $sysNot)
                             @switch($sysNot['type'])
                                 @case('App\Notifications\NewProfilePicture')
                                     <a class="{{$sysNot['id']}} dropdown-item alert alert-info" href="/admin/home">
-                                        Zgłoszono Nowe Zdjęcie Profilowe
+                                        {{__('nav.pictureTicket')}}
                                     </a>
                                     @break
                                 @case('App\Notifications\UserFlagged')
                                     <a class="{{$sysNot['id']}} dropdown-item alert alert-info" href="/admin/home">
-                                        Użytkownik Został Zgłoszony
+                                        {{__('nav.userTicket')}}
                                     </a>
                                     @break
                                 @case('App\Notifications\AcceptedPicture')
                                     <a class="dropdown-item alert alert-success" href="/profile">
-                                        Twoje Zdjęcie Profilowe Zostało Zaakceptowane
+                                        {{__('nav.pictureOk')}} 
                                     </a>
                                     @break
                                 @case('App\Notifications\DeniedPicture')
                                     <a class="dropdown-item alert alert-danger" href="/profile">
-                                        Twoje Zdjęcie Profilowe Zostało Odrzucone
+                                        {{__('nav.pictureDeny')}} 
                                     </a>
                                     @break
                                 @default
@@ -145,7 +145,7 @@
                         {{-- User Notifications --}}
                         <div class="dropdown-menu userNotifications">
                             @if (count($notifications['user']) == 0)
-                                <div class="text-center">Brak Powiadomień</div>
+                                <div class="text-center">{{__('nav.noNotifications')}}</div>
                             @endif
                         </div>
 
@@ -161,7 +161,7 @@
                         {{-- Chat Notifications --}}
                         <div class="dropdown-menu chatNotifications">
                             @if (count($notifications['chat']) == 0)
-                                <div class="text-center">Brak Powiadomień</div>
+                                <div class="text-center">{{__('nav.noNotifications')}}</div>
                             @endif
                             @foreach ($notifications['chat'] as $chatNot)
                             <a class="chat-{{$chatNot['data']['sender_id']}} dropdown-item container" href="/message/{{$chatNot['senderName']}}">
@@ -189,28 +189,28 @@
                         {{-- System Notifications --}}
                         <div class="dropdown-menu systemNotifications p-2">
                             @if (count($notifications['system']) == 0)
-                                <div class="text-center">Brak Powiadomień</div>
+                                <div class="text-center">{{__('nav.noNotifications')}}</div>
                             @endif
                             @foreach ($notifications['system'] as $sysNot)
                                 @switch($sysNot['type'])
                                     @case('App\Notifications\NewProfilePicture')
                                         <a class="{{$sysNot['id']}} dropdown-item alert alert-info" href="/admin/home">
-                                            Zgłoszono Nowe Zdjęcie Profilowe
+                                            {{__('admin.pictureTicket')}}
                                         </a>
                                         @break
                                     @case('App\Notifications\UserFlagged')
                                         <a class="{{$sysNot['id']}} dropdown-item alert alert-info" href="/admin/home">
-                                            Użytkownik Został Zgłoszony
+                                            {{__('admin.userTicket')}}
                                         </a>
                                         @break
                                     @case('App\Notifications\AcceptedPicture')
                                         <a class="dropdown-item alert alert-success" href="/profile">
-                                            Twoje Zdjęcie Profilowe Zostało Zaakceptowane
+                                            {{__('nav.pictureOk')}}
                                         </a>
                                         @break
                                     @case('App\Notifications\DeniedPicture')
                                         <a class="dropdown-item alert alert-danger" href="/profile">
-                                            Twoje Zdjęcie Profilowe Zostało Odrzucone
+                                            {{__('nav.pictureDeny')}}
                                         </a>
                                         @break
                                     @default
@@ -278,28 +278,28 @@
                 switch (notification.type.replace(/\\/g,"/")) {
                     case 'App/Notifications/NewProfilePicture':
                         html = '<a class="'+notification.id+' dropdown-item alert alert-info" href="/admin/home">'+
-                                        'Zgłoszono Nowe Zdjęcie Profilowe'+
+                                        '{{__("nav.pictureTicket")}}'+
                                 '</a>';
                         $('.systemNotificationsCount').html(parseInt(currentAmountNot)+1);
                         $('.systemNotifications').prepend(html);
                         break;
                     case 'App/Notifications/UserFlagged':
                         html = '<a class="'+notification.id+' dropdown-item alert alert-info" href="/admin/home">'+
-                                        'Użytkownik Został Zgłoszony'+
+                                        '{{__("nav.userTicket")}}'+
                                 '</a>';
                         $('.systemNotificationsCount').html(parseInt(currentAmountNot)+1);
                         $('.systemNotifications').prepend(html);
                         break;
                     case 'App/Notifications/AcceptedPicture':
                         html = '<a class="'+notification.id+' dropdown-item alert alert-success" href="/admin/home">'+
-                                        'Twoje Zdjęcie Profilowe Zostało Zaakceptowane'+
+                                        '{{__("nav.pictureOk")}}'+
                                 '</a>';
                         $('.systemNotificationsCount').html(parseInt(currentAmountNot)+1);
                         $('.systemNotifications').prepend(html);
                         break;
                     case 'App/Notifications/DeniedPicture':
                         html = '<a class="'+notification.id+' dropdown-item alert alert-danger" href="/admin/home">'+
-                                        'Twoje Zdjęcie Profilowe Zostało Odrzucone'+
+                                        '{{__("nav.pictureDeny")}}'+
                                 '</a>';
                         $('.systemNotificationsCount').html(parseInt(currentAmountNot)+1);
                         $('.systemNotifications').prepend(html);

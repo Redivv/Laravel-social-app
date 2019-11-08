@@ -47,7 +47,6 @@ class AdminController extends Controller
                     $amount = count($validTickets);
                     $html = view('partials.admin.profileTicketContent')->withTickets($validTickets)->render();
                     break;
-                
                 case 'userTicket':
                     $validTickets = $this->getUserTickets();
                     $amount = count($validTickets);
@@ -111,10 +110,10 @@ class AdminController extends Controller
         if ($request->ajax()) {
             $request->validate([
                 'decision'     =>
-                    'string',
+                    'string', 'required',
                     Rule::in(['delete','edit']),
                 'target'       =>
-                    'string',
+                    'string', 'required',
                     Rule::in(['userList','tagList','cityList']),
             ]);
             $elementId = intVal(substr($request->elementId,10));

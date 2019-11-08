@@ -238,6 +238,11 @@ function carryTicket(decided, target) {
       }
 
       $('a.' + ticketId.substring(9)).remove();
+
+      if ($('#descSys').html().trim() == "") {
+        $('div.systemNotifications').html('<div class="text-center">' + noNotifications + '</div>');
+      }
+
       $('.spinnerOverlay').addClass('d-none');
     }
   });

@@ -132,15 +132,25 @@
         }
 
         .icons{
-            @include font-size(1.5rem);
             .ico{
                 @media screen and (max-width: $breakpoint1) {
                     float: left;
                     text-align: center;
-                  }
-                &:hover{
-                    cursor: pointer;
-                    color: $orange;
+                }
+                a{
+                    text-decoration: none;
+                    color: $black;
+                    &:hover{
+                        color: $orange;
+                    }
+                }
+                button{
+                    @include font-size(1.5rem);
+                    &:hover{
+                        i{
+                            color: $orange;
+                        }
+                    }
                 }
             }
         }

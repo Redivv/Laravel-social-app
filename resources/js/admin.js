@@ -156,6 +156,9 @@ function carryTicket(decided,target) {
                 $('.systemNotificationsCount').html(parseInt(currentAmountNot)-1);
             }
             $('a.'+ticketId.substring(9)).remove();
+            if($('#descSys').html().trim() == ""){
+                $('div.systemNotifications').html('<div class="text-center">'+noNotifications+'</div>');
+            }
             $('.spinnerOverlay').addClass('d-none');
         }
     });

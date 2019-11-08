@@ -17218,16 +17218,6 @@ readers do not read off random characters that represent icons */
   font-size: 1.1rem;
 }
 
-.searchResults-box .searchResult .icons {
-  font-size: calc(1.275rem + 0.3vw);
-}
-
-@media (min-width: 1200px) {
-  .searchResults-box .searchResult .icons {
-    font-size: 1.5rem;
-  }
-}
-
 @media screen and (max-width: 992px) {
   .searchResults-box .searchResult .icons .ico {
     float: left;
@@ -17235,8 +17225,26 @@ readers do not read off random characters that represent icons */
   }
 }
 
-.searchResults-box .searchResult .icons .ico:hover {
-  cursor: pointer;
+.searchResults-box .searchResult .icons .ico a {
+  text-decoration: none;
+  color: #000;
+}
+
+.searchResults-box .searchResult .icons .ico a:hover {
+  color: #f66103;
+}
+
+.searchResults-box .searchResult .icons .ico button {
+  font-size: calc(1.275rem + 0.3vw);
+}
+
+@media (min-width: 1200px) {
+  .searchResults-box .searchResult .icons .ico button {
+    font-size: 1.5rem;
+  }
+}
+
+.searchResults-box .searchResult .icons .ico button:hover i {
   color: #f66103;
 }
 
@@ -17556,5 +17564,23 @@ div.cookie-consent {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.spinnerOverlay {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.spinnerOverlay .spinner-border {
+  width: 5rem;
+  height: 5rem;
+  font-size: 1.5rem;
 }
 

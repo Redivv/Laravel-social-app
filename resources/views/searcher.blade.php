@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div class="spinnerOverlay d-none">
+    <div class="spinner-border text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
 <div class="searcher container mt-3">
     {{-- Wyświetla wszystkie powiadomienia typu 'status' z conrtollera --}}
     @if (session('status'))
@@ -116,8 +123,12 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script>
-    var base_url = "{{url('/')}}";
-    var deleteMsg = "Czy na pewno chcesz usunąć kryterium?";
+    var base_url                = "{{url('/')}}";
+    var deleteMsg               = "{{__('searcher.deleteCriteria')}}";
+    var reportUser              = "{{__('searcher.reportUser')}}";
+    var reportUserReason        = "{{__('searcher.reportUserReason')}}";
+    var reportUserReasonErr     = "{{__('searcher.reportUserReasonErr')}}";
+    var reportUserSuccess       = "{{__('searcher.reportUserSuccess')}}";
 </script>
 <script src="{{asset('js/searcher.js')}}"></script>
 

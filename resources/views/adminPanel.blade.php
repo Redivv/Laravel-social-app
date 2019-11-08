@@ -43,7 +43,8 @@
 @push('scripts')
     <script>
         var __baseUrl = "{{url('/')}}";
-        var confirmMsg = "{{__('admin.confirmMsg')}}"
+        var confirmMsg = "{{__('admin.confirmMsg')}}";
+        var noNotifications = "{{__('nav.noNotifications')}}";
     </script>
 
     <script src="{{asset('js/admin.js')}}"></script>

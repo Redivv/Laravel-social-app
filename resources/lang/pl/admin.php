@@ -5,6 +5,7 @@ return [
     'profileTicketTable1'       => 'Użytkownik',
     'profileTicketTable2'       => 'Zdjęcie',
     'profileTicketTable3'       => 'Opcje',
+    'profileTicketTable4'       => 'Data Utworzenia',
     'accept'                    => 'Zaakceptuj',
     'refuse'                    => 'Odrzuć',
     'userTicket'                => 'Zgłoszeni Użytkownicy',
@@ -14,7 +15,7 @@ return [
     'noContent'                 => 'Brak nowych zgłoszeń',
     'userTicketTable1'          => 'Powód',
     'userDelete'                => 'Usuń Użytkownika',
-    'ignore'                    => 'Ignoruj Zgłoszenie',
+    'ignore'                    => 'Usuń Zgłoszenie',
     'userListTable3'            => 'Data Rejestracji',
     'tagListTable1'             => 'Nazwa',
     'tagListTable2'             => 'Ilość Użyć',
@@ -26,5 +27,5 @@ return [
     'deletedUser-subject'       => 'Usunięcie Konta', 
     'deletedUser-greet'         => 'Witaj ',
     'deletedUser-message'       => 'Z przykrością zawiadamiamy, że Twoje konto w serwisie Safo zostało usunięte',
-    'deletedUser-messageInfo'   => 'Jeśli uważasz, że jesteś niewinny prosimy o kontakt w formie odpowiedzi na ten email',
+    'deletedUser-messageInfo'   => 'Jeśli uważasz, że jesteś niewinny prosimy o kontakt w formie odpowiedzi na ten email'
 ];
