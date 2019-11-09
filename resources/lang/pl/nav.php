@@ -5,4 +5,6 @@ return [
     'userTicket'                => 'Zgłoszono Użytkownika',
     'pictureOk'                 => 'Twoje Zdjęcie Profilowe Zostało Zaakceptowane',
     'pictureDeny'               => 'Twoje Zdjęcie Profilowe Zostało Odrzucone',
+    'ago'                       => 'temu',
+    'deleteAll'                 => 'Przeczytaj Wszystkie'
 ];

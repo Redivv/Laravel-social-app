@@ -3982,7 +3982,8 @@ input[type=button].btn-block {
   border-top: 1px solid #e9ecef;
 }
 
-.dropdown-item {
+.dropdown-item,
+.nav-bar-height .clearAllBtn {
   display: block;
   width: 100%;
   padding: 0.25rem 1.5rem;
@@ -3996,21 +3997,27 @@ input[type=button].btn-block {
 }
 
 .dropdown-item:hover,
-.dropdown-item:focus {
+.nav-bar-height .clearAllBtn:hover,
+.dropdown-item:focus,
+.nav-bar-height .clearAllBtn:focus {
   color: #16181b;
   text-decoration: none;
   background-color: #f8f9fa;
 }
 
 .dropdown-item.active,
-.dropdown-item:active {
+.nav-bar-height .active.clearAllBtn,
+.dropdown-item:active,
+.nav-bar-height .clearAllBtn:active {
   color: #ffffff;
   text-decoration: none;
   background-color: #3490dc;
 }
 
 .dropdown-item.disabled,
-.dropdown-item:disabled {
+.nav-bar-height .disabled.clearAllBtn,
+.dropdown-item:disabled,
+.nav-bar-height .clearAllBtn:disabled {
   color: #6c757d;
   pointer-events: none;
   background-color: transparent;
@@ -11112,7 +11119,9 @@ a.text-dark:focus {
   color: #212529 !important;
 }
 
-.text-muted {
+.text-muted,
+.nav-bar-height .chatNotifications .dropdown-item .notificationDesc .descTime,
+.nav-bar-height .chatNotifications .clearAllBtn .notificationDesc .descTime {
   color: #6c757d !important;
 }
 
@@ -17390,6 +17399,59 @@ body {
 
 .nav-bar-height .systemNotifications .alert-success:hover {
   background-color: #38c172;
+}
+
+.nav-bar-height .systemNotifications .read {
+  background-color: #a1a1a1;
+  color: #ffffff;
+}
+
+.nav-bar-height .systemNotifications .read:hover {
+  background-color: #828282;
+}
+
+.nav-bar-height .chatNotifications .dropdown-item,
+.nav-bar-height .chatNotifications .clearAllBtn {
+  font-size: 0.9rem;
+}
+
+.nav-bar-height .chatNotifications .dropdown-item .notificationDesc div:first-child,
+.nav-bar-height .chatNotifications .clearAllBtn .notificationDesc div:first-child {
+  font-size: 1rem;
+  color: #000;
+  font-weight: bold;
+}
+
+.nav-bar-height .chatNotifications .dropdown-item .notificationDesc .descTime,
+.nav-bar-height .chatNotifications .clearAllBtn .notificationDesc .descTime {
+  font-size: 0.65rem;
+}
+
+.nav-bar-height .chatNotifications .dropdown-item.read,
+.nav-bar-height .chatNotifications .read.clearAllBtn {
+  background-color: #e8e8e8;
+  color: #828282;
+}
+
+.nav-bar-height .chatNotifications .dropdown-item.read .notificationDesc div:first-child,
+.nav-bar-height .chatNotifications .read.clearAllBtn .notificationDesc div:first-child {
+  color: #828282;
+  font-weight: normal;
+}
+
+.nav-bar-height .chatNotifications .dropdown-item.read .notificationDesc .descTime,
+.nav-bar-height .chatNotifications .read.clearAllBtn .notificationDesc .descTime {
+  color: #828282 !important;
+}
+
+.nav-bar-height .clearAllBtn {
+  cursor: pointer;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  margin-top: 0;
+  margin-left: auto;
+  text-align: center;
 }
 
 .py-4 {

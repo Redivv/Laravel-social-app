@@ -89,6 +89,51 @@ body{
         .alert-success:hover{
             background-color: $green;
         }
+        .read{
+            background-color: $grey;
+            color:$white;
+            &:hover{
+                background-color: $dark-grey;
+            }
+        }
+    }
+    .chatNotifications{
+        .dropdown-item{
+            @include font-size(0.9rem);
+            .notificationDesc{
+                div:first-child{
+                    @include font-size(1rem);
+                    color:$black;
+                    font-weight: bold;
+                }
+                .descTime{
+                    @include font-size (0.65rem);
+                    @extend .text-muted;
+                }
+            }
+
+            &.read{
+                background-color: $light-grey;
+                color: $dark-grey;
+                .notificationDesc{
+                    div:first-child{
+                        color: $dark-grey;
+                        font-weight: normal;
+                    }
+                    .descTime{
+                        color: $dark-grey !important;
+                    }
+                }
+            }
+        }
+    }
+    .clearAllBtn{
+        cursor: pointer;
+        @extend .dropdown-item;
+        width: min-content;
+        margin-top: 0;
+        margin-left: auto;
+        text-align: center;
     }
 }
 

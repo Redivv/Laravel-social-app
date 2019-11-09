@@ -39,6 +39,8 @@ Route::prefix('user')->group(function(){
     Route::get('home', 'HomeController@index')->name('home');
     Route::get('talk', 'HomeController@chat')->name('chat');
     Route::put('report', "HomeController@report")->name('reportUser');
+    Route::patch('readNotifications', 'HomeController@readNotifications')->name('readNotifications');
+    Route::delete('deleteNotifications', 'HomeController@deleteNotifications')->name('deleteNotifications');
 });
 
 Route::prefix('admin')->group(function(){

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Nahid\Talk\Facades\Talk;
 use Auth;
 
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 use App\Notifications\UserFlagged;
 use App\User;
 use Illuminate\Support\Facades\Notification;
@@ -49,6 +53,76 @@ class HomeController extends Controller
             Notification::send($admins, new UserFlagged($request->userName,$request->reason));
         }
 
+        return response()->json(['status' => 'success'], 200);
+    }
+
+    public function readNotifications(Request $request)
+    {
+        $request->validate([
+            'type'    => [
+                'string',
+                Rule::in(['userNotifications', 'chatNotifications','systemNotifications']),
+            ]
+        ]);
+
+        switch ($request->type) {
+            case 'userNotifications':
+                # code...
+                break;
+            
+            case 'chatNotifications':
+                DB::table('notifications')
+                    ->where('type','App\Notifications\NewMessage')
+                    ->where('notifiable_id',Auth::id())
+                    ->update(['read_at' => Carbon::now()->toDateTimeString()]);
+                break;
+            
+            case 'systemNotifications':
+                DB::table('notifications')
+                    ->whereIn('type',[
+                        'App\Notifications\NewProfilePicture',
+                        'App\Notifications\UserFlagged',
+                        'App\Notifications\AcceptedPicture',
+                        'App\Notifications\DeniedPicture'
+                    ])
+                    ->where('notifiable_id',Auth::id())
+                    ->update(['read_at' => Carbon::now()->toDateTimeString()]);
+                break;
+        }
+        return response()->json(['status' => 'success'], 200);
+    }
+
+    public function deleteNotifications(Request $request)
+    {
+        $request->validate([
+            'type'    => [
+                'string',
+                Rule::in(['usNoNot', 'chatNoNot','sysNoNot']),
+            ]
+        ]);
+
+        switch ($request->type) {
+            case 'usNoNot':
+                # code...
+                break;
+            
+            case 'chatNoNot':
+                DB::table('notifications')
+                    ->where('type','App\Notifications\NewMessage')
+                    ->where('notifiable_id',Auth::id())
+                    ->delete();
+                break;
+            
+            case 'sysNoNot':
+                DB::table('notifications')
+                    ->whereIn('type',[
+                        'App\Notifications\AcceptedPicture',
+                        'App\Notifications\DeniedPicture'
+                    ])
+                    ->where('notifiable_id',Auth::id())
+                    ->delete();
+                break;
+        }
         return response()->json(['status' => 'success'], 200);
     }
 }
