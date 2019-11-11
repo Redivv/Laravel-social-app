@@ -46,7 +46,7 @@
                                         <div class="notificationDesc col-8">
                                             <div class="col-12 ">{{$chatNot['senderName']}}</div>
                                             <div class="col-12 descTime">{{$chatNot['created_at']}}</div>
-                                            <div class="col-12">{{$chatNot['data']['message_body']}}</div>
+                                            <div class="col-12">@if($chatNot['data']['image_present'])<i class="far fa-file-image"></i>@endif {{$chatNot['data']['message_body']}}</div>
                                         </div>
                                     </div>
                                 </a>
@@ -178,7 +178,7 @@
                                         <div class="notificationDesc col-10">
                                             <div class="col-12">{{$chatNot['senderName']}}</div>
                                             <div class="col-12 descTime">{{$chatNot['created_at']}}</div>
-                                            <div class="col-12">{{$chatNot['data']['message_body']}}</div>
+                                            <div class="col-12">@if($chatNot['data']['image_present'])<i class="far fa-file-image"></i>@endif {{$chatNot['data']['message_body']}}</div>
                                         </div>
                                     </div>
                                 </a>
@@ -387,6 +387,9 @@
                         })
                     }
                 }
+                if (data.message == null || data.message.trim() == "") {
+                    data.message = '<i class="far fa-file-image"></i>';
+                }
                 html = '<a class="chat-'+data.sender.id+' dropdown-item container" href="/message/'+data.sender.name+'">'+
                     '<div class="row">'+
                         '<div class="notificationImage col-2">'+
@@ -400,14 +403,18 @@
                     '</div>'+
                 '</a>';
                 if($('a.chat-'+data.sender.id).length) {
+                    if ($('a.chat-'+data.sender.id).hasClass('read')) {
+                        $('#desktopTalk').html(parseInt(newMessages)+1);
+                    }
                     $('a.chat-'+data.sender.id).remove();
                     $('.chatNotifications').prepend(html);
                 }else{
                     newMessages++;
                     $('.chatNotificationsCount').html(newMessages);
-                    $('.chatNotifications').prepend(html); 
+                    $('.chatNotifications').prepend(html);
+                    $('#desktopTalk').html(parseInt(newMessages)+1);
                 }
-                $('#desktopTalk').html(parseInt(newMessages)+1);
+
             }
         </script>
             {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}
