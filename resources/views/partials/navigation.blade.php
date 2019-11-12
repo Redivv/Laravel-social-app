@@ -121,11 +121,10 @@
                         <li class="nav-item">
                             <a href="{{ route('adminHome') }}" class="nav-link">{{__('app.adminDashboard')}}</a>
                         </li>
-                    @else
-                        <li class="nav-item">
-                            <a href="{{ route('home') }}" class="nav-link">{{__('app.dashboard')}}</a>
-                        </li>
                     @endif
+                    <li class="nav-item">
+                        <a href="{{ route('home') }}" class="nav-link">{{__('app.dashboard')}}</a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ url('/profile') }}" class="nav-link">{{__('app.profile')}}</a>
                     </li>
