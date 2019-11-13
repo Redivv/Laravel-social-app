@@ -75,12 +75,6 @@ body {
       padding-bottom: 20px;
 
     }
-
-    li.thread.activeUser{
-      .name,.status{
-        color: $green;
-      }
-    }
   }
   
   .profile-picture{
@@ -92,8 +86,22 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     img {
       width:70%;
+    }
+  }
+
+  li.activeUser{
+    .profile-picture:after{
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background-color: $green;
+      border-radius: 50%;
+      top: 2rem;
+      left: 2.4rem;
     }
   }
 
