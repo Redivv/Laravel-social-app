@@ -8,6 +8,7 @@ use Auth;
 use Carbon\Carbon;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Nahid\Talk\Facades\Talk;
 
 class NavigationComposer
 {   
@@ -24,8 +25,8 @@ class NavigationComposer
         if(Auth::check()){
             $notifications = Auth::user()->notifications()->get();
 
-            $notifications['chat'] = $notifications->whereIn('type',['App\Notifications\NewMessage'])->toArray();
-            $notificationsChatAmount = 0;
+            $this->notifications['chat'] = $threads = Talk::user(Auth::id())->getInbox();
+            $this->notifications['chatAmount'] = 0;
 
             $this->notifications['user'] = $notifications->whereIn('type',[])->toArray();
             $this->notifications['userAmount'] = $notifications->whereIn('type',[])->where('read_at',null)->count();
@@ -48,34 +49,10 @@ class NavigationComposer
                         'App\Notifications\AcceptedPicture',
                         'App\Notifications\DeniedPicture'
                         ])->where('read_at',null)->count();
-
-            if (count($notifications['chat']) > 0) {
-                $duplicateConvo = array();
-                foreach ($notifications['chat'] as $chatNot) {
-                    if (in_array($chatNot['data']['sender_id'],$duplicateConvo)) {
-                        continue;
-                    }else{
-                        $sender = User::find($chatNot['data']['sender_id']);
-                        if(!$sender){
-                            DB::table('notifications')->where('id',$chatNot['id'])->delete();
-                            continue;
-                        }else{
-                            $carbon = new Carbon($chatNot['created_at'],'Europe/Warsaw');
-                            $chatNot['created_at'] = $carbon->diffForHumans();
-                            $chatNot['senderName'] = $sender->name;
-                            $chatNot['senderPicture'] = $sender->picture;
-                            $this->notifications['chat'][] = $chatNot;
-                            $duplicateConvo[] = $chatNot['data']['sender_id'];
-                            if ($chatNot['read_at'] == null) {
-                                $notificationsChatAmount++;
-                            }
-                        }
-                    }
+            foreach ($this->notifications['chat'] as $chatNot) {
+                if ($chatNot->thread->is_seen == 0 && $chatNot->thread->user_id != Auth::id()) {
+                    $this->notifications['chatAmount']++;
                 }
-                $this->notifications['chatAmount'] = $notificationsChatAmount;
-            }else{
-                $this->notifications['chat'] = array();
-                $this->notifications['chatAmount'] = $notificationsChatAmount;
             }
 
         }else{

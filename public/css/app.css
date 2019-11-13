@@ -11120,6 +11120,7 @@ a.text-dark:focus {
 }
 
 .text-muted,
+#friendsWall .friendsWall #friendsWallFeed .noContent,
 .nav-bar-height .chatNotifications .dropdown-item .notificationDesc .descTime,
 .nav-bar-height .chatNotifications .clearAllBtn .notificationDesc .descTime {
   color: #6c757d !important;
@@ -17608,6 +17609,127 @@ html {
 
 .tag i:hover {
   color: #000;
+}
+
+#friendsWall .friendsWall {
+  text-align: left;
+}
+
+#friendsWall .friendsWall textarea {
+  display: none;
+}
+
+#friendsWall .friendsWall .emojionearea {
+  font-size: 1rem;
+}
+
+#friendsWall .friendsWall .friendsWallButtons {
+  margin: 0.5rem 0;
+  padding: 0 0.5rem;
+}
+
+#friendsWall .friendsWall .friendsWallButtons .additionalButton {
+  font-size: calc(1.265rem + 0.18vw);
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
+
+@media (min-width: 1200px) {
+  #friendsWall .friendsWall .friendsWallButtons .additionalButton {
+    font-size: 1.4rem;
+  }
+}
+
+#friendsWall .friendsWall .friendsWallButtons .additionalButton:hover {
+  color: #f66103;
+}
+
+#friendsWall .friendsWall .friendsWallSendButton button {
+  color: #ffffff;
+  background-color: #f66103;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+#friendsWall .friendsWall #friendsWallFeed {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+  display: block;
+  width: 100%;
+  min-height: 50vh;
+  padding: 1rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .noContent {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: calc(1.325rem + 0.9vw);
+  opacity: 0.5;
+}
+
+@media (min-width: 1200px) {
+  #friendsWall .friendsWall #friendsWallFeed .noContent {
+    font-size: 2rem;
+  }
+}
+
+#friendsWall .friendsListBox {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+#friendsWall .friendsListBox ul {
+  padding-left: 1rem;
+  list-style: none;
+}
+
+#friendsWall .friendsListBox ul li .profilePicture {
+  position: relative;
+}
+
+#friendsWall .friendsListBox ul li .profilePicture img {
+  max-width: 35px;
+  max-height: 35px;
+  border-radius: 50%;
+}
+
+#friendsWall .friendsListBox ul li.active .profilePicture::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #38c172;
+  border-radius: 50%;
+  top: 1.55rem;
+  left: 2.5rem;
+}
+
+#friendsWall .friendsListBox ul li .friendName,
+#friendsWall .friendsListBox ul li .friendOptions {
+  display: flex;
+  align-items: center;
+}
+
+#friendsWall .friendsListBox ul li .friendName {
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+#friendsWall .friendsListBox ul li .friendOptions {
+  font-size: 1.1rem;
+}
+
+#friendsWall .friendsListBox ul li .friendOptions span {
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
+
+#friendsWall .friendsListBox ul li .friendOptions span:hover {
+  color: #f66103;
 }
 
 html {

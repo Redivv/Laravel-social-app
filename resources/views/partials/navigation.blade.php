@@ -38,21 +38,19 @@
                             <div class="text-center chatNoNot">{{__('nav.noNotifications')}}</div>
                         @else
                             @foreach ($notifications['chat'] as $chatNot)
-                                <a class="chat-{{$chatNot['data']['sender_id']}} dropdown-item container @if($chatNot['read_at']){{'read'}}@endif" href="/message/{{$chatNot['senderName']}}">
+                                <a class="chat-{{$chatNot->thread->conversation_id}} dropdown-item container @if(($chatNot->thread->is_seen == 1) || ($chatNot->thread->user_id == auth()->id())){{'read'}}@endif" href="/message/{{$chatNot->withUser->name}}" target="__blank">
                                     <div class="row">
                                         <div class="notificationImage col-2">
-                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot['senderPicture'])}}" alt="" srcset="">
+                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot->withUser->picture)}}" alt="" srcset="">
                                         </div>
                                         <div class="notificationDesc col-8">
-                                            <div class="col-12 ">{{$chatNot['senderName']}}</div>
-                                            <div class="col-12 descTime">{{$chatNot['created_at']}}</div>
-                                            <div class="col-12">@if($chatNot['data']['image_present'])<i class="far fa-file-image"></i>@endif {{$chatNot['data']['message_body']}}</div>
+                                            <div class="col-12 ">{{$chatNot->withUser->name}}</div>
+                                            <div class="col-12 descTime">{{$chatNot->thread->updated_at->diffForHumans()}}</div>
+                                            <div class="col-12 descBody">@if($chatNot->thread->pictures)<i class="far fa-file-image"></i>@endif @if($chatNot->thread->user_id == auth()->id())<i class="fas fa-reply"></i>@endif {{$chatNot->thread->message}} @if($chatNot->thread->is_seen)<i class="fa fa-check"></i>@endif</div>
                                         </div>
                                     </div>
                                 </a>
                             @endforeach
-                            <div class="dropdown-divider"></div>
-                            <a class="clearAllBtn" data-type="chatNoNot" href="#">{{__('nav.deleteAll')}}</a>
                         @endif
                     </div>
 
@@ -169,21 +167,19 @@
                                 <div class="text-center chatNoNot">{{__('nav.noNotifications')}}</div>
                             @else
                                 @foreach($notifications['chat'] as $chatNot)
-                                <a class="chat-{{$chatNot['data']['sender_id']}} dropdown-item container @if($chatNot['read_at']){{'read'}}@endif" href="/message/{{$chatNot['senderName']}}">
+                                <a class="chat-{{$chatNot->thread->conversation_id}} dropdown-item container @if(($chatNot->thread->is_seen == 1) || ($chatNot->thread->user_id == auth()->id())){{'read'}}@endif" href="/message/{{$chatNot->withUser->name}}" target="__blank">
                                     <div class="row">
                                         <div class="notificationImage col-2">
-                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot['senderPicture'])}}" alt="" srcset="">
+                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot->withUser->picture)}}" alt="" srcset="">
                                         </div>
-                                        <div class="notificationDesc col-10">
-                                            <div class="col-12">{{$chatNot['senderName']}}</div>
-                                            <div class="col-12 descTime">{{$chatNot['created_at']}}</div>
-                                            <div class="col-12">@if($chatNot['data']['image_present'])<i class="far fa-file-image"></i>@endif {{$chatNot['data']['message_body']}}</div>
+                                        <div class="notificationDesc col-8">
+                                            <div class="col-12 ">{{$chatNot->withUser->name}}</div>
+                                            <div class="col-12 descTime">{{$chatNot->thread->updated_at->diffForHumans()}}</div>
+                                            <div class="col-12 descBody">@if($chatNot->thread->pictures)<i class="far fa-file-image"></i>@endif @if($chatNot->thread->user_id == auth()->id())<i class="fas fa-reply"></i>@endif {{$chatNot->thread->message}} @if($chatNot->thread->is_seen)<i class="fa fa-check"></i>@endif</div>
                                         </div>
                                     </div>
                                 </a>
                                 @endforeach
-                                <div class="dropdown-divider"></div>
-                                <a class="clearAllBtn" data-type="chatNoNot" href="#">{{__('nav.deleteAll')}}</a>
                             @endif
                         </div>
 
@@ -347,6 +343,13 @@
                 $('.systemNotifications').prepend(html);
         
             });
+
+            Echo.private(`seen.` + window.Laravel.user)
+
+                .listen('MessagesWereSeen', (e) => {
+                    alert('kek');
+                    $('.chat-'+e.conversation_id+'>.descBody').append('<i class="fas fa-reply"></i>');
+                });
         </script>
 
         <script>
@@ -389,7 +392,7 @@
                 if (data.message == null || data.message.trim() == "") {
                     data.message = '<i class="far fa-file-image"></i>';
                 }
-                html = '<a class="chat-'+data.sender.id+' dropdown-item container" href="/message/'+data.sender.name+'">'+
+                html = '<a class="chat-'+data.conversation_id+' dropdown-item container" href="/message/'+data.sender.name+' target=__blank">'+
                     '<div class="row">'+
                         '<div class="notificationImage col-2">'+
                             '<img class="notificationImage" src="/img/profile-pictures/'+data.sender.picture+'" alt="" srcset="">'+
@@ -401,11 +404,11 @@
                         '</div>'+
                     '</div>'+
                 '</a>';
-                if($('a.chat-'+data.sender.id).length) {
-                    if ($('a.chat-'+data.sender.id).hasClass('read')) {
+                if($('a.chat-'+data.conversation_id).length) {
+                    if ($('a.chat-'+data.conversation_id).hasClass('read')) {
                         $('#desktopTalk').html(parseInt(newMessages)+1);
                     }
-                    $('a.chat-'+data.sender.id).remove();
+                    $('a.chat-'+data.conversation_id).remove();
                     $('.chatNotifications').prepend(html);
                 }else{
                     newMessages++;

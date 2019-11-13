@@ -34,9 +34,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->isAdmin()) {
-            return redirect(route('adminHome'));
-        }
         return view('home');
     }
 
@@ -97,20 +94,13 @@ class HomeController extends Controller
         $request->validate([
             'type'    => [
                 'string',
-                Rule::in(['usNoNot', 'chatNoNot','sysNoNot']),
+                Rule::in(['usNoNot','sysNoNot']),
             ]
         ]);
 
         switch ($request->type) {
             case 'usNoNot':
                 # code...
-                break;
-            
-            case 'chatNoNot':
-                DB::table('notifications')
-                    ->where('type','App\Notifications\NewMessage')
-                    ->where('notifiable_id',Auth::id())
-                    ->delete();
                 break;
             
             case 'sysNoNot':

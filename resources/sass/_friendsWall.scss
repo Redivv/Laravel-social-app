@@ -1,0 +1,98 @@
+#friendsWall{
+    .friendsWall{
+        text-align: left;
+        textarea{
+            display: none;
+        }
+        .emojionearea{
+            @include font-size(1rem);
+        }
+        .friendsWallButtons{
+            margin: 0.5rem 0;
+            padding:0 0.5rem;
+            .additionalButton{
+                @include font-size(1.4rem);
+                margin: 0 0.5rem;
+                cursor: pointer;
+                &:hover{
+                    color: $orange;
+                }
+            }
+        }
+        .friendsWallSendButton{
+            button{
+                color: $white;
+                background-color: $orange;
+                @include font-size(1rem);
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+            }
+        }
+        #friendsWallFeed{
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            display: block;
+            width: 100%;
+            min-height: 50vh;
+            padding: 1rem;
+            .noContent{
+                text-align: center;
+                margin: 2rem 0;
+                @include font-size(2rem);
+                @extend .text-muted;
+                opacity: 0.5;
+            }
+        }
+    }
+    .friendsListBox{
+        display: block;
+        width: 100%;
+        text-align: left;
+        ul{
+            padding-left: 1rem;
+            list-style: none;
+            li{
+                .profilePicture{
+                    position: relative;
+                    img{
+                        max-width: 35px;
+                        max-height: 35px;
+                        border-radius: 50%;
+                    }
+                }
+                &.active{
+                    .profilePicture::after{
+                        content: "";
+                        position: absolute;
+                        width: 12px;
+                        height: 12px;
+                        background-color: $green;
+                        border-radius: 50%;
+                        top: 1.55rem;
+                        left: 2.5rem;
+                    }
+                }
+                .friendName,.friendOptions{
+                    display: flex;
+                    align-items: center;
+                }
+                .friendName{
+                    @include font-size(1rem);
+                    letter-spacing: 1px;
+                }
+                .friendOptions{
+                    @include font-size(1.1rem);
+                    span{
+                        margin: 0 0.5rem;
+                        cursor: pointer;
+                        &:hover{
+                            color: $orange; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
