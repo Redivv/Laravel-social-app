@@ -104,23 +104,26 @@ function main() {
     $(this).parent().one('hidden.bs.dropdown', function () {
       $('.' + type + '>.dropdown-item').addClass('read');
     });
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    var url = baseUrl + '/user/readNotifications';
-    var request = $.ajax({
-      method: 'post',
-      url: url,
-      data: {
-        "_method": "PATCH",
-        type: type
-      }
-    });
-    request.fail(function (xhr) {
-      alert(xhr.responseJSON.message);
-    });
+
+    if (type !== "chatNotifications") {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      var url = baseUrl + '/user/readNotifications';
+      var request = $.ajax({
+        method: 'post',
+        url: url,
+        data: {
+          "_method": "PATCH",
+          type: type
+        }
+      });
+      request.fail(function (xhr) {
+        alert(xhr.responseJSON.message);
+      });
+    }
   });
   $('a.clearAllBtn').one('click', function () {
     var type = $(this).data('type');

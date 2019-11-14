@@ -11,23 +11,25 @@ function main() {
             $('.'+type+'>.dropdown-item').addClass('read');
         })
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        let url = baseUrl+'/user/readNotifications';
-
-        let request = $.ajax({
-            method : 'post',
-            url: url,
-            data: {"_method":"PATCH",type:type}
-        });
-        
-        request.fail(function (xhr){
-            alert(xhr.responseJSON.message);
-        });
+        if (type !== "chatNotifications") {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+    
+            let url = baseUrl+'/user/readNotifications';
+    
+            let request = $.ajax({
+                method : 'post',
+                url: url,
+                data: {"_method":"PATCH",type:type}
+            });
+            
+            request.fail(function (xhr){
+                alert(xhr.responseJSON.message);
+            });
+        }
 
     });
 

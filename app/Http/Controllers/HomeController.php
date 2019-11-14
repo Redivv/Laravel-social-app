@@ -58,20 +58,13 @@ class HomeController extends Controller
         $request->validate([
             'type'    => [
                 'string',
-                Rule::in(['userNotifications', 'chatNotifications','systemNotifications']),
+                Rule::in(['userNotifications','systemNotifications']),
             ]
         ]);
 
         switch ($request->type) {
             case 'userNotifications':
                 # code...
-                break;
-            
-            case 'chatNotifications':
-                DB::table('notifications')
-                    ->where('type','App\Notifications\NewMessage')
-                    ->where('notifiable_id',Auth::id())
-                    ->update(['read_at' => Carbon::now()->toDateTimeString()]);
                 break;
             
             case 'systemNotifications':
