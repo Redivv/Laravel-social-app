@@ -17402,9 +17402,14 @@ body {
   background-color: #38c172;
 }
 
+.nav-bar-height .systemNotifications .systemNotificationDate {
+  font-size: 0.6rem;
+}
+
 .nav-bar-height .systemNotifications .read {
   background-color: #a1a1a1;
   color: #ffffff;
+  border-color: darkgrey;
 }
 
 .nav-bar-height .systemNotifications .read:hover {
@@ -17648,7 +17653,7 @@ html {
   color: #ffffff;
   background-color: #f66103;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 2px;
 }

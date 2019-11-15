@@ -17,7 +17,7 @@ class NavigationComposer
     /**
      * Create a new profile composer.
      *
-     * @param  UserRepository  $users
+     * @param  UserRepository  $users  
      * @return void
      */
     public function __construct()
@@ -28,7 +28,7 @@ class NavigationComposer
             $this->notifications['chat'] = $threads = Talk::user(Auth::id())->getInbox();
             $this->notifications['chatAmount'] = 0;
 
-            $this->notifications['user'] = $notifications->whereIn('type',[])->toArray();
+            $this->notifications['user'] = $notifications->whereIn('type',[]);
             $this->notifications['userAmount'] = $notifications->whereIn('type',[])->where('read_at',null)->count();
 
             $this->notifications['system'] = $notifications
@@ -39,7 +39,7 @@ class NavigationComposer
                         'App\Notifications\UserFlagged',
                         'App\Notifications\AcceptedPicture',
                         'App\Notifications\DeniedPicture'
-                        ])->toArray();
+                        ]);
             $this->notifications['systemAmount'] = $notifications
                 ->whereIn(
                     'type',
@@ -49,6 +49,7 @@ class NavigationComposer
                         'App\Notifications\AcceptedPicture',
                         'App\Notifications\DeniedPicture'
                         ])->where('read_at',null)->count();
+
             foreach ($this->notifications['chat'] as $chatNot) {
                 if ($chatNot->thread->is_seen == 0 && $chatNot->thread->user_id != Auth::id()) {
                     $this->notifications['chatAmount']++;
@@ -69,6 +70,7 @@ class NavigationComposer
      */
     public function compose(View $view)
     {
+        // dd($this->notifications);
         $view->with('notifications', $this->notifications);
     }
 }

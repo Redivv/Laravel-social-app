@@ -24,7 +24,7 @@
                 color: $white;
                 background-color: $orange;
                 @include font-size(1rem);
-                font-weight: bold;
+                font-weight: normal;
                 text-transform: uppercase;
                 letter-spacing: 2px;
             }

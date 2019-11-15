@@ -76,6 +76,7 @@ class HomeController extends Controller
                         'App\Notifications\DeniedPicture'
                     ])
                     ->where('notifiable_id',Auth::id())
+                    ->where('read_at',null)
                     ->update(['read_at' => Carbon::now()->toDateTimeString()]);
                 break;
         }

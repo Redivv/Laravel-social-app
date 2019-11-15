@@ -89,9 +89,13 @@ body{
         .alert-success:hover{
             background-color: $green;
         }
+        .systemNotificationDate{
+            @include font-size(0.6rem);
+        }
         .read{
             background-color: $grey;
             color:$white;
+            border-color: darkgrey;
             &:hover{
                 background-color: $dark-grey;
             }
