@@ -17620,6 +17620,26 @@ html {
   text-align: left;
 }
 
+#friendsWall .friendsWall .friendsWallHeader {
+  text-align: center;
+}
+
+#friendsWall .friendsWall .friendsWallHeader h3 {
+  font-size: calc(1.325rem + 0.9vw);
+  letter-spacing: 2px;
+}
+
+@media (min-width: 1200px) {
+  #friendsWall .friendsWall .friendsWallHeader h3 {
+    font-size: 2rem;
+  }
+}
+
+#friendsWall .friendsWall #picture-preview .thumb {
+  max-width: 150px;
+  max-height: 150px;
+}
+
 #friendsWall .friendsWall textarea {
   display: none;
 }
@@ -17681,28 +17701,43 @@ html {
   }
 }
 
-#friendsWall .friendsListBox {
+#friendsWall .friendsWall #friendsWallFeed .ajaxSpinner {
+  text-align: center;
+}
+
+#friendsWall .friendsList .friendsListHeader h3 {
+  font-size: calc(1.325rem + 0.9vw);
+  letter-spacing: 2px;
+}
+
+@media (min-width: 1200px) {
+  #friendsWall .friendsList .friendsListHeader h3 {
+    font-size: 2rem;
+  }
+}
+
+#friendsWall .friendsList .friendsListBox {
   display: block;
   width: 100%;
   text-align: left;
 }
 
-#friendsWall .friendsListBox ul {
+#friendsWall .friendsList .friendsListBox ul {
   padding-left: 1rem;
   list-style: none;
 }
 
-#friendsWall .friendsListBox ul li .profilePicture {
+#friendsWall .friendsList .friendsListBox ul li .profilePicture {
   position: relative;
 }
 
-#friendsWall .friendsListBox ul li .profilePicture img {
+#friendsWall .friendsList .friendsListBox ul li .profilePicture img {
   max-width: 35px;
   max-height: 35px;
   border-radius: 50%;
 }
 
-#friendsWall .friendsListBox ul li.active .profilePicture::after {
+#friendsWall .friendsList .friendsListBox ul li.active .profilePicture::after {
   content: "";
   position: absolute;
   width: 12px;
@@ -17713,27 +17748,27 @@ html {
   left: 2.5rem;
 }
 
-#friendsWall .friendsListBox ul li .friendName,
-#friendsWall .friendsListBox ul li .friendOptions {
+#friendsWall .friendsList .friendsListBox ul li .friendName,
+#friendsWall .friendsList .friendsListBox ul li .friendOptions {
   display: flex;
   align-items: center;
 }
 
-#friendsWall .friendsListBox ul li .friendName {
+#friendsWall .friendsList .friendsListBox ul li .friendName {
   font-size: 1rem;
   letter-spacing: 1px;
 }
 
-#friendsWall .friendsListBox ul li .friendOptions {
+#friendsWall .friendsList .friendsListBox ul li .friendOptions {
   font-size: 1.1rem;
 }
 
-#friendsWall .friendsListBox ul li .friendOptions span {
+#friendsWall .friendsList .friendsListBox ul li .friendOptions span {
   margin: 0 0.5rem;
   cursor: pointer;
 }
 
-#friendsWall .friendsListBox ul li .friendOptions span:hover {
+#friendsWall .friendsList .friendsListBox ul li .friendOptions span:hover {
   color: #f66103;
 }
 

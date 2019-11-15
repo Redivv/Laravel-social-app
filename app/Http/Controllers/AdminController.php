@@ -227,6 +227,12 @@ class AdminController extends Controller
         if($validUser){
             switch ($decision) {
                 case 'accept':
+                    $convoId = DB::table('conversations')->select('id')->where('user_one',$validUser->id)->orWhere('user_two',$validUser->id)->get()->toArray();
+                    foreach ($convoId as $convo) {
+                        DB::table('conversations')->where('id',$convo->id)->delete();
+                        DB::table('messages')->where('conversation_id',$convo->id)->delete();
+                    }
+                    DB::table('posts')->where('user_id',$validUser->id)->delete();
                     $validUser->notify(new UserDeleted($validUser->name));
                     $validUser->delete();
                     break;
@@ -245,6 +251,7 @@ class AdminController extends Controller
                     DB::table('conversations')->where('id',$convo->id)->delete();
                     DB::table('messages')->where('conversation_id',$convo->id)->delete();
                 }
+                DB::table('posts')->where('user_id',$validUser->id)->delete();
                 $user->notify(new UserDeleted($user->name));
                 $user->delete();
                 break;

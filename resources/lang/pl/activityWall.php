@@ -3,5 +3,7 @@ return [
     'tagUser'           => 'Oznacz Znajomego',
     'addImage'          => 'Dodaj Zdjęcie',
     'createPost'        => 'Dodaj Post',
-    'noContent'         => 'Brak Treści'
+    'noContent'         => 'Brak Treści',
+    'friendsListHeader' => 'Lista Znajomych',
+    'friendsWallHeader' => 'Napisz do Znajomych'
 ];

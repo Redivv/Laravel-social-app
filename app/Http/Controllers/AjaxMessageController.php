@@ -69,7 +69,6 @@ class AjaxMessageController extends Controller
             }
 
                 if ($message = Talk::sendMessageByUserId($userId, $body, $pictures_json)) {
-                    User::find($userId)->notify(new NewMessage(Auth::id(),$body,isset($pictures_json)));
                     $html = view('ajax.newMessageHtml', compact('message'))->render();
                     $threads = Talk::getInbox('desc',0,1);
                     $html2 = view('ajax.newThreadHtml', compact('threads'))->render();

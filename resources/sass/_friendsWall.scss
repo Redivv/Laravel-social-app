@@ -1,6 +1,19 @@
 #friendsWall{
     .friendsWall{
         text-align: left;
+        .friendsWallHeader{
+            text-align: center;
+            h3{
+                @include font-size(2rem);
+                letter-spacing: 2px;
+            }
+        }
+        #picture-preview{
+            .thumb{
+                max-width: 150px;
+                max-height: 150px;
+            }
+        }
         textarea{
             display: none;
         }
@@ -44,51 +57,62 @@
                 @extend .text-muted;
                 opacity: 0.5;
             }
+            .ajaxSpinner{
+                text-align: center;
+            }
         }
     }
-    .friendsListBox{
-        display: block;
-        width: 100%;
-        text-align: left;
-        ul{
-            padding-left: 1rem;
-            list-style: none;
-            li{
-                .profilePicture{
-                    position: relative;
-                    img{
-                        max-width: 35px;
-                        max-height: 35px;
-                        border-radius: 50%;
+    .friendsList{
+        .friendsListHeader{
+            h3{
+                @include font-size(2rem);
+                letter-spacing: 2px;
+            }
+        }
+        .friendsListBox{
+            display: block;
+            width: 100%;
+            text-align: left;
+            ul{
+                padding-left: 1rem;
+                list-style: none;
+                li{
+                    .profilePicture{
+                        position: relative;
+                        img{
+                            max-width: 35px;
+                            max-height: 35px;
+                            border-radius: 50%;
+                        }
                     }
-                }
-                &.active{
-                    .profilePicture::after{
-                        content: "";
-                        position: absolute;
-                        width: 12px;
-                        height: 12px;
-                        background-color: $green;
-                        border-radius: 50%;
-                        top: 1.55rem;
-                        left: 2.5rem;
+                    &.active{
+                        .profilePicture::after{
+                            content: "";
+                            position: absolute;
+                            width: 12px;
+                            height: 12px;
+                            background-color: $green;
+                            border-radius: 50%;
+                            top: 1.55rem;
+                            left: 2.5rem;
+                        }
                     }
-                }
-                .friendName,.friendOptions{
-                    display: flex;
-                    align-items: center;
-                }
-                .friendName{
-                    @include font-size(1rem);
-                    letter-spacing: 1px;
-                }
-                .friendOptions{
-                    @include font-size(1.1rem);
-                    span{
-                        margin: 0 0.5rem;
-                        cursor: pointer;
-                        &:hover{
-                            color: $orange; 
+                    .friendName,.friendOptions{
+                        display: flex;
+                        align-items: center;
+                    }
+                    .friendName{
+                        @include font-size(1rem);
+                        letter-spacing: 1px;
+                    }
+                    .friendOptions{
+                        @include font-size(1.1rem);
+                        span{
+                            margin: 0 0.5rem;
+                            cursor: pointer;
+                            &:hover{
+                                color: $orange; 
+                            }
                         }
                     }
                 }

@@ -41,6 +41,9 @@ Route::prefix('user')->group(function(){
     Route::put('report', "HomeController@report")->name('reportUser');
     Route::patch('readNotifications', 'HomeController@readNotifications')->name('readNotifications');
     Route::delete('deleteNotifications', 'HomeController@deleteNotifications')->name('deleteNotifications');
+    Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+       Route::post('newPost', 'HomeController@newPost')->name('ajaxNewPost'); 
+    });
 });
 
 Route::prefix('admin')->group(function(){
