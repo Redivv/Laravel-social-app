@@ -66,7 +66,7 @@ function main() {
                         '<span class="sr-only">Loading...</span>'+
                     '</div>'+
                 '</div>';
-                if ($('noContent').length) {
+                if ($('.noContent').length) {
                     $('.noContent').remove();
                 }
                 $('#friendsWallFeed').prepend(html);
@@ -84,8 +84,8 @@ function main() {
             
             request.done(function(response){
                 if (response.status === 'success') {
-                    alert('ke');
                     $('#spinner').remove();
+                    $('#friendsWallFeed').prepend(response.html);
                 }
             });
             

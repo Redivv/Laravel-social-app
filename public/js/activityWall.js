@@ -151,7 +151,7 @@ function main() {
         $('#picture-preview').empty();
         var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
 
-        if ($('noContent').length) {
+        if ($('.noContent').length) {
           $('.noContent').remove();
         }
 
@@ -167,8 +167,8 @@ function main() {
       });
       request.done(function (response) {
         if (response.status === 'success') {
-          alert('ke');
           $('#spinner').remove();
+          $('#friendsWallFeed').prepend(response.html);
         }
       });
       request.fail(function (xhr) {

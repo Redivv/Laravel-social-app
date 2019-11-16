@@ -11122,7 +11122,9 @@ a.text-dark:focus {
 .text-muted,
 #friendsWall .friendsWall #friendsWallFeed .noContent,
 .nav-bar-height .chatNotifications .dropdown-item .notificationDesc .descTime,
-.nav-bar-height .chatNotifications .clearAllBtn .notificationDesc .descTime {
+.nav-bar-height .chatNotifications .clearAllBtn .notificationDesc .descTime,
+.nav-bar-height .userNotifications .dropdown-item .notificationDesc .descTime,
+.nav-bar-height .userNotifications .clearAllBtn .notificationDesc .descTime {
   color: #6c757d !important;
 }
 
@@ -17377,8 +17379,61 @@ body {
 }
 
 .nav-bar-height .navDesc .dropdown-menu {
-  min-width: 25vw;
   left: -80%;
+  overflow-x: hidden;
+  width: 30vw;
+}
+
+.nav-bar-height .userNotifications .dropdown-item,
+.nav-bar-height .userNotifications .clearAllBtn {
+  padding: 0.5rem;
+}
+
+.nav-bar-height .userNotifications .dropdown-item .notificationImageBox,
+.nav-bar-height .userNotifications .clearAllBtn .notificationImageBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-bar-height .userNotifications .dropdown-item .notificationImageBox .notificationImage,
+.nav-bar-height .userNotifications .clearAllBtn .notificationImageBox .notificationImage {
+  padding-left: 0;
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+}
+
+.nav-bar-height .userNotifications .dropdown-item .notificationDesc,
+.nav-bar-height .userNotifications .clearAllBtn .notificationDesc {
+  align-self: center;
+}
+
+.nav-bar-height .userNotifications .dropdown-item .notificationDesc .descTime,
+.nav-bar-height .userNotifications .clearAllBtn .notificationDesc .descTime {
+  font-size: 0.7rem;
+}
+
+.nav-bar-height .userNotifications .dropdown-item .notificationDesc .descBody,
+.nav-bar-height .userNotifications .clearAllBtn .notificationDesc .descBody {
+  font-size: 0.9rem;
+}
+
+.nav-bar-height .userNotifications .dropdown-item.read,
+.nav-bar-height .userNotifications .read.clearAllBtn {
+  background-color: #e8e8e8;
+  color: #828282;
+}
+
+.nav-bar-height .userNotifications .dropdown-item.read .notificationDesc div:first-child,
+.nav-bar-height .userNotifications .read.clearAllBtn .notificationDesc div:first-child {
+  color: #828282;
+  font-weight: normal;
+}
+
+.nav-bar-height .userNotifications .dropdown-item.read .notificationDesc .descTime,
+.nav-bar-height .userNotifications .read.clearAllBtn .notificationDesc .descTime {
+  color: #828282 !important;
 }
 
 .nav-bar-height .systemNotifications a {
@@ -17419,6 +17474,21 @@ body {
 .nav-bar-height .chatNotifications .dropdown-item,
 .nav-bar-height .chatNotifications .clearAllBtn {
   font-size: 0.9rem;
+}
+
+.nav-bar-height .chatNotifications .dropdown-item .notificationImageBox,
+.nav-bar-height .chatNotifications .clearAllBtn .notificationImageBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-bar-height .chatNotifications .dropdown-item .notificationImageBox .notificationImage,
+.nav-bar-height .chatNotifications .clearAllBtn .notificationImageBox .notificationImage {
+  padding-left: 0;
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
 }
 
 .nav-bar-height .chatNotifications .dropdown-item .notificationDesc div:first-child,
@@ -17703,6 +17773,74 @@ html {
 
 #friendsWall .friendsWall #friendsWallFeed .ajaxSpinner {
   text-align: center;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post {
+  margin-top: 1rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorPicture {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName {
+  display: flex;
+  align-items: center;
+  font-size: calc(1.255rem + 0.06vw);
+  font-weight: bold;
+  letter-spacing: 1.5px;
+}
+
+@media (min-width: 1200px) {
+  #friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName {
+    font-size: 1.3rem;
+  }
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorButtons {
+  text-align: right;
+  font-size: 0.9rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorButtons i {
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorButtons i:hover {
+  color: #f66103;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postDesc {
+  padding: 0 1rem;
+  margin-top: 0.5rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postDesc .postPhotos .postPicture {
+  max-width: 500px;
+  max-height: 200px;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postDesc .postContent {
+  margin-top: 0.25rem;
+  font-size: 1rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postFooter {
+  margin-top: 0.5rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postFooter button {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  margin: 0 auto;
+  color: #000;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postFooter button:hover {
+  color: #f66103;
 }
 
 #friendsWall .friendsList .friendsListHeader h3 {

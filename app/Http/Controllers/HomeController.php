@@ -36,7 +36,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $posts = Post::orderBy('created_at', 'desc')->get();
+
+        $userNotifications = Auth::user()->notifications()->whereIn(
+            'type',
+            [
+                'App\Notifications\NewFriendPost',
+                ])->get();
+        
+        foreach ($userNotifications as $usNot) {
+            $usNot->delete();
+        }
+
+        return view('home')->withPosts($posts);
     }
 
     public function report(Request $request)
@@ -66,7 +78,13 @@ class HomeController extends Controller
 
         switch ($request->type) {
             case 'userNotifications':
-                # code...
+                DB::table('notifications')
+                    ->whereIn('type',[
+                        'App\Notifications\NewFriendPost',
+                    ])
+                    ->where('notifiable_id',Auth::id())
+                    ->where('read_at',null)
+                    ->update(['read_at' => Carbon::now()->toDateTimeString()]);
                 break;
             
             case 'systemNotifications':
@@ -116,11 +134,14 @@ class HomeController extends Controller
 
             
             if ($post->save()) {
-                $friends = User::all();
-                Notification::send($friends, new NewFriendPost($author));
+                $posts = [$post];
+                $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
+                $friends = User::whereNotIn('id',[Auth::id()])->get();
+                Notification::send($friends, new NewFriendPost($author,$post->id));
+                return response()->json(['status' => 'success', 'html' => $html], 200);
             }
 
-            return response()->json(['status' => 'success'], 200);
+            return response()->json(['status' => 'error'], 400);
         }
     }
 

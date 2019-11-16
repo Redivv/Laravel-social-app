@@ -110,10 +110,10 @@ class AdminController extends Controller
         if ($request->ajax()) {
             $request->validate([
                 'decision'     =>
-                    'string', 'required',
+                    'string',
                     Rule::in(['delete','edit']),
                 'target'       =>
-                    'string', 'required',
+                    'string',
                     Rule::in(['userList','tagList','cityList']),
             ]);
             $elementId = intVal(substr($request->elementId,10));
@@ -251,7 +251,8 @@ class AdminController extends Controller
                     DB::table('conversations')->where('id',$convo->id)->delete();
                     DB::table('messages')->where('conversation_id',$convo->id)->delete();
                 }
-                DB::table('posts')->where('user_id',$validUser->id)->delete();
+                DB::table('posts')->where('user_id',$user->id)->delete();
+                DB::table('notifications')->where('notifiable_id',$user->id)->delete();
                 $user->notify(new UserDeleted($user->name));
                 $user->delete();
                 break;

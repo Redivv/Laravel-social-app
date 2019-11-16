@@ -21,7 +21,11 @@
                 </div>
             </form>
             <output id="friendsWallFeed" class="">
-                <div class="noContent">{{__('activityWall.noContent')}}</div>
+                @if (count($posts) > 0)
+                    @include('partials.friendsWallPosts')
+                @else
+                    <div class="noContent">{{__('activityWall.noContent')}}</div>
+                @endif
             </output>
         </div>
         <div class="col-3 friendsList">

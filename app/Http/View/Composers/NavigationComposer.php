@@ -28,8 +28,8 @@ class NavigationComposer
             $this->notifications['chat'] = $threads = Talk::user(Auth::id())->getInbox();
             $this->notifications['chatAmount'] = 0;
 
-            $this->notifications['user'] = $notifications->whereIn('type',[]);
-            $this->notifications['userAmount'] = $notifications->whereIn('type',[])->where('read_at',null)->count();
+            $this->notifications['user'] = $notifications->whereIn('type',['App\Notifications\NewFriendPost']);
+            $this->notifications['userAmount'] = $notifications->whereIn('type',['App\Notifications\NewFriendPost'])->where('read_at',null)->count();
 
             $this->notifications['system'] = $notifications
                 ->whereIn(
@@ -69,7 +69,8 @@ class NavigationComposer
      * @return void
      */
     public function compose(View $view)
-    {
+    {   
+        // dd($this->notifications);
         // dd($this->notifications);
         $view->with('notifications', $this->notifications);
     }

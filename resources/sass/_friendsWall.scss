@@ -60,6 +60,60 @@
             .ajaxSpinner{
                 text-align: center;
             }
+            .post{
+                margin-top: 1rem;
+                .postAuthor{
+                    .postAuthorPicture{
+                        max-width: 50px;
+                        max-height: 50px;
+                        border-radius: 50%;
+                    }
+                    .postAuthorName{
+                        display: flex;
+                        align-items: center;
+                        @include font-size(1.3rem);
+                        font-weight: bold;
+                        letter-spacing: 1.5px;
+                    }
+                    .postAuthorButtons{
+                        text-align: right;
+                        @include font-size(0.9rem);
+                        i{
+                            padding: 0 0.5rem;
+                            cursor: pointer;
+                            &:hover{
+                                color: $orange;
+                            }
+                        }
+                    }
+                }
+                .postDesc{
+                    padding: 0 1rem;
+                    margin-top: 0.5rem;
+                    .postPhotos{
+                        .postPicture{
+                            max-width: 500px;
+                            max-height: 200px;
+                        }
+                    }
+                    .postContent{
+                        margin-top: 0.25rem;
+                        @include font-size(1rem);
+                    }
+                }
+                .postFooter{
+                    margin-top: 0.5rem;
+                    button{
+                        @include font-size(1.2rem);
+                        letter-spacing: 2px;
+                        margin: 0 auto;
+                        color: $black;
+                        &:hover{
+                            color:$orange;
+                        }
+                    }
+                }
+            }
         }
     }
     .friendsList{

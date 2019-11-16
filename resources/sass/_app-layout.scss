@@ -68,8 +68,49 @@ body{
             border-radius: 50%;
         }
         .dropdown-menu{
-            min-width: 25vw;
             left: -80%;
+            overflow-x: hidden;
+            width: 30vw;
+        }
+    }
+    .userNotifications{
+        .dropdown-item{
+            padding: 0.5rem;
+            .notificationImageBox{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .notificationImage{
+                    padding-left: 0;
+                    max-width: 50px;
+                    max-height: 50px;
+                    border-radius: 50%;
+                }
+            }
+            .notificationDesc{
+                align-self: center;
+                .descTime{
+                    @extend .text-muted;
+                    @include font-size(0.7rem);
+                }
+                .descBody{
+                    @include font-size(0.9rem);
+                }
+            }
+
+            &.read{
+                background-color: $light-grey;
+                color: $dark-grey;
+                .notificationDesc{
+                    div:first-child{
+                        color: $dark-grey;
+                        font-weight: normal;
+                    }
+                    .descTime{
+                        color: $dark-grey !important;
+                    }
+                }
+            }
         }
     }
     .systemNotifications{
@@ -103,6 +144,17 @@ body{
     }
     .chatNotifications{
         .dropdown-item{
+            .notificationImageBox{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .notificationImage{
+                    padding-left: 0;
+                    max-width: 50px;
+                    max-height: 50px;
+                    border-radius: 50%;
+                }
+            }
             @include font-size(0.9rem);
             .notificationDesc{
                 div:first-child{

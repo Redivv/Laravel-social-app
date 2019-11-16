@@ -7,5 +7,7 @@ return [
     'pictureDeny'               => 'Twoje Zdjęcie Profilowe Zostało Odrzucone',
     'ago'                       => 'temu',
     'deleteAll'                 => 'Przeczytaj Wszystkie',
-    'newSysNotTime'             => '1 sekunda temu'
+    'newSysNotTime'             => '1 sekunda temu',
+    'userNot1'                  => 'Twój znajomy ',
+    'userNot2'                  => 'napisał nowy post na tablicy'
 ];
