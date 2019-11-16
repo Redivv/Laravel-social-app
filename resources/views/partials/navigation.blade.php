@@ -17,9 +17,25 @@
                     {{-- User Notifications Mobile --}}
                     <div class="dropdown-menu pl-2 pr-2 position-absolute userNotifications">
                         @if (count($notifications['user']) == 0)
-                            <div class="text-center usNoNot">{{__('nav.noNotifications')}}</div>
-                        @else
-                            Powiadomienia
+                                <div class="text-center usNoNot">{{__('nav.noNotifications')}}</div>
+                            @else
+                                @foreach ($notifications['user'] as $userNot)
+                                    @switch($userNot->type)
+                                        @case('App\Notifications\NewFriendPost')
+                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('home').'/#post'.$userNot->data['postId']}}" target="__blank">
+                                                <div class="row">
+                                                    <div class="notificationImageBox col-2">
+                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}">
+                                                    </div>
+                                                    <div class="notificationDesc col-10">
+                                                        <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
+                                                        <div class="col-12 descBody">{{__('nav.userNot1')}} <span class="font-weight-bold">{{$userNot->data['author_name']}}</span> {{__('nav.userNot2')}}</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            @break
+                                    @endswitch
+                                @endforeach
                         @endif
                     </div>
 
@@ -37,19 +53,19 @@
                         @if (count($notifications['chat']) == 0)
                             <div class="text-center chatNoNot">{{__('nav.noNotifications')}}</div>
                         @else
-                            @foreach ($notifications['chat'] as $chatNot)
-                                <a class="chat-{{$chatNot->thread->conversation_id}} dropdown-item container @if(($chatNot->thread->is_seen == 1) || ($chatNot->thread->user_id == auth()->id())){{'read'}}@endif" href="/message/{{$chatNot->withUser->name}}" target="__blank">
-                                    <div class="row">
-                                        <div class="notificationImageBox col-2">
-                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot->withUser->picture)}}" alt="" srcset="">
-                                        </div>
-                                        <div class="notificationDesc col-8">
-                                            <div class="col-12 ">{{$chatNot->withUser->name}}</div>
-                                            <div class="col-12 descTime">{{$chatNot->thread->updated_at->diffForHumans()}}</div>
-                                            <div class="col-12 descBody">@if($chatNot->thread->pictures)<i class="far fa-file-image"></i>@endif @if($chatNot->thread->user_id == auth()->id())<i class="fas fa-reply"></i>@endif {{$chatNot->thread->message}} @if($chatNot->thread->is_seen)<i class="fa fa-check"></i>@endif</div>
-                                        </div>
+                            @foreach($notifications['chat'] as $chatNot)
+                            <a class="chat-{{$chatNot->thread->conversation_id}} dropdown-item container @if(($chatNot->thread->is_seen == 1) || ($chatNot->thread->user_id == auth()->id())){{'read'}}@endif" href="/message/{{$chatNot->withUser->name}}" target="__blank">
+                                <div class="row">
+                                    <div class="notificationImageBox col-2">
+                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot->withUser->picture)}}" alt="" srcset="">
                                     </div>
-                                </a>
+                                    <div class="notificationDesc col-10">
+                                        <div class="col-12 ">{{$chatNot->withUser->name}}</div>
+                                        <div class="col-12 descTime">{{$chatNot->thread->updated_at->diffForHumans()}}</div>
+                                        <div class="col-12 descBody">@if($chatNot->thread->pictures)<i class="far fa-file-image"></i>@endif @if($chatNot->thread->user_id == auth()->id())<i class="fas fa-reply"></i>@endif {{$chatNot->thread->message}} @if($chatNot->thread->is_seen)<i class="fa fa-check"></i>@endif</div>
+                                    </div>
+                                </div>
+                            </a>
                             @endforeach
                         @endif
                     </div>

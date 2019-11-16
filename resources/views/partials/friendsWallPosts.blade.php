@@ -5,7 +5,9 @@
                 <img class="postAuthorPicture" src="{{asset('img/profile-pictures/'.$post->user->picture)}}">
             </div>
             <div class="col-9 postAuthorName">{{$post->user->name}}</div>
-            <div class="col-2 postAuthorButtons"><i class="fas fa-edit"></i> <i class="fas fa-times"></i></div>
+            @if ($post->id == auth()->user()->id)
+                <div class="col-2 postAuthorButtons"><i class="fas postEdit fa-edit" data-id="{{$post->id}}"></i> <i class="fas postDelete fa-times" data-id="{{$post->id}}"></i></div>
+            @endif
         </header>
         <main class="postDesc row">
             <div class="postPhotos col-12">

@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="spinnerOverlay d-none">
+    <div class="spinner-border text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+    </div>
+</div>
 <div id="friendsWall" class="container-fluid mt-4">
     <div class="row text-center">
         <div class="col-3">gek</div>
@@ -59,6 +64,7 @@
 
 <script>
     var badFileType   = "{{__('chat.badFileType')}}";
+    var deletePost    = "{{__('activityWall.deletePost')}}";
     var baseUrl = "{{url('/')}}";
 </script>
 

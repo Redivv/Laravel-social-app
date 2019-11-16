@@ -43,6 +43,7 @@ Route::prefix('user')->group(function(){
     Route::delete('deleteNotifications', 'HomeController@deleteNotifications')->name('deleteNotifications');
     Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
        Route::post('newPost', 'HomeController@newPost')->name('ajaxNewPost'); 
+       Route::delete('deletePost', 'HomeController@deletePost')->name('ajaxDeletePost');
     });
 });
 

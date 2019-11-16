@@ -95,5 +95,32 @@ function main() {
                 $('#spinner').remove();
             });
         }
+    });
+
+    $('.postDelete').on('click',function() {
+        if (confirm(deletePost)) {
+            let url = baseUrl + "/user/ajax/deletePost";
+            let postId = $(this).data('id');
+            $('.spinnerOverlay').removeClass('d-none');
+    
+            var request = $.ajax({
+                method : 'post',
+                url: url,
+                data: {'_method': 'DELETE',id:postId}
+            });
+            
+            
+            request.done(function(response){
+                if (response.status === 'success') {
+                    $('#post'+postId).remove();
+                    $('.spinnerOverlay').addClass('d-none');
+                }
+            });
+            
+            
+            request.fail(function (xhr){
+                alert(xhr.responseJSON.message);
+            });
+        }
     })
 }

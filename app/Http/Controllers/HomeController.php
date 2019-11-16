@@ -145,6 +145,20 @@ class HomeController extends Controller
         }
     }
 
+    public function deletePost(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->validate([
+                'id'    => ['required','exists:posts']
+            ]);
+            
+            if(Post::where('id',$request->id)->where('user_id',Auth::id())->delete()){
+                return response()->json(['status' => 'success'], 200);
+            }
+            return response()->json(['status' => 'error'], 400);
+        }
+    }
+
     public function deleteNotifications(Request $request)
     {
 
