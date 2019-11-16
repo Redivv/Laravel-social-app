@@ -72,9 +72,13 @@
     <input type="radio" name="status" id="status1" value="1" <?php if($user->hidden_status == 1){echo('checked');} ?>><label for="status1">1 - profil częściowo wid. dla niezalogowanych użytkowników</label><br>
     <input type="radio" name="status" id="status2" value="2" <?php if($user->hidden_status == 2){echo('checked');} ?>><label for="status2">2 - profil niewidoczny dla niezalogowanych użytkowników</label>
 
-
 @endsection
 
+@section('relations')
+    
+    <input type="radio" name="relations" id="Rstatus0" value="0" <?php if($user->relationship_status == 0){echo('checked');} ?>><label for="status0">Wolna</label><br>
+    <input type="radio" name="relations" id="Rstatus1" value="1" <?php if($user->relationship_status == 1){echo('checked');} ?>><label for="status1">W związku</label><br>
+@endsection
 
 @push('styles')
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">

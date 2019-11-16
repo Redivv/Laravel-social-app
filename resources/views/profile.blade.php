@@ -55,6 +55,20 @@
     @endif
 @endsection
 
+@section('relations')
+    <p class="profile-paragraph">
+        {{__('profile.status')}}:
+        @if($user->relationship_status==0)
+            {{__('profile.status_free')}}
+        @else
+            {{__('profile.status_taken')}}
+        @endif
+        
+    </p>
+        
+
+@endsection
+
 @section('photo')
     <div class="row justify-content-center">
         <div class="col-md-8">
