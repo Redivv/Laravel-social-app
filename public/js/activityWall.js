@@ -204,6 +204,13 @@ function main() {
     request.done(function (response) {
       if (response.status === 'success') {
         modal.find('.modal-body').html(response.html);
+        $('.resetPicture').one('click', function () {
+          if (confirm(resetImgMsg)) {
+            $('#editPicture').val("");
+            $('#modalPicture-preview').empty();
+            modal.find('#editPost').prepend('<input name="noPicture" type="hidden" value="noPicture">');
+          }
+        });
         $('#editPostDesc').emojioneArea({
           pickerPosition: "bottom",
           placeholder: "\xa0",
@@ -221,6 +228,7 @@ function main() {
             if (confirm(resetImgMsg)) {
               tag.val("");
               $('#modalPicture-preview').empty();
+              modal.find('#editPost').prepend('<input name="noPicture" type="hidden" value="noPicture">');
             }
           }); // Loop through the FileList and render image files as thumbnails.
 
@@ -248,6 +256,8 @@ function main() {
 
             reader.readAsDataURL(f);
           }
+
+          $('input[name="noPicture"]').remove();
         });
         $('#editPost').on('submit', function (e) {
           e.preventDefault();
@@ -275,6 +285,7 @@ function main() {
               if (response.status === 'success') {
                 $('.spinnerOverlay').addClass('d-none');
                 $('#post' + post).replaceWith(response.html);
+                $('#post' + post).next().remove();
               }
             });
             request.fail(function (xhr) {

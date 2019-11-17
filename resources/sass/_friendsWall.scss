@@ -88,6 +88,14 @@
                         @include font-size(1.3rem);
                         font-weight: bold;
                         letter-spacing: 1.5px;
+                        a{
+                            color: $black;
+                        }
+                        small{
+                            @include font-size(0.6rem);
+                            font-weight: normal;
+                            margin-left: 0.25rem;
+                        }
                     }
                     .postAuthorButtons{
                         text-align: right;

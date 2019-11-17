@@ -1,6 +1,7 @@
 <form id="editPost" method="post">
     <output id="modalPicture-preview">
         @if ($pictures = json_decode($post->pictures))
+            <div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt"></i></div>
             @foreach ($pictures as $picture)
                 <img class="thumb" src="{{asset('img/post-pictures/'.$picture)}}">
             @endforeach

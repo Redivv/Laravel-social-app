@@ -17471,6 +17471,11 @@ body {
   background-color: #828282;
 }
 
+.nav-bar-height .systemNotifications .adminWideHeader {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 .nav-bar-height .chatNotifications .dropdown-item,
 .nav-bar-height .chatNotifications .clearAllBtn {
   font-size: 0.9rem;
@@ -17817,6 +17822,16 @@ html {
   #friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName {
     font-size: 1.3rem;
   }
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName a {
+  color: #000;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName small {
+  font-size: 0.6rem;
+  font-weight: normal;
+  margin-left: 0.25rem;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorButtons {

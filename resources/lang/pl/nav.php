@@ -9,5 +9,7 @@ return [
     'deleteAll'                 => 'Przeczytaj Wszystkie',
     'newSysNotTime'             => '1 sekunda temu',
     'userNot1'                  => 'Twój znajomy ',
-    'userNot2'                  => 'napisał nowy post na tablicy'
-];
+    'userNot2'                  => 'napisał nowy post na tablicy',
+    'userNotAdmin'              => 'Administrator dodał nowy post na tablicy',
+    'adminWideInfoHeader'       => 'Wiadomość od administracji'
+]; 

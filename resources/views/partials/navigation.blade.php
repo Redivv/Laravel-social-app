@@ -34,6 +34,19 @@
                                                 </div>
                                             </a>
                                             @break
+                                        @case('App\Notifications\NewAdminPost')
+                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('home').'/#post'.$userNot->data['postId']}}" target="__blank">
+                                                <div class="row">
+                                                    <div class="notificationImageBox col-2">
+                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}">
+                                                    </div>
+                                                    <div class="notificationDesc col-10">
+                                                        <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
+                                                        <div class="col-12 descBody"><span class="font-weight-bold">{{__('nav.userNotAdmin')}}</span></div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            @break
                                     @endswitch
                                 @endforeach
                         @endif
@@ -107,6 +120,13 @@
                                         <a class="dropdown-item alert alert-danger @if($sysNot['read_at']){{'read'}}@endif" href="/profile">
                                             <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
                                             {{__('nav.pictureDeny')}} 
+                                        </a>
+                                        @break
+                                    @case('App\Notifications\AdminWideInfo')
+                                        <a class="dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="/profile">
+                                            <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
+                                            <div class="adminWideHeader">{{__('nav.adminWideInfoHeader')}}</div>
+                                            {{$sysNot->data['content']}}
                                         </a>
                                         @break
                                 @endswitch
@@ -184,6 +204,19 @@
                                                 </div>
                                             </a>
                                             @break
+                                        @case('App\Notifications\NewAdminPost')
+                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('home').'/#post'.$userNot->data['postId']}}" target="__blank">
+                                                <div class="row">
+                                                    <div class="notificationImageBox col-2">
+                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}">
+                                                    </div>
+                                                    <div class="notificationDesc col-10">
+                                                        <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
+                                                        <div class="col-12 descBody"><span class="font-weight-bold">{{__('nav.userNotAdmin')}}</span></div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            @break
                                     @endswitch
                                 @endforeach
                             @endif
@@ -256,6 +289,13 @@
                                             <a class="dropdown-item alert alert-danger @if($sysNot['read_at']){{'read'}}@endif" href="/profile">
                                                 <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
                                                 {{__('nav.pictureDeny')}}
+                                            </a>
+                                            @break
+                                        @case('App\Notifications\AdminWideInfo')
+                                            <a class="dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="/profile">
+                                                <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
+                                                <div class="adminWideHeader">{{__('nav.adminWideInfoHeader')}}</div>
+                                                {{$sysNot->data['content']}}
                                             </a>
                                             @break
                                     @endswitch
@@ -335,6 +375,21 @@
                                 '</a>';
                         $('.userNotifications').prepend(html);
                         break;
+                    case 'App/Notifications/NewAdminPost':
+                        updateUserNotifications()
+                        html = '<a class="dropdown-item container" href="/user/home/#post'+notification.postId+'" target="__blank">'+
+                                    '<div class="row">'+
+                                        '<div class="notificationImageBox col-2">'+
+                                            '<img class="notificationImage" src="/img/post-pictures/'+notification.author_image+'">'+
+                                        '</div>'+
+                                        '<div class="notificationDesc col-10">'+
+                                            '<div class="col-12 descTime">{{__("nav.newSysNotTime")}}</div>'+
+                                            '<div class="col-12 descBody"><span class="font-weight-bold">{{__("nav.userNotAdmin")}}</span></div>'+
+                                        '</div>'+
+                                   '</div>'+
+                                '</a>';
+                        $('.userNotifications').prepend(html);
+                        break;
                     case 'App/Notifications/NewProfilePicture':
                         updateSystemNotifications();
                         html = '<a class="'+notification.id+' dropdown-item alert alert-info" href="/admin/home">'+
@@ -367,6 +422,15 @@
                                 '</a>';
                         $('.systemNotifications').prepend(html);
                         break;
+                    case 'App/Notifications/AdminWideInfo':
+                        updateSystemNotifications();
+                        html = '<a class="'+notification.id+' dropdown-item alert alert-info" href="/admin/home">'+
+                                        '<div class="systemNotificationDate">{{__("nav.newSysNotTime")}}</div>'+
+                                        '<div class="adminWideHeader">{{__("nav.adminWideInfoHeader")}}</div>'+
+                                        notification.content+
+                                '</a>';
+                        $('.systemNotifications').prepend(html);
+                        break;
                     
                 }
         
@@ -385,6 +449,9 @@
                 if (currentAmountNot === "") {
                     currentAmountNot = 0;
                     $('.userNotificationsCount').html(parseInt(currentAmountNot)+1);
+                    if ($('.usNoNot').length) {
+                        $('.usNoNot').remove();
+                    }
                 }
                 
             }

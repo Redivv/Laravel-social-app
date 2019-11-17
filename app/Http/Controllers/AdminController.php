@@ -11,9 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 use App\User;
 use App\City;
+use App\Post;
 use Conner\Tagging\Model\Tag;
 
+use Illuminate\Support\Facades\Notification;
+
 use App\Notifications\AcceptedPicture;
+use App\Notifications\NewAdminPost;
+use App\Notifications\AdminWideInfo;
 use App\Notifications\UserDeleted;
 use App\Notifications\DeniedPicture;
 
@@ -149,6 +154,55 @@ class AdminController extends Controller
             return response()->json(['status' => 'success'], 200);
         }
         return response()->json(['status' => 'error'], 400);
+    }
+
+    public function wideInfo(Request $request)
+    {
+        if($request->ajax()){
+            $kek = $request->all();
+            $request->validate([
+                'infoNotCheck'  => ['nullable','string'],
+                'infoNotDesc'   => ['nullable','string','max:255','required_with:infoNotCheck'],
+                'infoWallCheck' => ['nullable','string'],
+                'infoWallDesc'  => ['nullable','string','max:255'],
+                'postPicture.*' => ['nullable','file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
+            ]);
+
+            if (isset($request->infoNotCheck)) {
+                $users = User::whereNotIn('id',[Auth::id()])->get();
+                Notification::send($users, new AdminWideInfo($request->infoNotDesc));
+            }
+
+            if (isset($request->infoWallCheck)) {
+                $postDesc = $request->input('infoWallDesc');
+                $pictures = $request->file('postPicture');
+                $pictures_json = null;
+
+                if($pictures){
+                    $pictures_json = array();
+                    foreach ($pictures as $picture) {
+                        $imageName = hash_file('haval160,4',$picture->getPathname()).'.'.$picture->getClientOriginalExtension();
+                        $picture->move(public_path('img/post-pictures'), $imageName);
+                        $pictures_json[] = $imageName;
+                    }
+                    $pictures_json = json_encode($pictures_json);
+                }
+
+                $author = Auth::user();
+
+                $post = new Post;
+                $post->user_id = $author->id;
+                $post->desc = $postDesc;
+                $post->pictures = $pictures_json;
+
+                
+                if ($post->save()) {
+                    $users = User::whereNotIn('id',[Auth::id()])->get();
+                    Notification::send($users, new NewAdminPost($author,$post->id));
+                }
+            }
+            return response()->json(['status' => 'success'], 200);
+        }
     }
 
     private function getProfileTickets() : array

@@ -42,6 +42,7 @@ class HomeController extends Controller
             'type',
             [
                 'App\Notifications\NewFriendPost',
+                'App\Notifications\NewAdminPost',
                 ])->get();
         
         foreach ($userNotifications as $usNot) {
@@ -81,6 +82,7 @@ class HomeController extends Controller
                 DB::table('notifications')
                     ->whereIn('type',[
                         'App\Notifications\NewFriendPost',
+                        'App\Notifications\NewAdminPost',
                     ])
                     ->where('notifiable_id',Auth::id())
                     ->where('read_at',null)
@@ -160,11 +162,15 @@ class HomeController extends Controller
             $request->validate([
                 'postDesc'       =>['required_without:postPicture','string','nullable'],
                 'editPicture.*'  =>['required_without:postDesc', 'nullable','file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
-                'postId'         =>['exists:posts,id']
+                'postId'         =>['exists:posts,id'],
+                'noPicture'      =>['string','nullable']
             ]);
             $postDesc = $request->input('postDesc');
             $pictures = $request->file('editPicture');
             $pictures_json = null;
+
+            $post = Post::where('id',$request->postId)->where('user_id',Auth::id())->first();
+            $post->desc = $postDesc;
 
             if($pictures){
                 $pictures_json = array();
@@ -174,11 +180,14 @@ class HomeController extends Controller
                     $pictures_json[] = $imageName;
                 }
                 $pictures_json = json_encode($pictures_json);
+                $post->pictures = $pictures_json;
             }
 
-            $post = Post::where('id',$request->postId)->where('user_id',Auth::id())->first();
-            $post->desc = $postDesc;
-            $post->pictures = $pictures_json;
+            if (isset($request->noPicture)) {
+                $post->pictures = null;
+            }
+
+            
 
             
             if ($post->update()) {
@@ -212,20 +221,18 @@ class HomeController extends Controller
             $request->validate([
                 'type'    => [
                     'string',
-                    Rule::in(['usNoNot','sysNoNot']),
+                    Rule::in(['sysNoNot']),
                 ]
             ]);
     
             switch ($request->type) {
-                case 'usNoNot':
-                    # code...
-                    break;
                 
                 case 'sysNoNot':
                     DB::table('notifications')
                         ->whereIn('type',[
                             'App\Notifications\AcceptedPicture',
-                            'App\Notifications\DeniedPicture'
+                            'App\Notifications\DeniedPicture',
+                            'App\Notifications\AdminWideInfo'
                         ])
                         ->where('notifiable_id',Auth::id())
                         ->delete();

@@ -141,6 +141,10 @@ body{
                 background-color: $dark-grey;
             }
         }
+        .adminWideHeader{
+            @include font-size(1rem);
+            font-weight: bold;
+        }
     }
     .chatNotifications{
         .dropdown-item{

@@ -9,5 +9,6 @@ return [
     'deletePost'        => 'Czy na pewno chcesz usunąć ten post?',
     'editModalTitle'    => 'Edytuj Post',
     'editPost'          => 'Zapisz Zmiany',
-    'resetPictures'     => 'Na pewno chcesz usunąć zdjęcia?'
+    'resetPictures'     => 'Na pewno chcesz usunąć zdjęcia?',
+    'adminStatus'       => 'administrator'
 ];

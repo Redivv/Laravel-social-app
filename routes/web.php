@@ -56,6 +56,7 @@ Route::prefix('admin')->group(function(){
         Route::get('tab', 'AdminController@getTabContent')->middleware('verified')->name('adminAjaxTab');
         Route::patch('ticket','AdminController@resolveTicket')->middleware('verified')->name('adminAjaxTicket');
         Route::patch('list','AdminController@resolveListRequest')->middleware('verified')->name('adminAjaxList');
+        Route::post('wideInfo', 'AdminController@wideInfo')->middleware('verified')->name('adminWideInfo');
     });
     
 });

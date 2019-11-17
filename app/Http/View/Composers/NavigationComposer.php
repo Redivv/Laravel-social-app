@@ -28,8 +28,16 @@ class NavigationComposer
             $this->notifications['chat'] = $threads = Talk::user(Auth::id())->getInbox();
             $this->notifications['chatAmount'] = 0;
 
-            $this->notifications['user'] = $notifications->whereIn('type',['App\Notifications\NewFriendPost']);
-            $this->notifications['userAmount'] = $notifications->whereIn('type',['App\Notifications\NewFriendPost'])->where('read_at',null)->count();
+            $this->notifications['user'] = $notifications->whereIn('type',
+            ['App\Notifications\NewFriendPost',
+            'App\Notifications\NewAdminPost'
+            ]);
+
+            $this->notifications['userAmount'] = $notifications->whereIn('type',
+            [
+                'App\Notifications\NewFriendPost',
+                'App\Notifications\NewAdminPost'
+                ])->where('read_at',null)->count();
 
             $this->notifications['system'] = $notifications
                 ->whereIn(
@@ -38,7 +46,8 @@ class NavigationComposer
                         'App\Notifications\NewProfilePicture',
                         'App\Notifications\UserFlagged',
                         'App\Notifications\AcceptedPicture',
-                        'App\Notifications\DeniedPicture'
+                        'App\Notifications\DeniedPicture',
+                        'App\Notifications\AdminWideInfo'
                         ]);
             $this->notifications['systemAmount'] = $notifications
                 ->whereIn(
@@ -47,7 +56,8 @@ class NavigationComposer
                         'App\Notifications\NewProfilePicture',
                         'App\Notifications\UserFlagged',
                         'App\Notifications\AcceptedPicture',
-                        'App\Notifications\DeniedPicture'
+                        'App\Notifications\DeniedPicture',
+                        'App\Notifications\AdminWideInfo'
                         ])->where('read_at',null)->count();
 
             foreach ($this->notifications['chat'] as $chatNot) {
