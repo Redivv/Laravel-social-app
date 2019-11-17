@@ -75,7 +75,7 @@
                                     <div class="notificationDesc col-10">
                                         <div class="col-12 ">{{$chatNot->withUser->name}}</div>
                                         <div class="col-12 descTime">{{$chatNot->thread->updated_at->diffForHumans()}}</div>
-                                        <div class="col-12 descBody">@if($chatNot->thread->pictures)<i class="far fa-file-image"></i>@endif @if($chatNot->thread->user_id == auth()->id())<i class="fas fa-reply"></i>@endif {{$chatNot->thread->message}} @if($chatNot->thread->is_seen)<i class="fa fa-check"></i>@endif</div>
+                                        <div class="col-12 descBody">@if($chatNot->thread->pictures)<i class="far fa-file-image"></i>@endif @if($chatNot->thread->user_id == auth()->id())<i class="fas fa-reply"></i>@endif {{substr($chatNot->thread->message, 0, 20)}} @if($chatNot->thread->is_seen)<i class="fa fa-check"></i>@endif</div>
                                     </div>
                                 </div>
                             </a>
@@ -244,7 +244,7 @@
                                         <div class="notificationDesc col-10">
                                             <div class="col-12 ">{{$chatNot->withUser->name}}</div>
                                             <div class="col-12 descTime">{{$chatNot->thread->updated_at->diffForHumans()}}</div>
-                                            <div class="col-12 descBody">@if($chatNot->thread->pictures)<i class="far fa-file-image"></i>@endif @if($chatNot->thread->user_id == auth()->id())<i class="fas fa-reply"></i>@endif {{$chatNot->thread->message}} @if($chatNot->thread->is_seen)<i class="fa fa-check"></i>@endif</div>
+                                            <div class="col-12 descBody">@if($chatNot->thread->pictures)<i class="far fa-file-image"></i>@endif @if($chatNot->thread->user_id == auth()->id())<i class="fas fa-reply"></i>@endif {{substr($chatNot->thread->message, 0, 20)}} @if($chatNot->thread->is_seen)<i class="fa fa-check"></i>@endif</div>
                                         </div>
                                     </div>
                                 </a>
@@ -544,7 +544,7 @@
                         '<div class="notificationDesc col-8">'+
                             '<div class="col-12 ">'+data.sender.name+'</div>'+
                             '<div class="col-12 descTime">'+data.humans_time+' {{__("nav.ago")}}</div>'+
-                            '<div class="col-12">'+data.message+'</div>'+
+                            '<div class="col-12">'+data.message.substring(0,20)+'</div>'+
                         '</div>'+
                     '</div>'+
                 '</a>';
