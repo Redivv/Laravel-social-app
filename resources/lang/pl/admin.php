@@ -27,5 +27,9 @@ return [
     'deletedUser-subject'       => 'Usunięcie Konta', 
     'deletedUser-greet'         => 'Witaj ',
     'deletedUser-message'       => 'Z przykrością zawiadamiamy, że Twoje konto w serwisie Safo zostało usunięte',
-    'deletedUser-messageInfo'   => 'Jeśli uważasz, że jesteś niewinny prosimy o kontakt w formie odpowiedzi na ten email'
+    'deletedUser-messageInfo'   => 'Jeśli uważasz, że jesteś niewinny prosimy o kontakt w formie odpowiedzi na ten email',
+    'adminWideInfo'             => 'Wiadomość do użytkowników',
+    'wideNotCheck'              => 'Wyślij powiadomienie na pasku nawigacyjnym',
+    'wideWallCheck'             => 'Stwórz post na tablicy',
+    'infoContent'               => 'Treść'
 ];

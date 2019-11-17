@@ -11120,8 +11120,11 @@ a.text-dark:focus {
 }
 
 .text-muted,
+#friendsWall .friendsWall #friendsWallFeed .noContent,
 .nav-bar-height .chatNotifications .dropdown-item .notificationDesc .descTime,
-.nav-bar-height .chatNotifications .clearAllBtn .notificationDesc .descTime {
+.nav-bar-height .chatNotifications .clearAllBtn .notificationDesc .descTime,
+.nav-bar-height .userNotifications .dropdown-item .notificationDesc .descTime,
+.nav-bar-height .userNotifications .clearAllBtn .notificationDesc .descTime {
   color: #6c757d !important;
 }
 
@@ -17376,8 +17379,61 @@ body {
 }
 
 .nav-bar-height .navDesc .dropdown-menu {
-  min-width: 25vw;
   left: -80%;
+  overflow-x: hidden;
+  width: 30vw;
+}
+
+.nav-bar-height .userNotifications .dropdown-item,
+.nav-bar-height .userNotifications .clearAllBtn {
+  padding: 0.5rem;
+}
+
+.nav-bar-height .userNotifications .dropdown-item .notificationImageBox,
+.nav-bar-height .userNotifications .clearAllBtn .notificationImageBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-bar-height .userNotifications .dropdown-item .notificationImageBox .notificationImage,
+.nav-bar-height .userNotifications .clearAllBtn .notificationImageBox .notificationImage {
+  padding-left: 0;
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+}
+
+.nav-bar-height .userNotifications .dropdown-item .notificationDesc,
+.nav-bar-height .userNotifications .clearAllBtn .notificationDesc {
+  align-self: center;
+}
+
+.nav-bar-height .userNotifications .dropdown-item .notificationDesc .descTime,
+.nav-bar-height .userNotifications .clearAllBtn .notificationDesc .descTime {
+  font-size: 0.7rem;
+}
+
+.nav-bar-height .userNotifications .dropdown-item .notificationDesc .descBody,
+.nav-bar-height .userNotifications .clearAllBtn .notificationDesc .descBody {
+  font-size: 0.9rem;
+}
+
+.nav-bar-height .userNotifications .dropdown-item.read,
+.nav-bar-height .userNotifications .read.clearAllBtn {
+  background-color: #e8e8e8;
+  color: #828282;
+}
+
+.nav-bar-height .userNotifications .dropdown-item.read .notificationDesc div:first-child,
+.nav-bar-height .userNotifications .read.clearAllBtn .notificationDesc div:first-child {
+  color: #828282;
+  font-weight: normal;
+}
+
+.nav-bar-height .userNotifications .dropdown-item.read .notificationDesc .descTime,
+.nav-bar-height .userNotifications .read.clearAllBtn .notificationDesc .descTime {
+  color: #828282 !important;
 }
 
 .nav-bar-height .systemNotifications a {
@@ -17401,18 +17457,43 @@ body {
   background-color: #38c172;
 }
 
+.nav-bar-height .systemNotifications .systemNotificationDate {
+  font-size: 0.6rem;
+}
+
 .nav-bar-height .systemNotifications .read {
   background-color: #a1a1a1;
   color: #ffffff;
+  border-color: darkgrey;
 }
 
 .nav-bar-height .systemNotifications .read:hover {
   background-color: #828282;
 }
 
+.nav-bar-height .systemNotifications .adminWideHeader {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 .nav-bar-height .chatNotifications .dropdown-item,
 .nav-bar-height .chatNotifications .clearAllBtn {
   font-size: 0.9rem;
+}
+
+.nav-bar-height .chatNotifications .dropdown-item .notificationImageBox,
+.nav-bar-height .chatNotifications .clearAllBtn .notificationImageBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-bar-height .chatNotifications .dropdown-item .notificationImageBox .notificationImage,
+.nav-bar-height .chatNotifications .clearAllBtn .notificationImageBox .notificationImage {
+  padding-left: 0;
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
 }
 
 .nav-bar-height .chatNotifications .dropdown-item .notificationDesc div:first-child,
@@ -17610,6 +17691,323 @@ html {
   color: #000;
 }
 
+#friendsWall .friendsWall {
+  text-align: left;
+}
+
+#friendsWall .friendsWall .friendsWallHeader {
+  text-align: center;
+}
+
+#friendsWall .friendsWall .friendsWallHeader h3 {
+  font-size: calc(1.325rem + 0.9vw);
+  letter-spacing: 2px;
+}
+
+@media (min-width: 1200px) {
+  #friendsWall .friendsWall .friendsWallHeader h3 {
+    font-size: 2rem;
+  }
+}
+
+#friendsWall .friendsWall #picture-preview {
+  display: block;
+  width: 100%;
+}
+
+#friendsWall .friendsWall #picture-preview .resetPictureBox {
+  text-align: right;
+}
+
+#friendsWall .friendsWall #picture-preview .resetPictureBox i {
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+#friendsWall .friendsWall #picture-preview .resetPictureBox i:hover {
+  color: #f66103;
+}
+
+#friendsWall .friendsWall #picture-preview .thumb {
+  max-width: 150px;
+  max-height: 150px;
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#friendsWall .friendsWall textarea {
+  display: none;
+}
+
+#friendsWall .friendsWall .emojionearea {
+  font-size: 1rem;
+}
+
+#friendsWall .friendsWall .friendsWallButtons {
+  margin: 0.5rem 0;
+  padding: 0 0.5rem;
+}
+
+#friendsWall .friendsWall .friendsWallButtons .additionalButton {
+  font-size: calc(1.265rem + 0.18vw);
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
+
+@media (min-width: 1200px) {
+  #friendsWall .friendsWall .friendsWallButtons .additionalButton {
+    font-size: 1.4rem;
+  }
+}
+
+#friendsWall .friendsWall .friendsWallButtons .additionalButton:hover {
+  color: #f66103;
+}
+
+#friendsWall .friendsWall .friendsWallSendButton button {
+  color: #ffffff;
+  background-color: #f66103;
+  font-size: 1rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+#friendsWall .friendsWall #friendsWallFeed {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+  display: block;
+  width: 100%;
+  min-height: 50vh;
+  padding: 1rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .noContent {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: calc(1.325rem + 0.9vw);
+  opacity: 0.5;
+}
+
+@media (min-width: 1200px) {
+  #friendsWall .friendsWall #friendsWallFeed .noContent {
+    font-size: 2rem;
+  }
+}
+
+#friendsWall .friendsWall #friendsWallFeed .ajaxSpinner {
+  text-align: center;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post {
+  margin-top: 1rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorPicture {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName {
+  display: flex;
+  align-items: center;
+  font-size: calc(1.255rem + 0.06vw);
+  font-weight: bold;
+  letter-spacing: 1.5px;
+}
+
+@media (min-width: 1200px) {
+  #friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName {
+    font-size: 1.3rem;
+  }
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName a {
+  color: #000;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName small {
+  font-size: 0.6rem;
+  font-weight: normal;
+  margin-left: 0.25rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorButtons {
+  text-align: right;
+  font-size: 0.9rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorButtons i {
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorButtons i:hover {
+  color: #f66103;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postDesc {
+  padding: 0 1rem;
+  margin-top: 0.5rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postDesc .postPhotos .postPicture {
+  max-width: 500px;
+  max-height: 200px;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postDesc .postContent {
+  margin-top: 0.25rem;
+  font-size: 1rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postFooter {
+  margin-top: 0.5rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postFooter button {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  margin: 0 auto;
+  color: #000;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .post .postFooter button:hover {
+  color: #f66103;
+}
+
+#friendsWall .friendsList .friendsListHeader h3 {
+  font-size: calc(1.325rem + 0.9vw);
+  letter-spacing: 2px;
+}
+
+@media (min-width: 1200px) {
+  #friendsWall .friendsList .friendsListHeader h3 {
+    font-size: 2rem;
+  }
+}
+
+#friendsWall .friendsList .friendsListBox {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+#friendsWall .friendsList .friendsListBox ul {
+  padding-left: 1rem;
+  list-style: none;
+}
+
+#friendsWall .friendsList .friendsListBox ul li .profilePicture {
+  position: relative;
+}
+
+#friendsWall .friendsList .friendsListBox ul li .profilePicture img {
+  max-width: 35px;
+  max-height: 35px;
+  border-radius: 50%;
+}
+
+#friendsWall .friendsList .friendsListBox ul li.active .profilePicture::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #38c172;
+  border-radius: 50%;
+  top: 1.55rem;
+  left: 2.5rem;
+}
+
+#friendsWall .friendsList .friendsListBox ul li .friendName,
+#friendsWall .friendsList .friendsListBox ul li .friendOptions {
+  display: flex;
+  align-items: center;
+}
+
+#friendsWall .friendsList .friendsListBox ul li .friendName {
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+#friendsWall .friendsList .friendsListBox ul li .friendOptions {
+  font-size: 1.1rem;
+}
+
+#friendsWall .friendsList .friendsListBox ul li .friendOptions span {
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
+
+#friendsWall .friendsList .friendsListBox ul li .friendOptions span:hover {
+  color: #f66103;
+}
+
+#editModal .modal-dialog {
+  max-width: 50vw;
+}
+
+#editModal .modal-body {
+  padding-top: 0.25rem;
+}
+
+#editModal .modal-body #modalPicture-preview {
+  display: block;
+  width: 100%;
+}
+
+#editModal .modal-body #modalPicture-preview .resetPictureBox {
+  text-align: right;
+}
+
+#editModal .modal-body #modalPicture-preview .resetPictureBox i {
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+#editModal .modal-body #modalPicture-preview .resetPictureBox i:hover {
+  color: #f66103;
+}
+
+#editModal .modal-body #modalPicture-preview .thumb {
+  max-width: 150px;
+  max-height: 150px;
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#editModal .modal-body .friendsWallButtons {
+  margin: 0.5rem 0;
+  padding: 0 0.5rem;
+}
+
+#editModal .modal-body .friendsWallButtons .additionalButton {
+  font-size: calc(1.265rem + 0.18vw);
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
+
+@media (min-width: 1200px) {
+  #editModal .modal-body .friendsWallButtons .additionalButton {
+    font-size: 1.4rem;
+  }
+}
+
+#editModal .modal-body .friendsWallButtons .additionalButton:hover {
+  color: #f66103;
+}
+
+#editModal .modal-body .friendsWallSendButton button {
+  color: #ffffff;
+  background-color: #f66103;
+  font-size: 1rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
 html {
   font-size: 2vw;
   scroll-behavior: smooth;
@@ -17641,6 +18039,8 @@ div.cookie-consent {
 }
 
 .spinnerOverlay .spinner-border {
+  position: fixed;
+  top: 50%;
   width: 5rem;
   height: 5rem;
   font-size: 1.5rem;

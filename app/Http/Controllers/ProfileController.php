@@ -25,7 +25,8 @@ class ProfileController extends Controller
             'type',
             [
                 'App\Notifications\AcceptedPicture',
-                'App\Notifications\DeniedPicture'
+                'App\Notifications\DeniedPicture',
+                'App\Notifications\AdminWideInfo'
                 ])->get();
         
         foreach ($profileNotifications as $profNot) {

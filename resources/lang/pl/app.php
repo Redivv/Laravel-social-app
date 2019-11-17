@@ -1,9 +1,9 @@
 <?php
 return [
-    'searcher'          => 'Znajdź Ludzi',
+    'searcher'          => 'Społeczność',
     'login'             => 'Zaloguj Się',
     'register'          => 'Zarejestruj Się',
-    'dashboard'         => 'Panel Użytkownika',
+    'dashboard'         => 'Tablica',
     'chat'              => 'Rozmowy',
     'logout'            => 'Wyloguj Się',
     'toggle-nav'        => 'Rozwiń Menu',
