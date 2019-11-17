@@ -5,8 +5,11 @@
                 <img class="postAuthorPicture" src="{{asset('img/profile-pictures/'.$post->user->picture)}}">
             </div>
             <div class="col-9 postAuthorName">{{$post->user->name}}</div>
-            @if ($post->id == auth()->user()->id)
-                <div class="col-2 postAuthorButtons"><i class="fas postEdit fa-edit" data-id="{{$post->id}}"></i> <i class="fas postDelete fa-times" data-id="{{$post->id}}"></i></div>
+            @if ($post->user_id == auth()->user()->id)
+                <div class="col-2 postAuthorButtons">
+                    <i class="fas postEdit fa-edit" data-id="{{$post->id}}" data-toggle="modal" data-target="#editModal"></i>
+                    <i class="fas postDelete fa-times" data-id="{{$post->id}}"></i>
+                </div>
             @endif
         </header>
         <main class="postDesc row">

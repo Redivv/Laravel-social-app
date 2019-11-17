@@ -17705,9 +17705,29 @@ html {
   }
 }
 
+#friendsWall .friendsWall #picture-preview {
+  display: block;
+  width: 100%;
+}
+
+#friendsWall .friendsWall #picture-preview .resetPictureBox {
+  text-align: right;
+}
+
+#friendsWall .friendsWall #picture-preview .resetPictureBox i {
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+#friendsWall .friendsWall #picture-preview .resetPictureBox i:hover {
+  color: #f66103;
+}
+
 #friendsWall .friendsWall #picture-preview .thumb {
   max-width: 150px;
   max-height: 150px;
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 #friendsWall .friendsWall textarea {
@@ -17910,6 +17930,69 @@ html {
   color: #f66103;
 }
 
+#editModal .modal-dialog {
+  max-width: 50vw;
+}
+
+#editModal .modal-body {
+  padding-top: 0.25rem;
+}
+
+#editModal .modal-body #modalPicture-preview {
+  display: block;
+  width: 100%;
+}
+
+#editModal .modal-body #modalPicture-preview .resetPictureBox {
+  text-align: right;
+}
+
+#editModal .modal-body #modalPicture-preview .resetPictureBox i {
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+#editModal .modal-body #modalPicture-preview .resetPictureBox i:hover {
+  color: #f66103;
+}
+
+#editModal .modal-body #modalPicture-preview .thumb {
+  max-width: 150px;
+  max-height: 150px;
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#editModal .modal-body .friendsWallButtons {
+  margin: 0.5rem 0;
+  padding: 0 0.5rem;
+}
+
+#editModal .modal-body .friendsWallButtons .additionalButton {
+  font-size: calc(1.265rem + 0.18vw);
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
+
+@media (min-width: 1200px) {
+  #editModal .modal-body .friendsWallButtons .additionalButton {
+    font-size: 1.4rem;
+  }
+}
+
+#editModal .modal-body .friendsWallButtons .additionalButton:hover {
+  color: #f66103;
+}
+
+#editModal .modal-body .friendsWallSendButton button {
+  color: #ffffff;
+  background-color: #f66103;
+  font-size: 1rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
 html {
   font-size: 2vw;
   scroll-behavior: smooth;
@@ -17941,6 +18024,8 @@ div.cookie-consent {
 }
 
 .spinnerOverlay .spinner-border {
+  position: fixed;
+  top: 50%;
   width: 5rem;
   height: 5rem;
   font-size: 1.5rem;

@@ -106,13 +106,23 @@ $(document).ready(function () {
 function main() {
   $('#addPost').emojioneArea({
     pickerPosition: "bottom",
-    placeholder: "\xa0"
+    placeholder: "\xa0",
+    autocomplete: false
   });
   $('#postPicture').change(function (evt) {
     var files = evt.target.files; // FileList object
     // Empty the preview list
 
-    $('#picture-preview').empty(); // Loop through the FileList and render image files as thumbnails.
+    $('#picture-preview').empty();
+    var html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt"></i></div>';
+    $('#picture-preview').append(html);
+    var tag = $(this);
+    $('.resetPicture').one('click', function () {
+      if (confirm(resetImgMsg)) {
+        tag.val("");
+        $('#picture-preview').empty();
+      }
+    }); // Loop through the FileList and render image files as thumbnails.
 
     for (var i = 0, f; f = files[i]; i++) {
       // Only process image files.
@@ -130,7 +140,7 @@ function main() {
           // Render thumbnail.
           var span = document.createElement('span');
           span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
-          $('#picture-preview').prepend(span, null);
+          $('#picture-preview').append(span, null);
           $('.emojionearea-editor').focus();
         };
       }(f); // Read in the image file as a data URL.
@@ -169,6 +179,9 @@ function main() {
         if (response.status === 'success') {
           $('#spinner').remove();
           $('#friendsWallFeed').prepend(response.html);
+          $('.postDelete').on('click', function () {
+            deletePost(this);
+          });
         }
       });
       request.fail(function (xhr) {
@@ -177,30 +190,138 @@ function main() {
       });
     }
   });
-  $('.postDelete').on('click', function () {
-    if (confirm(deletePost)) {
-      var url = baseUrl + "/user/ajax/deletePost";
-      var postId = $(this).data('id');
-      $('.spinnerOverlay').removeClass('d-none');
-      var request = $.ajax({
-        method: 'post',
-        url: url,
-        data: {
-          '_method': 'DELETE',
-          id: postId
-        }
-      });
-      request.done(function (response) {
-        if (response.status === 'success') {
-          $('#post' + postId).remove();
-          $('.spinnerOverlay').addClass('d-none');
-        }
-      });
-      request.fail(function (xhr) {
-        alert(xhr.responseJSON.message);
-      });
-    }
+  $('#editModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var post = button.data('id');
+    var modal = $(this);
+    var spinnerHtml = '<div class="spinnerBox text-center mt-2">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+    modal.find('.modal-body').html(spinnerHtml);
+    var url = baseUrl + '/user/ajax/getPost/' + post;
+    var request = $.ajax({
+      method: 'get',
+      url: url
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        modal.find('.modal-body').html(response.html);
+        $('#editPostDesc').emojioneArea({
+          pickerPosition: "bottom",
+          placeholder: "\xa0",
+          autocomplete: false
+        });
+        $('#editPicture').change(function (evt) {
+          var files = evt.target.files; // FileList object
+          // Empty the preview list
+
+          $('#modalPicture-preview').empty();
+          var html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt"></i></div>';
+          $('#modalPicture-preview').append(html);
+          var tag = $(this);
+          $('.resetPicture').one('click', function () {
+            if (confirm(resetImgMsg)) {
+              tag.val("");
+              $('#modalPicture-preview').empty();
+            }
+          }); // Loop through the FileList and render image files as thumbnails.
+
+          for (var i = 0, f; f = files[i]; i++) {
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+              $(this).val("");
+              alert(badFileType);
+              $('#modalPicture-preview').empty();
+              break;
+            }
+
+            var reader = new FileReader(); // Closure to capture the file information.
+
+            reader.onload = function (theFile) {
+              return function (e) {
+                // Render thumbnail.
+                var span = document.createElement('span');
+                span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                $('#modalPicture-preview').append(span, null);
+                $('.emojionearea-editor').focus();
+              };
+            }(f); // Read in the image file as a data URL.
+
+
+            reader.readAsDataURL(f);
+          }
+        });
+        $('#editPost').on('submit', function (e) {
+          e.preventDefault();
+
+          if ($('#editPicture').val() || $('#editPostDesc').val()) {
+            var _url = baseUrl + "/user/ajax/editPost";
+
+            var tag = $(this);
+            $(document).one("ajaxSend", function () {
+              $('#editModal').modal('hide');
+              $('.spinnerOverlay').removeClass('d-none');
+              tag[0].reset();
+              $('.emojionearea-editor').empty();
+              $('#modalPicture-preview').empty();
+            });
+            var request = $.ajax({
+              method: "post",
+              url: _url,
+              enctype: 'multipart/form-data',
+              processData: false,
+              contentType: false,
+              data: new FormData(this)
+            });
+            request.done(function (response) {
+              if (response.status === 'success') {
+                $('.spinnerOverlay').addClass('d-none');
+                $('#post' + post).replaceWith(response.html);
+              }
+            });
+            request.fail(function (xhr) {
+              alert(xhr.responseJSON.message);
+            });
+          }
+        });
+      }
+    });
+    request.fail(function (xhr) {
+      alert(xhr.responseJSON.message);
+    });
   });
+  $('#editModal').on('hide.bs.modal', function () {
+    $('#editPicture').off('change');
+    $(this).find('.modal-body').html('');
+  });
+  $('.postDelete').off('click');
+  $('.postDelete').on('click', function () {
+    deletePost(this);
+  });
+}
+
+function deletePost(selected) {
+  if (confirm(deletePostMsg)) {
+    var url = baseUrl + "/user/ajax/deletePost";
+    var postId = $(selected).data('id');
+    $('.spinnerOverlay').removeClass('d-none');
+    var request = $.ajax({
+      method: 'post',
+      url: url,
+      data: {
+        '_method': 'DELETE',
+        id: postId
+      }
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        $('#post' + postId).next().remove();
+        $('#post' + postId).remove();
+        $('.spinnerOverlay').addClass('d-none');
+      }
+    });
+    request.fail(function (xhr) {
+      alert(xhr.responseJSON.message);
+    });
+  }
 }
 
 /***/ }),

@@ -102,6 +102,14 @@ class HomeController extends Controller
         }
         return response()->json(['status' => 'success'], 200);
     }
+    
+    public function getPost(Request $request, Post $post)
+    {
+        if ($request->ajax()) {
+            $html = view('partials.postEditForm')->withPost($post)->render();
+            return response()->json(['status' => 'success', 'html' => $html], 200);
+        }
+    }
 
     public function newPost(Request $request)
     {
@@ -138,6 +146,44 @@ class HomeController extends Controller
                 $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
                 $friends = User::whereNotIn('id',[Auth::id()])->get();
                 Notification::send($friends, new NewFriendPost($author,$post->id));
+                return response()->json(['status' => 'success', 'html' => $html], 200);
+            }
+
+            return response()->json(['status' => 'error'], 400);
+        }
+    }
+
+    public function editPost(Request $request)
+    {
+        if ($request->ajax()) {
+            $kek = $request->all();
+            $request->validate([
+                'postDesc'       =>['required_without:postPicture','string','nullable'],
+                'editPicture.*'  =>['required_without:postDesc', 'nullable','file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
+                'postId'         =>['exists:posts,id']
+            ]);
+            $postDesc = $request->input('postDesc');
+            $pictures = $request->file('editPicture');
+            $pictures_json = null;
+
+            if($pictures){
+                $pictures_json = array();
+                foreach ($pictures as $picture) {
+                    $imageName = hash_file('haval160,4',$picture->getPathname()).'.'.$picture->getClientOriginalExtension();
+                    $picture->move(public_path('img/post-pictures'), $imageName);
+                    $pictures_json[] = $imageName;
+                }
+                $pictures_json = json_encode($pictures_json);
+            }
+
+            $post = Post::where('id',$request->postId)->where('user_id',Auth::id())->first();
+            $post->desc = $postDesc;
+            $post->pictures = $pictures_json;
+
+            
+            if ($post->update()) {
+                $posts = [$post];
+                $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
                 return response()->json(['status' => 'success', 'html' => $html], 200);
             }
 

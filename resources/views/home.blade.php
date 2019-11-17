@@ -58,13 +58,17 @@
         </div>
     </div>
 </div>
+
+@include('partials.postEditModal')
+
 @endsection
 
 @push('scripts')
 
 <script>
-    var badFileType   = "{{__('chat.badFileType')}}";
-    var deletePost    = "{{__('activityWall.deletePost')}}";
+    var badFileType      = "{{__('chat.badFileType')}}";
+    var deletePostMsg    = "{{__('activityWall.deletePost')}}";
+    var resetImgMsg      =  "{{__('activityWall.resetPictures')}}";
     var baseUrl = "{{url('/')}}";
 </script>
 

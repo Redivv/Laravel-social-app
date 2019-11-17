@@ -42,8 +42,10 @@ Route::prefix('user')->group(function(){
     Route::patch('readNotifications', 'HomeController@readNotifications')->name('readNotifications');
     Route::delete('deleteNotifications', 'HomeController@deleteNotifications')->name('deleteNotifications');
     Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
-       Route::post('newPost', 'HomeController@newPost')->name('ajaxNewPost'); 
-       Route::delete('deletePost', 'HomeController@deletePost')->name('ajaxDeletePost');
+        Route::get('getPost/{post}', 'HomeController@getPost')->name('ajaxGetPost');
+        Route::post('newPost', 'HomeController@newPost')->name('ajaxNewPost');
+        Route::post('editPost', 'HomeController@editPost')->name('ajaxEditPost');  
+        Route::delete('deletePost', 'HomeController@deletePost')->name('ajaxDeletePost');
     });
 });
 
