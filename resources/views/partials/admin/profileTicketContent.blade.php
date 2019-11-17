@@ -9,6 +9,7 @@
         <tr>
             <th scope="col">{{__('admin.profileTicketTable1')}}</th>
             <th scope="col">{{__('admin.profileTicketTable2')}}</th>
+            <th scope="col">{{__('admin.profileTicketTable4')}}</th>
             <th scope="col">{{__('admin.profileTicketTable3')}}<span id="profileTicket-fetchBtn" class="fetchBtn"><i class="fas fa-sync"></i></span></th>
         </tr>
     </thead>
@@ -17,9 +18,10 @@
             <tr>
                 <th scope="row">{{$ticket->data['user_name']}}</th>
                 <td><img src="{{asset('img/profile-pictures/'.$ticket->data['image'])}}" class="profilePicture"></td>
+                <td>{{$ticket->created_at->diffForHumans()}}</td>
                 <td>
                     <form class="adminForm" method="post" enctype="multipart/form-data">
-                        <button id="dasdas" name="accept" type="submit" class="btn ticketBtn form-btn acceptBtn">
+                        <button name="accept" type="submit" class="btn ticketBtn form-btn acceptBtn">
                         {{__('admin.accept')}} 
                         </button>
                         <input type="hidden" name="ticketId" value="{{$ticket->id}}">

@@ -38,6 +38,15 @@ Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
 Route::prefix('user')->group(function(){
     Route::get('home', 'HomeController@index')->name('home');
     Route::get('talk', 'HomeController@chat')->name('chat');
+    Route::put('report', "HomeController@report")->name('reportUser');
+    Route::patch('readNotifications', 'HomeController@readNotifications')->name('readNotifications');
+    Route::delete('deleteNotifications', 'HomeController@deleteNotifications')->name('deleteNotifications');
+    Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+        Route::get('getPost/{post}', 'HomeController@getPost')->name('ajaxGetPost');
+        Route::post('newPost', 'HomeController@newPost')->name('ajaxNewPost');
+        Route::post('editPost', 'HomeController@editPost')->name('ajaxEditPost');  
+        Route::delete('deletePost', 'HomeController@deletePost')->name('ajaxDeletePost');
+    });
 });
 
 Route::prefix('admin')->group(function(){
@@ -47,6 +56,7 @@ Route::prefix('admin')->group(function(){
         Route::get('tab', 'AdminController@getTabContent')->middleware('verified')->name('adminAjaxTab');
         Route::patch('ticket','AdminController@resolveTicket')->middleware('verified')->name('adminAjaxTicket');
         Route::patch('list','AdminController@resolveListRequest')->middleware('verified')->name('adminAjaxList');
+        Route::post('wideInfo', 'AdminController@wideInfo')->middleware('verified')->name('adminWideInfo');
     });
     
 });

@@ -52,6 +52,8 @@
                             @yield('email')
 
                             @yield('birth')
+                            
+                            @yield('relations')
 
                     </div>
                 </div>

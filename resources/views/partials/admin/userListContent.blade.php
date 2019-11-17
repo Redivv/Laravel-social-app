@@ -13,7 +13,7 @@
                 <tr>
                     <th scope="row">{{$element->name}}</th>
                     <td><img class="profilePicture" src="{{asset('img/profile-pictures/'.$element->picture)}}"></td>
-                    <td>{{$element->created_at}}</td>
+                    <td>{{$element->created_at->diffForHumans()}}</td>
                     <td>
                         <form class="adminForm" method="post">
                             <button name="delete" type="submit" class="btn form-btn listBtn">

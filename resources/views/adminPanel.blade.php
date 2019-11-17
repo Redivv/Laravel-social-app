@@ -25,6 +25,8 @@
                 <a class="nav-link tab" id="userList" data-toggle="pill" href="#userList-content" role="tab" aria-controls="userList" aria-selected="true">{{__('admin.userList')}}</a>
                 <a class="nav-link tab" id="tagList" data-toggle="pill" href="#tagList-content" role="tab" aria-controls="tagList" aria-selected="true">{{__('admin.tagList')}}</a>
                 <a class="nav-link tab" id="cityList" data-toggle="pill" href="#cityList-content" role="tab" aria-controls="cityList" aria-selected="true">{{__('admin.cityList')}}</a>
+                <hr>
+                <a class="nav-link bonusTab" id="adminWideInfo" data-toggle="pill" href="#adminWideInfo-content" role="tab" aria-controls="adminWideInfo" aria-selected="true">{{__('admin.adminWideInfo')}}</a>
             </div>
         </div>
         <div class="tabsContent pt-2 pb-2 overflow-auto col-md-8 col-sm-12">
@@ -34,6 +36,7 @@
                 <div class="tab-pane" id="userList-content" role="tabpanel" aria-labelledby="userList-tab"></div>
                 <div class="tab-pane" id="tagList-content" role="tabpanel" aria-labelledby="tagList-tab"></div>
                 <div class="tab-pane" id="cityList-content" role="tabpanel" aria-labelledby="cityList-tab"></div>
+                <div class="tab-pane" id="adminWideInfo-content" role="tabpanel" aria-labelledby="adminWideInfo-tab">@include('partials.admin.wideInfoForm')</div>
             </div>
         </div>
     </div>
@@ -43,20 +46,30 @@
 @push('scripts')
     <script>
         var __baseUrl = "{{url('/')}}";
-        var confirmMsg = "{{__('admin.confirmMsg')}}"
+        var confirmMsg = "{{__('admin.confirmMsg')}}";
+        var noNotifications = "{{__('nav.noNotifications')}}";
+        var resetImgMsg      =  "{{__('activityWall.resetPictures')}}";
     </script>
-
+    
+    <script src="{{asset('js/emoji.js')}}"></script>
     <script src="{{asset('js/admin.js')}}"></script>
     
     <script defer>
         Echo.private('users.'+window.Laravel.user)
             .notification((notification) => {
+                let currentAmount;
                 switch (notification.type.replace(/\\/g,"/")) {
                     case 'App/Notifications/NewProfilePicture':
-                        let currentAmount = $('#profileTicketCount').html().trim();
+                        currentAmount = $('#profileTicketCount').html().trim();
                         if(currentAmount == ""){currentAmount = 0;}
                         $('#profileTicketCount').html(parseInt(currentAmount)+1);
                         $('#profileTicket-fetchBtn').addClass('new');
+                        break;
+                    case 'App/Notifications/UserFlagged':
+                        currentAmount = $('#userTicketCount').html().trim();
+                        if(currentAmount == ""){currentAmount = 0;}
+                        $('#userTicketCount').html(parseInt(currentAmount)+1);
+                        $('#userTicket-fetchBtn').addClass('new');
                         break;
                 
                     default:

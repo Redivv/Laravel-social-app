@@ -1,0 +1,249 @@
+#friendsWall{
+    .friendsWall{
+        text-align: left;
+        .friendsWallHeader{
+            text-align: center;
+            h3{
+                @include font-size(2rem);
+                letter-spacing: 2px;
+            }
+        }
+        #picture-preview{
+            display: block;
+            width:100%;
+            .resetPictureBox{
+                text-align: right;
+                i{
+                    cursor: pointer;
+                    @include font-size(1.1rem);
+                    &:hover{
+                        color:$orange;
+                    }
+                }
+            }
+            .thumb{
+                max-width: 150px;
+                max-height: 150px;
+                margin-left: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+        textarea{
+            display: none;
+        }
+        .emojionearea{
+            @include font-size(1rem);
+        }
+        .friendsWallButtons{
+            margin: 0.5rem 0;
+            padding:0 0.5rem;
+            .additionalButton{
+                @include font-size(1.4rem);
+                margin: 0 0.5rem;
+                cursor: pointer;
+                &:hover{
+                    color: $orange;
+                }
+            }
+        }
+        .friendsWallSendButton{
+            button{
+                color: $white;
+                background-color: $orange;
+                @include font-size(1rem);
+                font-weight: normal;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+            }
+        }
+        #friendsWallFeed{
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            display: block;
+            width: 100%;
+            min-height: 50vh;
+            padding: 1rem;
+            .noContent{
+                text-align: center;
+                margin: 2rem 0;
+                @include font-size(2rem);
+                @extend .text-muted;
+                opacity: 0.5;
+            }
+            .ajaxSpinner{
+                text-align: center;
+            }
+            .post{
+                margin-top: 1rem;
+                .postAuthor{
+                    .postAuthorPicture{
+                        max-width: 50px;
+                        max-height: 50px;
+                        border-radius: 50%;
+                    }
+                    .postAuthorName{
+                        display: flex;
+                        align-items: center;
+                        @include font-size(1.3rem);
+                        font-weight: bold;
+                        letter-spacing: 1.5px;
+                        a{
+                            color: $black;
+                        }
+                        small{
+                            @include font-size(0.6rem);
+                            font-weight: normal;
+                            margin-left: 0.25rem;
+                        }
+                    }
+                    .postAuthorButtons{
+                        text-align: right;
+                        @include font-size(0.9rem);
+                        i{
+                            padding: 0 0.5rem;
+                            cursor: pointer;
+                            &:hover{
+                                color: $orange;
+                            }
+                        }
+                    }
+                }
+                .postDesc{
+                    padding: 0 1rem;
+                    margin-top: 0.5rem;
+                    .postPhotos{
+                        .postPicture{
+                            max-width: 500px;
+                            max-height: 200px;
+                        }
+                    }
+                    .postContent{
+                        margin-top: 0.25rem;
+                        @include font-size(1rem);
+                    }
+                }
+                .postFooter{
+                    margin-top: 0.5rem;
+                    button{
+                        @include font-size(1.2rem);
+                        letter-spacing: 2px;
+                        margin: 0 auto;
+                        color: $black;
+                        &:hover{
+                            color:$orange;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .friendsList{
+        .friendsListHeader{
+            h3{
+                @include font-size(2rem);
+                letter-spacing: 2px;
+            }
+        }
+        .friendsListBox{
+            display: block;
+            width: 100%;
+            text-align: left;
+            ul{
+                padding-left: 1rem;
+                list-style: none;
+                li{
+                    .profilePicture{
+                        position: relative;
+                        img{
+                            max-width: 35px;
+                            max-height: 35px;
+                            border-radius: 50%;
+                        }
+                    }
+                    &.active{
+                        .profilePicture::after{
+                            content: "";
+                            position: absolute;
+                            width: 12px;
+                            height: 12px;
+                            background-color: $green;
+                            border-radius: 50%;
+                            top: 1.55rem;
+                            left: 2.5rem;
+                        }
+                    }
+                    .friendName,.friendOptions{
+                        display: flex;
+                        align-items: center;
+                    }
+                    .friendName{
+                        @include font-size(1rem);
+                        letter-spacing: 1px;
+                    }
+                    .friendOptions{
+                        @include font-size(1.1rem);
+                        span{
+                            margin: 0 0.5rem;
+                            cursor: pointer;
+                            &:hover{
+                                color: $orange; 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#editModal{
+    .modal-dialog{
+        max-width: 50vw;
+    }
+    .modal-body{
+        padding-top: 0.25rem;
+        #modalPicture-preview{
+            display: block;
+            width:100%;
+            .resetPictureBox{
+                text-align: right;
+                i{
+                    cursor: pointer;
+                    @include font-size(1.1rem);
+                    &:hover{
+                        color:$orange;
+                    }
+                }
+            }
+            .thumb{
+                max-width: 150px;
+                max-height: 150px;
+                margin-left: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+        .friendsWallButtons{
+            margin: 0.5rem 0;
+            padding:0 0.5rem;
+            .additionalButton{
+                @include font-size(1.4rem);
+                margin: 0 0.5rem;
+                cursor: pointer;
+                &:hover{
+                    color: $orange;
+                }
+            }
+        }
+        .friendsWallSendButton{
+            button{
+                color: $white;
+                background-color: $orange;
+                @include font-size(1rem);
+                font-weight: normal;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+            }
+        }
+    }
+}

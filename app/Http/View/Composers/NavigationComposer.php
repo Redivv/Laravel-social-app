@@ -5,8 +5,10 @@ namespace App\Http\View\Composers;
 use Illuminate\View\View;
 use Illuminate\Support\Arr;
 use Auth;
+use Carbon\Carbon;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Nahid\Talk\Facades\Talk;
 
 class NavigationComposer
 {   
@@ -15,15 +17,28 @@ class NavigationComposer
     /**
      * Create a new profile composer.
      *
-     * @param  UserRepository  $users
+     * @param  UserRepository  $users  
      * @return void
      */
     public function __construct()
     {
         if(Auth::check()){
             $notifications = Auth::user()->notifications()->get();
-            $notifications['chat'] = $notifications->whereIn('type',['App\Notifications\NewMessage'])->toArray();
-            $this->notifications['user'] = $notifications->whereIn('type',[])->toArray();
+
+            $this->notifications['chat'] = $threads = Talk::user(Auth::id())->getInbox();
+            $this->notifications['chatAmount'] = 0;
+
+            $this->notifications['user'] = $notifications->whereIn('type',
+            ['App\Notifications\NewFriendPost',
+            'App\Notifications\NewAdminPost'
+            ]);
+
+            $this->notifications['userAmount'] = $notifications->whereIn('type',
+            [
+                'App\Notifications\NewFriendPost',
+                'App\Notifications\NewAdminPost'
+                ])->where('read_at',null)->count();
+
             $this->notifications['system'] = $notifications
                 ->whereIn(
                     'type',
@@ -31,34 +46,30 @@ class NavigationComposer
                         'App\Notifications\NewProfilePicture',
                         'App\Notifications\UserFlagged',
                         'App\Notifications\AcceptedPicture',
-                        'App\Notifications\DeniedPicture'
-                        ])->toArray();
+                        'App\Notifications\DeniedPicture',
+                        'App\Notifications\AdminWideInfo'
+                        ]);
+            $this->notifications['systemAmount'] = $notifications
+                ->whereIn(
+                    'type',
+                    [
+                        'App\Notifications\NewProfilePicture',
+                        'App\Notifications\UserFlagged',
+                        'App\Notifications\AcceptedPicture',
+                        'App\Notifications\DeniedPicture',
+                        'App\Notifications\AdminWideInfo'
+                        ])->where('read_at',null)->count();
 
-            if (count($notifications['chat']) > 0) {
-                $duplicateConvo = array();
-                foreach ($notifications['chat'] as $chatNot) {
-                    if (in_array($chatNot['data']['sender_id'],$duplicateConvo)) {
-                        continue;
-                    }else{
-                        $sender = User::find($chatNot['data']['sender_id']);
-                        if(!$sender){
-                            DB::table('notifications')->where('id',$chatNot['id'])->delete();
-                            continue;
-                        }else{
-                            $chatNot['senderName'] = $sender->name;
-                            $chatNot['senderPicture'] = $sender->picture;
-                            $this->notifications['chat'][] = $chatNot;
-                            $duplicateConvo[] = $chatNot['data']['sender_id'];
-                        }
-                    }
+            foreach ($this->notifications['chat'] as $chatNot) {
+                if ($chatNot->thread->is_seen == 0 && $chatNot->thread->user_id != Auth::id()) {
+                    $this->notifications['chatAmount']++;
                 }
-            }else{
-                $this->notifications['chat'] = array();
             }
 
         }else{
             $this->notifications = null;
         }
+        // dd($this->notifications);
     }
 
     /**
@@ -68,7 +79,9 @@ class NavigationComposer
      * @return void
      */
     public function compose(View $view)
-    {
+    {   
+        // dd($this->notifications);
+        // dd($this->notifications);
         $view->with('notifications', $this->notifications);
     }
 }

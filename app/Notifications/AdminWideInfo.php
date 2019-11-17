@@ -5,26 +5,23 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class NewMessage extends Notification implements ShouldQueue
+class AdminWideInfo extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
-    public $sender_id;
-    public $body;
-    public $image;
+    public $content;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($id,$body,$image)
+    public function __construct(string $content)
     {
-        $this->sender_id = $id;
-        $this->body = $body;
-        $this->image = $image;
+        $this->content = $content;
     }
 
     /**
@@ -35,7 +32,7 @@ class NewMessage extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -47,9 +44,14 @@ class NewMessage extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'sender_id'     => $this->sender_id,
-            'message_body'  => $this->body,
-            'image_present' => $this->image,
+            'content'     => $this->content
         ];
+    }
+
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'content'     => $this->content
+        ]);
     }
 }

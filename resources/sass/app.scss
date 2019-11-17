@@ -33,6 +33,9 @@
 //Scss related do profile layout
 @import 'profile-layout';
 
+//Scss related do profile layout
+@import 'friendsWall';
+
 html{
     font-size: 2vw;
     scroll-behavior: smooth;
@@ -54,6 +57,26 @@ html{
         button{
             @extend .btn;
             @extend .btn-primary;
-            @extend .ml-3
+            @extend .ml-3;
+        }
+    }   
+
+    // Loading Spinner
+    .spinnerOverlay{
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        height: 100%;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background:rgba(0,0,0,0.8);
+        .spinner-border{
+            position: fixed;
+            top: 50%;
+            width: 5rem;
+            height: 5rem;
+            font-size: 1.5rem;
         }
     }

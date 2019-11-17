@@ -11,7 +11,7 @@
             @foreach ($elements as $element)
                 <tr>
                     <th scope="row">{{$element->name}}</th>
-                    <td>{{$element->created_at}}</td>
+                    <td>{{$element->created_at->diffForHumans()}}</td>
                     <td>
                         <form class="adminForm" method="post">
                             <button name="edit" type="submit" class="btn form-btn listBtn editBtn">

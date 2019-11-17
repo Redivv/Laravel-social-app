@@ -5,25 +5,26 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class AcceptedPicture extends Notification implements ShouldBroadcast
+class NewAdminPost extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
-    public $user_name;
-    public $image;
+    public $author;
+    public $postId;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user_name,$image)
+    public function __construct(object $author, $postId)
     {
-        $this->user_name = $user_name;
-        $this->image = $image;
+        $this->author = $author;
+        $this->postId = $postId;
     }
 
     /**
@@ -46,16 +47,19 @@ class AcceptedPicture extends Notification implements ShouldBroadcast
     public function toArray($notifiable)
     {
         return [
-            'user_name'     => $this->user_name,
-            'image'         => $this->image,
+            'author_name'   =>$this->author->name,
+            'author_image'  =>$this->author->picture,
+            'postId'        =>$this->postId
         ];
     }
 
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'user_name'     => $this->user_name,
-            'user_image'    => $this->image
+            'author_name'   =>$this->author->name,
+            'author_image'  =>$this->author->picture,
+            'postId'        =>$this->postId
         ]);
     }
+
 }

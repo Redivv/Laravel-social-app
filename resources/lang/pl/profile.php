@@ -42,5 +42,8 @@ return [
     'lastActive1sec'        => 'Ostatnio Aktywny: 1 sekunda temu',
     'verifyEmailAlert'      => 'Konieczna weryfikacja adresu email. Aby korzystać z wszystkich funkcji portalu kliknij w link wysłany na podany adres email',
     'pictureInfo'           => 'Twoje zdjęcie zostało wysłane do administracji do akceptacji',
-    'updated'               => 'Profil został zaktualizowany'
+    'updated'               => 'Profil został zaktualizowany',
+    'status'                => 'Status',
+    'status_taken'          => 'w zaiązku',
+    'status_free'           => 'wolna'
 ];

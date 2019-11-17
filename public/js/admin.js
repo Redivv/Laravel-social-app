@@ -1,1 +1,386 @@
-!function(t){var n={};function e(a){if(n[a])return n[a].exports;var o=n[a]={i:a,l:!1,exports:{}};return t[a].call(o.exports,o,o.exports,e),o.l=!0,o.exports}e.m=t,e.c=n,e.d=function(t,n,a){e.o(t,n)||Object.defineProperty(t,n,{enumerable:!0,get:a})},e.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},e.t=function(t,n){if(1&n&&(t=e(t)),8&n)return t;if(4&n&&"object"==typeof t&&t&&t.__esModule)return t;var a=Object.create(null);if(e.r(a),Object.defineProperty(a,"default",{enumerable:!0,value:t}),2&n&&"string"!=typeof t)for(var o in t)e.d(a,o,function(n){return t[n]}.bind(null,o));return a},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,n){return Object.prototype.hasOwnProperty.call(t,n)},e.p="/",e(e.s=50)}({50:function(t,n,e){t.exports=e(51)},51:function(t,n){function e(t,n){var e=$(t).attr("name"),a=$(t).parent().serialize(),o=$.ajax({method:"post",url:__baseUrl+"/admin/ajax/ticket",data:{_method:"PATCH",ticketId:a,decision:e}});o.done((function(e){if("success"===e.status){$(t).parent().parent().parent().remove();var o=$("#"+n+"Count").text(),r=$("#descSys").text();o-1==0?$("#"+n+"Count").html(""):$("#"+n+"Count").html(parseInt(o)-1),r-1==0?$(".systemNotificationsCount").html(""):$(".systemNotificationsCount").html(parseInt(r)-1),$("a."+a.substring(9)).remove(),$(".spinnerOverlay").addClass("d-none")}})),o.fail((function(t){alert(t.responseJSON.message)}))}function a(t,n){var e=$(t).attr("name");if("edit"==e)var a=prompt("Nowa Nazwa");else a="";$(".spinnerOverlay").removeClass("d-none");var o=$(t).parent().serialize(),r=$.ajax({method:"post",url:__baseUrl+"/admin/ajax/list",data:{_method:"PATCH",elementId:o,decision:e,editValue:a,target:n}});r.done((function(n){if("success"===n.status)switch(e){case"delete":$(t).parent().parent().parent().remove(),$(".spinnerOverlay").addClass("d-none");break;case"edit":$(t).parent().parent().prev().prev().html(a),$(".spinnerOverlay").addClass("d-none")}})),r.fail((function(t){alert(t.responseJSON.message)}))}$(document).ready((function(){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$("a.tab").one("click",(function(){!function(t){var n=$(t).attr("id"),o=__baseUrl+"/admin/ajax/tab";$(document).one("ajaxSend",(function(){$("#"+n+"-content").html(' <div class="spinner-border text-dark" role="status"><span class="sr-only">Loading...</span></div>')}));var r=$.ajax({method:"get",url:o,data:{target:n}});r.done((function(t){"success"===t.status&&($("#"+n+"-content").html(t.html),0==t.amount?$("#"+n+"Count").html(""):$("#"+n+"Count").html(t.amount),$("button.ticketBtn").on("click",(function(t){t.preventDefault(),confirm(confirmMsg)&&($(".spinnerOverlay").removeClass("d-none"),e(this,n))})),$("button.listBtn").on("click",(function(t){t.preventDefault(),confirm(confirmMsg)&&a(this,n)})),$("span.fetchBtn").on("click",(function(){$(this).addClass("spin"),function t(n){var o=$(n).attr("id").split("-");o=o[0];var r=__baseUrl+"/admin/ajax/tab",s=$.ajax({method:"get",url:r,data:{target:o}});s.done((function(n){"success"===n.status&&($("#"+o+"-content").html(n.html),0==n.amount?$("#"+o+"Count").html(""):$("#"+o+"Count").html(n.amount),$("button.ticketBtn").on("click",(function(t){t.preventDefault(),confirm(confirmMsg)&&($(".spinnerOverlay").removeClass("d-none"),e(this,o))})),$("button.listBtn").on("click",(function(t){t.preventDefault(),confirm(confirmMsg)&&a(this,o)})),$("span.fetchBtn").on("click",(function(){$(this).addClass("spin"),t(this)})))})),s.fail((function(t){alert(t.responseJSON.message),$("#"+o+"-content").html("")}))}(this)})))})),r.fail((function(t){alert(t.responseJSON.message),$("#"+n+"-content").html("")}))}(this)}))}))}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./resources/js/admin.js":
+/*!*******************************!*\
+  !*** ./resources/js/admin.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  main();
+});
+
+function main() {
+  $('a.tab').one('click', function () {
+    renderContent(this);
+  });
+  $('#infoNotDesc').emojioneArea({
+    pickerPosition: "bottom",
+    placeholder: "\xa0",
+    autocomplete: false
+  });
+  $('#infoWallDesc').emojioneArea({
+    pickerPosition: "bottom",
+    placeholder: "\xa0",
+    autocomplete: false
+  });
+  $('#postPicture').change(function (evt) {
+    var files = evt.target.files; // FileList object
+    // Empty the preview list
+
+    $('#adminPicture-preview').empty();
+    var html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt"></i></div>';
+    $('#adminPicture-preview').append(html);
+    var tag = $(this);
+    $('.resetPicture').one('click', function () {
+      if (confirm(resetImgMsg)) {
+        tag.val("");
+        $('#adminPicture-preview').empty();
+      }
+    }); // Loop through the FileList and render image files as thumbnails.
+
+    for (var i = 0, f; f = files[i]; i++) {
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        $(this).val("");
+        alert(badFileType);
+        $('#adminPicture-preview').empty();
+        break;
+      }
+
+      var reader = new FileReader(); // Closure to capture the file information.
+
+      reader.onload = function (theFile) {
+        return function (e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+          $('#adminPicture-preview').append(span, null);
+          $('.emojionearea-editor').focus();
+        };
+      }(f); // Read in the image file as a data URL.
+
+
+      reader.readAsDataURL(f);
+    }
+  });
+  $('#adminInfoForm').on('submit', function (e) {
+    e.preventDefault();
+    var url = baseUrl + "/admin/ajax/wideInfo";
+    var tag = $(this);
+    $(document).one("ajaxSend", function () {
+      tag[0].reset();
+      $('.emojionearea-editor').empty();
+      $('#adminPicture-preview').empty();
+      $('.spinnerOverlay').removeClass('d-none');
+    });
+    var request = $.ajax({
+      method: "post",
+      url: url,
+      enctype: 'multipart/form-data',
+      processData: false,
+      contentType: false,
+      data: new FormData(this)
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        $('.spinnerOverlay').addClass('d-none');
+      }
+    });
+    request.fail(function (xhr) {
+      alert(xhr.responseJSON.message);
+    });
+  });
+}
+
+function renderContent(selected) {
+  var targetId = $(selected).attr('id');
+  var url = __baseUrl + '/admin/ajax/tab';
+  $(document).one("ajaxSend", function () {
+    var html = ' <div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>';
+    $('#' + targetId + '-content').html(html);
+  });
+  var request = $.ajax({
+    method: 'get',
+    url: url,
+    data: {
+      target: targetId
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      $('#' + targetId + '-content').html(response.html);
+
+      if (response.amount == 0) {
+        $('#' + targetId + 'Count').html('');
+      } else {
+        $('#' + targetId + 'Count').html(response.amount);
+      }
+
+      $('button.ticketBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (confirm(confirmMsg)) {
+          $('.spinnerOverlay').removeClass('d-none');
+          carryTicket(this, targetId);
+        }
+      });
+      $('button.listBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (confirm(confirmMsg)) {
+          carryList(this, targetId);
+        }
+      });
+      $('span.fetchBtn').on('click', function () {
+        $(this).addClass('spin');
+        fetchContent(this);
+      });
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+    $('#' + targetId + '-content').html('');
+  });
+}
+
+function fetchContent(selected) {
+  var targetId = $(selected).attr('id').split('-');
+  targetId = targetId[0];
+  var url = __baseUrl + '/admin/ajax/tab';
+  var request = $.ajax({
+    method: 'get',
+    url: url,
+    data: {
+      target: targetId
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      $('#' + targetId + '-content').html(response.html);
+
+      if (response.amount == 0) {
+        $('#' + targetId + 'Count').html('');
+      } else {
+        $('#' + targetId + 'Count').html(response.amount);
+      }
+
+      $('button.ticketBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (confirm(confirmMsg)) {
+          $('.spinnerOverlay').removeClass('d-none');
+          carryTicket(this, targetId);
+        }
+      });
+      $('button.listBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (confirm(confirmMsg)) {
+          carryList(this, targetId);
+        }
+      });
+      $('span.fetchBtn').on('click', function () {
+        $(this).addClass('spin');
+        fetchContent(this);
+      });
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+    $('#' + targetId + '-content').html('');
+  });
+}
+
+function carryTicket(decided, target) {
+  var decision = $(decided).attr('name');
+  var ticketId = $(decided).parent().serialize();
+  var request = $.ajax({
+    method: 'post',
+    url: __baseUrl + '/admin/ajax/ticket',
+    data: {
+      "_method": "PATCH",
+      ticketId: ticketId,
+      decision: decision
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      $(decided).parent().parent().parent().remove();
+      var currentAmount = $('#' + target + 'Count').text();
+      var currentAmountNot = $('#descSys').text();
+
+      if (currentAmount - 1 == 0) {
+        $('#' + target + 'Count').html('');
+      } else {
+        $('#' + target + 'Count').html(parseInt(currentAmount) - 1);
+      }
+
+      if (currentAmountNot - 1 == 0) {
+        $('.systemNotificationsCount').html('');
+      } else {
+        $('.systemNotificationsCount').html(parseInt(currentAmountNot) - 1);
+      }
+
+      $('a.' + ticketId.substring(9)).remove();
+
+      if ($('#descSys').html().trim() == "") {
+        $('div.systemNotifications').html('<div class="text-center">' + noNotifications + '</div>');
+      }
+
+      $('.spinnerOverlay').addClass('d-none');
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+  });
+}
+
+function carryList(decided, target) {
+  var decision = $(decided).attr('name');
+
+  if (decision == 'edit') {
+    var editValue = prompt("Nowa Nazwa");
+  } else {
+    var editValue = "";
+  }
+
+  $('.spinnerOverlay').removeClass('d-none');
+  var elementId = $(decided).parent().serialize();
+  var request = $.ajax({
+    method: 'post',
+    url: __baseUrl + '/admin/ajax/list',
+    data: {
+      "_method": "PATCH",
+      elementId: elementId,
+      decision: decision,
+      editValue: editValue,
+      target: target
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      switch (decision) {
+        case 'delete':
+          $(decided).parent().parent().parent().remove();
+          $('.spinnerOverlay').addClass('d-none');
+          break;
+
+        case 'edit':
+          $(decided).parent().parent().prev().prev().html(editValue);
+          $('.spinnerOverlay').addClass('d-none');
+      }
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+  });
+}
+
+/***/ }),
+
+/***/ 6:
+/*!*************************************!*\
+  !*** multi ./resources/js/admin.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\admin.js */"./resources/js/admin.js");
+
+
+/***/ })
+
+/******/ });

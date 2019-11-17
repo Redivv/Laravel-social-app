@@ -206,8 +206,11 @@ class SearchController extends Controller
     public function getRandomUsers() : array    
     {
         $search_results = User::select('users.id','users.name','users.birth_year','users.description as desc', 'users.status', 'users.picture','cities.name as city')
-            ->whereNotIn('hidden_status',[2])
-            ->leftJoin('cities', 'users.city_id', '=', 'cities.id')
+            ->whereNotIn('hidden_status',[2]);
+            if (Auth::check()) {
+                $search_results = $search_results->whereNotIn('users.id',[Auth::id()]);
+            }
+            $search_results = $search_results->leftJoin('cities', 'users.city_id', '=', 'cities.id')
             ->inRandomOrder()
             ->take(5)
             ->get();

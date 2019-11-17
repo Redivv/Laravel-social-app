@@ -5,8 +5,10 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class DeniedPicture extends Notification
+class DeniedPicture extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
@@ -30,7 +32,7 @@ class DeniedPicture extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -44,5 +46,12 @@ class DeniedPicture extends Notification
         return [
             'user_name'     => $this->user_name
         ];
+    }
+
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'user_name'     => $this->user_name
+        ]);
     }
 }

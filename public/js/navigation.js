@@ -81,62 +81,79 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/register.js":
-/*!**********************************!*\
-  !*** ./resources/js/register.js ***!
-  \**********************************/
+/***/ "./resources/js/navigation.js":
+/*!************************************!*\
+  !*** ./resources/js/navigation.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-  $('#profile-picture').change(function (evt) {
-    var files = evt.target.files; // FileList object
-    // Empty the preview list
+  main();
+});
 
-    $('#picture-preview').empty(); // Loop through the FileList and render image files as thumbnails.
+function main() {
+  $('a.navNotifications').on('click', function () {
+    var type = $(this).data('type');
+    $('.' + type + 'Count').html('');
+    $(this).parent().one('hidden.bs.dropdown', function () {
+      $('.' + type + '>.dropdown-item').addClass('read');
+    });
 
-    for (var i = 0, f; f = files[i]; i++) {
-      // Only process image files.
-      if (!f.type.match('image.*')) {
-        $(this).val("");
-        alert("Niewłaściwy Typ Pliku!");
-        $('#picture-preview').empty();
-        break;
-      }
-
-      var reader = new FileReader(); // Closure to capture the file information.
-
-      reader.onload = function (theFile) {
-        return function (e) {
-          // Render thumbnail.
-          var span = document.createElement('span');
-          span.innerHTML = ['<img class="profile-picture" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
-          $('#picture-preview').prepend(span, null);
-          $('#message-data').focus();
-        };
-      }(f); // Read in the image file as a data URL.
-
-
-      reader.readAsDataURL(f);
+    if (type !== "chatNotifications") {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      var url = baseUrl + '/user/readNotifications';
+      var request = $.ajax({
+        method: 'post',
+        url: url,
+        data: {
+          "_method": "PATCH",
+          type: type
+        }
+      });
+      request.fail(function (xhr) {
+        alert(xhr.responseJSON.message);
+      });
     }
   });
-});
+  $('a.clearAllBtn').one('click', function () {
+    var type = $(this).data('type');
+    var html = '<div class="text-center ' + type + '">' + noNotifications + '</div>';
+    $(this).parent().html(html);
+    var url = baseUrl + '/user/deleteNotifications';
+    var request = $.ajax({
+      method: 'post',
+      url: url,
+      data: {
+        "_method": "DELETE",
+        type: type
+      }
+    });
+    request.fail(function (xhr) {
+      alert(xhr.responseJSON.message);
+    });
+  });
+}
 
 /***/ }),
 
-/***/ 2:
-/*!****************************************!*\
-  !*** multi ./resources/js/register.js ***!
-  \****************************************/
+/***/ 7:
+/*!******************************************!*\
+  !*** multi ./resources/js/navigation.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\register.js */"./resources/js/register.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\navigation.js */"./resources/js/navigation.js");
 
 
 /***/ })

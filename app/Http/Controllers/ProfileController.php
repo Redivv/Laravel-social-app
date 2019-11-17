@@ -25,7 +25,8 @@ class ProfileController extends Controller
             'type',
             [
                 'App\Notifications\AcceptedPicture',
-                'App\Notifications\DeniedPicture'
+                'App\Notifications\DeniedPicture',
+                'App\Notifications\AdminWideInfo'
                 ])->get();
         
         foreach ($profileNotifications as $profNot) {
@@ -51,7 +52,8 @@ class ProfileController extends Controller
             'photo'         =>  'mimes:jpeg,png,jpg,gif|max:2048',
             'city'          =>  ['string','nullable','max:250'],
             'description'   => ['string','nullable','max:500'],
-            'status'        =>  ['numeric', 'gte:0', 'lte:2' ]
+            'status'        =>  ['numeric', 'gte:0', 'lte:2' ],
+            'relations'        =>  ['numeric', 'gte:0', 'lte:1' ]
         ]);
         //If there's a file
         if (request()->hasFile('photo')) {
@@ -74,6 +76,7 @@ class ProfileController extends Controller
 
         $user->city_id = $city->id;
         $user->hidden_status = request('status');
+        $user->relationship_status = request('relations');
         $user->description = request('description');
         //Save changes in user profile
         $user->update();
