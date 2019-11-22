@@ -1,36 +1,50 @@
 @foreach ($posts as $post)
-    <article id="post{{$post->id}}" class="post container">
-        <header class="postAuthor row">
-            <div class="col-1">
-                <img class="postAuthorPicture" src="{{asset('img/profile-pictures/'.$post->user->picture)}}">
-            </div>
-            <div class="col-9 postAuthorName">
-                <a class="postAuthorLink" href="/profile/{{$post->user->name}}">
-                    {{$post->user->name}}@if($post->user->is_admin)<small class="text-muted adminStatus">{{__('activityWall.adminStatus')}}</small>@endif
-                 </a>
-            </div>
-            @if ($post->user_id == auth()->user()->id)
-                <div class="col-2 postAuthorButtons">
-                    <i class="fas postEdit fa-edit" data-id="{{$post->id}}" data-toggle="modal" data-target="#editModal"></i>
-                    <i class="fas postDelete fa-times" data-id="{{$post->id}}"></i>
+    <div class="postBox container">
+        <article id="post{{$post->id}}" class="post">
+            <header class="postAuthor row">
+                <div class="col-1">
+                    <img class="postAuthorPicture" src="{{asset('img/profile-pictures/'.$post->user->picture)}}">
                 </div>
-            @endif
-        </header>
-        <main class="postDesc row">
-            <div class="postPhotos col-12">
-                @if ($pictures = json_decode($post->pictures))
-                    @foreach ($pictures as $picture)
-                        <img class="postPicture" src="{{asset('img/post-pictures/'.$picture)}}">
-                    @endforeach
+                <div class="col-9 postAuthorName">
+                    <a class="postAuthorLink" href="/profile/{{$post->user->name}}">
+                        {{$post->user->name}}@if($post->user->is_admin)<small class="text-muted adminStatus">{{__('activityWall.adminStatus')}}</small>@endif
+                    </a>
+                </div>
+                @if ($post->user_id == auth()->user()->id)
+                    <div class="col-2 postAuthorButtons">
+                        <i class="fas postEdit fa-edit" data-id="{{$post->id}}" data-toggle="modal" data-target="#editModal"></i>
+                        <i class="fas postDelete fa-times" data-id="{{$post->id}}"></i>
+                    </div>
                 @endif
-            </div>
-            <div class="postContent col-12">{{$post->desc}}</div>
-            <div class="postTags col-12"></div>
-        </main>
-        <footer class="postFooter row">
-            <button class="col-5 btn btn-block"><i class="fas fa-fire"></i> Poleć</button>
-            <button class="col-5 btn btn-block"><i class="far fa-comments"></i> Skomentuj</button>
-        </footer>
-    </article>
-    <hr>
+            </header>
+            <main class="postDesc row">
+                <div class="postPhotos col-12">
+                    @if ($pictures = json_decode($post->pictures))
+                        @foreach ($pictures as $picture)
+                            <img class="postPicture" src="{{asset('img/post-pictures/'.$picture)}}">
+                        @endforeach
+                    @endif
+                </div>
+                <div class="postContent col-12">{{$post->desc}}</div>
+                <div class="postTags col-12"></div>
+            </main>
+            <footer class="postFooter row">
+                <button class="col-5 btn btn-block"><i class="fas fa-fire"></i> Poleć</button>
+                <button class="col-5 btn btn-block"><i class="far fa-comments"></i> Skomentuj</button>
+            </footer>
+        </article>
+        <div class="postComments mt-4">
+            <form class="commentsForm" data-id="{{$post->id}}" method="post">
+                <div class="input-group row">
+                    <input type="text" class="form-control commentsDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">
+                    <div class="input-group-append col-1 commentButtons">
+                            <i class="fas fa-user-tag"></i>
+                            <i class="far fa-image"></i>
+                    </div>
+                </div>
+            </form>
+            <output class="commentsFeed"></output>
+        </div>
+        <hr>
+    </div>
 @endforeach

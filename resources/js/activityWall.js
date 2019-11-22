@@ -16,6 +16,12 @@ function main() {
         autocomplete:false
     });
 
+    $('.commentsDesc').emojioneArea({
+        pickerPosition: "top",
+        placeholder: "Napisz Komentarz",
+        autocomplete:false
+    });
+
     $('#postPicture').change(function(evt){
         var files = evt.target.files; // FileList object
         

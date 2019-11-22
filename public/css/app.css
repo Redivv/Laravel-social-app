@@ -17800,17 +17800,17 @@ html {
   text-align: center;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post {
   margin-top: 1rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorPicture {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorPicture {
   max-width: 50px;
   max-height: 50px;
   border-radius: 50%;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorName {
   display: flex;
   align-items: center;
   font-size: calc(1.255rem + 0.06vw);
@@ -17819,63 +17819,97 @@ html {
 }
 
 @media (min-width: 1200px) {
-  #friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName {
+  #friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorName {
     font-size: 1.3rem;
   }
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName a {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorName a {
   color: #000;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName small {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorName small {
   font-size: 0.6rem;
   font-weight: normal;
   margin-left: 0.25rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorButtons {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorButtons {
   text-align: right;
   font-size: 0.9rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorButtons i {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorButtons i {
   padding: 0 0.5rem;
   cursor: pointer;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorButtons i:hover {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorButtons i:hover {
   color: #f66103;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postDesc {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc {
   padding: 0 1rem;
   margin-top: 0.5rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postDesc .postPhotos .postPicture {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postPhotos .postPicture {
   max-width: 500px;
   max-height: 200px;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postDesc .postContent {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postContent {
   margin-top: 0.25rem;
   font-size: 1rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postFooter {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter {
   margin-top: 0.5rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postFooter button {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter button {
   font-size: 1.2rem;
   letter-spacing: 2px;
   margin: 0 auto;
   color: #000;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postFooter button:hover {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter button:hover {
   color: #f66103;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .input-group {
+  padding: 0 5%;
+  width: auto;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsDesc {
+  border-right: 0;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentButtons {
+  padding: 0;
+  border: 1px solid #CCC;
+  border-left-color: #cccccc;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left: 0;
+  background: #ffffff;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  align-content: center;
+  align-items: center;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentButtons i {
+  cursor: pointer;
+  color: #a1a1a1;
+  margin-left: 10%;
+  font-size: 0.9rem;
+  transition: all 400ms ease-in-out;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentButtons i:hover {
+  color: #757575;
 }
 
 #friendsWall .friendsList .friendsListHeader h3 {

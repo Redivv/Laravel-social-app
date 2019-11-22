@@ -74,64 +74,97 @@
             .ajaxSpinner{
                 text-align: center;
             }
-            .post{
-                margin-top: 1rem;
-                .postAuthor{
-                    .postAuthorPicture{
-                        max-width: 50px;
-                        max-height: 50px;
-                        border-radius: 50%;
+            .postBox{
+                .post{
+                    margin-top: 1rem;
+                    .postAuthor{
+                        .postAuthorPicture{
+                            max-width: 50px;
+                            max-height: 50px;
+                            border-radius: 50%;
+                        }
+                        .postAuthorName{
+                            display: flex;
+                            align-items: center;
+                            @include font-size(1.3rem);
+                            font-weight: bold;
+                            letter-spacing: 1.5px;
+                            a{
+                                color: $black;
+                            }
+                            small{
+                                @include font-size(0.6rem);
+                                font-weight: normal;
+                                margin-left: 0.25rem;
+                            }
+                        }
+                        .postAuthorButtons{
+                            text-align: right;
+                            @include font-size(0.9rem);
+                            i{
+                                padding: 0 0.5rem;
+                                cursor: pointer;
+                                &:hover{
+                                    color: $orange;
+                                }
+                            }
+                        }
                     }
-                    .postAuthorName{
-                        display: flex;
-                        align-items: center;
-                        @include font-size(1.3rem);
-                        font-weight: bold;
-                        letter-spacing: 1.5px;
-                        a{
+                    .postDesc{
+                        padding: 0 1rem;
+                        margin-top: 0.5rem;
+                        .postPhotos{
+                            .postPicture{
+                                max-width: 500px;
+                                max-height: 200px;
+                            }
+                        }
+                        .postContent{
+                            margin-top: 0.25rem;
+                            @include font-size(1rem);
+                        }
+                    }
+                    .postFooter{
+                        margin-top: 0.5rem;
+                        button{
+                            @include font-size(1.2rem);
+                            letter-spacing: 2px;
+                            margin: 0 auto;
                             color: $black;
-                        }
-                        small{
-                            @include font-size(0.6rem);
-                            font-weight: normal;
-                            margin-left: 0.25rem;
-                        }
-                    }
-                    .postAuthorButtons{
-                        text-align: right;
-                        @include font-size(0.9rem);
-                        i{
-                            padding: 0 0.5rem;
-                            cursor: pointer;
                             &:hover{
-                                color: $orange;
+                                color:$orange;
                             }
                         }
                     }
                 }
-                .postDesc{
-                    padding: 0 1rem;
-                    margin-top: 0.5rem;
-                    .postPhotos{
-                        .postPicture{
-                            max-width: 500px;
-                            max-height: 200px;
-                        }
+                .postComments{
+                    .input-group{
+                        padding: 0 5%;
+                        width: auto;
                     }
-                    .postContent{
-                        margin-top: 0.25rem;
-                        @include font-size(1rem);
+                    .commentsDesc{
+                        border-right: 0;
                     }
-                }
-                .postFooter{
-                    margin-top: 0.5rem;
-                    button{
-                        @include font-size(1.2rem);
-                        letter-spacing: 2px;
-                        margin: 0 auto;
-                        color: $black;
-                        &:hover{
-                            color:$orange;
+                    .commentButtons{
+                        padding: 0;
+                        border: 1px solid#CCC;
+                        border-left-color: rgb(204, 204, 204);
+                        border-left-style: solid;
+                        border-left-width: 1px;
+                        border-left: 0;
+                        background: $white;
+                        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+                        align-content: center;
+                        align-items: center;
+                        i{
+                            cursor: pointer;
+                            color: #a1a1a1;
+                            margin-left: 10%;
+                            @include font-size(0.9rem);
+                            transition: all 400ms ease-in-out;
+                            &:hover{
+                                color: #757575;
+                            }
                         }
                     }
                 }

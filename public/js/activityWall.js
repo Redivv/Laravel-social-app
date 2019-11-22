@@ -109,6 +109,11 @@ function main() {
     placeholder: "\xa0",
     autocomplete: false
   });
+  $('.commentsDesc').emojioneArea({
+    pickerPosition: "top",
+    placeholder: "Napisz Komentarz",
+    autocomplete: false
+  });
   $('#postPicture').change(function (evt) {
     var files = evt.target.files; // FileList object
     // Empty the preview list

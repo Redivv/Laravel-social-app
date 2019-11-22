@@ -95,10 +95,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="alert alert-info" role="alert">
-                                {{__('registeration.infoAlert')}}
-                            </div>
                             
                             <button type="submit" class="form-btn btn btn-block">
                                 {{ __('registeration.register-button') }}
