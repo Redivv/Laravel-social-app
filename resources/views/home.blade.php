@@ -61,6 +61,8 @@
 
 @include('partials.postEditModal')
 
+@include('partials.commentEditModal')
+
 @endsection
 
 @push('scripts')

@@ -13,14 +13,41 @@ function main() {
     $('#addPost').emojioneArea({
         pickerPosition: "bottom",
         placeholder: "\xa0",
-        autocomplete:false
+        autocomplete:false,
+        buttonTitle: ""
     });
 
     $('.commentsDesc').emojioneArea({
         pickerPosition: "top",
         placeholder: "Napisz Komentarz",
-        autocomplete:false
+        autocomplete:false,
+        buttonTitle: "kokok",
+        inline: false,
+        events: {
+            keypress: function(editor,e) {
+                if (e.keyCode == 13 || e.which == 13) {
+                    e.preventDefault();
+                    editor.parent().prev().val(this.getText());
+                    editor.parent().prev().parent().submit(); 
+                }
+            }
+          }
     });
+
+    $('.commentsForm').on('submit',function(e){
+        e.preventDefault();
+        let tag = $(this);
+
+        tag[0].reset();
+        tag.find('.emojionearea-editor').empty();
+    })
+
+    $('.btnComment').on('click',function() {
+        let commentBox = $(this).parent().parent().next();
+
+        commentBox.removeClass('d-none');
+        commentBox.find('.emojionearea-editor').focus();
+    })
 
     $('#postPicture').change(function(evt){
         var files = evt.target.files; // FileList object

@@ -11120,6 +11120,7 @@ a.text-dark:focus {
 }
 
 .text-muted,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentsFeed .comment .commentContent .commentDate,
 #friendsWall .friendsWall #friendsWallFeed .noContent,
 .nav-bar-height .chatNotifications .dropdown-item .notificationDesc .descTime,
 .nav-bar-height .chatNotifications .clearAllBtn .notificationDesc .descTime,
@@ -17883,6 +17884,14 @@ html {
   width: auto;
 }
 
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .input-group .emojionearea-editor {
+  min-height: unset;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .input-group .emojionearea-button {
+  margin-top: 3px;
+}
+
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsDesc {
   border-right: 0;
 }
@@ -17910,6 +17919,65 @@ html {
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentButtons i:hover {
   color: #757575;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentsFeed {
+  display: block;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0 2rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentsFeed .comment .commentProfilePicture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentsFeed .comment .commentProfilePicture img {
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentsFeed .comment .commentContent .commentAuthor .commentAuthorName {
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  font-size: 1rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentsFeed .comment .commentContent .commentAuthor .commentAuthorButtons i {
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentsFeed .comment .commentContent .commentAuthor .commentAuthorButtons i:hover {
+  color: #f66103;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentsFeed .comment .commentContent .commentDate {
+  font-size: 0.6rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentsFeed .comment .commentContent .commentDesc {
+  font-size: 0.8rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentsFeed .comment .commentUserButtons {
+  padding: 0;
+  text-align: left;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentsFeed .comment .commentUserButtons i {
+  cursor: pointer;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  color: #000;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentsFeed .comment .commentUserButtons i:hover {
+  color: #f66103;
 }
 
 #friendsWall .friendsList .friendsListHeader h3 {

@@ -141,6 +141,12 @@
                     .input-group{
                         padding: 0 5%;
                         width: auto;
+                        .emojionearea-editor{
+                            min-height: unset;
+                        }
+                        .emojionearea-button{
+                            margin-top: 3px;
+                        }
                     }
                     .commentsDesc{
                         border-right: 0;
@@ -164,6 +170,63 @@
                             transition: all 400ms ease-in-out;
                             &:hover{
                                 color: #757575;
+                            }
+                        }
+                    }
+                    #commentsFeed{
+                        display: block;
+                        width: 100%;
+                        margin-top: 1.5rem;
+                        padding: 0 2rem;
+                        .comment{
+                            .commentProfilePicture{
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                img{
+                                    max-width: 40px;
+                                    max-height: 40px;
+                                    border-radius: 50%;
+                                }
+                            }
+                            .commentContent{
+                                .commentAuthor{
+                                    .commentAuthorName{
+                                        font-weight: bold;
+                                        letter-spacing: 1.5px;
+                                        @include font-size(1rem);
+                                    }
+                                    .commentAuthorButtons{
+                                        i{
+                                            cursor: pointer;
+                                            @include font-size(0.8rem);
+                                            margin-left: 0.5rem;
+                                            &:hover{
+                                                color:$orange;
+                                            }
+                                        }
+                                    }
+                                }
+                                .commentDate{
+                                    @extend .text-muted;
+                                    @include font-size(0.6rem);
+                                }
+                                .commentDesc{
+                                    @include font-size(0.8rem);
+                                }
+                            }
+                            .commentUserButtons{
+                                padding: 0;
+                                text-align: left;
+                                i{
+                                    cursor: pointer;
+                                    margin-left: 0.5rem;
+                                    @include font-size(0.9rem);
+                                    color: $black;
+                                    &:hover{
+                                        color: $orange;
+                                    }
+                                }
                             }
                         }
                     }

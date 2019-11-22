@@ -30,20 +30,42 @@
             </main>
             <footer class="postFooter row">
                 <button class="col-5 btn btn-block"><i class="fas fa-fire"></i> Poleć</button>
-                <button class="col-5 btn btn-block"><i class="far fa-comments"></i> Skomentuj</button>
+                <button class="col-5 btn btnComment btn-block"><i class="far fa-comments"></i> Skomentuj</button>
             </footer>
         </article>
-        <div class="postComments mt-4">
+
+        <div class="d-none postComments mt-4">
             <form class="commentsForm" data-id="{{$post->id}}" method="post">
                 <div class="input-group row">
-                    <input type="text" class="form-control commentsDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">
+                    <input type="text" name="commentDesc" class="form-control commentsDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">
                     <div class="input-group-append col-1 commentButtons">
                             <i class="fas fa-user-tag"></i>
                             <i class="far fa-image"></i>
                     </div>
                 </div>
             </form>
-            <output class="commentsFeed"></output>
+            <output id="commentsFeed">
+                <div class="comment row">
+                    <div class="col-2 commentProfilePicture">
+                        <img class="profilePicture" src="{{asset('img/profile-pictures/default-picture.png')}}">
+                    </div>
+                    <div class="col-10 commentContent">
+                        <div class="col-12 commentAuthor row">
+                            <div class="col-9 commentAuthorName">Nick</div>
+                            <div class="col-3 commentAuthorButtons">
+                                <i class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
+                                <i class="fas commentDelete fa-times"></i>
+                            </div>
+                        </div>
+                        <div class="col-12 commentDate">2 dni temu</div>
+                        <div class="col-12 commentDesc">Treść</div>
+                    </div>
+                    <div class="col-12 commentUserButtons">
+                        <i class="fas fa-fire"></i>
+                        <i class="fas fa-reply"></i>
+                    </div>
+                </div>
+            </output>
         </div>
         <hr>
     </div>

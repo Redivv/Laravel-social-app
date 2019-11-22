@@ -1,4 +1,4 @@
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+<div class="modal fade" id="commentEditModal" tabindex="-1" role="dialog" aria-labelledby="commentEditModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,6 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                kk
             </div>
         </div>
     </div>
