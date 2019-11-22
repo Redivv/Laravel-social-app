@@ -5,12 +5,13 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Hootlex\Friendships\Traits\Friendable;
 
 use Conner\Tagging\Taggable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, Taggable;
+    use Notifiable, Taggable, Friendable;
 
     /**
      * The attributes that are mass assignable.

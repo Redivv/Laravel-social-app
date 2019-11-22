@@ -5,6 +5,7 @@
 
 /vendor/*
 !/vendor/nahid
+!/vendor/hootlex
 
 .env
 .env.backup

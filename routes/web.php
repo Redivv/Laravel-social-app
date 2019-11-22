@@ -22,6 +22,9 @@ Route::get('searcher', 'SearchController@index')->name('searcher');
 Route::middleware(['verified'])->group(function () {
     Route::patch('profile', 'ProfileController@update');
     Route::get('profile/edit','ProfileController@edit')->name('ProfileEdition');
+    // Ya need to be 'verified' to do stuff with friends
+    Route::get('friends/add/{user}','FriendsController@addFriend');
+
 });
 
 Route::get('profile', 'ProfileController@index')->middleware('auth')->name('ProfileView');
