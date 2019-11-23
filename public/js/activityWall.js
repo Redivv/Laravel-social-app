@@ -112,7 +112,6 @@ function main() {
   $('.commentsDesc').emojioneArea({
     pickerPosition: "top",
     placeholder: "Napisz Komentarz",
-    buttonTitle: "kokok",
     inline: false,
     events: {
       keypress: function keypress(editor, e) {
@@ -123,6 +122,11 @@ function main() {
         }
       }
     }
+  });
+  $('#editPostDesc').emojioneArea({
+    pickerPosition: "top",
+    placeholder: "\xa0",
+    autocomplete: false
   });
   $('#postPicture').change(function (evt) {
     var files = evt.target.files; // FileList object
@@ -318,6 +322,50 @@ function main() {
     $('#editPicture').off('change');
     $(this).find('.modal-body').html('');
   });
+  $('#commentEditModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var commentId = button.data('id');
+    var modal = $(this);
+    var comment = $('#com-' + commentId);
+    var content = comment.find('.commentDesc').html().trim();
+    modal.find('.emojionearea-editor').html(content);
+    modal.find('#editPostDesc').val(content);
+    $('#editComment').on('submit', function (e) {
+      e.preventDefault();
+      var tag = $(this);
+      var newComment = $(this).serializeArray();
+
+      if (newComment[0].value.trim() != "") {
+        var url = baseUrl + "/user/ajax/editComment";
+        $(document).one("ajaxSend", function () {
+          $('#commentEditModal').modal('hide');
+          $('.spinnerOverlay').removeClass('d-none');
+          tag[0].reset();
+          $('.emojionearea-editor').empty();
+        });
+        var request = $.ajax({
+          method: 'post',
+          url: url,
+          data: {
+            "_method": 'PATCH',
+            data: newComment,
+            commentId: commentId
+          }
+        });
+        request.done(function (response) {
+          if (response.status === 'success') {
+            comment.replaceWith(response.html);
+            $('.spinnerOverlay').addClass('d-none');
+          }
+        });
+        request.fail(function (xhr) {
+          alert(xhr.responseJSON.message);
+        });
+      } else {
+        alert(emptyCommentMsg);
+      }
+    });
+  });
   $('.postDelete').off('click');
   $('.postDelete').on('click', function () {
     deletePost(this);
@@ -340,6 +388,10 @@ function main() {
       request.done(function (response) {
         if (response.status === 'success') {
           $('#feed-' + postId).html(response.html);
+          $('.commentDelete').off('click');
+          $('.commentDelete').on('click', function (e) {
+            deleteComment(this);
+          });
         }
       });
       request.fail(function (xhr) {
@@ -374,13 +426,17 @@ function main() {
         if (response.status === 'success') {
           $('.ajaxSpinner').remove();
           $('#feed-' + postId).prepend(response.html);
+          $('.commentDelete').off('click');
+          $('.commentDelete').on('click', function (e) {
+            deleteComment(this);
+          });
         }
       });
       request.fail(function (xhr) {
         alert(xhr.responseJSON.message);
       });
     } else {
-      alert("Nie możesz dodać komentarza bez treści");
+      alert(emptyCommentMsg);
     }
   });
 }
@@ -402,6 +458,31 @@ function deletePost(selected) {
       if (response.status === 'success') {
         $('#post' + postId).next().remove();
         $('#post' + postId).remove();
+        $('.spinnerOverlay').addClass('d-none');
+      }
+    });
+    request.fail(function (xhr) {
+      alert(xhr.responseJSON.message);
+    });
+  }
+}
+
+function deleteComment(selected) {
+  if (confirm(deleteCommentMsg)) {
+    var url = baseUrl + "/user/ajax/deleteComment";
+    var commentId = $(selected).data('id');
+    $('.spinnerOverlay').removeClass('d-none');
+    var request = $.ajax({
+      method: 'post',
+      url: url,
+      data: {
+        '_method': 'DELETE',
+        id: commentId
+      }
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        $('#com-' + commentId).remove();
         $('.spinnerOverlay').addClass('d-none');
       }
     });

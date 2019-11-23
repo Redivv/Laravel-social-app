@@ -49,6 +49,7 @@ Route::prefix('user')->group(function(){
 
         Route::get('getComments/{post}', 'CommentController@getComments')->name('ajaxGetComments');
         Route::put('newComment', 'CommentController@newComment')->name('ajaxNewComment');
+        Route::patch('editComment', 'CommentController@editComment')->name('ajaxEditComment');
         Route::delete('deleteComment', 'CommentController@deleteComment')->name('ajaxDeleteComment');
     });
 });

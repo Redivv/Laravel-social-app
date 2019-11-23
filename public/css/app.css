@@ -18060,61 +18060,73 @@ html {
   color: #f66103;
 }
 
-#editModal .modal-dialog {
+#editModal .modal-dialog,
+#commentEditModal .modal-dialog {
   max-width: 50vw;
 }
 
-#editModal .modal-body {
+#editModal .modal-body,
+#commentEditModal .modal-body {
   padding-top: 0.25rem;
 }
 
-#editModal .modal-body #modalPicture-preview {
+#editModal .modal-body #modalPicture-preview,
+#commentEditModal .modal-body #modalPicture-preview {
   display: block;
   width: 100%;
 }
 
-#editModal .modal-body #modalPicture-preview .resetPictureBox {
+#editModal .modal-body #modalPicture-preview .resetPictureBox,
+#commentEditModal .modal-body #modalPicture-preview .resetPictureBox {
   text-align: right;
 }
 
-#editModal .modal-body #modalPicture-preview .resetPictureBox i {
+#editModal .modal-body #modalPicture-preview .resetPictureBox i,
+#commentEditModal .modal-body #modalPicture-preview .resetPictureBox i {
   cursor: pointer;
   font-size: 1.1rem;
 }
 
-#editModal .modal-body #modalPicture-preview .resetPictureBox i:hover {
+#editModal .modal-body #modalPicture-preview .resetPictureBox i:hover,
+#commentEditModal .modal-body #modalPicture-preview .resetPictureBox i:hover {
   color: #f66103;
 }
 
-#editModal .modal-body #modalPicture-preview .thumb {
+#editModal .modal-body #modalPicture-preview .thumb,
+#commentEditModal .modal-body #modalPicture-preview .thumb {
   max-width: 150px;
   max-height: 150px;
   margin-left: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-#editModal .modal-body .friendsWallButtons {
+#editModal .modal-body .friendsWallButtons,
+#commentEditModal .modal-body .friendsWallButtons {
   margin: 0.5rem 0;
   padding: 0 0.5rem;
 }
 
-#editModal .modal-body .friendsWallButtons .additionalButton {
+#editModal .modal-body .friendsWallButtons .additionalButton,
+#commentEditModal .modal-body .friendsWallButtons .additionalButton {
   font-size: calc(1.265rem + 0.18vw);
   margin: 0 0.5rem;
   cursor: pointer;
 }
 
 @media (min-width: 1200px) {
-  #editModal .modal-body .friendsWallButtons .additionalButton {
+  #editModal .modal-body .friendsWallButtons .additionalButton,
+  #commentEditModal .modal-body .friendsWallButtons .additionalButton {
     font-size: 1.4rem;
   }
 }
 
-#editModal .modal-body .friendsWallButtons .additionalButton:hover {
+#editModal .modal-body .friendsWallButtons .additionalButton:hover,
+#commentEditModal .modal-body .friendsWallButtons .additionalButton:hover {
   color: #f66103;
 }
 
-#editModal .modal-body .friendsWallSendButton button {
+#editModal .modal-body .friendsWallSendButton button,
+#commentEditModal .modal-body .friendsWallSendButton button {
   color: #ffffff;
   background-color: #f66103;
   font-size: 1rem;

@@ -70,6 +70,8 @@
 <script>
     var badFileType      = "{{__('chat.badFileType')}}";
     var deletePostMsg    = "{{__('activityWall.deletePost')}}";
+    var emptyCommentMsg  = "{{__('activityWall.emptyComment')}}";
+    var deleteCommentMsg = "{{__('activityWall.deleteComment')}}";
     var resetImgMsg      =  "{{__('activityWall.resetPictures')}}";
     var baseUrl = "{{url('/')}}";
 </script>
