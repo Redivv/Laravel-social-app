@@ -12,7 +12,6 @@ use Carbon\Carbon;
 
 use App\Notifications\UserFlagged;
 use App\Post;
-use App\Comment;
 use App\User;
 use App\Notifications\NewFriendPost;
 use Illuminate\Support\Facades\Notification;
@@ -27,7 +26,6 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('verified');
-
     }
 
     /**
@@ -213,27 +211,6 @@ class HomeController extends Controller
             }
             return response()->json(['status' => 'error'], 400);
         }
-    }
-
-    public function newComment(Request $request)
-    {
-        if ($request->ajax()) {
-            $kek = $request->all();
-            $request->validate([
-                'data.*.value' => ['string','max:255'],
-                'postId'       => ['exists:posts,id']
-            ]);
-
-            $comment = new Comment;
-
-            $comment->message   = $request->data[0]['value'];
-            $comment->author_id = Auth::id();
-            $comment->post_id = $request->postId;  
-
-            $comment->save();
-            $html = view('partials.ajaxWallComment')->withComment($comment)->render();
-        }
-        return response()->json(['status' => 'success','html' => $html], 200);
     }
 
     public function deleteNotifications(Request $request)

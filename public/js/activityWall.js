@@ -107,13 +107,11 @@ function main() {
   $('#addPost').emojioneArea({
     pickerPosition: "bottom",
     placeholder: "\xa0",
-    autocomplete: false,
     buttonTitle: ""
   });
   $('.commentsDesc').emojioneArea({
     pickerPosition: "top",
     placeholder: "Napisz Komentarz",
-    autocomplete: false,
     buttonTitle: "kokok",
     inline: false,
     events: {
@@ -325,9 +323,29 @@ function main() {
     deletePost(this);
   });
   $('.btnComment').on('click', function () {
-    var commentBox = $(this).parent().parent().next();
+    var postId = $(this).data('id');
+    var commentBox = $('#post' + postId).next();
+    var commentsCount = $('#post' + postId).find('.postCommentsCount');
     commentBox.removeClass('d-none');
     commentBox.find('.emojionearea-editor').focus();
+
+    if (commentsCount.text().trim() != "") {
+      var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+      $('#feed-' + postId).html(html);
+      var url = baseUrl + "/user/ajax/getComments/" + postId;
+      var request = $.ajax({
+        method: 'get',
+        url: url
+      });
+      request.done(function (response) {
+        if (response.status === 'success') {
+          $('#feed-' + postId).html(response.html);
+        }
+      });
+      request.fail(function (xhr) {
+        alert(xhr.responseJSON.message);
+      });
+    }
   });
   $('.commentsForm').on('submit', function (e) {
     e.preventDefault();

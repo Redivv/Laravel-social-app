@@ -7,10 +7,12 @@
             <div class="col-10 commentContent">
                 <div class="col-12 commentAuthor row">
                     <div class="col-10 commentAuthorName">{{$comment->user->name}}</div>
-                    <div class="col-2 commentAuthorButtons">
-                        <i class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
-                        <i class="fas commentDelete fa-times"></i>
-                    </div>
+                    @if(auth()->user()->id == $comment->author_id)
+                        <div class="col-2 commentAuthorButtons">
+                            <i class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
+                            <i class="fas commentDelete fa-times"></i>
+                        </div>
+                    @endif
                 </div>
                 <div class="col-12 commentDate">{{$comment->created_at->diffForHumans()}}</div>
                 <div class="col-12 commentDesc">{{$comment->message}}</div>
