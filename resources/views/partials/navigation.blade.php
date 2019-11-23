@@ -155,16 +155,8 @@
                         <a href="{{ url('/searcher') }}" class="nav-link">{{ __('app.searcher') }}</a>
                     </li>
                 @auth
-                    @if(auth()->user()->isAdmin())
-                        <li class="nav-item">
-                            <a href="{{ route('adminHome') }}" class="nav-link">{{__('app.adminDashboard')}}</a>
-                        </li>
-                    @endif
                     <li class="nav-item">
                         <a href="{{ route('home') }}" class="nav-link">{{__('app.dashboard')}}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ url('/profile') }}" class="nav-link">{{__('app.profile')}}</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/message') }}" class="nav-link">
@@ -331,9 +323,18 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a href="{{ url('/profile') }}" class="dropdown-item">{{__('app.profile')}}</a>
+                            
+                            @if(auth()->user()->isAdmin())
+                                <a href="{{ route('adminHome') }}" class="dropdown-item">{{__('app.adminDashboard')}}</a>
+                            @endif
+
+                            <div class="dropdown-divider"></div>
+
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
+                                        document.getElementById('logout-form').submit();"
+                            >
                                 {{ __('app.logout') }}
                             </a>
 

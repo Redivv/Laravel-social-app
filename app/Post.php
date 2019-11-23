@@ -14,4 +14,9 @@ class Post extends Model
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'comment_id', 'id')->whereNull('parent_id');
+    }
 }
