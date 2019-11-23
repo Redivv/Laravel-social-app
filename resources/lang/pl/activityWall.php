@@ -10,5 +10,7 @@ return [
     'editModalTitle'    => 'Edytuj Post',
     'editPost'          => 'Zapisz Zmiany',
     'resetPictures'     => 'Na pewno chcesz usunąć zdjęcia?',
-    'adminStatus'       => 'administrator'
+    'adminStatus'       => 'administrator',
+    'like'              => 'Poleć',
+    'comment'           => 'Skomentuj'
 ];

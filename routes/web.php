@@ -46,6 +46,8 @@ Route::prefix('user')->group(function(){
         Route::post('newPost', 'HomeController@newPost')->name('ajaxNewPost');
         Route::post('editPost', 'HomeController@editPost')->name('ajaxEditPost');  
         Route::delete('deletePost', 'HomeController@deletePost')->name('ajaxDeletePost');
+
+        Route::put('newComment', 'HomeController@newComment')->name('ajaxNewComment');
     });
 });
 

@@ -17,6 +17,6 @@ class Post extends Model
 
     public function comments()
     {
-        return $this->hasMany('App\Comment', 'comment_id', 'id')->whereNull('parent_id');
+        return $this->hasMany('App\Comment')->whereNull('parent_id')->orderBy('created_at','desc');
     }
 }

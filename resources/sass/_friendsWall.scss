@@ -134,6 +134,13 @@
                             &:hover{
                                 color:$orange;
                             }
+                            .postCommentsCount{
+                                background-color: $orange;
+                                color:$white;
+                                @include font-size(0.6rem);
+                                padding: 0.2rem 0.3rem;
+                                top:0.2rem;
+                            }
                         }
                     }
                 }
@@ -165,7 +172,7 @@
                         i{
                             cursor: pointer;
                             color: #a1a1a1;
-                            margin-left: 10%;
+                            margin: auto;
                             @include font-size(0.9rem);
                             transition: all 400ms ease-in-out;
                             &:hover{
@@ -173,12 +180,12 @@
                             }
                         }
                     }
-                    #commentsFeed{
+                    .commentsFeed{
                         display: block;
                         width: 100%;
                         margin-top: 1.5rem;
-                        padding: 0 2rem;
                         .comment{
+                            padding: 0 3rem;
                             .commentProfilePicture{
                                 display: flex;
                                 align-items: center;

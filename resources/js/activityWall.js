@@ -10,6 +10,7 @@ $(document).ready(function() {
 
 
 function main() {
+
     $('#addPost').emojioneArea({
         pickerPosition: "bottom",
         placeholder: "\xa0",
@@ -33,21 +34,6 @@ function main() {
             }
           }
     });
-
-    $('.commentsForm').on('submit',function(e){
-        e.preventDefault();
-        let tag = $(this);
-
-        tag[0].reset();
-        tag.find('.emojionearea-editor').empty();
-    })
-
-    $('.btnComment').on('click',function() {
-        let commentBox = $(this).parent().parent().next();
-
-        commentBox.removeClass('d-none');
-        commentBox.find('.emojionearea-editor').focus();
-    })
 
     $('#postPicture').change(function(evt){
         var files = evt.target.files; // FileList object
@@ -273,22 +259,74 @@ function main() {
             }
         });
         
-        
         request.fail(function (xhr){
             alert(xhr.responseJSON.message);
         });
       })
 
-      $('#editModal').on('hide.bs.modal', function () {
-            $('#editPicture').off('change');
-            $(this).find('.modal-body').html('');
-      });
+    $('#editModal').on('hide.bs.modal', function () {
+        $('#editPicture').off('change');
+        $(this).find('.modal-body').html('');
+    });
 
     $('.postDelete').off('click');
 
     $('.postDelete').on('click',function(){
         deletePost(this);
-    })
+    });
+
+    $('.btnComment').on('click',function() {
+        let commentBox = $(this).parent().parent().next();
+
+        commentBox.removeClass('d-none');
+        commentBox.find('.emojionearea-editor').focus();
+    });
+
+    $('.commentsForm').on('submit',function(e){
+        e.preventDefault();
+        let tag = $(this);
+        let postId = tag.data('id');
+
+        $(document).one("ajaxSend", function(){
+            tag[0].reset();
+            tag.find('.emojionearea-editor').empty();
+            
+            let html = '<div id="spinner" class="ajaxSpinner">'+
+            '<div class="spinner-border text-dark" role="status">'+
+                '<span class="sr-only">Loading...</span>'+
+                '</div>'+
+            '</div>';
+    
+            $('#feed-'+postId).prepend(html);
+        });
+
+        let data = tag.serializeArray();
+        let url = baseUrl + "/user/ajax/newComment";
+
+        if (data[0].value.trim() != "") {
+
+            var request = $.ajax({
+                method : 'post',
+                url: url,
+                data: {"_method": "PUT", data:data, postId:postId}
+            });
+            
+            
+            request.done(function(response){
+                if (response.status === 'success') {
+                    $('.ajaxSpinner').remove();
+                    $('#feed-'+postId).prepend(response.html);
+                }
+            });
+            
+            
+            request.fail(function (xhr){
+                alert(xhr.responseJSON.message);
+            });
+        }else{
+            alert("Nie możesz dodać komentarza bez treści");
+        }
+    });
 }
 
 function deletePost(selected) {
