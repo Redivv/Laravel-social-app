@@ -279,6 +279,21 @@
                                     @include font-size(0.75rem);
                                 }
                             }
+                            .repliesMoreBtn{
+                                background-color: $orange;
+                                color: $white;
+                                @include font-size(0.7rem);
+                                font-weight: bold;
+                                padding: 0.4rem;
+                                margin: 2% 0 2% 5%;
+                                .repliesCount{
+                                    @include font-size(0.5rem);
+                                    color: $white;
+                                    background: $orange;
+                                    top: 0.3rem;
+                                    right: 0.2rem;
+                                }
+                            }
                         }
                     }
                 }

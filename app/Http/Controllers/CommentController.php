@@ -23,6 +23,14 @@ class CommentController extends Controller
             return response()->json(['status' => 'success', 'html' => $html], 200);
         }
     }
+
+    public function getReplies(Request $request, Comment $comment)
+    {
+        if ($request->ajax()) {
+            $html = view('partials.wallReplies')->withReplies($comment->replies)->render();
+            return response()->json(['status' => 'success', 'html' => $html], 200);
+        }
+    }
     
     public function newComment(Request $request)
     {

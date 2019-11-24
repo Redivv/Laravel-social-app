@@ -491,6 +491,10 @@ function getComments(selected) {
                     $('.replyButton').on('click',function() {
                         addReplyForm(this);
                     });
+
+                    $('.repliesMoreBtn').on('click',function() {
+                        loadReplies(this);
+                    });
                 }
             });
             
@@ -516,7 +520,6 @@ function addReplyForm(selected) {
     '</div>';
     let parentComment = $('#com-'+parentId);
     $(formHtml).insertAfter('#com-'+parentId);
-    alert(parentId);
 
     $('#replyInput').emojioneArea({
         pickerPosition: "top",
@@ -641,4 +644,38 @@ function addComment(event, selected) {
         }else{
             alert(emptyCommentMsg);
         }
+}
+
+function loadReplies(selected) {
+    let button = $(selected);
+    let parentId = button.data('id');
+
+    let html = '<div id="spinner" class="ajaxSpinner">'+
+            '<div class="spinner-border text-dark" role="status">'+
+                '<span class="sr-only">Loading...</span>'+
+        '</div>'+
+    '</div>';
+
+    $(document).one("ajaxSend", function(){   
+        button.parents('.commentRepliesBox').append(html);
+    });
+
+    let url = baseUrl + "/user/ajax/getReplies/"+parentId;
+
+    var request = $.ajax({
+        method : 'get',
+        url: url,
+    });
+    
+    
+    request.done(function(response){
+        if (response.status === 'success') {
+            button.parents('.commentRepliesBox').html(response.html);
+        }
+    });
+    
+    
+    request.fail(function (xhr){
+        alert(xhr.responseJSON.message);
+    });
 }

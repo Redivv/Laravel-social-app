@@ -504,6 +504,9 @@ function getComments(selected) {
         $('.replyButton').on('click', function () {
           addReplyForm(this);
         });
+        $('.repliesMoreBtn').on('click', function () {
+          loadReplies(this);
+        });
       }
     });
     request.fail(function (xhr) {
@@ -518,7 +521,6 @@ function addReplyForm(selected) {
   var formHtml = '<div class="replyForm">' + '<form id="replyForm" method="post">' + '<div class="input-group row">' + '<input type="text" name="commentDesc" id="replyInput" class="form-control replyDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">' + '<div class="input-group-append col-1 commentButtons">' + '<i class="fas fa-user-tag"></i>' + '</div>' + '</div>' + '</form>' + '</div>';
   var parentComment = $('#com-' + parentId);
   $(formHtml).insertAfter('#com-' + parentId);
-  alert(parentId);
   $('#replyInput').emojioneArea({
     pickerPosition: "top",
     placeholder: "Napisz Komentarz",
@@ -620,6 +622,28 @@ function addComment(event, selected) {
   } else {
     alert(emptyCommentMsg);
   }
+}
+
+function loadReplies(selected) {
+  var button = $(selected);
+  var parentId = button.data('id');
+  var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+  $(document).one("ajaxSend", function () {
+    button.parents('.commentRepliesBox').append(html);
+  });
+  var url = baseUrl + "/user/ajax/getReplies/" + parentId;
+  var request = $.ajax({
+    method: 'get',
+    url: url
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      button.parents('.commentRepliesBox').html(response.html);
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+  });
 }
 
 /***/ }),

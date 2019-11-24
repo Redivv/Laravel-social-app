@@ -18045,6 +18045,23 @@ html {
   font-size: 0.75rem;
 }
 
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .repliesMoreBtn {
+  background-color: #f66103;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 0.4rem;
+  margin: 2% 0 2% 5%;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .repliesMoreBtn .repliesCount {
+  font-size: 0.5rem;
+  color: #ffffff;
+  background: #f66103;
+  top: 0.3rem;
+  right: 0.2rem;
+}
+
 #friendsWall .friendsList .friendsListHeader h3 {
   font-size: calc(1.325rem + 0.9vw);
   letter-spacing: 2px;
