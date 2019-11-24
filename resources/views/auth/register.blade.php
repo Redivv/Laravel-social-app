@@ -79,7 +79,7 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="form-group row">
+                            <div class="form-group row">
                                 <label for="profile-picture" class="col-md-4 col-form-label text-md-right">{{ __('registeration.profile-picture') }}</label>
 
                                 <div class="col-md-6">
@@ -94,10 +94,7 @@
                                         {{__('registeration.infoAlert')}}
                                     </div>
                                 </div>
-                            </div> --}}
-                                <div class="alert alert-info" role="alert">
-                                    {{__('registeration.infoAlert')}}
-                                </div>
+                            </div>
                             
                             <button type="submit" class="form-btn btn btn-block">
                                 {{ __('registeration.register-button') }}

@@ -7,6 +7,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Conner\Tagging\Taggable;
+use App\Notifications\UserDeleted;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -57,6 +59,26 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isAdmin()
     {
         return $this->is_admin;
+    }
+
+    public function deleteAll()
+    {   
+        // Delete Conversation & Messages
+        $convoId = DB::table('conversations')->select('id')->where('user_one',$this->id)->orWhere('user_two',$this->id)->get()->toArray();
+        foreach ($convoId as $convo) {
+            DB::table('conversations')->where('id',$convo->id)->delete();
+            DB::table('messages')->where('conversation_id',$convo->id)->delete();
+        }
+
+        // Delete posts
+        DB::table('posts')->where('user_id',$this->id)->delete();
+
+        // Delete notifications
+        DB::table('notifications')->where('notifiable_id',$this->id)->delete();
+
+        $this->notify(new UserDeleted($this->name));
+        $this->delete();
+        return true;
     }
 
     public function receivesBroadcastNotificationsOn() {
