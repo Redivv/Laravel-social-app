@@ -1,6 +1,6 @@
 @if ($replies = $comment->replies)
     @foreach ($replies as $reply)
-        <div id="reply-{{$reply->id}}" class="reply row">
+        <div id="com-{{$reply->id}}" class="reply row">
             <div class="col-2 commentProfilePicture">
                 <img class="profilePicture" src="{{asset('img/profile-pictures/'.$reply->user->picture)}}">
             </div>

@@ -1,5 +1,4 @@
-
-<div id="reply-{{$comment->id}}" class="reply row">
+<div id="com-{{$comment->id}}" class="comment row">
     <div class="col-2 commentProfilePicture">
         <img class="profilePicture" src="{{asset('img/profile-pictures/'.$comment->user->picture)}}">
     </div>

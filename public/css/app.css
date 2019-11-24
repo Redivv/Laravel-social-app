@@ -18011,30 +18011,36 @@ html {
   padding: 0 3rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentProfilePicture img {
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.8rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentProfilePicture img {
   max-width: 35px;
   max-height: 35px;
   border-radius: 50%;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentAuthor .commentAuthorName {
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentContent .commentAuthor .commentAuthorName {
   font-size: 0.8rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentAuthor .commentAuthorButtons i {
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentContent .commentAuthor .commentAuthorButtons i {
   font-size: 0.6rem;
   margin-left: 0.3rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentDate {
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentContent .commentDate {
   font-size: 0.5rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentDesc {
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentContent .commentDesc {
   font-size: 0.65rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentUserButtons i {
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentUserButtons i {
   margin-left: 0.3rem;
   font-size: 0.75rem;
 }

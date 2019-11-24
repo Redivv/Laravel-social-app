@@ -21,8 +21,4 @@
             <i class="fas fa-reply replyButton" data-id="{{$comment->id}}"></i>
         </div>
     </div>
-
-    <div class="commentRepliesBox container">
-        @include('partials.wallReplies')
-    </div>
 @endforeach

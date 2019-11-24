@@ -71,7 +71,7 @@ class CommentController extends Controller
 
             $comment->message = $request->data[0]['value'];
             if ($comment->update()) {
-                $html = view('partials.ajaxWallComment')->withComments([$comment])->render();
+                $html = view('partials.ajaxWallCommentSingle')->withComments([$comment])->render();
                 return response()->json(['status' => 'success','html' => $html], 200);
             }
         }

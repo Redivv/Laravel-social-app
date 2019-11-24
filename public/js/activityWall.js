@@ -109,6 +109,11 @@ function main() {
     placeholder: "\xa0",
     buttonTitle: ""
   });
+  $('#editPostDesc').emojioneArea({
+    pickerPosition: "top",
+    placeholder: "\xa0",
+    autocomplete: false
+  });
   $('.commentsDesc').emojioneArea({
     pickerPosition: "top",
     placeholder: "Napisz Komentarz",
@@ -122,11 +127,6 @@ function main() {
         }
       }
     }
-  });
-  $('#editPostDesc').emojioneArea({
-    pickerPosition: "top",
-    placeholder: "\xa0",
-    autocomplete: false
   });
   $('#postPicture').change(function (evt) {
     var files = evt.target.files; // FileList object
@@ -200,6 +200,27 @@ function main() {
           $('#friendsWallFeed').prepend(response.html);
           $('.postDelete').on('click', function () {
             deletePost(this);
+          });
+          $('.commentsForm').off('submit');
+          $('.commentsForm').on('submit', function (e) {
+            addComment(e, this);
+          });
+          $('.btnComment').one('click', function () {
+            $('.commentsDesc:first').emojioneArea({
+              pickerPosition: "top",
+              placeholder: "Napisz Komentarz",
+              inline: false,
+              events: {
+                keypress: function keypress(editor, e) {
+                  if (e.keyCode == 13 || e.which == 13) {
+                    e.preventDefault();
+                    editor.parent().prev().val(this.getText());
+                    editor.parent().prev().parent().submit();
+                  }
+                }
+              }
+            });
+            getComments(this);
           });
         }
       });
@@ -278,6 +299,7 @@ function main() {
 
           $('input[name="noPicture"]').remove();
         });
+        $('#editPost').off('submit');
         $('#editPost').on('submit', function (e) {
           e.preventDefault();
 
@@ -303,8 +325,31 @@ function main() {
             request.done(function (response) {
               if (response.status === 'success') {
                 $('.spinnerOverlay').addClass('d-none');
-                $('#post' + post).replaceWith(response.html);
-                $('#post' + post).next().remove();
+                $('#post' + post).parent().replaceWith(response.html);
+                $('.postDelete').on('click', function () {
+                  deletePost(this);
+                });
+                $('.commentsForm').off('submit');
+                $('.commentsForm').on('submit', function (e) {
+                  addComment(e, this);
+                });
+                $('.btnComment').one('click', function () {
+                  $('#post' + post).parent().find('.commentsDesc:first').emojioneArea({
+                    pickerPosition: "top",
+                    placeholder: "Napisz Komentarz",
+                    inline: false,
+                    events: {
+                      keypress: function keypress(editor, e) {
+                        if (e.keyCode == 13 || e.which == 13) {
+                          e.preventDefault();
+                          editor.parent().prev().val(this.getText());
+                          editor.parent().prev().parent().submit();
+                        }
+                      }
+                    }
+                  });
+                  getComments(this);
+                });
               }
             });
             request.fail(function (xhr) {
@@ -329,8 +374,10 @@ function main() {
     var modal = $(this);
     var comment = $('#com-' + commentId);
     var content = comment.find('.commentDesc').html().trim();
+    console.log(content);
     modal.find('.emojionearea-editor').html(content);
     modal.find('#editPostDesc').val(content);
+    $('#editComment').off('submit');
     $('#editComment').on('submit', function (e) {
       e.preventDefault();
       var tag = $(this);
@@ -368,82 +415,14 @@ function main() {
       }
     });
   });
-  $('.postDelete').off('click');
   $('.postDelete').on('click', function () {
     deletePost(this);
   });
-  $('.btnComment').on('click', function () {
-    var postId = $(this).data('id');
-    var commentBox = $('#post' + postId).next();
-    var commentsCount = $('#post' + postId).find('.postCommentsCount');
-    commentBox.removeClass('d-none');
-    commentBox.find('.emojionearea-editor').focus();
-
-    if (commentsCount.text().trim() != "") {
-      var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
-      $('#feed-' + postId).html(html);
-      var url = baseUrl + "/user/ajax/getComments/" + postId;
-      var request = $.ajax({
-        method: 'get',
-        url: url
-      });
-      request.done(function (response) {
-        if (response.status === 'success') {
-          $('#feed-' + postId).html(response.html);
-          $('.commentDelete').off('click');
-          $('.commentDelete').on('click', function (e) {
-            deleteComment(this);
-          });
-          $('.replyButton').on('click', function () {
-            addReplyForm(this);
-          });
-        }
-      });
-      request.fail(function (xhr) {
-        alert(xhr.responseJSON.message);
-      });
-    }
+  $('.btnComment').one('click', function () {
+    getComments(this);
   });
   $('.commentsForm').on('submit', function (e) {
-    e.preventDefault();
-    var tag = $(this);
-    var postId = tag.data('id');
-    $(document).one("ajaxSend", function () {
-      tag[0].reset();
-      tag.find('.emojionearea-editor').empty();
-      var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
-      $('#feed-' + postId).prepend(html);
-    });
-    var data = tag.serializeArray();
-    var url = baseUrl + "/user/ajax/newComment";
-
-    if (data[0].value.trim() != "") {
-      var request = $.ajax({
-        method: 'post',
-        url: url,
-        data: {
-          "_method": "PUT",
-          data: data,
-          postId: postId
-        }
-      });
-      request.done(function (response) {
-        if (response.status === 'success') {
-          $('.ajaxSpinner').remove();
-          $('#feed-' + postId).prepend(response.html);
-          $('.commentDelete').off('click');
-          $('.commentDelete').on('click', function (e) {
-            deleteComment(this);
-          });
-        }
-      });
-      request.fail(function (xhr) {
-        $('.ajaxSpinner').remove();
-        alert(xhr.responseJSON.message);
-      });
-    } else {
-      alert(emptyCommentMsg);
-    }
+    addComment(e, this);
   });
 }
 
@@ -489,8 +468,42 @@ function deleteComment(selected) {
     });
     request.done(function (response) {
       if (response.status === 'success') {
+        $('#com-' + commentId).siblings('.commentRepliesBox').remove();
         $('#com-' + commentId).remove();
         $('.spinnerOverlay').addClass('d-none');
+      }
+    });
+    request.fail(function (xhr) {
+      alert(xhr.responseJSON.message);
+    });
+  }
+}
+
+function getComments(selected) {
+  var postId = $(selected).data('id');
+  var commentBox = $('#post' + postId).next();
+  var commentsCount = $('#post' + postId).find('.postCommentsCount');
+  commentBox.removeClass('d-none');
+  commentBox.find('.emojionearea-editor').focus();
+
+  if (commentsCount.text().trim() != "") {
+    var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+    $('#feed-' + postId).html(html);
+    var url = baseUrl + "/user/ajax/getComments/" + postId;
+    var request = $.ajax({
+      method: 'get',
+      url: url
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        $('#feed-' + postId).html(response.html);
+        $('.commentDelete').off('click');
+        $('.commentDelete').on('click', function (e) {
+          deleteComment(this);
+        });
+        $('.replyButton').on('click', function () {
+          addReplyForm(this);
+        });
       }
     });
     request.fail(function (xhr) {
@@ -505,6 +518,7 @@ function addReplyForm(selected) {
   var formHtml = '<div class="replyForm">' + '<form id="replyForm" method="post">' + '<div class="input-group row">' + '<input type="text" name="commentDesc" id="replyInput" class="form-control replyDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">' + '<div class="input-group-append col-1 commentButtons">' + '<i class="fas fa-user-tag"></i>' + '</div>' + '</div>' + '</form>' + '</div>';
   var parentComment = $('#com-' + parentId);
   $(formHtml).insertAfter('#com-' + parentId);
+  alert(parentId);
   $('#replyInput').emojioneArea({
     pickerPosition: "top",
     placeholder: "Napisz Komentarz",
@@ -520,6 +534,7 @@ function addReplyForm(selected) {
     }
   });
   $('#replyForm').find('.emojionearea-editor').focus();
+  $('#replyForm').off('submit');
   $('#replyForm').on('submit', function (e) {
     e.preventDefault();
     var tag = $(this);
@@ -560,6 +575,51 @@ function addReplyForm(selected) {
       alert(emptyCommentMsg);
     }
   });
+}
+
+function addComment(event, selected) {
+  event.preventDefault();
+  var tag = $(selected);
+  var postId = tag.data('id');
+  $(document).one("ajaxSend", function () {
+    tag[0].reset();
+    tag.find('.emojionearea-editor').empty();
+    var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+    $('#feed-' + postId).prepend(html);
+  });
+  var data = tag.serializeArray();
+  var url = baseUrl + "/user/ajax/newComment";
+
+  if (data[0].value.trim() != "") {
+    var request = $.ajax({
+      method: 'post',
+      url: url,
+      data: {
+        "_method": "PUT",
+        data: data,
+        postId: postId
+      }
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        $('.ajaxSpinner').remove();
+        $('#feed-' + postId).prepend(response.html);
+        $('.commentDelete').off('click');
+        $('.commentDelete').on('click', function (e) {
+          deleteComment(this);
+        });
+        $('.replyButton').on('click', function () {
+          addReplyForm(this);
+        });
+      }
+    });
+    request.fail(function (xhr) {
+      $('.ajaxSpinner').remove();
+      alert(xhr.responseJSON.message);
+    });
+  } else {
+    alert(emptyCommentMsg);
+  }
 }
 
 /***/ }),

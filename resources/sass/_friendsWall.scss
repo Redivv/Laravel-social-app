@@ -241,7 +241,12 @@
                             margin-bottom: 1rem;
                             padding: 0 3rem;
                         }
-                        .reply{
+                        .commentRepliesBox{
+                            .spinner-border{
+                                width: 1.5rem;
+                                height: 1.5rem;
+                                font-size: 0.8rem;
+                            }
                             .commentProfilePicture{
                                 img{
                                     max-width: 35px;
