@@ -17876,13 +17876,19 @@ html {
   letter-spacing: 2px;
   margin: 0 auto;
   color: #000;
+  font-weight: bold;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter button:hover {
   color: #f66103;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter button .postCommentsCount {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter button.active {
+  color: #f66103;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter button .postCommentsCount,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter button .likesCount {
   background-color: #f66103;
   color: #ffffff;
   font-size: 0.6rem;
@@ -18005,6 +18011,18 @@ html {
   color: #f66103;
 }
 
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentUserButtons i.active,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentUserButtons i.active {
+  color: #f66103;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentUserButtons .likesCount,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentUserButtons .likesCount {
+  font-size: 0.8rem;
+  background: transparent;
+  color: #e3342f;
+}
+
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed #replyForm {
   margin-top: 2rem;
   margin-bottom: 1rem;
@@ -18043,6 +18061,12 @@ html {
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentUserButtons i {
   margin-left: 0.3rem;
   font-size: 0.75rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentUserButtons .likesCount {
+  font-size: 0.55rem;
+  background: transparent;
+  color: #e3342f;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .repliesMoreBtn {

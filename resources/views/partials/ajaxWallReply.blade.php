@@ -16,6 +16,6 @@
         <div class="col-12 commentDesc">{{$comment->message}}</div>
     </div>
     <div class="col-12 commentUserButtons">
-        <i class="fas fa-fire"></i>
+        <i class="fas fa-fire likeCommentButton @if($comment->liked()){{"active"}}@endif" data-id="{{$comment->id}}"></i><span class="badge likesCount badge-pill badge-warning">@if($comment->likeCount != 0){{$comment->likeCount}}@endif</span>
     </div>
 </div>

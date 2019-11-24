@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Conner\Likeable\Likeable;
 
 class Comment extends Model
 {
+    use Likeable;
+    
     protected $fillable = [
         'message','author_id','post_id','parent_id'
     ];

@@ -17,7 +17,7 @@
             <div class="col-12 commentDesc">{{$comment->message}}</div>
         </div>
         <div class="col-12 commentUserButtons">
-            <i class="fas fa-fire"></i>
+            <i class="fas fa-fire likeCommentButton @if($comment->liked()){{"active"}}@endif" data-id="{{$comment->id}}"></i><span class="badge likesCount badge-pill badge-warning">@if($comment->likeCount != 0){{$comment->likeCount}}@endif</span>
             <i class="fas fa-reply replyButton" data-id="{{$comment->id}}"></i>
         </div>
     </div>
@@ -43,14 +43,14 @@
                 <div class="col-12 commentDesc">{{$comment->replies[0]->message}}</div>
             </div>
             <div class="col-12 commentUserButtons">
-                <i class="fas fa-fire"></i>
+                <i class="fas fa-fire likeCommentButton @if($comment->replies[0]->liked()){{"active"}}@endif" data-id="{{$comment->replies[0]->id}}"></i><span class="badge likesCount badge-pill badge-warning">@if($comment->replies[0]->likeCount != 0){{$comment->replies[0]->likeCount}}@endif</span>
             </div>
         </div>
         @endif
 
         @if(count($comment->replies) > 1)
             <button type="button" data-id="{{$comment->id}}" class="btn repliesMoreBtn">
-                Pokaż Więcej Odpowiedzi
+                {{__('activityWall.moreReplies')}}
                 <i class="ml-1 fas fa-sort-down"></i><span class="badge repliesCount badge-pill badge-warning">{{count($comment->replies) - 1}}</span>
             </button>
         @endif

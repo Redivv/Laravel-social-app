@@ -15,5 +15,6 @@ return [
     'adminStatus'       => 'administrator',
     'like'              => 'Poleć',
     'comment'           => 'Skomentuj',
-    'emptyComment'      => 'Nie możesz wysłać pustego komentarza'
+    'emptyComment'      => 'Nie możesz wysłać pustego komentarza',
+    'moreReplies'       => 'Pokaż Więcej Odpowiedzi'
 ];

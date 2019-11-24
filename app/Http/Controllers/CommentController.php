@@ -98,4 +98,24 @@ class CommentController extends Controller
             return response()->json(['status' => 'error'], 400);
         }
     }
+
+    public function likeComment(Request $request)
+    {
+        if($request->ajax()){
+            $request->validate([
+                'commentId' => 'exists:comments,id'
+            ]);
+
+            $comment = Comment::find($request->commentId);
+
+            if ($comment->liked()) {
+                $comment->unlike();
+            }else{
+                $comment->like();
+            }
+
+            return response()->json(['status' => 'success'], 200);
+        }
+
+    }
 }

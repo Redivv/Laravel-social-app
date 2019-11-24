@@ -240,4 +240,26 @@ class HomeController extends Controller
             return response()->json(['status' => 'success'], 200);
         }
     }
+
+    
+
+    public function likePost(Request $request)
+    {
+        if($request->ajax()){
+            $request->validate([
+                'postId' => 'exists:posts,id'
+            ]);
+
+            $post = Post::find($request->postId);
+
+            if ($post->liked()) {
+                $post->unlike();
+            }else{
+                $post->like();
+            }
+
+            return response()->json(['status' => 'success'], 200);
+        }
+
+    }
 }

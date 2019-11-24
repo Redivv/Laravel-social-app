@@ -37,6 +37,10 @@ function main() {
             }
         }
     });
+
+    $('.likePostButton').on('click',function() {
+        likePost(this);
+    });
     
     $('#postPicture').change(function(evt){
         var files = evt.target.files; // FileList object
@@ -124,6 +128,10 @@ function main() {
                     
                     $('.postDelete').on('click',function(){
                         deletePost(this);
+                    });
+
+                    $('.likePostButton').on('click',function() {
+                        likePost(this);
                     });
 
                     $('.commentsForm').off('submit');
@@ -281,6 +289,10 @@ function main() {
                                     deletePost(this);
                                 });
 
+                                $('.likePostButton').on('click',function() {
+                                    likePost(this);
+                                });
+
                                 $('.commentsForm').off('submit');
 
                                 $('.commentsForm').on('submit',function(e){
@@ -320,7 +332,7 @@ function main() {
         request.fail(function (xhr){
             alert(xhr.responseJSON.message);
         });
-      })
+    });
 
     $('#editModal').on('hide.bs.modal', function () {
         $('#editPicture').off('change');
@@ -369,6 +381,19 @@ function main() {
                     if (response.status === 'success') {
                         comment.replaceWith(response.html);
                         $('.spinnerOverlay').addClass('d-none');
+
+                        $('.commentDelete').off('click');
+                        $('.commentDelete').on('click',function(e) {
+                            deleteComment(this);
+                        });
+    
+                        $('.likeCommentButton').on('click',function() {
+                            likeComment(this);
+                        })
+                        
+                        $('.replyButton').on('click',function() {
+                            addReplyForm(this);
+                        });
                     }
                 });
                 
@@ -491,6 +516,10 @@ function getComments(selected) {
                     $('.replyButton').on('click',function() {
                         addReplyForm(this);
                     });
+
+                    $('.likeCommentButton').on('click',function() {
+                        likeComment(this);
+                    })
 
                     $('.repliesMoreBtn').on('click',function() {
                         loadReplies(this);
@@ -629,6 +658,10 @@ function addComment(event, selected) {
                     $('.commentDelete').on('click',function(e) {
                         deleteComment(this);
                     });
+
+                    $('.likeCommentButton').on('click',function() {
+                        likeComment(this);
+                    })
                     
                     $('.replyButton').on('click',function() {
                         addReplyForm(this);
@@ -677,5 +710,63 @@ function loadReplies(selected) {
     
     request.fail(function (xhr){
         alert(xhr.responseJSON.message);
+    });
+}
+
+function likeComment(selected) {
+    let commentId = $(selected).data('id');
+    let url = baseUrl + "/user/ajax/likeComment";
+
+    let likesCount = $(selected).siblings('.likesCount').html().trim();
+    if (likesCount == "") {
+        likesCount = 0;
+    }
+    likesCount = parseInt(likesCount);
+
+    if ($(selected).hasClass('active')) {
+        $(selected).removeClass('active');
+        if (likesCount - 1 == 0) {
+            $(selected).siblings('.likesCount').html('');
+        }else{
+            $(selected).siblings('.likesCount').html(likesCount-1);
+        }
+    }else{
+        $(selected).addClass('active');
+        $(selected).siblings('.likesCount').html(likesCount+1);
+    }
+
+    var request = $.ajax({
+        method : 'post',
+        url: url,
+        data: {'_method':'PATCH', commentId:commentId}
+    });
+}
+
+function likePost(selected) {
+    let postId = $(selected).data('id');
+    let url = baseUrl + "/user/ajax/likePost";
+
+    let likesCount = $(selected).children('.likesCount').html().trim();
+    if (likesCount == "") {
+        likesCount = 0;
+    }
+    likesCount = parseInt(likesCount);
+
+    if ($(selected).hasClass('active')) {
+        $(selected).removeClass('active');
+        if (likesCount - 1 == 0) {
+            $(selected).children('.likesCount').html('');
+        }else{
+            $(selected).children('.likesCount').html(likesCount-1);
+        }
+    }else{
+        $(selected).addClass('active');
+        $(selected).children('.likesCount').html(likesCount+1);
+    }
+
+    var request = $.ajax({
+        method : 'post',
+        url: url,
+        data: {'_method':'PATCH', postId:postId}
     });
 }

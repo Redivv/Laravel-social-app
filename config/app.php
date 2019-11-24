@@ -161,11 +161,12 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Nahid\Talk\TalkServiceProvider::class,
 
         /*
          * Package Service Providers...
          */
+        Nahid\Talk\TalkServiceProvider::class,
+        Conner\Likeable\LikeableServiceProvider::class,
 
         /*
          * Application Service Providers...

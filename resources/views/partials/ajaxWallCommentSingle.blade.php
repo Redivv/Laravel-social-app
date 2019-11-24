@@ -17,7 +17,7 @@
             <div class="col-12 commentDesc">{{$comment->message}}</div>
         </div>
         <div class="col-12 commentUserButtons">
-            <i class="fas fa-fire"></i>
+            <i class="fas fa-fire likeCommentButton @if($comment->liked()){{"active"}}@endif" data-id="{{$comment->id}}"></i>
             <i class="fas fa-reply replyButton" data-id="{{$comment->id}}"></i>
         </div>
     </div>

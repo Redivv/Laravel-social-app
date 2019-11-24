@@ -131,10 +131,14 @@
                             letter-spacing: 2px;
                             margin: 0 auto;
                             color: $black;
+                            font-weight: bold;
                             &:hover{
                                 color:$orange;
                             }
-                            .postCommentsCount{
+                            &.active{
+                                color: $orange;
+                            }
+                            .postCommentsCount,.likesCount{
                                 background-color: $orange;
                                 color:$white;
                                 @include font-size(0.6rem);
@@ -233,6 +237,15 @@
                                     &:hover{
                                         color: $orange;
                                     }
+
+                                    &.active{
+                                        color: $orange;
+                                    }
+                                }
+                                .likesCount{
+                                    @include font-size(0.8rem);
+                                    background: transparent;
+                                    color: $red;
                                 }
                             }
                         }
@@ -277,6 +290,11 @@
                                 i{
                                     margin-left: 0.3rem;
                                     @include font-size(0.75rem);
+                                }
+                                .likesCount{
+                                    @include font-size(0.55rem);
+                                    background: transparent;
+                                    color: $red;
                                 }
                             }
                             .repliesMoreBtn{

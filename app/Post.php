@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Conner\Likeable\Likeable;
 
 class Post extends Model
 {
+    use Likeable;
+    
     protected $fillable = [
         'user_id', 'desc', 'pictures'
     ];
