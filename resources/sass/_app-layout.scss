@@ -26,6 +26,8 @@ body{
     .dropdown-menu{
         max-height: 50vh;
         overflow-y: auto;
+        position: absolute;
+        right: unset;
     }
     .nav-link{
         .badge{

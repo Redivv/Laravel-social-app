@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8eb13de513b4db67ce9e1ff7b0e8f2ee",
+    "content-hash": "eadaaea3aa8bacff68cd91d860cb0a69",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1720,6 +1720,63 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "rtconner/laravel-likeable",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rtconner/laravel-likeable.git",
+                "reference": "4f353f98eccff47147f16db3457ff34cb1c109ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rtconner/laravel-likeable/zipball/4f353f98eccff47147f16db3457ff34cb1c109ee",
+                "reference": "4f353f98eccff47147f16db3457ff34cb1c109ee",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": ">=5.0|^6.0",
+                "illuminate/support": ">=5.0|^6.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "~4.0|~8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Conner\\Likeable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Conner",
+                    "email": "rtconner@smarter.bz"
+                }
+            ],
+            "description": "Trait for Laravel Eloquent models to allow easy implementation of a 'like' or 'favorite' or 'remember' feature.",
+            "homepage": "https://smartersoftware.net/packages/laravel-likeable-favorite",
+            "keywords": [
+                "Follow",
+                "eloquent",
+                "favorite",
+                "favourite",
+                "laravel",
+                "laravel5",
+                "likable",
+                "like",
+                "likeable",
+                "remember",
+                "trait"
+            ],
+            "time": "2019-09-22T01:44:24+00:00"
         },
         {
             "name": "rtconner/laravel-tagging",

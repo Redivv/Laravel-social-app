@@ -11120,6 +11120,8 @@ a.text-dark:focus {
 }
 
 .text-muted,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentDate,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentDate,
 #friendsWall .friendsWall #friendsWallFeed .noContent,
 .nav-bar-height .chatNotifications .dropdown-item .notificationDesc .descTime,
 .nav-bar-height .chatNotifications .clearAllBtn .notificationDesc .descTime,
@@ -17311,6 +17313,8 @@ body {
 .nav-bar-height .dropdown-menu {
   max-height: 50vh;
   overflow-y: auto;
+  position: absolute;
+  right: unset;
 }
 
 .nav-bar-height .nav-link .badge {
@@ -17800,17 +17804,17 @@ html {
   text-align: center;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post {
   margin-top: 1rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorPicture {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorPicture {
   max-width: 50px;
   max-height: 50px;
   border-radius: 50%;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorName {
   display: flex;
   align-items: center;
   font-size: calc(1.255rem + 0.06vw);
@@ -17819,63 +17823,267 @@ html {
 }
 
 @media (min-width: 1200px) {
-  #friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName {
+  #friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorName {
     font-size: 1.3rem;
   }
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName a {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorName a {
   color: #000;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorName small {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorName small {
   font-size: 0.6rem;
   font-weight: normal;
   margin-left: 0.25rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorButtons {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorButtons {
   text-align: right;
   font-size: 0.9rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorButtons i {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorButtons i {
   padding: 0 0.5rem;
   cursor: pointer;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postAuthor .postAuthorButtons i:hover {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorButtons i:hover {
   color: #f66103;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postDesc {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc {
   padding: 0 1rem;
   margin-top: 0.5rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postDesc .postPhotos .postPicture {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postPhotos .postPicture {
   max-width: 500px;
   max-height: 200px;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postDesc .postContent {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postContent {
   margin-top: 0.25rem;
   font-size: 1rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postFooter {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter {
   margin-top: 0.5rem;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postFooter button {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter button {
   font-size: 1.2rem;
   letter-spacing: 2px;
   margin: 0 auto;
   color: #000;
+  font-weight: bold;
 }
 
-#friendsWall .friendsWall #friendsWallFeed .post .postFooter button:hover {
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter button:hover {
   color: #f66103;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter button.active {
+  color: #f66103;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter button .postCommentsCount,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter button .likesCount {
+  background-color: #f66103;
+  color: #ffffff;
+  font-size: 0.6rem;
+  padding: 0.2rem 0.3rem;
+  top: 0.2rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .input-group {
+  padding: 0 5%;
+  width: auto;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .input-group .emojionearea-editor {
+  min-height: unset;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .input-group .emojionearea-button {
+  margin-top: 3px;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsDesc {
+  border-right: 0;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentButtons {
+  padding: 0;
+  border: 1px solid #CCC;
+  border-left-color: #cccccc;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left: 0;
+  background: #ffffff;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  align-content: center;
+  align-items: center;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentButtons i {
+  cursor: pointer;
+  color: #a1a1a1;
+  margin: auto;
+  font-size: 0.9rem;
+  transition: all 400ms ease-in-out;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentButtons i:hover {
+  color: #757575;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed {
+  display: block;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply {
+  padding: 0 3rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentProfilePicture,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentProfilePicture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentProfilePicture img,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentProfilePicture img {
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentAuthor .commentAuthorName,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentAuthor .commentAuthorName {
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  font-size: 1rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentAuthor .commentAuthorButtons i,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentAuthor .commentAuthorButtons i {
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentAuthor .commentAuthorButtons i:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentAuthor .commentAuthorButtons i:hover {
+  color: #f66103;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentDate,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentDate {
+  font-size: 0.6rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentDesc,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentDesc {
+  font-size: 0.8rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentUserButtons,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentUserButtons {
+  padding: 0;
+  text-align: left;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentUserButtons i,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentUserButtons i {
+  cursor: pointer;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  color: #000;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentUserButtons i:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentUserButtons i:hover {
+  color: #f66103;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentUserButtons i.active,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentUserButtons i.active {
+  color: #f66103;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentUserButtons .likesCount,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentUserButtons .likesCount {
+  font-size: 0.8rem;
+  background: transparent;
+  color: #e3342f;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed #replyForm {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding: 0 3rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.8rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentProfilePicture img {
+  max-width: 35px;
+  max-height: 35px;
+  border-radius: 50%;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentContent .commentAuthor .commentAuthorName {
+  font-size: 0.8rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentContent .commentAuthor .commentAuthorButtons i {
+  font-size: 0.6rem;
+  margin-left: 0.3rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentContent .commentDate {
+  font-size: 0.5rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentContent .commentDesc {
+  font-size: 0.65rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentUserButtons i {
+  margin-left: 0.3rem;
+  font-size: 0.75rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentUserButtons .likesCount {
+  font-size: 0.55rem;
+  background: transparent;
+  color: #e3342f;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .repliesMoreBtn {
+  background-color: #f66103;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 0.4rem;
+  margin: 2% 0 2% 5%;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .repliesMoreBtn .repliesCount {
+  font-size: 0.5rem;
+  color: #ffffff;
+  background: #f66103;
+  top: 0.3rem;
+  right: 0.2rem;
 }
 
 #friendsWall .friendsList .friendsListHeader h3 {
@@ -17945,61 +18153,73 @@ html {
   color: #f66103;
 }
 
-#editModal .modal-dialog {
+#editModal .modal-dialog,
+#commentEditModal .modal-dialog {
   max-width: 50vw;
 }
 
-#editModal .modal-body {
+#editModal .modal-body,
+#commentEditModal .modal-body {
   padding-top: 0.25rem;
 }
 
-#editModal .modal-body #modalPicture-preview {
+#editModal .modal-body #modalPicture-preview,
+#commentEditModal .modal-body #modalPicture-preview {
   display: block;
   width: 100%;
 }
 
-#editModal .modal-body #modalPicture-preview .resetPictureBox {
+#editModal .modal-body #modalPicture-preview .resetPictureBox,
+#commentEditModal .modal-body #modalPicture-preview .resetPictureBox {
   text-align: right;
 }
 
-#editModal .modal-body #modalPicture-preview .resetPictureBox i {
+#editModal .modal-body #modalPicture-preview .resetPictureBox i,
+#commentEditModal .modal-body #modalPicture-preview .resetPictureBox i {
   cursor: pointer;
   font-size: 1.1rem;
 }
 
-#editModal .modal-body #modalPicture-preview .resetPictureBox i:hover {
+#editModal .modal-body #modalPicture-preview .resetPictureBox i:hover,
+#commentEditModal .modal-body #modalPicture-preview .resetPictureBox i:hover {
   color: #f66103;
 }
 
-#editModal .modal-body #modalPicture-preview .thumb {
+#editModal .modal-body #modalPicture-preview .thumb,
+#commentEditModal .modal-body #modalPicture-preview .thumb {
   max-width: 150px;
   max-height: 150px;
   margin-left: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-#editModal .modal-body .friendsWallButtons {
+#editModal .modal-body .friendsWallButtons,
+#commentEditModal .modal-body .friendsWallButtons {
   margin: 0.5rem 0;
   padding: 0 0.5rem;
 }
 
-#editModal .modal-body .friendsWallButtons .additionalButton {
+#editModal .modal-body .friendsWallButtons .additionalButton,
+#commentEditModal .modal-body .friendsWallButtons .additionalButton {
   font-size: calc(1.265rem + 0.18vw);
   margin: 0 0.5rem;
   cursor: pointer;
 }
 
 @media (min-width: 1200px) {
-  #editModal .modal-body .friendsWallButtons .additionalButton {
+  #editModal .modal-body .friendsWallButtons .additionalButton,
+  #commentEditModal .modal-body .friendsWallButtons .additionalButton {
     font-size: 1.4rem;
   }
 }
 
-#editModal .modal-body .friendsWallButtons .additionalButton:hover {
+#editModal .modal-body .friendsWallButtons .additionalButton:hover,
+#commentEditModal .modal-body .friendsWallButtons .additionalButton:hover {
   color: #f66103;
 }
 
-#editModal .modal-body .friendsWallSendButton button {
+#editModal .modal-body .friendsWallSendButton button,
+#commentEditModal .modal-body .friendsWallSendButton button {
   color: #ffffff;
   background-color: #f66103;
   font-size: 1rem;

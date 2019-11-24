@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Notification;
 use App\Notifications\AcceptedPicture;
 use App\Notifications\NewAdminPost;
 use App\Notifications\AdminWideInfo;
-use App\Notifications\UserDeleted;
 use App\Notifications\DeniedPicture;
 
 class AdminController extends Controller
@@ -281,14 +280,7 @@ class AdminController extends Controller
         if($validUser){
             switch ($decision) {
                 case 'accept':
-                    $convoId = DB::table('conversations')->select('id')->where('user_one',$validUser->id)->orWhere('user_two',$validUser->id)->get()->toArray();
-                    foreach ($convoId as $convo) {
-                        DB::table('conversations')->where('id',$convo->id)->delete();
-                        DB::table('messages')->where('conversation_id',$convo->id)->delete();
-                    }
-                    DB::table('posts')->where('user_id',$validUser->id)->delete();
-                    $validUser->notify(new UserDeleted($validUser->name));
-                    $validUser->delete();
+                    $validUser->deleteAll();
                     break;
                 case 'refuse':
                     break;
@@ -300,15 +292,7 @@ class AdminController extends Controller
     {
         switch ($decision) {
             case 'delete':
-                $convoId = DB::table('conversations')->select('id')->where('user_one',$user->id)->orWhere('user_two',$user->id)->get()->toArray();
-                foreach ($convoId as $convo) {
-                    DB::table('conversations')->where('id',$convo->id)->delete();
-                    DB::table('messages')->where('conversation_id',$convo->id)->delete();
-                }
-                DB::table('posts')->where('user_id',$user->id)->delete();
-                DB::table('notifications')->where('notifiable_id',$user->id)->delete();
-                $user->notify(new UserDeleted($user->name));
-                $user->delete();
+                $user->deleteAll();
                 break;
         }
     }

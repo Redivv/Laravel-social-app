@@ -107,7 +107,29 @@ function main() {
   $('#addPost').emojioneArea({
     pickerPosition: "bottom",
     placeholder: "\xa0",
+    buttonTitle: ""
+  });
+  $('#editPostDesc').emojioneArea({
+    pickerPosition: "top",
+    placeholder: "\xa0",
     autocomplete: false
+  });
+  $('.commentsDesc').emojioneArea({
+    pickerPosition: "top",
+    placeholder: "Napisz Komentarz",
+    inline: false,
+    events: {
+      keypress: function keypress(editor, e) {
+        if (e.keyCode == 13 || e.which == 13) {
+          e.preventDefault();
+          editor.parent().prev().val(this.getText());
+          editor.parent().prev().parent().submit();
+        }
+      }
+    }
+  });
+  $('.likePostButton').on('click', function () {
+    likePost(this);
   });
   $('#postPicture').change(function (evt) {
     var files = evt.target.files; // FileList object
@@ -181,6 +203,30 @@ function main() {
           $('#friendsWallFeed').prepend(response.html);
           $('.postDelete').on('click', function () {
             deletePost(this);
+          });
+          $('.likePostButton').on('click', function () {
+            likePost(this);
+          });
+          $('.commentsForm').off('submit');
+          $('.commentsForm').on('submit', function (e) {
+            addComment(e, this);
+          });
+          $('.btnComment').one('click', function () {
+            $('.commentsDesc:first').emojioneArea({
+              pickerPosition: "top",
+              placeholder: "Napisz Komentarz",
+              inline: false,
+              events: {
+                keypress: function keypress(editor, e) {
+                  if (e.keyCode == 13 || e.which == 13) {
+                    e.preventDefault();
+                    editor.parent().prev().val(this.getText());
+                    editor.parent().prev().parent().submit();
+                  }
+                }
+              }
+            });
+            getComments(this);
           });
         }
       });
@@ -259,6 +305,7 @@ function main() {
 
           $('input[name="noPicture"]').remove();
         });
+        $('#editPost').off('submit');
         $('#editPost').on('submit', function (e) {
           e.preventDefault();
 
@@ -284,11 +331,38 @@ function main() {
             request.done(function (response) {
               if (response.status === 'success') {
                 $('.spinnerOverlay').addClass('d-none');
-                $('#post' + post).replaceWith(response.html);
-                $('#post' + post).next().remove();
+                $('#post' + post).parent().replaceWith(response.html);
+                $('.postDelete').on('click', function () {
+                  deletePost(this);
+                });
+                $('.likePostButton').on('click', function () {
+                  likePost(this);
+                });
+                $('.commentsForm').off('submit');
+                $('.commentsForm').on('submit', function (e) {
+                  addComment(e, this);
+                });
+                $('.btnComment').one('click', function () {
+                  $('#post' + post).parent().find('.commentsDesc:first').emojioneArea({
+                    pickerPosition: "top",
+                    placeholder: "Napisz Komentarz",
+                    inline: false,
+                    events: {
+                      keypress: function keypress(editor, e) {
+                        if (e.keyCode == 13 || e.which == 13) {
+                          e.preventDefault();
+                          editor.parent().prev().val(this.getText());
+                          editor.parent().prev().parent().submit();
+                        }
+                      }
+                    }
+                  });
+                  getComments(this);
+                });
               }
             });
             request.fail(function (xhr) {
+              $('.spinnerOverlay').addClass('d-none');
               alert(xhr.responseJSON.message);
             });
           }
@@ -303,9 +377,71 @@ function main() {
     $('#editPicture').off('change');
     $(this).find('.modal-body').html('');
   });
-  $('.postDelete').off('click');
+  $('#commentEditModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var commentId = button.data('id');
+    var modal = $(this);
+    var comment = $('#com-' + commentId);
+    var content = comment.find('.commentDesc').html().trim();
+    console.log(content);
+    modal.find('.emojionearea-editor').html(content);
+    modal.find('#editPostDesc').val(content);
+    $('#editComment').off('submit');
+    $('#editComment').on('submit', function (e) {
+      e.preventDefault();
+      var tag = $(this);
+      var newComment = $(this).serializeArray();
+
+      if (newComment[0].value.trim() != "") {
+        var url = baseUrl + "/user/ajax/editComment";
+        $(document).one("ajaxSend", function () {
+          $('#commentEditModal').modal('hide');
+          $('.spinnerOverlay').removeClass('d-none');
+          tag[0].reset();
+          $('.emojionearea-editor').empty();
+        });
+        var request = $.ajax({
+          method: 'post',
+          url: url,
+          data: {
+            "_method": 'PATCH',
+            data: newComment,
+            commentId: commentId
+          }
+        });
+        request.done(function (response) {
+          if (response.status === 'success') {
+            comment.replaceWith(response.html);
+            $('.spinnerOverlay').addClass('d-none');
+            $('.commentDelete').off('click');
+            $('.commentDelete').on('click', function (e) {
+              deleteComment(this);
+            });
+            $('.likeCommentButton').on('click', function () {
+              likeComment(this);
+            });
+            $('.replyButton').on('click', function () {
+              addReplyForm(this);
+            });
+          }
+        });
+        request.fail(function (xhr) {
+          alert(xhr.responseJSON.message);
+          $('.spinnerOverlay').addClass('d-none');
+        });
+      } else {
+        alert(emptyCommentMsg);
+      }
+    });
+  });
   $('.postDelete').on('click', function () {
     deletePost(this);
+  });
+  $('.btnComment').one('click', function () {
+    getComments(this);
+  });
+  $('.commentsForm').on('submit', function (e) {
+    addComment(e, this);
   });
 }
 
@@ -330,9 +466,277 @@ function deletePost(selected) {
       }
     });
     request.fail(function (xhr) {
+      $('.spinnerOverlay').addClass('d-none');
       alert(xhr.responseJSON.message);
     });
   }
+}
+
+function deleteComment(selected) {
+  if (confirm(deleteCommentMsg)) {
+    var url = baseUrl + "/user/ajax/deleteComment";
+    var commentId = $(selected).data('id');
+    $('.spinnerOverlay').removeClass('d-none');
+    var request = $.ajax({
+      method: 'post',
+      url: url,
+      data: {
+        '_method': 'DELETE',
+        id: commentId
+      }
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        $('#com-' + commentId).siblings('.commentRepliesBox').remove();
+        $('#com-' + commentId).remove();
+        $('.spinnerOverlay').addClass('d-none');
+      }
+    });
+    request.fail(function (xhr) {
+      alert(xhr.responseJSON.message);
+    });
+  }
+}
+
+function getComments(selected) {
+  var postId = $(selected).data('id');
+  var commentBox = $('#post' + postId).next();
+  var commentsCount = $('#post' + postId).find('.postCommentsCount');
+  commentBox.removeClass('d-none');
+  commentBox.find('.emojionearea-editor').focus();
+
+  if (commentsCount.text().trim() != "") {
+    var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+    $('#feed-' + postId).html(html);
+    var url = baseUrl + "/user/ajax/getComments/" + postId;
+    var request = $.ajax({
+      method: 'get',
+      url: url
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        $('#feed-' + postId).html(response.html);
+        $('.commentDelete').off('click');
+        $('.commentDelete').on('click', function (e) {
+          deleteComment(this);
+        });
+        $('.replyButton').on('click', function () {
+          addReplyForm(this);
+        });
+        $('.likeCommentButton').on('click', function () {
+          likeComment(this);
+        });
+        $('.repliesMoreBtn').on('click', function () {
+          loadReplies(this);
+        });
+      }
+    });
+    request.fail(function (xhr) {
+      alert(xhr.responseJSON.message);
+    });
+  }
+}
+
+function addReplyForm(selected) {
+  $('#replyForm').remove();
+  var parentId = $(selected).data('id');
+  var formHtml = '<div class="replyForm">' + '<form id="replyForm" method="post">' + '<div class="input-group row">' + '<input type="text" name="commentDesc" id="replyInput" class="form-control replyDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">' + '<div class="input-group-append col-1 commentButtons">' + '<i class="fas fa-user-tag"></i>' + '</div>' + '</div>' + '</form>' + '</div>';
+  var parentComment = $('#com-' + parentId);
+  $(formHtml).insertAfter('#com-' + parentId);
+  $('#replyInput').emojioneArea({
+    pickerPosition: "top",
+    placeholder: "Napisz Komentarz",
+    inline: false,
+    events: {
+      keypress: function keypress(editor, e) {
+        if (e.keyCode == 13 || e.which == 13) {
+          e.preventDefault();
+          editor.parent().prev().val(this.getText());
+          editor.parent().prev().parent().submit();
+        }
+      }
+    }
+  });
+  $('#replyForm').find('.emojionearea-editor').focus();
+  $('#replyForm').off('submit');
+  $('#replyForm').on('submit', function (e) {
+    e.preventDefault();
+    var tag = $(this);
+    $(document).one("ajaxSend", function () {
+      tag[0].reset();
+      tag.parent().remove();
+      var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+      $('#com-' + parentId).next().prepend(html);
+    });
+    var data = tag.serializeArray();
+    var url = baseUrl + "/user/ajax/newComment";
+
+    if (data[0].value.trim() != "") {
+      var request = $.ajax({
+        method: 'post',
+        url: url,
+        data: {
+          "_method": "PUT",
+          data: data,
+          parentId: parentId
+        }
+      });
+      request.done(function (response) {
+        if (response.status === 'success') {
+          $('.ajaxSpinner').remove();
+          $('#com-' + parentId).next().prepend(response.html);
+          $('.commentDelete').off('click');
+          $('.commentDelete').on('click', function (e) {
+            deleteComment(this);
+          });
+        }
+      });
+      request.fail(function (xhr) {
+        $('.ajaxSpinner').remove();
+        alert(xhr.responseJSON.message);
+      });
+    } else {
+      alert(emptyCommentMsg);
+    }
+  });
+}
+
+function addComment(event, selected) {
+  event.preventDefault();
+  var tag = $(selected);
+  var postId = tag.data('id');
+  $(document).one("ajaxSend", function () {
+    tag[0].reset();
+    tag.find('.emojionearea-editor').empty();
+    var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+    $('#feed-' + postId).prepend(html);
+  });
+  var data = tag.serializeArray();
+  var url = baseUrl + "/user/ajax/newComment";
+
+  if (data[0].value.trim() != "") {
+    var request = $.ajax({
+      method: 'post',
+      url: url,
+      data: {
+        "_method": "PUT",
+        data: data,
+        postId: postId
+      }
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        $('.ajaxSpinner').remove();
+        $('#feed-' + postId).prepend(response.html);
+        $('.commentDelete').off('click');
+        $('.commentDelete').on('click', function (e) {
+          deleteComment(this);
+        });
+        $('.likeCommentButton').on('click', function () {
+          likeComment(this);
+        });
+        $('.replyButton').on('click', function () {
+          addReplyForm(this);
+        });
+      }
+    });
+    request.fail(function (xhr) {
+      $('.ajaxSpinner').remove();
+      alert(xhr.responseJSON.message);
+    });
+  } else {
+    alert(emptyCommentMsg);
+  }
+}
+
+function loadReplies(selected) {
+  var button = $(selected);
+  var parentId = button.data('id');
+  var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+  $(document).one("ajaxSend", function () {
+    button.parents('.commentRepliesBox').append(html);
+  });
+  var url = baseUrl + "/user/ajax/getReplies/" + parentId;
+  var request = $.ajax({
+    method: 'get',
+    url: url
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      button.parents('.commentRepliesBox').html(response.html);
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+  });
+}
+
+function likeComment(selected) {
+  var commentId = $(selected).data('id');
+  var url = baseUrl + "/user/ajax/likeComment";
+  var likesCount = $(selected).siblings('.likesCount').html().trim();
+
+  if (likesCount == "") {
+    likesCount = 0;
+  }
+
+  likesCount = parseInt(likesCount);
+
+  if ($(selected).hasClass('active')) {
+    $(selected).removeClass('active');
+
+    if (likesCount - 1 == 0) {
+      $(selected).siblings('.likesCount').html('');
+    } else {
+      $(selected).siblings('.likesCount').html(likesCount - 1);
+    }
+  } else {
+    $(selected).addClass('active');
+    $(selected).siblings('.likesCount').html(likesCount + 1);
+  }
+
+  var request = $.ajax({
+    method: 'post',
+    url: url,
+    data: {
+      '_method': 'PATCH',
+      commentId: commentId
+    }
+  });
+}
+
+function likePost(selected) {
+  var postId = $(selected).data('id');
+  var url = baseUrl + "/user/ajax/likePost";
+  var likesCount = $(selected).children('.likesCount').html().trim();
+
+  if (likesCount == "") {
+    likesCount = 0;
+  }
+
+  likesCount = parseInt(likesCount);
+
+  if ($(selected).hasClass('active')) {
+    $(selected).removeClass('active');
+
+    if (likesCount - 1 == 0) {
+      $(selected).children('.likesCount').html('');
+    } else {
+      $(selected).children('.likesCount').html(likesCount - 1);
+    }
+  } else {
+    $(selected).addClass('active');
+    $(selected).children('.likesCount').html(likesCount + 1);
+  }
+
+  var request = $.ajax({
+    method: 'post',
+    url: url,
+    data: {
+      '_method': 'PATCH',
+      postId: postId
+    }
+  });
 }
 
 /***/ }),
