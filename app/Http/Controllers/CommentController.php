@@ -27,19 +27,33 @@ class CommentController extends Controller
     public function newComment(Request $request)
     {
         if ($request->ajax()) {
+            $kek = $request->all();
             $request->validate([
                 'data.*.value' => ['string','max:255'],
-                'postId'       => ['exists:posts,id']
+                'postId'       => ['exists:posts,id','nullable','required_without:parentId'],
+                'parentId'     => ['exists:comments,id','required_without:postId']
             ]);
 
-            $comment = new Comment;
+            $newComment = new Comment;
 
-            $comment->message   = $request->data[0]['value'];
-            $comment->author_id = Auth::id();
-            $comment->post_id = $request->postId;  
+            $newComment->message   = $request->data[0]['value'];
+            $newComment->author_id = Auth::id();
+            if (isset($request->parentId)) {
+                $parentComment = Comment::find($request->parentId);
+                
+                $newComment->post_id = $parentComment->post_id;
+                $newComment->parent_id = $parentComment->id;
+                
+                $newComment->save();
 
-            $comment->save();
-            $html = view('partials.ajaxWallComment')->withComments([$comment])->render();
+                $html = view('partials.ajaxWallReply')->withComment($newComment)->render();
+            }else{
+                $newComment->post_id = $request->postId;  
+                
+                $newComment->save();
+
+                $html = view('partials.ajaxWallComment')->withComments([$newComment])->render();
+            }
         }
         return response()->json(['status' => 'success','html' => $html], 200);
     }
@@ -50,7 +64,7 @@ class CommentController extends Controller
 
             $request->validate([
                 'data.*.value' => ['string','max:255'],
-                'commentId'    => ['exists:comments,id']
+                'commentId'    => ['exists:comments,id','nullable']
             ]);
 
             $comment = Comment::where('id',$request->commentId)->where('author_id',Auth::id())->first();

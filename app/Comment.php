@@ -22,6 +22,6 @@ class Comment extends Model
 
     public function replies()
     {
-        return $this->hasMany('App\Comment', 'parent_id', 'id');
+        return $this->hasMany('App\Comment', 'parent_id')->orderBy('created_at','desc');
     }
 }

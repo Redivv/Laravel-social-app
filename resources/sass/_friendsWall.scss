@@ -184,7 +184,7 @@
                         display: block;
                         width: 100%;
                         margin-top: 1.5rem;
-                        .comment{
+                        .comment,.reply{
                             padding: 0 3rem;
                             .commentProfilePicture{
                                 display: flex;
@@ -233,6 +233,45 @@
                                     &:hover{
                                         color: $orange;
                                     }
+                                }
+                            }
+                        }
+                        #replyForm{
+                            margin-top: 2rem;
+                            margin-bottom: 1rem;
+                            padding: 0 3rem;
+                        }
+                        .reply{
+                            .commentProfilePicture{
+                                img{
+                                    max-width: 35px;
+                                    max-height: 35px;
+                                    border-radius: 50%;
+                                }
+                            }
+                            .commentContent{
+                                .commentAuthor{
+                                    .commentAuthorName{
+                                        @include font-size(0.8rem);
+                                    }
+                                    .commentAuthorButtons{
+                                        i{
+                                            @include font-size(0.6rem);
+                                            margin-left: 0.3rem;
+                                        }
+                                    }
+                                }
+                                .commentDate{
+                                    @include font-size(0.5rem);
+                                }
+                                .commentDesc{
+                                    @include font-size(0.65rem);
+                                }
+                            }
+                            .commentUserButtons{
+                                i{
+                                    margin-left: 0.3rem;
+                                    @include font-size(0.75rem);
                                 }
                             }
                         }

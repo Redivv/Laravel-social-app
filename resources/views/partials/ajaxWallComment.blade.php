@@ -18,7 +18,11 @@
         </div>
         <div class="col-12 commentUserButtons">
             <i class="fas fa-fire"></i>
-            <i class="fas fa-reply"></i>
+            <i class="fas fa-reply replyButton" data-id="{{$comment->id}}"></i>
         </div>
+    </div>
+    
+    <div class="commentRepliesBox container">
+        @include('partials.wallReplies')
     </div>
 @endforeach

@@ -308,6 +308,7 @@ function main() {
               }
             });
             request.fail(function (xhr) {
+              $('.spinnerOverlay').addClass('d-none');
               alert(xhr.responseJSON.message);
             });
           }
@@ -360,6 +361,7 @@ function main() {
         });
         request.fail(function (xhr) {
           alert(xhr.responseJSON.message);
+          $('.spinnerOverlay').addClass('d-none');
         });
       } else {
         alert(emptyCommentMsg);
@@ -391,6 +393,9 @@ function main() {
           $('.commentDelete').off('click');
           $('.commentDelete').on('click', function (e) {
             deleteComment(this);
+          });
+          $('.replyButton').on('click', function () {
+            addReplyForm(this);
           });
         }
       });
@@ -433,6 +438,7 @@ function main() {
         }
       });
       request.fail(function (xhr) {
+        $('.ajaxSpinner').remove();
         alert(xhr.responseJSON.message);
       });
     } else {
@@ -462,6 +468,7 @@ function deletePost(selected) {
       }
     });
     request.fail(function (xhr) {
+      $('.spinnerOverlay').addClass('d-none');
       alert(xhr.responseJSON.message);
     });
   }
@@ -490,6 +497,69 @@ function deleteComment(selected) {
       alert(xhr.responseJSON.message);
     });
   }
+}
+
+function addReplyForm(selected) {
+  $('#replyForm').remove();
+  var parentId = $(selected).data('id');
+  var formHtml = '<div class="replyForm">' + '<form id="replyForm" method="post">' + '<div class="input-group row">' + '<input type="text" name="commentDesc" id="replyInput" class="form-control replyDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">' + '<div class="input-group-append col-1 commentButtons">' + '<i class="fas fa-user-tag"></i>' + '</div>' + '</div>' + '</form>' + '</div>';
+  var parentComment = $('#com-' + parentId);
+  $(formHtml).insertAfter('#com-' + parentId);
+  $('#replyInput').emojioneArea({
+    pickerPosition: "top",
+    placeholder: "Napisz Komentarz",
+    inline: false,
+    events: {
+      keypress: function keypress(editor, e) {
+        if (e.keyCode == 13 || e.which == 13) {
+          e.preventDefault();
+          editor.parent().prev().val(this.getText());
+          editor.parent().prev().parent().submit();
+        }
+      }
+    }
+  });
+  $('#replyForm').find('.emojionearea-editor').focus();
+  $('#replyForm').on('submit', function (e) {
+    e.preventDefault();
+    var tag = $(this);
+    $(document).one("ajaxSend", function () {
+      tag[0].reset();
+      tag.parent().remove();
+      var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+      $('#com-' + parentId).next().prepend(html);
+    });
+    var data = tag.serializeArray();
+    var url = baseUrl + "/user/ajax/newComment";
+
+    if (data[0].value.trim() != "") {
+      var request = $.ajax({
+        method: 'post',
+        url: url,
+        data: {
+          "_method": "PUT",
+          data: data,
+          parentId: parentId
+        }
+      });
+      request.done(function (response) {
+        if (response.status === 'success') {
+          $('.ajaxSpinner').remove();
+          $('#com-' + parentId).next().prepend(response.html);
+          $('.commentDelete').off('click');
+          $('.commentDelete').on('click', function (e) {
+            deleteComment(this);
+          });
+        }
+      });
+      request.fail(function (xhr) {
+        $('.ajaxSpinner').remove();
+        alert(xhr.responseJSON.message);
+      });
+    } else {
+      alert(emptyCommentMsg);
+    }
+  });
 }
 
 /***/ }),
