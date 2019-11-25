@@ -35,7 +35,7 @@
                     @if(auth()->user()->id == $comment->replies[0]->user->id)
                         <div class="col-3 commentAuthorButtons">
                             <i data-id="{{$comment->replies[0]->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
-                            <i data-id="{{$comment->replies[0]->id}}" class="fas commentDelete fa-times"></i>
+                            <i data-id="{{$comment->replies[0]->id}}" class="fas replyDelete commentDelete fa-times"></i>
                         </div>
                     @endif
                 </div>

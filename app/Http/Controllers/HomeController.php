@@ -227,6 +227,10 @@ class HomeController extends Controller
             ]);
             
             if(Post::where('id',$request->id)->where('user_id',Auth::id())->delete()){
+                
+                DB::table('likeable_like_counters')->where('likeable_id',$request->id)->delete();
+                DB::table('likeable_likes')->where('likeable_id',$request->id)->delete();
+
                 return response()->json(['status' => 'success'], 200);
             }
             return response()->json(['status' => 'error'], 400);

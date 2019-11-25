@@ -70,11 +70,11 @@ class User extends Authenticatable implements MustVerifyEmail
             DB::table('messages')->where('conversation_id',$convo->id)->delete();
         }
 
-        // Delete posts
-        DB::table('posts')->where('user_id',$this->id)->delete();
-
         // Delete notifications
         DB::table('notifications')->where('notifiable_id',$this->id)->delete();
+
+        // Delete Likes
+        DB::table('likeable_likes')->where('user_id',$this->id)->delete();
 
         $this->notify(new UserDeleted($this->name));
         $this->delete();

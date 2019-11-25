@@ -123,6 +123,19 @@ function main() {
           if (response.stopPagi == true) {
             $(window).off('scroll');
           }
+
+          $('.btnComment').off('click');
+          $('.btnComment').one('click', function () {
+            getComments(this);
+          });
+          $('.postDelete').off('click');
+          $('.postDelete').on('click', function () {
+            deletePost(this);
+          });
+          $('.likePostButton').off('click');
+          $('.likePostButton').on('click', function () {
+            likePost(this);
+          });
         }
       });
       request.fail(function (xhr) {
@@ -139,20 +152,6 @@ function main() {
     pickerPosition: "top",
     placeholder: "\xa0",
     autocomplete: false
-  });
-  $('.commentsDesc').emojioneArea({
-    pickerPosition: "top",
-    placeholder: "Napisz Komentarz",
-    inline: false,
-    events: {
-      keypress: function keypress(editor, e) {
-        if (e.keyCode == 13 || e.which == 13) {
-          e.preventDefault();
-          editor.parent().prev().val(this.getText());
-          editor.parent().prev().parent().submit();
-        }
-      }
-    }
   });
   $('.likePostButton').on('click', function () {
     likePost(this);
@@ -514,6 +513,17 @@ function deleteComment(selected) {
     request.done(function (response) {
       if (response.status === 'success') {
         $('#com-' + commentId).siblings('.commentRepliesBox').remove();
+
+        if (!$(selected).hasClass('replyDelete')) {
+          var commAmount = $(selected).parents('.postComments').prev().find('.postCommentsCount').html().trim();
+
+          if (commAmount - 1 <= 0) {
+            $(selected).parents('.postComments').prev().find('.postCommentsCount').html("");
+          } else {
+            $(selected).parents('.postComments').prev().find('.postCommentsCount').html(commAmount - 1);
+          }
+        }
+
         $('#com-' + commentId).remove();
         $('.spinnerOverlay').addClass('d-none');
       }
@@ -527,6 +537,24 @@ function deleteComment(selected) {
 function getComments(selected) {
   var postId = $(selected).data('id');
   var commentBox = $('#post' + postId).next();
+
+  if (!$(commentBox).find('.emojionearea-editor').length) {
+    $(commentBox).find('.commentsDesc').emojioneArea({
+      pickerPosition: "top",
+      placeholder: "Napisz Komentarz",
+      inline: false,
+      events: {
+        keypress: function keypress(editor, e) {
+          if (e.keyCode == 13 || e.which == 13) {
+            e.preventDefault();
+            editor.parent().prev().val(this.getText());
+            editor.parent().prev().parent().submit();
+          }
+        }
+      }
+    });
+  }
+
   var commentsCount = $('#post' + postId).find('.postCommentsCount');
   commentBox.removeClass('d-none');
   commentBox.find('.emojionearea-editor').focus();
@@ -655,6 +683,13 @@ function addComment(event, selected) {
         $('.ajaxSpinner').remove();
         $('#feed-' + postId).prepend(response.html);
         $('.commentDelete').off('click');
+        var commentAmount = $('#post' + postId).find('.postCommentsCount').html().trim();
+
+        if (commentAmount == "") {
+          commentAmount = 0;
+        }
+
+        $('#post' + postId).find('.postCommentsCount').html(commentAmount + 1);
         $('.commentDelete').on('click', function (e) {
           deleteComment(this);
         });
@@ -690,6 +725,13 @@ function loadReplies(selected) {
   request.done(function (response) {
     if (response.status === 'success') {
       button.parents('.commentRepliesBox').html(response.html);
+      $('.commentDelete').off('click');
+      $('.commentDelete').on('click', function (e) {
+        deleteComment(this);
+      });
+      $('.likeCommentButton').on('click', function () {
+        likeComment(this);
+      });
     }
   });
   request.fail(function (xhr) {

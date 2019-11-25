@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Comment;
 use App\Post;
@@ -93,6 +94,10 @@ class CommentController extends Controller
             ]);
             
             if(Comment::where('id',$request->id)->where('author_id',Auth::id())->delete()){
+
+                DB::table('likeable_like_counters')->where('likeable_id',$request->id)->delete();
+                DB::table('likeable_likes')->where('likeable_id',$request->id)->delete();
+
                 return response()->json(['status' => 'success'], 200);
             }
             return response()->json(['status' => 'error'], 400);

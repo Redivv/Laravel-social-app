@@ -9,7 +9,7 @@
                 @if(auth()->user()->id == $reply->user->id)
                     <div class="col-3 commentAuthorButtons">
                         <i data-id="{{$reply->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
-                        <i data-id="{{$reply->id}}" class="fas commentDelete fa-times"></i>
+                        <i data-id="{{$reply->id}}" class="fas commentDelete replyDelete fa-times"></i>
                     </div>
                 @endif
             </div>
