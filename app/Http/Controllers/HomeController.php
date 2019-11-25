@@ -35,7 +35,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->get();
+        
+        $posts = Post::orderBy('created_at', 'desc')->take(5)->get();
 
         $userNotifications = Auth::user()->notifications()->whereIn(
             'type',
@@ -49,6 +50,25 @@ class HomeController extends Controller
         }
 
         return view('home')->withPosts($posts);
+    }
+
+    public function getMorePosts(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->validate([
+                'pagiTime'   => 'numeric'
+            ]);
+            
+            $stopPagi = false;
+            $posts = Post::orderBy('created_at', 'desc')->skip(5*$request->pagiTime)->take(5)->get();
+            if (count($posts) < 5) {
+                $stopPagi = true;
+            }
+
+            $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
+
+            return response()->json(['status' => 'success', 'html' => $html, 'stopPagi' => $stopPagi], 200);
+        }
     }
 
     public function report(Request $request)

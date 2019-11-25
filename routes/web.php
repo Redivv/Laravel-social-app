@@ -50,6 +50,7 @@ Route::prefix('user')->group(function(){
 
         Route::get('getComments/{post}', 'CommentController@getComments')->name('ajaxGetComments');
         Route::get('getReplies/{comment}', 'CommentController@getReplies')->name('ajaxGetReplies');
+        Route::get('getMorePosts', 'HomeController@getMorePosts')->name('ajaxGetPosts');
         Route::put('newComment', 'CommentController@newComment')->name('ajaxNewComment');
         Route::patch('editComment', 'CommentController@editComment')->name('ajaxEditComment');
         Route::patch('likeComment', 'CommentController@likeComment')->name('ajaxLikeComment');

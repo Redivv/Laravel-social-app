@@ -10,6 +10,34 @@ $(document).ready(function() {
 
 
 function main() {
+    var pagi = 0;
+    $(window).on('scroll',function() {
+        if(($(window).scrollTop() + $(window).height() > $(document).height() - 70)) {
+            pagi++;
+            let url = baseUrl + "/user/ajax/getMorePosts";
+
+            var request = $.ajax({
+                method : 'get',
+                url: url,
+                data: {pagiTime:pagi}
+            });
+            
+            
+            request.done(function(response){
+                if (response.status === 'success') {
+                    $('#friendsWallFeed').append(response.html);
+                    if (response.stopPagi == true) {
+                        $(window).off('scroll');
+                    }
+                }
+            });
+            
+            
+            request.fail(function (xhr){
+                alert(xhr.responseJSON.message);
+            });
+        }
+    });
 
     $('#addPost').emojioneArea({
         pickerPosition: "bottom",
@@ -41,6 +69,8 @@ function main() {
     $('.likePostButton').on('click',function() {
         likePost(this);
     });
+
+    
     
     $('#postPicture').change(function(evt){
         var files = evt.target.files; // FileList object
