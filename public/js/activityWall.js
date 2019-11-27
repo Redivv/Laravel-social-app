@@ -107,42 +107,7 @@ $(document).ready(function () {
 
 function main() {
   $(window).on('scroll', function () {
-    if ($(window).scrollTop() + $(window).height() > $(document).height() - 70) {
-      pagi++;
-      var url = baseUrl + "/user/ajax/getMorePosts";
-      var request = $.ajax({
-        method: 'get',
-        url: url,
-        data: {
-          pagiTime: pagi
-        }
-      });
-      request.done(function (response) {
-        if (response.status === 'success') {
-          $('#friendsWallFeed').append(response.html);
-
-          if (response.stopPagi == true) {
-            $(window).off('scroll');
-          }
-
-          $('.btnComment').off('click');
-          $('.btnComment').one('click', function () {
-            getComments(this);
-          });
-          $('.postDelete').off('click');
-          $('.postDelete').on('click', function () {
-            deletePost(this);
-          });
-          $('.likePostButton').off('click');
-          $('.likePostButton').on('click', function () {
-            likePost(this);
-          });
-        }
-      });
-      request.fail(function (xhr) {
-        alert(xhr.responseJSON.message);
-      });
-    }
+    pagiPosts();
   });
   $('#addPost').emojioneArea({
     pickerPosition: "bottom",
@@ -879,6 +844,48 @@ function likePost(selected) {
       postId: postId
     }
   });
+}
+
+function pagiPosts() {
+  if ($(window).scrollTop() + $(window).height() > $(document).height() - 50) {
+    $(window).off('scroll');
+    pagi++;
+    var url = baseUrl + "/user/ajax/getMorePosts";
+    var request = $.ajax({
+      method: 'get',
+      url: url,
+      data: {
+        pagiTime: pagi
+      }
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        $('#friendsWallFeed').append(response.html);
+
+        if (response.stopPagi == false) {
+          $(window).on('scroll', function () {
+            pagiPosts();
+          });
+        }
+
+        $('.btnComment').off('click');
+        $('.btnComment').one('click', function () {
+          getComments(this);
+        });
+        $('.postDelete').off('click');
+        $('.postDelete').on('click', function () {
+          deletePost(this);
+        });
+        $('.likePostButton').off('click');
+        $('.likePostButton').on('click', function () {
+          likePost(this);
+        });
+      }
+    });
+    request.fail(function (xhr) {
+      alert(xhr.responseJSON.message);
+    });
+  }
 }
 
 /***/ }),

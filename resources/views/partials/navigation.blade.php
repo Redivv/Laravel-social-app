@@ -96,10 +96,11 @@
                     </a>
 
                     {{-- System Notifications Mobile --}}
-                    <div class="dropdown-menu pl-2 pr-2 systemNotifications position-absolute p-2">
+                    <div class="dropdown-menu pl-2 pr-2 systemNotifications position-absolute">
                         @if (count($notifications['system']) == 0)
                             <div class="text-center sysNoNot">{{__('nav.noNotifications')}}</div>
                         @else
+                            <div class="notificationsContainer">
                             @foreach ($notifications['system'] as $sysNot)
                                 @switch($sysNot['type'])
 
@@ -134,6 +135,7 @@
                                         @break
                                 @endswitch
                             @endforeach
+                            </div>
                             <div class="dropdown-divider"></div>
                             <a class="clearAllBtn" data-type="sysNoNot" href="#">{{__('nav.deleteAll')}}</a>
                         @endif
@@ -260,10 +262,11 @@
                         </a>
 
                         {{-- System Notifications --}}
-                        <div class="dropdown-menu systemNotifications p-2">
+                        <div class="dropdown-menu systemNotifications">
                             @if (count($notifications['system']) == 0)
                                 <div class="text-center sysNoNot">{{__('nav.noNotifications')}}</div>
                             @else
+                            <div class="notificationsContainer">
                                 @foreach ($notifications['system'] as $sysNot)
                                     @switch($sysNot['type'])
 
@@ -298,6 +301,7 @@
                                             @break
                                     @endswitch
                                 @endforeach
+                                </div>
                                 <div class="dropdown-divider"></div>
                                 <a class="clearAllBtn" data-type="sysNoNot">{{__('nav.deleteAll')}}</a>
                             @endif
@@ -411,7 +415,7 @@
                                         '<div class="systemNotificationDate">{{__("nav.newSysNotTime")}}</div>'+
                                         notification.message+
                                 '</a>';
-                        $('.systemNotifications').prepend(html);
+                        $('.systemNotifications').find('.notificationsContainer').prepend(html);
                         break;
                     
                     // Special Admin Notification
@@ -422,7 +426,7 @@
                                         '<div class="adminWideHeader">{{__("nav.adminWideInfoHeader")}}</div>'+
                                         notification.content+
                                 '</a>';
-                        $('.systemNotifications').prepend(html);
+                        $('.systemNotifications').find('.notificationsContainer').prepend(html);
                         break;
                     case 'App/Notifications/NewProfilePicture':
                         updateSystemNotifications();
@@ -430,7 +434,7 @@
                                         '<div class="systemNotificationDate">{{__("nav.newSysNotTime")}}</div>'+
                                         '{{__("nav.pictureTicket")}}'+
                                 '</a>';
-                        $('.systemNotifications').prepend(html);
+                        $('.systemNotifications').find('.notificationsContainer').prepend(html);
                         break;
                     case 'App/Notifications/UserFlagged':
                         updateSystemNotifications();
@@ -438,7 +442,7 @@
                                         '<div class="systemNotificationDate">{{__("nav.newSysNotTime")}}</div>'+
                                         '{{__("nav.userTicket")}}'+
                                 '</a>';
-                        $('.systemNotifications').prepend(html);
+                        $('.systemNotifications').find('.notificationsContainer').prepend(html);
                         break;
                     
                 }
@@ -470,37 +474,37 @@
                 let html;
                 if (currentAmountNot === "") {
                     currentAmountNot = 0;
-                    $('.systemNotificationsCount').html(parseInt(currentAmountNot)+1);
-                    if ($('.sysNoNot').length) {
-                        html = '<div class="dropdown-divider"></div>'+
-                                    '<a class="clearAllBtn">{{__("nav.deleteAll")}}</a>';
-                        $('.sysNoNot').remove();
-                        $('.systemNotifications').append(html);
+                }
+                $('.systemNotificationsCount').html(parseInt(currentAmountNot)+1);
+                if ($('.sysNoNot').length) {
+                    html = '<div class="dropdown-divider"></div>'+
+                                '<a class="clearAllBtn">{{__("nav.deleteAll")}}</a>';
+                    $('.sysNoNot').remove();
+                    $('.systemNotifications').append(html);
 
-                        $('a.clearAllBtn').one('click',function() {
-                            let type= $(this).data('type');
-                            let html = '<div class="text-center '+type+'">'+noNotifications+'</div>';
-                            $(this).parent().html(html);
+                    $('a.clearAllBtn').one('click',function() {
+                        let type= $(this).data('type');
+                        let html = '<div class="text-center '+type+'">'+noNotifications+'</div>';
+                        $(this).parent().html(html);
 
-                            let url = baseUrl+'/user/deleteNotifications';
-                            
-                            $.ajaxSetup({
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                }
-                            });
+                        let url = baseUrl+'/user/deleteNotifications';
+                        
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
 
-                            let request = $.ajax({
-                                method : 'post',
-                                url: url,
-                                data: {"_method":"DELETE",type:type}
-                            });
-        
-                            request.fail(function (xhr){
-                                alert(xhr.responseJSON.message);
-                            });
-                        })
-                    }
+                        let request = $.ajax({
+                            method : 'post',
+                            url: url,
+                            data: {"_method":"DELETE",type:type}
+                        });
+    
+                        request.fail(function (xhr){
+                            alert(xhr.responseJSON.message);
+                        });
+                    });
                 }
             }
         </script>

@@ -11,5 +11,9 @@ return [
     'userNot1'                  => 'Twój znajomy ',
     'userNot2'                  => 'napisał nowy post na tablicy',
     'userNotAdmin'              => 'Administrator dodał nowy post na tablicy',
-    'adminWideInfoHeader'       => 'Wiadomość od administracji'
+    'adminWideInfoHeader'       => 'Wiadomość od administracji',
+    'replyNot'                  => 'Ktoś odpowiedział na Twój komentarz',
+    'commentNot'                => 'Dodano komentarz pod Twoim postem',
+    'likePostNot'               => 'Ktoś poleca Twój post',
+    'likeComNot'                => 'Ktoś poleca Twój komentarz'
 ]; 

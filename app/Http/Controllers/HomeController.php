@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Notifications\UserFlagged;
 use App\Post;
 use App\User;
+use App\Notifications\SystemNotification;
 use App\Notifications\UserNotification;
 use Illuminate\Support\Facades\Notification;
 
@@ -206,8 +207,6 @@ class HomeController extends Controller
             }
 
             
-
-            
             if ($post->update()) {
                 $posts = [$post];
                 $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
@@ -252,8 +251,7 @@ class HomeController extends Controller
                 case 'sysNoNot':
                     DB::table('notifications')
                         ->whereIn('type',[
-                            'App\Notifications\AcceptedPicture',
-                            'App\Notifications\DeniedPicture',
+                            'App\Notifications\SystemNotification',
                             'App\Notifications\AdminWideInfo'
                         ])
                         ->where('notifiable_id',Auth::id())
@@ -279,6 +277,10 @@ class HomeController extends Controller
                 $post->unlike();
             }else{
                 $post->like();
+
+                if ($post->user_id != Auth::id()) {
+                    $post->user->notify(new SystemNotification(__('nav.likePostNot'),'info','-user-home#post'.$post->id));
+                }
             }
 
             return response()->json(['status' => 'success'], 200);

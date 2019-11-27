@@ -17440,6 +17440,18 @@ body {
   color: #828282 !important;
 }
 
+.nav-bar-height .systemNotifications {
+  overflow-y: unset;
+  max-height: none;
+}
+
+.nav-bar-height .systemNotifications .notificationsContainer {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.25rem 1rem;
+  max-height: 40vh;
+}
+
 .nav-bar-height .systemNotifications a {
   margin-top: 0.5rem;
   margin-bottom: 0;

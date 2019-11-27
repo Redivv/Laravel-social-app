@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\Comment;
 use App\Post;
 
+use App\Notifications\SystemNotification;
+
 use Auth;
 
 class CommentController extends Controller
@@ -63,7 +65,9 @@ class CommentController extends Controller
 
             $newComment->message   = $request->data[0]['value'];
             $newComment->author_id = Auth::id();
+
             if (isset($request->parentId)) {
+                
                 $parentComment = Comment::find($request->parentId);
                 
                 $newComment->post_id = $parentComment->post_id;
@@ -71,11 +75,21 @@ class CommentController extends Controller
                 
                 $newComment->save();
 
+                if ($parentComment->author_id != Auth::id()) {
+                    $parentComment->user->notify(new SystemNotification(__('nav.replyNot'),'info','-user-home#post'.$parentComment->post_id));
+                }
+
                 $html = view('partials.ajaxWallReply')->withComment($newComment)->render();
             }else{
+
+                $post = Post::find($request->postId);
                 $newComment->post_id = $request->postId;  
                 
                 $newComment->save();
+
+                if ($post->user_id != Auth::id()) {
+                    $post->user->notify(new SystemNotification(__('nav.commentNot'),'info','-user-home#post'.$post->id));
+                }
 
                 $html = view('partials.ajaxWallComment')->withComments([$newComment])->render();
             }
@@ -133,6 +147,10 @@ class CommentController extends Controller
                 $comment->unlike();
             }else{
                 $comment->like();
+
+                if ($comment->author_id != Auth::id()) {
+                    $comment->user->notify(new SystemNotification(__('nav.likeComNot'),'info','-user-home#post'.$comment->post->id));
+                }
             }
 
             return response()->json(['status' => 'success'], 200);
