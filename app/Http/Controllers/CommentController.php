@@ -20,7 +20,16 @@ class CommentController extends Controller
     public function getComments(Request $request, Post $post)
     {
         if ($request->ajax()) {
-            $html = view('partials.ajaxWallComment')->withComments($post->comments)->render();
+
+            $request->validate([
+                'pagi'  => 'numeric'
+            ]);
+
+            $commentsAmount = count($post->comments);
+
+            $comments = Comment::where('post_id',$post->id)->whereNull('parent_id')->take(5)->skip(5*$request->pagi)->orderBy('created_at','desc')->get();
+
+            $html = view('partials.ajaxWallComment')->withComments($comments)->withId($post->id)->withPagi($request->pagi+1)->withCommentsAmount($commentsAmount - count($comments))->render();
             return response()->json(['status' => 'success', 'html' => $html], 200);
         }
     }
@@ -28,7 +37,14 @@ class CommentController extends Controller
     public function getReplies(Request $request, Comment $comment)
     {
         if ($request->ajax()) {
-            $html = view('partials.wallReplies')->withReplies($comment->replies)->render();
+
+            $request->validate([
+                'pagi'  => 'numeric'
+            ]);
+
+            $replies = Comment::where('parent_id',$comment->id)->take(5)->skip(5*$request->pagi)->orderBy('created_at','desc')->get();
+
+            $html = view('partials.wallReplies')->withReplies($replies)->withId($comment->id)->withPagi($request->pagi+1)->render();
             return response()->json(['status' => 'success', 'html' => $html], 200);
         }
     }

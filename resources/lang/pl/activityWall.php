@@ -16,5 +16,6 @@ return [
     'like'              => 'Poleć',
     'comment'           => 'Skomentuj',
     'emptyComment'      => 'Nie możesz wysłać pustego komentarza',
-    'moreReplies'       => 'Pokaż Więcej Odpowiedzi'
+    'moreReplies'       => 'Pokaż Więcej Odpowiedzi',
+    'moreComments'       => 'Pokaż Więcej Komentarzy'
 ];

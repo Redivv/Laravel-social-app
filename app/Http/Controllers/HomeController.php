@@ -13,7 +13,7 @@ use Carbon\Carbon;
 use App\Notifications\UserFlagged;
 use App\Post;
 use App\User;
-use App\Notifications\NewFriendPost;
+use App\Notifications\UserNotification;
 use Illuminate\Support\Facades\Notification;
 
 class HomeController extends Controller
@@ -41,7 +41,7 @@ class HomeController extends Controller
         $userNotifications = Auth::user()->notifications()->whereIn(
             'type',
             [
-                'App\Notifications\NewFriendPost',
+                'App\Notifications\UserNotification',
                 'App\Notifications\NewAdminPost',
                 ])->get();
         
@@ -100,7 +100,7 @@ class HomeController extends Controller
             case 'userNotifications':
                 DB::table('notifications')
                     ->whereIn('type',[
-                        'App\Notifications\NewFriendPost',
+                        'App\Notifications\UserNotification',
                         'App\Notifications\NewAdminPost',
                     ])
                     ->where('notifiable_id',Auth::id())
@@ -113,8 +113,7 @@ class HomeController extends Controller
                     ->whereIn('type',[
                         'App\Notifications\NewProfilePicture',
                         'App\Notifications\UserFlagged',
-                        'App\Notifications\AcceptedPicture',
-                        'App\Notifications\DeniedPicture'
+                        'App\Notifications\SystemNotification',
                     ])
                     ->where('notifiable_id',Auth::id())
                     ->where('read_at',null)
@@ -166,7 +165,7 @@ class HomeController extends Controller
                 $posts = [$post];
                 $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
                 $friends = User::whereNotIn('id',[Auth::id()])->get();
-                Notification::send($friends, new NewFriendPost($author,$post->id));
+                Notification::send($friends, new UserNotification($author, '-user-home#post'.$post->id, __('nav.userNot2')));
                 return response()->json(['status' => 'success', 'html' => $html], 200);
             }
 

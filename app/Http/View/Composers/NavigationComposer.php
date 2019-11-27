@@ -29,13 +29,13 @@ class NavigationComposer
             $this->notifications['chatAmount'] = 0;
 
             $this->notifications['user'] = $notifications->whereIn('type',
-            ['App\Notifications\NewFriendPost',
+            ['App\Notifications\UserNotification',
             'App\Notifications\NewAdminPost'
             ]);
 
             $this->notifications['userAmount'] = $notifications->whereIn('type',
             [
-                'App\Notifications\NewFriendPost',
+                'App\Notifications\UserNotification',
                 'App\Notifications\NewAdminPost'
                 ])->where('read_at',null)->count();
 
@@ -45,9 +45,8 @@ class NavigationComposer
                     [
                         'App\Notifications\NewProfilePicture',
                         'App\Notifications\UserFlagged',
-                        'App\Notifications\AcceptedPicture',
-                        'App\Notifications\DeniedPicture',
-                        'App\Notifications\AdminWideInfo'
+                        'App\Notifications\AdminWideInfo',
+                        'App\Notifications\SystemNotification',
                         ]);
             $this->notifications['systemAmount'] = $notifications
                 ->whereIn(
@@ -55,9 +54,8 @@ class NavigationComposer
                     [
                         'App\Notifications\NewProfilePicture',
                         'App\Notifications\UserFlagged',
-                        'App\Notifications\AcceptedPicture',
-                        'App\Notifications\DeniedPicture',
-                        'App\Notifications\AdminWideInfo'
+                        'App\Notifications\AdminWideInfo',
+                        'App\Notifications\SystemNotification',
                         ])->where('read_at',null)->count();
 
             foreach ($this->notifications['chat'] as $chatNot) {
@@ -80,8 +78,6 @@ class NavigationComposer
      */
     public function compose(View $view)
     {   
-        // dd($this->notifications);
-        // dd($this->notifications);
         $view->with('notifications', $this->notifications);
     }
 }

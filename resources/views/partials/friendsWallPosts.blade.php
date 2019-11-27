@@ -30,7 +30,7 @@
             </main>
             <footer class="postFooter row">
                 <button class="col-5 btn btn-block likePostButton @if($post->liked()){{"active"}}@endif" data-id="{{$post->id}}"><i class="fas fa-fire"></i><span class="badge likesCount badge-pill badge-warning">@if($post->likeCount != 0){{$post->likeCount}}@endif</span> {{__('activityWall.like')}}</button>
-                <button class="col-5 btn btnComment btn-block" data-id="{{$post->id}}">
+                <button class="col-5 btn btnComment btn-block" data-id="{{$post->id}}" data-pagi="0">
                     <i class="far fa-comments"></i><span class="badge postCommentsCount badge-pill badge-warning">@if(count($post->comments) > 0){{count($post->comments)}}@endif</span>
                      {{__('activityWall.comment')}}
                 </button>

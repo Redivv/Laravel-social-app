@@ -8,22 +8,24 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class AcceptedPicture extends Notification implements ShouldBroadcast
+class SystemNotification extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
-    public $user_name;
-    public $image;
+    public $message;
+    public $color;
+    public $link;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user_name,$image)
+    public function __construct(string $message,string $color,string $link)
     {
-        $this->user_name = $user_name;
-        $this->image = $image;
+        $this->message = $message;
+        $this->color = $color;
+        $this->link = $link;
     }
 
     /**
@@ -46,16 +48,18 @@ class AcceptedPicture extends Notification implements ShouldBroadcast
     public function toArray($notifiable)
     {
         return [
-            'user_name'     => $this->user_name,
-            'image'         => $this->image,
+            'message'       => $this->message,
+            'color'         => $this->color,
+            'link'          => $this->link
         ];
     }
 
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'user_name'     => $this->user_name,
-            'user_image'    => $this->image
+            'message'       => $this->message,
+            'color'         => $this->color,
+            'link'          => $this->link
         ]);
     }
 }

@@ -16,10 +16,9 @@ use Conner\Tagging\Model\Tag;
 
 use Illuminate\Support\Facades\Notification;
 
-use App\Notifications\AcceptedPicture;
+use App\Notifications\SystemNotification;
 use App\Notifications\NewAdminPost;
 use App\Notifications\AdminWideInfo;
-use App\Notifications\DeniedPicture;
 
 class AdminController extends Controller
 {
@@ -259,7 +258,7 @@ class AdminController extends Controller
                     $validUser->picture = $validUser->pending_picture;
                     $validUser->pending_picture = null;
                     $validUser->update();
-                    $validUser->notify(new AcceptedPicture($validUser->name,$validUser->picture));
+                    $validUser->notify(new SystemNotification(__('nav.pictureOk'),'success','-profile'));
                     break;
                 case 'refuse':
                     $validUser->pending_picture = null;
@@ -268,7 +267,7 @@ class AdminController extends Controller
                     if (!$otherUser) {
                         unlink(public_path('img/profile-pictures/'.$data['image']));
                     }
-                    $validUser->notify(new DeniedPicture($validUser->name));
+                    $validUser->notify(new SystemNotification(__('nav.pictureDeny'),'danger','-profile'));
                     break;
             }
         }

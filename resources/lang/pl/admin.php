@@ -31,5 +31,6 @@ return [
     'adminWideInfo'             => 'Wiadomość do użytkowników',
     'wideNotCheck'              => 'Wyślij powiadomienie na pasku nawigacyjnym',
     'wideWallCheck'             => 'Stwórz post na tablicy',
-    'infoContent'               => 'Treść'
+    'infoContent'               => 'Treść',
+    'infoSend'                  => 'Wyślij Powiadomienie'
 ];

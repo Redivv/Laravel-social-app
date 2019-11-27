@@ -313,6 +313,21 @@
                                 }
                             }
                         }
+                        .commentsMoreBtn{
+                            background-color: $orange;
+                            color: $white;
+                            @include font-size(1rem);
+                            padding: 0.6rem;
+                            font-weight: bold;
+                            margin: 2% 0 2% 5%;
+                            .commentsMoreCount{
+                                @include font-size(0.65rem);
+                                color: $white;
+                                background: $orange;
+                                top: 0.3rem;
+                                right: 0.2rem;
+                            }
+                        }
                     }
                 }
             }

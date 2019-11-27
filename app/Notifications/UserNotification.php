@@ -9,22 +9,24 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class NewFriendPost extends Notification implements ShouldBroadcast
+class UserNotification extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
-    public $author;
-    public $postId;
+    public $user;
+    public $link;
+    public $message;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(object $author, $postId)
+    public function __construct(object $user, string $link, string $message)
     {
-        $this->author = $author;
-        $this->postId = $postId;
+        $this->user          = $user;
+        $this->link          = $link;
+        $this->message       = $message;
     }
 
     /**
@@ -47,18 +49,20 @@ class NewFriendPost extends Notification implements ShouldBroadcast
     public function toArray($notifiable)
     {
         return [
-            'author_name'   =>$this->author->name,
-            'author_image'  =>$this->author->picture,
-            'postId'        =>$this->postId
+            'user_name'         =>$this->user->name,
+            'user_image'        =>$this->user->picture,
+            'link'              =>$this->link,
+            'message'           =>$this->message
         ];
     }
 
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'author_name'   =>$this->author->name,
-            'author_image'  =>$this->author->picture,
-            'postId'        =>$this->postId
+            'user_name'         =>$this->user->name,
+            'user_image'        =>$this->user->picture,
+            'link'              =>$this->link,
+            'message'           =>$this->message
         ]);
     }
 

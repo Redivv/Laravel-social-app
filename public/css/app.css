@@ -17390,7 +17390,7 @@ body {
 
 .nav-bar-height .userNotifications .dropdown-item,
 .nav-bar-height .userNotifications .clearAllBtn {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 
 .nav-bar-height .userNotifications .dropdown-item .notificationImageBox,
@@ -18080,6 +18080,23 @@ html {
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .repliesMoreBtn .repliesCount {
   font-size: 0.5rem;
+  color: #ffffff;
+  background: #f66103;
+  top: 0.3rem;
+  right: 0.2rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentsMoreBtn {
+  background-color: #f66103;
+  color: #ffffff;
+  font-size: 1rem;
+  padding: 0.6rem;
+  font-weight: bold;
+  margin: 2% 0 2% 5%;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentsMoreBtn .commentsMoreCount {
+  font-size: 0.65rem;
   color: #ffffff;
   background: #f66103;
   top: 0.3rem;

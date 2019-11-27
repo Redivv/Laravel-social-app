@@ -93,6 +93,8 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+var pagi = 0;
+var pagiReply = 0;
 $(document).ready(function () {
   $('[data-toggle="tooltip"]').tooltip();
   $.ajaxSetup({
@@ -104,7 +106,6 @@ $(document).ready(function () {
 });
 
 function main() {
-  var pagi = 0;
   $(window).on('scroll', function () {
     if ($(window).scrollTop() + $(window).height() > $(document).height() - 70) {
       pagi++;
@@ -535,6 +536,7 @@ function deleteComment(selected) {
 }
 
 function getComments(selected) {
+  var pagi = $(selected).data('pagi');
   var postId = $(selected).data('id');
   var commentBox = $('#post' + postId).next();
 
@@ -565,7 +567,10 @@ function getComments(selected) {
     var url = baseUrl + "/user/ajax/getComments/" + postId;
     var request = $.ajax({
       method: 'get',
-      url: url
+      url: url,
+      data: {
+        pagi: pagi
+      }
     });
     request.done(function (response) {
       if (response.status === 'success') {
@@ -580,8 +585,13 @@ function getComments(selected) {
         $('.likeCommentButton').on('click', function () {
           likeComment(this);
         });
+        $('.repliesMoreBtn').off('click');
         $('.repliesMoreBtn').on('click', function () {
           loadReplies(this);
+        });
+        $('.commentsMoreBtn').off('click');
+        $('.commentsMoreBtn').on('click', function () {
+          loadMoreComments(this);
         });
       }
     });
@@ -689,7 +699,7 @@ function addComment(event, selected) {
           commentAmount = 0;
         }
 
-        $('#post' + postId).find('.postCommentsCount').html(commentAmount + 1);
+        $('#post' + postId).find('.postCommentsCount').html(parseInt(commentAmount) + 1);
         $('.commentDelete').on('click', function (e) {
           deleteComment(this);
         });
@@ -713,6 +723,7 @@ function addComment(event, selected) {
 function loadReplies(selected) {
   var button = $(selected);
   var parentId = button.data('id');
+  var pagi = $(button).data('pagi');
   var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
   $(document).one("ajaxSend", function () {
     button.parents('.commentRepliesBox').append(html);
@@ -720,17 +731,80 @@ function loadReplies(selected) {
   var url = baseUrl + "/user/ajax/getReplies/" + parentId;
   var request = $.ajax({
     method: 'get',
-    url: url
+    url: url,
+    data: {
+      pagi: pagi
+    }
   });
   request.done(function (response) {
     if (response.status === 'success') {
-      button.parents('.commentRepliesBox').html(response.html);
+      if (pagi == 0) {
+        button.prev().remove();
+      }
+
+      button.parents('.commentRepliesBox').append(response.html);
+      $('.ajaxSpinner').remove();
+      button.remove();
       $('.commentDelete').off('click');
       $('.commentDelete').on('click', function (e) {
         deleteComment(this);
       });
       $('.likeCommentButton').on('click', function () {
         likeComment(this);
+      });
+      $('.repliesMoreBtn').off('click');
+      $('.repliesMoreBtn').on('click', function () {
+        loadReplies(this);
+      });
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+  });
+}
+
+function loadMoreComments(selected) {
+  var button = $(selected);
+  var postId = button.data('id');
+  var pagi = $(button).data('pagi');
+  var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+  $(document).one("ajaxSend", function () {
+    button.parents('.commentsFeed').append(html);
+  });
+  var url = baseUrl + "/user/ajax/getComments/" + postId;
+  var request = $.ajax({
+    method: 'get',
+    url: url,
+    data: {
+      pagi: pagi
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      if (pagi == 0) {
+        button.prev().remove();
+      }
+
+      button.parents('.commentsFeed').append(response.html);
+      $('.ajaxSpinner').remove();
+      button.remove();
+      $('.commentDelete').off('click');
+      $('.commentDelete').on('click', function (e) {
+        deleteComment(this);
+      });
+      $('.replyButton').on('click', function () {
+        addReplyForm(this);
+      });
+      $('.likeCommentButton').on('click', function () {
+        likeComment(this);
+      });
+      $('.repliesMoreBtn').off('click');
+      $('.repliesMoreBtn').on('click', function () {
+        loadReplies(this);
+      });
+      $('.commentsMoreBtn').off('click');
+      $('.commentsMoreBtn').on('click', function () {
+        loadMoreComments(this);
       });
     }
   });

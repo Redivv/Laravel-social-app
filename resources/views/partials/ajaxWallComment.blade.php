@@ -49,10 +49,18 @@
         @endif
 
         @if(count($comment->replies) > 1)
-            <button type="button" data-id="{{$comment->id}}" class="btn repliesMoreBtn">
+            <button type="button" data-id="{{$comment->id}}" data-pagi="0" class="btn repliesMoreBtn">
                 {{__('activityWall.moreReplies')}}
                 <i class="ml-1 fas fa-sort-down"></i><span class="badge repliesCount badge-pill badge-warning">{{count($comment->replies) - 1}}</span>
             </button>
         @endif
     </div>
 @endforeach
+
+
+@if (count($comments) == 5)
+<button type="button" data-id="{{$id}}" data-pagi="{{$pagi}}" class="btn commentsMoreBtn">
+    {{__('activityWall.moreComments')}}
+    <i class="ml-1 fas fa-sort-down"></i><span class="badge commentsMoreCount badge-pill badge-warning">{{$commentsAmount}}</span>
+</button>
+@endif

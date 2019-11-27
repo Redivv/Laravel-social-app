@@ -24,8 +24,7 @@ class ProfileController extends Controller
         $profileNotifications = $user->notifications()->whereIn(
             'type',
             [
-                'App\Notifications\AcceptedPicture',
-                'App\Notifications\DeniedPicture',
+                'App\Notifications\SystemNotification',
                 'App\Notifications\AdminWideInfo'
                 ])->get();
         

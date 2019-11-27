@@ -20,4 +20,12 @@
             <i class="fas fa-fire likeCommentButton @if($reply->liked()){{"active"}}@endif" data-id="{{$reply->id}}"></i><span class="badge likesCount badge-pill badge-warning">@if($reply->likeCount != 0){{$reply->likeCount}}@endif</span>
         </div>
     </div>
+    
 @endforeach
+
+@if (count($replies) == 5)
+<button type="button" data-id="{{$id}}" data-pagi="{{$pagi}}" class="btn repliesMoreBtn">
+    {{__('activityWall.moreReplies')}}
+    <i class="ml-1 fas fa-sort-down"></i>
+</button>
+@endif

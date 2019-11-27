@@ -21,19 +21,23 @@
                             @else
                                 @foreach ($notifications['user'] as $userNot)
                                     @switch($userNot->type)
-                                        @case('App\Notifications\NewFriendPost')
-                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('home').'/#post'.$userNot->data['postId']}}" target="__blank">
+
+                                        {{-- User Notification --}}
+                                        @case('App\Notifications\UserNotification')
+                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$userNot->data['link'])}}" target="__blank">
                                                 <div class="row">
                                                     <div class="notificationImageBox col-2">
-                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}">
+                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}">
                                                     </div>
                                                     <div class="notificationDesc col-10">
                                                         <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
-                                                        <div class="col-12 descBody">{{__('nav.userNot1')}} <span class="font-weight-bold">{{$userNot->data['author_name']}}</span> {{__('nav.userNot2')}}</div>
+                                                        <div class="col-12 descBody">{{__('nav.userNot1')}} <span class="font-weight-bold">{{$userNot->data['user_name']}}</span> {{$userNot->data['message']}}</div>
                                                     </div>
                                                 </div>
                                             </a>
                                             @break
+                                        
+                                        {{-- Admin Special Notification --}}
                                         @case('App\Notifications\NewAdminPost')
                                             <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('home').'/#post'.$userNot->data['postId']}}" target="__blank">
                                                 <div class="row">
@@ -98,6 +102,8 @@
                         @else
                             @foreach ($notifications['system'] as $sysNot)
                                 @switch($sysNot['type'])
+
+                                    {{-- Admin Tickets --}}
                                     @case('App\Notifications\NewProfilePicture')
                                         <a class="{{$sysNot['id']}} dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="/admin/home">
                                             <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
@@ -110,18 +116,15 @@
                                             {{__('nav.userTicket')}}
                                         </a>
                                         @break
-                                    @case('App\Notifications\AcceptedPicture')
-                                        <a class="dropdown-item alert alert-success @if($sysNot['read_at']){{'read'}}@endif" href="/profile">
+
+                                    {{-- System Notifications --}}
+                                    @case('App\Notifications\SystemNotification')
+                                        <a class="{{$sysNot['id']}} dropdown-item alert alert-{{$sysNot->data['color']}} @if($sysNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$sysNot->data['link'])}}">
                                             <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
-                                            {{__('nav.pictureOk')}} 
+                                            {{$sysNot->data['message']}}
                                         </a>
                                         @break
-                                    @case('App\Notifications\DeniedPicture')
-                                        <a class="dropdown-item alert alert-danger @if($sysNot['read_at']){{'read'}}@endif" href="/profile">
-                                            <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
-                                            {{__('nav.pictureDeny')}} 
-                                        </a>
-                                        @break
+                                    {{-- Admin Special Notifiaction --}}
                                     @case('App\Notifications\AdminWideInfo')
                                         <a class="dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="/profile">
                                             <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
@@ -183,19 +186,23 @@
                             @else
                                 @foreach ($notifications['user'] as $userNot)
                                     @switch($userNot->type)
-                                        @case('App\Notifications\NewFriendPost')
-                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('home').'/#post'.$userNot->data['postId']}}" target="__blank">
+
+                                        {{-- User Notification --}}
+                                        @case('App\Notifications\UserNotification')
+                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$userNot->data['link'])}}" target="__blank">
                                                 <div class="row">
                                                     <div class="notificationImageBox col-2">
-                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}">
+                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}">
                                                     </div>
                                                     <div class="notificationDesc col-10">
                                                         <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
-                                                        <div class="col-12 descBody">{{__('nav.userNot1')}} <span class="font-weight-bold">{{$userNot->data['author_name']}}</span> {{__('nav.userNot2')}}</div>
+                                                        <div class="col-12 descBody">{{__('nav.userNot1')}} <span class="font-weight-bold">{{$userNot->data['user_name']}}</span> {{$userNot->data['message']}}</div>
                                                     </div>
                                                 </div>
                                             </a>
                                             @break
+                                        
+                                        {{-- Admin Special Notification --}}
                                         @case('App\Notifications\NewAdminPost')
                                             <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('home').'/#post'.$userNot->data['postId']}}" target="__blank">
                                                 <div class="row">
@@ -259,6 +266,8 @@
                             @else
                                 @foreach ($notifications['system'] as $sysNot)
                                     @switch($sysNot['type'])
+
+                                        {{-- Admin Tickets --}}
                                         @case('App\Notifications\NewProfilePicture')
                                             <a class="{{$sysNot['id']}} dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="/admin/home">
                                                 <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
@@ -271,18 +280,15 @@
                                                 {{__('nav.userTicket')}}
                                             </a>
                                             @break
-                                        @case('App\Notifications\AcceptedPicture')
-                                            <a class="dropdown-item alert alert-success @if($sysNot['read_at']){{'read'}}@endif" href="/profile">
+
+                                        {{-- System Notifications --}}
+                                        @case('App\Notifications\SystemNotification')
+                                            <a class="{{$sysNot['id']}} dropdown-item alert alert-{{$sysNot->data['color']}} @if($sysNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$sysNot->data['link'])}}">
                                                 <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
-                                                {{__('nav.pictureOk')}}
+                                                {{$sysNot->data['message']}}
                                             </a>
                                             @break
-                                        @case('App\Notifications\DeniedPicture')
-                                            <a class="dropdown-item alert alert-danger @if($sysNot['read_at']){{'read'}}@endif" href="/profile">
-                                                <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
-                                                {{__('nav.pictureDeny')}}
-                                            </a>
-                                            @break
+                                        {{-- Admin Special Notifiaction --}}
                                         @case('App\Notifications\AdminWideInfo')
                                             <a class="dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="/profile">
                                                 <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
@@ -361,27 +367,33 @@
             .notification((notification) => {
 
                 switch (notification.type.replace(/\\/g,"/")) {
-                    case 'App/Notifications/NewFriendPost':
+
+                    // User Notification 
+                    case 'App/Notifications/UserNotification':
                         updateUserNotifications()
-                        html = '<a class="dropdown-item container" href="/user/home/#post'+notification.postId+'" target="__blank">'+
+                        console.log(notification.link);
+                        console.log(notification.link.replace('-','/'));
+                        html = '<a class="dropdown-item container" href="'+notification.link.replace(/-/g,'/')+'" target="__blank">'+
                                     '<div class="row">'+
                                         '<div class="notificationImageBox col-2">'+
-                                            '<img class="notificationImage" src="/img/post-pictures/'+notification.author_image+'">'+
+                                            '<img class="notificationImage" src="/img/profile-pictures/'+notification.user_image+'">'+
                                         '</div>'+
                                         '<div class="notificationDesc col-10">'+
                                             '<div class="col-12 descTime">{{__("nav.newSysNotTime")}}</div>'+
-                                            '<div class="col-12 descBody">{{__("nav.userNot1")}} <span class="font-weight-bold">'+notification.author_name+'</span> {{__("nav.userNot2")}}</div>'+
+                                            '<div class="col-12 descBody">{{__("nav.userNot1")}} <span class="font-weight-bold">'+notification.user_name+'</span> '+notification.message+'</div>'+
                                         '</div>'+
                                    '</div>'+
                                 '</a>';
                         $('.userNotifications').prepend(html);
                         break;
+
+                    // Special Admin Notifications
                     case 'App/Notifications/NewAdminPost':
                         updateUserNotifications()
                         html = '<a class="dropdown-item container" href="/user/home/#post'+notification.postId+'" target="__blank">'+
                                     '<div class="row">'+
                                         '<div class="notificationImageBox col-2">'+
-                                            '<img class="notificationImage" src="/img/post-pictures/'+notification.author_image+'">'+
+                                            '<img class="notificationImage" src="/img/profile-pictures/'+notification.author_image+'">'+
                                         '</div>'+
                                         '<div class="notificationDesc col-10">'+
                                             '<div class="col-12 descTime">{{__("nav.newSysNotTime")}}</div>'+
@@ -390,6 +402,27 @@
                                    '</div>'+
                                 '</a>';
                         $('.userNotifications').prepend(html);
+                        break;
+
+                    // System Notification
+                    case 'App/Notifications/SystemNotification':
+                        updateSystemNotifications();
+                        html = '<a class="'+notification.id+' dropdown-item alert alert-'+notification.color+'" href="'+notification.link.replace(/-/g,'/')+'">'+
+                                        '<div class="systemNotificationDate">{{__("nav.newSysNotTime")}}</div>'+
+                                        notification.message+
+                                '</a>';
+                        $('.systemNotifications').prepend(html);
+                        break;
+                    
+                    // Special Admin Notification
+                    case 'App/Notifications/AdminWideInfo':
+                        updateSystemNotifications();
+                        html = '<a class="'+notification.id+' dropdown-item alert alert-info" href="/admin/home">'+
+                                        '<div class="systemNotificationDate">{{__("nav.newSysNotTime")}}</div>'+
+                                        '<div class="adminWideHeader">{{__("nav.adminWideInfoHeader")}}</div>'+
+                                        notification.content+
+                                '</a>';
+                        $('.systemNotifications').prepend(html);
                         break;
                     case 'App/Notifications/NewProfilePicture':
                         updateSystemNotifications();
@@ -404,31 +437,6 @@
                         html = '<a class="'+notification.id+' dropdown-item alert alert-info" href="/admin/home">'+
                                         '<div class="systemNotificationDate">{{__("nav.newSysNotTime")}}</div>'+
                                         '{{__("nav.userTicket")}}'+
-                                '</a>';
-                        $('.systemNotifications').prepend(html);
-                        break;
-                    case 'App/Notifications/AcceptedPicture':
-                        updateSystemNotifications();
-                        html = '<a class="'+notification.id+' dropdown-item alert alert-success" href="/admin/home">'+
-                                        '<div class="systemNotificationDate">{{__("nav.newSysNotTime")}}</div>'+
-                                        '{{__("nav.pictureOk")}}'+
-                                '</a>';
-                        $('.systemNotifications').prepend(html);
-                        break;
-                    case 'App/Notifications/DeniedPicture':
-                        updateSystemNotifications();
-                        html = '<a class="'+notification.id+' dropdown-item alert alert-danger" href="/admin/home">'+
-                                        '<div class="systemNotificationDate">{{__("nav.newSysNotTime")}}</div>'+
-                                        '{{__("nav.pictureDeny")}}'+
-                                '</a>';
-                        $('.systemNotifications').prepend(html);
-                        break;
-                    case 'App/Notifications/AdminWideInfo':
-                        updateSystemNotifications();
-                        html = '<a class="'+notification.id+' dropdown-item alert alert-info" href="/admin/home">'+
-                                        '<div class="systemNotificationDate">{{__("nav.newSysNotTime")}}</div>'+
-                                        '<div class="adminWideHeader">{{__("nav.adminWideInfoHeader")}}</div>'+
-                                        notification.content+
                                 '</a>';
                         $('.systemNotifications').prepend(html);
                         break;
