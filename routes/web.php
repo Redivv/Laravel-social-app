@@ -22,10 +22,12 @@ Route::get('searcher', 'SearchController@index')->name('searcher');
 Route::middleware(['verified'])->group(function () {
     Route::patch('profile', 'ProfileController@update');
     Route::get('profile/edit','ProfileController@edit')->name('ProfileEdition');
-    // Ya need to be 'verified' to do stuff with friends
-    Route::get('friends/add/{user}','FriendsController@addFriend');
-
-});
+    Route::group(['prefix'=>'friends'], function() {
+        // Ya need to be 'verified' to do stuff with friends
+        Route::get('add/{user}','FriendsController@addFriend');
+        Route::get('accept/{user}','FriendsController@acceptFriend');
+        Route::get('deny/{user}','FriendsController@denyRequest');
+});});
 
 Route::get('profile', 'ProfileController@index')->middleware('auth')->name('ProfileView');
 Route::get('profile/{user}','ProfileController@visit');

@@ -300,9 +300,37 @@
                                             @break
                                     @endswitch
                                 @endforeach
+                                
                                 <div class="dropdown-divider"></div>
                                 <a class="clearAllBtn" data-type="sysNoNot">{{__('nav.deleteAll')}}</a>
                             @endif
+                            <ul>
+                                @if($notifications['FRAmount']==0)
+
+                                @else
+                                @foreach ($notifications['FR'] as $frNot)
+                                    
+                                    <li class="row active">
+                                        <a class="col-7 dropdown-item" href="">
+                                            <div class="row">
+                                                <div class="col-2" >
+                                                    <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
+                                                </div>
+                                                <div class="col-5 friendName">
+                                                    <span>{{$frNot['name']}}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="col-5 friendOptions">
+                                            <a href="/friends/accept/{{$frNot['name']}}"><span><i class="fas fa-plus"></i></span></a>
+                                            <a href="{{route('message.read', ['name' => $frNot['name']])}}"><span><i class="far fa-comment-dots"></i></span></a>
+                                            <a href="/friends/deny/{{$frNot['name']}}"><span><i class="fas fa-times"></i></span></a>
+                                        </div>
+                                    </li>
+                                    
+                                @endforeach
+                                @endif
+                                </ul>
                         </div>
 
                     </li>

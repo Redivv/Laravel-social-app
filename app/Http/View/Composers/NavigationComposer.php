@@ -24,7 +24,30 @@ class NavigationComposer
     {
         if(Auth::check()){
             $notifications = Auth::user()->notifications()->get();
+            //creates new variable that stores pending requests (the are entries in db 'friendships', that have Auth::user()'s id in recipient_id field).
+            $friendRequests = Auth::user()->getFriendRequests();
+            //counts number of pending friendships
+            $frCount=$friendRequests->count();
+            if($frCount==0){
+                    //saves results to notifiation if no friend requests
+            $this->notifications['FR'] = $friendRequests;
+            }else{
+                //gets info on users, that sent friend request
+                for ($i=0; $i < $frCount ; $i++) { 
+                    $friend_results[$i] = User::select('name','picture')
+                        ->whereIn('id',[$friendRequests[$i]["sender_id"]])
+                        ->get();
+                        //$friend_results is some hella complexed data array, so we simplify it
+                    $friend_results[$i] = $friend_results[$i][0];
+                }
+                $this->notifications['FR'] = $friend_results;
+            }   
 
+            // dd($friend_results);
+            
+                //saves results to notifiation
+            $this->notifications['FRAmount'] = $frCount;
+                //rest of the code :v
             $this->notifications['chat'] = $threads = Talk::user(Auth::id())->getInbox();
             $this->notifications['chatAmount'] = 0;
 
