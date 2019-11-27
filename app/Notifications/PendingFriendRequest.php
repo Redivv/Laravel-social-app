@@ -33,11 +33,11 @@ class PendingFriendRequest extends Notification
         return ['database','broadcast'];
     }
 
-    /**
-     * Get the mail representation of the notification.
+        /**
+     * Get the array representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return array
      */
     public function toArray($notifiable)
     {
@@ -47,12 +47,7 @@ class PendingFriendRequest extends Notification
         ];
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
+
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([

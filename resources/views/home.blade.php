@@ -54,17 +54,7 @@
                         @include('partials.friendsList')
                     @else
                         <li class="row active">
-                            <div class="col-2 profilePicture">
-                                <img src="{{asset('img/profile-pictures/default-picture.png')}}">
-                            </div>
-                            <div class="col-5 friendName">
-                                <span>Reds</span>
-                            </div>
-                            <div class="col-5 friendOptions">
-                                <span><i class="fas fa-user-minus"></i></span>
-                                <span><i class="far fa-comment-dots"></i></span>
-                                <span><i class="fas fa-exclamation"></i></span>
-                            </div>
+                            {{__('activityWall.noFriendsToShow')}}
                         </li>
                     @endif
                 </ul>
