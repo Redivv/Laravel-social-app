@@ -1,7 +1,7 @@
 @extends('layouts.profile')
 
 @section('startform')
-    <form action="/profile" method="POST" enctype="multipart/form-data">
+    <form action="{{route('ProfileView')}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('patch')
 @endsection
@@ -50,7 +50,7 @@
 
 @section('endform')
     <button type="submit" style="margin-left:30px !important;" class="form-btn btn m-1" >{{__('profile.submit')}}</button>
-    <a href="/profile" class="form-btn btn">{{__('profile.cancel')}}</a>
+    <a href="{{route('ProfileView')}}" class="form-btn btn">{{__('profile.cancel')}}</a>
     </form>
     <hr>
 @endsection

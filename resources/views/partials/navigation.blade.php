@@ -126,7 +126,7 @@
                                         @break
                                     {{-- Admin Special Notifiaction --}}
                                     @case('App\Notifications\AdminWideInfo')
-                                        <a class="dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="/profile">
+                                        <a class="dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="{{route('ProfileView')}}">
                                             <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
                                             <div class="adminWideHeader">{{__('nav.adminWideInfoHeader')}}</div>
                                             {{$sysNot->data['content']}}
@@ -290,7 +290,7 @@
                                             @break
                                         {{-- Admin Special Notifiaction --}}
                                         @case('App\Notifications\AdminWideInfo')
-                                            <a class="dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="/profile">
+                                            <a class="dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="{{route('ProfileView')}}">
                                                 <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
                                                 <div class="adminWideHeader">{{__('nav.adminWideInfoHeader')}}</div>
                                                 {{$sysNot->data['content']}}
@@ -329,7 +329,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a href="{{ url('/profile') }}" class="dropdown-item">{{__('app.profile')}}</a>
+                            <a href="{{ route('ProfileView') }}" class="dropdown-item">{{__('app.profile')}}</a>
                             
                             @if(auth()->user()->isAdmin())
                                 <a href="{{ route('adminHome') }}" class="dropdown-item">{{__('app.adminDashboard')}}</a>

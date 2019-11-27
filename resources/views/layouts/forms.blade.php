@@ -41,7 +41,7 @@
                             </li>
                         @auth
                             <li class="nav-item">
-                                    <a href="{{ url('/profile') }}" class="nav-link">{{__('app.profile')}}</a>
+                                <a href="{{ route('ProfileView') }}" class="nav-link">{{__('app.profile')}}</a>
                             </li>
                         @endauth
                     </ul>

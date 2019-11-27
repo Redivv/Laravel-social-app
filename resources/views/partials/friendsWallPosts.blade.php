@@ -6,7 +6,7 @@
                     <img class="postAuthorPicture" src="{{asset('img/profile-pictures/'.$post->user->picture)}}">
                 </div>
                 <div class="col-9 postAuthorName">
-                    <a class="postAuthorLink" href="/profile/{{$post->user->name}}">
+                    <a class="postAuthorLink" href="{{route('ProfileView')."/".$post->user->name}}">
                         {{$post->user->name}}@if($post->user->is_admin)<small class="text-muted adminStatus">{{__('activityWall.adminStatus')}}</small>@endif
                     </a>
                 </div>
