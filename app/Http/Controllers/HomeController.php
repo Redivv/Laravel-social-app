@@ -34,10 +34,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         
         $posts = Post::orderBy('created_at', 'desc')->take(5)->get();
+
+        if ($request->ajax()) {
+            $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
+            return response()->json(['status' => 'success', 'html' => $html], 200);
+        }
 
         $userNotifications = Auth::user()->notifications()->whereIn(
             'type',
@@ -166,7 +171,7 @@ class HomeController extends Controller
                 $posts = [$post];
                 $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
                 $friends = User::whereNotIn('id',[Auth::id()])->get();
-                Notification::send($friends, new UserNotification($author, '-user-home#post'.$post->id, __('nav.userNot2')));
+                Notification::send($friends, new UserNotification($author, '-user-home#post',$post->id, __('nav.userNot2')));
                 return response()->json(['status' => 'success', 'html' => $html], 200);
             }
 
@@ -279,7 +284,7 @@ class HomeController extends Controller
                 $post->like();
 
                 if ($post->user_id != Auth::id()) {
-                    $post->user->notify(new SystemNotification(__('nav.likePostNot'),'info','-user-home#post'.$post->id));
+                    $post->user->notify(new SystemNotification(__('nav.likePostNot'),'info','-user-home#post',$post->id));
                 }
             }
 

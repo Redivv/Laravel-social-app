@@ -8,7 +8,9 @@
 </div>
 <div id="friendsWall" class="container-fluid mt-4">
     <div class="row text-center">
-        <div class="col-3"></div>
+        <div class="col-3 text-center wallExtraFunctions">
+            <span id="wallFetchBtn" class="fetchBtn" data-toggle="tooltip" data-placement="bottom" title="{{__('activityWall.refreshWall')}}"><i class="fas fa-sync"></i></span>
+        </div>
         <div class="col-6 friendsWall">
             <div class="friendsWallHeader">
                 <h3>{{__('activityWall.friendsWallHeader')}}</h3>

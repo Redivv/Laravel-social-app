@@ -16,16 +16,18 @@ class UserNotification extends Notification implements ShouldBroadcast
     public $user;
     public $link;
     public $message;
+    public $contentId;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(object $user, string $link, string $message)
+    public function __construct(object $user, string $link, $contentId, string $message)
     {
         $this->user          = $user;
         $this->link          = $link;
+        $this->contentId     = $contentId;
         $this->message       = $message;
     }
 
@@ -49,20 +51,22 @@ class UserNotification extends Notification implements ShouldBroadcast
     public function toArray($notifiable)
     {
         return [
-            'user_name'         =>$this->user->name,
-            'user_image'        =>$this->user->picture,
-            'link'              =>$this->link,
-            'message'           =>$this->message
+            'user_name'         =>  $this->user->name,
+            'user_image'        =>  $this->user->picture,
+            'link'              =>  $this->link,
+            'contentId'         =>  $this->contentId,
+            'message'           =>  $this->message,
         ];
     }
 
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'user_name'         =>$this->user->name,
-            'user_image'        =>$this->user->picture,
-            'link'              =>$this->link,
-            'message'           =>$this->message
+            'user_name'         =>  $this->user->name,
+            'user_image'        =>  $this->user->picture,
+            'link'              =>  $this->link,
+            'contentId'         =>  $this->contentId,
+            'message'           =>  $this->message
         ]);
     }
 

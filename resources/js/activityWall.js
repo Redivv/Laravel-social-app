@@ -17,6 +17,10 @@ function main() {
         pagiPosts();
     });
 
+    $('#wallFetchBtn').on('click',function() {
+        refreshWall(this);
+    })
+
     $('#addPost').emojioneArea({
         pickerPosition: "bottom",
         placeholder: "\xa0",
@@ -939,4 +943,8 @@ function pagiPosts() {
             alert(xhr.responseJSON.message);
         });
     }
+}
+
+function refreshWall(selected) {
+    $(selected).addClass('spin');
 }

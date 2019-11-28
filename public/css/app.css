@@ -17707,6 +17707,27 @@ html {
   color: #000;
 }
 
+#friendsWall .wallExtraFunctions #wallFetchBtn {
+  font-size: 1.2rem;
+  cursor: pointer;
+  position: fixed;
+}
+
+#friendsWall .wallExtraFunctions #wallFetchBtn.spin i {
+  -webkit-animation-name: spin;
+          animation-name: spin;
+  -webkit-animation-duration: 2000ms;
+          animation-duration: 2000ms;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+#friendsWall .wallExtraFunctions #wallFetchBtn:hover {
+  color: #f66103;
+}
+
 #friendsWall .friendsWall {
   text-align: left;
 }
@@ -18255,6 +18276,26 @@ html {
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+
+@-webkit-keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 html {

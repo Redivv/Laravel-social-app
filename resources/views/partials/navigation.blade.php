@@ -24,7 +24,7 @@
 
                                         {{-- User Notification --}}
                                         @case('App\Notifications\UserNotification')
-                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$userNot->data['link'])}}" target="__blank">
+                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$userNot->data['link']).$userNot->data['contentId']}}" target="__blank">
                                                 <div class="row">
                                                     <div class="notificationImageBox col-2">
                                                         <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}">
@@ -99,6 +99,7 @@
                     <div class="dropdown-menu pl-2 pr-2 systemNotifications position-absolute">
                         @if (count($notifications['system']) == 0)
                             <div class="text-center sysNoNot">{{__('nav.noNotifications')}}</div>
+                            <div class="notificationsContainer"></div>
                         @else
                             <div class="notificationsContainer">
                             @foreach ($notifications['system'] as $sysNot)
@@ -120,7 +121,7 @@
 
                                     {{-- System Notifications --}}
                                     @case('App\Notifications\SystemNotification')
-                                        <a class="{{$sysNot['id']}} dropdown-item alert alert-{{$sysNot->data['color']}} @if($sysNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$sysNot->data['link'])}}">
+                                        <a class="{{$sysNot['id']}} dropdown-item alert alert-{{$sysNot->data['color']}} @if($sysNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$sysNot->data['link']).$sysNot->data['contentId']}}">
                                             <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
                                             {{$sysNot->data['message']}}
                                         </a>
@@ -191,7 +192,7 @@
 
                                         {{-- User Notification --}}
                                         @case('App\Notifications\UserNotification')
-                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$userNot->data['link'])}}" target="__blank">
+                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$userNot->data['link']).$userNot->data['contentId']}}" target="__blank">
                                                 <div class="row">
                                                     <div class="notificationImageBox col-2">
                                                         <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}">
@@ -265,6 +266,7 @@
                         <div class="dropdown-menu systemNotifications">
                             @if (count($notifications['system']) == 0)
                                 <div class="text-center sysNoNot">{{__('nav.noNotifications')}}</div>
+                                <div class="notificationsContainer"></div>
                             @else
                             <div class="notificationsContainer">
                                 @foreach ($notifications['system'] as $sysNot)
@@ -286,7 +288,7 @@
 
                                         {{-- System Notifications --}}
                                         @case('App\Notifications\SystemNotification')
-                                            <a class="{{$sysNot['id']}} dropdown-item alert alert-{{$sysNot->data['color']}} @if($sysNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$sysNot->data['link'])}}">
+                                            <a class="{{$sysNot['id']}} dropdown-item alert alert-{{$sysNot->data['color']}} @if($sysNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$sysNot->data['link']).$sysNot->data['contentId']}}">
                                                 <div class="systemNotificationDate">{{$sysNot['created_at']->diffForHumans()}}</div>
                                                 {{$sysNot->data['message']}}
                                             </a>
@@ -375,9 +377,8 @@
                     // User Notification 
                     case 'App/Notifications/UserNotification':
                         updateUserNotifications()
-                        console.log(notification.link);
                         console.log(notification.link.replace('-','/'));
-                        html = '<a class="dropdown-item container" href="'+notification.link.replace(/-/g,'/')+'" target="__blank">'+
+                        html = '<a class="dropdown-item container" href="'+notification.link.replace(/-/g,'/')+notification.contentId+'" target="__blank">'+
                                     '<div class="row">'+
                                         '<div class="notificationImageBox col-2">'+
                                             '<img class="notificationImage" src="/img/profile-pictures/'+notification.user_image+'">'+
@@ -411,7 +412,7 @@
                     // System Notification
                     case 'App/Notifications/SystemNotification':
                         updateSystemNotifications();
-                        html = '<a class="'+notification.id+' dropdown-item alert alert-'+notification.color+'" href="'+notification.link.replace(/-/g,'/')+'">'+
+                        html = '<a class="'+notification.id+' dropdown-item alert alert-'+notification.color+'" href="'+notification.link.replace(/-/g,'/')+notification.contentId+'">'+
                                         '<div class="systemNotificationDate">{{__("nav.newSysNotTime")}}</div>'+
                                         notification.message+
                                 '</a>';
