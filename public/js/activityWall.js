@@ -192,9 +192,11 @@ function main() {
         if (response.status === 'success') {
           $('#spinner').remove();
           $('#friendsWallFeed').prepend(response.html);
+          $('.postDelete').off('click');
           $('.postDelete').on('click', function () {
             deletePost(this);
           });
+          $('.likePostButton').off('click');
           $('.likePostButton').on('click', function () {
             likePost(this);
           });
@@ -323,9 +325,11 @@ function main() {
               if (response.status === 'success') {
                 $('.spinnerOverlay').addClass('d-none');
                 $('#post' + post).parent().replaceWith(response.html);
+                $('.postDelete').off('click');
                 $('.postDelete').on('click', function () {
                   deletePost(this);
                 });
+                $('.likePostButton').off('click');
                 $('.likePostButton').on('click', function () {
                   likePost(this);
                 });
@@ -417,9 +421,11 @@ function main() {
             $('.commentDelete').on('click', function (e) {
               deleteComment(this);
             });
+            $('.likeCommentButton').off('click');
             $('.likeCommentButton').on('click', function () {
               likeComment(this);
             });
+            $('.replyButton').off('click');
             $('.replyButton').on('click', function () {
               addReplyForm(this);
             });
@@ -547,9 +553,11 @@ function getComments(selected) {
         $('.commentDelete').on('click', function (e) {
           deleteComment(this);
         });
+        $('.replyButton').off('click');
         $('.replyButton').on('click', function () {
           addReplyForm(this);
         });
+        $('.likeCommentButton').off('click');
         $('.likeCommentButton').on('click', function () {
           likeComment(this);
         });
@@ -668,12 +676,15 @@ function addComment(event, selected) {
         }
 
         $('#post' + postId).find('.postCommentsCount').html(parseInt(commentAmount) + 1);
+        $('.commentDelete').off('click');
         $('.commentDelete').on('click', function (e) {
           deleteComment(this);
         });
+        $('.likeCommentButton').off('click');
         $('.likeCommentButton').on('click', function () {
           likeComment(this);
         });
+        $('.replyButton').off('click');
         $('.replyButton').on('click', function () {
           addReplyForm(this);
         });
@@ -717,6 +728,7 @@ function loadReplies(selected) {
       $('.commentDelete').on('click', function (e) {
         deleteComment(this);
       });
+      $('.likeCommentButton').off('click');
       $('.likeCommentButton').on('click', function () {
         likeComment(this);
       });
@@ -760,9 +772,11 @@ function loadMoreComments(selected) {
       $('.commentDelete').on('click', function (e) {
         deleteComment(this);
       });
+      $('.replyButton').off('click');
       $('.replyButton').on('click', function () {
         addReplyForm(this);
       });
+      $('.likeCommentButton').off('click');
       $('.likeCommentButton').on('click', function () {
         likeComment(this);
       });

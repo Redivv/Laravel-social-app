@@ -116,17 +116,18 @@ function main() {
                 if (response.status === 'success') {
                     $('#spinner').remove();
                     $('#friendsWallFeed').prepend(response.html);
-                    
+
+                    $('.postDelete').off('click');
                     $('.postDelete').on('click',function(){
                         deletePost(this);
                     });
 
+                    $('.likePostButton').off('click');
                     $('.likePostButton').on('click',function() {
                         likePost(this);
                     });
 
                     $('.commentsForm').off('submit');
-
                     $('.commentsForm').on('submit',function(e){
                         addComment(e,this);
                     });
@@ -276,16 +277,17 @@ function main() {
                                 $('.spinnerOverlay').addClass('d-none'); 
                                 $('#post'+post).parent().replaceWith(response.html);
 
+                                $('.postDelete').off('click');
                                 $('.postDelete').on('click',function(){
                                     deletePost(this);
                                 });
 
+                                $('.likePostButton').off('click');
                                 $('.likePostButton').on('click',function() {
                                     likePost(this);
                                 });
 
                                 $('.commentsForm').off('submit');
-
                                 $('.commentsForm').on('submit',function(e){
                                     addComment(e,this);
                                 });
@@ -390,10 +392,12 @@ function main() {
                             deleteComment(this);
                         });
     
+                        $('.likeCommentButton').off('click');
                         $('.likeCommentButton').on('click',function() {
                             likeComment(this);
-                        })
-                        
+                        });
+
+                        $('.replyButton').off('click');
                         $('.replyButton').on('click',function() {
                             addReplyForm(this);
                         });
@@ -538,10 +542,12 @@ function getComments(selected) {
                         deleteComment(this);
                     });
 
+                    $('.replyButton').off('click');
                     $('.replyButton').on('click',function() {
                         addReplyForm(this);
                     });
 
+                    $('.likeCommentButton').off('click');
                     $('.likeCommentButton').on('click',function() {
                         likeComment(this);
                     });
@@ -633,10 +639,11 @@ function addReplyForm(selected) {
                 if (response.status === 'success') {
                     $('.ajaxSpinner').remove();
                     $('#com-'+parentId).next().prepend(response.html);
+
                     $('.commentDelete').off('click');
                     $('.commentDelete').on('click',function(e) {
                         deleteComment(this);
-                    })
+                    });
                 }
             });
             
@@ -694,14 +701,17 @@ function addComment(event, selected) {
                     }
                     $('#post'+postId).find('.postCommentsCount').html(parseInt(commentAmount)+1);
 
+                    $('.commentDelete').off('click');
                     $('.commentDelete').on('click',function(e) {
                         deleteComment(this);
                     });
 
+                    $('.likeCommentButton').off('click');
                     $('.likeCommentButton').on('click',function() {
                         likeComment(this);
                     })
                     
+                    $('.replyButton').off('click');
                     $('.replyButton').on('click',function() {
                         addReplyForm(this);
                     });
@@ -757,12 +767,12 @@ function loadReplies(selected) {
                 deleteComment(this);
             });
 
+            $('.likeCommentButton').off('click');
             $('.likeCommentButton').on('click',function() {
                 likeComment(this);
             });
 
             $('.repliesMoreBtn').off('click');
-
             $('.repliesMoreBtn').on('click',function() {
                 loadReplies(this);
             });
@@ -814,10 +824,12 @@ function loadMoreComments(selected) {
                 deleteComment(this);
             });
 
+            $('.replyButton').off('click');
             $('.replyButton').on('click',function() {
                 addReplyForm(this);
             });
 
+            $('.likeCommentButton').off('click');
             $('.likeCommentButton').on('click',function() {
                 likeComment(this);
             });
