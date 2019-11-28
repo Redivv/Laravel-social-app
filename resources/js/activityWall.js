@@ -32,10 +32,6 @@ function main() {
         placeholder: "\xa0",
         autocomplete: false,
     });
-
-    $('.likePostButton').on('click',function() {
-        likePost(this);
-    });
    
     $('#postPicture').change(function(evt){
         var files = evt.target.files; // FileList object
@@ -334,6 +330,18 @@ function main() {
         $(this).find('.modal-body').html('');
     });
 
+    $('.postDelete').on('click',function(){
+        deletePost(this);
+    });
+
+    $('.likePostButton').on('click',function() {
+        likePost(this);
+    });
+
+    $('.btnComment').one('click',function() {
+        getComments(this);
+    });
+
     $('#commentEditModal').on('show.bs.modal', function (event) {
         let button      = $(event.relatedTarget);
         let commentId   = button.data('id');
@@ -402,18 +410,6 @@ function main() {
             }
         });
 
-    });
-
-    $('.postDelete').on('click',function(){
-        deletePost(this);
-    });
-
-    $('.btnComment').one('click',function() {
-        getComments(this);
-    });
-
-    $('.commentsForm').on('submit',function(e){
-        addComment(e,this);
     });
 }
 
@@ -484,6 +480,10 @@ function deleteComment(selected) {
 }
 
 function getComments(selected) {
+
+        $('.commentsForm').on('submit',function(e){
+            addComment(e,this);
+        });
     
         let pagi = $(selected).data('pagi');
         let postId = $(selected).data('id');
@@ -947,4 +947,39 @@ function pagiPosts() {
 
 function refreshWall(selected) {
     $(selected).addClass('spin');
+
+    let url = baseUrl+"/user/home";
+
+    var request = $.ajax({
+        method : 'get',
+        url: url,
+    });
+    
+    
+    request.done(function(response){
+        if (response.status === 'success') {
+            $(selected).removeClass('spin');
+            $('#friendsWallFeed').html(response.html);
+
+            $('.postDelete').off('click');
+            $('.postDelete').on('click',function(){
+                deletePost(this);
+            });
+        
+            $('.likePostButton').off('click');
+            $('.likePostButton').on('click',function() {
+                likePost(this);
+            });
+
+            $('.btnComment').off('click');
+            $('.btnComment').one('click',function() {
+                getComments(this);
+            });
+        }
+    });
+    
+    
+    request.fail(function (xhr){
+        alert(xhr.responseJSON.message);
+    });
 }
