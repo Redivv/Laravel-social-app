@@ -76,7 +76,7 @@ class CommentController extends Controller
                 $newComment->save();
 
                 if ($parentComment->author_id != Auth::id()) {
-                    $parentComment->user->notify(new SystemNotification(__('nav.replyNot'),'info','-user-home#post',$parentComment->post_id));
+                    $parentComment->user->notify(new SystemNotification(__('nav.replyNot'),'info','_user_home#com-',$parentComment->id, 'newRep'));
                 }
 
                 $html = view('partials.ajaxWallReply')->withComment($newComment)->render();
@@ -88,7 +88,7 @@ class CommentController extends Controller
                 $newComment->save();
 
                 if ($post->user_id != Auth::id()) {
-                    $post->user->notify(new SystemNotification(__('nav.commentNot'),'info','-user-home#post',$post->id));
+                    $post->user->notify(new SystemNotification(__('nav.commentNot'),'info','_user_home#post',$newComment->post->id, 'newCom'));
                 }
 
                 $html = view('partials.ajaxWallComment')->withComments([$newComment])->render();
@@ -149,7 +149,7 @@ class CommentController extends Controller
                 $comment->like();
 
                 if ($comment->author_id != Auth::id()) {
-                    $comment->user->notify(new SystemNotification(__('nav.likeComNot'),'info','-user-home#post',$comment->post->id));
+                    $comment->user->notify(new SystemNotification(__('nav.likeComNot'),'info','_user_home#com-',$comment->id, 'likeCom'));
                 }
             }
 

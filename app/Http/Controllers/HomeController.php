@@ -171,7 +171,7 @@ class HomeController extends Controller
                 $posts = [$post];
                 $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
                 $friends = User::whereNotIn('id',[Auth::id()])->get();
-                Notification::send($friends, new UserNotification($author, '-user-home#post',$post->id, __('nav.userNot2')));
+                Notification::send($friends, new UserNotification($author, '_user_home#post',$post->id, __('nav.userNot2'), 'newPost'));
                 return response()->json(['status' => 'success', 'html' => $html], 200);
             }
 
@@ -284,7 +284,7 @@ class HomeController extends Controller
                 $post->like();
 
                 if ($post->user_id != Auth::id()) {
-                    $post->user->notify(new SystemNotification(__('nav.likePostNot'),'info','-user-home#post',$post->id));
+                    $post->user->notify(new SystemNotification(__('nav.likePostNot'),'info','_user_home#post',$post->id, 'likePost'));
                 }
             }
 

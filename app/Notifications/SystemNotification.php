@@ -16,18 +16,20 @@ class SystemNotification extends Notification implements ShouldBroadcast
     public $color;
     public $link;
     public $contentId;
+    public $action;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(string $message,string $color,string $link, $contentId)
+    public function __construct(string $message,string $color,string $link, $contentId, string $action)
     {
         $this->message      = $message;
         $this->color        = $color;
         $this->link         = $link;
         $this->contentId    = $contentId;
+        $this->action       = $action;
     }
 
     /**
@@ -53,7 +55,8 @@ class SystemNotification extends Notification implements ShouldBroadcast
             'message'       => $this->message,
             'color'         => $this->color,
             'link'          => $this->link,
-            'contentId'     => $this->contentId
+            'contentId'     => $this->contentId,
+            'action'        => $this->action
         ];
     }
 
@@ -63,7 +66,8 @@ class SystemNotification extends Notification implements ShouldBroadcast
             'message'       => $this->message,
             'color'         => $this->color,
             'link'          => $this->link,
-            'contentId'     => $this->contentId
+            'contentId'     => $this->contentId,
+            'action'        => $this->action
         ]);
     }
 }

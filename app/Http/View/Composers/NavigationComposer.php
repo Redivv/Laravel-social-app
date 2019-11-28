@@ -13,6 +13,7 @@ use Nahid\Talk\Facades\Talk;
 class NavigationComposer
 {   
     protected $notifications;
+    protected $systemDuplicatesAmount;
 
     /**
      * Create a new profile composer.
@@ -64,10 +65,30 @@ class NavigationComposer
                 }
             }
 
+            $systemDuplicatesAmount = array();
+            $duplicateNot = array();
+            $duplicateCount = 1;
+
+
+            foreach ($this->notifications['system'] as $key => $sysNot) {
+                if (in_array($sysNot->data['action'].$sysNot->data['contentId'],$duplicateNot)) {
+                    $duplicateCount++;
+                    if ($sysNot->type != "App\Notifications\AdminWideInfo") {
+                        unset($this->notifications["system"][$key]);
+                    }
+                }else{
+                    $duplicateNot[] = $sysNot->data['action'].$sysNot->data['contentId'];
+                    $systemDuplicatesAmount[] = $duplicateCount;
+                    $duplicateCount = 1;
+                }
+            }
+            $systemDuplicatesAmount[] = $duplicateCount;
+            unset($systemDuplicatesAmount[0]);
+            $this->systemDuplicatesAmount = array_values($systemDuplicatesAmount);
+
         }else{
             $this->notifications = null;
         }
-        // dd($this->notifications);
     }
 
     /**
@@ -77,7 +98,7 @@ class NavigationComposer
      * @return void
      */
     public function compose(View $view)
-    {   
-        $view->with('notifications', $this->notifications);
+    {  
+        $view->with('notifications')->withNotifications($this->notifications)->withSystemDuplicates($this->systemDuplicatesAmount);
     }
 }

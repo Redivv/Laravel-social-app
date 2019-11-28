@@ -127,7 +127,6 @@ function main() {
   });
   $('a.clearAllBtn').one('click', function () {
     var type = $(this).data('type');
-    alert(type);
     var html = '<div class="text-center ' + type + '">' + noNotifications + '</div><div class="notificationsContainer"></div>';
     $('.systemNotifications').html(html);
     var url = baseUrl + '/user/deleteNotifications';

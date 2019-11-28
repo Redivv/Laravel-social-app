@@ -35,7 +35,6 @@ function main() {
 
     $('a.clearAllBtn').one('click',function() {
         let type= $(this).data('type');
-        alert(type);
         let html = '<div class="text-center '+type+'">'+noNotifications+'</div><div class="notificationsContainer"></div>';
         $('.systemNotifications').html(html);
 

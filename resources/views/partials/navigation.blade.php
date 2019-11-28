@@ -24,7 +24,7 @@
 
                                         {{-- User Notification --}}
                                         @case('App\Notifications\UserNotification')
-                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$userNot->data['link']).$userNot->data['contentId']}}" target="__blank">
+                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('_','/',$userNot->data['link']).$userNot->data['contentId']}}" target="__blank">
                                                 <div class="row">
                                                     <div class="notificationImageBox col-2">
                                                         <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}">
@@ -102,7 +102,7 @@
                             <div class="notificationsContainer"></div>
                         @else
                             <div class="notificationsContainer">
-                            @foreach ($notifications['system'] as $sysNot)
+                            @foreach ($notifications['system'] as $key => $sysNot)
                                 @switch($sysNot['type'])
 
                                     {{-- Admin Tickets --}}
@@ -110,7 +110,7 @@
                                         <a class="{{$sysNot['id']}} newPictureNot dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="/admin/home">
                                             <div class="row systemNotificationDate">
                                                 <div class="col-6 text-left">{{$sysNot['created_at']->diffForHumans()}}</div>
-                                                <div class="col-6 text-right"><span class="systemNotificationAmountPicture badge ">4</span></div>
+                                                <div class="col-6 text-right"><span class="systemNotificationAmountPicture badge ">@if($systemDuplicates[$key] > 1){{$systemDuplicates[$key]}}@endif</span></div>
                                             </div>
                                             {{__('nav.pictureTicket')}}
                                         </a>
@@ -119,7 +119,7 @@
                                         <a class="{{$sysNot['id']}} userFlaggedNot dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="/admin/home">
                                             <div class="row systemNotificationDate">
                                                 <div class="col-6 text-left">{{$sysNot['created_at']->diffForHumans()}}</div>
-                                                <div class="col-6 text-right"><span class="systemNotificationAmountUser badge ">4</span></div>
+                                                <div class="col-6 text-right"><span class="systemNotificationAmountUser badge ">@if($systemDuplicates[$key] > 1){{$systemDuplicates[$key]}}@endif</span></div>
                                             </div>
                                             {{__('nav.userTicket')}}
                                         </a>
@@ -127,10 +127,10 @@
 
                                     {{-- System Notifications --}}
                                     @case('App\Notifications\SystemNotification')
-                                        <a class="{{$sysNot['id']}} content-{{$sysNot->data['contentId']}} dropdown-item alert alert-{{$sysNot->data['color']}} @if($sysNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$sysNot->data['link']).$sysNot->data['contentId']}}">
+                                        <a class="{{$sysNot['id']}} {{$sysNot->data['action']}}{{$sysNot->data['contentId']}} dropdown-item alert alert-{{$sysNot->data['color']}} @if($sysNot['read_at']){{'read'}}@endif" href="{{str_replace('_','/',$sysNot->data['link']).$sysNot->data['contentId']}}">
                                             <div class="row systemNotificationDate">
                                                 <div class="col-6 text-left">{{$sysNot['created_at']->diffForHumans()}}</div>
-                                                <div class="col-6 text-right"><span class="systemNotificationAmount{{$sysNot->data['contentId']}} badge ">4</span></div>
+                                                <div class="col-6 text-right"><span class="{{$sysNot->data['action']}}{{$sysNot->data['contentId']}}Amount badge ">@if($systemDuplicates[$key] > 1){{$systemDuplicates[$key]}}@endif</span></div>
                                             </div>
                                             {{$sysNot->data['message']}}
                                         </a>
@@ -201,7 +201,7 @@
 
                                         {{-- User Notification --}}
                                         @case('App\Notifications\UserNotification')
-                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$userNot->data['link']).$userNot->data['contentId']}}" target="__blank">
+                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('_','/',$userNot->data['link']).$userNot->data['contentId']}}" target="__blank">
                                                 <div class="row">
                                                     <div class="notificationImageBox col-2">
                                                         <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}">
@@ -278,7 +278,7 @@
                                 <div class="notificationsContainer"></div>
                             @else
                             <div class="notificationsContainer">
-                                @foreach ($notifications['system'] as $sysNot)
+                                @foreach ($notifications['system'] as $key => $sysNot)
                                     @switch($sysNot['type'])
 
                                         {{-- Admin Tickets --}}
@@ -286,7 +286,7 @@
                                             <a class="{{$sysNot['id']}} newPictureNot dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="/admin/home">
                                                 <div class="row systemNotificationDate">
                                                     <div class="col-6 text-left">{{$sysNot['created_at']->diffForHumans()}}</div>
-                                                    <div class="col-6 text-right"><span class="systemNotificationAmountPicture badge ">4</span></div>
+                                                    <div class="col-6 text-right"><span class="systemNotificationAmountPicture badge ">@if($systemDuplicates[$key] > 1){{$systemDuplicates[$key]}}@endif</span></div>
                                                 </div>
                                                 {{__('nav.pictureTicket')}}
                                             </a>
@@ -295,7 +295,7 @@
                                             <a class="{{$sysNot['id']}} userFlaggedNot dropdown-item alert alert-info @if($sysNot['read_at']){{'read'}}@endif" href="/admin/home">
                                                 <div class="row systemNotificationDate">
                                                     <div class="col-6 text-left">{{$sysNot['created_at']->diffForHumans()}}</div>
-                                                    <div class="col-6 text-right"><span class="systemNotificationAmountUser badge">4</span></div>
+                                                    <div class="col-6 text-right"><span class="systemNotificationAmountUser badge">@if($systemDuplicates[$key] > 1){{$systemDuplicates[$key]}}@endif</span></div>
                                                 </div>
                                                 {{__('nav.userTicket')}}
                                             </a>
@@ -303,10 +303,10 @@
 
                                         {{-- System Notifications --}}
                                         @case('App\Notifications\SystemNotification')
-                                            <a class="{{$sysNot['id']}} content-{{$sysNot->data['contentId']}} dropdown-item alert alert-{{$sysNot->data['color']}} @if($sysNot['read_at']){{'read'}}@endif" href="{{str_replace('-','/',$sysNot->data['link']).$sysNot->data['contentId']}}">
+                                            <a class="{{$sysNot['id']}} {{$sysNot->data['action']}}{{$sysNot->data['contentId']}} dropdown-item alert alert-{{$sysNot->data['color']}} @if($sysNot['read_at']){{'read'}}@endif" href="{{str_replace('_','/',$sysNot->data['link']).$sysNot->data['contentId']}}">
                                                 <div class="row systemNotificationDate">
                                                     <div class="col-6 text-left">{{$sysNot['created_at']->diffForHumans()}}</div>
-                                                    <div class="col-6 text-right"><span class="systemNotificationAmount{{$sysNot->data['contentId']}} badge ">4</span></div>
+                                                    <div class="col-6 text-right"><span class="{{$sysNot->data['action']}}{{$sysNot->data['contentId']}}Amount badge ">@if($systemDuplicates[$key] > 1){{$systemDuplicates[$key]}}@endif</span></div>
                                                 </div>
                                                 {{$sysNot->data['message']}}
                                             </a>
@@ -396,7 +396,7 @@
                     case 'App/Notifications/UserNotification':
                         updateUserNotifications()
                         console.log(notification.link.replace('-','/'));
-                        html = '<a class="dropdown-item container" href="'+notification.link.replace(/-/g,'/')+notification.contentId+'" target="__blank">'+
+                        html = '<a class="dropdown-item container" href="'+notification.link.replace(/_/g,'/')+notification.contentId+'" target="__blank">'+
                                     '<div class="row">'+
                                         '<div class="notificationImageBox col-2">'+
                                             '<img class="notificationImage" src="/img/profile-pictures/'+notification.user_image+'">'+
@@ -430,16 +430,16 @@
                     // System Notification
                     case 'App/Notifications/SystemNotification':
                         updateSystemNotifications();
-                        if ($('.content-'+notification.contentId+':first').length) {
-                            $('.content-'+notification.contentId).removeClass('read');
-                            let amount = $('.content-'+notification.contentId+':first').find('.systemNotificationAmount'+notification.contentId).text().trim();
+                        if ($('.'+notification.action+notification.contentId+':first').length) {
+                            $('.'+notification.action+notification.contentId).removeClass('read');
+                            let amount = $('.'+notification.action+notification.contentId+':first').find('.'+notification.action+notification.contentId+'Amount').text().trim();
                             if (amount == "") {
                                 amount = 1;
                             }
-                            $('.systemNotificationAmount'+notification.contentId).html(parseInt(amount)+1);
+                            $('.'+notification.action+notification.contentId+'Amount').html(parseInt(amount)+1);
                         }else{
 
-                            html = '<a class="'+notification.id+' content-'+notification.contentId+' dropdown-item alert alert-'+notification.color+'" href="'+notification.link.replace(/-/g,'/')+notification.contentId+'">'+
+                            html = '<a class="'+notification.id+' content-'+notification.contentId+' dropdown-item alert alert-'+notification.color+'" href="'+notification.link.replace(/_/g,'/')+notification.contentId+'">'+
                                         '<div class="row systemNotificationDate">'+
                                             '<div class="col-6 text-left">{{__("nav.newSysNotTime")}}</div>'+
                                             '<div class="col-6 text-right"><span class="systemNotificationAmount'+notification.contentId+' badge badge-light"></span></div>'+
@@ -509,7 +509,6 @@
             Echo.private(`seen.` + window.Laravel.user)
 
                 .listen('MessagesWereSeen', (e) => {
-                    alert('kek');
                     $('.chat-'+e.conversation_id+'>.descBody').append('<i class="fas fa-reply"></i>');
                 });
 
