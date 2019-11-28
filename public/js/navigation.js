@@ -102,7 +102,7 @@ function main() {
     var type = $(this).data('type');
     $('.' + type + 'Count').html('');
     $(this).parent().one('hidden.bs.dropdown', function () {
-      $('.' + type + '>.dropdown-item').addClass('read');
+      $('.' + type).find('.dropdown-item').addClass('read');
     });
 
     if (type !== "chatNotifications") {
@@ -127,8 +127,9 @@ function main() {
   });
   $('a.clearAllBtn').one('click', function () {
     var type = $(this).data('type');
-    var html = '<div class="text-center ' + type + '">' + noNotifications + '</div>';
-    $(this).parent().html(html);
+    alert(type);
+    var html = '<div class="text-center ' + type + '">' + noNotifications + '</div><div class="notificationsContainer"></div>';
+    $('.systemNotifications').html(html);
     var url = baseUrl + '/user/deleteNotifications';
     var request = $.ajax({
       method: 'post',

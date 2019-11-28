@@ -142,6 +142,13 @@ body{
         }
         .systemNotificationDate{
             @include font-size(0.6rem);
+            .badge{
+                color: $white;
+                background-color: $orange;
+                padding: 0.25rem 0.4rem;
+                border-radius: 50%;
+                @include font-size(0.75rem);
+            }
         }
         .read{
             background-color: $grey;
@@ -149,6 +156,11 @@ body{
             border-color: darkgrey;
             &:hover{
                 background-color: $dark-grey;
+            }
+            .systemNotificationDate{
+                .badge{
+                    @extend .badge-light;
+                }
             }
         }
         .adminWideHeader{

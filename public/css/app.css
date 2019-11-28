@@ -5860,19 +5860,24 @@ a.badge-danger.focus {
   box-shadow: 0 0 0 0.2rem rgba(227, 52, 47, 0.5);
 }
 
-.badge-light {
+.badge-light,
+.nav-bar-height .systemNotifications .read .systemNotificationDate .badge {
   color: #212529;
   background-color: #f8f9fa;
 }
 
 a.badge-light:hover,
-a.badge-light:focus {
+.nav-bar-height .systemNotifications .read .systemNotificationDate a.badge:hover,
+a.badge-light:focus,
+.nav-bar-height .systemNotifications .read .systemNotificationDate a.badge:focus {
   color: #212529;
   background-color: #dae0e5;
 }
 
 a.badge-light:focus,
-a.badge-light.focus {
+.nav-bar-height .systemNotifications .read .systemNotificationDate a.badge:focus,
+a.badge-light.focus,
+.nav-bar-height .systemNotifications .read .systemNotificationDate a.focus.badge {
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5);
 }
@@ -17475,6 +17480,14 @@ body {
 
 .nav-bar-height .systemNotifications .systemNotificationDate {
   font-size: 0.6rem;
+}
+
+.nav-bar-height .systemNotifications .systemNotificationDate .badge {
+  color: #ffffff;
+  background-color: #f66103;
+  padding: 0.25rem 0.4rem;
+  border-radius: 50%;
+  font-size: 0.75rem;
 }
 
 .nav-bar-height .systemNotifications .read {
