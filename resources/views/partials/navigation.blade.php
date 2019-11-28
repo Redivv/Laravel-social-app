@@ -439,10 +439,10 @@
                             $('.'+notification.action+notification.contentId+'Amount').html(parseInt(amount)+1);
                         }else{
 
-                            html = '<a class="'+notification.id+' content-'+notification.contentId+' dropdown-item alert alert-'+notification.color+'" href="'+notification.link.replace(/_/g,'/')+notification.contentId+'">'+
+                            html = '<a class="'+notification.id+' '+notification.action+notification.contentId+' dropdown-item alert alert-'+notification.color+'" href="'+notification.link.replace(/_/g,'/')+notification.contentId+'">'+
                                         '<div class="row systemNotificationDate">'+
                                             '<div class="col-6 text-left">{{__("nav.newSysNotTime")}}</div>'+
-                                            '<div class="col-6 text-right"><span class="systemNotificationAmount'+notification.contentId+' badge badge-light"></span></div>'+
+                                            '<div class="col-6 text-right"><span class="'+notification.action+notification.contentId+'Amount badge badge-light"></span></div>'+
                                         '</div>'+
                                         notification.message+
                                     '</a>';
