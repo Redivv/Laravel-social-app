@@ -17936,12 +17936,13 @@ html {
   font-size: 1.1rem;
 }
 
-#friendsWall .friendsList .friendsListBox ul li .friendOptions span {
+#friendsWall .friendsList .friendsListBox ul li .friendOptions span a {
   margin: 0 0.5rem;
   cursor: pointer;
+  color: #000;
 }
 
-#friendsWall .friendsList .friendsListBox ul li .friendOptions span:hover {
+#friendsWall .friendsList .friendsListBox ul li .friendOptions span a:hover {
   color: #f66103;
 }
 
