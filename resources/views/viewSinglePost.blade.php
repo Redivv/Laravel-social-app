@@ -1,11 +1,5 @@
 @extends('layouts.app')
 
-@section('floatingPopUps')
-    <div id="wallFetchBtn" class="newPostsBox d-none">
-        <span class="fetchBtn">{{__('activityWall.refreshWall')}}</span>
-    </div>
-@endsection
-
 @section('content')
 <div class="spinnerOverlay d-none">
     <div class="spinner-border text-warning" role="status">
@@ -18,29 +12,11 @@
         <div class="col-3 text-center wallExtraFunctions">
         </div>
         <div class="col-6 friendsWall">
-            <div class="friendsWallHeader">
-                <h3>{{__('activityWall.friendsWallHeader')}}</h3>
-            </div>
-            <form id="wallPost" method="post">
-                <output id="picture-preview"></output>
-                <textarea id="addPost" name="postDesc"></textarea>
-                <div class="friendsWallButtons">
-                    <span class="additionalButton" data-toggle="tooltip" data-placement="bottom" title="{{__('activityWall.tagUser')}}"><i class="fas fa-user-tag"></i></span>
-                    <label for="postPicture" class="additionalButton" data-toggle="tooltip" data-placement="bottom" title="{{__('activityWall.addImage')}}"><i class="far fa-image"></i></label>
-                    <input type="file" class="d-none" name="postPicture[]" accept="image/*" id="postPicture" multiple>
-                </div>
-                <div class="friendsWallSendButton">
-                    <button name="sendPost" id="newPostButton" type="submit" class="btn btn-block">{{__('activityWall.createPost')}}</button>
-                </div>
-            </form>
             <output id="friendsWallFeed" class="">
-                @if (count($posts) > 0)
-                    @include('partials.friendsWallPosts')
-                @else
-                    <div class="noContent">{{__('activityWall.noContent')}}</div>
-                @endif
+                @include('partials.wallSinglePost')
             </output>
         </div>
+
         <div class="col-3 friendsList">
             <div class="friendsListHeader">
                 <h3>{{__('activityWall.friendsListHeader')}}</h3>
@@ -85,7 +61,7 @@
 </script>
 
 <script src="{{asset('js/emoji.js')}}"></script>
-<script src="{{asset('js/activityWall.js')}}"></script>
+<script src="{{asset('js/singlePost.js')}}"></script>
 
 <script defer>
     Echo.join('online')

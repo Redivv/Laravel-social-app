@@ -10,5 +10,6 @@
     "/js/navigation.js": "/js/navigation.js",
     "/js/profile.js": "/js/profile.js",
     "/js/register.js": "/js/register.js",
-    "/js/searcher.js": "/js/searcher.js"
+    "/js/searcher.js": "/js/searcher.js",
+    "/js/singlePost.js": "/js/singlePost.js"
 }

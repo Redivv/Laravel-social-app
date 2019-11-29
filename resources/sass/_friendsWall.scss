@@ -1,22 +1,22 @@
-#friendsWall{
-    .wallExtraFunctions{
-        #wallFetchBtn{
-            @include font-size(1.2rem);
-            cursor: pointer;
-            position: fixed;
-            &.spin{
-                i{
-                    animation-name: spin;
-                    animation-duration: 2000ms;
-                    animation-iteration-count: infinite;
-                    animation-timing-function: linear;
-                }
-            }
-            &:hover{
-                color: $orange;
-            }
-        }
+#wallFetchBtn{
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    text-align: center;
+    margin-top: 10vh;
+    span{
+        @include font-size(1.2rem);
+        padding: 0.8rem;
+        border-radius: 50px;
+        letter-spacing: 1px;
+        font-weight: bold;
+        cursor: pointer;
+        color: $white;
+        background-color: $orange;
     }
+}
+
+#friendsWall{
     .friendsWall{
         text-align: left;
         .friendsWallHeader{
@@ -458,16 +458,5 @@
                 letter-spacing: 2px;
             }
         }
-    }
-}
-
-// Animations
-
-@keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
     }
 }

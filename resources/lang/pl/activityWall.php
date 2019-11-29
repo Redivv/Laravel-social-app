@@ -18,5 +18,5 @@ return [
     'emptyComment'      => 'Nie możesz wysłać pustego komentarza',
     'moreReplies'       => 'Pokaż Więcej Odpowiedzi',
     'moreComments'      => 'Pokaż Więcej Komentarzy',
-    'refreshWall'       => 'Odśwież tablicę'
+    'refreshWall'       => 'Nowe Posty'
 ];

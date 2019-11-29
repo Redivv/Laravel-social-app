@@ -25,6 +25,7 @@
     </head>
     <body class="pb-5">
         @include('partials.navigation')
+        @yield('floatingPopUps')
         <main>
             @yield('content')
         </main>

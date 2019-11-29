@@ -17720,25 +17720,23 @@ html {
   color: #000;
 }
 
-#friendsWall .wallExtraFunctions #wallFetchBtn {
-  font-size: 1.2rem;
-  cursor: pointer;
+#wallFetchBtn {
+  width: 100%;
   position: fixed;
+  z-index: 1000;
+  text-align: center;
+  margin-top: 10vh;
 }
 
-#friendsWall .wallExtraFunctions #wallFetchBtn.spin i {
-  -webkit-animation-name: spin;
-          animation-name: spin;
-  -webkit-animation-duration: 2000ms;
-          animation-duration: 2000ms;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
-}
-
-#friendsWall .wallExtraFunctions #wallFetchBtn:hover {
-  color: #f66103;
+#wallFetchBtn span {
+  font-size: 1.2rem;
+  padding: 0.8rem;
+  border-radius: 50px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #f66103;
 }
 
 #friendsWall .friendsWall {
@@ -18289,26 +18287,6 @@ html {
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 2px;
-}
-
-@-webkit-keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 html {

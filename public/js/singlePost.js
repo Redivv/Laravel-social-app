@@ -81,20 +81,18 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/activityWall.js":
-/*!**************************************!*\
-  !*** ./resources/js/activityWall.js ***!
-  \**************************************/
+/***/ "./resources/js/singlePost.js":
+/*!************************************!*\
+  !*** ./resources/js/singlePost.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var pagi = 0;
-var pagiReply = 0;
 $(document).ready(function () {
   $('[data-toggle="tooltip"]').tooltip();
   $.ajaxSetup({
@@ -106,127 +104,23 @@ $(document).ready(function () {
 });
 
 function main() {
-  $(window).on('scroll', function () {
-    pagiPosts();
-  });
-  $('#wallFetchBtn').on('click', function () {
-    refreshWall(this);
-  });
-  $('#addPost').emojioneArea({
-    pickerPosition: "bottom",
-    placeholder: "\xa0",
-    buttonTitle: ""
-  });
   $('#editPostDesc').emojioneArea({
     pickerPosition: "top",
     placeholder: "\xa0",
     autocomplete: false
   });
-  $('#postPicture').change(function (evt) {
-    var files = evt.target.files; // FileList object
-    // Empty the preview list
-
-    $('#picture-preview').empty();
-    var html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt"></i></div>';
-    $('#picture-preview').append(html);
-    var tag = $(this);
-    $('.resetPicture').one('click', function () {
-      if (confirm(resetImgMsg)) {
-        tag.val("");
-        $('#picture-preview').empty();
-      }
-    }); // Loop through the FileList and render image files as thumbnails.
-
-    for (var i = 0, f; f = files[i]; i++) {
-      // Only process image files.
-      if (!f.type.match('image.*')) {
-        $(this).val("");
-        alert(badFileType);
-        $('#picture-preview').empty();
-        break;
-      }
-
-      var reader = new FileReader(); // Closure to capture the file information.
-
-      reader.onload = function (theFile) {
-        return function (e) {
-          // Render thumbnail.
-          var span = document.createElement('span');
-          span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
-          $('#picture-preview').append(span, null);
-          $('.emojionearea-editor').focus();
-        };
-      }(f); // Read in the image file as a data URL.
-
-
-      reader.readAsDataURL(f);
-    }
-  });
-  $('#wallPost').on('submit', function (e) {
-    e.preventDefault();
-
-    if ($('#postPicture').val() || $('#addPost').val()) {
-      var url = baseUrl + "/user/ajax/newPost";
-      var tag = $(this);
-      $(document).one("ajaxSend", function () {
-        tag[0].reset();
-        $('.emojionearea-editor').empty();
-        $('#picture-preview').empty();
-        var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
-
-        if ($('.noContent').length) {
-          $('.noContent').remove();
+  $('.commentsDesc').emojioneArea({
+    pickerPosition: "top",
+    placeholder: "Napisz Komentarz",
+    inline: false,
+    events: {
+      keypress: function keypress(editor, e) {
+        if (e.keyCode == 13 || e.which == 13) {
+          e.preventDefault();
+          editor.parent().prev().val(this.getText());
+          editor.parent().prev().parent().submit();
         }
-
-        $('#friendsWallFeed').prepend(html);
-      });
-      var request = $.ajax({
-        method: "post",
-        url: url,
-        enctype: 'multipart/form-data',
-        processData: false,
-        contentType: false,
-        data: new FormData(this)
-      });
-      request.done(function (response) {
-        if (response.status === 'success') {
-          $('#spinner').remove();
-          $('#friendsWallFeed').prepend(response.html);
-          $('.postDelete').off('click');
-          $('.postDelete').on('click', function () {
-            deletePost(this);
-          });
-          $('.likePostButton').off('click');
-          $('.likePostButton').on('click', function () {
-            likePost(this);
-          });
-          $('.commentsForm').off('submit');
-          $('.commentsForm').on('submit', function (e) {
-            addComment(e, this);
-          });
-          $('.btnComment').one('click', function () {
-            $('.commentsDesc:first').emojioneArea({
-              pickerPosition: "top",
-              placeholder: "Napisz Komentarz",
-              inline: false,
-              events: {
-                keypress: function keypress(editor, e) {
-                  if (e.keyCode == 13 || e.which == 13) {
-                    e.preventDefault();
-                    editor.parent().prev().val(this.getText());
-                    editor.parent().prev().parent().submit();
-                  }
-                }
-              }
-            });
-            getComments(this);
-          });
-        }
-      });
-      request.fail(function (xhr) {
-        alert(xhr.responseJSON.message);
-        $('#spinner').remove();
-      });
+      }
     }
   });
   $('#editModal').on('show.bs.modal', function (event) {
@@ -378,8 +272,17 @@ function main() {
   $('.likePostButton').on('click', function () {
     likePost(this);
   });
-  $('.btnComment').one('click', function () {
-    getComments(this);
+  $('.commentsForm').on('submit', function (e) {
+    addComment(e, this);
+  });
+  $('.commentDelete').on('click', function (e) {
+    deleteComment(this);
+  });
+  $('.replyButton').on('click', function () {
+    addReplyForm(this);
+  });
+  $('.likeCommentButton').on('click', function () {
+    likeComment(this);
   });
   $('#commentEditModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
@@ -498,77 +401,6 @@ function deleteComment(selected) {
 
         $('#com-' + commentId).remove();
         $('.spinnerOverlay').addClass('d-none');
-      }
-    });
-    request.fail(function (xhr) {
-      alert(xhr.responseJSON.message);
-    });
-  }
-}
-
-function getComments(selected) {
-  $('.commentsForm').on('submit', function (e) {
-    addComment(e, this);
-  });
-  var pagi = $(selected).data('pagi');
-  var postId = $(selected).data('id');
-  var commentBox = $('#post' + postId).next();
-
-  if (!$(commentBox).find('.emojionearea-editor').length) {
-    $(commentBox).find('.commentsDesc').emojioneArea({
-      pickerPosition: "top",
-      placeholder: "Napisz Komentarz",
-      inline: false,
-      events: {
-        keypress: function keypress(editor, e) {
-          if (e.keyCode == 13 || e.which == 13) {
-            e.preventDefault();
-            editor.parent().prev().val(this.getText());
-            editor.parent().prev().parent().submit();
-          }
-        }
-      }
-    });
-  }
-
-  var commentsCount = $('#post' + postId).find('.postCommentsCount');
-  commentBox.removeClass('d-none');
-  commentBox.find('.emojionearea-editor').focus();
-
-  if (commentsCount.text().trim() != "") {
-    var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
-    $('#feed-' + postId).html(html);
-    var url = baseUrl + "/user/ajax/getComments/" + postId;
-    var request = $.ajax({
-      method: 'get',
-      url: url,
-      data: {
-        pagi: pagi
-      }
-    });
-    request.done(function (response) {
-      if (response.status === 'success') {
-        $('#feed-' + postId).html(response.html);
-        $('.commentDelete').off('click');
-        $('.commentDelete').on('click', function (e) {
-          deleteComment(this);
-        });
-        $('.replyButton').off('click');
-        $('.replyButton').on('click', function () {
-          addReplyForm(this);
-        });
-        $('.likeCommentButton').off('click');
-        $('.likeCommentButton').on('click', function () {
-          likeComment(this);
-        });
-        $('.repliesMoreBtn').off('click');
-        $('.repliesMoreBtn').on('click', function () {
-          loadReplies(this);
-        });
-        $('.commentsMoreBtn').off('click');
-        $('.commentsMoreBtn').on('click', function () {
-          loadMoreComments(this);
-        });
       }
     });
     request.fail(function (xhr) {
@@ -699,102 +531,6 @@ function addComment(event, selected) {
   }
 }
 
-function loadReplies(selected) {
-  var button = $(selected);
-  var parentId = button.data('id');
-  var pagi = $(button).data('pagi');
-  var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
-  $(document).one("ajaxSend", function () {
-    button.parents('.commentRepliesBox').append(html);
-  });
-  var url = baseUrl + "/user/ajax/getReplies/" + parentId;
-  var request = $.ajax({
-    method: 'get',
-    url: url,
-    data: {
-      pagi: pagi
-    }
-  });
-  request.done(function (response) {
-    if (response.status === 'success') {
-      if (pagi == 0) {
-        button.prev().remove();
-      }
-
-      button.parents('.commentRepliesBox').append(response.html);
-      $('.ajaxSpinner').remove();
-      button.remove();
-      $('.commentDelete').off('click');
-      $('.commentDelete').on('click', function (e) {
-        deleteComment(this);
-      });
-      $('.likeCommentButton').off('click');
-      $('.likeCommentButton').on('click', function () {
-        likeComment(this);
-      });
-      $('.repliesMoreBtn').off('click');
-      $('.repliesMoreBtn').on('click', function () {
-        loadReplies(this);
-      });
-    }
-  });
-  request.fail(function (xhr) {
-    alert(xhr.responseJSON.message);
-  });
-}
-
-function loadMoreComments(selected) {
-  var button = $(selected);
-  var postId = button.data('id');
-  var pagi = $(button).data('pagi');
-  var html = '<div id="spinner" class="ajaxSpinner">' + '<div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
-  $(document).one("ajaxSend", function () {
-    button.parents('.commentsFeed').append(html);
-  });
-  var url = baseUrl + "/user/ajax/getComments/" + postId;
-  var request = $.ajax({
-    method: 'get',
-    url: url,
-    data: {
-      pagi: pagi
-    }
-  });
-  request.done(function (response) {
-    if (response.status === 'success') {
-      if (pagi == 0) {
-        button.prev().remove();
-      }
-
-      button.parents('.commentsFeed').append(response.html);
-      $('.ajaxSpinner').remove();
-      button.remove();
-      $('.commentDelete').off('click');
-      $('.commentDelete').on('click', function (e) {
-        deleteComment(this);
-      });
-      $('.replyButton').off('click');
-      $('.replyButton').on('click', function () {
-        addReplyForm(this);
-      });
-      $('.likeCommentButton').off('click');
-      $('.likeCommentButton').on('click', function () {
-        likeComment(this);
-      });
-      $('.repliesMoreBtn').off('click');
-      $('.repliesMoreBtn').on('click', function () {
-        loadReplies(this);
-      });
-      $('.commentsMoreBtn').off('click');
-      $('.commentsMoreBtn').on('click', function () {
-        loadMoreComments(this);
-      });
-    }
-  });
-  request.fail(function (xhr) {
-    alert(xhr.responseJSON.message);
-  });
-}
-
 function likeComment(selected) {
   var commentId = $(selected).data('id');
   var url = baseUrl + "/user/ajax/likeComment";
@@ -863,90 +599,16 @@ function likePost(selected) {
   });
 }
 
-function pagiPosts() {
-  if ($(window).scrollTop() + $(window).height() > $(document).height() - 50) {
-    $(window).off('scroll');
-    pagi++;
-    var url = baseUrl + "/user/ajax/getMorePosts";
-    var request = $.ajax({
-      method: 'get',
-      url: url,
-      data: {
-        pagiTime: pagi
-      }
-    });
-    request.done(function (response) {
-      if (response.status === 'success') {
-        $('#friendsWallFeed').append(response.html);
-
-        if (response.stopPagi == false) {
-          $(window).on('scroll', function () {
-            pagiPosts();
-          });
-        }
-
-        $('.btnComment').off('click');
-        $('.btnComment').one('click', function () {
-          getComments(this);
-        });
-        $('.postDelete').off('click');
-        $('.postDelete').on('click', function () {
-          deletePost(this);
-        });
-        $('.likePostButton').off('click');
-        $('.likePostButton').on('click', function () {
-          likePost(this);
-        });
-      }
-    });
-    request.fail(function (xhr) {
-      alert(xhr.responseJSON.message);
-    });
-  }
-}
-
-function refreshWall(selected) {
-  $(selected).addClass('d-none');
-  $('.spinnerOverlay').removeClass('d-none');
-  var url = baseUrl + "/user/home";
-  var request = $.ajax({
-    method: 'get',
-    url: url
-  });
-  request.done(function (response) {
-    if (response.status === 'success') {
-      $(selected).removeClass('spin');
-      $('#friendsWallFeed').html(response.html);
-      $('.spinnerOverlay').addClass('d-none');
-      $('.postDelete').off('click');
-      $('.postDelete').on('click', function () {
-        deletePost(this);
-      });
-      $('.likePostButton').off('click');
-      $('.likePostButton').on('click', function () {
-        likePost(this);
-      });
-      $('.btnComment').off('click');
-      $('.btnComment').one('click', function () {
-        getComments(this);
-      });
-    }
-  });
-  request.fail(function (xhr) {
-    alert(xhr.responseJSON.message);
-  });
-}
-
 /***/ }),
 
-/***/ 8:
-/*!********************************************!*\
-  !*** multi ./resources/js/activityWall.js ***!
-  \********************************************/
+/***/ 9:
+/*!******************************************!*\
+  !*** multi ./resources/js/singlePost.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\activityWall.js */"./resources/js/activityWall.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\singlePost.js */"./resources/js/singlePost.js");
 
 
 /***/ })

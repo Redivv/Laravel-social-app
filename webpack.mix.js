@@ -20,6 +20,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin.js', 'public/js')
     .js('resources/js/navigation.js', 'public/js')
     .js('resources/js/activityWall.js', 'public/js')
+    .js('resources/js/singlePost.js', 'public/js')
     .sass('resources/sass/chat.scss', 'public/chat/css')
     .sass('resources/sass/adminPane.scss', 'public/css')
     .sass('resources/sass/app.scss', 'public/css');

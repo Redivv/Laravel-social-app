@@ -58,6 +58,11 @@ class HomeController extends Controller
         return view('home')->withPosts($posts);
     }
 
+    public function viewPost(Post $post)
+    {
+        return view('viewSinglePost')->withPost($post);
+    }
+
     public function getMorePosts(Request $request)
     {
         if ($request->ajax()) {
@@ -171,7 +176,7 @@ class HomeController extends Controller
                 $posts = [$post];
                 $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
                 $friends = User::whereNotIn('id',[Auth::id()])->get();
-                Notification::send($friends, new UserNotification($author, '_user_home#post',$post->id, __('nav.userNot2'), 'newPost'));
+                Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2'), 'newPost'));
                 return response()->json(['status' => 'success', 'html' => $html], 200);
             }
 
@@ -284,7 +289,7 @@ class HomeController extends Controller
                 $post->like();
 
                 if ($post->user_id != Auth::id()) {
-                    $post->user->notify(new SystemNotification(__('nav.likePostNot'),'info','_user_home#post',$post->id, 'likePost'));
+                    $post->user->notify(new SystemNotification(__('nav.likePostNot'),'info','_user_home_post_',$post->id, '', 'likePost'));
                 }
             }
 

@@ -17,6 +17,7 @@ class UserNotification extends Notification implements ShouldBroadcast
     public $link;
     public $message;
     public $contentId;
+    public $contentAnchor;
     public $action;
 
     /**
@@ -24,11 +25,12 @@ class UserNotification extends Notification implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(object $user, string $link, $contentId, string $message, string $action)
+    public function __construct(object $user, string $link, $contentId, ?string $contentAnchor, string $message, string $action)
     {
         $this->user          = $user;
         $this->link          = $link;
         $this->contentId     = $contentId;
+        $this->contentAnchor = $contentAnchor;
         $this->message       = $message;
         $this->action        = $action;
     }
@@ -57,6 +59,7 @@ class UserNotification extends Notification implements ShouldBroadcast
             'user_image'        =>  $this->user->picture,
             'link'              =>  $this->link,
             'contentId'         =>  $this->contentId,
+            'contentAnchor'     =>  $this->contentAnchor,
             'message'           =>  $this->message,
             'action'            =>  $this->action
         ];
@@ -69,6 +72,7 @@ class UserNotification extends Notification implements ShouldBroadcast
             'user_image'        =>  $this->user->picture,
             'link'              =>  $this->link,
             'contentId'         =>  $this->contentId,
+            'contentAnchor'     => $this->contentAnchor,
             'message'           =>  $this->message,
             'action'            =>  $this->action
         ]);

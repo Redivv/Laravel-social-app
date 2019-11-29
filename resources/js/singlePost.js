@@ -1,6 +1,3 @@
-var pagi = 0;
-var pagiReply = 0;
-
 $(document).ready(function() {
     $('[data-toggle="tooltip"]').tooltip()
     $.ajaxSetup({
@@ -13,150 +10,25 @@ $(document).ready(function() {
 
 
 function main() {
-    $(window).on('scroll',function() {
-        pagiPosts();
-    });
-
-    $('#wallFetchBtn').on('click',function() {
-        refreshWall(this);
-    })
-
-    $('#addPost').emojioneArea({
-        pickerPosition: "bottom",
-        placeholder: "\xa0",
-        buttonTitle: ""
-    });
 
     $('#editPostDesc').emojioneArea({
         pickerPosition: "top",
         placeholder: "\xa0",
         autocomplete: false,
     });
-   
-    $('#postPicture').change(function(evt){
-        var files = evt.target.files; // FileList object
-        
-        // Empty the preview list
-        $('#picture-preview').empty();
-
-        
-        let html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt"></i></div>';
-        $('#picture-preview').append(html);
-        let tag = $(this);
-
-        $('.resetPicture').one('click',function() {
-            if (confirm(resetImgMsg)) {
-                tag.val("");
-                $('#picture-preview').empty();
+    
+    $('.commentsDesc').emojioneArea({
+        pickerPosition: "top",
+        placeholder: "Napisz Komentarz",
+        inline: false,
+        events: {
+            keypress: function(editor,e) {
+                if (e.keyCode == 13 || e.which == 13) {
+                    e.preventDefault();
+                    editor.parent().prev().val(this.getText());
+                    editor.parent().prev().parent().submit(); 
+                }
             }
-        })
-
-        // Loop through the FileList and render image files as thumbnails.
-        for (var i = 0, f; f = files[i]; i++) {
-
-        // Only process image files.
-        if (!f.type.match('image.*')) {
-            $(this).val("");
-            alert(badFileType);
-            $('#picture-preview').empty();
-            break;
-        }
-
-        var reader = new FileReader();
-
-        // Closure to capture the file information.
-        reader.onload = (function(theFile) {
-            return function(e) {
-            // Render thumbnail.
-            var span = document.createElement('span');
-            span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                                '" title="', escape(theFile.name), '"/>'].join('');
-            $('#picture-preview').append(span, null);
-            $('.emojionearea-editor').focus();
-            };
-        })(f);
-
-        // Read in the image file as a data URL.
-        reader.readAsDataURL(f);
-        }
-    });
-
-    $('#wallPost').on('submit',function(e) {
-        e.preventDefault();
-        if ($('#postPicture').val() || $('#addPost').val()) {
-            let url = baseUrl + "/user/ajax/newPost";
-            let tag = $(this);
-
-            $(document).one("ajaxSend", function(){
-                tag[0].reset();
-                $('.emojionearea-editor').empty();
-                $('#picture-preview').empty();
-                let html = '<div id="spinner" class="ajaxSpinner">'+
-                    '<div class="spinner-border text-dark" role="status">'+
-                        '<span class="sr-only">Loading...</span>'+
-                    '</div>'+
-                '</div>';
-                if ($('.noContent').length) {
-                    $('.noContent').remove();
-                }
-                $('#friendsWallFeed').prepend(html);
-            }); 
-
-            var request = $.ajax({
-                method: "post",
-                url: url,
-                enctype: 'multipart/form-data',
-                processData: false,
-                contentType: false,
-                data: new FormData(this)
-            });
-            
-            
-            request.done(function(response){
-                if (response.status === 'success') {
-                    $('#spinner').remove();
-                    $('#friendsWallFeed').prepend(response.html);
-
-                    $('.postDelete').off('click');
-                    $('.postDelete').on('click',function(){
-                        deletePost(this);
-                    });
-
-                    $('.likePostButton').off('click');
-                    $('.likePostButton').on('click',function() {
-                        likePost(this);
-                    });
-
-                    $('.commentsForm').off('submit');
-                    $('.commentsForm').on('submit',function(e){
-                        addComment(e,this);
-                    });
-
-                    $('.btnComment').one('click',function() {
-                        $('.commentsDesc:first').emojioneArea({
-                            pickerPosition: "top",
-                            placeholder: "Napisz Komentarz",
-                            inline: false,
-                            events: {
-                                keypress: function(editor,e) {
-                                    if (e.keyCode == 13 || e.which == 13) {
-                                        e.preventDefault();
-                                        editor.parent().prev().val(this.getText());
-                                        editor.parent().prev().parent().submit(); 
-                                    }
-                                }
-                            }
-                        });
-                        getComments(this);
-                    });
-                }
-            });
-            
-            
-            request.fail(function (xhr){
-                alert(xhr.responseJSON.message);
-                $('#spinner').remove();
-            });
         }
     });
 
@@ -340,8 +212,21 @@ function main() {
         likePost(this);
     });
 
-    $('.btnComment').one('click',function() {
-        getComments(this);
+    $('.commentsForm').on('submit',function(e){
+        addComment(e,this);
+    });
+    
+                    
+    $('.commentDelete').on('click',function(e) {
+        deleteComment(this);
+    });
+
+    $('.replyButton').on('click',function() {
+        addReplyForm(this);
+    });
+
+    $('.likeCommentButton').on('click',function() {
+        likeComment(this);
     });
 
     $('#commentEditModal').on('show.bs.modal', function (event) {
@@ -481,94 +366,6 @@ function deleteComment(selected) {
             alert(xhr.responseJSON.message);
         });
     }
-}
-
-function getComments(selected) {
-
-        $('.commentsForm').on('submit',function(e){
-            addComment(e,this);
-        });
-    
-        let pagi = $(selected).data('pagi');
-        let postId = $(selected).data('id');
-        let commentBox = $('#post'+postId).next();
-
-        if(!($(commentBox).find('.emojionearea-editor').length)){
-            $(commentBox).find('.commentsDesc').emojioneArea({
-                pickerPosition: "top",
-                placeholder: "Napisz Komentarz",
-                inline: false,
-                events: {
-                    keypress: function(editor,e) {
-                        if (e.keyCode == 13 || e.which == 13) {
-                            e.preventDefault();
-                            editor.parent().prev().val(this.getText());
-                            editor.parent().prev().parent().submit(); 
-                        }
-                    }
-                }
-            });
-        }
-
-        let commentsCount = $('#post'+postId).find('.postCommentsCount');
-
-        commentBox.removeClass('d-none');
-        commentBox.find('.emojionearea-editor').focus();
-        
-        if (commentsCount.text().trim() != "") {
-            
-            let html = '<div id="spinner" class="ajaxSpinner">'+
-            '<div class="spinner-border text-dark" role="status">'+
-                '<span class="sr-only">Loading...</span>'+
-                '</div>'+
-            '</div>';
-
-            $('#feed-'+postId).html(html);
-
-            let url = baseUrl + "/user/ajax/getComments/"+postId;
-
-            var request = $.ajax({
-                method : 'get',
-                url: url,
-                data: {pagi:pagi}
-            });
-            
-            
-            request.done(function(response){
-                if (response.status === 'success') {
-                    $('#feed-'+postId).html(response.html);
-                    $('.commentDelete').off('click');
-                    $('.commentDelete').on('click',function(e) {
-                        deleteComment(this);
-                    });
-
-                    $('.replyButton').off('click');
-                    $('.replyButton').on('click',function() {
-                        addReplyForm(this);
-                    });
-
-                    $('.likeCommentButton').off('click');
-                    $('.likeCommentButton').on('click',function() {
-                        likeComment(this);
-                    });
-
-                    $('.repliesMoreBtn').off('click');
-                    $('.repliesMoreBtn').on('click',function() {
-                        loadReplies(this);
-                    });
-
-                    $('.commentsMoreBtn').off('click');
-                    $('.commentsMoreBtn').on('click',function() {
-                        loadMoreComments(this);
-                    });
-                }
-            });
-            
-            
-            request.fail(function (xhr){
-                alert(xhr.responseJSON.message);
-            });
-        }
 }
 
 function addReplyForm(selected) {
@@ -728,130 +525,6 @@ function addComment(event, selected) {
         }
 }
 
-function loadReplies(selected) {
-
-    let button = $(selected);
-    let parentId = button.data('id');
-    let pagi = $(button).data('pagi');
-
-    let html = '<div id="spinner" class="ajaxSpinner">'+
-            '<div class="spinner-border text-dark" role="status">'+
-                '<span class="sr-only">Loading...</span>'+
-        '</div>'+
-    '</div>';
-
-    $(document).one("ajaxSend", function(){   
-        button.parents('.commentRepliesBox').append(html);
-    });
-
-    let url = baseUrl + "/user/ajax/getReplies/"+parentId;
-
-    var request = $.ajax({
-        method : 'get',
-        url: url,
-        data: {pagi:pagi}
-    });
-    
-    
-    request.done(function(response){
-        if (response.status === 'success') {
-            if (pagi == 0) {
-                button.prev().remove();
-            }
-            button.parents('.commentRepliesBox').append(response.html);
-            $('.ajaxSpinner').remove();
-            button.remove();
-
-            $('.commentDelete').off('click');
-            $('.commentDelete').on('click',function(e) {
-                deleteComment(this);
-            });
-
-            $('.likeCommentButton').off('click');
-            $('.likeCommentButton').on('click',function() {
-                likeComment(this);
-            });
-
-            $('.repliesMoreBtn').off('click');
-            $('.repliesMoreBtn').on('click',function() {
-                loadReplies(this);
-            });
-        }
-    });
-    
-    
-    request.fail(function (xhr){
-        alert(xhr.responseJSON.message);
-    });
-}
-
-function loadMoreComments(selected) {
-
-    let button = $(selected);
-    let postId = button.data('id');
-    let pagi = $(button).data('pagi');
-
-    let html = '<div id="spinner" class="ajaxSpinner">'+
-            '<div class="spinner-border text-dark" role="status">'+
-                '<span class="sr-only">Loading...</span>'+
-        '</div>'+
-    '</div>';
-
-    $(document).one("ajaxSend", function(){   
-        button.parents('.commentsFeed').append(html);
-    });
-
-    let url = baseUrl + "/user/ajax/getComments/"+postId;
-
-    var request = $.ajax({
-        method : 'get',
-        url: url,
-        data: {pagi:pagi}
-    });
-    
-    
-    request.done(function(response){
-        if (response.status === 'success') {
-            if (pagi == 0) {
-                button.prev().remove();
-            }
-            button.parents('.commentsFeed').append(response.html);
-            $('.ajaxSpinner').remove();
-            button.remove();
-            
-            $('.commentDelete').off('click');
-            $('.commentDelete').on('click',function(e) {
-                deleteComment(this);
-            });
-
-            $('.replyButton').off('click');
-            $('.replyButton').on('click',function() {
-                addReplyForm(this);
-            });
-
-            $('.likeCommentButton').off('click');
-            $('.likeCommentButton').on('click',function() {
-                likeComment(this);
-            });
-
-            $('.repliesMoreBtn').off('click');
-            $('.repliesMoreBtn').on('click',function() {
-                loadReplies(this);
-            });
-
-            $('.commentsMoreBtn').off('click');
-            $('.commentsMoreBtn').on('click',function() {
-                loadMoreComments(this);
-            });
-        }
-    });
-    
-    
-    request.fail(function (xhr){
-        alert(xhr.responseJSON.message);
-    });
-}
-
 function likeComment(selected) {
     let commentId = $(selected).data('id');
     let url = baseUrl + "/user/ajax/likeComment";
@@ -907,94 +580,5 @@ function likePost(selected) {
         method : 'post',
         url: url,
         data: {'_method':'PATCH', postId:postId}
-    });
-}
-
-function pagiPosts() {
-    if(($(window).scrollTop() + $(window).height() > $(document).height() - 50)) {
-        $(window).off('scroll');
-        pagi++;
-        let url = baseUrl + "/user/ajax/getMorePosts";
-
-        var request = $.ajax({
-            method : 'get',
-            url: url,
-            data: {pagiTime:pagi}
-        });
-        
-        
-        request.done(function(response){
-            if (response.status === 'success') {
-                $('#friendsWallFeed').append(response.html);
-                if (response.stopPagi == false) {
-                    $(window).on('scroll',function() {
-                        pagiPosts();
-                    });
-                }
-
-                $('.btnComment').off('click');
-                $('.btnComment').one('click',function() {
-                    getComments(this);
-                });
-
-                $('.postDelete').off('click');
-                $('.postDelete').on('click',function(){
-                    deletePost(this);
-                });
-
-                $('.likePostButton').off('click');
-                $('.likePostButton').on('click',function() {
-                    likePost(this);
-                });
-            
-            }
-        });
-        
-        
-        request.fail(function (xhr){
-            alert(xhr.responseJSON.message);
-        });
-    }
-}
-
-function refreshWall(selected) {
-    $(selected).addClass('d-none');
-
-    $('.spinnerOverlay').removeClass('d-none');
-
-    let url = baseUrl+"/user/home";
-
-    var request = $.ajax({
-        method : 'get',
-        url: url,
-    });
-    
-    
-    request.done(function(response){
-        if (response.status === 'success') {
-            $(selected).removeClass('spin');
-            $('#friendsWallFeed').html(response.html);
-            $('.spinnerOverlay').addClass('d-none');
-
-            $('.postDelete').off('click');
-            $('.postDelete').on('click',function(){
-                deletePost(this);
-            });
-        
-            $('.likePostButton').off('click');
-            $('.likePostButton').on('click',function() {
-                likePost(this);
-            });
-
-            $('.btnComment').off('click');
-            $('.btnComment').one('click',function() {
-                getComments(this);
-            });
-        }
-    });
-    
-    
-    request.fail(function (xhr){
-        alert(xhr.responseJSON.message);
     });
 }
