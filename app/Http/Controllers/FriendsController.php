@@ -36,4 +36,8 @@ class FriendsController extends Controller
         $you->denyFriendRequest($user);
         return redirect('user/home')->with(['status' => 'Odrzucono zaproszenie '.$user->name]);
     }
+    public function  deleteFriend(User $user){
+        Auth::user()->unfriend($user);
+        return redirect('user/home')->with(['status' => 'Usunięto '.$user->name]);
+    }
 }

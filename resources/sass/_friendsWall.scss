@@ -480,10 +480,13 @@
                     .friendOptions{
                         @include font-size(1.1rem);
                         span{
-                            margin: 0 0.5rem;
-                            cursor: pointer;
-                            &:hover{
-                                color: $orange; 
+                            a{
+                                margin: 0 0.5rem;
+                                cursor: pointer;
+                                color: $black;
+                                &:hover{
+                                    color: $orange; 
+                                }
                             }
                         }
                     }

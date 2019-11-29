@@ -23,10 +23,16 @@ Route::middleware(['verified'])->group(function () {
     Route::patch('profile', 'ProfileController@update');
     Route::get('profile/edit','ProfileController@edit')->name('ProfileEdition');
     Route::group(['prefix'=>'friends'], function() {
-        // Ya need to be 'verified' to do stuff with friends
+        // List of friend-related routes
         Route::get('add/{user}','FriendsController@addFriend');
         Route::get('accept/{user}','FriendsController@acceptFriend');
         Route::get('deny/{user}','FriendsController@denyRequest');
+        Route::get('delete/{user}','FriendsController@deleteFriend');
+
+        Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+            Route::get('add/{user}', 'AjaxFriendsController@addFriend');
+        });
+
 });});
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
