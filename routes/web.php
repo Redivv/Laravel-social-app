@@ -30,7 +30,8 @@ Route::middleware(['verified'])->group(function () {
         Route::get('delete/{user}','FriendsController@deleteFriend');
 
         Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
-            Route::get('add/{user}', 'AjaxFriendsController@addFriend');
+            Route::put('add/{user}', 'AjaxFriendsController@addFriend');
+            Route::delete('delete/{user}', 'AjaxFriendsController@deleteFriend');
         });
 
 });});
