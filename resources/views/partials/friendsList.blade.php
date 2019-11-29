@@ -1,5 +1,5 @@
 @foreach ($friends as $friend)
-    <li class="row active">
+    <li class="row active friendObject">
         <a href="../profile/{{$friend->name}}" class="col-7">
             <div class="row">
                 <div class="col-3 profilePicture">
@@ -11,7 +11,7 @@
             </div>
         </a>
         <div class="col-5 friendOptions">
-            <span><a href="../friends/delete/{{$friend->name}}"><i class="fas fa-user-minus"></i></a></span>
+            <span class="deleteFriend" data-name="{{$friend->name}}"><a {{--href="../friends/delete/{{$friend->name}}--}}><i class="fas fa-user-minus"></i></a></span>
             <span><a href=""><i class="far fa-comment-dots"></i></a></span>
             <span><a><i class="fas fa-exclamation"></i></a></span>
         </div>

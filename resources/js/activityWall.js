@@ -256,6 +256,41 @@ function main() {
     $('.postDelete').on('click',function(){
         deletePost(this);
     })
+    //                              ------------------------delete'owanie znajomych
+    $('.deleteFriend').on('click',function() {
+        //local var in JS == let
+        //get name of friend you want to delete
+        let friendName = $(this).data('name');
+        //get url we want to visit with ajax
+        let url= baseUrl+"/friends/ajax/delete/"+friendName;
+        //make request in ajax:
+        var request = $.ajax({
+            //select method
+            method : 'post',
+            //select destination
+            url: url,
+            //select content we want to send:
+            data: {
+                //here, we just want to change our method to "delete", since it is strictly laravelish method
+                //and is unavaible in html.
+                "_method":"delete",
+            }
+        });
+        //if our request is succesfull, in other words, our response code is 200:
+        request.done(function(response){
+            //if status made by response is 'succes':
+            if (response.status === 'success') {
+                //we delete object, that is not necessary from now.
+                $(this).parents('.friendObject').remove();
+            }
+        });
+        //if our request is unsuccesfull:
+        request.fail(function (xhr){
+            //we get our response as alert.
+            alert(xhr.responseJSON.message);
+        });
+    })
+    
 }
 
 function deletePost(selected) {

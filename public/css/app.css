@@ -17900,6 +17900,10 @@ html {
   list-style: none;
 }
 
+#friendsWall .friendsList .friendsListBox ul li {
+  margin: 1rem 0;
+}
+
 #friendsWall .friendsList .friendsListBox ul li .profilePicture {
   position: relative;
 }

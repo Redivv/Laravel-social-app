@@ -218,7 +218,7 @@ function deleteTag(tag) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\profile.js */"./resources/js/profile.js");
+module.exports = __webpack_require__(/*! D:\Safo\resources\js\profile.js */"./resources/js/profile.js");
 
 
 /***/ })
