@@ -26,7 +26,15 @@
                     @endif
                 </div>
                 <div class="postContent col-12">{{$post->desc}}</div>
-                <div class="postTags col-12"></div>
+                <div class="postTags col-12 row">
+                    @if ($taggedUsers = json_decode($post->tagged_users))
+                        @foreach ($taggedUsers as $tags)
+                            <a href="/user/profile/{{$tags}}" class="col-3 postTaggedUser" target="__blank">
+                                <span class="taggedUserLabel">{{$tags}}</span>
+                            </a>
+                        @endforeach
+                    @endif
+                </div>
             </main>
             <footer class="postFooter row">
                 <button class="col-5 btn btn-block likePostButton @if($post->liked()){{"active"}}@endif" data-id="{{$post->id}}"><i class="fas fa-fire"></i><span class="badge likesCount badge-pill badge-warning">@if($post->likeCount != 0){{$post->likeCount}}@endif</span> {{__('activityWall.like')}}</button>
@@ -42,9 +50,10 @@
                 <div class="input-group row">
                     <input type="text" name="commentDesc" class="form-control commentsDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">
                     <div class="input-group-append col-1 commentButtons">
-                        <i class="fas fa-user-tag"></i>
+                        <i class="fas fa-user-tag commentUserTag" data-toggle="modal" data-target="#tagUsersModal"></i>
                     </div>
                 </div>
+                <output id="commentUserTags" class="row"></output>
             </form>
             <output class="commentsFeed"  id="feed-{{$post->id}}"></output>
         </div>

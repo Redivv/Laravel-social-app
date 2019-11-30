@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use Conner\Tagging\Model\Tag;
 use App\City;
+use App\User;
 
 class AjaxTagsController extends Controller
 {
@@ -65,6 +66,19 @@ class AjaxTagsController extends Controller
         $search = Str::slug($request->get('term'));
     
         $result = City::where('name_slug', 'LIKE', $search.'%')->get();
+
+        return response()->json($result);
+            
+    } 
+
+    public function autocompleteUser(Request $request)
+    {
+        $request->validate([
+            'term'  =>  ['required', 'string', 'max:255']
+        ]);
+        $search = $request->get('term');
+    
+        $result = User::where('name', 'LIKE', $search.'%')->whereNotIn('id',[Auth::id()])->get();
 
         return response()->json($result);
             

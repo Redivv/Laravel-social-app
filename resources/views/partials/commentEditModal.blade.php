@@ -11,7 +11,7 @@
                 <form id="editComment" method="post">
                     <input id="editPostDesc" name="nameDesc">
                     <div class="friendsWallButtons">
-                        <span class="additionalButton" data-toggle="tooltip" data-placement="bottom" title="{{__('activityWall.tagUser')}}"><i class="fas fa-user-tag"></i></span>
+                        <span class="additionalButton"><i class="fas fa-user-tag"></i></span>
                     </div>
                     <div class="friendsWallSendButton">
                         <button name="sendPost" id="editCommentButton" type="submit" class="btn btn-block">{{__('activityWall.editPost')}}</button>

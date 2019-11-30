@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->text('desc')->nullable()->default(null);
             $table->longText('pictures')->nullable()->default(null);
+            $table->longText('tagged_users')->nullable()->default(null);
             $table->timestamps();
 
             $table->foreign("user_id")->references('id')->on('users')->onDelete('cascade');

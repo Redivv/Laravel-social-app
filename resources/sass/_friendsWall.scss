@@ -52,6 +52,25 @@
         .emojionearea{
             @include font-size(1rem);
         }
+        
+        #postTaggedUsers{
+            padding: 0 1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            width: 100%;
+            .taggedUser{
+                label{
+                    padding: 0.5rem 1rem;
+                    border-radius: 50px;
+                    background-color: $orange;
+                    color: $white;
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                    @include font-size(0.9rem);
+                }
+            }
+        }
+
         .friendsWallButtons{
             margin: 0.5rem 0;
             padding:0 0.5rem;
@@ -141,6 +160,20 @@
                             margin-top: 0.25rem;
                             @include font-size(1rem);
                         }
+                        .postTags{
+                            padding: 1rem 0.5rem;
+                            .postTaggedUser{
+                                @extend div;
+                                text-decoration: none;
+                                text-align: center;
+                                @include font-size(0.9rem);
+                                font-weight: bold;
+                                padding: 0.5rem 0.2rem;
+                                border-radius: 50px;
+                                background-color: $orange;
+                                color: $white;
+                            }
+                        }
                     }
                     .postFooter{
                         margin-top: 0.5rem;
@@ -175,6 +208,23 @@
                         }
                         .emojionearea-button{
                             margin-top: 3px;
+                        }
+                    }
+                    #commentUserTags{
+                        padding: 0 2rem;
+                        margin-top: 1rem;
+                        margin-bottom: 0.5rem;
+                        width: 100%;
+                        .taggedUser{
+                            label{
+                                padding: 0.5rem 1rem;
+                                border-radius: 50px;
+                                background-color: $orange;
+                                color: $white;
+                                font-weight: bold;
+                                letter-spacing: 1px;
+                                @include font-size(0.6rem);
+                            }
                         }
                     }
                     .commentsDesc{
@@ -410,9 +460,13 @@
     }
 }
 
-#editModal,#commentEditModal{
+#editModal,#commentEditModal, #tagUsersModal{
     .modal-dialog{
         max-width: 50vw;
+    }
+    .modal-title{
+        letter-spacing: 1px;
+        @include font-size (1.2rem);
     }
     .modal-body{
         padding-top: 0.25rem;
@@ -456,6 +510,33 @@
                 font-weight: normal;
                 text-transform: uppercase;
                 letter-spacing: 2px;
+            }
+        }
+        #taggedUsers,#postTaggedUsersModal{
+            padding: 0 1rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            width: 100%;
+            .taggedUser{
+                cursor: pointer;
+                label{
+                    cursor: pointer;
+                    padding: 0.5rem 1rem;
+                    border-radius: 50px;
+                    background-color: $orange;
+                    color: $white;
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                    @include font-size(0.9rem);
+                }
+            }
+        }
+        #postTaggedUsersModal{
+            .taggedUser{
+                cursor: default !important;
+                label{
+                    cursor: default !important;
+                }
             }
         }
     }

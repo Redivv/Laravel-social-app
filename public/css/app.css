@@ -3034,7 +3034,8 @@ textarea.form-control.is-invalid {
 }
 
 .btn,
-div.cookie-consent button {
+div.cookie-consent button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button {
   display: inline-block;
   font-weight: 400;
   color: #212529;
@@ -3055,29 +3056,35 @@ div.cookie-consent button {
 
 @media (prefers-reduced-motion: reduce) {
   .btn,
-  div.cookie-consent button {
+  div.cookie-consent button,
+  #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button {
     transition: none;
   }
 }
 
 .btn:hover,
-div.cookie-consent button:hover {
+div.cookie-consent button:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button:hover {
   color: #212529;
   text-decoration: none;
 }
 
 .btn:focus,
 div.cookie-consent button:focus,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button:focus,
 .btn.focus,
-div.cookie-consent button.focus {
+div.cookie-consent button.focus,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button.focus {
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
 }
 
 .btn.disabled,
 div.cookie-consent button.disabled,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button.disabled,
 .btn:disabled,
-div.cookie-consent button:disabled {
+div.cookie-consent button:disabled,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button:disabled {
   opacity: 0.65;
 }
 
@@ -3087,14 +3094,16 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary,
-div.cookie-consent button {
+div.cookie-consent button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button {
   color: #ffffff;
   background-color: #3490dc;
   border-color: #3490dc;
 }
 
 .btn-primary:hover,
-div.cookie-consent button:hover {
+div.cookie-consent button:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button:hover {
   color: #ffffff;
   background-color: #227dc7;
   border-color: #2176bd;
@@ -3102,15 +3111,19 @@ div.cookie-consent button:hover {
 
 .btn-primary:focus,
 div.cookie-consent button:focus,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button:focus,
 .btn-primary.focus,
-div.cookie-consent button.focus {
+div.cookie-consent button.focus,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button.focus {
   box-shadow: 0 0 0 0.2rem rgba(82, 161, 225, 0.5);
 }
 
 .btn-primary.disabled,
 div.cookie-consent button.disabled,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button.disabled,
 .btn-primary:disabled,
-div.cookie-consent button:disabled {
+div.cookie-consent button:disabled,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button:disabled {
   color: #ffffff;
   background-color: #3490dc;
   border-color: #3490dc;
@@ -3118,10 +3131,13 @@ div.cookie-consent button:disabled {
 
 .btn-primary:not(:disabled):not(.disabled):active,
 div.cookie-consent button:not(:disabled):not(.disabled):active,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button:not(:disabled):not(.disabled):active,
 .btn-primary:not(:disabled):not(.disabled).active,
 div.cookie-consent button:not(:disabled):not(.disabled).active,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle,
-div.cookie-consent .show > button.dropdown-toggle {
+div.cookie-consent .show > button.dropdown-toggle,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .show > button.dropdown-toggle {
   color: #ffffff;
   background-color: #2176bd;
   border-color: #1f6fb2;
@@ -3129,10 +3145,13 @@ div.cookie-consent .show > button.dropdown-toggle {
 
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 div.cookie-consent button:not(:disabled):not(.disabled):active:focus,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button:not(:disabled):not(.disabled):active:focus,
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 div.cookie-consent button:not(:disabled):not(.disabled).active:focus,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button:not(:disabled):not(.disabled).active:focus,
 .show > .btn-primary.dropdown-toggle:focus,
-div.cookie-consent .show > button.dropdown-toggle:focus {
+div.cookie-consent .show > button.dropdown-toggle:focus,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .show > button.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(82, 161, 225, 0.5);
 }
 
@@ -3715,7 +3734,8 @@ div.cookie-consent .show > button.dropdown-toggle:focus {
 
 .btn-lg,
 .btn-group-lg > .btn,
-div.cookie-consent .btn-group-lg > button {
+div.cookie-consent .btn-group-lg > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-lg > button {
   padding: 0.5rem 1rem;
   font-size: 1.125rem;
   line-height: 1.5;
@@ -3724,7 +3744,8 @@ div.cookie-consent .btn-group-lg > button {
 
 .btn-sm,
 .btn-group-sm > .btn,
-div.cookie-consent .btn-group-sm > button {
+div.cookie-consent .btn-group-sm > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-sm > button {
   padding: 0.25rem 0.5rem;
   font-size: 0.7875rem;
   line-height: 1.5;
@@ -4051,31 +4072,41 @@ input[type=button].btn-block {
 
 .btn-group > .btn,
 div.cookie-consent .btn-group > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group > button,
 .btn-group-vertical > .btn,
-div.cookie-consent .btn-group-vertical > button {
+div.cookie-consent .btn-group-vertical > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-vertical > button {
   position: relative;
   flex: 1 1 auto;
 }
 
 .btn-group > .btn:hover,
 div.cookie-consent .btn-group > button:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group > button:hover,
 .btn-group-vertical > .btn:hover,
-div.cookie-consent .btn-group-vertical > button:hover {
+div.cookie-consent .btn-group-vertical > button:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-vertical > button:hover {
   z-index: 1;
 }
 
 .btn-group > .btn:focus,
 div.cookie-consent .btn-group > button:focus,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group > button:focus,
 .btn-group > .btn:active,
 div.cookie-consent .btn-group > button:active,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group > button:active,
 .btn-group > .btn.active,
 div.cookie-consent .btn-group > button.active,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group > button.active,
 .btn-group-vertical > .btn:focus,
 div.cookie-consent .btn-group-vertical > button:focus,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-vertical > button:focus,
 .btn-group-vertical > .btn:active,
 div.cookie-consent .btn-group-vertical > button:active,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-vertical > button:active,
 .btn-group-vertical > .btn.active,
-div.cookie-consent .btn-group-vertical > button.active {
+div.cookie-consent .btn-group-vertical > button.active,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-vertical > button.active {
   z-index: 1;
 }
 
@@ -4091,22 +4122,27 @@ div.cookie-consent .btn-group-vertical > button.active {
 
 .btn-group > .btn:not(:first-child),
 div.cookie-consent .btn-group > button:not(:first-child),
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group > button:not(:first-child),
 .btn-group > .btn-group:not(:first-child) {
   margin-left: -1px;
 }
 
 .btn-group > .btn:not(:last-child):not(.dropdown-toggle),
 div.cookie-consent .btn-group > button:not(:last-child):not(.dropdown-toggle),
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group > button:not(:last-child):not(.dropdown-toggle),
 .btn-group > .btn-group:not(:last-child) > .btn,
-div.cookie-consent .btn-group > .btn-group:not(:last-child) > button {
+div.cookie-consent .btn-group > .btn-group:not(:last-child) > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group > .btn-group:not(:last-child) > button {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
 .btn-group > .btn:not(:first-child),
 div.cookie-consent .btn-group > button:not(:first-child),
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group > button:not(:first-child),
 .btn-group > .btn-group:not(:first-child) > .btn,
-div.cookie-consent .btn-group > .btn-group:not(:first-child) > button {
+div.cookie-consent .btn-group > .btn-group:not(:first-child) > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group > .btn-group:not(:first-child) > button {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -4128,14 +4164,16 @@ div.cookie-consent .btn-group > .btn-group:not(:first-child) > button {
 
 .btn-sm + .dropdown-toggle-split,
 .btn-group-sm > .btn + .dropdown-toggle-split,
-div.cookie-consent .btn-group-sm > button + .dropdown-toggle-split {
+div.cookie-consent .btn-group-sm > button + .dropdown-toggle-split,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-sm > button + .dropdown-toggle-split {
   padding-right: 0.375rem;
   padding-left: 0.375rem;
 }
 
 .btn-lg + .dropdown-toggle-split,
 .btn-group-lg > .btn + .dropdown-toggle-split,
-div.cookie-consent .btn-group-lg > button + .dropdown-toggle-split {
+div.cookie-consent .btn-group-lg > button + .dropdown-toggle-split,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-lg > button + .dropdown-toggle-split {
   padding-right: 0.75rem;
   padding-left: 0.75rem;
 }
@@ -4148,43 +4186,53 @@ div.cookie-consent .btn-group-lg > button + .dropdown-toggle-split {
 
 .btn-group-vertical > .btn,
 div.cookie-consent .btn-group-vertical > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-vertical > button,
 .btn-group-vertical > .btn-group {
   width: 100%;
 }
 
 .btn-group-vertical > .btn:not(:first-child),
 div.cookie-consent .btn-group-vertical > button:not(:first-child),
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-vertical > button:not(:first-child),
 .btn-group-vertical > .btn-group:not(:first-child) {
   margin-top: -1px;
 }
 
 .btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle),
 div.cookie-consent .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle),
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle),
 .btn-group-vertical > .btn-group:not(:last-child) > .btn,
-div.cookie-consent .btn-group-vertical > .btn-group:not(:last-child) > button {
+div.cookie-consent .btn-group-vertical > .btn-group:not(:last-child) > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-vertical > .btn-group:not(:last-child) > button {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
 .btn-group-vertical > .btn:not(:first-child),
 div.cookie-consent .btn-group-vertical > button:not(:first-child),
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-vertical > button:not(:first-child),
 .btn-group-vertical > .btn-group:not(:first-child) > .btn,
-div.cookie-consent .btn-group-vertical > .btn-group:not(:first-child) > button {
+div.cookie-consent .btn-group-vertical > .btn-group:not(:first-child) > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-vertical > .btn-group:not(:first-child) > button {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
 .btn-group-toggle > .btn,
 div.cookie-consent .btn-group-toggle > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-toggle > button,
 .btn-group-toggle > .btn-group > .btn,
-div.cookie-consent .btn-group-toggle > .btn-group > button {
+div.cookie-consent .btn-group-toggle > .btn-group > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-toggle > .btn-group > button {
   margin-bottom: 0;
 }
 
 .btn-group-toggle > .btn input[type=radio],
 div.cookie-consent .btn-group-toggle > button input[type=radio],
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-toggle > button input[type=radio],
 .btn-group-toggle > .btn input[type=checkbox],
 div.cookie-consent .btn-group-toggle > button input[type=checkbox],
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn-group-toggle > button input[type=checkbox],
 .btn-group-toggle > .btn-group > .btn input[type=radio],
 .btn-group-toggle > .btn-group > .btn input[type=checkbox] {
   position: absolute;
@@ -4271,9 +4319,13 @@ div.cookie-consent .btn-group-toggle > button input[type=checkbox],
 .input-group-prepend .btn,
 .input-group-prepend div.cookie-consent button,
 div.cookie-consent .input-group-prepend button,
+.input-group-prepend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-prepend button,
 .input-group-append .btn,
 .input-group-append div.cookie-consent button,
-div.cookie-consent .input-group-append button {
+div.cookie-consent .input-group-append button,
+.input-group-append #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-append button {
   position: relative;
   z-index: 2;
 }
@@ -4281,40 +4333,68 @@ div.cookie-consent .input-group-append button {
 .input-group-prepend .btn:focus,
 .input-group-prepend div.cookie-consent button:focus,
 div.cookie-consent .input-group-prepend button:focus,
+.input-group-prepend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button:focus,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-prepend button:focus,
 .input-group-append .btn:focus,
 .input-group-append div.cookie-consent button:focus,
-div.cookie-consent .input-group-append button:focus {
+div.cookie-consent .input-group-append button:focus,
+.input-group-append #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button:focus,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-append button:focus {
   z-index: 3;
 }
 
 .input-group-prepend .btn + .btn,
 .input-group-prepend div.cookie-consent button + .btn,
 div.cookie-consent .input-group-prepend button + .btn,
+.input-group-prepend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button + .btn,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-prepend button + .btn,
 .input-group-prepend div.cookie-consent .btn + button,
 div.cookie-consent .input-group-prepend .btn + button,
 .input-group-prepend div.cookie-consent button + button,
 div.cookie-consent .input-group-prepend button + button,
+.input-group-prepend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser div.cookie-consent button + button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-prepend div.cookie-consent button + button,
+.input-group-prepend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn + button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-prepend .btn + button,
+.input-group-prepend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button + button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-prepend button + button,
 .input-group-prepend .btn + .input-group-text,
 .input-group-prepend div.cookie-consent button + .input-group-text,
 div.cookie-consent .input-group-prepend button + .input-group-text,
+.input-group-prepend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button + .input-group-text,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-prepend button + .input-group-text,
 .input-group-prepend .input-group-text + .input-group-text,
 .input-group-prepend .input-group-text + .btn,
 .input-group-prepend div.cookie-consent .input-group-text + button,
 div.cookie-consent .input-group-prepend .input-group-text + button,
+.input-group-prepend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-text + button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-prepend .input-group-text + button,
 .input-group-append .btn + .btn,
 .input-group-append div.cookie-consent button + .btn,
 div.cookie-consent .input-group-append button + .btn,
+.input-group-append #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button + .btn,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-append button + .btn,
 .input-group-append div.cookie-consent .btn + button,
 div.cookie-consent .input-group-append .btn + button,
 .input-group-append div.cookie-consent button + button,
 div.cookie-consent .input-group-append button + button,
+.input-group-append #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser div.cookie-consent button + button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-append div.cookie-consent button + button,
+.input-group-append #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .btn + button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-append .btn + button,
+.input-group-append #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button + button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-append button + button,
 .input-group-append .btn + .input-group-text,
 .input-group-append div.cookie-consent button + .input-group-text,
 div.cookie-consent .input-group-append button + .input-group-text,
+.input-group-append #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button + .input-group-text,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-append button + .input-group-text,
 .input-group-append .input-group-text + .input-group-text,
 .input-group-append .input-group-text + .btn,
 .input-group-append div.cookie-consent .input-group-text + button,
-div.cookie-consent .input-group-append .input-group-text + button {
+div.cookie-consent .input-group-append .input-group-text + button,
+.input-group-append #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-text + button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-append .input-group-text + button {
   margin-left: -1px;
 }
 
@@ -4358,8 +4438,10 @@ div.cookie-consent .input-group-append .input-group-text + button {
 .input-group-lg > .input-group-append > .input-group-text,
 .input-group-lg > .input-group-prepend > .btn,
 div.cookie-consent .input-group-lg > .input-group-prepend > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-lg > .input-group-prepend > button,
 .input-group-lg > .input-group-append > .btn,
-div.cookie-consent .input-group-lg > .input-group-append > button {
+div.cookie-consent .input-group-lg > .input-group-append > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-lg > .input-group-append > button {
   padding: 0.5rem 1rem;
   font-size: 1.125rem;
   line-height: 1.5;
@@ -4377,8 +4459,10 @@ div.cookie-consent .input-group-lg > .input-group-append > button {
 .input-group-sm > .input-group-append > .input-group-text,
 .input-group-sm > .input-group-prepend > .btn,
 div.cookie-consent .input-group-sm > .input-group-prepend > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-sm > .input-group-prepend > button,
 .input-group-sm > .input-group-append > .btn,
-div.cookie-consent .input-group-sm > .input-group-append > button {
+div.cookie-consent .input-group-sm > .input-group-append > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group-sm > .input-group-append > button {
   padding: 0.25rem 0.5rem;
   font-size: 0.7875rem;
   line-height: 1.5;
@@ -4392,12 +4476,15 @@ div.cookie-consent .input-group-sm > .input-group-append > button {
 
 .input-group > .input-group-prepend > .btn,
 div.cookie-consent .input-group > .input-group-prepend > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group > .input-group-prepend > button,
 .input-group > .input-group-prepend > .input-group-text,
 .input-group > .input-group-append:not(:last-child) > .btn,
 div.cookie-consent .input-group > .input-group-append:not(:last-child) > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group > .input-group-append:not(:last-child) > button,
 .input-group > .input-group-append:not(:last-child) > .input-group-text,
 .input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
 div.cookie-consent .input-group > .input-group-append:last-child > button:not(:last-child):not(.dropdown-toggle),
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group > .input-group-append:last-child > button:not(:last-child):not(.dropdown-toggle),
 .input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -4405,12 +4492,15 @@ div.cookie-consent .input-group > .input-group-append:last-child > button:not(:l
 
 .input-group > .input-group-append > .btn,
 div.cookie-consent .input-group > .input-group-append > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group > .input-group-append > button,
 .input-group > .input-group-append > .input-group-text,
 .input-group > .input-group-prepend:not(:first-child) > .btn,
 div.cookie-consent .input-group > .input-group-prepend:not(:first-child) > button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group > .input-group-prepend:not(:first-child) > button,
 .input-group > .input-group-prepend:not(:first-child) > .input-group-text,
 .input-group > .input-group-prepend:first-child > .btn:not(:first-child),
 div.cookie-consent .input-group > .input-group-prepend:first-child > button:not(:first-child),
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser .input-group > .input-group-prepend:first-child > button:not(:first-child),
 .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -5747,7 +5837,8 @@ a.badge:focus {
 }
 
 .btn .badge,
-div.cookie-consent button .badge {
+div.cookie-consent button .badge,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button .badge {
   position: relative;
   top: -1px;
 }
@@ -8842,6 +8933,7 @@ button.bg-dark:focus {
 
 .ml-3,
 div.cookie-consent button,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser button,
 .mx-3 {
   margin-left: 1rem !important;
 }
@@ -17267,7 +17359,9 @@ readers do not read off random characters that represent icons */
   color: #f66103;
 }
 
-.searchResults-box div.searchResult.activeUser .name {
+.searchResults-box div.searchResult.activeUser .name,
+.searchResults-box #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .searchResult.activeUser.postTaggedUser .name,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .searchResults-box .searchResult.activeUser.postTaggedUser .name {
   color: #38c172;
 }
 
@@ -17435,7 +17529,11 @@ body {
 }
 
 .nav-bar-height .userNotifications .dropdown-item.read .notificationDesc div:first-child,
-.nav-bar-height .userNotifications .read.clearAllBtn .notificationDesc div:first-child {
+.nav-bar-height .userNotifications .dropdown-item.read .notificationDesc #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser:first-child,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .nav-bar-height .userNotifications .dropdown-item.read .notificationDesc .postTaggedUser:first-child,
+.nav-bar-height .userNotifications .read.clearAllBtn .notificationDesc div:first-child,
+.nav-bar-height .userNotifications .read.clearAllBtn .notificationDesc #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser:first-child,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .nav-bar-height .userNotifications .read.clearAllBtn .notificationDesc .postTaggedUser:first-child {
   color: #828282;
   font-weight: normal;
 }
@@ -17526,7 +17624,11 @@ body {
 }
 
 .nav-bar-height .chatNotifications .dropdown-item .notificationDesc div:first-child,
-.nav-bar-height .chatNotifications .clearAllBtn .notificationDesc div:first-child {
+.nav-bar-height .chatNotifications .dropdown-item .notificationDesc #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser:first-child,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .nav-bar-height .chatNotifications .dropdown-item .notificationDesc .postTaggedUser:first-child,
+.nav-bar-height .chatNotifications .clearAllBtn .notificationDesc div:first-child,
+.nav-bar-height .chatNotifications .clearAllBtn .notificationDesc #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser:first-child,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .nav-bar-height .chatNotifications .clearAllBtn .notificationDesc .postTaggedUser:first-child {
   font-size: 1rem;
   color: #000;
   font-weight: bold;
@@ -17544,7 +17646,11 @@ body {
 }
 
 .nav-bar-height .chatNotifications .dropdown-item.read .notificationDesc div:first-child,
-.nav-bar-height .chatNotifications .read.clearAllBtn .notificationDesc div:first-child {
+.nav-bar-height .chatNotifications .dropdown-item.read .notificationDesc #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser:first-child,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .nav-bar-height .chatNotifications .dropdown-item.read .notificationDesc .postTaggedUser:first-child,
+.nav-bar-height .chatNotifications .read.clearAllBtn .notificationDesc div:first-child,
+.nav-bar-height .chatNotifications .read.clearAllBtn .notificationDesc #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser:first-child,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .nav-bar-height .chatNotifications .read.clearAllBtn .notificationDesc .postTaggedUser:first-child {
   color: #828282;
   font-weight: normal;
 }
@@ -17791,6 +17897,23 @@ html {
   font-size: 1rem;
 }
 
+#friendsWall .friendsWall #postTaggedUsers {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+#friendsWall .friendsWall #postTaggedUsers .taggedUser label {
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  background-color: #f66103;
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
 #friendsWall .friendsWall .friendsWallButtons {
   margin: 0.5rem 0;
   padding: 0 0.5rem;
@@ -17911,6 +18034,21 @@ html {
   font-size: 1rem;
 }
 
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags {
+  padding: 1rem 0.5rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser {
+  text-decoration: none;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 0.5rem 0.2rem;
+  border-radius: 50px;
+  background-color: #f66103;
+  color: #ffffff;
+}
+
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter {
   margin-top: 0.5rem;
 }
@@ -17951,6 +18089,23 @@ html {
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .input-group .emojionearea-button {
   margin-top: 3px;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentUserTags {
+  padding: 0 2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentUserTags .taggedUser label {
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  background-color: #f66103;
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 0.6rem;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsDesc {
@@ -18215,39 +18370,53 @@ html {
 }
 
 #editModal .modal-dialog,
-#commentEditModal .modal-dialog {
+#commentEditModal .modal-dialog,
+#tagUsersModal .modal-dialog {
   max-width: 50vw;
 }
 
+#editModal .modal-title,
+#commentEditModal .modal-title,
+#tagUsersModal .modal-title {
+  letter-spacing: 1px;
+  font-size: 1.2rem;
+}
+
 #editModal .modal-body,
-#commentEditModal .modal-body {
+#commentEditModal .modal-body,
+#tagUsersModal .modal-body {
   padding-top: 0.25rem;
 }
 
 #editModal .modal-body #modalPicture-preview,
-#commentEditModal .modal-body #modalPicture-preview {
+#commentEditModal .modal-body #modalPicture-preview,
+#tagUsersModal .modal-body #modalPicture-preview {
   display: block;
   width: 100%;
 }
 
 #editModal .modal-body #modalPicture-preview .resetPictureBox,
-#commentEditModal .modal-body #modalPicture-preview .resetPictureBox {
+#commentEditModal .modal-body #modalPicture-preview .resetPictureBox,
+#tagUsersModal .modal-body #modalPicture-preview .resetPictureBox {
   text-align: right;
 }
 
 #editModal .modal-body #modalPicture-preview .resetPictureBox i,
-#commentEditModal .modal-body #modalPicture-preview .resetPictureBox i {
+#commentEditModal .modal-body #modalPicture-preview .resetPictureBox i,
+#tagUsersModal .modal-body #modalPicture-preview .resetPictureBox i {
   cursor: pointer;
   font-size: 1.1rem;
 }
 
 #editModal .modal-body #modalPicture-preview .resetPictureBox i:hover,
-#commentEditModal .modal-body #modalPicture-preview .resetPictureBox i:hover {
+#commentEditModal .modal-body #modalPicture-preview .resetPictureBox i:hover,
+#tagUsersModal .modal-body #modalPicture-preview .resetPictureBox i:hover {
   color: #f66103;
 }
 
 #editModal .modal-body #modalPicture-preview .thumb,
-#commentEditModal .modal-body #modalPicture-preview .thumb {
+#commentEditModal .modal-body #modalPicture-preview .thumb,
+#tagUsersModal .modal-body #modalPicture-preview .thumb {
   max-width: 150px;
   max-height: 150px;
   margin-left: 0.5rem;
@@ -18255,13 +18424,15 @@ html {
 }
 
 #editModal .modal-body .friendsWallButtons,
-#commentEditModal .modal-body .friendsWallButtons {
+#commentEditModal .modal-body .friendsWallButtons,
+#tagUsersModal .modal-body .friendsWallButtons {
   margin: 0.5rem 0;
   padding: 0 0.5rem;
 }
 
 #editModal .modal-body .friendsWallButtons .additionalButton,
-#commentEditModal .modal-body .friendsWallButtons .additionalButton {
+#commentEditModal .modal-body .friendsWallButtons .additionalButton,
+#tagUsersModal .modal-body .friendsWallButtons .additionalButton {
   font-size: calc(1.265rem + 0.18vw);
   margin: 0 0.5rem;
   cursor: pointer;
@@ -18269,18 +18440,21 @@ html {
 
 @media (min-width: 1200px) {
   #editModal .modal-body .friendsWallButtons .additionalButton,
-  #commentEditModal .modal-body .friendsWallButtons .additionalButton {
+  #commentEditModal .modal-body .friendsWallButtons .additionalButton,
+  #tagUsersModal .modal-body .friendsWallButtons .additionalButton {
     font-size: 1.4rem;
   }
 }
 
 #editModal .modal-body .friendsWallButtons .additionalButton:hover,
-#commentEditModal .modal-body .friendsWallButtons .additionalButton:hover {
+#commentEditModal .modal-body .friendsWallButtons .additionalButton:hover,
+#tagUsersModal .modal-body .friendsWallButtons .additionalButton:hover {
   color: #f66103;
 }
 
 #editModal .modal-body .friendsWallSendButton button,
-#commentEditModal .modal-body .friendsWallSendButton button {
+#commentEditModal .modal-body .friendsWallSendButton button,
+#tagUsersModal .modal-body .friendsWallSendButton button {
   color: #ffffff;
   background-color: #f66103;
   font-size: 1rem;
@@ -18289,12 +18463,62 @@ html {
   letter-spacing: 2px;
 }
 
+#editModal .modal-body #taggedUsers,
+#editModal .modal-body #postTaggedUsersModal,
+#commentEditModal .modal-body #taggedUsers,
+#commentEditModal .modal-body #postTaggedUsersModal,
+#tagUsersModal .modal-body #taggedUsers,
+#tagUsersModal .modal-body #postTaggedUsersModal {
+  padding: 0 1rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+#editModal .modal-body #taggedUsers .taggedUser,
+#editModal .modal-body #postTaggedUsersModal .taggedUser,
+#commentEditModal .modal-body #taggedUsers .taggedUser,
+#commentEditModal .modal-body #postTaggedUsersModal .taggedUser,
+#tagUsersModal .modal-body #taggedUsers .taggedUser,
+#tagUsersModal .modal-body #postTaggedUsersModal .taggedUser {
+  cursor: pointer;
+}
+
+#editModal .modal-body #taggedUsers .taggedUser label,
+#editModal .modal-body #postTaggedUsersModal .taggedUser label,
+#commentEditModal .modal-body #taggedUsers .taggedUser label,
+#commentEditModal .modal-body #postTaggedUsersModal .taggedUser label,
+#tagUsersModal .modal-body #taggedUsers .taggedUser label,
+#tagUsersModal .modal-body #postTaggedUsersModal .taggedUser label {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  background-color: #f66103;
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+#editModal .modal-body #postTaggedUsersModal .taggedUser,
+#commentEditModal .modal-body #postTaggedUsersModal .taggedUser,
+#tagUsersModal .modal-body #postTaggedUsersModal .taggedUser {
+  cursor: default !important;
+}
+
+#editModal .modal-body #postTaggedUsersModal .taggedUser label,
+#commentEditModal .modal-body #postTaggedUsersModal .taggedUser label,
+#tagUsersModal .modal-body #postTaggedUsersModal .taggedUser label {
+  cursor: default !important;
+}
+
 html {
   font-size: 2vw;
   scroll-behavior: smooth;
 }
 
-div.cookie-consent {
+div.cookie-consent,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser {
   padding: 1% 0;
   width: 50%;
   text-align: center;

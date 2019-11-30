@@ -27,6 +27,7 @@ Route::middleware(['verified'])->group(function () {
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
     Route::get('tag/autocompleteHobby', 'AjaxTagsController@autocompleteHobby');
     Route::get('tag/autocompleteCity', 'AjaxTagsController@autocompleteCity');
+    Route::get('tag/autocompleteUser', 'AjaxTagsController@autocompleteUser');
     Route::put('tag/addNew', 'AjaxTagsController@addNew');
     Route::delete('tag/deleteTag', 'AjaxTagsController@deleteTag');
 });
@@ -53,6 +54,9 @@ Route::prefix('user')->group(function(){
         Route::patch('editComment', 'CommentController@editComment')->name('ajaxEditComment');
         Route::patch('likeComment', 'CommentController@likeComment')->name('ajaxLikeComment');
         Route::delete('deleteComment', 'CommentController@deleteComment')->name('ajaxDeleteComment');
+
+        Route::post('checkUser', 'HomeController@checkUser')->name('ajaxCheckUser');
+        Route::get('getTaggedUsers/{post}', 'HomeController@getTagged')->name('ajaxGetTagged');
     });
 
     Route::get('profile', 'ProfileController@index')->middleware('auth')->name('ProfileView');

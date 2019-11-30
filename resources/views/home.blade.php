@@ -24,9 +24,11 @@
             <form id="wallPost" method="post">
                 <output id="picture-preview"></output>
                 <textarea id="addPost" name="postDesc"></textarea>
+                <output id="postTaggedUsers" class="row"></output>
+
                 <div class="friendsWallButtons">
-                    <span class="additionalButton" data-toggle="tooltip" data-placement="bottom" title="{{__('activityWall.tagUser')}}"><i class="fas fa-user-tag"></i></span>
-                    <label for="postPicture" class="additionalButton" data-toggle="tooltip" data-placement="bottom" title="{{__('activityWall.addImage')}}"><i class="far fa-image"></i></label>
+                    <span class="additionalButton tagUserButton" data-toggle="modal" data-target="#tagUsersModal"><i class="fas fa-user-tag"></i></span>
+                    <label for="postPicture" class="additionalButton"><i class="far fa-image"></i></label>
                     <input type="file" class="d-none" name="postPicture[]" accept="image/*" id="postPicture" multiple>
                 </div>
                 <div class="friendsWallSendButton">
@@ -71,16 +73,26 @@
 
 @include('partials.commentEditModal')
 
+@include('partials.tagUsersModal')
+
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+@endpush
 
 @push('scripts')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script>
-    var badFileType      = "{{__('chat.badFileType')}}";
-    var deletePostMsg    = "{{__('activityWall.deletePost')}}";
-    var emptyCommentMsg  = "{{__('activityWall.emptyComment')}}";
-    var deleteCommentMsg = "{{__('activityWall.deleteComment')}}";
+    var badFileType      =  "{{__('chat.badFileType')}}";
+    var deletePostMsg    =  "{{__('activityWall.deletePost')}}";
+    var emptyCommentMsg  =  "{{__('activityWall.emptyComment')}}";
+    var deleteCommentMsg =  "{{__('activityWall.deleteComment')}}";
     var resetImgMsg      =  "{{__('activityWall.resetPictures')}}";
+    var userNotFound     =  "{{__('activityWall.noUserFound')}}";
+    var deleteUserTag    =  "{{__('activityWall.deleteTaggedUser')}}";
+
     var baseUrl = "{{url('/')}}";
 </script>
 

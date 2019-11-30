@@ -8,9 +8,18 @@
         @endif
     </output>
     <textarea id="editPostDesc" name="postDesc">{{$post->desc}}</textarea>
+    <output id="postTaggedUsersModal" class="row">
+        @if ($taggedUsers = json_decode($post->tagged_users))
+            @foreach ($taggedUsers as $tag)
+                <div class="col-3 taggedUser">
+                    <label class="taggedUserLabel">{{$tag}}</label>
+                </div>
+            @endforeach
+        @endif
+    </output>
     <div class="friendsWallButtons">
-        <span class="additionalButton" data-toggle="tooltip" data-placement="bottom" title="{{__('activityWall.tagUser')}}"><i class="fas fa-user-tag"></i></span>
-        <label for="editPicture" class="additionalButton" data-toggle="tooltip" data-placement="bottom" title="{{__('activityWall.addImage')}}"><i class="far fa-image"></i></label>
+        <span class="additionalButton tagUserButton" data-id="{{$post->id}}" data-toggle="modal" data-target="#tagUsersModal"><i class="fas fa-user-tag"></i></span>
+        <label for="editPicture" class="additionalButton"><i class="far fa-image"></i></label>
         <input type="file" class="d-none" name="editPicture[]" accept="image/*" id="editPicture" multiple>
     </div>
     <input type="hidden" value="{{$post->id}}" name="postId">

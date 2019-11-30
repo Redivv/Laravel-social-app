@@ -102,6 +102,13 @@ $(document).ready(function () {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
+  $(document).on('show.bs.modal', '.modal', function () {
+    var zIndex = 1040 + 10 * $('.modal:visible').length;
+    $(this).css('z-index', zIndex);
+    setTimeout(function () {
+      $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+    }, 0);
+  });
   main();
 });
 
@@ -371,6 +378,77 @@ function main() {
   $('#editModal').on('hide.bs.modal', function () {
     $('#editPicture').off('change');
     $(this).find('.modal-body').html('');
+  });
+  $('#tagUsersModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var postId;
+
+    if (postId = $(button).data('id')) {
+      var html = '<div id="tagSpinner" class="col-3">' + '<div class="spinner-border" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+      $('#taggedUsers').html(html);
+      var url = baseUrl + '/user/ajax/getTaggedUsers/' + postId;
+      var request = $.ajax({
+        method: 'get',
+        url: url
+      });
+      request.done(function (response) {
+        if (response.status === 'success') {
+          $('#taggedUsers').html(response.html);
+          $('.taggedUser').off('click');
+          $('.taggedUser').on('click', function () {
+            if (confirm(deleteUserTag)) {
+              $(this).remove();
+            }
+          });
+        }
+      });
+      request.fail(function (xhr) {
+        alert(xhr.responseJSON.message);
+      });
+    }
+
+    $("#tagUserName").autocomplete({
+      source: function source(request, response) {
+        $.ajax({
+          url: baseUrl + "/ajax/tag/autocompleteUser",
+          data: {
+            term: request.term
+          },
+          dataType: "json",
+          success: function success(data) {
+            var resp = $.map(data, function (obj) {
+              return obj.name;
+            });
+            response(resp);
+          }
+        });
+      },
+      minLength: 1,
+      appendTo: '#tagUsers'
+    });
+    $('#tagUserName').on('keydown', function (e) {
+      if (e.keyCode == 13 || e.which == 13) {
+        e.preventDefault();
+        addTagUser(this);
+      }
+    });
+    $('#tagUsers').on('submit', function (e) {
+      e.preventDefault();
+
+      if (postId) {
+        tagUsersPostModal(this);
+      } else if ($(button).hasClass('commentUserTag')) {
+        tagUsersComment(this);
+      } else {
+        tagUsers(this);
+      }
+    });
+  });
+  $('#tagUsersModal').on('hide.bs.modal', function () {
+    $('#taggedUsers').empty();
+    $('#tagUserName').off('keydown');
+    $('#tagUsers').off('submit');
+    $('.taggedUser').off('click');
   });
   $('.postDelete').on('click', function () {
     deletePost(this);
@@ -935,6 +1013,66 @@ function refreshWall(selected) {
   request.fail(function (xhr) {
     alert(xhr.responseJSON.message);
   });
+}
+
+function addTagUser(selected) {
+  var userName = $(selected).val().trim();
+  $(selected).val('');
+  var html = '<div id="tagSpinner" class="col-3">' + '<div class="spinner-border" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+  $('#taggedUsers').append(html);
+  var url = baseUrl + '/user/ajax/checkUser';
+  var request = $.ajax({
+    method: 'post',
+    url: url,
+    data: {
+      userName: userName
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      html = '<div class="col-3 taggedUser">' + '<label class="taggedUserLabel">' + userName + '</label>' + '<input type="hidden" value="' + response.userId + '" name="taggedUser[]">' + '</div>';
+      $('#taggedUsers').find('#tagSpinner').replaceWith(html);
+      $('.taggedUser').off('click');
+      $('.taggedUser').on('click', function () {
+        if (confirm(deleteUserTag)) {
+          $(this).remove();
+        }
+      });
+    }
+  });
+  request.fail(function (xhr) {
+    alert(userNotFound);
+    $('#taggedUsers').find('#tagSpinner').remove();
+  });
+}
+
+function tagUsers() {
+  if (!$('#taggedUsers').find('#tagSpinner').length) {
+    var taggedUsers = $('#taggedUsers').html().trim();
+    $('#tagUsersModal').modal('hide');
+    $('#postTaggedUsers').html(taggedUsers);
+  }
+}
+
+function tagUsersComment() {
+  if (!$('#taggedUsers').find('#tagSpinner').length) {
+    var taggedUsers = $('#taggedUsers').html().trim();
+    $('#tagUsersModal').modal('hide');
+    $('#commentUserTags').html(taggedUsers);
+  }
+}
+
+function tagUsersPostModal() {
+  if (!$('#taggedUsers').find('#tagSpinner').length) {
+    var taggedUsers = $('#taggedUsers').html().trim();
+    $('#tagUsersModal').modal('hide');
+    $('#postTaggedUsersModal').html(taggedUsers);
+
+    if ($('#postTaggedUsersModal').html().trim() == "") {
+      var html = "<input type='hidden' name='noTags' value='true'>";
+      $('#postTaggedUsersModal').html(html);
+    }
+  }
 }
 
 /***/ }),

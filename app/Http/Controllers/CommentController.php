@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Comment;
 use App\Post;
+use App\User;
 
 use App\Notifications\SystemNotification;
 
@@ -56,15 +57,30 @@ class CommentController extends Controller
         if ($request->ajax()) {
             $kek = $request->all();
             $request->validate([
-                'data.*.value' => ['string','max:255'],
+                'data.0.value' => ['string','max:255'],
                 'postId'       => ['exists:posts,id','nullable','required_without:parentId'],
-                'parentId'     => ['exists:comments,id','required_without:postId']
+                'parentId'     => ['exists:comments,id','required_without:postId'],
             ]);
 
             $newComment = new Comment;
 
             $newComment->message   = $request->data[0]['value'];
             $newComment->author_id = Auth::id();
+
+            $taggedUsers = $request->data;
+
+            unset($taggedUsers[0]);
+            
+            
+            if ($taggedUsers) {
+                $taggedUsers_json = array();
+                foreach ($taggedUsers as $tagged) {
+                    $user = User::find($tagged);
+                    $taggedUsers_json[] = $user->name;
+                }
+                $taggedUsers_json = json_encode($taggedUsers_json);
+                $newComment->tagged_users = $taggedUsers_json;
+            }
 
             if (isset($request->parentId)) {
                 

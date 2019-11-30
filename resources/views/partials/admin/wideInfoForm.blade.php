@@ -17,8 +17,8 @@
         <label class="d-block" for="infoWallDesc">{{__('admin.infoContent')}}</label>
         <textarea class="infoWallDesc" name="infoWallDesc" id="infoWallDesc"></textarea>
         <div class="friendsWallButtons">
-            <span class="additionalButton" data-toggle="tooltip" data-placement="bottom" title="{{__('activityWall.tagUser')}}"><i class="fas fa-user-tag"></i></span>
-            <label for="postPicture" class="additionalButton" data-toggle="tooltip" data-placement="bottom" title="{{__('activityWall.addImage')}}"><i class="far fa-image"></i></label>
+            <span class="additionalButton"><i class="fas fa-user-tag"></i></span>
+            <label for="postPicture" class="additionalButton"><i class="far fa-image"></i></label>
             <input type="file" class="d-none" name="postPicture[]" accept="image/*" id="postPicture" multiple>
         </div>
     </div>

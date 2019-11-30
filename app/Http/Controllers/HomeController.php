@@ -148,11 +148,14 @@ class HomeController extends Controller
             $request->validate([
                 'postDesc'       =>['required_without:postPicture','string','nullable'],
                 'postPicture.*'  =>['required_without:postDesc','file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
+                'taggedUser.*'   =>['exists:users,id','distinct']
             ]);
 
-            $postDesc = $request->input('postDesc');
-            $pictures = $request->file('postPicture');
-            $pictures_json = null;
+            $postDesc           = $request->input('postDesc');
+            $pictures           = $request->file('postPicture');
+            $taggedUsers        = $request->taggedUser;
+            $pictures_json      = null;
+            $taggedUsers_json   = null;
 
             if($pictures){
                 $pictures_json = array();
@@ -164,12 +167,23 @@ class HomeController extends Controller
                 $pictures_json = json_encode($pictures_json);
             }
 
+            if ($taggedUsers) {
+                $taggedUsers_json = array();
+                foreach ($taggedUsers as $tagged) {
+                    $user = User::find($tagged);
+                    $taggedUsers_json[] = $user->name;
+                }
+                $taggedUsers_json = json_encode($taggedUsers_json);
+            }
+
             $author = Auth::user();
 
             $post = new Post;
-            $post->user_id = $author->id;
-            $post->desc = $postDesc;
-            $post->pictures = $pictures_json;
+
+            $post->user_id      = $author->id;
+            $post->desc         = $postDesc;
+            $post->pictures     = $pictures_json;
+            $post->tagged_users = $taggedUsers_json;
 
             
             if ($post->save()) {
@@ -192,11 +206,15 @@ class HomeController extends Controller
                 'postDesc'       =>['required_without:postPicture','string','nullable'],
                 'editPicture.*'  =>['required_without:postDesc', 'nullable','file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
                 'postId'         =>['exists:posts,id'],
-                'noPicture'      =>['string','nullable']
+                'noPicture'      =>['string','nullable'],
+                'taggedUser.*'   =>['exists:users,id','distinct'],
+                'noTags'      =>['string','nullable']
             ]);
             $postDesc = $request->input('postDesc');
             $pictures = $request->file('editPicture');
-            $pictures_json = null;
+            $taggedUsers        = $request->taggedUser;
+            $pictures_json      = null;
+            $taggedUsers_json   = null;
 
             $post = Post::where('id',$request->postId)->where('user_id',Auth::id())->first();
             $post->desc = $postDesc;
@@ -210,10 +228,20 @@ class HomeController extends Controller
                 }
                 $pictures_json = json_encode($pictures_json);
                 $post->pictures = $pictures_json;
+            }elseif(isset($request->noPicture)) {
+                $post->pictures = null;
             }
 
-            if (isset($request->noPicture)) {
-                $post->pictures = null;
+            if ($taggedUsers) {
+                $taggedUsers_json = array();
+                foreach ($taggedUsers as $tagged) {
+                    $user = User::find($tagged);
+                    $taggedUsers_json[] = $user->name;
+                }
+                $taggedUsers_json = json_encode($taggedUsers_json);
+                $post->tagged_users = $taggedUsers_json;
+            }elseif(isset($request->noTags)){
+                $post->tagged_users = null;
             }
 
             
@@ -295,6 +323,32 @@ class HomeController extends Controller
 
             return response()->json(['status' => 'success'], 200);
         }
+    }
 
+    public function checkUser(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->validate([
+                'userName'    => ['string','exists:users,name']
+            ]);
+            $user = User::where('name',$request->userName)->first();
+            return response()->json(['status' => 'success', 'userId' => $user->id], 200);
+        }
+    }
+
+    public function getTagged(Request $request, Post $post)
+    {
+        if ($request->ajax()) {
+            $taggedUsers = json_decode($post->tagged_users);
+            $users = User::whereIn('name',$taggedUsers)->get();
+
+            if (count($users) > 0) {
+                $taggedUsersHtml = view('partials.wallTaggedUsers')->withTaggedUsers($users)->render();
+            }else{
+                return response()->json(['status' => 'error'], 400);
+            }
+
+            return response()->json(['status' => 'success', 'html' => $taggedUsersHtml], 200);
+        }
     }
 }
