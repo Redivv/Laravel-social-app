@@ -35,5 +35,5 @@
             </div> 
         </div>
     @endforeach
-    {{$results->appends(['username' => request('username') ?? '', 'age-min' => request('age-min') ?? '', 'age-max' => request('age-max') ?? ''])->links()}}
+    {{$results->appends(['username' => request('username') ?? '', 'age-min' => request('age-min') ?? '', 'age-max' => request('age-max') ?? '', 'sortOptions_crit' => request('sortOptions_crit') ?? '', 'sortOptions_dir' => request('sortOptions_dir') ?? '', 'city' => request('city') ?? ''])->links()}}
 </div>
