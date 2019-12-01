@@ -80,7 +80,7 @@ class ProfileController extends Controller
         //Save changes in user profile
         $user->update();
 
-        return redirect('profile')->with(['status' => __('profile.updated')]);
+        return redirect('user/profile')->with(['status' => __('profile.updated')]);
     }
 
     public function visit(User $user){
