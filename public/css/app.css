@@ -17769,6 +17769,33 @@ body {
   width: 30vw;
 }
 
+.nav-bar-height .userNotifications ul {
+  list-style-type: none;
+}
+
+.nav-bar-height .userNotifications ul .friendName {
+  position: relative;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.nav-bar-height .userNotifications ul .friendOptions {
+  padding: 1rem;
+}
+
+.nav-bar-height .userNotifications ul .friendOptions i {
+  margin: 0 0.5rem;
+}
+
+.nav-bar-height .userNotifications ul .friendOptions .friendRelated {
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.nav-bar-height .userNotifications ul .friendOptions .friendRelated:hover {
+  color: #f66103;
+}
+
 .nav-bar-height .userNotifications .dropdown-item,
 .nav-bar-height .userNotifications .clearAllBtn {
   padding: 0.5rem 1rem;
@@ -17834,6 +17861,7 @@ body {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .nav-bar-height .systemNotifications {
   overflow-y: unset;
   max-height: none;
@@ -17867,6 +17895,8 @@ body {
 >>>>>>> Friends done
 }
 
+=======
+>>>>>>> Friends - pre-merge hotfix
 .nav-bar-height .systemNotifications a {
   margin-top: 0.5rem;
   margin-bottom: 0;

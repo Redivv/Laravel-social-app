@@ -49,15 +49,13 @@
             </div>
             <hr>
             <output class="friendsListBox">
-                <ul class="friendList">
-                    @if(count($friends)>0)
+                @if(count($friends)>0)
+                    <ul class="friendList">
                         @include('partials.friendsList')
-                    @else
-                        <li class="row active">
-                            {{__('activityWall.noFriendsToShow')}}
-                        </li>
-                    @endif
-                </ul>
+                    </ul>
+                @else   
+                    {{__('activityWall.noFriendsToShow')}}
+                @endif
             </output>
         </div>
     </div>
