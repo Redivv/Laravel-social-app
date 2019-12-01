@@ -53,6 +53,39 @@
                                             @break
                                     @endswitch
                                 @endforeach
+
+
+
+                                            {{-- Friend request notifications Mobile, not working--}}
+                                            <ul>
+                                                @if($notifications['FRAmount']==0)
+                                                    
+                                                @else
+                                                @foreach ($notifications['FR'] as $frNot)
+                                                    
+                                                    <li class="active">
+                                                        <div class="row" id="{{$frNot['name']}}">
+                                                            <a class="col-7 dropdown-item" href="/user/profile/{{$frNot['name']}}">
+                                                                <div class="row">
+                                                                    <div class="col-2" >
+                                                                        <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
+                                                                    </div>
+                                                                    <div class="col-8 friendName">
+                                                                        <span>{{$frNot['name']}}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                            <div class="col-5 friendOptions">
+                                                                <span class="acceptFriend friendRelated" id="{{$frNot['name']}}Add"  data-name="{{$frNot['name']}}"><i class="fas fa-plus"></i></span>
+                                                                <span class="chatWith friendRelated" id="{{$frNot['name']}}Chat" data-name="{{$frNot['name']}}"><i class="far fa-comment-dots"></i></span>
+                                                                <span class="denyFriend friendRelated" id="{{$frNot['name']}}Deny" data-name="{{$frNot['name']}}"><i class="fas fa-times"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    
+                                                @endforeach
+                                                @endif
+                                            </ul>
                         @endif
                     </div>
 
@@ -230,7 +263,7 @@
                                             @break
                                     @endswitch
                                 @endforeach
-                                
+                                            {{-- Friend request notifications --}}
                                     <ul>
                                         @if($notifications['FRAmount']==0)
                                             
@@ -239,7 +272,7 @@
                                             
                                             <li class="active">
                                                 <div class="row" id="{{$frNot['name']}}">
-                                                    <a class="col-7 dropdown-item" href="/profile/{{$frNot['name']}}">
+                                                    <a class="col-7 dropdown-item" href="/user/profile/{{$frNot['name']}}">
                                                         <div class="row">
                                                             <div class="col-2" >
                                                                 <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
