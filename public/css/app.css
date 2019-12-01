@@ -18796,9 +18796,13 @@ html {
   color: #f66103;
 }
 
+<<<<<<< HEAD
 #editModal .modal-dialog,
 #commentEditModal .modal-dialog,
 #tagUsersModal .modal-dialog {
+=======
+#editModal .modal-dialog {
+>>>>>>> df51133542b08d300fb13d4155d71f94dbab5782
   max-width: 50vw;
 }
 
