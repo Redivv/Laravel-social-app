@@ -75,7 +75,7 @@ class CommentController extends Controller
             if ($taggedUsers) {
                 $taggedUsers_json = array();
                 foreach ($taggedUsers as $tagged) {
-                    $user = User::find($tagged);
+                    $user = User::find($tagged['value']);
                     $taggedUsers_json[] = $user->name;
                 }
                 $taggedUsers_json = json_encode($taggedUsers_json);
@@ -118,13 +118,34 @@ class CommentController extends Controller
         if ($request->ajax()) {
 
             $request->validate([
-                'data.*.value' => ['string','max:255'],
+                'data.0.value' => ['string','max:255'],
                 'commentId'    => ['exists:comments,id','nullable']
             ]);
 
             $comment = Comment::where('id',$request->commentId)->where('author_id',Auth::id())->first();
 
             $comment->message = $request->data[0]['value'];
+
+
+            $taggedUsers = $request->data;
+
+            unset($taggedUsers[0]);
+            
+            
+            if ($taggedUsers) {
+                if ($taggedUsers[1]['name'] == 'noTags') {
+                    $comment->tagged_users = null;
+                }else{
+                    $taggedUsers_json = array();
+                    foreach ($taggedUsers as $tagged) {
+                        $user = User::find($tagged['value']);
+                        $taggedUsers_json[] = $user->name;
+                    }
+                    $taggedUsers_json = json_encode($taggedUsers_json);
+                    $comment->tagged_users = $taggedUsers_json;
+                }
+            }
+
             if ($comment->update()) {
                 $html = view('partials.ajaxWallCommentSingle')->withComments([$comment])->render();
                 return response()->json(['status' => 'success','html' => $html], 200);
@@ -172,5 +193,27 @@ class CommentController extends Controller
             return response()->json(['status' => 'success'], 200);
         }
 
+    }
+
+    
+
+    public function getTagged(Request $request, Comment $comment)
+    {
+        if ($request->ajax()) {
+
+            if($taggedUsers = json_decode($comment->tagged_users)){
+                $users = User::whereIn('name',$taggedUsers)->get();
+
+                if (count($users) > 0) {
+                    $taggedUsersHtml = view('partials.wallTaggedUsers')->withTaggedUsers($users)->render();
+                }else{
+                    return response()->json(['status' => 'error'], 400);
+                }
+
+                return response()->json(['status' => 'success', 'html' => $taggedUsersHtml], 200);
+            }else{
+                return response()->json(['status' => 'success', 'html' => ''], 200);
+            }
+        }
     }
 }

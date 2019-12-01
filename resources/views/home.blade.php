@@ -92,6 +92,7 @@
     var resetImgMsg      =  "{{__('activityWall.resetPictures')}}";
     var userNotFound     =  "{{__('activityWall.noUserFound')}}";
     var deleteUserTag    =  "{{__('activityWall.deleteTaggedUser')}}";
+    var emptyUser        =  "{{__('activityWall.emptyUser')}}";
 
     var baseUrl = "{{url('/')}}";
 </script>

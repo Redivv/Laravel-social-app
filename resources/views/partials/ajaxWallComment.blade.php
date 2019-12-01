@@ -15,6 +15,15 @@
             </div>
             <div class="col-12 commentDate">{{$comment->created_at->diffForHumans()}}</div>
             <div class="col-12 commentDesc">{{$comment->message}}</div>
+            <div class="col-12 commentTags row">
+                @if ($taggedUsers = json_decode($comment->tagged_users))
+                    @foreach ($taggedUsers as $tag)
+                        <a href="/user/profile{{$tag}}" class="col-3 commentTaggedUser" target="__blank">
+                            <span class="taggedUserLabel">{{$tag}}</span>
+                        </a>
+                    @endforeach
+                @endif
+            </div>
         </div>
         <div class="col-12 commentUserButtons">
             <i class="fas fa-fire likeCommentButton @if($comment->liked()){{"active"}}@endif" data-id="{{$comment->id}}"></i><span class="badge likesCount badge-pill badge-warning">@if($comment->likeCount != 0){{$comment->likeCount}}@endif</span>
@@ -41,6 +50,15 @@
                 </div>
                 <div class="col-12 commentDate">{{$comment->replies[0]->created_at->diffForHumans()}}</div>
                 <div class="col-12 commentDesc">{{$comment->replies[0]->message}}</div>
+                <div class="col-12 commentTags row">
+                    @if ($taggedUsers = json_decode($comment->replies[0]->tagged_users))
+                        @foreach ($taggedUsers as $tag)
+                            <a href="/user/profile{{$tag}}" class="col-3 commentTaggedUser" target="__blank">
+                                <span class="taggedUserLabel">{{$tag}}</span>
+                            </a>
+                        @endforeach
+                    @endif
+                </div>
             </div>
             <div class="col-12 commentUserButtons">
                 <i class="fas fa-fire likeCommentButton @if($comment->replies[0]->liked()){{"active"}}@endif" data-id="{{$comment->replies[0]->id}}"></i><span class="badge likesCount badge-pill badge-warning">@if($comment->replies[0]->likeCount != 0){{$comment->replies[0]->likeCount}}@endif</span>

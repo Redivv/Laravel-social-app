@@ -355,7 +355,12 @@ function main() {
 
             $('#taggedUsers').html(html);
 
-            let url = baseUrl+'/user/ajax/getTaggedUsers/'+postId;
+            let url;
+            if ($(button).hasClass('commentModal')) {
+                url = baseUrl+'/user/ajax/getCommentTaggedUsers/'+postId;
+            }else{
+                url = baseUrl+'/user/ajax/getTaggedUsers/'+postId;
+            }
 
             var request = $.ajax({
                 method : 'get',
@@ -414,11 +419,11 @@ function main() {
         $('#tagUsers').on('submit',function(e) {
             e.preventDefault();
             if (postId) {
-                tagUsersPostModal(this);
+                tagUsersPostModal(button);
             }else if($(button).hasClass('commentUserTag')){
-                tagUsersComment(this);
+                tagUsersComment(button);
             }else{
-                tagUsers(this);
+                tagUsers();
             }
 
             
@@ -453,11 +458,13 @@ function main() {
         let comment     = $('#com-'+commentId);
 
         let content     = comment.find('.commentDesc').html().trim();
-
-        console.log(content);
+        let taggedUsers = comment.find('.commentTags').html().trim();
 
         modal.find('.emojionearea-editor').html(content);
         modal.find('#editPostDesc').val(content);
+        modal.find('#commentModalUserTagged').html(taggedUsers);
+        modal.find('.tagUserButton').data('id',commentId);
+        modal.find('.tagUserButton').data('modal','true');
 
         $('#editComment').off('submit');
 
@@ -681,9 +688,10 @@ function addReplyForm(selected) {
         '<div class="input-group row">'+
             '<input type="text" name="commentDesc" id="replyInput" class="form-control replyDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">'+
             '<div class="input-group-append col-1 commentButtons">'+
-                '<i class="fas fa-user-tag"></i>'+
-                '</div>'+
+                '<i class="fas fa-user-tag commentUserTag" data-toggle="modal" data-target="#tagUsersModal"></i>'+
             '</div>'+
+        '</div>'+
+        '<output id="replyUsersTag"></output>'
         '</form>'+
     '</div>';
     let parentComment = $('#com-'+parentId);
@@ -1104,45 +1112,50 @@ function refreshWall(selected) {
 function addTagUser(selected) {
     let userName = $(selected).val().trim();
 
-    $(selected).val('');
-    let html = '<div id="tagSpinner" class="col-3">'+
-        '<div class="spinner-border" role="status">'+
-            '<span class="sr-only">Loading...</span>'+
-        '</div>'+
-    '</div>';
+    if (userName != "") {
 
-    $('#taggedUsers').append(html);
+        $(selected).val('');
+        let html = '<div id="tagSpinner" class="col-3">'+
+            '<div class="spinner-border" role="status">'+
+                '<span class="sr-only">Loading...</span>'+
+            '</div>'+
+        '</div>';
 
-    let url = baseUrl+'/user/ajax/checkUser';
-    var request = $.ajax({
-        method : 'post',
-        url: url,
-        data: {userName: userName}
-    });
-    
-    
-    request.done(function(response){
-        if (response.status === 'success') {
-            html = '<div class="col-3 taggedUser">'+
-                '<label class="taggedUserLabel">'+userName+'</label>'+
-                '<input type="hidden" value="'+response.userId+'" name="taggedUser[]">'+
-            '</div>';
-            $('#taggedUsers').find('#tagSpinner').replaceWith(html);
+        $('#taggedUsers').append(html);
 
-            $('.taggedUser').off('click');
-            $('.taggedUser').on('click',function() {
-               if (confirm(deleteUserTag)) {
-                   $(this).remove();
-               } 
-            });
-        }
-    });
-    
-    
-    request.fail(function (xhr){
-        alert(userNotFound);
-        $('#taggedUsers').find('#tagSpinner').remove();
-    });
+        let url = baseUrl+'/user/ajax/checkUser';
+        var request = $.ajax({
+            method : 'post',
+            url: url,
+            data: {userName: userName}
+        });
+        
+        
+        request.done(function(response){
+            if (response.status === 'success') {
+                html = '<div class="col-3 taggedUser">'+
+                    '<label class="taggedUserLabel">'+userName+'</label>'+
+                    '<input type="hidden" value="'+response.userId+'" name="taggedUser[]">'+
+                '</div>';
+                $('#taggedUsers').find('#tagSpinner').replaceWith(html);
+
+                $('.taggedUser').off('click');
+                $('.taggedUser').on('click',function() {
+                if (confirm(deleteUserTag)) {
+                    $(this).remove();
+                } 
+                });
+            }
+        });
+        
+        
+        request.fail(function (xhr){
+            alert(userNotFound);
+            $('#taggedUsers').find('#tagSpinner').remove();
+        });
+    }else{
+        alert(emptyUser);
+    }
 }
 
 function tagUsers() {
@@ -1154,26 +1167,34 @@ function tagUsers() {
     }
 }
 
-function tagUsersComment() {
+function tagUsersComment(selected) {
     if (!$('#taggedUsers').find('#tagSpinner').length) {
         let taggedUsers = $('#taggedUsers').html().trim();
         $('#tagUsersModal').modal('hide');
 
-        $('#commentUserTags').html(taggedUsers);
+        $(selected).parents('.input-group').next().html(taggedUsers);
     }
     
 }
 
-function tagUsersPostModal() {
+function tagUsersPostModal(selected) {
     if (!$('#taggedUsers').find('#tagSpinner').length) {
         let taggedUsers = $('#taggedUsers').html().trim();
+        console.log (taggedUsers);
         $('#tagUsersModal').modal('hide');
 
-        $('#postTaggedUsersModal').html(taggedUsers);
+        let output;
 
-        if ($('#postTaggedUsersModal').html().trim() == "") {
+        if (selected.data('modal')) {
+            output = '#commentModalUserTagged';
+        }else{
+            output = '#postTaggedUsersModal' 
+        }
+        $(output).html(taggedUsers);
+
+        if ($(output).html().trim() == "") {
             let html = "<input type='hidden' name='noTags' value='true'>";
-            $('#postTaggedUsersModal').html(html)
+            $(output).html(html)
         }
     }
 }

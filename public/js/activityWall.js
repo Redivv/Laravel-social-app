@@ -386,7 +386,14 @@ function main() {
     if (postId = $(button).data('id')) {
       var html = '<div id="tagSpinner" class="col-3">' + '<div class="spinner-border" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
       $('#taggedUsers').html(html);
-      var url = baseUrl + '/user/ajax/getTaggedUsers/' + postId;
+      var url;
+
+      if ($(button).hasClass('commentModal')) {
+        url = baseUrl + '/user/ajax/getCommentTaggedUsers/' + postId;
+      } else {
+        url = baseUrl + '/user/ajax/getTaggedUsers/' + postId;
+      }
+
       var request = $.ajax({
         method: 'get',
         url: url
@@ -436,11 +443,11 @@ function main() {
       e.preventDefault();
 
       if (postId) {
-        tagUsersPostModal(this);
+        tagUsersPostModal(button);
       } else if ($(button).hasClass('commentUserTag')) {
-        tagUsersComment(this);
+        tagUsersComment(button);
       } else {
-        tagUsers(this);
+        tagUsers();
       }
     });
   });
@@ -465,9 +472,12 @@ function main() {
     var modal = $(this);
     var comment = $('#com-' + commentId);
     var content = comment.find('.commentDesc').html().trim();
-    console.log(content);
+    var taggedUsers = comment.find('.commentTags').html().trim();
     modal.find('.emojionearea-editor').html(content);
     modal.find('#editPostDesc').val(content);
+    modal.find('#commentModalUserTagged').html(taggedUsers);
+    modal.find('.tagUserButton').data('id', commentId);
+    modal.find('.tagUserButton').data('modal', 'true');
     $('#editComment').off('submit');
     $('#editComment').on('submit', function (e) {
       e.preventDefault();
@@ -658,7 +668,8 @@ function getComments(selected) {
 function addReplyForm(selected) {
   $('#replyForm').remove();
   var parentId = $(selected).data('id');
-  var formHtml = '<div class="replyForm">' + '<form id="replyForm" method="post">' + '<div class="input-group row">' + '<input type="text" name="commentDesc" id="replyInput" class="form-control replyDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">' + '<div class="input-group-append col-1 commentButtons">' + '<i class="fas fa-user-tag"></i>' + '</div>' + '</div>' + '</form>' + '</div>';
+  var formHtml = '<div class="replyForm">' + '<form id="replyForm" method="post">' + '<div class="input-group row">' + '<input type="text" name="commentDesc" id="replyInput" class="form-control replyDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">' + '<div class="input-group-append col-1 commentButtons">' + '<i class="fas fa-user-tag commentUserTag" data-toggle="modal" data-target="#tagUsersModal"></i>' + '</div>' + '</div>' + '<output id="replyUsersTag"></output>';
+  '</form>' + '</div>';
   var parentComment = $('#com-' + parentId);
   $(formHtml).insertAfter('#com-' + parentId);
   $('#replyInput').emojioneArea({
@@ -1017,33 +1028,38 @@ function refreshWall(selected) {
 
 function addTagUser(selected) {
   var userName = $(selected).val().trim();
-  $(selected).val('');
-  var html = '<div id="tagSpinner" class="col-3">' + '<div class="spinner-border" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
-  $('#taggedUsers').append(html);
-  var url = baseUrl + '/user/ajax/checkUser';
-  var request = $.ajax({
-    method: 'post',
-    url: url,
-    data: {
-      userName: userName
-    }
-  });
-  request.done(function (response) {
-    if (response.status === 'success') {
-      html = '<div class="col-3 taggedUser">' + '<label class="taggedUserLabel">' + userName + '</label>' + '<input type="hidden" value="' + response.userId + '" name="taggedUser[]">' + '</div>';
-      $('#taggedUsers').find('#tagSpinner').replaceWith(html);
-      $('.taggedUser').off('click');
-      $('.taggedUser').on('click', function () {
-        if (confirm(deleteUserTag)) {
-          $(this).remove();
-        }
-      });
-    }
-  });
-  request.fail(function (xhr) {
-    alert(userNotFound);
-    $('#taggedUsers').find('#tagSpinner').remove();
-  });
+
+  if (userName != "") {
+    $(selected).val('');
+    var html = '<div id="tagSpinner" class="col-3">' + '<div class="spinner-border" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>' + '</div>';
+    $('#taggedUsers').append(html);
+    var url = baseUrl + '/user/ajax/checkUser';
+    var request = $.ajax({
+      method: 'post',
+      url: url,
+      data: {
+        userName: userName
+      }
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        html = '<div class="col-3 taggedUser">' + '<label class="taggedUserLabel">' + userName + '</label>' + '<input type="hidden" value="' + response.userId + '" name="taggedUser[]">' + '</div>';
+        $('#taggedUsers').find('#tagSpinner').replaceWith(html);
+        $('.taggedUser').off('click');
+        $('.taggedUser').on('click', function () {
+          if (confirm(deleteUserTag)) {
+            $(this).remove();
+          }
+        });
+      }
+    });
+    request.fail(function (xhr) {
+      alert(userNotFound);
+      $('#taggedUsers').find('#tagSpinner').remove();
+    });
+  } else {
+    alert(emptyUser);
+  }
 }
 
 function tagUsers() {
@@ -1054,23 +1070,32 @@ function tagUsers() {
   }
 }
 
-function tagUsersComment() {
+function tagUsersComment(selected) {
   if (!$('#taggedUsers').find('#tagSpinner').length) {
     var taggedUsers = $('#taggedUsers').html().trim();
     $('#tagUsersModal').modal('hide');
-    $('#commentUserTags').html(taggedUsers);
+    $(selected).parents('.input-group').next().html(taggedUsers);
   }
 }
 
-function tagUsersPostModal() {
+function tagUsersPostModal(selected) {
   if (!$('#taggedUsers').find('#tagSpinner').length) {
     var taggedUsers = $('#taggedUsers').html().trim();
+    console.log(taggedUsers);
     $('#tagUsersModal').modal('hide');
-    $('#postTaggedUsersModal').html(taggedUsers);
+    var output;
 
-    if ($('#postTaggedUsersModal').html().trim() == "") {
+    if (selected.data('modal')) {
+      output = '#commentModalUserTagged';
+    } else {
+      output = '#postTaggedUsersModal';
+    }
+
+    $(output).html(taggedUsers);
+
+    if ($(output).html().trim() == "") {
       var html = "<input type='hidden' name='noTags' value='true'>";
-      $('#postTaggedUsersModal').html(html);
+      $(output).html(html);
     }
   }
 }

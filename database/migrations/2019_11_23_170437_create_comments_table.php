@@ -19,6 +19,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('author_id')->index();
             $table->unsignedBigInteger('post_id')->index();
             $table->unsignedBigInteger('parent_id')->nullable()->default(null)->index();
+            $table->longText('tagged_users')->nullable()->default(null);
             $table->timestamps();
             
             $table->foreign("author_id")->references('id')->on('users')->onDelete('cascade');

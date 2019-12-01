@@ -339,16 +339,20 @@ class HomeController extends Controller
     public function getTagged(Request $request, Post $post)
     {
         if ($request->ajax()) {
-            $taggedUsers = json_decode($post->tagged_users);
-            $users = User::whereIn('name',$taggedUsers)->get();
 
-            if (count($users) > 0) {
-                $taggedUsersHtml = view('partials.wallTaggedUsers')->withTaggedUsers($users)->render();
+            if($taggedUsers = json_decode($post->tagged_users)){
+                $users = User::whereIn('name',$taggedUsers)->get();
+
+                if (count($users) > 0) {
+                    $taggedUsersHtml = view('partials.wallTaggedUsers')->withTaggedUsers($users)->render();
+                }else{
+                    return response()->json(['status' => 'error'], 400);
+                }
+
+                return response()->json(['status' => 'success', 'html' => $taggedUsersHtml], 200);
             }else{
-                return response()->json(['status' => 'error'], 400);
+                return response()->json(['status' => 'success', 'html' => ''], 200);
             }
-
-            return response()->json(['status' => 'success', 'html' => $taggedUsersHtml], 200);
         }
     }
 }

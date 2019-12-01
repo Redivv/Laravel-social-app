@@ -164,14 +164,19 @@
                             padding: 1rem 0.5rem;
                             .postTaggedUser{
                                 @extend div;
-                                text-decoration: none;
                                 text-align: center;
-                                @include font-size(0.9rem);
-                                font-weight: bold;
-                                padding: 0.5rem 0.2rem;
-                                border-radius: 50px;
-                                background-color: $orange;
-                                color: $white;
+                                margin-left: 0.5rem;
+                                text-decoration: none;
+                                span{
+                                    display: block;
+                                    width: 100%;
+                                    @include font-size(0.9rem);
+                                    font-weight: bold;
+                                    padding: 0.4rem;
+                                    border-radius: 50px;
+                                    background-color: $orange;
+                                    color: $white;
+                                }
                             }
                         }
                     }
@@ -293,6 +298,26 @@
                                 .commentDesc{
                                     @include font-size(0.8rem);
                                 }
+                                .commentTags{
+                                    margin-top: 1rem;
+                                    margin-bottom: 0.5rem;
+                                    a{
+                                        @extend div;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        span{
+                                            display: block;
+                                            width: 100%;
+                                            @include font-size (0.7rem);
+                                            font-weight: bold;
+                                            letter-spacing: 1px;
+                                            border-radius: 50px;
+                                            padding: 0.3rem;
+                                            background-color: $orange;
+                                            color: $white;
+                                        }
+                                    }
+                                }
                             }
                             .commentUserButtons{
                                 padding: 0;
@@ -321,6 +346,9 @@
                             margin-top: 2rem;
                             margin-bottom: 1rem;
                             padding: 0 3rem;
+                            #replyUsersTag{
+                                @extend #commentUserTags;
+                            }
                         }
                         .commentRepliesBox{
                             .spinner-border{
@@ -352,6 +380,11 @@
                                 }
                                 .commentDesc{
                                     @include font-size(0.65rem);
+                                }
+                                .commentTags{
+                                    .taggedUserLabel{
+                                        @include font-size (0.6rem);
+                                    }
                                 }
                             }
                             .commentUserButtons{
@@ -512,14 +545,15 @@
                 letter-spacing: 2px;
             }
         }
-        #taggedUsers,#postTaggedUsersModal{
+        #taggedUsers,#postTaggedUsersModal,#commentModalUserTagged{
             padding: 0 1rem;
             margin-top: 2rem;
             margin-bottom: 1rem;
             width: 100%;
-            .taggedUser{
+            .taggedUser,.commentTaggedUser{
+                text-decoration: none;
                 cursor: pointer;
-                label{
+                label,span{
                     cursor: pointer;
                     padding: 0.5rem 1rem;
                     border-radius: 50px;
@@ -531,10 +565,10 @@
                 }
             }
         }
-        #postTaggedUsersModal{
-            .taggedUser{
+        #postTaggedUsersModal,#commentModalUserTagged{
+            .taggedUser,.commentTaggedUser{
                 cursor: default !important;
-                label{
+                label,span{
                     cursor: default !important;
                 }
             }

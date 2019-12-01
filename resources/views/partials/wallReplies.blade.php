@@ -15,6 +15,14 @@
             </div>
             <div class="col-12 commentDate">{{$reply->created_at->diffForHumans()}}</div>
             <div class="col-12 commentDesc">{{$reply->message}}</div>
+            <div class="col-12 commentTags row">
+                <a href="/user/profile" class="col-3 commentTaggedUser" target="__blank">
+                    <span class="taggedUserLabel">Beniz</span>
+                </a>
+                <a href="/user/profile" class="col-3 commentTaggedUser" target="__blank">
+                    <span class="taggedUserLabel">Beniz</span>
+                </a>
+            </div>
         </div>
         <div class="col-12 commentUserButtons">
             <i class="fas fa-fire likeCommentButton @if($reply->liked()){{"active"}}@endif" data-id="{{$reply->id}}"></i><span class="badge likesCount badge-pill badge-warning">@if($reply->likeCount != 0){{$reply->likeCount}}@endif</span>
