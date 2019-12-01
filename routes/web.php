@@ -20,7 +20,7 @@ Route::get('logout', 'Auth\LoginController@logout');
 Route::get('searcher', 'SearchController@index')->name('searcher');
 
 Route::middleware(['verified'])->group(function () {
-    Route::patch('profile', 'ProfileController@update');
+    Route::patch('profile', 'ProfileController@update')->name('ProfileUpdate');
     Route::get('profile/edit','ProfileController@edit')->name('ProfileEdition');
 });
 

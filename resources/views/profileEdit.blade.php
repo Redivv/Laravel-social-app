@@ -1,7 +1,7 @@
 @extends('layouts.profile')
 
 @section('startform')
-    <form action="{{route('ProfileView')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('ProfileUpdate')}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('patch')
 @endsection
