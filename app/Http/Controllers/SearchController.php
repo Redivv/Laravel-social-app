@@ -52,6 +52,7 @@ class SearchController extends Controller
             $header = $search_results_variable[1];
             $search_results_variable = $search_results_variable[0];
         }
+
         return view('searcher')->withResults($search_results)->withResultsVar($search_results_variable)->withYear(date('Y'))->withCities($cities)->withHeader($header);
     }
 
@@ -137,6 +138,18 @@ class SearchController extends Controller
 
         $search_results = $search_results->orderBy('users.'.$validated_data['sortOptions_crit'], $validated_data['sortOptions_dir'])->paginate(5);
         
+        if(Auth::check()){
+            for ($i=0; $i < count($search_results); $i++) { 
+                $user=$search_results[$i];
+                if(Auth::user()->isFriendWith($user)){
+                    $search_results[$i]['friend']=2;
+                }elseif(Auth::user()->hasSentFriendRequestTo($user)||Auth::user()->hasFriendRequestFrom($user)){
+                    $search_results[$i]['friend']=1;
+                }else{
+                    $search_results[$i]['friend']=0;
+                }
+            }
+        }
         return [$search_results,__('searcher.resultNormal',['number' => count($search_results)])];
     }
 
@@ -154,7 +167,18 @@ class SearchController extends Controller
         if (count($search_results) <= 0) {
             return $this->getRandomUsers();
         }
-
+        if(Auth::check()){
+            for ($i=0; $i < count($search_results); $i++) { 
+                $user=$search_results[$i];
+                if(Auth::user()->isFriendWith($user)){
+                    $search_results[$i]['friend']=2;
+                }elseif(Auth::user()->hasSentFriendRequestTo($user)||Auth::user()->hasFriendRequestFrom($user)){
+                    $search_results[$i]['friend']=1;
+                }else{
+                    $search_results[$i]['friend']=0;
+                }
+            }
+        }
         return [$search_results,__('searcher.resultAge')];
     }
 
@@ -175,7 +199,18 @@ class SearchController extends Controller
         if (count($search_results) <= 0) {
             return $this->getSimmilarAgeUsers($authenticated_user);
         }
-
+        if(Auth::check()){
+            for ($i=0; $i < count($search_results); $i++) { 
+                $user=$search_results[$i];
+                if(Auth::user()->isFriendWith($user)){
+                    $search_results[$i]['friend']=2;
+                }elseif(Auth::user()->hasSentFriendRequestTo($user)||Auth::user()->hasFriendRequestFrom($user)){
+                    $search_results[$i]['friend']=1;
+                }else{
+                    $search_results[$i]['friend']=0;
+                }
+            }
+        }
         return [$search_results,__('searcher.resultCity',['city' => City::find($authenticated_user->city_id)->name])];
     }
 
@@ -199,7 +234,18 @@ class SearchController extends Controller
         if (count($search_results) <= 0) {
             return $this->getSimmilarAgeUsers($authenticated_user);
         }
-        
+        if(Auth::check()){
+            for ($i=0; $i < count($search_results); $i++) { 
+                $user=$search_results[$i];
+                if(Auth::user()->isFriendWith($user)){
+                    $search_results[$i]['friend']=2;
+                }elseif(Auth::user()->hasSentFriendRequestTo($user)||Auth::user()->hasFriendRequestFrom($user)){
+                    $search_results[$i]['friend']=1;
+                }else{
+                    $search_results[$i]['friend']=0;
+                }
+            }
+        }
         return [$search_results,__('searcher.resultHobby',['hobby' => $searchedTag])];
     }
 
@@ -214,7 +260,19 @@ class SearchController extends Controller
             ->inRandomOrder()
             ->take(5)
             ->get();
-        
+
+            if(Auth::check()){
+                for ($i=0; $i < count($search_results); $i++) { 
+                    $user=$search_results[$i];
+                    if(Auth::user()->isFriendWith($user)){
+                        $search_results[$i]['friend']=2;
+                    }elseif(Auth::user()->hasSentFriendRequestTo($user)||Auth::user()->hasFriendRequestFrom($user)){
+                        $search_results[$i]['friend']=1;
+                    }else{
+                        $search_results[$i]['friend']=0;
+                    }
+                }
+            }
         return [$search_results,__('searcher.resultRandom')];
     }
 }

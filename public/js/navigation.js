@@ -125,6 +125,85 @@ function main() {
       });
     }
   });
+  $('.chatWith').on('click', function () {
+    var friendName = $(this).data('name'); //get url we want to visit
+
+    var url = baseUrl + "/message/" + friendName;
+    console.log(url);
+    window.location = url;
+  });
+  $('.acceptFriend').on('click', function () {
+    var friendName = $(this).data('name');
+    var confirmation = confirm("Na pewno chcesz zaakceptować zaproszenie " + friendName + "?");
+
+    if (confirmation == true) {
+      //get url we want to visit with ajax
+      var url = baseUrl + "/friends/ajax/accept/" + friendName; //make request in ajax:
+
+      var request = $.ajax({
+        //select method
+        method: 'post',
+        //select destination
+        url: url,
+        //select content we want to send:
+        data: {
+          //here, we just want to change our method to "put", since it is strictly laravelish method
+          //and is unavaible in html.
+          "_method": "patch" //we don't need to change anything else, because we send user name in url.
+
+        }
+      }); //if our request is succesfull, in other words, our response code is 200:
+
+      request.done(function (response) {
+        //if status made by response is 'succes':
+        if (response.status === 'success') {
+          //we delete object, that is not necessary from now.
+          var edit = $('#' + friendName);
+          var html = '<li class="displaynan"></li>';
+          $(edit).replaceWith(html);
+        }
+      }); //if our request is unsuccesfull:
+
+      request.fail(function (xhr) {
+        //we get our response as alert.
+        alert(xhr.responseJSON.message);
+      });
+    }
+  });
+  $('.denyFriend').on('click', function () {
+    var friendName = $(this).data('name');
+    var confirmation = confirm("Na pewno chcesz odrzucić zaproszenie " + friendName + "?");
+
+    if (confirmation == true) {
+      //get url we want to visit with ajax
+      var url = baseUrl + "/friends/ajax/deny/" + friendName; //make request in ajax:
+
+      var request = $.ajax({
+        //select method
+        method: 'post',
+        //select destination
+        url: url,
+        //select content we want to send:
+        data: {
+          "_method": "delete"
+        }
+      });
+      request.done(function (response) {
+        //if status made by response is 'succes':
+        if (response.status === 'success') {
+          //we delete object, that is not necessary from now.
+          var edit = $('#' + friendName);
+          var html = '<li class="displaynan"></li>';
+          $(edit).replaceWith(html);
+        }
+      }); //if our request is unsuccesfull:
+
+      request.fail(function (xhr) {
+        //we get our response as alert.
+        alert(xhr.responseJSON.message);
+      });
+    }
+  });
   $('a.clearAllBtn').one('click', function () {
     var type = $(this).data('type');
     var html = '<div class="text-center ' + type + '">' + noNotifications + '</div><div class="notificationsContainer"></div>';
@@ -153,7 +232,7 @@ function main() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\navigation.js */"./resources/js/navigation.js");
+module.exports = __webpack_require__(/*! D:\Safo\resources\js\navigation.js */"./resources/js/navigation.js");
 
 
 /***/ })

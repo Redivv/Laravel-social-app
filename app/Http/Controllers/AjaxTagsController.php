@@ -14,17 +14,24 @@ class AjaxTagsController extends Controller
 {
     public function addNew(Request $request)
     {
+        //if request done via ajax
         if ($request->ajax()) {
+            //validating sent data
             $data = $request->validate([
                 'tag'  =>  ['required', 'string', 'max:255']
             ]);
             $user = Auth::user();
+            //saving tags for user
             $user->tag($data['tag']);
+            //dunno
             $tagsList = $user->tagNames();
+            //if tagList ends without tag name given bu user, fuck'em up
             if (end($tagsList) != Str::title($data['tag'])) {
                 return response()->json(['status' => 'repeat'],400);
             }else{
+                //else we render html partial using user tag array
                 $html = view('partials.tagListEdit')->withTags(array('tag' => $data['tag']))->render();
+                //and return response using json, that includes status(succes) and our html, with code 200 (succes)
                 return response()->json(['status' => 'success', 'html' => $html],200);
             }
         }

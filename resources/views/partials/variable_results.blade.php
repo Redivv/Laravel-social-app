@@ -23,7 +23,15 @@
                   <div class="icons col-lg-2">
                     <div class="row">
                         <div class="col-4 ico"><a href="{{route('message.read', ['name' => $result->name])}}"><button class="btn text-reset"><i class="far fa-comment-dots"></i></button></a></div>
-                        <div class="col-4 ico"><button class="btn text-reset"><i class="fas fa-user-plus"></i></button></div>
+                        <div class="col-4 ico addFriend" data-name="{{$result->name}}" id="{{$result->name}}"><button class="btn text-reset">
+                                @if($result->friend==2)
+                                <i class="fas fa-user-friends"></i>
+                                @elseif($result->friend==1)
+                                <i class="fas fa-user-check"></i>
+                                @else
+                                <i class="fas fa-user-plus"></i>
+                                @endif
+                            </button></div>
                         <div class="col-4 ico"><button class="btn reportBtn text-reset" data-name="{{$result->name}}"><i class="fas fa-exclamation"></i></button></div>
                     </div>
                 </div>  

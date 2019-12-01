@@ -49,21 +49,13 @@
             </div>
             <hr>
             <output class="friendsListBox">
-                <ul class="friendsList">
-                    <li class="row active">
-                        <div class="col-2 profilePicture">
-                            <img src="{{asset('img/profile-pictures/default-picture.png')}}">
-                        </div>
-                        <div class="col-5 friendName">
-                            <span>Reds</span>
-                        </div>
-                        <div class="col-5 friendOptions">
-                            <span><i class="fas fa-user-minus"></i></span>
-                            <span><i class="far fa-comment-dots"></i></span>
-                            <span><i class="fas fa-exclamation"></i></span>
-                        </div>
-                    </li>
-                </ul>
+                @if(count($friends)>0)
+                    <ul class="friendList">
+                        @include('partials.friendsList')
+                    </ul>
+                @else   
+                    {{__('activityWall.noFriendsToShow')}}
+                @endif
             </output>
         </div>
     </div>

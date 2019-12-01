@@ -38,7 +38,16 @@
 .searchResults-box{
 
     .searchResult{
-
+        .addFriend{
+            .fa-user-check{
+                color: $orange;
+                cursor: default;
+            }
+            .fa-user-friends{
+                color: $orange;
+                cursor: default;
+            }
+        }
         .picture{
             position: relative;
             display: flex;

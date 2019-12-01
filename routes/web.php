@@ -22,7 +22,16 @@ Route::get('searcher', 'SearchController@index')->name('searcher');
 Route::middleware(['verified'])->group(function () {
     Route::patch('profile', 'ProfileController@update')->name('ProfileUpdate');
     Route::get('profile/edit','ProfileController@edit')->name('ProfileEdition');
-});
+    // List of friend-related routes
+    Route::group(['prefix'=>'friends'], function() {
+        Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+            Route::put('add/{user}', 'AjaxFriendsController@addFriend');
+            Route::delete('delete/{user}', 'AjaxFriendsController@deleteFriend');
+            Route::patch('accept/{user}','AjaxFriendsController@acceptFriend');
+            Route::delete('deny/{user}','AjaxFriendsController@denyFriend');
+        });
+
+});});
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
     Route::get('tag/autocompleteHobby', 'AjaxTagsController@autocompleteHobby');

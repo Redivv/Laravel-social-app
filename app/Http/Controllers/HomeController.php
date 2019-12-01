@@ -55,7 +55,12 @@ class HomeController extends Controller
             $usNot->delete();
         }
 
-        return view('home')->withPosts($posts);
+        //Friendships 
+        $you=Auth::user();
+        //gets your friends
+        $friends=$you->getFriends();
+
+        return view('home')->withPosts($posts)->withFriends($friends);
     }
 
     public function viewPost(Post $post)

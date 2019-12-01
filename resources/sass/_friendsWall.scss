@@ -442,13 +442,23 @@
             }
         }
         .friendsListBox{
+            .friendList{
+                padding: 0.1rem;
+                &:hover{
+                    background-color: #aaaaaa;
+                }
+            }
             display: block;
             width: 100%;
             text-align: left;
             ul{
                 padding-left: 1rem;
                 list-style: none;
+                .displaynan{
+                    display: none;
+                }
                 li{
+                    margin: 1.0rem 0;
                     .profilePicture{
                         position: relative;
                         img{
@@ -473,18 +483,36 @@
                         display: flex;
                         align-items: center;
                     }
+                    .friendObject{
+                        .row{
+                            background-color: #000000;
+                        }
+                    }
                     .friendName{
                         @include font-size(1rem);
                         letter-spacing: 1px;
+                        color: $black;
                     }
+                    
                     .friendOptions{
                         @include font-size(1.1rem);
                         span{
-                            margin: 0 0.5rem;
-                            cursor: pointer;
-                            &:hover{
-                                color: $orange; 
-                            }
+                            
+                                margin: 0 0.5rem;
+                                cursor: pointer;
+                                color: $black;
+                                &:hover{
+                                    color: $orange; 
+                                }
+                                a{
+                                    margin: 0 0.5rem;
+                                    cursor: pointer;
+                                    color: $black;
+                                    &:hover{
+                                    color: $orange; 
+                                }
+                                }
+                            
                         }
                     }
                 }
