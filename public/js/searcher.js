@@ -94,6 +94,11 @@
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
   main();
 });
 
@@ -122,11 +127,6 @@ function main() {
       alert(reportUserReason);
     } else {
       $('.spinnerOverlay').removeClass('d-none');
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
       var userName = $(this).data('name');
       var url = base_url + "/user/report";
       var request = $.ajax({
@@ -166,6 +166,39 @@ function main() {
       });
     },
     minLength: 1
+  });
+  $('.likeBtn').on('click', function () {
+    var userId = $(this).data('id');
+    var url = base_url + "/user/ajax/likeUser";
+    var currentAmount = $(this).find('.likesAmount').html().trim();
+
+    if ($(this).hasClass('active')) {
+      $(this).removeClass('active');
+      $(this).find('.likesAmount').html(parseInt(currentAmount) - 1);
+
+      if (currentAmount == 1) {
+        $(this).find('.likesAmount').addClass('invisible');
+      }
+    } else {
+      $(this).addClass('active');
+      $(this).find('.likesAmount').html(parseInt(currentAmount) + 1);
+
+      if (currentAmount == 0) {
+        $(this).find('.likesAmount').removeClass('invisible');
+      }
+    }
+
+    var request = $.ajax({
+      method: 'post',
+      url: url,
+      data: {
+        "_method": "patch",
+        userId: userId
+      }
+    });
+    request.fail(function (xhr) {
+      alert(xhr.responseJSON.message);
+    });
   });
 }
 

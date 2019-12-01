@@ -151,7 +151,30 @@
                             color: $orange;
                         }
                     }
+                    &.active{
+                        i{
+                            color: $orange;
+                        }
+                    }
                 }
+                .likesAmount{
+                    @include font-size(0.7rem);
+                    background-color: $orange;
+                    color: $white;
+                    border-radius: 50%;
+                    top: 0.3rem;
+                    right: 0.3rem;
+                    &.invisible{
+                        color: transparent;
+                        background-color: transparent;
+                    }
+                }
+            }
+            .likeProfile{
+                padding: 0.5rem 0 0.5rem 2rem;
+                @media screen and (max-width: $breakpoint1) {
+                    padding: 0.5rem 0 0.5rem 0.4rem;
+                  }
             }
         }
     }

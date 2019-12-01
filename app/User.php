@@ -9,10 +9,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Conner\Tagging\Taggable;
 use App\Notifications\UserDeleted;
 use Illuminate\Support\Facades\DB;
+use Conner\Likeable\Likeable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, Taggable;
+    use Notifiable, Taggable, Likeable;
 
     /**
      * The attributes that are mass assignable.

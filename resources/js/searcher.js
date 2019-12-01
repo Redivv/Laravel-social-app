@@ -1,4 +1,9 @@
 $(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     main();
 })
 
@@ -29,11 +34,6 @@ function main() {
             alert(reportUserReason);
         }else{
             $('.spinnerOverlay').removeClass('d-none');
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
 
             let userName = $(this).data('name');
             let url = base_url+"/user/report";
@@ -78,6 +78,40 @@ function main() {
         },
         minLength: 1
     });
+
+    $('.likeBtn').on('click',function() {
+        let userId = $(this).data('id');
+        let url = base_url+"/user/ajax/likeUser";
+
+        let currentAmount = $(this).find('.likesAmount').html().trim();
+        if ($(this).hasClass('active')) {
+
+            $(this).removeClass('active');
+            $(this).find('.likesAmount').html(parseInt(currentAmount)-1);
+            if (currentAmount == 1) {
+                $(this).find('.likesAmount').addClass('invisible');
+            }
+
+        }else{
+            
+            $(this).addClass('active');
+            $(this).find('.likesAmount').html(parseInt(currentAmount)+1);
+            if (currentAmount == 0) {
+                $(this).find('.likesAmount').removeClass('invisible');
+            }
+        }
+
+        var request = $.ajax({
+            method : 'post',
+            url: url,
+            data: {"_method": "patch", userId:userId}
+        });
+        
+        
+        request.fail(function (xhr){
+            alert(xhr.responseJSON.message);
+        });
+    })
 }
 
 function addNewHobby(hobby) {

@@ -17627,6 +17627,34 @@ readers do not read off random characters that represent icons */
   color: #f66103;
 }
 
+.searchResults-box .searchResult .icons .ico button.active i {
+  color: #f66103;
+}
+
+.searchResults-box .searchResult .icons .ico .likesAmount {
+  font-size: 0.7rem;
+  background-color: #f66103;
+  color: #ffffff;
+  border-radius: 50%;
+  top: 0.3rem;
+  right: 0.3rem;
+}
+
+.searchResults-box .searchResult .icons .ico .likesAmount.invisible {
+  color: transparent;
+  background-color: transparent;
+}
+
+.searchResults-box .searchResult .icons .likeProfile {
+  padding: 0.5rem 0 0.5rem 2rem;
+}
+
+@media screen and (max-width: 992px) {
+  .searchResults-box .searchResult .icons .likeProfile {
+    padding: 0.5rem 0 0.5rem 0.4rem;
+  }
+}
+
 .searchResults-box div.searchResult.activeUser .name,
 .searchResults-box #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.searchResult.activeUser .name,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags .searchResults-box a.searchResult.activeUser .name,
