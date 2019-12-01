@@ -17146,6 +17146,16 @@ readers do not read off random characters that represent icons */
   }
 }
 
+.searchResults-box .searchResult .addFriend .fa-user-check {
+  color: #f66103;
+  cursor: default;
+}
+
+.searchResults-box .searchResult .addFriend .fa-user-friends {
+  color: #f66103;
+  cursor: default;
+}
+
 .searchResults-box .searchResult .picture {
   position: relative;
   display: flex;
@@ -17434,6 +17444,27 @@ body {
 .nav-bar-height .userNotifications .dropdown-item.read .notificationDesc .descTime,
 .nav-bar-height .userNotifications .read.clearAllBtn .notificationDesc .descTime {
   color: #828282 !important;
+}
+
+.nav-bar-height .systemNotifications ul {
+  list-style-type: none;
+}
+
+.nav-bar-height .systemNotifications .friendOptions {
+  padding: 1rem;
+}
+
+.nav-bar-height .systemNotifications .friendOptions i {
+  margin: 0 0.5rem;
+}
+
+.nav-bar-height .systemNotifications .friendOptions .friendRelated {
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.nav-bar-height .systemNotifications .friendOptions .friendRelated:hover {
+  color: #f66103;
 }
 
 .nav-bar-height .systemNotifications a {
@@ -17895,9 +17926,21 @@ html {
   text-align: left;
 }
 
+#friendsWall .friendsList .friendsListBox .friendList {
+  padding: 0.1rem;
+}
+
+#friendsWall .friendsList .friendsListBox .friendList:hover {
+  background-color: #aaaaaa;
+}
+
 #friendsWall .friendsList .friendsListBox ul {
   padding-left: 1rem;
   list-style: none;
+}
+
+#friendsWall .friendsList .friendsListBox ul .displaynan {
+  display: none;
 }
 
 #friendsWall .friendsList .friendsListBox ul li {
@@ -17931,13 +17974,28 @@ html {
   align-items: center;
 }
 
+#friendsWall .friendsList .friendsListBox ul li .friendObject .row {
+  background-color: #000000;
+}
+
 #friendsWall .friendsList .friendsListBox ul li .friendName {
   font-size: 1rem;
   letter-spacing: 1px;
+  color: #000;
 }
 
 #friendsWall .friendsList .friendsListBox ul li .friendOptions {
   font-size: 1.1rem;
+}
+
+#friendsWall .friendsList .friendsListBox ul li .friendOptions span {
+  margin: 0 0.5rem;
+  cursor: pointer;
+  color: #000;
+}
+
+#friendsWall .friendsList .friendsListBox ul li .friendOptions span:hover {
+  color: #f66103;
 }
 
 #friendsWall .friendsList .friendsListBox ul li .friendOptions span a {
