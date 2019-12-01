@@ -17394,6 +17394,33 @@ body {
   width: 30vw;
 }
 
+.nav-bar-height .userNotifications ul {
+  list-style-type: none;
+}
+
+.nav-bar-height .userNotifications ul .friendName {
+  position: relative;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.nav-bar-height .userNotifications ul .friendOptions {
+  padding: 1rem;
+}
+
+.nav-bar-height .userNotifications ul .friendOptions i {
+  margin: 0 0.5rem;
+}
+
+.nav-bar-height .userNotifications ul .friendOptions .friendRelated {
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.nav-bar-height .userNotifications ul .friendOptions .friendRelated:hover {
+  color: #f66103;
+}
+
 .nav-bar-height .userNotifications .dropdown-item,
 .nav-bar-height .userNotifications .clearAllBtn {
   padding: 0.5rem;
@@ -17444,27 +17471,6 @@ body {
 .nav-bar-height .userNotifications .dropdown-item.read .notificationDesc .descTime,
 .nav-bar-height .userNotifications .read.clearAllBtn .notificationDesc .descTime {
   color: #828282 !important;
-}
-
-.nav-bar-height .systemNotifications ul {
-  list-style-type: none;
-}
-
-.nav-bar-height .systemNotifications .friendOptions {
-  padding: 1rem;
-}
-
-.nav-bar-height .systemNotifications .friendOptions i {
-  margin: 0 0.5rem;
-}
-
-.nav-bar-height .systemNotifications .friendOptions .friendRelated {
-  cursor: pointer;
-  transition: all 0.5s ease;
-}
-
-.nav-bar-height .systemNotifications .friendOptions .friendRelated:hover {
-  color: #f66103;
 }
 
 .nav-bar-height .systemNotifications a {

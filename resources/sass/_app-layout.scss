@@ -74,6 +74,32 @@ body{
         }
     }
     .userNotifications{
+        ul{
+            list-style-type: none;
+            .friendName{
+                position: relative;
+                height: 100%;
+                vertical-align: middle;
+            }
+            .friendOptions{
+                padding: 1rem;
+                i{
+                    margin: 0 0.5rem;
+                }
+                .friendRelated{
+                    cursor: pointer;
+                    -webkit-transition: all 0.5s ease;
+                    -moz-transition: all 0.5s ease;
+                    -ms-transition: all 0.5s ease;
+                    -o-transition: all 0.5s ease;
+                    transition: all 0.5s ease;
+                    &:hover{
+                        color: $orange;
+                    }
+                }
+            }
+        }   
+
         .dropdown-item{
             padding: 0.5rem;
             .notificationImageBox{
@@ -114,28 +140,6 @@ body{
         }
     }
     .systemNotifications{
-        ul{
-            list-style-type: none;
-        }
-        .friendOptions{
-            padding: 1rem;
-            i{
-                margin: 0 0.5rem;
-            }
-            .friendRelated{
-                cursor: pointer;
-
-                -webkit-transition: all 0.5s ease;
-                -moz-transition: all 0.5s ease;
-                -ms-transition: all 0.5s ease;
-                -o-transition: all 0.5s ease;
-                transition: all 0.5s ease;
-                &:hover{
-                    color: $orange;
-                }
-            }
-            
-        }
         a{
             margin-top: 0.5rem;
             margin-bottom: 0;
