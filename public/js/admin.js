@@ -378,7 +378,7 @@ function carryList(decided, target) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! D:\Safo\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })

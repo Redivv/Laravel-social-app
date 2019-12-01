@@ -23,5 +23,6 @@ return [
     'tagUsersBtn'       => 'Oznacz',
     'noUserFound'       => 'Nie Znaleziono Użytkownika',
     'deleteTaggedUser'  => 'Czy na pewno chcesz odznaczyć tego użytkownika?',
-    'emptyUser'         => 'Nie możesz kogoś oznaczyć bez podawania nicku'
+    'emptyUser'         => 'Nie możesz kogoś oznaczyć bez podawania nicku',
+    'noFriendsToShow'   => 'Nie masz jeszcze żadnych znajomych.'
 ];
