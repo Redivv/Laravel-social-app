@@ -49,7 +49,7 @@
             </div>
             <hr>
             <output class="friendsListBox">
-                <ul class="friendsList">
+                <ul class="friendList">
                     @if(count($friends)>0)
                         @include('partials.friendsList')
                     @else

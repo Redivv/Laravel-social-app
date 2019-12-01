@@ -24,14 +24,14 @@ Route::middleware(['verified'])->group(function () {
     Route::get('profile/edit','ProfileController@edit')->name('ProfileEdition');
     Route::group(['prefix'=>'friends'], function() {
         // List of friend-related routes
-        Route::get('add/{user}','FriendsController@addFriend');
         Route::get('accept/{user}','FriendsController@acceptFriend');
         Route::get('deny/{user}','FriendsController@denyRequest');
-        Route::get('delete/{user}','FriendsController@deleteFriend');
 
         Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
             Route::put('add/{user}', 'AjaxFriendsController@addFriend');
             Route::delete('delete/{user}', 'AjaxFriendsController@deleteFriend');
+            Route::patch('accept/{user}','AjaxFriendsController@acceptFriend');
+            Route::delete('deny/{user}','AjaxFriendsController@denyFriend');
         });
 
 });});

@@ -272,8 +272,8 @@
                         </a>
 
                         {{-- System Notifications --}}
-                        <div class="dropdown-menu systemNotifications">
-                            @if (count($notifications['system']) == 0)
+                        <div class="dropdown-menu systemNotifications p-2">
+                            @if ($notifications['systemAmount'] == 0 && $notifications['FRAmount']==0)
                                 <div class="text-center sysNoNot">{{__('nav.noNotifications')}}</div>
                                 <div class="notificationsContainer"></div>
                             @else
@@ -321,37 +321,39 @@
                                             @break
                                     @endswitch
                                 @endforeach
-                                </div>
+                                
+                                <ul>
+                                    @if($notifications['FRAmount']==0)
+                                        
+                                    @else
+                                    @foreach ($notifications['FR'] as $frNot)
+                                        
+                                        <li class="active">
+                                            <div class="row" id="{{$frNot['name']}}">
+                                                <a class="col-7 dropdown-item" href="/profile/{{$frNot['name']}}">
+                                                    <div class="row">
+                                                        <div class="col-4" >
+                                                            <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
+                                                        </div>
+                                                        <div class="col-8 friendName">
+                                                            <span>{{$frNot['name']}}</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <div class="col-5 friendOptions">
+                                                    <span class="acceptFriend friendRelated" id="{{$frNot['name']}}Add"  data-name="{{$frNot['name']}}"><i class="fas fa-plus"></i></span>
+                                                    <span class="chatWith friendRelated" id="{{$frNot['name']}}Chat" data-name="{{$frNot['name']}}"><i class="far fa-comment-dots"></i></span>
+                                                    <span class="denyFriend friendRelated" id="{{$frNot['name']}}Deny" data-name="{{$frNot['name']}}"><i class="fas fa-times"></i></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        
+                                    @endforeach
+                                    @endif
+                                </ul>
                                 <div class="dropdown-divider"></div>
                                 <a class="clearAllBtn" data-type="sysNoNot">{{__('nav.deleteAll')}}</a>
                             @endif
-                            <ul>
-                                @if($notifications['FRAmount']==0)
-
-                                @else
-                                @foreach ($notifications['FR'] as $frNot)
-                                    
-                                    <li class="row active">
-                                        <a class="col-7 dropdown-item" href="">
-                                            <div class="row">
-                                                <div class="col-2" >
-                                                    <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
-                                                </div>
-                                                <div class="col-5 friendName">
-                                                    <span>{{$frNot['name']}}</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="col-5 friendOptions">
-                                            <a href="/friends/accept/{{$frNot['name']}}"><span><i class="fas fa-plus"></i></span></a>
-                                            <a href="{{route('message.read', ['name' => $frNot['name']])}}"><span><i class="far fa-comment-dots"></i></span></a>
-                                            <a href="/friends/deny/{{$frNot['name']}}"><span><i class="fas fa-times"></i></span></a>
-                                        </div>
-                                    </li>
-                                    
-                                @endforeach
-                                @endif
-                                </ul>
                         </div>
 
                     </li>

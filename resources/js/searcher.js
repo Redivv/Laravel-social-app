@@ -93,10 +93,10 @@ function main() {
             url: url,
             //select content we want to send:
             data: {
-                
                 //here, we just want to change our method to "put", since it is strictly laravelish method
                 //and is unavaible in html.
                 "_method":"put",
+                //we don't need to change anything else, because we send user name in url.
             }
         });
         //if our request is succesfull, in other words, our response code is 200:
@@ -104,9 +104,10 @@ function main() {
             //if status made by response is 'succes':
             if (response.status === 'success') {
                 //we delete object, that is not necessary from now.
-                alert('U,magnumka///');
-                $(this).remove();
-                //replace with --> will replace
+                let edit = $('#'+friendName).find('i');
+                let html= '<i class="fas fa-user-check"></i>';
+                $(edit).replaceWith(html);
+                // alert('U,magnumka///');
             }
         });
         //if our request is unsuccesfull:
@@ -114,7 +115,7 @@ function main() {
             //we get our response as alert.
             alert(xhr.responseJSON.message);
         });
-    })
+    });
 }
 
 function addNewHobby(hobby) {

@@ -29,7 +29,23 @@ class AjaxFriendsController extends Controller
     }
     public function deleteFriend(Request $request,User $user){
         if($request->ajax()){
-            Auth::user()->unfriend($user);
+            if(Auth::user()->isFriendWith($user)){
+                Auth::user()->unfriend($user);
+                return response()->json(['status' => 'success'],200);
+            }
+        }
+    }
+    public function acceptFriend(Request $request,User $user){
+        if($request->ajax()){
+            $you = Auth::user();
+            $you->acceptFriendRequest($user);
+            return response()->json(['status' => 'success'],200);
+        }
+    }
+    public function denyFriend(Request $request,User $user){
+        if($request->ajax()){
+            $you = Auth::user();
+            $you->denyFriendRequest($user);
             return response()->json(['status' => 'success'],200);
         }
     }
