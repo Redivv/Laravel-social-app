@@ -12476,7 +12476,7 @@ module.exports = g;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Safo\node_modules\emojionearea\dist\emojionearea.js */"./node_modules/emojionearea/dist/emojionearea.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\node_modules\emojionearea\dist\emojionearea.js */"./node_modules/emojionearea/dist/emojionearea.js");
 
 
 /***/ })
