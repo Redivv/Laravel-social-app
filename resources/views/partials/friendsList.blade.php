@@ -1,6 +1,6 @@
 @foreach ($friends as $friend)
     <li class="row active friendObject" id="{{$friend->name}}">
-        <a href="../profile/{{$friend->name}}" class="col-7">
+        <a href="../user/profile/{{$friend->name}}" class="col-7">
             <div class="row">
                 <div class="col-3 profilePicture">
                     <img src="{{asset('img/profile-pictures/'.$friend->picture)}}">
