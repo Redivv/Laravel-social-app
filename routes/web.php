@@ -67,6 +67,8 @@ Route::prefix('user')->group(function(){
         Route::post('checkUser', 'HomeController@checkUser')->name('ajaxCheckUser');
         Route::get('getTaggedUsers/{post}', 'HomeController@getTagged')->name('ajaxGetTagged');
         Route::get('getCommentTaggedUsers/{comment}', 'CommentController@getTagged')->name('ajaxGetCommentTagged');
+
+        Route::patch('likeUser', 'HomeController@likeUser')->name('ajaxLikeUser');
     });
 
     Route::get('profile', 'ProfileController@index')->middleware('auth')->name('ProfileView');

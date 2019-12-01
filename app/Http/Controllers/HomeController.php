@@ -360,4 +360,28 @@ class HomeController extends Controller
             }
         }
     }
+
+    public function likeUser(Request $request)
+    {
+        if($request->ajax()){
+            $request->validate([
+                'userId' => 'exists:users,id'
+            ]);
+
+            if ($request->userId != Auth::id()) {
+
+                $user = User::find($request->userId);
+    
+                if ($user->liked()) {
+                    $user->unlike();
+                }else{
+                    $user->like();
+                }
+    
+                return response()->json(['status' => 'success'], 200);
+            }else{
+                return response()->json(['status' => 'error', 'message' => 'No'], 200);
+            }
+        }
+    }
 }

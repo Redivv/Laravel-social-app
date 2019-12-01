@@ -37,6 +37,7 @@
                             @endif
                         </button></div>
                         <div class="col-4 ico"><button class="btn reportBtn text-reset" data-name="{{$result->name}}"><i class="fas fa-exclamation"></i></button></div>
+                        <div class="col-12 text-center ico likeProfile"><button class="btn likeBtn @if($result->liked()) active @endif" data-id="{{$result->id}}"><i class="fas fa-fire"></i><span class="badge likesAmount @if($result->likeCount <= 0) invisible @endif">{{$result->likeCount}}</span></button></div>
                     </div>
                 </div>  
                 @endauth

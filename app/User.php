@@ -10,10 +10,11 @@ use Hootlex\Friendships\Traits\Friendable;
 use Conner\Tagging\Taggable;
 use App\Notifications\UserDeleted;
 use Illuminate\Support\Facades\DB;
+use Conner\Likeable\Likeable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, Taggable, Friendable;
+    use Notifiable, Taggable, Friendable, Likeable;
 
     /**
      * The attributes that are mass assignable.
