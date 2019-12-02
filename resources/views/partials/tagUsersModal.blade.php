@@ -10,13 +10,13 @@
             <div class="modal-body">
                 <form id="tagUsers" class="mt-4" method="post">
                     <div class="form-group">
-                        <input id="tagUserName" placeholder="{{__('activityWAll.tagUsersTitle')}}" class="form-control" name="username">
+                        <input id="tagUserName" placeholder="{{__('activityWall.tagUsersTitle')}}" class="form-control" name="username">
                     </div>
                     
                     <output id="taggedUsers" class="row"></output>
 
                     <div class="form-group friendsWallSendButton mb-0">
-                        <button class="btn btn-block" type="submit">{{__('activityWAll.tagUsersBtn')}}</button>
+                        <button class="btn btn-block" type="submit">{{__('activityWall.tagUsersBtn')}}</button>
                     </div>
                 </form>
             </div>
