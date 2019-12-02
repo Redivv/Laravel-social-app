@@ -59,6 +59,7 @@ class ProfileController extends Controller
             //Change original name of the file
             $filename = hash_file('haval160,4',request('photo')->getPathname()).'.'.request('photo')->getClientOriginalExtension();
             request('photo')->move(public_path('img/profile-pictures/'), $filename);
+            copy(public_path('img/profile-pictures/').$filename,public_path('img/post-pictures/').$filename);
             $user->pending_picture = $filename;
 
             $admins = User::where('is_admin','=',1)->get();

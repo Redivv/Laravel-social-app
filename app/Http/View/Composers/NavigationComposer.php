@@ -92,17 +92,20 @@ class NavigationComposer
             $duplicateNot = array();
             $duplicateCount = 1;
 
-
             foreach ($this->notifications['system'] as $key => $sysNot) {
-                if (in_array($sysNot->data['action'].$sysNot->data['contentId'],$duplicateNot)) {
-                    $duplicateCount++;
-                    if ($sysNot->type != "App\Notifications\AdminWideInfo") {
-                        unset($this->notifications["system"][$key]);
+                if ($sysNot->type == 'App\Notifications\SystemNotification') {
+                    if (in_array($sysNot->data['action'].$sysNot->data['contentId'],$duplicateNot)) {
+                        $duplicateCount++;
+                        if ($sysNot->type != "App\Notifications\AdminWideInfo") {
+                            unset($this->notifications["system"][$key]);
+                        }
+                    }else{
+                        $duplicateNot[] = $sysNot->data['action'].$sysNot->data['contentId'];
+                        $systemDuplicatesAmount[] = $duplicateCount;
+                        $duplicateCount = 1;
                     }
                 }else{
-                    $duplicateNot[] = $sysNot->data['action'].$sysNot->data['contentId'];
-                    $systemDuplicatesAmount[] = $duplicateCount;
-                    $duplicateCount = 1;
+                    continue;
                 }
             }
             $systemDuplicatesAmount[] = $duplicateCount;
@@ -112,6 +115,7 @@ class NavigationComposer
         }else{
             $this->notifications = null;
         }
+        $kek = $this->notifications;
     }
 
     /**

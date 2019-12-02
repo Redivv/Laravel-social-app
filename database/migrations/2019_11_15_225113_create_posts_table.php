@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->index();
             $table->text('desc')->nullable()->default(null);
-            $table->boolean('is_public')->delete(1);
+            $table->boolean('is_public')->default(true);
             $table->longText('pictures')->nullable()->default(null);
             $table->longText('tagged_users')->nullable()->default(null);
             $table->timestamps();

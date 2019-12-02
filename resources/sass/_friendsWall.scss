@@ -82,6 +82,10 @@
                     color: $orange;
                 }
             }
+            .custom-control-input:checked ~ .custom-control-label::before{
+                background-color: $orange;
+                border-color: $orange;
+            }
         }
         .friendsWallSendButton{
             button{
@@ -561,6 +565,10 @@
                 &:hover{
                     color: $orange;
                 }
+            }
+            .custom-control-input:checked ~ .custom-control-label::before{
+                background-color: $orange;
+                border-color: $orange;
             }
         }
         .friendsWallSendButton{

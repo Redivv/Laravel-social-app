@@ -30,6 +30,11 @@
                     <span class="additionalButton tagUserButton" data-toggle="modal" data-target="#tagUsersModal"><i class="fas fa-user-tag"></i></span>
                     <label for="postPicture" class="additionalButton"><i class="far fa-image"></i></label>
                     <input type="file" class="d-none" name="postPicture[]" accept="image/*" id="postPicture" multiple>
+
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" name="isPublic" class="custom-control-input" id="isPublicSwitch1">
+                        <label class="custom-control-label" for="isPublicSwitch1">{{__('activityWall.togglePublic')}}</label>
+                    </div>
                 </div>
                 <div class="friendsWallSendButton">
                     <button name="sendPost" id="newPostButton" type="submit" class="btn btn-block">{{__('activityWall.createPost')}}</button>
@@ -77,14 +82,20 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script>
-    var badFileType      =  "{{__('chat.badFileType')}}";
-    var deletePostMsg    =  "{{__('activityWall.deletePost')}}";
-    var emptyCommentMsg  =  "{{__('activityWall.emptyComment')}}";
-    var deleteCommentMsg =  "{{__('activityWall.deleteComment')}}";
-    var resetImgMsg      =  "{{__('activityWall.resetPictures')}}";
-    var userNotFound     =  "{{__('activityWall.noUserFound')}}";
-    var deleteUserTag    =  "{{__('activityWall.deleteTaggedUser')}}";
-    var emptyUser        =  "{{__('activityWall.emptyUser')}}";
+    var badFileType             =  "{{__('chat.badFileType')}}";
+    var deletePostMsg           =  "{{__('activityWall.deletePost')}}";
+    var emptyCommentMsg         =  "{{__('activityWall.emptyComment')}}";
+    var deleteCommentMsg        =  "{{__('activityWall.deleteComment')}}";
+    var resetImgMsg             =  "{{__('activityWall.resetPictures')}}";
+    var userNotFound            =  "{{__('activityWall.noUserFound')}}";
+    var deleteUserTag           =  "{{__('activityWall.deleteTaggedUser')}}";
+    var emptyUser               =  "{{__('activityWall.emptyUser')}}";
+    var reportUser              = "{{__('searcher.reportUser')}}";
+    var reportUserReason        = "{{__('searcher.reportUserReason')}}";
+    var reportUserReasonErr     = "{{__('searcher.reportUserReasonErr')}}";
+    var reportUserSuccess       = "{{__('searcher.reportUserSuccess')}}";
+    var deleteFriend            = "{{__('activityWall.deleteFriend')}}";
+    var friendDeleted           = "{{__('activityWall.friendDeleted')}}";
 
     var baseUrl = "{{url('/')}}";
 </script>

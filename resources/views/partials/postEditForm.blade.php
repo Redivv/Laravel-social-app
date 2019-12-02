@@ -21,6 +21,11 @@
         <span class="additionalButton tagUserButton" data-id="{{$post->id}}" data-toggle="modal" data-target="#tagUsersModal"><i class="fas fa-user-tag"></i></span>
         <label for="editPicture" class="additionalButton"><i class="far fa-image"></i></label>
         <input type="file" class="d-none" name="editPicture[]" accept="image/*" id="editPicture" multiple>
+
+        <div class="custom-control custom-switch">
+            <input type="checkbox" name="isPublic" class="custom-control-input" id="isPublicSwitch2" @if(!$post->is_public) checked @endif>
+            <label class="custom-control-label" for="isPublicSwitch2">{{__('activityWall.togglePublic')}}</label>
+        </div>
     </div>
     <input type="hidden" value="{{$post->id}}" name="postId">
     <div class="friendsWallSendButton">

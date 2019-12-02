@@ -36,8 +36,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $friendsArray = Auth::user()->getFriends()->modelKeys();
         
-        $posts = Post::orderBy('created_at', 'desc')->take(5)->get();
+        $posts = Post::orderBy('created_at', 'desc')->where('is_public',1)->orWhereIn('user_id',$friendsArray)->orWhere('user_id',Auth::id())->take(5)->get();
 
         if ($request->ajax()) {
             $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
@@ -76,7 +77,9 @@ class HomeController extends Controller
             ]);
             
             $stopPagi = false;
-            $posts = Post::orderBy('created_at', 'desc')->skip(5*$request->pagiTime)->take(5)->get();
+            $friendsArray = Auth::user()->getFriends()->modelKeys();
+
+            $posts = Post::orderBy('created_at', 'desc')->where('is_public',1)->orWhereIn('user_id',$friendsArray)->orWhere('user_id',Auth::id())->skip(5*$request->pagiTime)->take(5)->get();
             if (count($posts) < 5) {
                 $stopPagi = true;
             }
@@ -150,17 +153,21 @@ class HomeController extends Controller
     public function newPost(Request $request)
     {
         if ($request->ajax()) {
+            $kek = $request->all();
             $request->validate([
                 'postDesc'       =>['required_without:postPicture','string','nullable'],
                 'postPicture.*'  =>['required_without:postDesc','file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
-                'taggedUser.*'   =>['exists:users,id','distinct']
+                'taggedUser.*'   =>['exists:users,id','distinct'],
+                'isPublic'       =>[Rule::in(['on'])]
             ]);
 
             $postDesc           = $request->input('postDesc');
             $pictures           = $request->file('postPicture');
+            $isPublic           = $request->isPublic;
             $taggedUsers        = $request->taggedUser;
             $pictures_json      = null;
             $taggedUsers_json   = null;
+            $taggedUsersArray   = null;
 
             if($pictures){
                 $pictures_json = array();
@@ -174,11 +181,19 @@ class HomeController extends Controller
 
             if ($taggedUsers) {
                 $taggedUsers_json = array();
+                $taggedUsersArray = array();
                 foreach ($taggedUsers as $tagged) {
                     $user = User::find($tagged);
                     $taggedUsers_json[] = $user->name;
+                    $taggedUsersArray[] = $user;
                 }
                 $taggedUsers_json = json_encode($taggedUsers_json);
+            }
+
+            if ($isPublic) {
+                $isPublic = false;
+            }else{
+                $isPublic = true;
             }
 
             $author = Auth::user();
@@ -189,13 +204,17 @@ class HomeController extends Controller
             $post->desc         = $postDesc;
             $post->pictures     = $pictures_json;
             $post->tagged_users = $taggedUsers_json;
+            $post->is_public    = $isPublic;
 
             
             if ($post->save()) {
                 $posts = [$post];
                 $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
-                $friends = User::whereNotIn('id',[Auth::id()])->get();
-                Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2'), 'newPost'));
+                $friends = Auth::user()->getFriends();
+                Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot3'), 'newPost'));
+                if ($taggedUsers) {
+                    Notification::send($taggedUsersArray, new SystemNotification(__('nav.taggedInPost'),'success','_user_home_post_',$post->id, '', 'tagPost'));
+                }
                 return response()->json(['status' => 'success', 'html' => $html], 200);
             }
 
@@ -206,20 +225,23 @@ class HomeController extends Controller
     public function editPost(Request $request)
     {
         if ($request->ajax()) {
-            $kek = $request->all();
             $request->validate([
                 'postDesc'       =>['required_without:postPicture','string','nullable'],
                 'editPicture.*'  =>['required_without:postDesc', 'nullable','file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
                 'postId'         =>['exists:posts,id'],
                 'noPicture'      =>['string','nullable'],
                 'taggedUser.*'   =>['exists:users,id','distinct'],
-                'noTags'      =>['string','nullable']
+                'noTags'         =>['string','nullable'],
+                'isPublic'       =>[Rule::in(['on'])]
             ]);
+            
             $postDesc = $request->input('postDesc');
             $pictures = $request->file('editPicture');
+            $isPublic           = $request->isPublic;
             $taggedUsers        = $request->taggedUser;
             $pictures_json      = null;
             $taggedUsers_json   = null;
+            $taggedUsersArray   = null;
 
             $post = Post::where('id',$request->postId)->where('user_id',Auth::id())->first();
             $post->desc = $postDesc;
@@ -239,9 +261,11 @@ class HomeController extends Controller
 
             if ($taggedUsers) {
                 $taggedUsers_json = array();
+                $taggedUsersArray = array();
                 foreach ($taggedUsers as $tagged) {
                     $user = User::find($tagged);
                     $taggedUsers_json[] = $user->name;
+                    $taggedUsersArray[] = $user;
                 }
                 $taggedUsers_json = json_encode($taggedUsers_json);
                 $post->tagged_users = $taggedUsers_json;
@@ -249,10 +273,21 @@ class HomeController extends Controller
                 $post->tagged_users = null;
             }
 
+            if ($isPublic) {
+                $post->is_public = false;
+            }else{
+                $post->is_public = true;
+            }
+
             
             if ($post->update()) {
                 $posts = [$post];
                 $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
+
+                if ($taggedUsers) {
+                    Notification::send($taggedUsersArray, new SystemNotification(__('nav.taggedInPost'),'success','_user_home_post_',$post->id, '', 'tagPost'));
+                }
+                
                 return response()->json(['status' => 'success', 'html' => $html], 200);
             }
 
@@ -316,17 +351,20 @@ class HomeController extends Controller
 
             $post = Post::find($request->postId);
 
-            if ($post->liked()) {
-                $post->unlike();
-            }else{
-                $post->like();
-
-                if ($post->user_id != Auth::id()) {
-                    $post->user->notify(new SystemNotification(__('nav.likePostNot'),'info','_user_home_post_',$post->id, '', 'likePost'));
+            if ($post->canBeSeen()) {
+                if ($post->liked()) {
+                    $post->unlike();
+                }else{
+                    $post->like();
+    
+                    if ($post->user_id != Auth::id()) {
+                        $post->user->notify(new SystemNotification(__('nav.likePostNot'),'info','_user_home_post_',$post->id, '', 'likePost'));
+                    }
                 }
+                return response()->json(['status' => 'success'], 200);
+            }else{
+                return response()->json(['status' => 'error', 'message' => 'You cannot see this post'], 400);
             }
-
-            return response()->json(['status' => 'success'], 200);
         }
     }
 
@@ -376,6 +414,7 @@ class HomeController extends Controller
                     $user->unlike();
                 }else{
                     $user->like();
+                    $user->notify(new SystemNotification(__('nav.likeUser'),'success','_user_profile','','', 'likeUser'));
                 }
     
                 return response()->json(['status' => 'success'], 200);

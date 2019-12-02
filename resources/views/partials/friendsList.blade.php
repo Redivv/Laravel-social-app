@@ -13,7 +13,7 @@
         <div class="col-5 friendOptions">
             <span class="deleteFriend" data-name="{{$friend->name}}" id="{{$friend->name}}"><i class="fas fa-user-minus"></i></span>
             <span><a href="{{route('message.read', ['name' => $friend->name])}}" target="__blank"><i class="far fa-comment-dots"></i></a></span>
-            <span><a><i class="fas fa-exclamation"></i></a></span>
+            <span class="reportBtn" data-name="{{$friend->name}}"><i class="fas fa-exclamation"></i></span>
         </div>
     </li>
 @endforeach

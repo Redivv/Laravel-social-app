@@ -18317,6 +18317,11 @@ html {
   color: #f66103;
 }
 
+#friendsWall .friendsWall .friendsWallButtons .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #f66103;
+  border-color: #f66103;
+}
+
 #friendsWall .friendsWall .friendsWallSendButton button {
   color: #ffffff;
   background-color: #f66103;
@@ -18901,6 +18906,13 @@ html {
 #commentEditModal .modal-body .friendsWallButtons .additionalButton:hover,
 #tagUsersModal .modal-body .friendsWallButtons .additionalButton:hover {
   color: #f66103;
+}
+
+#editModal .modal-body .friendsWallButtons .custom-control-input:checked ~ .custom-control-label::before,
+#commentEditModal .modal-body .friendsWallButtons .custom-control-input:checked ~ .custom-control-label::before,
+#tagUsersModal .modal-body .friendsWallButtons .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #f66103;
+  border-color: #f66103;
 }
 
 #editModal .modal-body .friendsWallSendButton button,

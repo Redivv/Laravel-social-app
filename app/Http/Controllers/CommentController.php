@@ -10,6 +10,7 @@ use App\Post;
 use App\User;
 
 use App\Notifications\SystemNotification;
+use Illuminate\Support\Facades\Notification;
 
 use Auth;
 
@@ -67,16 +68,19 @@ class CommentController extends Controller
             $newComment->message   = $request->data[0]['value'];
             $newComment->author_id = Auth::id();
 
-            $taggedUsers = $request->data;
+            $taggedUsers        = $request->data;
+            $taggedUsersArray   = null;
 
             unset($taggedUsers[0]);
             
             
             if ($taggedUsers) {
                 $taggedUsers_json = array();
+                $taggedUsersArray = array();
                 foreach ($taggedUsers as $tagged) {
                     $user = User::find($tagged['value']);
                     $taggedUsers_json[] = $user->name;
+                    $taggedUsersArray[] = $user;
                 }
                 $taggedUsers_json = json_encode($taggedUsers_json);
                 $newComment->tagged_users = $taggedUsers_json;
@@ -85,29 +89,48 @@ class CommentController extends Controller
             if (isset($request->parentId)) {
                 
                 $parentComment = Comment::find($request->parentId);
-                
-                $newComment->post_id = $parentComment->post_id;
-                $newComment->parent_id = $parentComment->id;
-                
-                $newComment->save();
 
-                if ($parentComment->author_id != Auth::id()) {
-                    $parentComment->user->notify(new SystemNotification(__('nav.replyNot'),'info','_user_home_post_',$parentComment->post->id,'#com-'.$parentComment->id, 'newRep'));
+                if ($parentComment->post->canBeSeen()) {
+                
+                    $newComment->post_id = $parentComment->post_id;
+                    $newComment->parent_id = $parentComment->id;
+                    
+                    $newComment->save();
+
+                    if ($parentComment->author_id != Auth::id()) {
+                        $parentComment->user->notify(new SystemNotification(__('nav.replyNot'),'info','_user_home_post_',$parentComment->post->id,'#com-'.$parentComment->id, 'newRep'));
+                    }
+
+                    if ($taggedUsers) {
+                        Notification::send($taggedUsersArray, new SystemNotification(__('nav.taggedInComment'),'success','_user_home_post_',$parentComment->post->id,'#com-'.$parentComment->id, 'tagCom'));
+                    }
+
+                    $html = view('partials.ajaxWallReply')->withComment($newComment)->render();
+                }else{
+                    return response()->json(['status' => 'error', 'message' => 'You cannot see this post'], 400);
                 }
-
-                $html = view('partials.ajaxWallReply')->withComment($newComment)->render();
             }else{
 
                 $post = Post::find($request->postId);
-                $newComment->post_id = $request->postId;  
+
+                if ($post->canBeSeen()) {
                 
-                $newComment->save();
+                    $newComment->post_id = $request->postId;  
+                    
+                    $newComment->save();
 
-                if ($post->user_id != Auth::id()) {
-                    $post->user->notify(new SystemNotification(__('nav.commentNot'),'info','_user_home_post_',$newComment->post->id,'#com-'.$newComment->id, 'newCom'));
+                    if ($post->user_id != Auth::id()) {
+                        $post->user->notify(new SystemNotification(__('nav.commentNot'),'info','_user_home_post_',$newComment->post->id,'#com-'.$newComment->id, 'newCom'));
+                    }
+                    
+                    if ($taggedUsers) {
+                        Notification::send($taggedUsersArray, new SystemNotification(__('nav.taggedInComment'),'success','_user_home_post_',$post->id, '#com-'.$newComment->id, 'tagCom'));
+                    }
+
+                    $html = view('partials.ajaxWallComment')->withComments([$newComment])->render();
+                }else{
+                    return response()->json(['status' => 'error', 'message' => 'You cannot see this post'], 400);
                 }
-
-                $html = view('partials.ajaxWallComment')->withComments([$newComment])->render();
             }
         }
         return response()->json(['status' => 'success','html' => $html], 200);
@@ -128,18 +151,23 @@ class CommentController extends Controller
 
 
             $taggedUsers = $request->data;
+            $taggedUsersArray   = null;
+
 
             unset($taggedUsers[0]);
             
             
             if ($taggedUsers) {
+
                 if ($taggedUsers[1]['name'] == 'noTags') {
                     $comment->tagged_users = null;
                 }else{
                     $taggedUsers_json = array();
+                    $taggedUsersArray = array();
                     foreach ($taggedUsers as $tagged) {
                         $user = User::find($tagged['value']);
                         $taggedUsers_json[] = $user->name;
+                        $taggedUsersArray[] = $user;
                     }
                     $taggedUsers_json = json_encode($taggedUsers_json);
                     $comment->tagged_users = $taggedUsers_json;
@@ -148,6 +176,11 @@ class CommentController extends Controller
 
             if ($comment->update()) {
                 $html = view('partials.ajaxWallCommentSingle')->withComments([$comment])->render();
+                    
+                if ($taggedUsers) {
+                    Notification::send($taggedUsersArray, new SystemNotification(__('nav.taggedInComment'),'success','_user_home_post_',$comment->post->id, '#com-'.$comment->id, 'tagCom'));
+                }
+                
                 return response()->json(['status' => 'success','html' => $html], 200);
             }
         }
@@ -180,17 +213,22 @@ class CommentController extends Controller
 
             $comment = Comment::find($request->commentId);
 
-            if ($comment->liked()) {
-                $comment->unlike();
-            }else{
-                $comment->like();
+            if ($comment->post->canBeSeen()) {
 
-                if ($comment->author_id != Auth::id()) {
-                    $comment->user->notify(new SystemNotification(__('nav.likeComNot'),'info','_user_home_post_',$comment->post->id,'#com-'.$comment->id, 'likeCom'));
+                if ($comment->liked()) {
+                    $comment->unlike();
+                }else{
+                    $comment->like();
+
+                    if ($comment->author_id != Auth::id()) {
+                        $comment->user->notify(new SystemNotification(__('nav.likeComNot'),'info','_user_home_post_',$comment->post->id,'#com-'.$comment->id, 'likeCom'));
+                    }
                 }
-            }
 
-            return response()->json(['status' => 'success'], 200);
+                return response()->json(['status' => 'success'], 200);
+            }else{
+                return response()->json(['status' => 'error', 'message' => 'You cannot see this post'], 400);
+            }
         }
 
     }

@@ -5,7 +5,7 @@ return [
     'createPost'        => 'Dodaj Post',
     'noContent'         => 'Brak Treści',
     'friendsListHeader' => 'Lista Znajomych',
-    'friendsWallHeader' => 'Napisz do Znajomych',
+    'friendsWallHeader' => 'Co Ci Chodzi po Głowie?',
     'deletePost'        => 'Czy na pewno chcesz usunąć ten post?',
     'deleteComment'     => 'Czy na pewno chcesz usunąć ten komentarz?',
     'editModalTitle'    => 'Edytuj Post',
@@ -24,5 +24,9 @@ return [
     'noUserFound'       => 'Nie Znaleziono Użytkownika',
     'deleteTaggedUser'  => 'Czy na pewno chcesz odznaczyć tego użytkownika?',
     'emptyUser'         => 'Nie możesz kogoś oznaczyć bez podawania nicku',
-    'noFriendsToShow'   => 'Nie masz jeszcze żadnych znajomych.'
+    'noFriendsToShow'   => 'Nie masz jeszcze żadnych znajomych.',
+    'togglePublic'      => 'Tylko dla znajomych',
+    'deleteFriend'      => 'Czy na pewno chcesz usunąć ',
+    'friendDeleted'     => 'Znajomy został usunięty',
+    'friendNewPicture'  => ' zmienił swoje zdjęcie profilowe'
 ];

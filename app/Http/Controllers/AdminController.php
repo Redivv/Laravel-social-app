@@ -16,6 +16,7 @@ use Conner\Tagging\Model\Tag;
 
 use Illuminate\Support\Facades\Notification;
 
+use App\Notifications\UserNotification;
 use App\Notifications\SystemNotification;
 use App\Notifications\NewAdminPost;
 use App\Notifications\AdminWideInfo;
@@ -258,7 +259,19 @@ class AdminController extends Controller
                     $validUser->picture = $validUser->pending_picture;
                     $validUser->pending_picture = null;
                     $validUser->update();
-                    $validUser->notify(new SystemNotification(__('nav.pictureOk'),'success','-profile'));
+                    $validUser->notify(new SystemNotification(__('nav.pictureOk'),'success','_user_profile','','','userPictureOk'));
+
+                    $post = new Post;
+                    $post->user_id      = $validUser->id;
+                    $post->desc         = $validUser->name.__('activityWall.friendNewPicture');
+                    $post->is_public    = false;
+                    $post->pictures     = json_encode([$validUser->picture]);
+
+
+                    if ($post->save()) {
+                        Notification::send($validUser->getFriends(), new UserNotification($validUser, '_user_home_post_',$post->id, '', __('nav.userNot3'), 'newPost'));
+                    }
+
                     break;
                 case 'refuse':
                     $validUser->pending_picture = null;
@@ -266,8 +279,9 @@ class AdminController extends Controller
                     $otherUser = User::where('pending_picture','=',$data['image'])->orWhere('picture','=',$data['image'])->first();
                     if (!$otherUser) {
                         unlink(public_path('img/profile-pictures/'.$data['image']));
+                        unlink(public_path('img/post-pictures/'.$data['image']));
                     }
-                    $validUser->notify(new SystemNotification(__('nav.pictureDeny'),'danger','-profile'));
+                    $validUser->notify(new SystemNotification(__('nav.pictureDeny'),'danger','_user_profile','','','userPictureNo'));
                     break;
             }
         }

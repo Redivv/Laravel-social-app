@@ -533,7 +533,7 @@ function main() {
     //local var in JS == let
     //get name of friend you want to delete
     var friendName = $(this).data('name');
-    var confirmation = confirm("Na pewno chcesz usunąć " + friendName + "?"); //get url we want to visit with ajax
+    var confirmation = confirm(deleteFriend + friendName + "?"); //get url we want to visit with ajax
 
     if (confirmation == true) {
       var url = baseUrl + "/friends/ajax/delete/" + friendName; //make request in ajax:
@@ -554,7 +554,7 @@ function main() {
       request.done(function (response) {
         //if status made by response is 'succes':
         if (response.status === 'success') {
-          alert("no,usuwamy");
+          alert(friendDeleted);
           var edit = $('#' + friendName);
           var html = '<li class="displaynan"></li>';
           $(edit).replaceWith(html); //we delete object, that is not necessary from now.
@@ -567,43 +567,32 @@ function main() {
         alert(xhr.responseJSON.message);
       });
     }
-  }); //                              ------------------------delete'owanie znajomych
+  });
+  $('.reportBtn').on('click', function () {
+    var reportReason = prompt(reportUserReason);
 
-  $('.deleteFriend').on('click', function () {
-    //local var in JS == let
-    //get name of friend you want to delete
-    var friendName = $(this).data('name');
-    var confirmation = confirm("Na pewno chcesz usunąć " + friendName + "?"); //get url we want to visit with ajax
-
-    if (confirmation == true) {
-      var url = baseUrl + "/friends/ajax/delete/" + friendName; //make request in ajax:
-
+    if (reportReason.trim() == '') {
+      alert(reportUserReasonErr);
+    } else {
+      $('.spinnerOverlay').removeClass('d-none');
+      var userName = $(this).data('name');
+      var url = base_url + "/user/report";
       var request = $.ajax({
-        //select method
         method: 'post',
-        //select destination
         url: url,
-        //select content we want to send:
         data: {
-          //here, we just want to change our method to "delete", since it is strictly laravelish method
-          //and is unavaible in html.
-          "_method": "delete"
+          "_method": 'PUT',
+          userName: userName,
+          reason: reportReason.trim()
         }
-      }); //if our request is succesfull, in other words, our response code is 200:
-
+      });
       request.done(function (response) {
-        //if status made by response is 'succes':
         if (response.status === 'success') {
-          alert("no,usuwamy");
-          var edit = $('#' + friendName);
-          var html = '<li class="displaynan"></li>';
-          $(edit).replaceWith(html); //we delete object, that is not necessary from now.
-          // $(this).parents('.friendObject').remove();
+          $('.spinnerOverlay').addClass('d-none');
+          alert(reportUserSuccess);
         }
-      }); //if our request is unsuccesfull:
-
+      });
       request.fail(function (xhr) {
-        //we get our response as alert.
         alert(xhr.responseJSON.message);
       });
     }
