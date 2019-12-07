@@ -440,6 +440,8 @@
         <script>
             var baseUrl =   "{{url('/')}}";
             var noNotifications = "{{__('nav.noNotifications')}}";
+            var friendAcceptMsg = "{{__('nav.acceptFriendMsg')}}";
+            var friendDenyMsg   = "{{__('nav.denyFriendMsg')}}";
         </script>
         <script src="{{asset('js/navigation.js')}}"></script>
         <script>

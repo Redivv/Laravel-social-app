@@ -61,7 +61,7 @@ function main() {
 
 function acceptFriend(selected) {
     let friendName = $(selected).data('name');
-    let confirmation = confirm("Na pewno chcesz zaakceptować zaproszenie "+friendName+"?");
+    let confirmation = confirm(friendAcceptMsg+friendName+"?");
     if(confirmation==true){
         //get url we want to visit with ajax
         let url= baseUrl+"/friends/ajax/accept/"+friendName;
@@ -84,9 +84,7 @@ function acceptFriend(selected) {
             //if status made by response is 'succes':
             if (response.status === 'success') {
                 //we delete object, that is not necessary from now.
-                let edit = $('#'+friendName);
-                let html= '<li class="displaynan"></li>';
-                $(edit).replaceWith(html);
+                $(selected).parents('.dropdown-item').remove();
             }
         });
         //if our request is unsuccesfull:
@@ -99,7 +97,7 @@ function acceptFriend(selected) {
 
 function denyFriend(selected) {
     let friendName = $(selected).data('name');
-    let confirmation = confirm("Na pewno chcesz odrzucić zaproszenie "+friendName+"?");
+    let confirmation = confirm(friendDenyMsg+friendName+"?");
     if(confirmation==true){
         //get url we want to visit with ajax
         let url= baseUrl+"/friends/ajax/deny/"+friendName;
@@ -118,9 +116,7 @@ function denyFriend(selected) {
             //if status made by response is 'succes':
             if (response.status === 'success') {
                 //we delete object, that is not necessary from now.
-                let edit = $('#'+friendName);
-                let html= '<li class="displaynan"></li>';
-                $(edit).replaceWith(html);
+                $(selected).parents('.dropdown-item').remove();
             }
         });
         //if our request is unsuccesfull:

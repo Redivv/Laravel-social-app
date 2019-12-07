@@ -39,8 +39,8 @@ class FriendRequestAccepted extends Notification implements ShouldBroadcast
     public function toArray($notifiable)
     {
         return[
-            'sender_name'       => $sender->name,
-            'sender_picture'    => $sender->picture
+            'sender_name'       => $this->sender->name,
+            'sender_picture'    => $this->sender->picture
         ];
     }
 

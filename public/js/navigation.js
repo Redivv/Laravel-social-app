@@ -152,7 +152,7 @@ function main() {
 
 function acceptFriend(selected) {
   var friendName = $(selected).data('name');
-  var confirmation = confirm("Na pewno chcesz zaakceptować zaproszenie " + friendName + "?");
+  var confirmation = confirm(friendAcceptMsg + friendName + "?");
 
   if (confirmation == true) {
     //get url we want to visit with ajax
@@ -176,9 +176,7 @@ function acceptFriend(selected) {
       //if status made by response is 'succes':
       if (response.status === 'success') {
         //we delete object, that is not necessary from now.
-        var edit = $('#' + friendName);
-        var html = '<li class="displaynan"></li>';
-        $(edit).replaceWith(html);
+        $(selected).parents('.dropdown-item').remove();
       }
     }); //if our request is unsuccesfull:
 
@@ -191,7 +189,7 @@ function acceptFriend(selected) {
 
 function denyFriend(selected) {
   var friendName = $(selected).data('name');
-  var confirmation = confirm("Na pewno chcesz odrzucić zaproszenie " + friendName + "?");
+  var confirmation = confirm(friendDenyMsg + friendName + "?");
 
   if (confirmation == true) {
     //get url we want to visit with ajax
@@ -211,9 +209,7 @@ function denyFriend(selected) {
       //if status made by response is 'succes':
       if (response.status === 'success') {
         //we delete object, that is not necessary from now.
-        var edit = $('#' + friendName);
-        var html = '<li class="displaynan"></li>';
-        $(edit).replaceWith(html);
+        $(selected).parents('.dropdown-item').remove();
       }
     }); //if our request is unsuccesfull:
 

@@ -19,5 +19,7 @@ return [
     'likeComNot'                => 'Ktoś poleca Twój komentarz',
     'taggedInPost'              => 'Ktoś oznaczył Cię w poście',
     'taggedInComment'           => 'Ktoś oznaczył Cię w komentarzu',
-    'likeUser'                  => 'Ktoś poleca Twój profil'
+    'likeUser'                  => 'Ktoś poleca Twój profil',
+    'denyFriendMsg'             => 'Na pewno chcesz odrzucić zaproszenie ',
+    'acceptFriendMsg'           => 'Na pewno chcesz zaakceptować zaproszenie '
 ]; 
