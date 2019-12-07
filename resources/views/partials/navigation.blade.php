@@ -11,14 +11,42 @@
                 <li class="nav-item">
 
                     <a href="#" class="nav-link navNotifications" data-type="userNotifications" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="far fa-smile"></i><span class="badge userNotificationsCount badge-pill badge-warning">@if($notifications['userAmount'] > 0){{$notifications['userAmount']}}@endif</span>
+                        <i class="far fa-smile"></i><span class="badge userNotificationsCount badge-pill badge-warning">@if(($notifications['userAmount']+$notifications['FRAmount']) > 0){{$notifications['userAmount']+$notifications['FRAmount']}}@endif</span>
                     </a>
 
                     {{-- User Notifications Mobile --}}
                     <div class="dropdown-menu pl-2 pr-2 position-absolute userNotifications">
-                        @if (count($notifications['user']) == 0)
-                                <div class="text-center usNoNot">{{__('nav.noNotifications')}}</div>
-                            @else
+                        @if (count($notifications['user']) == 0 && $notifications['FRAmount'] == 0)
+                            <div class="text-center usNoNot">{{__('nav.noNotifications')}}</div>
+                        @else
+                        {{-- Friend request notifications --}}
+                            @if ($notifications['FRAmount'] > 0)
+                                <ul class="friendRequests">
+                                    @foreach ($notifications['FR'] as $frNot)
+                                        <li class="dropdown-item">
+                                            <div class="row" id="{{$frNot['name']}}">
+                                                <a class="col-7" href="/user/profile/{{$frNot['name']}}">
+                                                    <div class="row">
+                                                        <div class="col-2" >
+                                                            <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
+                                                        </div>
+                                                        <div class="col-8 friendName">
+                                                            <span>{{$frNot['name']}}</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <div class="col-5 friendOptions">
+                                                    <span class="acceptFriend friendRelated" id="{{$frNot['name']}}Add"  data-name="{{$frNot['name']}}"><i class="fas fa-plus"></i></span>
+                                                    <a href="/message/{{$frNot['name']}}" class="chatWith friendRelated" id="{{$frNot['name']}}Chat"><i class="far fa-comment-dots"></i></a>
+                                                    <span class="denyFriend friendRelated" id="{{$frNot['name']}}Deny" data-name="{{$frNot['name']}}"><i class="fas fa-times"></i></span>
+                                                </div>
+                                            </div>
+                                        </li>                                        
+                                    @endforeach
+                                </ul>
+                                <hr>
+                            @endif
+                            @if(count($notifications['user']) > 0)
                                 @foreach ($notifications['user'] as $userNot)
                                     @switch($userNot->type)
 
@@ -33,7 +61,7 @@
                                                         <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
                                                         <div class="col-12 descBody">{{__('nav.userNot1')}} <span class="font-weight-bold">{{$userNot->data['user_name']}}</span> {{$userNot->data['message']}}</div>
                                                     </div>
-                                                </div>
+                                        q          </div>
                                             </a>
                                             @break
                                         
@@ -53,39 +81,7 @@
                                             @break
                                     @endswitch
                                 @endforeach
-
-
-
-                                            {{-- Friend request notifications Mobile, not working--}}
-                                            <ul>
-                                                @if($notifications['FRAmount']==0)
-                                                    
-                                                @else
-                                                @foreach ($notifications['FR'] as $frNot)
-                                                    
-                                                    <li class="active">
-                                                        <div class="row" id="{{$frNot['name']}}">
-                                                            <a class="col-7 dropdown-item" href="/user/profile/{{$frNot['name']}}">
-                                                                <div class="row">
-                                                                    <div class="col-2" >
-                                                                        <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
-                                                                    </div>
-                                                                    <div class="col-8 friendName">
-                                                                        <span>{{$frNot['name']}}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <div class="col-5 friendOptions">
-                                                                <span class="acceptFriend friendRelated" id="{{$frNot['name']}}Add"  data-name="{{$frNot['name']}}"><i class="fas fa-plus"></i></span>
-                                                                <span class="chatWith friendRelated" id="{{$frNot['name']}}Chat" data-name="{{$frNot['name']}}"><i class="far fa-comment-dots"></i></span>
-                                                                <span class="denyFriend friendRelated" id="{{$frNot['name']}}Deny" data-name="{{$frNot['name']}}"><i class="fas fa-times"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    
-                                                @endforeach
-                                                @endif
-                                            </ul>
+                            @endif
                         @endif
                     </div>
 
@@ -221,58 +217,21 @@
 
                     <li class="nav-item">
                         <a href="#" class="nav-link navNotifications" data-type="userNotifications" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="far fa-smile"></i><span id="userNotDesc" class="badge userNotificationsCount badge-pill badge-warning">@if($notifications['userAmount'] > 0){{$notifications['userAmount']}}@endif</span>
+                            <i class="far fa-smile"></i><span id="userNotDesc" class="badge userNotificationsCount badge-pill badge-warning">@if(($notifications['userAmount']+$notifications['FRAmount']) > 0){{$notifications['userAmount']+$notifications['FRAmount']}}@endif</span>
                         </a>
 
                         {{-- User Notifications --}}
                         <div class="dropdown-menu userNotifications">
-                            @if (count($notifications['user']) == 0 && $notifications['FRAmount']==0)
+                            @if (count($notifications['user']) == 0 && $notifications['FRAmount'] == 0)
                                 <div class="text-center usNoNot">{{__('nav.noNotifications')}}</div>
                             @else
-                                @foreach ($notifications['user'] as $userNot)
-                                    @switch($userNot->type)
-
-                                        {{-- User Notification --}}
-                                        @case('App\Notifications\UserNotification')
-                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('_','/',$userNot->data['link']).$userNot->data['contentId'].$userNot->data['contentAnchor']}}" target="__blank">
-                                                <div class="row">
-                                                    <div class="notificationImageBox col-2">
-                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}">
-                                                    </div>
-                                                    <div class="notificationDesc col-10">
-                                                        <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
-                                                        <div class="col-12 descBody">{{__('nav.userNot1')}} <span class="font-weight-bold">{{$userNot->data['user_name']}}</span> {{$userNot->data['message']}}</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            @break
-                                        
-                                        {{-- Admin Special Notification --}}
-                                        @case('App\Notifications\NewAdminPost')
-                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('home').'/#post'.$userNot->data['postId']}}" target="__blank">
-                                                <div class="row">
-                                                    <div class="notificationImageBox col-2">
-                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}">
-                                                    </div>
-                                                    <div class="notificationDesc col-10">
-                                                        <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
-                                                        <div class="col-12 descBody"><span class="font-weight-bold">{{__('nav.userNotAdmin')}}</span></div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            @break
-                                    @endswitch
-                                @endforeach
-                                            {{-- Friend request notifications --}}
-                                    <ul>
-                                        @if($notifications['FRAmount']==0)
-                                            
-                                        @else
+                            {{-- Friend request notifications --}}
+                                @if ($notifications['FRAmount'] > 0)
+                                    <ul class="friendRequests">
                                         @foreach ($notifications['FR'] as $frNot)
-                                            
-                                            <li class="active">
+                                            <li class="dropdown-item">
                                                 <div class="row" id="{{$frNot['name']}}">
-                                                    <a class="col-7 dropdown-item" href="/user/profile/{{$frNot['name']}}">
+                                                    <a class="col-7" href="/user/profile/{{$frNot['name']}}">
                                                         <div class="row">
                                                             <div class="col-2" >
                                                                 <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
@@ -284,16 +243,51 @@
                                                     </a>
                                                     <div class="col-5 friendOptions">
                                                         <span class="acceptFriend friendRelated" id="{{$frNot['name']}}Add"  data-name="{{$frNot['name']}}"><i class="fas fa-plus"></i></span>
-                                                        <span class="chatWith friendRelated" id="{{$frNot['name']}}Chat" data-name="{{$frNot['name']}}"><i class="far fa-comment-dots"></i></span>
+                                                        <a href="/message/{{$frNot['name']}}" class="chatWith friendRelated" id="{{$frNot['name']}}Chat"><i class="far fa-comment-dots"></i></a>
                                                         <span class="denyFriend friendRelated" id="{{$frNot['name']}}Deny" data-name="{{$frNot['name']}}"><i class="fas fa-times"></i></span>
                                                     </div>
                                                 </div>
-                                            </li>
-                                            
+                                            </li>                                        
                                         @endforeach
-                                        @endif
                                     </ul>
+                                    <hr>
+                                @endif
+                                @if (count($notifications['user']) > 0)
+                                    @foreach ($notifications['user'] as $userNot)
+                                        @switch($userNot->type)
 
+                                            {{-- User Notification --}}
+                                            @case('App\Notifications\UserNotification')
+                                                <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('_','/',$userNot->data['link']).$userNot->data['contentId'].$userNot->data['contentAnchor']}}" target="__blank">
+                                                    <div class="row">
+                                                        <div class="notificationImageBox col-2">
+                                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}">
+                                                        </div>
+                                                        <div class="notificationDesc col-10">
+                                                            <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
+                                                            <div class="col-12 descBody">{{__('nav.userNot1')}} <span class="font-weight-bold">{{$userNot->data['user_name']}}</span> {{$userNot->data['message']}}</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                @break
+                                            
+                                            {{-- Admin Special Notification --}}
+                                            @case('App\Notifications\NewAdminPost')
+                                                <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('home').'/#post'.$userNot->data['postId']}}" target="__blank">
+                                                    <div class="row">
+                                                        <div class="notificationImageBox col-2">
+                                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}">
+                                                        </div>
+                                                        <div class="notificationDesc col-10">
+                                                            <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
+                                                            <div class="col-12 descBody"><span class="font-weight-bold">{{__('nav.userNotAdmin')}}</span></div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                @break
+                                        @endswitch
+                                    @endforeach
+                                @endif
                             @endif
                         </div>
 
@@ -385,34 +379,6 @@
                                             @break
                                     @endswitch
                                 @endforeach
-                                
-                                <ul>
-                                    @if($notifications['FRAmount']==0)
-                                        
-                                    @else
-                                    @foreach ($notifications['FR'] as $frNot)
-                                        <li class="active">
-                                            <div class="row" id="{{$frNot['name']}}">
-                                                <a class="col-7 dropdown-item" href="/profile/{{$frNot['name']}}">
-                                                    <div class="row">
-                                                        <div class="col-4" >
-                                                            <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
-                                                        </div>
-                                                        <div class="col-8 friendName">
-                                                            <span>{{$frNot['name']}}</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="col-5 friendOptions">
-                                                    <span class="acceptFriend friendRelated" id="{{$frNot['name']}}Add"  data-name="{{$frNot['name']}}"><i class="fas fa-plus"></i></span>
-                                                    <span class="chatWith friendRelated" id="{{$frNot['name']}}Chat" data-name="{{$frNot['name']}}"><i class="far fa-comment-dots"></i></span>
-                                                    <span class="denyFriend friendRelated" id="{{$frNot['name']}}Deny" data-name="{{$frNot['name']}}"><i class="fas fa-times"></i></span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                    @endif
-                                </ul>
                                 <div class="dropdown-divider"></div>
                                 <a class="clearAllBtn" data-type="sysNoNot">{{__('nav.deleteAll')}}</a>
                             @endif
@@ -483,6 +449,43 @@
 
                 switch (notification.type.replace(/\\/g,"/")) {
 
+                    case 'App/Notifications/FriendRequestSend':
+                        updateUserNotifications();
+                        if (!($('.friendRequests:first').length)) {
+                            $('.userNotifications').prepend('<ul class="friendRequests"></ul>');
+                        }
+                        html = '<li class="dropdown-item">'+
+                                    '<div class="row" id="'+notification.sender_name+'">'+
+                                        '<a class="col-7 " href="/user/profile/'+notification.sender_name+'">'+
+                                            '<div class="row">'+
+                                                '<div class="col-2" >'+
+                                                    '<img src="/img/profile-pictures/'+notification.sender_picture+'" style="max-width: 35px; max-height: 35px; border-radius: 50%;">'+
+                                                '</div>'+
+                                                '<div class="col-8 friendName">'+
+                                                    '<span>'+notification.sender_name+'</span>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</a>'+
+                                        '<div class="col-5 friendOptions">'+
+                                            '<span class="acceptFriend friendRelated" id="'+notification.sender_name+'Add"  data-name="'+notification.sender_name+'"><i class="fas fa-plus"></i></span>'+
+                                            '<span class="chatWith friendRelated" id="'+notification.sender_name+'Chat" data-name="'+notification.sender_name+'"><i class="far fa-comment-dots"></i></span>'+
+                                            '<span class="denyFriend friendRelated" id="'+notification.sender_name+'Deny" data-name="'+notification.sender_name+'"><i class="fas fa-times"></i></span>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</li>';
+                        $('.friendRequests').prepend(html);
+
+                        $('.acceptFriend').off('click');
+                        $('.acceptFriend').on('click',function() {
+                            acceptFriend(this);
+                        });
+
+                        $('.denyFriend').off('click');
+                        $('.denyFriend').on('click',function() {
+                            denyFriend(this);
+                        });
+
+                        break;
                     // User Notification 
                     case 'App/Notifications/UserNotification':
                         updateUserNotifications()
@@ -631,6 +634,77 @@
                         request.fail(function (xhr){
                             alert(xhr.responseJSON.message);
                         });
+                    });
+                }
+            }
+
+            function acceptFriend(selected) {
+                let friendName = $(selected).data('name');
+                let confirmation = confirm("Na pewno chcesz zaakceptować zaproszenie "+friendName+"?");
+                if(confirmation==true){
+                    //get url we want to visit with ajax
+                    let url= baseUrl+"/friends/ajax/accept/"+friendName;
+                    //make request in ajax:
+                    var request = $.ajax({
+                        //select method
+                        method : 'post',
+                        //select destination
+                        url: url,
+                        //select content we want to send:
+                        data: {
+                            //here, we just want to change our method to "put", since it is strictly laravelish method
+                            //and is unavaible in html.
+                            "_method":"patch",
+                            //we don't need to change anything else, because we send user name in url.
+                        }
+                    });
+                    //if our request is succesfull, in other words, our response code is 200:
+                    request.done(function(response){
+                        //if status made by response is 'succes':
+                        if (response.status === 'success') {
+                            //we delete object, that is not necessary from now.
+                            let edit = $('#'+friendName);
+                            let html= '<li class="displaynan"></li>';
+                            $(edit).replaceWith(html);
+                        }
+                    });
+                    //if our request is unsuccesfull:
+                    request.fail(function (xhr){
+                        //we get our response as alert.
+                        alert(xhr.responseJSON.message);
+                    });
+                }
+            }
+            function denyFriend(selected) {
+                let friendName = $(selected).data('name');
+                let confirmation = confirm("Na pewno chcesz odrzucić zaproszenie "+friendName+"?");
+                if(confirmation==true){
+                    //get url we want to visit with ajax
+                    let url= baseUrl+"/friends/ajax/deny/"+friendName;
+                    //make request in ajax:
+                    var request = $.ajax({
+                        //select method
+                        method : 'post',
+                        //select destination
+                        url: url,
+                        //select content we want to send:
+                        data: {
+                            "_method":"delete",
+                        }
+                    });
+                    request.done(function(response){
+                        //if status made by response is 'succes':
+                        if (response.status === 'success') {
+                            //we delete object, that is not necessary from now.
+                            let edit = $('#'+friendName);
+                            let html= '<li class="displaynan"></li>';
+                            $(edit).replaceWith(html);
+                        }
+                    });
+                    //if our request is unsuccesfull:
+                    request.fail(function (xhr){
+                        //we get our response as alert.
+                        alert(xhr.responseJSON.message);
                     });
                 }
             }

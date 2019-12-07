@@ -90,6 +90,9 @@ function main() {
         let friendName = $(this).data('name');
         //get url we want to visit with ajax
         let url= baseUrl+"/friends/ajax/add/"+friendName;
+
+        let html= '<i class="fas fa-user-check"></i>';
+        $(this).find('i').replaceWith(html);
         //make request in ajax:
         var request = $.ajax({
             //select method
@@ -102,17 +105,6 @@ function main() {
                 //and is unavaible in html.
                 "_method":"put",
                 //we don't need to change anything else, because we send user name in url.
-            }
-        });
-        //if our request is succesfull, in other words, our response code is 200:
-        request.done(function(response){
-            //if status made by response is 'succes':
-            if (response.status === 'success') {
-                //we delete object, that is not necessary from now.
-                let edit = $('#'+friendName).find('i');
-                let html= '<i class="fas fa-user-check"></i>';
-                $(edit).replaceWith(html);
-                // alert('U,magnumka///');
             }
         });
         //if our request is unsuccesfull:

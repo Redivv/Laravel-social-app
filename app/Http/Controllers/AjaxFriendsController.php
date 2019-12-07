@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
+use App\Notifications\FriendRequestSend;
+use App\Notifications\FriendRequestAccepted;
 
 use App\User;
 
@@ -23,6 +25,7 @@ class AjaxFriendsController extends Controller
                 return response()->json(['status' => 'repeat', 'message' => 'gotRequestFromHim'],400);
             }else{
                 $you->befriend($user);
+                $user->notify(new FriendRequestSend($you));
             }
             return response()->json(['status' => 'success'],200);
         }
@@ -39,6 +42,7 @@ class AjaxFriendsController extends Controller
         if($request->ajax()){
             $you = Auth::user();
             $you->acceptFriendRequest($user);
+            $user->notify(new FriendRequestAccepted($you));
             return response()->json(['status' => 'success'],200);
         }
     }
