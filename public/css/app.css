@@ -17813,6 +17813,10 @@ body {
   color: #000;
 }
 
+.nav-bar-height .userNotifications ul .friendOptions {
+  text-align: center;
+}
+
 .nav-bar-height .userNotifications ul .friendOptions i {
   margin: 0 0.5rem;
 }
@@ -17834,7 +17838,7 @@ body {
 
 .nav-bar-height .userNotifications .dropdown-item,
 .nav-bar-height .userNotifications .clearAllBtn {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2rem;
 }
 
 .nav-bar-height .userNotifications .dropdown-item .notificationImageBox,

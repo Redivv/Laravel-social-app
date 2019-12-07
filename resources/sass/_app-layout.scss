@@ -89,6 +89,7 @@ body{
                 color: $black;
             }
             .friendOptions{
+                text-align: center;
                 i{
                     margin: 0 0.5rem;
                 }
@@ -113,7 +114,7 @@ body{
         }   
 
         .dropdown-item{
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 2rem;
             .notificationImageBox{
                 display: flex;
                 align-items: center;
