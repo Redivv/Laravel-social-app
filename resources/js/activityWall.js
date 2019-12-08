@@ -1,5 +1,6 @@
 var pagi = 0;
 var pagiReply = 0;
+var position = $(window).scrollTop(); 
 
 $(document).ready(function() {
 
@@ -26,6 +27,7 @@ function main() {
 
     $(window).on('scroll',function() {
         pagiPosts();
+        showFetchBtn(position);
     });
 
     $('#wallFetchBtn').on('click',function() {
@@ -1111,8 +1113,16 @@ function pagiPosts() {
             if (response.status === 'success') {
                 $('#friendsWallFeed').append(response.html);
                 if (response.stopPagi == false) {
+
                     $(window).on('scroll',function() {
                         pagiPosts();
+                        showFetchBtn(position);
+                    });
+
+                }else{
+
+                    $(window).on('scroll',function() {
+                        showFetchBtn(position);
                     });
                 }
 
@@ -1143,6 +1153,7 @@ function pagiPosts() {
 
 function refreshWall(selected) {
     $(selected).addClass('d-none');
+    $(selected).removeClass('ready');
 
     $('.spinnerOverlay').removeClass('d-none');
 
@@ -1160,6 +1171,8 @@ function refreshWall(selected) {
             $('#friendsWallFeed').html(response.html);
             $('.spinnerOverlay').addClass('d-none');
 
+            window.scrollTo(0,0);
+
             $('.postDelete').off('click');
             $('.postDelete').on('click',function(){
                 deletePost(this);
@@ -1174,6 +1187,7 @@ function refreshWall(selected) {
             $('.btnComment').one('click',function() {
                 getComments(this);
             });
+            
         }
     });
     
@@ -1270,5 +1284,17 @@ function tagUsersPostModal(selected) {
             let html = "<input type='hidden' name='noTags' value='true'>";
             $(output).html(html)
         }
+    }
+}
+
+function showFetchBtn() {
+    if ($('#wallFetchBtn').hasClass('ready')) {
+        var scroll = $(window).scrollTop();
+        if(scroll > position) {
+            $('#wallFetchBtn').addClass('d-none');
+        } else {
+            $('#wallFetchBtn').removeClass('d-none');
+        }
+        position = scroll;
     }
 }

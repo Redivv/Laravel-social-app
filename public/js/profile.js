@@ -179,6 +179,9 @@ function main() {
     },
     minLength: 1
   });
+  $('.likeUserBtn').on('click', function () {
+    likeUser(this);
+  });
   $('i.delete').on('click', function () {
     deleteTag(this);
   });
@@ -207,6 +210,40 @@ function deleteTag(tag) {
       }
     });
   }
+}
+
+function likeUser(selected) {
+  var userId = $(selected).data('id');
+  var url = base_url + "/user/ajax/likeUser";
+  var currentAmount = $(selected).find('.likesAmount').html().trim();
+
+  if ($(selected).hasClass('active')) {
+    $(selected).removeClass('active');
+    $(selected).find('.likesAmount').html(parseInt(currentAmount) - 1);
+
+    if (currentAmount == 1) {
+      $(selected).find('.likesAmount').addClass('invisible');
+    }
+  } else {
+    $(selected).addClass('active');
+    $(selected).find('.likesAmount').html(parseInt(currentAmount) + 1);
+
+    if (currentAmount == 0) {
+      $(selected).find('.likesAmount').removeClass('invisible');
+    }
+  }
+
+  var request = $.ajax({
+    method: 'post',
+    url: url,
+    data: {
+      "_method": "patch",
+      userId: userId
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+  });
 }
 
 /***/ }),

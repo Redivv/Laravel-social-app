@@ -48,6 +48,34 @@ html{font-size:16px !important;}
     box-shadow: 0.5px 0.5px 5px 0.5px rgba(0,0,0,0.7);
 }
 
+.profileButtons{
+    cursor: pointer;
+    i{
+        @include font-size(1.5rem);
+        color: $black;
+    }
+    &:hover{
+        i{
+            color: $orange;
+        }
+    }
+    &.active{
+        i{
+            color: $orange;
+        }
+    }
+    .likesAmount{
+        @include font-size(0.6rem);
+        background-color: $orange;
+        color: $white;
+        padding: 0.25rem 0.35rem;
+        border-radius: 50%;
+        &.invisible{
+            display: none;
+        }
+    }
+}
+
 .tag{
     @extend .form-btn;
     &:hover{

@@ -18185,6 +18185,41 @@ html {
   box-shadow: 0.5px 0.5px 5px 0.5px rgba(0, 0, 0, 0.7);
 }
 
+.profileButtons {
+  cursor: pointer;
+}
+
+.profileButtons i {
+  font-size: calc(1.275rem + 0.3vw);
+  color: #000;
+}
+
+@media (min-width: 1200px) {
+  .profileButtons i {
+    font-size: 1.5rem;
+  }
+}
+
+.profileButtons:hover i {
+  color: #f66103;
+}
+
+.profileButtons.active i {
+  color: #f66103;
+}
+
+.profileButtons .likesAmount {
+  font-size: 0.6rem;
+  background-color: #f66103;
+  color: #ffffff;
+  padding: 0.25rem 0.35rem;
+  border-radius: 50%;
+}
+
+.profileButtons .likesAmount.invisible {
+  display: none;
+}
+
 .tag:hover {
   color: #ffffff;
 }

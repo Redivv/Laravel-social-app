@@ -11,6 +11,7 @@ return [
     'userNot1'                  => 'Twój znajomy ',
     'userNot2'                  => 'napisał nowy post na tablicy',
     'userNot3'                  => 'ma nowe zdjęcie profilowe',
+    'userNot4'                  => 'zaakceptował Twoje zaproszenie do znajomych',
     'userNotAdmin'              => 'Administrator dodał nowy post na tablicy',
     'adminWideInfoHeader'       => 'Wiadomość od administracji',
     'replyNot'                  => 'Ktoś odpowiedział na Twój komentarz',

@@ -49,6 +49,7 @@ class HomeController extends Controller
             'type',
             [
                 'App\Notifications\UserNotification',
+                'App\Notifications\FriendRequestAccepted',
                 'App\Notifications\NewAdminPost',
                 ])->get();
         
@@ -120,6 +121,7 @@ class HomeController extends Controller
                 DB::table('notifications')
                     ->whereIn('type',[
                         'App\Notifications\UserNotification',
+                        'App\Notifications\FriendRequestAccepted',
                         'App\Notifications\NewAdminPost',
                     ])
                     ->where('notifiable_id',Auth::id())
@@ -211,7 +213,7 @@ class HomeController extends Controller
                 $posts = [$post];
                 $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
                 $friends = Auth::user()->getFriends();
-                Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot3'), 'newPost'));
+                Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2'), 'newPost'));
                 if ($taggedUsers) {
                     Notification::send($taggedUsersArray, new SystemNotification(__('nav.taggedInPost'),'success','_user_home_post_',$post->id, '', 'tagPost'));
                 }
@@ -419,7 +421,7 @@ class HomeController extends Controller
     
                 return response()->json(['status' => 'success'], 200);
             }else{
-                return response()->json(['status' => 'error', 'message' => 'No'], 200);
+                return response()->json(['status' => 'error', 'message' => 'No'], 400);
             }
         }
     }

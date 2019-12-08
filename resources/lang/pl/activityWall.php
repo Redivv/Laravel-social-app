@@ -18,7 +18,7 @@ return [
     'emptyComment'      => 'Nie możesz wysłać pustego komentarza',
     'moreReplies'       => 'Pokaż Więcej Odpowiedzi',
     'moreComments'      => 'Pokaż Więcej Komentarzy',
-    'refreshWall'       => 'Nowe Posty',
+    'refreshWall'       => 'Nowe Posty Znajomych',
     'tagUsersTitle'     => 'Oznacz Użytkownika',
     'tagUsersBtn'       => 'Oznacz',
     'noUserFound'       => 'Nie Znaleziono Użytkownika',

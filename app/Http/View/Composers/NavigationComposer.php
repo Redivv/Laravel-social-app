@@ -53,13 +53,16 @@ class NavigationComposer
             $this->notifications['chatAmount'] = 0;
 
             $this->notifications['user'] = $notifications->whereIn('type',
-            ['App\Notifications\UserNotification',
-            'App\Notifications\NewAdminPost'
+            [
+                'App\Notifications\UserNotification',
+                'App\Notifications\FriendRequestAccepted',
+                'App\Notifications\NewAdminPost'
             ]);
 
             $this->notifications['userAmount'] = $notifications->whereIn('type',
             [
                 'App\Notifications\UserNotification',
+                'App\Notifications\FriendRequestAccepted',
                 'App\Notifications\NewAdminPost'
                 ])->where('read_at',null)->count();
 

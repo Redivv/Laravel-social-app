@@ -85,6 +85,7 @@ class ProfileController extends Controller
     }
 
     public function visit(User $user){
+        
         $user->email='Private data';  //Seeing other's email is impossible (safety reasons);
         if(Auth::check()){ //If user's logged in, he can explore any profile
             $tags = $user->tagNames();

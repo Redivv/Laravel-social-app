@@ -8,7 +8,7 @@
                 <div class="picture col-lg-2">
                     <img src="{{asset('img/profile-pictures/'.$result->picture)}}" alt="">
                     <div class="overlay"></div>
-                    <a href="{{route('ProfileView')}}/{{$result->name}}">
+                    <a href="{{route('ProfileView')}}/{{$result->name}}" target="__blank">
                         <div class="overlay-content fadeIn-bottom">
                             <span class="overlay-text">{{__('searcher.see_profile')}}</span>
                         </div>
@@ -24,12 +24,12 @@
                     <div class="row">
                         <div class="col-4 ico"><a href="{{route('message.read', ['name' => $result->name])}}"><button class="btn text-reset"><i class="far fa-comment-dots"></i></button></a></div>
                         <div class="col-4 ico addFriend" data-name="{{$result->name}}" id="{{$result->name}}"><button class="btn text-reset">
-                                @if($result->friend==2)
-                                <i class="fas fa-user-friends"></i>
-                                @elseif($result->friend==1)
-                                <i class="fas fa-user-check"></i>
+                                @if($user->isFriendWith(auth()->user()))
+                                    <i class="fas fa-user-friends"></i>
+                                @elseif($user->hasSentFriendRequestTo(auth()->user()))
+                                    <i class="fas fa-user-check"></i>
                                 @else
-                                <i class="fas fa-user-plus"></i>
+                                    <i class="fas fa-user-plus"></i>
                                 @endif
                             </button></div>
                         <div class="col-4 ico"><button class="btn reportBtn text-reset" data-name="{{$result->name}}"><i class="fas fa-exclamation"></i></button></div>

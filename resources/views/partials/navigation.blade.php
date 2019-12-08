@@ -61,9 +61,23 @@
                                                         <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
                                                         <div class="col-12 descBody">{{__('nav.userNot1')}} <span class="font-weight-bold">{{$userNot->data['user_name']}}</span> {{$userNot->data['message']}}</div>
                                                     </div>
-                                        q          </div>
+                                                </div>
                                             </a>
                                             @break
+
+                                        @case('App\Notifications\FriendRequestAccepted')
+                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="/profile/{{$userNot->data['sender_name']}}" target="__blank">
+                                                <div class="row">
+                                                    <div class="notificationImageBox col-2">
+                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['sender_picture'])}}">
+                                                    </div>
+                                                    <div class="notificationDesc col-10">
+                                                        <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
+                                                        <div class="col-12 descBody"><span class="font-weight-bold">{{$userNot->data['sender_name']}}</span> {{__('nav.userNot4')}}</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        @break
                                         
                                         {{-- Admin Special Notification --}}
                                         @case('App\Notifications\NewAdminPost')
@@ -270,6 +284,20 @@
                                                     </div>
                                                 </a>
                                                 @break
+
+                                            @case('App\Notifications\FriendRequestAccepted')
+                                                <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="/profile/{{$userNot->data['sender_name']}}" target="__blank">
+                                                    <div class="row">
+                                                        <div class="notificationImageBox col-2">
+                                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['sender_picture'])}}">
+                                                        </div>
+                                                        <div class="notificationDesc col-10">
+                                                            <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
+                                                            <div class="col-12 descBody"><span class="font-weight-bold">{{$userNot->data['sender_name']}}</span> {{__('nav.userNot4')}}</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            @break
                                             
                                             {{-- Admin Special Notification --}}
                                             @case('App\Notifications\NewAdminPost')
@@ -491,7 +519,11 @@
                     // User Notification 
                     case 'App/Notifications/UserNotification':
                         updateUserNotifications()
-                        $('#wallFetchBtn').removeClass('d-none');
+                        
+                        if (!($('#wallFetchBtn').hasClass('ready'))) {
+                            $('#wallFetchBtn').addClass('ready');
+                        }
+
                         html = '<a class="dropdown-item container" href="'+notification.link.replace(/_/g,'/')+notification.contentId+notification.contentAnchor+'" target="__blank">'+
                                     '<div class="row">'+
                                         '<div class="notificationImageBox col-2">'+
@@ -500,6 +532,24 @@
                                         '<div class="notificationDesc col-10">'+
                                             '<div class="col-12 descTime">{{__("nav.newSysNotTime")}}</div>'+
                                             '<div class="col-12 descBody">{{__("nav.userNot1")}} <span class="font-weight-bold">'+notification.user_name+'</span> '+notification.message+'</div>'+
+                                        '</div>'+
+                                   '</div>'+
+                                '</a>';
+                        $('.userNotifications').prepend(html);
+                        break;
+
+                    // Accepted Friend Request Notification
+                    case 'App/Notifications/FriendRequestAccepted':
+                        updateUserNotifications()
+
+                        html = '<a class="dropdown-item container" href="/profile/'+notification.sender_name+'" target="__blank">'+
+                                    '<div class="row">'+
+                                        '<div class="notificationImageBox col-2">'+
+                                            '<img class="notificationImage" src="/img/profile-pictures/'+notification.sender_picture+'">'+
+                                        '</div>'+
+                                        '<div class="notificationDesc col-10">'+
+                                            '<div class="col-12 descTime">{{__("nav.newSysNotTime")}}</div>'+
+                                            '<div class="col-12 descBody"><span class="font-weight-bold">'+notification.sender_name+'</span> {{__("nav.userNot4")}}</div>'+
                                         '</div>'+
                                    '</div>'+
                                 '</a>';

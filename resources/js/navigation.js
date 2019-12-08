@@ -4,6 +4,7 @@ $(document).ready(function() {
 
 
 function main() {
+
     $('a.navNotifications').on('click',function() {
         let type = $(this).data('type');
         $('.'+type+'Count').html('');

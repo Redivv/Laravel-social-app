@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="spinnerOverlay d-none">
+    <div class="spinner-border text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
 <div class="container m-5 profile_view">
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -59,6 +65,8 @@
                 </div>
             </div>
             <div class="col-md-6">
+                    @yield('buttons')
+                    
                     @yield('photo')
 
                     @yield('status')

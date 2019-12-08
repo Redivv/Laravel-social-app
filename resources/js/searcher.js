@@ -34,34 +34,7 @@ function main() {
 
     
     $('.reportBtn').on('click',function() {
-        let reportReason = prompt(reportUserReason);
-        if (reportReason.trim() == '') {
-            alert(reportUserReason);
-        }else{
-            $('.spinnerOverlay').removeClass('d-none');
-
-            let userName = $(this).data('name');
-            let url = base_url+"/user/report";
-
-            var request = $.ajax({
-                method : 'post',
-                url: url,
-                data: {"_method": 'PUT', userName:userName, reason:reportReason.trim()}
-            });
-            
-            
-            request.done(function(response){
-                if (response.status === 'success') {
-                    $('.spinnerOverlay').addClass('d-none');
-                    alert(reportUserSuccess);
-                }
-            });
-            
-            
-            request.fail(function (xhr){
-                alert(xhr.responseJSON.message);
-            });
-        }
+        reportUser(this);
     });
 
     $( "#hobby" ).autocomplete({
@@ -85,68 +58,108 @@ function main() {
     });
 
     $('.addFriend').on('click',function() {
-        //local var in JS == let
-        //get name of friend you want to delete
-        let friendName = $(this).data('name');
-        //get url we want to visit with ajax
-        let url= baseUrl+"/friends/ajax/add/"+friendName;
-
-        let html= '<i class="fas fa-user-check"></i>';
-        $(this).find('i').replaceWith(html);
-        //make request in ajax:
-        var request = $.ajax({
-            //select method
-            method : 'post',
-            //select destination
-            url: url,
-            //select content we want to send:
-            data: {
-                //here, we just want to change our method to "put", since it is strictly laravelish method
-                //and is unavaible in html.
-                "_method":"put",
-                //we don't need to change anything else, because we send user name in url.
-            }
-        });
-        //if our request is unsuccesfull:
-        request.fail(function (xhr){
-            //we get our response as alert.
-            alert(xhr.responseJSON.message);
-        });
+        addFriend(this);
     });
     
     $('.likeBtn').on('click',function() {
-        let userId = $(this).data('id');
-        let url = base_url+"/user/ajax/likeUser";
+        likeUser(this);
+    });
+}
 
-        let currentAmount = $(this).find('.likesAmount').html().trim();
-        if ($(this).hasClass('active')) {
+function likeUser(selected) {
+    let userId = $(selected).data('id');
+    let url = base_url+"/user/ajax/likeUser";
 
-            $(this).removeClass('active');
-            $(this).find('.likesAmount').html(parseInt(currentAmount)-1);
-            if (currentAmount == 1) {
-                $(this).find('.likesAmount').addClass('invisible');
-            }
+    let currentAmount = $(selected).find('.likesAmount').html().trim();
+    if ($(selected).hasClass('active')) {
 
-        }else{
-            
-            $(this).addClass('active');
-            $(this).find('.likesAmount').html(parseInt(currentAmount)+1);
-            if (currentAmount == 0) {
-                $(this).find('.likesAmount').removeClass('invisible');
-            }
+        $(selected).removeClass('active');
+        $(selected).find('.likesAmount').html(parseInt(currentAmount)-1);
+        if (currentAmount == 1) {
+            $(selected).find('.likesAmount').addClass('invisible');
         }
 
-        var request = $.ajax({
-            method : 'post',
-            url: url,
-            data: {"_method": "patch", userId:userId}
-        });
+    }else{
         
-        
-        request.fail(function (xhr){
-            alert(xhr.responseJSON.message);
-        });
-    })
+        $(selected).addClass('active');
+        $(selected).find('.likesAmount').html(parseInt(currentAmount)+1);
+        if (currentAmount == 0) {
+            $(selected).find('.likesAmount').removeClass('invisible');
+        }
+    }
+
+    var request = $.ajax({
+        method : 'post',
+        url: url,
+        data: {"_method": "patch", userId:userId}
+    });
+    
+    
+    request.fail(function (xhr){
+        alert(xhr.responseJSON.message);
+    });
+}
+
+function addFriend(selected){
+    //get name of friend you want to delete
+    let friendName = $(selected).data('name');
+    //get url we want to visit with ajax
+    let url= baseUrl+"/friends/ajax/add/"+friendName;
+
+    let html= '<i class="fas fa-user-check"></i>';
+    $(selected).find('i').replaceWith(html);
+    $(selected).removeClass('addFriend');
+    //make request in ajax:
+    var request = $.ajax({
+        //select method
+        method : 'post',
+        //select destination
+        url: url,
+        //select content we want to send:
+        data: {
+            //here, we just want to change our method to "put", since it is strictly laravelish method
+            //and is unavaible in html.
+            "_method":"put",
+            //we don't need to change anything else, because we send user name in url.
+        }
+    });
+    //if our request is unsuccesfull:
+    request.fail(function (xhr){
+        //we get our response as alert.
+        alert(xhr.responseJSON.message);
+    });
+}
+
+function reportUser(selected) {
+    let reportReason = prompt(reportUserReason);
+        if (reportReason.trim() == '') {
+            alert(reportUserReasonErr);
+        }else{
+            $('.spinnerOverlay').removeClass('d-none');
+
+            let userName = $(selected).data('name');
+            let url = base_url+"/user/report";
+
+            var request = $.ajax({
+                method : 'post',
+                url: url,
+                data: {"_method": 'PUT', userName:userName, reason:reportReason.trim()}
+            });
+            
+            
+            request.done(function(response){
+                if (response.status === 'success') {
+                    $('.spinnerOverlay').addClass('d-none');
+                    alert(reportUserSuccess);
+                    $(selected).removeClass('reportBtn');
+                }
+            });
+            
+            
+            request.fail(function (xhr){
+                alert(xhr.responseJSON.message);
+            });
+        }
 }
 
 function addNewHobby(hobby) {

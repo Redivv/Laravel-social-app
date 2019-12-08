@@ -95,6 +95,7 @@
 
 var pagi = 0;
 var pagiReply = 0;
+var position = $(window).scrollTop();
 $(document).ready(function () {
   $('[data-toggle="tooltip"]').tooltip();
   $.ajaxSetup({
@@ -115,6 +116,7 @@ $(document).ready(function () {
 function main() {
   $(window).on('scroll', function () {
     pagiPosts();
+    showFetchBtn(position);
   });
   $('#wallFetchBtn').on('click', function () {
     refreshWall(this);
@@ -1040,6 +1042,11 @@ function pagiPosts() {
         if (response.stopPagi == false) {
           $(window).on('scroll', function () {
             pagiPosts();
+            showFetchBtn(position);
+          });
+        } else {
+          $(window).on('scroll', function () {
+            showFetchBtn(position);
           });
         }
 
@@ -1065,6 +1072,7 @@ function pagiPosts() {
 
 function refreshWall(selected) {
   $(selected).addClass('d-none');
+  $(selected).removeClass('ready');
   $('.spinnerOverlay').removeClass('d-none');
   var url = baseUrl + "/user/home";
   var request = $.ajax({
@@ -1076,6 +1084,7 @@ function refreshWall(selected) {
       $(selected).removeClass('spin');
       $('#friendsWallFeed').html(response.html);
       $('.spinnerOverlay').addClass('d-none');
+      window.scrollTo(0, 0);
       $('.postDelete').off('click');
       $('.postDelete').on('click', function () {
         deletePost(this);
@@ -1166,6 +1175,20 @@ function tagUsersPostModal(selected) {
       var html = "<input type='hidden' name='noTags' value='true'>";
       $(output).html(html);
     }
+  }
+}
+
+function showFetchBtn() {
+  if ($('#wallFetchBtn').hasClass('ready')) {
+    var scroll = $(window).scrollTop();
+
+    if (scroll > position) {
+      $('#wallFetchBtn').addClass('d-none');
+    } else {
+      $('#wallFetchBtn').removeClass('d-none');
+    }
+
+    position = scroll;
   }
 }
 
