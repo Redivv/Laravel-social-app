@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);.emojione {
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css?family=Lobster);.emojione {
   /* Emoji Sizing */
   font-size: inherit;
   height: 3ex;
@@ -18061,10 +18061,85 @@ body {
   text-align: center;
 }
 
-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+main .pageTestimonial {
+  margin-bottom: 3rem;
+  padding: 0 5rem;
+  text-align: center;
+}
+
+main .pageTestimonial .testimonial {
+  font-family: "Lobster";
+  font-size: calc(1.255rem + 0.06vw);
+  color: #f66103;
+  font-style: italic;
+  letter-spacing: 1.5px;
+  font-weight: bold;
+}
+
+@media (min-width: 1200px) {
+  main .pageTestimonial .testimonial {
+    font-size: 1.3rem;
+  }
+}
+
+main .registerForm {
+  background-image: url(/images/background.jpg?9eef4335477b96674d18c317b6419872);
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  padding: 3rem 25%;
+}
+
+@media screen and (max-width: 767px) {
+  main .registerForm {
+    padding: 3rem 15%;
+  }
+}
+
+main .registerForm .formContainer .formHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+main .registerForm .formContainer .formHeader h3 {
+  font-size: calc(1.325rem + 0.9vw);
+  letter-spacing: 1.5px;
+  font-weight: bold;
+  color: #f66103;
+  text-transform: uppercase;
+}
+
+@media (min-width: 1200px) {
+  main .registerForm .formContainer .formHeader h3 {
+    font-size: 2rem;
+  }
+}
+
+main .registerForm .loginLink {
+  font-size: 1rem;
+}
+
+main .registerForm .loginLink a {
+  color: #f66103;
+}
+
+main .additionalLinks {
+  margin: 3rem 0 2rem;
+}
+
+main .additionalLinks a {
+  width: 20rem;
+  font-size: calc(1.275rem + 0.3vw);
+  display: block;
+  background-color: #f66103;
+  color: #ffffff;
+  margin: auto;
+}
+
+@media (min-width: 1200px) {
+  main .additionalLinks a {
+    font-size: 1.5rem;
+  }
 }
 
 .login-title-size {
