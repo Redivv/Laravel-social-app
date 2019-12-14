@@ -8,11 +8,6 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
 }
-
-#body-bg{
-    background-image: $body-picture;
-}
-
 .nav-bar-height{
     min-height: 10vh;
     @media screen and (max-width: $mobile-breakpoint) {

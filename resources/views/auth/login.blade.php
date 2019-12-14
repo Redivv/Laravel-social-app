@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container loginForm">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card login-window shadow">
@@ -58,6 +58,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="login-button login-title-size">{{ __('login.login-button') }}</button>
+                            <div class="registerLink mt-3">Nie Masz Jeszcze Konta?<br><a href="{{route('register')}}">Zarejestruj Się</a></div>
                         </form>
                     </div>
                 </div>
@@ -65,3 +66,13 @@
         </div>
     </div>
 @endsection
+
+
+@push('styles')
+    <style>
+        body{
+            background-image: url("img/background.jpg");
+        }
+
+    </style>
+@endpush

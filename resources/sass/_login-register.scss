@@ -38,6 +38,7 @@ main{
             @include font-size(1rem);
             a{
                 color: $orange;
+                font-weight: bold;
             }
         }
     }
@@ -52,6 +53,16 @@ main{
             margin: auto;
         }
     }
+    .loginForm{
+        margin-top: 7rem;
+        .registerLink{
+            a{
+                color: $orange;
+                font-weight: bold;
+            }
+        }
+    }
+    
 }
 .login-title-size{
     font-size: 1.7rem;

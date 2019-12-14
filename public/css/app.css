@@ -17701,10 +17701,6 @@ body {
   background-size: cover;
 }
 
-#body-bg {
-  background-image: url(/images/background.jpg?9eef4335477b96674d18c317b6419872);
-}
-
 .nav-bar-height {
   min-height: 10vh;
 }
@@ -18121,6 +18117,7 @@ main .registerForm .loginLink {
 
 main .registerForm .loginLink a {
   color: #f66103;
+  font-weight: bold;
 }
 
 main .additionalLinks {
@@ -18140,6 +18137,15 @@ main .additionalLinks a {
   main .additionalLinks a {
     font-size: 1.5rem;
   }
+}
+
+main .loginForm {
+  margin-top: 7rem;
+}
+
+main .loginForm .registerLink a {
+  color: #f66103;
+  font-weight: bold;
 }
 
 .login-title-size {
