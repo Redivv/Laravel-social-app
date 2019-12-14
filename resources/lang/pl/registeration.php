@@ -15,5 +15,9 @@ return [
     'verificationInfo3'         => 'kliknij tutaj aby wysłać go ponownie',
     'newMail'                   => 'Wysłano nowy link aktywacyjny',
     'infoAlert'                 => 'W serwisie Safo zależy nam na autentyczności użytkowników. Nowe zdjęcia profilowe będą przesyłane do administracji w celu akceptacji',
-    'testimonial'               => 'Stworzony przez kobietę dla kobiet w celu poznania się. Zależy nam na autentyczności, dlatego bądźcie sobą! Tutaj możecie dzielić się Waszym życiem, doświadczeniem, wspierać nowe osoby.'
+    'testimonial'               => 'Stworzony przez kobietę dla kobiet w celu poznania się. Zależy nam na autentyczności, dlatego bądźcie sobą! Tutaj możecie dzielić się Waszym życiem, doświadczeniem, wspierać nowe osoby.',
+    'joinUs'                    => 'Dołącz Do Naszej Społeczności',
+    'loginLink1'                => 'Masz Już Konto?',
+    'loginLink2'                => 'Zaloguj Się',
+    'searcherLink'              => 'Zobacz Naszych Użytkowników'
 ];

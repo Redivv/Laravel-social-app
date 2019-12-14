@@ -15,7 +15,7 @@
         <div class="formContainer card">
             <div class="card-body">
                 <div class="formHeader card-title">
-                    <h3>Dołącz Do Naszej Społeczności</h3>
+                    <h3>{{__('registeration.joinUs')}}</h3>
                 </div>
                 <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                     @csrf
@@ -107,14 +107,14 @@
                     <button type="submit" class="form-btn btn btn-block">
                         {{ __('registeration.register-button') }}
                     </button>
-                    <div class="loginLink mt-2">Masz Już Konto? <a href="{{route('login')}}">Zaloguj Się</a></div>
+                    <div class="loginLink mt-2">{{__('registeration.loginLink1')}} <a href="{{route('login')}}">{{__('registeration.loginLink2')}}</a></div>
                 </form>
             </div>
         </div>        
     </main>
 
     <footer class="additionalLinks">
-        <a href="{{route('searcher')}}" class="btn">Zobacz Naszych Użytkowników</a>
+        <a href="{{route('searcher')}}" class="btn">{{__('registeration.searcherLink')}}</a>
     </footer>
 @endsection
 

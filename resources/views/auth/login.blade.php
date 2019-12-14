@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="login-button login-title-size">{{ __('login.login-button') }}</button>
-                            <div class="registerLink mt-3">Nie Masz Jeszcze Konta?<br><a href="{{route('register')}}">Zarejestruj Się</a></div>
+                            <div class="registerLink mt-3">{{__('login.registerLink1')}}<br><a href="{{route('register')}}">{{__('login.registerLink2')}}</a></div>
                         </form>
                     </div>
                 </div>
