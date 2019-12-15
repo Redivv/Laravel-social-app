@@ -27,7 +27,7 @@
                                             <div class="row" id="{{$frNot['name']}}">
                                                 <a class="col-7" href="/user/profile/{{$frNot['name']}}">
                                                     <div class="row">
-                                                        <div class="col-2" >
+                                                        <div class="col-4" >
                                                             <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
                                                         </div>
                                                         <div class="col-8 friendName">
@@ -101,7 +101,7 @@
 
                 </li>
 
-                <li class="nav-item pr-5 pl-5">
+                <li class="nav-item" style="padding:0 2rem">
 
                     <a href="#" class="nav-link navNotifications" data-type="chatNotifications" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="far fa-comment"></i>
@@ -199,9 +199,91 @@
             </div> 
         </ul>
         @endauth
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('app.toggle_nav') }}">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMobile" aria-controls="navbarMobile" aria-expanded="false" aria-label="{{ __('app.toggle_nav') }}" style="margin:auto">
             <span class="navbar-toggler-icon"></span>
         </button>
+        
+
+        <div class="collapse navbar-collapse" id="navbarMobile">
+            <!-- Left Side Of Navbar -->
+            <ul class="navbar-nav mr-auto text-center flex-row">
+                
+                    @guest
+                        <li class="nav-item col-4">
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <br>
+                                {{ __('app.login') }}
+                            </a>
+                        </li>
+                    @endguest
+
+                    <li class="nav-item col-4">
+                        <a href="{{ url('/searcher') }}" class="nav-link">
+                            <i class="fas fa-search"></i>
+                            <br>
+                            {{ __('app.searcher') }}
+                        </a>
+                    </li>
+                    @auth
+                        <li class="nav-item col-4">
+                            <a href="{{ route('home') }}" class="nav-link">
+                                <i class="fas fa-users"></i>
+                                <br>
+                                {{__('app.dashboard')}}
+                            </a>
+                        </li>
+                        <li class="nav-item col-4">
+                            <a href="{{ url('/message') }}" class="nav-link">
+                                <i class="far fa-comments"></i>
+                                <br>
+                                {{__('app.chat')}}
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item col-4">
+                            <a class="nav-link" href="{{ route('register') }}">
+                                <i class="fas fa-female"></i>
+                                <br>
+                                {{ __('app.register') }}
+                            </a>
+                        </li>
+                    @endauth
+
+            </ul>
+
+            @auth
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown text-center">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" style="left:0" aria-labelledby="navbarDropdown">
+                        <a href="{{ route('ProfileView') }}" class="dropdown-item">{{__('app.profile')}}</a>
+                        
+                        @if(auth()->user()->isAdmin())
+                            <a href="{{ route('adminHome') }}" class="dropdown-item">{{__('app.adminDashboard')}}</a>
+                        @endif
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"
+                        >
+                            {{ __('app.logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            </ul>
+            @endauth
+        </div>
         
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -222,6 +304,7 @@
                         </a>
                     </li>
                 @endauth
+
             </ul>
 
             @auth
@@ -247,7 +330,7 @@
                                                 <div class="row" id="{{$frNot['name']}}">
                                                     <a class="col-7" href="/user/profile/{{$frNot['name']}}">
                                                         <div class="row">
-                                                            <div class="col-2" >
+                                                            <div class="col-4" >
                                                                 <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
                                                             </div>
                                                             <div class="col-8 friendName">
@@ -488,7 +571,7 @@
                                     '<div class="row" id="'+notification.sender_name+'">'+
                                         '<a class="col-7 " href="/user/profile/'+notification.sender_name+'">'+
                                             '<div class="row">'+
-                                                '<div class="col-2" >'+
+                                                '<div class="col-4" >'+
                                                     '<img src="/img/profile-pictures/'+notification.sender_picture+'" style="max-width: 35px; max-height: 35px; border-radius: 50%;">'+
                                                 '</div>'+
                                                 '<div class="col-8 friendName">'+
@@ -692,7 +775,7 @@
 
             function acceptFriend(selected) {
                 let friendName = $(selected).data('name');
-                let confirmation = confirm("Na pewno chcesz zaakceptować zaproszenie "+friendName+"?");
+                let confirmation = confirm(friendAcceptMsg+friendName+"?");
                 if(confirmation==true){
                     //get url we want to visit with ajax
                     let url= baseUrl+"/friends/ajax/accept/"+friendName;
@@ -715,9 +798,7 @@
                         //if status made by response is 'succes':
                         if (response.status === 'success') {
                             //we delete object, that is not necessary from now.
-                            let edit = $('#'+friendName);
-                            let html= '<li class="displaynan"></li>';
-                            $(edit).replaceWith(html);
+                            $(selected).parents('.dropdown-item').remove();
                         }
                     });
                     //if our request is unsuccesfull:
@@ -727,9 +808,10 @@
                     });
                 }
             }
+
             function denyFriend(selected) {
                 let friendName = $(selected).data('name');
-                let confirmation = confirm("Na pewno chcesz odrzucić zaproszenie "+friendName+"?");
+                let confirmation = confirm(friendDenyMsg+friendName+"?");
                 if(confirmation==true){
                     //get url we want to visit with ajax
                     let url= baseUrl+"/friends/ajax/deny/"+friendName;
@@ -748,9 +830,7 @@
                         //if status made by response is 'succes':
                         if (response.status === 'success') {
                             //we delete object, that is not necessary from now.
-                            let edit = $('#'+friendName);
-                            let html= '<li class="displaynan"></li>';
-                            $(edit).replaceWith(html);
+                            $(selected).parents('.dropdown-item').remove();
                         }
                     });
                     //if our request is unsuccesfull:
@@ -760,6 +840,7 @@
                     });
                 }
             }
+
         </script>
 
         <script>

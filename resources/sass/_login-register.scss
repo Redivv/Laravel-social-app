@@ -42,6 +42,12 @@ main{
             }
         }
     }
+    .loginCard{
+        padding: 1rem;
+        .loginInputs{
+            padding: 0 2rem;
+        }
+    }
     .additionalLinks{
         margin: 3rem 0 2rem;
         a{

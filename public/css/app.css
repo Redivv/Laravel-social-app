@@ -17701,13 +17701,19 @@ body {
   background-size: cover;
 }
 
+@media screen and (min-width: 767px) {
+  #navbarMobile {
+    display: none !important;
+  }
+}
+
 .nav-bar-height {
   min-height: 10vh;
 }
 
 @media screen and (max-width: 767px) {
   .nav-bar-height .navbar-brand {
-    margin-right: auto;
+    margin: auto;
   }
 
   .nav-bar-height .navbar-toggler {
@@ -17717,9 +17723,13 @@ body {
 
 .nav-bar-height .dropdown-menu {
   max-height: 50vh;
-  overflow-y: auto;
   position: absolute;
-  right: unset;
+}
+
+.nav-bar-height .dropdown-menu .dropdown-item,
+.nav-bar-height .dropdown-menu .clearAllBtn {
+  white-space: normal;
+  margin-bottom: 0.5rem;
 }
 
 .nav-bar-height .nav-link .badge {
@@ -17750,14 +17760,19 @@ body {
   }
 }
 
-.nav-bar-height .navMobile .notificationImage {
+.nav-bar-height .navMobile .notificationImageBox {
+  padding: 0;
+}
+
+.nav-bar-height .navMobile .notificationImageBox .notificationImage {
   max-width: 40px;
   max-height: 40px;
   border-radius: 50%;
 }
 
 .nav-bar-height .navMobile .dropdown-menu {
-  min-width: 50vw;
+  left: -7rem;
+  min-width: 70vw;
 }
 
 .nav-bar-height .navDesc {
@@ -17791,6 +17806,18 @@ body {
   left: -80%;
   overflow-x: hidden;
   width: 30vw;
+}
+
+@media screen and (max-width: 1200px) {
+  .nav-bar-height .navDesc .dropdown-menu {
+    width: 38vw;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .nav-bar-height .navDesc .dropdown-menu {
+    width: 50vw;
+  }
 }
 
 .nav-bar-height .userNotifications ul {
@@ -17834,7 +17861,7 @@ body {
 
 .nav-bar-height .userNotifications .dropdown-item,
 .nav-bar-height .userNotifications .clearAllBtn {
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 1rem 0.5rem 1.6rem;
 }
 
 .nav-bar-height .userNotifications .dropdown-item .notificationImageBox,
@@ -18118,6 +18145,14 @@ main .registerForm .loginLink {
 main .registerForm .loginLink a {
   color: #f66103;
   font-weight: bold;
+}
+
+main .loginCard {
+  padding: 1rem;
+}
+
+main .loginCard .loginInputs {
+  padding: 0 2rem;
 }
 
 main .additionalLinks {
@@ -19173,7 +19208,7 @@ div.cookie-consent,
   color: #385d7a;
   background-color: #e2f0fb;
   border-color: #d6e9f9;
-  margin: 0 auto;
+  margin: 2rem auto;
   display: flex;
   align-items: center;
   justify-content: center;

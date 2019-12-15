@@ -8,11 +8,16 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
 }
+#navbarMobile{
+    @media screen and (min-width: $mobile-breakpoint) {
+        display: none !important;
+    }
+}
 .nav-bar-height{
     min-height: 10vh;
     @media screen and (max-width: $mobile-breakpoint) {
         .navbar-brand{
-            margin-right: auto;
+            margin: auto;
         }
         .navbar-toggler{
             margin-left: auto;
@@ -20,9 +25,11 @@ body{
     }
     .dropdown-menu{
         max-height: 50vh;
-        overflow-y: auto;
         position: absolute;
-        right: unset;
+        .dropdown-item{
+            white-space: normal;
+            margin-bottom: 0.5rem;
+        }
     }
     .nav-link{
         .badge{
@@ -41,13 +48,17 @@ body{
             display: inherit;
             @include font-size(1.5rem);
         }
-        .notificationImage{
-            max-width: 40px;
-            max-height: 40px;
-            border-radius: 50%;
+        .notificationImageBox{
+            padding: 0;
+            .notificationImage{
+                max-width: 40px;
+                max-height: 40px;
+                border-radius: 50%;
+            }
         }
         .dropdown-menu{
-            min-width: 50vw;
+            left: -7rem;
+            min-width: 70vw;
         }
     }
     .navDesc{
@@ -68,6 +79,12 @@ body{
             left: -80%;
             overflow-x: hidden;
             width: 30vw;
+            @media screen and (max-width: $breakpoint2) {
+                width: 38vw;
+            }
+            @media screen and (max-width: $breakpoint1) {
+                width: 50vw;
+            }
         }
     }
     .userNotifications{
@@ -109,7 +126,7 @@ body{
         }   
 
         .dropdown-item{
-            padding: 0.5rem 2rem;
+            padding: 0.5rem 1rem 0.5rem 1.6rem;
             .notificationImageBox{
                 display: flex;
                 align-items: center;

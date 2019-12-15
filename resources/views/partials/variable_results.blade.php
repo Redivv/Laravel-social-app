@@ -24,9 +24,9 @@
                     <div class="row">
                         <div class="col-4 ico"><a href="{{route('message.read', ['name' => $result->name])}}"><button class="btn text-reset"><i class="far fa-comment-dots"></i></button></a></div>
                         <div class="col-4 ico addFriend" data-name="{{$result->name}}" id="{{$result->name}}"><button class="btn text-reset">
-                                @if($user->isFriendWith(auth()->user()))
+                                @if($result->isFriendWith(auth()->user()))
                                     <i class="fas fa-user-friends"></i>
-                                @elseif($user->hasSentFriendRequestTo(auth()->user()))
+                                @elseif($result->hasSentFriendRequestTo(auth()->user()))
                                     <i class="fas fa-user-check"></i>
                                 @else
                                     <i class="fas fa-user-plus"></i>
