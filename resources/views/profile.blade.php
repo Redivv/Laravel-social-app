@@ -69,34 +69,36 @@
 
 @endsection
 
-@section('buttons')
-    <div class="mt-4 mb-4 row col-12 text-right">
-        <div class="col-3 profileButtons @if ($user->id != auth()->user()->id) likeUserBtn @endif @if($user->liked()) active @endif" data-id="{{$user->id}}">
-            <i class="fas fa-fire"></i><span class="badge likesAmount @if($user->likeCount <= 0) invisible @endif">{{$user->likeCount}}</span>
+@auth
+    @section('buttons')
+        <div class="mt-4 mb-4 row col-12 text-right">
+            <div class="col-3 profileButtons @if ($user->id != auth()->user()->id) likeUserBtn @endif @if($user->liked()) active @endif" data-id="{{$user->id}}">
+                <i class="fas fa-fire"></i><span class="badge likesAmount @if($user->likeCount <= 0) invisible @endif">{{$user->likeCount}}</span>
+            </div>
+            @if ($user->id != auth()->user()->id)
+                <div class="col-3 profileButtons @if(($user->isFriendWith(auth()->user())) || ($user->hasSentFriendRequestTo(auth()->user()))) active @else friendBtn @endif" data-name="{{$user->name}}">
+                    @if($user->isFriendWith(auth()->user()))
+                        <i class="fas fa-user-friends"></i>
+                    @elseif($user->hasSentFriendRequestTo(auth()->user()))
+                        <i class="fas fa-user-check"></i>
+                    @else
+                        <i class="fas fa-user-plus"></i>
+                    @endif
+                </div>
+            @endif
+            @if ($user->id != auth()->user()->id)
+                <div class="col-3 profileButtons">
+                    <a href="/message/{{$user->name}}" target="__blank"><i class="far fa-comment-dots"></i></a>
+                </div>
+            @endif
+            @if ($user->id != auth()->user()->id)
+                <div class="col-3 profileButtons reportUser" data-name="{{$user->name}}">
+                    <i class="fas fa-exclamation"></i>
+                </div>
+            @endif
         </div>
-        @if ($user->id != auth()->user()->id)
-            <div class="col-3 profileButtons @if(($user->isFriendWith(auth()->user())) || ($user->hasSentFriendRequestTo(auth()->user()))) active @else friendBtn @endif" data-name="{{$user->name}}">
-                @if($user->isFriendWith(auth()->user()))
-                    <i class="fas fa-user-friends"></i>
-                @elseif($user->hasSentFriendRequestTo(auth()->user()))
-                    <i class="fas fa-user-check"></i>
-                @else
-                    <i class="fas fa-user-plus"></i>
-                @endif
-            </div>
-        @endif
-        @if ($user->id != auth()->user()->id)
-            <div class="col-3 profileButtons">
-                <a href="/message/{{$user->name}}" target="__blank"><i class="far fa-comment-dots"></i></a>
-            </div>
-        @endif
-        @if ($user->id != auth()->user()->id)
-            <div class="col-3 profileButtons reportUser" data-name="{{$user->name}}">
-                <i class="fas fa-exclamation"></i>
-            </div>
-        @endif
-    </div>
-@endsection
+    @endsection
+@endauth
 
 @section('photo')
     <div class="row justify-content-center">
