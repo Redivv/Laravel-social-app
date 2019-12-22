@@ -26,5 +26,6 @@ return [
     'reportUser'            => 'Czy na pewno chcesz zgłosić użytkownika do administracji?',
     'reportUserReason'      => "Podaj Powód Zgłoszenia",
     'reportUserReasonErr'   => "Nie Możesz Zgłosić Użytkownika Bez Podania Powodu",
-    'reportUserSuccess'     => 'Dziękujemy za Zgłoszenie'
+    'reportUserSuccess'     => 'Dziękujemy za Zgłoszenie',
+    'deleteHobby'           => 'Usuń Kryterium'
 ];

@@ -18,12 +18,22 @@
         }
 
         #hobbyOutput{
+            margin-top: 1rem;
+            padding: 0 1rem;
             ul{
                 list-style: none;
                 .hobby{
                     cursor: pointer;
                     &:hover{
-                        color:$red;
+                        span{
+                            background-color: $red;
+                        }
+                    }
+                    span{
+                        background: $orange;
+                        color: $white;
+                        padding: 0.2rem 0.5rem;
+                        border-radius: 50px;
                     }
                 }
             }

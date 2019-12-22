@@ -119,42 +119,45 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 @endpush
 
+@push('scriptsBefore')
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+@endpush
+
 @push('scripts')
+    <script>
+        var base_url                = "{{url('/')}}";
+        var deleteMsg               = "{{__('searcher.deleteCriteria')}}";
+        var reportUser              = "{{__('searcher.reportUser')}}";
+        var reportUserReason        = "{{__('searcher.reportUserReason')}}";
+        var reportUserReasonErr     = "{{__('searcher.reportUserReasonErr')}}";
+        var reportUserSuccess       = "{{__('searcher.reportUserSuccess')}}";
+        var deleteHobby             = "{{__('searcher.deleteHobby')}}";
+    </script>
+    <script src="{{asset('js/searcher.js')}}"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script>
-    var base_url                = "{{url('/')}}";
-    var deleteMsg               = "{{__('searcher.deleteCriteria')}}";
-    var reportUser              = "{{__('searcher.reportUser')}}";
-    var reportUserReason        = "{{__('searcher.reportUserReason')}}";
-    var reportUserReasonErr     = "{{__('searcher.reportUserReasonErr')}}";
-    var reportUserSuccess       = "{{__('searcher.reportUserSuccess')}}";
-</script>
-<script src="{{asset('js/searcher.js')}}"></script>
-
-<script>
-    Echo.join('online')
-    
-        .joining((user) => {
-            axios.patch('/api/user/'+ user.name +'/online', {
+    <script>
+        Echo.join('online')
+        
+            .joining((user) => {
+                axios.patch('/api/user/'+ user.name +'/online', {
+                        api_token : user.api_token
+                });
+            })
+            .leaving((user) => {
+                axios.patch('/api/user/'+ user.name +'/offline', {
                     api_token : user.api_token
-            });
-        })
-        .leaving((user) => {
-            axios.patch('/api/user/'+ user.name +'/offline', {
-                api_token : user.api_token
-            });
-        })
+                });
+            })
 
-        .listen('UserOnline', (e) => {
-            $('div.searchResult[data-id="'+e.user.id+'"]').addClass('activeUser');
-            this.friend = e.user;
-        })
-        
-        .listen('UserOffline', (e) => {
-            $('div.searchResult[data-id="'+e.user.id+'"]').removeClass('activeUser');
-            this.friend = e.user;
-        });
-        
-</script>
+            .listen('UserOnline', (e) => {
+                $('div.searchResult[data-id="'+e.user.id+'"]').addClass('activeUser');
+                this.friend = e.user;
+            })
+            
+            .listen('UserOffline', (e) => {
+                $('div.searchResult[data-id="'+e.user.id+'"]').removeClass('activeUser');
+                this.friend = e.user;
+            });
+            
+    </script>
 @endpush

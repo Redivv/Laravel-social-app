@@ -163,13 +163,14 @@ function reportUser(selected) {
 }
 
 function addNewHobby(hobby) {
-    let html = '<li class="hobby mr-4 clearfix"><span>'+hobby+'</span>'+
+    let html = '<li class="hobby mr-5 clearfix" data-toggle="tooltip" data-placement="bottom" title="'+deleteHobby+'"><span>'+hobby+'</span>'+
     '<input type="hidden" value="'+slug(hobby)+'" name="hobby[]"></li>';
     $('#hobbyOutput>ul').append(html);
     $('input#hobby').val('');
-    
 
-    $('li.hobby').on('click',function() {
+    $('li.hobby').last().tooltip();
+
+    $('li.hobby').last().on('click',function() {
         if (confirm(deleteMsg)) {
             $(this).remove();
         }
