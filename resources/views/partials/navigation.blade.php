@@ -520,7 +520,7 @@
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-right" style="min-width:25vw" aria-labelledby="navbarDropdown">
                             <a href="{{ route('ProfileView') }}" class="dropdown-item">{{__('app.profile')}}</a>
                             
                             @if(auth()->user()->isAdmin())

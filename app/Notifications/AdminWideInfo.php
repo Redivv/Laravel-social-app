@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class AdminWideInfo extends Notification implements ShouldBroadcast
+class AdminWideInfo extends Notification implements ShouldBroadcast, ShouldQueue
 {
     use Queueable;
 
