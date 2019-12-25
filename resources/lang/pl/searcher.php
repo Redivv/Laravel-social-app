@@ -27,5 +27,6 @@ return [
     'reportUserReason'      => "Podaj Powód Zgłoszenia",
     'reportUserReasonErr'   => "Nie Możesz Zgłosić Użytkownika Bez Podania Powodu",
     'reportUserSuccess'     => 'Dziękujemy za Zgłoszenie',
-    'deleteHobby'           => 'Usuń Kryterium'
+    'deleteHobby'           => 'Usuń Kryterium',
+    'advancedSearchToggle'  => 'Dodatkowe Kryteria'
 ];

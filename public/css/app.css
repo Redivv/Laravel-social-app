@@ -17482,6 +17482,34 @@ readers do not read off random characters that represent icons */
   font-weight: bold;
 }
 
+@media screen and (max-width: 992px) {
+  .searcher .form #advancedSearch .form-row .col {
+    flex-basis: auto;
+  }
+}
+
+.searcher .form .togglerBox {
+  margin-bottom: 1rem;
+}
+
+.searcher .form .togglerBox .advancedSearchToggle {
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: #000;
+  text-decoration: none;
+}
+
+.searcher .form .togglerBox .advancedSearchToggle .toggleArrow {
+  margin-left: 0.25rem;
+  color: #f66103;
+  display: inline-block;
+  transition: transform 0.4s ease-in-out;
+}
+
+.searcher .form .togglerBox .advancedSearchToggle .toggleArrow.rotate {
+  transform: rotate(180deg);
+}
+
 .searcher .form .button {
   background-color: #f66103;
   color: #ffffff;
@@ -17513,6 +17541,12 @@ readers do not read off random characters that represent icons */
   color: #ffffff;
   padding: 0.2rem 0.5rem;
   border-radius: 50px;
+}
+
+@media screen and (max-width: 992px) {
+  .searcher .form #hobbyOutput {
+    margin-bottom: 1rem;
+  }
 }
 
 .searchResults-header {

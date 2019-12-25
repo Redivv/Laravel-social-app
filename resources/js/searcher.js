@@ -32,6 +32,13 @@ function main() {
         }
     });
 
+    $('#advancedSearch').on('show.bs.collapse',function() {
+        $('.toggleArrow').addClass('rotate');
+    });
+
+    $('#advancedSearch').on('hide.bs.collapse',function() {
+        $('.toggleArrow').removeClass('rotate');
+    });
     
     $('.reportBtn').on('click',function() {
         reportUser(this);

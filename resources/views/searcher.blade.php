@@ -16,7 +16,7 @@
         </div>
     @endif
     <form class="form" action="{{route('searcher')}}" method="get">
-            <div class="form-group">
+            <div id="basicSearch" class="form-group">
                 <div class="form-row">
                     <div class="col-7">
                         <label for="username">{{__('searcher.username')}}</label>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+            <div id="advancedSearch" class="form-group collapse">
                 <div class="form-row">
                     <div class="col">
                         <label for="hobby">{{__('searcher.hobby')}}</label>
@@ -101,6 +101,11 @@
                         </select>         
                     </div>
                 </div>
+            </div>
+            <div class="togglerBox">
+                <a class="advancedSearchToggle" data-toggle="collapse" href="#advancedSearch" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    {{__('searcher.advancedSearchToggle')}} <span class="toggleArrow"><i class="fas fa-sort-up"></i></span>
+                </a>
             </div>
             <button class="btn button" type="submit">{{__('searcher.search')}}</button>
         </form>
