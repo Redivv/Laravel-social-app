@@ -31,6 +31,11 @@ class AdminController extends Controller
 
     public function index()
     {
+
+        $notVerifiedTimer = Carbon::now()->subDays(3)->toDateTimeString();
+        User::where('email_verified_at',null)->where('created_at','<',$notVerifiedTimer)->delete();
+
+
         $pictureTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->get());
         $userTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->get());
         return view('adminPanel')->with('pictureTickets',$pictureTicketsAmount)->with('userTickets',$userTicketsAmount);
