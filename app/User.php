@@ -57,6 +57,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo('App\City', 'city_id', 'id');
     }
+    
+    public function partner()
+    {
+        return $this->hasOne('App\User', 'partner_id', 'id');
+    }
+
 
     public function isAdmin()
     {
