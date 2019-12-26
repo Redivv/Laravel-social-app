@@ -52,7 +52,7 @@ class ProfileController extends Controller
             'city'              =>  ['string','nullable','max:250'],
             'description'       =>  ['string','nullable','max:500'],
             'status'            =>  ['numeric', 'gte:0', 'lte:2' ],
-            'relations'         =>  ['numeric', 'gte:0', 'lte:1' ]
+            'relations'         =>  ['boolean']
         ]);
         //If there's a file
         if (request()->hasFile('photo')) {
