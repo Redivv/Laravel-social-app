@@ -531,12 +531,12 @@
 
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();"
+                                        document.getElementById('logout-form2').submit();"
                             >
                                 {{ __('app.logout') }}
                             </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form2" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
                         </div>

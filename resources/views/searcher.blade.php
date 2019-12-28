@@ -124,10 +124,6 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 @endpush
 
-@push('scriptsBefore')
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-@endpush
-
 @push('scripts')
     <script>
         var base_url                = "{{url('/')}}";
@@ -138,6 +134,7 @@
         var reportUserSuccess       = "{{__('searcher.reportUserSuccess')}}";
         var deleteHobby             = "{{__('searcher.deleteHobby')}}";
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="{{asset('js/searcher.js')}}"></script>
 
     <script>
