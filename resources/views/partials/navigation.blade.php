@@ -218,7 +218,7 @@
                         </li>
                     @endguest
 
-                    <li class="nav-item col-4">
+                    <li class="nav-item col-4 navSearcher">
                         <a href="{{ url('/searcher') }}" class="nav-link">
                             <i class="fas fa-search"></i>
                             <br>
@@ -226,14 +226,14 @@
                         </a>
                     </li>
                     @auth
-                        <li class="nav-item col-4">
+                        <li class="nav-item col-4 navDashboard">
                             <a href="{{ route('home') }}" class="nav-link">
                                 <i class="fas fa-users"></i>
                                 <br>
                                 {{__('app.dashboard')}}
                             </a>
                         </li>
-                        <li class="nav-item col-4">
+                        <li class="nav-item col-4 navChat">
                             <a href="{{ url('/message') }}" class="nav-link">
                                 <i class="far fa-comments"></i>
                                 <br>
@@ -291,14 +291,14 @@
             <ul class="navbar-nav mr-auto">
                 
                 <!-- Authentication Links -->
-                    <li class="nav-item">
+                    <li class="nav-item navSearcher">
                         <a href="{{ url('/searcher') }}" class="nav-link">{{ __('app.searcher') }}</a>
                     </li>
                 @auth
-                    <li class="nav-item">
+                    <li class="nav-item navHome">
                         <a href="{{ route('home') }}" class="nav-link">{{__('app.dashboard')}}</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item navChat">
                         <a href="{{ url('/message') }}" class="nav-link">
                             {{__('app.chat')}}
                         </a>

@@ -72,7 +72,7 @@
 @push('styles')
     <style>
         body{
-            background-image: url("images/background.jpg");
+            background-image: url("/images/background.jpg");
         }
 
     </style>
