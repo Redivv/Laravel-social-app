@@ -63,7 +63,8 @@ html{
     }   
 
     // Loading Spinner
-    .spinnerOverlay{
+    .spinnerOverlay,.darkOverlay{
+        top: 0;
         position: absolute;
         width: 100%;
         text-align: center;

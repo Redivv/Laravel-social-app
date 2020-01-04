@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm nav-bar-height">
+<nav id="navBar" class="navbar navbar-expand-md navbar-light bg-white shadow-sm nav-bar-height">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}"> <!-- url should be changed: /user/home   -->
             <!-- {{ config('app.name', 'default') }} -->

@@ -18419,6 +18419,14 @@ html {
   text-align: left;
 }
 
+@media screen and (max-width: 767px) {
+  #friendsWall .friendsWall {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    margin-left: 0;
+  }
+}
+
 #friendsWall .friendsWall .friendsWallHeader {
   text-align: center;
 }
@@ -18527,6 +18535,13 @@ html {
   width: 100%;
   min-height: 50vh;
   padding: 1rem;
+}
+
+@media screen and (max-width: 767px) {
+  #friendsWall .friendsWall #friendsWallFeed {
+    border-left: 0;
+    border-right: 0;
+  }
 }
 
 #friendsWall .friendsWall #friendsWallFeed .noContent {
@@ -18928,7 +18943,7 @@ html {
 #friendsWall .friendsList .friendsListBox {
   display: block;
   width: 100%;
-  text-align: left;
+  text-align: center;
 }
 
 #friendsWall .friendsList .friendsListBox .friendList {
@@ -19011,6 +19026,58 @@ html {
 
 #friendsWall .friendsList .friendsListBox ul li .friendOptions span a:hover {
   color: #f66103;
+}
+
+.friendsList {
+  position: fixed;
+  right: 0;
+  transition: right 1s linear;
+}
+
+@media screen and (max-width: 767px) {
+  .friendsList {
+    right: -50%;
+    top: 10%;
+    max-width: 40%;
+    background: #f8fafc;
+    height: 80%;
+    z-index: 1001;
+    overflow-y: auto;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border: solid 3px #a1a1a1;
+    border-right: 0;
+  }
+}
+
+.friendsList.show {
+  right: 0;
+}
+
+.wallExtraFunctions {
+  position: fixed;
+  left: 0;
+  transition: left 1s linear;
+}
+
+@media screen and (max-width: 767px) {
+  .wallExtraFunctions {
+    top: 10%;
+    left: -50%;
+    max-width: 40%;
+    background: #f8fafc;
+    height: 80%;
+    z-index: 1001;
+    overflow-y: auto;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border: solid 3px #a1a1a1;
+    border-left: 0;
+  }
+}
+
+.wallExtraFunctions.show {
+  left: 0;
 }
 
 #editModal .modal-dialog,
@@ -19239,6 +19306,41 @@ html {
   cursor: default !important;
 }
 
+#scrollUpAnchor,
+#showSidePanels {
+  font-size: calc(1.275rem + 0.3vw);
+  position: fixed;
+  top: 80%;
+  padding: 0.5rem 1rem 0.5rem 0.6rem;
+  color: #ffffff;
+  background: #f66103;
+  border-radius: 0 50% 50% 0;
+  left: -10%;
+  z-index: 1002;
+  transition: left 1s linear;
+}
+
+@media (min-width: 1200px) {
+  #scrollUpAnchor,
+  #showSidePanels {
+    font-size: 1.5rem;
+  }
+}
+
+#showSidePanels {
+  cursor: pointer;
+  padding: 0.5rem 0.6rem 0.5rem 1rem;
+  left: unset;
+  right: -10%;
+  border-radius: 50% 0 0 50%;
+}
+
+@media screen and (max-width: 767px) {
+  #showSidePanels {
+    right: 0;
+  }
+}
+
 html {
   font-size: 2vw;
   scroll-behavior: smooth;
@@ -19260,7 +19362,9 @@ div.cookie-consent,
   justify-content: center;
 }
 
-.spinnerOverlay {
+.spinnerOverlay,
+.darkOverlay {
+  top: 0;
   position: absolute;
   width: 100%;
   text-align: center;
@@ -19272,7 +19376,8 @@ div.cookie-consent,
   background: rgba(0, 0, 0, 0.8);
 }
 
-.spinnerOverlay .spinner-border {
+.spinnerOverlay .spinner-border,
+.darkOverlay .spinner-border {
   position: fixed;
   top: 50%;
   width: 5rem;
