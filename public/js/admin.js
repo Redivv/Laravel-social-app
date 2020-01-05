@@ -1,1 +1,397 @@
-!function(e){var t={};function n(a){if(t[a])return t[a].exports;var o=t[a]={i:a,l:!1,exports:{}};return e[a].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,a){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:a})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var a=Object.create(null);if(n.r(a),Object.defineProperty(a,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)n.d(a,o,function(t){return e[t]}.bind(null,o));return a},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="/",n(n.s=50)}({50:function(e,t,n){e.exports=n(51)},51:function(e,t){function n(e,t){var n=$(e).attr("name"),a=$(e).parent().serialize(),o=$.ajax({method:"post",url:__baseUrl+"/admin/ajax/ticket",data:{_method:"PATCH",ticketId:a,decision:n}});o.done((function(n){if("success"===n.status){$(e).parent().parent().parent().remove();var o=$("#"+t+"Count").text(),i=$("#descSys").text();o-1==0?$("#"+t+"Count").html(""):$("#"+t+"Count").html(parseInt(o)-1),i-1==0?$(".systemNotificationsCount").html(""):$(".systemNotificationsCount").html(parseInt(i)-1),$("a."+a.substring(9)).remove(),""==$("#descSys").html().trim()&&$("div.systemNotifications").html('<div class="text-center">'+noNotifications+"</div>"),$(".spinnerOverlay").addClass("d-none")}})),o.fail((function(e){alert(e.responseJSON.message)}))}function a(e,t){var n=$(e).attr("name");if("edit"==n)var a=prompt("Nowa Nazwa");else a="";$(".spinnerOverlay").removeClass("d-none");var o=$(e).parent().serialize(),i=$.ajax({method:"post",url:__baseUrl+"/admin/ajax/list",data:{_method:"PATCH",elementId:o,decision:n,editValue:a,target:t}});i.done((function(t){if("success"===t.status)switch(n){case"delete":$(e).parent().parent().parent().remove(),$(".spinnerOverlay").addClass("d-none");break;case"edit":$(e).parent().parent().prev().prev().html(a),$(".spinnerOverlay").addClass("d-none")}})),i.fail((function(e){alert(e.responseJSON.message)}))}$(document).ready((function(){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$("a.tab").one("click",(function(){!function(e){var t=$(e).attr("id"),o=__baseUrl+"/admin/ajax/tab";$(document).one("ajaxSend",(function(){$("#"+t+"-content").html(' <div class="spinner-border text-dark" role="status"><span class="sr-only">Loading...</span></div>')}));var i=$.ajax({method:"get",url:o,data:{target:t}});i.done((function(e){"success"===e.status&&($("#"+t+"-content").html(e.html),0==e.amount?$("#"+t+"Count").html(""):$("#"+t+"Count").html(e.amount),$("button.ticketBtn").on("click",(function(e){e.preventDefault(),confirm(confirmMsg)&&($(".spinnerOverlay").removeClass("d-none"),n(this,t))})),$("button.listBtn").on("click",(function(e){e.preventDefault(),confirm(confirmMsg)&&a(this,t)})),$("span.fetchBtn").on("click",(function(){$(this).addClass("spin"),function e(t){var o=$(t).attr("id").split("-");o=o[0];var i=__baseUrl+"/admin/ajax/tab",r=$.ajax({method:"get",url:i,data:{target:o}});r.done((function(t){"success"===t.status&&($("#"+o+"-content").html(t.html),0==t.amount?$("#"+o+"Count").html(""):$("#"+o+"Count").html(t.amount),$("button.ticketBtn").on("click",(function(e){e.preventDefault(),confirm(confirmMsg)&&($(".spinnerOverlay").removeClass("d-none"),n(this,o))})),$("button.listBtn").on("click",(function(e){e.preventDefault(),confirm(confirmMsg)&&a(this,o)})),$("span.fetchBtn").on("click",(function(){$(this).addClass("spin"),e(this)})))})),r.fail((function(e){alert(e.responseJSON.message),$("#"+o+"-content").html("")}))}(this)})))})),i.fail((function(e){alert(e.responseJSON.message),$("#"+t+"-content").html("")}))}(this)})),$("#infoNotDesc").emojioneArea({pickerPosition:"bottom",placeholder:" ",autocomplete:!1}),$("#infoWallDesc").emojioneArea({pickerPosition:"bottom",placeholder:" ",autocomplete:!1}),$("#infoMailTitle").emojioneArea({inline:!0,pickerPosition:"bottom",placeholder:" ",autocomplete:!1}),$("#infoMailDesc").emojioneArea({pickerPosition:"bottom",placeholder:" ",autocomplete:!1}),$("#postPicture").change((function(e){var t=e.target.files;$("#adminPicture-preview").empty(),$("#adminPicture-preview").append('<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt"></i></div>');var n=$(this);$(".resetPicture").one("click",(function(){confirm(resetImgMsg)&&(n.val(""),$("#adminPicture-preview").empty())}));for(var a,o=0;a=t[o];o++){if(!a.type.match("image.*")){$(this).val(""),alert(badFileType),$("#adminPicture-preview").empty();break}var i=new FileReader;i.onload=function(e){return function(t){var n=document.createElement("span");n.innerHTML=['<img class="thumb" src="',t.target.result,'" title="',escape(e.name),'"/>'].join(""),$("#adminPicture-preview").append(n,null),$(".emojionearea-editor").focus()}}(a),i.readAsDataURL(a)}})),$("#adminInfoForm").on("submit",(function(e){e.preventDefault();var t=baseUrl+"/admin/ajax/wideInfo",n=$(this);$(document).one("ajaxSend",(function(){n[0].reset(),$(".emojionearea-editor").empty(),$("#adminPicture-preview").empty(),$(".spinnerOverlay").removeClass("d-none")}));var a=$.ajax({method:"post",url:t,enctype:"multipart/form-data",processData:!1,contentType:!1,data:new FormData(this)});a.done((function(e){"success"===e.status&&$(".spinnerOverlay").addClass("d-none")})),a.fail((function(e){alert(e.responseJSON.message)}))}))}))}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./resources/js/admin.js":
+/*!*******************************!*\
+  !*** ./resources/js/admin.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  main();
+});
+
+function main() {
+  $('a.tab').one('click', function () {
+    renderContent(this);
+  });
+  $('#infoNotDesc').emojioneArea({
+    pickerPosition: "bottom",
+    placeholder: "\xa0",
+    autocomplete: false
+  });
+  $('#infoWallDesc').emojioneArea({
+    pickerPosition: "bottom",
+    placeholder: "\xa0",
+    autocomplete: false
+  });
+  $('#infoMailTitle').emojioneArea({
+    inline: true,
+    pickerPosition: "bottom",
+    placeholder: "\xa0",
+    autocomplete: false
+  });
+  $('#infoMailDesc').emojioneArea({
+    pickerPosition: "bottom",
+    placeholder: "\xa0",
+    autocomplete: false
+  });
+  $('#postPicture').change(function (evt) {
+    var files = evt.target.files; // FileList object
+    // Empty the preview list
+
+    $('#adminPicture-preview').empty();
+    var html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt"></i></div>';
+    $('#adminPicture-preview').append(html);
+    var tag = $(this);
+    $('.resetPicture').one('click', function () {
+      if (confirm(resetImgMsg)) {
+        tag.val("");
+        $('#adminPicture-preview').empty();
+      }
+    }); // Loop through the FileList and render image files as thumbnails.
+
+    for (var i = 0, f; f = files[i]; i++) {
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        $(this).val("");
+        alert(badFileType);
+        $('#adminPicture-preview').empty();
+        break;
+      }
+
+      var reader = new FileReader(); // Closure to capture the file information.
+
+      reader.onload = function (theFile) {
+        return function (e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+          $('#adminPicture-preview').append(span, null);
+          $('.emojionearea-editor').focus();
+        };
+      }(f); // Read in the image file as a data URL.
+
+
+      reader.readAsDataURL(f);
+    }
+  });
+  $('#adminInfoForm').on('submit', function (e) {
+    e.preventDefault();
+    var url = baseUrl + "/admin/ajax/wideInfo";
+    var tag = $(this);
+    $(document).one("ajaxSend", function () {
+      tag[0].reset();
+      $('.emojionearea-editor').empty();
+      $('#adminPicture-preview').empty();
+      $('.spinnerOverlay').removeClass('d-none');
+    });
+    var request = $.ajax({
+      method: "post",
+      url: url,
+      enctype: 'multipart/form-data',
+      processData: false,
+      contentType: false,
+      data: new FormData(this)
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        $('.spinnerOverlay').addClass('d-none');
+      }
+    });
+    request.fail(function (xhr) {
+      alert(xhr.responseJSON.message);
+    });
+  });
+}
+
+function renderContent(selected) {
+  var targetId = $(selected).attr('id');
+  var url = __baseUrl + '/admin/ajax/tab';
+  $(document).one("ajaxSend", function () {
+    var html = ' <div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>';
+    $('#' + targetId + '-content').html(html);
+  });
+  var request = $.ajax({
+    method: 'get',
+    url: url,
+    data: {
+      target: targetId
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      $('#' + targetId + '-content').html(response.html);
+
+      if (response.amount == 0) {
+        $('#' + targetId + 'Count').html('');
+      } else {
+        $('#' + targetId + 'Count').html(response.amount);
+      }
+
+      $('button.ticketBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (confirm(confirmMsg)) {
+          $('.spinnerOverlay').removeClass('d-none');
+          carryTicket(this, targetId);
+        }
+      });
+      $('button.listBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (confirm(confirmMsg)) {
+          carryList(this, targetId);
+        }
+      });
+      $('span.fetchBtn').on('click', function () {
+        $(this).addClass('spin');
+        fetchContent(this);
+      });
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+    $('#' + targetId + '-content').html('');
+  });
+}
+
+function fetchContent(selected) {
+  var targetId = $(selected).attr('id').split('-');
+  targetId = targetId[0];
+  var url = __baseUrl + '/admin/ajax/tab';
+  var request = $.ajax({
+    method: 'get',
+    url: url,
+    data: {
+      target: targetId
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      $('#' + targetId + '-content').html(response.html);
+
+      if (response.amount == 0) {
+        $('#' + targetId + 'Count').html('');
+      } else {
+        $('#' + targetId + 'Count').html(response.amount);
+      }
+
+      $('button.ticketBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (confirm(confirmMsg)) {
+          $('.spinnerOverlay').removeClass('d-none');
+          carryTicket(this, targetId);
+        }
+      });
+      $('button.listBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (confirm(confirmMsg)) {
+          carryList(this, targetId);
+        }
+      });
+      $('span.fetchBtn').on('click', function () {
+        $(this).addClass('spin');
+        fetchContent(this);
+      });
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+    $('#' + targetId + '-content').html('');
+  });
+}
+
+function carryTicket(decided, target) {
+  var decision = $(decided).attr('name');
+  var ticketId = $(decided).parent().serialize();
+  var request = $.ajax({
+    method: 'post',
+    url: __baseUrl + '/admin/ajax/ticket',
+    data: {
+      "_method": "PATCH",
+      ticketId: ticketId,
+      decision: decision
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      $(decided).parent().parent().parent().remove();
+      var currentAmount = $('#' + target + 'Count').text();
+      var currentAmountNot = $('#descSys').text();
+
+      if (currentAmount - 1 == 0) {
+        $('#' + target + 'Count').html('');
+      } else {
+        $('#' + target + 'Count').html(parseInt(currentAmount) - 1);
+      }
+
+      if (currentAmountNot - 1 == 0) {
+        $('.systemNotificationsCount').html('');
+      } else {
+        $('.systemNotificationsCount').html(parseInt(currentAmountNot) - 1);
+      }
+
+      $('a.' + ticketId.substring(9)).remove();
+
+      if ($('#descSys').html().trim() == "") {
+        $('div.systemNotifications').html('<div class="text-center">' + noNotifications + '</div>');
+      }
+
+      $('.spinnerOverlay').addClass('d-none');
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+  });
+}
+
+function carryList(decided, target) {
+  var decision = $(decided).attr('name');
+
+  if (decision == 'edit') {
+    var editValue = prompt("Nowa Nazwa");
+  } else {
+    var editValue = "";
+  }
+
+  $('.spinnerOverlay').removeClass('d-none');
+  var elementId = $(decided).parent().serialize();
+  var request = $.ajax({
+    method: 'post',
+    url: __baseUrl + '/admin/ajax/list',
+    data: {
+      "_method": "PATCH",
+      elementId: elementId,
+      decision: decision,
+      editValue: editValue,
+      target: target
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      switch (decision) {
+        case 'delete':
+          $(decided).parent().parent().parent().remove();
+          $('.spinnerOverlay').addClass('d-none');
+          break;
+
+        case 'edit':
+          $(decided).parent().parent().prev().prev().html(editValue);
+          $('.spinnerOverlay').addClass('d-none');
+      }
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+  });
+}
+
+/***/ }),
+
+/***/ 6:
+/*!*************************************!*\
+  !*** multi ./resources/js/admin.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\admin.js */"./resources/js/admin.js");
+
+
+/***/ })
+
+/******/ });
