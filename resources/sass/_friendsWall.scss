@@ -18,6 +18,11 @@
 
 #friendsWall{
     .friendsWall{
+        @media screen and (max-width: $mobile-breakpoint) {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            margin-left:0;
+        }
         text-align: left;
         .friendsWallHeader{
             text-align: center;
@@ -96,8 +101,17 @@
                 text-transform: uppercase;
                 letter-spacing: 2px;
             }
+            &:hover{
+                button{
+                    background-color: $orange-hover;
+                }
+            }
         }
         #friendsWallFeed{
+            @media screen and (max-width: $mobile-breakpoint) {
+                border-left: 0;
+                border-right: 0;
+            }
             border-left: 1px solid rgba(0, 0, 0, 0.1);
             border-right: 1px solid rgba(0, 0, 0, 0.1);
             margin: 2rem 0;
@@ -454,7 +468,7 @@
             }
             display: block;
             width: 100%;
-            text-align: left;
+            text-align: center;
             ul{
                 padding-left: 1rem;
                 list-style: none;
@@ -501,25 +515,95 @@
                     .friendOptions{
                         @include font-size(1.1rem);
                         span{
-                            
+                            margin: 0 0.5rem;
+                            cursor: pointer;
+                            color: $black;
+                            &:hover{
+                                color: $orange; 
+                            }
+                            a{
                                 margin: 0 0.5rem;
                                 cursor: pointer;
                                 color: $black;
                                 &:hover{
-                                    color: $orange; 
+                                color: $orange; 
                                 }
-                                a{
-                                    margin: 0 0.5rem;
-                                    cursor: pointer;
-                                    color: $black;
-                                    &:hover{
-                                    color: $orange; 
-                                }
-                                }
+                            }
                             
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+.friendsList{
+    position: fixed;
+    right: 0;
+    transition:right 1s linear;
+    @media screen and (max-width: $mobile-breakpoint) {
+        right: -50%;
+        top: 10%;
+        max-width: 40%;
+        background:#f8fafc;
+        height: 80%;
+        z-index: 1001;
+        overflow-y: auto;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        border: solid 3px $grey;
+        border-right: 0;
+    }
+    &.show{
+        right: 0;
+    }
+}
+
+.wallExtraFunctions{
+    position: fixed;
+    left: 0;
+    transition:left 1s linear;
+    @media screen and (max-width: $mobile-breakpoint) {
+        top: 10%;
+        left: -50%;
+        max-width: 40%;
+        background:#f8fafc;
+        height: 80%;
+        z-index: 1001;
+        overflow-y: auto;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        border: solid 3px $grey;
+        border-left: 0;
+    }
+    &.show{
+        left: 0;
+    }
+    .sortOptions{
+        display: block;
+        font-weight: bold;
+        color: $white;
+        text-decoration: none;
+        @include font-size(0.9rem);
+        padding: 1rem 0.5rem;
+        border-radius: 50px;
+        margin: 2rem auto;
+        background-color: $orange;
+        @media screen and (max-width: $mobile-breakpoint) {
+            @include font-size(0.8rem);
+            margin: 1.5rem auto;
+        }
+        @media screen and (min-width: $mobile-breakpoint) {
+            max-width: 70%;
+        }
+        &:hover{
+            background-color: $orange-hover;
+        }
+        &.active{
+            background-color: $orange-active;
+            &:hover{
+                background-color: $orange-active-hover;
             }
         }
     }
@@ -580,6 +664,9 @@
                 text-transform: uppercase;
                 letter-spacing: 2px;
             }
+            &:hover{
+                background-color: $orange-hover;
+            }
         }
         #taggedUsers,#postTaggedUsersModal,#commentModalUserTagged{
             padding: 0 1rem;
@@ -609,5 +696,29 @@
                 }
             }
         }
+    }
+}
+
+#scrollUpAnchor, #showSidePanels{
+    @include font-size (1.5rem);
+    position: fixed;
+    top: 80%;
+    padding: 0.5rem 1rem 0.5rem 0.6rem;
+    color:$white;
+    background:$orange;
+    border-radius: 0 50% 50% 0;
+    left: -10%;
+    z-index: 1002;
+    transition:left 1s linear;
+}
+
+#showSidePanels{
+    cursor: pointer;
+    padding: 0.5rem 0.6rem 0.5rem 1rem;
+    left: unset;
+    right: -10%;
+    border-radius: 50% 0 0 50%;
+    @media screen and (max-width: $mobile-breakpoint) {
+        right: 0;
     }
 }

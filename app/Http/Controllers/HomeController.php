@@ -38,8 +38,27 @@ class HomeController extends Controller
     {
         $friendsArray = Auth::user()->getFriends()->modelKeys();
         
-        $posts = Post::orderBy('created_at', 'desc')->where('is_public',1)->orWhereIn('user_id',$friendsArray)->orWhere('user_id',Auth::id())->take(5)->get();
-
+        if ($request->has('sortBy')) {
+            $request->validate([
+                'sortBy'    => ['string',
+                Rule::in(['public', 'friends', 'admin'])
+                ]
+            ]);
+            switch ($request->sortBy) {
+                case 'public':
+                    $posts = Post::orderBy('created_at', 'desc')->where('is_public',1)->whereNotIn('id',[Auth::id()])->take(5)->get();
+                    break;
+                case 'friends':
+                    $posts = Post::orderBy('created_at', 'desc')->whereIn('user_id',$friendsArray)->whereNotIn('id',[Auth::id()])->take(5)->get();
+                    break;
+                case 'admin':
+                    $adminsArray = User::where('is_admin','=',1)->whereNotIn('id',[Auth::id()])->get()->modelKeys();
+                    $posts = Post::orderBy('created_at', 'desc')->whereIn('user_id',$adminsArray)->whereNotIn('id',[Auth::id()])->take(5)->get();
+                    break;
+            }
+        }else{
+            $posts = Post::orderBy('created_at', 'desc')->where('is_public',1)->orWhereIn('user_id',$friendsArray)->orWhere('user_id',Auth::id())->take(5)->get();
+        }
         if ($request->ajax()) {
             $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
             return response()->json(['status' => 'success', 'html' => $html], 200);
@@ -74,14 +93,33 @@ class HomeController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
-                'pagiTime'   => 'numeric'
+                'pagiTime'   => 'numeric',
+                'sortBy'    => ['string',
+                Rule::in(['public', 'friends', 'admin'])]
             ]);
+
+            $bek = $request->all();
             
             $stopPagi = false;
             $friendsArray = Auth::user()->getFriends()->modelKeys();
 
-            $posts = Post::orderBy('created_at', 'desc')->where('is_public',1)->orWhereIn('user_id',$friendsArray)->orWhere('user_id',Auth::id())->skip(5*$request->pagiTime)->take(5)->get();
-            if (count($posts) < 5) {
+            if ($request->has('sortBy')) {
+                switch ($request->sortBy) {
+                    case 'public':
+                        $posts = Post::orderBy('created_at', 'desc')->where('is_public',1)->whereNotIn('id',[Auth::id()])->skip(5*$request->pagiTime)->take(5)->get();
+                        break;
+                    case 'friends':
+                        $posts = Post::orderBy('created_at', 'desc')->whereIn('user_id',$friendsArray)->whereNotIn('id',[Auth::id()])->skip(5*$request->pagiTime)->take(5)->get();
+                        break;
+                    case 'admin':
+                        $adminsArray = User::where('is_admin','=',1)->whereNotIn('id',[Auth::id()])->get()->modelKeys();
+                        $posts = Post::orderBy('created_at', 'desc')->whereIn('user_id',$adminsArray)->whereNotIn('id',[Auth::id()])->skip(5*$request->pagiTime)->take(5)->get();
+                        break;
+                }
+            }else{
+                $posts = Post::orderBy('created_at', 'desc')->where('is_public',1)->orWhereIn('user_id',$friendsArray)->orWhere('user_id',Auth::id())->skip(5*$request->pagiTime)->take(5)->get();
+            }
+                if (count($posts) < 5) {
                 $stopPagi = true;
             }
 

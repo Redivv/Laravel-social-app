@@ -20,6 +20,7 @@ use App\Notifications\UserNotification;
 use App\Notifications\SystemNotification;
 use App\Notifications\NewAdminPost;
 use App\Notifications\AdminWideInfo;
+use App\Notifications\AdminMailInfo;
 
 class AdminController extends Controller
 {
@@ -30,6 +31,11 @@ class AdminController extends Controller
 
     public function index()
     {
+
+        $notVerifiedTimer = Carbon::now()->subDays(3)->toDateTimeString();
+        User::where('email_verified_at',null)->where('created_at','<',$notVerifiedTimer)->delete();
+
+
         $pictureTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->get());
         $userTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->get());
         return view('adminPanel')->with('pictureTickets',$pictureTicketsAmount)->with('userTickets',$userTicketsAmount);
@@ -164,40 +170,32 @@ class AdminController extends Controller
                 'infoNotDesc'   => ['nullable','string','max:255','required_with:infoNotCheck'],
                 'infoWallCheck' => ['nullable','string'],
                 'infoWallDesc'  => ['nullable','string','max:255'],
+                'infoMailCheck' => ['nullable','string'],
+                'infoMailTitle' => ['nullable','string','max:255'],
+                'infoMailDesc'  => ['nullable','string','max:255'],
                 'postPicture.*' => ['nullable','file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
             ]);
 
-            if (isset($request->infoNotCheck)) {
-                $users = User::whereNotIn('id',[Auth::id()])->get();
-                Notification::send($users, new AdminWideInfo($request->infoNotDesc));
+            if ( (isset($request->infoNotCheck))){
+                if(!empty(trim($request->infoNotDesc))){
+                    $users = User::whereNotIn('id',[Auth::id()])->get();
+                    Notification::send($users, new AdminWideInfo($request->infoNotDesc));
+                }else{
+                    return response()->json(['status' => 'error', 'message' => 'Empty Message'], 400);
+                }
             }
 
-            if (isset($request->infoWallCheck)) {
-                $postDesc = $request->input('infoWallDesc');
-                $pictures = $request->file('postPicture');
-                $pictures_json = null;
+            if (isset($request->infoMailCheck)) {
+                $subject = $request->infoMailTitle;
+                $desc = $request->infoMailDesc;
 
-                if($pictures){
-                    $pictures_json = array();
-                    foreach ($pictures as $picture) {
-                        $imageName = hash_file('haval160,4',$picture->getPathname()).'.'.$picture->getClientOriginalExtension();
-                        $picture->move(public_path('img/post-pictures'), $imageName);
-                        $pictures_json[] = $imageName;
-                    }
-                    $pictures_json = json_encode($pictures_json);
-                }
+                if( (!empty(trim($subject))) && (!empty(trim($desc))) ){
 
-                $author = Auth::user();
-
-                $post = new Post;
-                $post->user_id = $author->id;
-                $post->desc = $postDesc;
-                $post->pictures = $pictures_json;
-
-                
-                if ($post->save()) {
                     $users = User::whereNotIn('id',[Auth::id()])->get();
-                    Notification::send($users, new NewAdminPost($author,$post->id));
+                    Notification::send($users, new AdminMailInfo($subject, $desc));
+
+                }else{
+                    return response()->json(['status' => 'error', 'message' => 'Empty Message'], 400);
                 }
             }
             return response()->json(['status' => 'success'], 200);

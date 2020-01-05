@@ -32,5 +32,9 @@ return [
     'wideNotCheck'              => 'Wyślij powiadomienie na pasku nawigacyjnym',
     'wideWallCheck'             => 'Stwórz post na tablicy',
     'infoContent'               => 'Treść',
-    'infoSend'                  => 'Wyślij Powiadomienie'
+    'infoSend'                  => 'Wyślij Powiadomienie',
+    'mailCheck'                 => 'Wyślij Wiadomość E-mail',
+    'infoTitleContent'          => 'Tytuł',
+    'mailInfoGreet'             => 'Wiadomość od Administracji'
+
 ];

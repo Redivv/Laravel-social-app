@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm nav-bar-height">
+<nav id="navBar" class="navbar navbar-expand-md navbar-light bg-white shadow-sm nav-bar-height">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}"> <!-- url should be changed: /user/home   -->
             <!-- {{ config('app.name', 'default') }} -->
@@ -218,7 +218,7 @@
                         </li>
                     @endguest
 
-                    <li class="nav-item col-4">
+                    <li class="nav-item col-4 navSearcher">
                         <a href="{{ url('/searcher') }}" class="nav-link">
                             <i class="fas fa-search"></i>
                             <br>
@@ -226,14 +226,14 @@
                         </a>
                     </li>
                     @auth
-                        <li class="nav-item col-4">
+                        <li class="nav-item col-4 navDashboard">
                             <a href="{{ route('home') }}" class="nav-link">
                                 <i class="fas fa-users"></i>
                                 <br>
                                 {{__('app.dashboard')}}
                             </a>
                         </li>
-                        <li class="nav-item col-4">
+                        <li class="nav-item col-4 navChat">
                             <a href="{{ url('/message') }}" class="nav-link">
                                 <i class="far fa-comments"></i>
                                 <br>
@@ -291,14 +291,14 @@
             <ul class="navbar-nav mr-auto">
                 
                 <!-- Authentication Links -->
-                    <li class="nav-item">
+                    <li class="nav-item navSearcher">
                         <a href="{{ url('/searcher') }}" class="nav-link">{{ __('app.searcher') }}</a>
                     </li>
                 @auth
-                    <li class="nav-item">
+                    <li class="nav-item navHome">
                         <a href="{{ route('home') }}" class="nav-link">{{__('app.dashboard')}}</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item navChat">
                         <a href="{{ url('/message') }}" class="nav-link">
                             {{__('app.chat')}}
                         </a>
@@ -520,7 +520,7 @@
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-right" style="min-width:25vw" aria-labelledby="navbarDropdown">
                             <a href="{{ route('ProfileView') }}" class="dropdown-item">{{__('app.profile')}}</a>
                             
                             @if(auth()->user()->isAdmin())

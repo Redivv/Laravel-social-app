@@ -48,11 +48,11 @@ class ProfileController extends Controller
 
         // If request is valid
         request()->validate([
-            'photo'         =>  'mimes:jpeg,png,jpg,gif|max:2048',
-            'city'          =>  ['string','nullable','max:250'],
-            'description'   => ['string','nullable','max:500'],
-            'status'        =>  ['numeric', 'gte:0', 'lte:2' ],
-            'relations'        =>  ['numeric', 'gte:0', 'lte:1' ]
+            'photo'             =>  'mimes:jpeg,png,jpg,gif|max:2048',
+            'city'              =>  ['string','nullable','max:250'],
+            'description'       =>  ['string','nullable','max:500'],
+            'status'            =>  ['numeric', 'gte:0', 'lte:2' ],
+            'relations'         =>  ['boolean']
         ]);
         //If there's a file
         if (request()->hasFile('photo')) {
@@ -89,6 +89,7 @@ class ProfileController extends Controller
         $user->email='Private data';  //Seeing other's email is impossible (safety reasons);
         if(Auth::check()){ //If user's logged in, he can explore any profile
             $tags = $user->tagNames();
+            $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
             return view('profile')->with(compact('user'))->with(compact('tags'));
         }else{
             if($user->hidden_status == 0){ //Guests can freely see profile of any person with hidden_status==0;
@@ -99,6 +100,7 @@ class ProfileController extends Controller
                 $user->description='err0000';
                 $user->city_id=null;
                 $user->birth_year='err0000';
+                $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
                 return view('profile')->with(compact('user'))->with(['status' => 'Nie jesteś zalogowany']);
             }else{ //Guests cannot find anyone with hidden_status==2, if they even try they get redirrected back to searcher (or mb register/login, dunno yet);
                 return redirect('searcher')->with(['status' => 'Nie można wyświetlić profilu użytkownika '.$user->name.' jako gość.']);

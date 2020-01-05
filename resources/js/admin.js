@@ -27,6 +27,19 @@ function main() {
         autocomplete:false
     });
 
+    $('#infoMailTitle').emojioneArea({
+        inline:true,
+        pickerPosition: "bottom",
+        placeholder: "\xa0",
+        autocomplete:false
+    });
+
+    $('#infoMailDesc').emojioneArea({
+        pickerPosition: "bottom",
+        placeholder: "\xa0",
+        autocomplete:false
+    });
+
     $('#postPicture').change(function(evt){
         var files = evt.target.files; // FileList object
         

@@ -13,11 +13,14 @@
     </div>
 </div>
 
+<div class="darkOverlay d-none"></div>
+
 <div id="friendsWall" class="container-fluid mt-4">
     <div class="row text-center">
         <div class="col-3 text-center wallExtraFunctions">
+            @include('partials.wallExtraFunctions')
         </div>
-        <div class="col-6 friendsWall">
+        <div class="offset-3 col-6 friendsWall">
             <div class="friendsWallHeader">
                 <h3>{{__('activityWall.friendsWallHeader')}}</h3>
             </div>
@@ -66,6 +69,10 @@
     </div>
 </div>
 
+<a id="scrollUpAnchor" href="#navBar"><i class="fas fa-arrow-up"></i></a>
+
+<span id="showSidePanels"><i class="fas fa-arrows-alt-h"></i></span>
+
 @include('partials.postEditModal')
 
 @include('partials.commentEditModal')
@@ -75,6 +82,11 @@
 @endsection
 
 @push('styles')
+<style>
+    .navHome > .nav-link{
+        color: #f66103 !important;
+    }
+</style>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 @endpush
 

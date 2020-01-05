@@ -117,6 +117,31 @@ function main() {
   $(window).on('scroll', function () {
     pagiPosts();
     showFetchBtn(position);
+    showScrollUp();
+  });
+  $('#showSidePanels').on('click', function () {
+    if ($('.friendsList:first').hasClass('show') || $('.wallExtraFunctions:first').hasClass('show')) {
+      $('.wallExtraFunctions').removeClass('show');
+      $('.friendsList').removeClass('show');
+      $('#showSidePanels').html('<i class="fas fa-arrows-alt-h"></i>');
+      setTimeout(function () {
+        $('.darkOverlay').addClass('d-none');
+      }, 900);
+    } else {
+      $('.wallExtraFunctions').addClass('show');
+      $('.friendsList').addClass('show');
+      $('.darkOverlay').removeClass('d-none');
+      $('#showSidePanels').html('<i class="fas fa-times"></i>');
+      $('#friendsWall').off('click');
+      $('.darkOverlay').on('click', function () {
+        $('.wallExtraFunctions').removeClass('show');
+        $('.friendsList').removeClass('show');
+        $('#showSidePanels').html('<i class="fas fa-arrows-alt-h"></i>');
+        setTimeout(function () {
+          $('.darkOverlay').addClass('d-none');
+        }, 900);
+      });
+    }
   });
   $('#wallFetchBtn').on('click', function () {
     refreshWall(this);
@@ -1028,11 +1053,13 @@ function pagiPosts() {
     $(window).off('scroll');
     pagi++;
     var url = baseUrl + "/user/ajax/getMorePosts";
+    var sortParam = getUrlParameter('sortBy');
     var request = $.ajax({
       method: 'get',
       url: url,
       data: {
-        pagiTime: pagi
+        pagiTime: pagi,
+        sortBy: sortParam
       }
     });
     request.done(function (response) {
@@ -1043,10 +1070,12 @@ function pagiPosts() {
           $(window).on('scroll', function () {
             pagiPosts();
             showFetchBtn(position);
+            showScrollUp();
           });
         } else {
           $(window).on('scroll', function () {
             showFetchBtn(position);
+            showScrollUp();
           });
         }
 
@@ -1191,6 +1220,33 @@ function showFetchBtn() {
     position = scroll;
   }
 }
+
+function showScrollUp() {
+  var y = $(this).scrollTop();
+
+  if (y >= 100) {
+    $('#scrollUpAnchor').css('left', '0');
+  } else {
+    $('#scrollUpAnchor').css('left', '-10%');
+  }
+}
+
+function getUrlParameter(sParam) {
+  var sPageURL = window.location.search.substring(1),
+      sURLVariables = sPageURL.split('&'),
+      sParameterName,
+      i;
+
+  for (i = 0; i < sURLVariables.length; i++) {
+    sParameterName = sURLVariables[i].split('=');
+
+    if (sParameterName[0] === sParam) {
+      return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+    }
+  }
+}
+
+;
 
 /***/ }),
 
