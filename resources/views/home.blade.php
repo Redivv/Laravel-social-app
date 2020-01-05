@@ -18,6 +18,7 @@
 <div id="friendsWall" class="container-fluid mt-4">
     <div class="row text-center">
         <div class="col-3 text-center wallExtraFunctions">
+            @include('partials.wallExtraFunctions')
         </div>
         <div class="offset-3 col-6 friendsWall">
             <div class="friendsWallHeader">

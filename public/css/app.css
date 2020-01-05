@@ -18527,6 +18527,10 @@ html {
   letter-spacing: 2px;
 }
 
+#friendsWall .friendsWall .friendsWallSendButton:hover button {
+  background-color: #e26103;
+}
+
 #friendsWall .friendsWall #friendsWallFeed {
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   border-right: 1px solid rgba(0, 0, 0, 0.1);
@@ -19080,6 +19084,43 @@ html {
   left: 0;
 }
 
+.wallExtraFunctions .sortOptions {
+  display: block;
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 1rem 0.5rem;
+  border-radius: 50px;
+  margin: 2rem auto;
+  background-color: #f66103;
+}
+
+@media screen and (max-width: 767px) {
+  .wallExtraFunctions .sortOptions {
+    font-size: 0.8rem;
+    margin: 1.5rem auto;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .wallExtraFunctions .sortOptions {
+    max-width: 70%;
+  }
+}
+
+.wallExtraFunctions .sortOptions:hover {
+  background-color: #e26103;
+}
+
+.wallExtraFunctions .sortOptions.active {
+  background-color: #f22103;
+}
+
+.wallExtraFunctions .sortOptions.active:hover {
+  background-color: #d22103;
+}
+
 #editModal .modal-dialog,
 #commentEditModal .modal-dialog,
 #tagUsersModal .modal-dialog {
@@ -19179,6 +19220,12 @@ html {
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+
+#editModal .modal-body .friendsWallSendButton:hover,
+#commentEditModal .modal-body .friendsWallSendButton:hover,
+#tagUsersModal .modal-body .friendsWallSendButton:hover {
+  background-color: #e26103;
 }
 
 #editModal .modal-body #taggedUsers,

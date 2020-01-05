@@ -28,5 +28,9 @@ return [
     'togglePublic'      => 'Tylko dla znajomych',
     'deleteFriend'      => 'Czy na pewno chcesz usunąć ',
     'friendDeleted'     => 'Znajomy został usunięty',
-    'friendNewPicture'  => ' zmienił swoje zdjęcie profilowe'
+    'friendNewPicture'  => ' zmienił swoje zdjęcie profilowe',
+    'sortNone'          => 'Wszystkie Posty',
+    'sortPublic'        => 'Posty Publiczne',
+    'sortFriends'       => 'Posty Znajomych',
+    'sortAdmin'         => 'Posty Administratorów'
 ];

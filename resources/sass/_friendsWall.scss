@@ -101,6 +101,11 @@
                 text-transform: uppercase;
                 letter-spacing: 2px;
             }
+            &:hover{
+                button{
+                    background-color: $orange-hover;
+                }
+            }
         }
         #friendsWallFeed{
             @media screen and (max-width: $mobile-breakpoint) {
@@ -575,6 +580,33 @@
     &.show{
         left: 0;
     }
+    .sortOptions{
+        display: block;
+        font-weight: bold;
+        color: $white;
+        text-decoration: none;
+        @include font-size(0.9rem);
+        padding: 1rem 0.5rem;
+        border-radius: 50px;
+        margin: 2rem auto;
+        background-color: $orange;
+        @media screen and (max-width: $mobile-breakpoint) {
+            @include font-size(0.8rem);
+            margin: 1.5rem auto;
+        }
+        @media screen and (min-width: $mobile-breakpoint) {
+            max-width: 70%;
+        }
+        &:hover{
+            background-color: $orange-hover;
+        }
+        &.active{
+            background-color: $orange-active;
+            &:hover{
+                background-color: $orange-active-hover;
+            }
+        }
+    }
 }
 
 #editModal,#commentEditModal, #tagUsersModal{
@@ -631,6 +663,9 @@
                 font-weight: normal;
                 text-transform: uppercase;
                 letter-spacing: 2px;
+            }
+            &:hover{
+                background-color: $orange-hover;
             }
         }
         #taggedUsers,#postTaggedUsersModal,#commentModalUserTagged{
