@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
 use App\Notifications\NewProfilePicture;
+use App\Notifications\SystemNotification;
 
 use Illuminate\Support\Facades\Notification;
 use App\User;
