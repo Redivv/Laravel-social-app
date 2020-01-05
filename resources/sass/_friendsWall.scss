@@ -545,13 +545,14 @@
     @media screen and (max-width: $mobile-breakpoint) {
         right: -50%;
         top: 10%;
-        max-width: 40%;
+        max-width: 45%;
         background:#f8fafc;
         height: 80%;
         z-index: 1001;
         overflow-y: auto;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
+        padding-right: 1rem;
         border: solid 3px $grey;
         border-right: 0;
     }
@@ -567,13 +568,14 @@
     @media screen and (max-width: $mobile-breakpoint) {
         top: 10%;
         left: -50%;
-        max-width: 40%;
+        max-width: 45%;
         background:#f8fafc;
         height: 80%;
         z-index: 1001;
         overflow-y: auto;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
+        padding-right: 1rem;
         border: solid 3px $grey;
         border-left: 0;
     }
@@ -707,7 +709,7 @@
     color:$white;
     background:$orange;
     border-radius: 0 50% 50% 0;
-    left: -10%;
+    left: -30%;
     z-index: 1002;
     transition:left 1s linear;
 }
@@ -716,7 +718,7 @@
     cursor: pointer;
     padding: 0.5rem 0.6rem 0.5rem 1rem;
     left: unset;
-    right: -10%;
+    right: -30%;
     border-radius: 50% 0 0 50%;
     @media screen and (max-width: $mobile-breakpoint) {
         right: 0;
