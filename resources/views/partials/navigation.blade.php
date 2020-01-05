@@ -226,7 +226,7 @@
                         </a>
                     </li>
                     @auth
-                        <li class="nav-item col-4 navDashboard">
+                        <li class="nav-item col-4 navHome">
                             <a href="{{ route('home') }}" class="nav-link">
                                 <i class="fas fa-users"></i>
                                 <br>
