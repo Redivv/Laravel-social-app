@@ -5,13 +5,13 @@
                 <div class="col-1">
                     <img class="postAuthorPicture" src="{{asset('img/profile-pictures/'.$post->user->picture)}}">
                 </div>
-                <div class="col-9 postAuthorName">
+                <div class="col-6 postAuthorName">
                     <a class="postAuthorLink" href="{{route('ProfileView')."/".$post->user->name}}">
                         {{$post->user->name}}@if($post->user->is_admin)<small class="text-muted adminStatus">{{__('activityWall.adminStatus')}}</small>@endif
                     </a>
                 </div>
                 @if ($post->user_id == auth()->user()->id)
-                    <div class="col-2 postAuthorButtons">
+                    <div class="col-4 postAuthorButtons">
                         <i class="fas postEdit fa-edit" data-id="{{$post->id}}" data-toggle="modal" data-target="#editModal"></i>
                         <i class="fas postDelete fa-times" data-id="{{$post->id}}"></i>
                     </div>

@@ -14,7 +14,9 @@
                     </div>
                     
                     <output id="taggedUsers" class="row"></output>
-
+                    <div class="form-group tagInstructions text-center">
+                        <span class="text-muted">{{__('activityWall.tagUsersHint')}}</span>
+                    </div>
                     <div class="form-group friendsWallSendButton mb-0">
                         <button class="btn btn-block" type="submit">{{__('activityWall.tagUsersBtn')}}</button>
                     </div>

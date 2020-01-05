@@ -20,7 +20,7 @@ return [
     'moreComments'      => 'Pokaż Więcej Komentarzy',
     'refreshWall'       => 'Nowe Posty Znajomych',
     'tagUsersTitle'     => 'Oznacz Użytkownika',
-    'tagUsersBtn'       => 'Oznacz',
+    'tagUsersBtn'       => 'Oznacz Wybranych Użytkowników',
     'noUserFound'       => 'Nie Znaleziono Użytkownika',
     'deleteTaggedUser'  => 'Czy na pewno chcesz odznaczyć tego użytkownika?',
     'emptyUser'         => 'Nie możesz kogoś oznaczyć bez podawania nicku',
@@ -32,5 +32,6 @@ return [
     'sortNone'          => 'Wszystkie Posty',
     'sortPublic'        => 'Posty Publiczne',
     'sortFriends'       => 'Posty Znajomych',
-    'sortAdmin'         => 'Posty Administratorów'
+    'sortAdmin'         => 'Posty Administratorów',
+    'tagUsersHint'      => '(Wpisz nazwę użytkownika i zatwierdź enterem aby dodać oznaczenie)'
 ];

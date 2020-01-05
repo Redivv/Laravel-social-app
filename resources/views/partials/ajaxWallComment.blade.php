@@ -5,9 +5,9 @@
         </div>
         <div class="col-10 commentContent">
             <div class="col-12 commentAuthor row">
-                <div class="col-10 commentAuthorName">{{$comment->user->name}}</div>
+                <div class="col-8 commentAuthorName">{{$comment->user->name}}</div>
                 @if(auth()->user()->id == $comment->user->id)
-                    <div class="col-2 commentAuthorButtons">
+                    <div class="col-4 commentAuthorButtons">
                         <i data-id="{{$comment->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
                         <i data-id="{{$comment->id}}" class="fas commentDelete fa-times"></i>
                     </div>
@@ -38,11 +38,11 @@
             <div class="col-2 commentProfilePicture">
                 <img class="profilePicture" src="{{asset('img/profile-pictures/'.$comment->replies[0]->user->picture)}}">
             </div>
-            <div class="col-10 commentContent">
+            <div class="col-9 commentContent">
                 <div class="col-12 commentAuthor row">
-                    <div class="col-9 commentAuthorName">{{$comment->replies[0]->user->name}}</div>
+                    <div class="col-6 commentAuthorName">{{$comment->replies[0]->user->name}}</div>
                     @if(auth()->user()->id == $comment->replies[0]->user->id)
-                        <div class="col-3 commentAuthorButtons">
+                        <div class="col-4 commentAuthorButtons">
                             <i data-id="{{$comment->replies[0]->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
                             <i data-id="{{$comment->replies[0]->id}}" class="fas replyDelete commentDelete fa-times"></i>
                         </div>

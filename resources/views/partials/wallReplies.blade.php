@@ -5,9 +5,9 @@
         </div>
         <div class="col-10 commentContent">
             <div class="col-12 commentAuthor row">
-                <div class="col-9 commentAuthorName">{{$reply->user->name}}</div>
+                <div class="col-7 commentAuthorName">{{$reply->user->name}}</div>
                 @if(auth()->user()->id == $reply->user->id)
-                    <div class="col-3 commentAuthorButtons">
+                    <div class="col-5 commentAuthorButtons">
                         <i data-id="{{$reply->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
                         <i data-id="{{$reply->id}}" class="fas commentDelete replyDelete fa-times"></i>
                     </div>

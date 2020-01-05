@@ -143,6 +143,7 @@
                             align-items: center;
                             @include font-size(1.3rem);
                             font-weight: bold;
+                            padding-left:3rem;
                             letter-spacing: 1.5px;
                             a{
                                 color: $black;
@@ -281,14 +282,21 @@
                         margin-top: 1.5rem;
                         .comment,.reply{
                             padding: 0 3rem;
+                            @media screen and (max-width: $mobile-breakpoint) {
+                                padding: 0 1rem;
+                            }
                             .commentProfilePicture{
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
                                 img{
-                                    max-width: 40px;
-                                    max-height: 40px;
+                                    width: 40px;
+                                    height: 40px;
                                     border-radius: 50%;
+                                    @media screen and (max-width: $mobile-breakpoint) {
+                                        width: 35px;
+                                        height: 35px;
+                                    }
                                 }
                             }
                             .commentContent{
@@ -469,6 +477,7 @@
             display: block;
             width: 100%;
             text-align: center;
+            padding-right: 2rem;
             ul{
                 padding-left: 1rem;
                 list-style: none;
@@ -500,6 +509,7 @@
                     .friendName,.friendOptions{
                         display: flex;
                         align-items: center;
+                        margin-left: 0.5rem;
                     }
                     .friendObject{
                         .row{
@@ -513,6 +523,7 @@
                     }
                     
                     .friendOptions{
+                        margin-top:1rem;
                         @include font-size(1.1rem);
                         span{
                             margin: 0 0.5rem;
@@ -543,9 +554,9 @@
     right: 0;
     transition:right 1s linear;
     @media screen and (max-width: $mobile-breakpoint) {
-        right: -50%;
+        right: -80%;
         top: 10%;
-        max-width: 45%;
+        max-width: 60%;
         background:#f8fafc;
         height: 80%;
         z-index: 1001;
@@ -555,11 +566,12 @@
         padding-right: 1rem;
         border: solid 3px $grey;
         border-right: 0;
+        padding-left: 0.3rem;
     }
     &.show{
         right: 0;
     }
-}
+}   
 
 .wallExtraFunctions{
     position: fixed;
@@ -568,7 +580,7 @@
     @media screen and (max-width: $mobile-breakpoint) {
         top: 10%;
         left: -50%;
-        max-width: 45%;
+        max-width: 30%;
         background:#f8fafc;
         height: 80%;
         z-index: 1001;
@@ -612,9 +624,6 @@
 }
 
 #editModal,#commentEditModal, #tagUsersModal{
-    .modal-dialog{
-        max-width: 50vw;
-    }
     .modal-title{
         letter-spacing: 1px;
         @include font-size (1.2rem);
@@ -655,6 +664,12 @@
             .custom-control-input:checked ~ .custom-control-label::before{
                 background-color: $orange;
                 border-color: $orange;
+            }
+        }
+        .tagInstructions{
+            margin-bottom:0.2rem;
+            span{
+                @include font-size(0.65rem);
             }
         }
         .friendsWallSendButton{
@@ -709,7 +724,7 @@
     color:$white;
     background:$orange;
     border-radius: 0 50% 50% 0;
-    left: -30%;
+    left: -100%;
     z-index: 1002;
     transition:left 1s linear;
 }
@@ -718,7 +733,7 @@
     cursor: pointer;
     padding: 0.5rem 0.6rem 0.5rem 1rem;
     left: unset;
-    right: -30%;
+    right: -50%;
     border-radius: 50% 0 0 50%;
     @media screen and (max-width: $mobile-breakpoint) {
         right: 0;

@@ -55,7 +55,6 @@
             <div class="friendsListHeader">
                 <h3>{{__('activityWall.friendsListHeader')}}</h3>
             </div>
-            <hr>
             <output class="friendsListBox">
                 @if(count($friends)>0)
                     <ul class="friendList">

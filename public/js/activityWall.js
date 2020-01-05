@@ -1227,7 +1227,7 @@ function showScrollUp() {
   if (y >= 100) {
     $('#scrollUpAnchor').css('left', '0');
   } else {
-    $('#scrollUpAnchor').css('left', '-10%');
+    $('#scrollUpAnchor').css('left', '-100%');
   }
 }
 
