@@ -17482,6 +17482,19 @@ readers do not read off random characters that represent icons */
   font-weight: bold;
 }
 
+@media screen and (max-width: 348px) {
+  .searcher .form #basicSearch .form-row .col-7,
+  .searcher .form #basicSearch .form-row .col-5 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .searcher .form #basicSearch .form-row .col-7 + .col-5,
+  .searcher .form #basicSearch .form-row .col-5 + .col-5 {
+    margin-top: 0.5rem;
+  }
+}
+
 @media screen and (max-width: 992px) {
   .searcher .form #advancedSearch .form-row .col {
     flex-basis: auto;
@@ -17516,7 +17529,8 @@ readers do not read off random characters that represent icons */
 }
 
 .searcher .form .button:hover {
-  color: #000;
+  color: #ffffff;
+  background-color: #e26103;
 }
 
 .searcher .form #hobbyOutput {
@@ -17556,6 +17570,12 @@ readers do not read off random characters that represent icons */
 @media (min-width: 1200px) {
   .searchResults-header {
     font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 348px) {
+  .searchResults-box h3 {
+    text-align: center;
   }
 }
 
@@ -18103,10 +18123,8 @@ body {
 }
 
 .nav-bar-height .clearAllBtn {
+  width: 100%;
   cursor: pointer;
-  width: -webkit-min-content;
-  width: -moz-min-content;
-  width: min-content;
   margin-top: 0;
   margin-left: auto;
   text-align: center;
@@ -18220,6 +18238,17 @@ main .additionalLinks a {
   }
 }
 
+main .additionalLinks a:hover {
+  color: #ffffff;
+  background-color: #e26103;
+}
+
+@media screen and (max-width: 767px) {
+  main .additionalLinks a {
+    width: 17rem;
+  }
+}
+
 main .loginForm {
   margin-top: 7rem;
 }
@@ -18255,14 +18284,15 @@ main .loginForm .registerLink a {
 
 .login-button {
   border: 0;
-  width: 100%;
+  width: 140%;
   height: 4rem;
   background-color: #f66103;
   text-transform: uppercase;
   letter-spacing: 2px;
   color: white;
   font-size: calc(1.305rem + 0.66vw);
-  transition: all 1s ease;
+  transition: all 0.5s ease;
+  margin-left: -20%;
 }
 
 @media (min-width: 1200px) {
@@ -18281,6 +18311,12 @@ main .loginForm .registerLink a {
   letter-spacing: 2px;
   text-transform: uppercase;
   background-color: #f66103;
+  color: #ffffff;
+}
+
+.form-btn:hover,
+.tag:hover {
+  background-color: #e26103;
   color: #ffffff;
 }
 
@@ -18606,12 +18642,16 @@ html {
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorButtons i {
-  padding: 0 0.5rem;
+  padding: 0.5rem;
   cursor: pointer;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorButtons i:hover {
   color: #f66103;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorButtons i.postEdit {
+  margin-left: 1.05rem;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc {
@@ -18792,6 +18832,7 @@ html {
   cursor: pointer;
   font-size: 0.8rem;
   margin-left: 0.5rem;
+  padding: 0.5rem;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentAuthor .commentAuthorButtons i:hover,
@@ -19426,7 +19467,8 @@ div.cookie-consent,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.cookie-consent,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a.cookie-consent {
   padding: 1% 0;
-  width: 50%;
+  width: 100%;
+  position: fixed;
   text-align: center;
   color: #385d7a;
   background-color: #e2f0fb;
@@ -19435,6 +19477,7 @@ div.cookie-consent,
   display: flex;
   align-items: center;
   justify-content: center;
+  top: 82%;
 }
 
 .spinnerOverlay,

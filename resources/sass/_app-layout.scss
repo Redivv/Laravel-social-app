@@ -259,9 +259,9 @@ body{
         }
     }
     .clearAllBtn{
+        width: 100%;
         cursor: pointer;
         @extend .dropdown-item;
-        width: min-content;
         margin-top: 0;
         margin-left: auto;
         text-align: center;

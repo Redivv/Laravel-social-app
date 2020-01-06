@@ -22,7 +22,7 @@
                         <label for="username">{{__('searcher.username')}}</label>
                         <input type="text" id="username" name="username" aria-label="Nazwa Użytkownika" value="{{request('username')}}" class="form-control @error('username') is-invalid @enderror">
                     </div>
-                    <div class="col">
+                    <div class="col-5">
                         <label for="age-min">{{__('searcher.age')}}</label>
                         <div class="input-group">
                             <input id="age-min" name="age-min" type="number" placeholder="Min" min="18" aria-label="{{__('searcher.min-age')}}" value="{{request('age-min')}}" class="form-control @error('age-min') is-invalid @enderror">

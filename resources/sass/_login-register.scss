@@ -57,6 +57,13 @@ main{
             background-color: $orange;
             color: $white;
             margin: auto;
+            &:hover{
+                color: $white;
+                background-color: $orange-hover;
+            }
+            @media screen and (max-width: $mobile-breakpoint) {
+                width: 17rem;
+            }
         }
     }
     .loginForm{
@@ -93,18 +100,19 @@ main{
 }
 .login-button{
     border: 0;
-    width: 100%;
+    width: 140%;
     height: 4rem;
     background-color: $orange;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: white;
     @include font-size(1.8rem);
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -ms-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    transition: all 1s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    margin-left: -20%;
     &:hover{
         background-color: #000;
         -webkit-transition: all 1s ease;
@@ -120,6 +128,10 @@ main{
     text-transform: uppercase;
     background-color: $orange;
     color: $white;
+    &:hover{
+        background-color: $orange-hover;
+        color: $white;
+    }
 }
 
 .profile-picture{

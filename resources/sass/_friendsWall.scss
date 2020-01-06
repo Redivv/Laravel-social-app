@@ -158,10 +158,13 @@
                             text-align: right;
                             @include font-size(0.9rem);
                             i{
-                                padding: 0 0.5rem;
+                                padding: 0.5rem;
                                 cursor: pointer;
                                 &:hover{
                                     color: $orange;
+                                }
+                                &.postEdit{
+                                    margin-left: 1.05rem;
                                 }
                             }
                         }
@@ -311,6 +314,7 @@
                                             cursor: pointer;
                                             @include font-size(0.8rem);
                                             margin-left: 0.5rem;
+                                            padding:0.5rem;
                                             &:hover{
                                                 color:$orange;
                                             }

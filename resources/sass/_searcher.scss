@@ -8,6 +8,20 @@
             }
         }
 
+        @media screen and (max-width: $ultra-small) {
+            #basicSearch{
+                .form-row{
+                    .col-7,.col-5{
+                        flex: 0 0 100%;
+                        max-width: 100%;
+                        &+.col-5{
+                            margin-top: 0.5rem;
+                        }
+                    }
+                }
+            }      
+        }  
+
         @media screen and (max-width: $breakpoint1) {
             #advancedSearch{
                 .form-row{
@@ -41,7 +55,8 @@
             background-color: $orange;
             color: $white;
             &:hover{
-                color: $black;
+                color: $white;
+                background-color: $orange-hover;
             }
         }
 
@@ -77,6 +92,11 @@
 }
 
 .searchResults-box{
+    @media screen and (max-width: $ultra-small) {
+        h3{
+            text-align: center;
+        }
+    }
 
     .searchResult{
         .addFriend{
