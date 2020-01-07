@@ -19,7 +19,7 @@
                 <div class="col-12 commentTags row">
                     @if ($taggedUsers = json_decode($comment->tagged_users))
                         @foreach ($taggedUsers as $tag)
-                            <a href="/user/profile{{$tag}}" class="col-3 commentTaggedUser" target="__blank">
+                            <a href="/user/profile/{{$tag}}" class="col-4 commentTaggedUser" target="__blank">
                                 <span class="taggedUserLabel">{{$tag}}</span>
                             </a>
                         @endforeach
@@ -54,7 +54,7 @@
                     <div class="col-12 commentTags row">
                         @if ($taggedUsers = json_decode($reply->tagged_users))
                             @foreach ($taggedUsers as $tag)
-                                <a href="/user/profile{{$tag}}" class="col-3 commentTaggedUser" target="__blank">
+                                <a href="/user/profile/{{$tag}}" class="col-4 commentTaggedUser" target="__blank">
                                     <span class="taggedUserLabel">{{$tag}}</span>
                                 </a>
                             @endforeach

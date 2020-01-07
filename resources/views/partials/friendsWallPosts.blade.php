@@ -29,7 +29,7 @@
                 <div class="postTags col-12 row">
                     @if ($taggedUsers = json_decode($post->tagged_users))
                         @foreach ($taggedUsers as $tags)
-                            <a href="/user/profile/{{$tags}}" class="col-3 postTaggedUser" target="__blank">
+                            <a href="/user/profile/{{$tags}}" class="col-4 postTaggedUser" target="__blank">
                                 <span class="taggedUserLabel">{{$tags}}</span>
                             </a>
                         @endforeach

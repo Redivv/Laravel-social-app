@@ -18677,6 +18677,21 @@ html {
   text-align: center;
   margin-left: 0.5rem;
   text-decoration: none;
+  margin-top: 0.5rem;
+}
+
+@media screen and (max-width: 767px) {
+  #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 348px) {
+  #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser span {
@@ -18688,6 +18703,10 @@ html {
   border-radius: 50px;
   background-color: #f66103;
   color: #ffffff;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser span:hover {
+  background-color: #e26103;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter {
@@ -18847,7 +18866,7 @@ html {
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentDesc,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentDesc {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags,
@@ -18860,6 +18879,23 @@ html {
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a {
   text-align: center;
   text-decoration: none;
+  margin-top: 0.5rem;
+}
+
+@media screen and (max-width: 767px) {
+  #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a,
+  #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 348px) {
+  #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a,
+  #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a span,
@@ -18873,6 +18909,11 @@ html {
   padding: 0.3rem;
   background-color: #f66103;
   color: #ffffff;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a span:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a span:hover {
+  background-color: #e26103;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentUserButtons,
@@ -18938,7 +18979,7 @@ html {
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentContent .commentDesc {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentContent .commentTags .taggedUserLabel {
@@ -19291,9 +19332,9 @@ html {
   letter-spacing: 2px;
 }
 
-#editModal .modal-body .friendsWallSendButton:hover,
-#commentEditModal .modal-body .friendsWallSendButton:hover,
-#tagUsersModal .modal-body .friendsWallSendButton:hover {
+#editModal .modal-body .friendsWallSendButton button:hover,
+#commentEditModal .modal-body .friendsWallSendButton button:hover,
+#tagUsersModal .modal-body .friendsWallSendButton button:hover {
   background-color: #e26103;
 }
 
@@ -19378,6 +19419,27 @@ html {
   font-weight: bold;
   letter-spacing: 1px;
   font-size: 0.9rem;
+}
+
+#editModal .modal-body #taggedUsers .taggedUser label:hover,
+#editModal .modal-body #taggedUsers .commentTaggedUser label:hover,
+#editModal .modal-body #postTaggedUsersModal .taggedUser label:hover,
+#editModal .modal-body #postTaggedUsersModal .commentTaggedUser label:hover,
+#editModal .modal-body #commentModalUserTagged .taggedUser label:hover,
+#editModal .modal-body #commentModalUserTagged .commentTaggedUser label:hover,
+#commentEditModal .modal-body #taggedUsers .taggedUser label:hover,
+#commentEditModal .modal-body #taggedUsers .commentTaggedUser label:hover,
+#commentEditModal .modal-body #postTaggedUsersModal .taggedUser label:hover,
+#commentEditModal .modal-body #postTaggedUsersModal .commentTaggedUser label:hover,
+#commentEditModal .modal-body #commentModalUserTagged .taggedUser label:hover,
+#commentEditModal .modal-body #commentModalUserTagged .commentTaggedUser label:hover,
+#tagUsersModal .modal-body #taggedUsers .taggedUser label:hover,
+#tagUsersModal .modal-body #taggedUsers .commentTaggedUser label:hover,
+#tagUsersModal .modal-body #postTaggedUsersModal .taggedUser label:hover,
+#tagUsersModal .modal-body #postTaggedUsersModal .commentTaggedUser label:hover,
+#tagUsersModal .modal-body #commentModalUserTagged .taggedUser label:hover,
+#tagUsersModal .modal-body #commentModalUserTagged .commentTaggedUser label:hover {
+  background-color: #d22103;
 }
 
 #editModal .modal-body #postTaggedUsersModal .taggedUser,

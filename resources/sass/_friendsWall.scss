@@ -189,6 +189,15 @@
                                 text-align: center;
                                 margin-left: 0.5rem;
                                 text-decoration: none;
+                                margin-top: 0.5rem;
+                                @media screen and (max-width: $mobile-breakpoint) {
+                                    flex: 0 0 50%;
+                                    max-width: 50%;
+                                }
+                                @media screen and (max-width: $ultra-small) {
+                                    flex: 0 0 100%;
+                                    max-width: 100%;
+                                }
                                 span{
                                     display: block;
                                     width: 100%;
@@ -198,6 +207,9 @@
                                     border-radius: 50px;
                                     background-color: $orange;
                                     color: $white;
+                                    &:hover{
+                                        background-color: $orange-hover;
+                                    }
                                 }
                             }
                         }
@@ -326,7 +338,7 @@
                                     @include font-size(0.6rem);
                                 }
                                 .commentDesc{
-                                    @include font-size(0.8rem);
+                                    @include font-size(0.9rem);
                                 }
                                 .commentTags{
                                     margin-top: 1rem;
@@ -335,6 +347,15 @@
                                         @extend div;
                                         text-align: center;
                                         text-decoration: none;
+                                        margin-top: 0.5rem;
+                                        @media screen and (max-width: $mobile-breakpoint) {
+                                            flex: 0 0 50%;
+                                            max-width: 50%;
+                                        }
+                                        @media screen and (max-width: $ultra-small) {
+                                            flex: 0 0 100%;
+                                            max-width: 100%;
+                                        }
                                         span{
                                             display: block;
                                             width: 100%;
@@ -345,6 +366,9 @@
                                             padding: 0.3rem;
                                             background-color: $orange;
                                             color: $white;
+                                            &:hover{
+                                                background-color: $orange-hover;
+                                            }
                                         }
                                     }
                                 }
@@ -409,7 +433,7 @@
                                     @include font-size(0.5rem);
                                 }
                                 .commentDesc{
-                                    @include font-size(0.65rem);
+                                    @include font-size(0.75rem);
                                 }
                                 .commentTags{
                                     .taggedUserLabel{
@@ -684,9 +708,9 @@
                 font-weight: normal;
                 text-transform: uppercase;
                 letter-spacing: 2px;
-            }
-            &:hover{
-                background-color: $orange-hover;
+                &:hover{
+                    background-color: $orange-hover;
+                }
             }
         }
         #taggedUsers,#postTaggedUsersModal,#commentModalUserTagged{
@@ -706,6 +730,9 @@
                     font-weight: bold;
                     letter-spacing: 1px;
                     @include font-size(0.9rem);
+                }
+                label:hover{
+                    background-color: $orange-active-hover;
                 }
             }
         }
