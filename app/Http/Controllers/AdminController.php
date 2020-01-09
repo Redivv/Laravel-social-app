@@ -14,13 +14,16 @@ use App\City;
 use App\Post;
 use Conner\Tagging\Model\Tag;
 
+use Carbon\Carbon;
+
 use Illuminate\Support\Facades\Notification;
 
 use App\Notifications\UserNotification;
 use App\Notifications\SystemNotification;
-use App\Notifications\NewAdminPost;
-use App\Notifications\AdminWideInfo;
-use App\Notifications\AdminMailInfo;
+
+use App\Jobs\SendAdminNewsletter;
+use App\Jobs\SendAdminWideInfo;
+use App\Jobs\DeleteNonVerifiedUsers;
 
 class AdminController extends Controller
 {
@@ -31,11 +34,6 @@ class AdminController extends Controller
 
     public function index()
     {
-
-        $notVerifiedTimer = Carbon::now()->subDays(3)->toDateTimeString();
-        User::where('email_verified_at',null)->where('created_at','<',$notVerifiedTimer)->delete();
-
-
         $pictureTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->get());
         $userTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->get());
         return view('adminPanel')->with('pictureTickets',$pictureTicketsAmount)->with('userTickets',$userTicketsAmount);
@@ -179,7 +177,7 @@ class AdminController extends Controller
             if ( (isset($request->infoNotCheck))){
                 if(!empty(trim($request->infoNotDesc))){
                     $users = User::whereNotIn('id',[Auth::id()])->get();
-                    Notification::send($users, new AdminWideInfo($request->infoNotDesc));
+                    SendAdminWideInfo::dispatch($request->infoNotDesc,$users)->delay(now()->addMinutes(2));;
                 }else{
                     return response()->json(['status' => 'error', 'message' => 'Empty Message'], 400);
                 }
@@ -192,7 +190,8 @@ class AdminController extends Controller
                 if( (!empty(trim($subject))) && (!empty(trim($desc))) ){
 
                     $users = User::whereNotIn('id',[Auth::id()])->get();
-                    Notification::send($users, new AdminMailInfo($subject, $desc));
+                    
+                    SendAdminNewsletter::dispatch($subject,$desc,$users)->delay(now()->addMinutes(1));
 
                 }else{
                     return response()->json(['status' => 'error', 'message' => 'Empty Message'], 400);
@@ -234,7 +233,9 @@ class AdminController extends Controller
 
     private function getUsers() : object
     {
-        return User::whereNotIn('id',[Auth::id()])->get();
+        DeleteNonVerifiedUsers::dispatch()->delay(now()->addMinutes(10));
+
+        return User::whereNotIn('id',[Auth::id()])->whereNotNull('email_verified_at')->get();
     }
 
     private function getTags() : object

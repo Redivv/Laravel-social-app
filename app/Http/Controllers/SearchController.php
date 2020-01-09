@@ -13,6 +13,8 @@ use Illuminate\Support\Str;
 use App\User;
 use App\City;
 
+use App\Jobs\FlagOfflineUsers;
+
 class SearchController extends Controller
 {
     public function index(Request $request) {
@@ -20,10 +22,6 @@ class SearchController extends Controller
         $search_results = null;
         $search_results_variable = null;
         $cities = City::all();
-
-        $offlineTimer = Carbon::now()->subMinutes(30)->toDateTimeString();
-        User::where('status','online')->where('updated_at','<',$offlineTimer)->update(['status' => 'offline', 'updated_at' => Carbon::now()->toDateTimeString()]);
-
         
         if ($request->has(['username','age-min','age-max','city','sortOptions_crit','sortOptions_dir'])) {
             $search_results = $this->getSearchResults($request);
@@ -150,6 +148,9 @@ class SearchController extends Controller
                 }
             }
         }
+        
+        FlagOfflineUsers::dispatch()->delay(now()->addMinutes(10));
+
         return [$search_results,__('searcher.resultNormal',['number' => count($search_results)])];
     }
 

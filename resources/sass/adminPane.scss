@@ -11,6 +11,25 @@ main{
         display: flex;
         justify-content: center;
         align-items: center;
+        @media screen and (max-width: $mobile-breakpoint) {
+            transition:left 1s linear;
+            position: fixed;
+            left: -100%;
+            max-width: 80%;
+            background:#f8fafc;
+            z-index: 1001;
+            overflow-y: auto;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            padding-right: 1rem;
+            border: solid 3px $grey;
+            border-left: 0;
+            padding-left: 0.3rem;
+        }
+
+        &.show{
+            left: 0;
+        }
 
        .nav-pills{
             width: 100%;
@@ -36,17 +55,20 @@ main{
     }
 
     .tabsContent{
-
+        thead{
+            text-align: center;
+        }
         div.tab-pane{
-            max-height: 60vh;
+            max-height: 75vh;
             overflow-y: auto;
             .form-btn{
                 @include font-size(0.7rem);
                 font-weight: bold;
+                margin-top: 0.5rem;
             }
             .fetchBtn{
+                padding: 1rem;
                 cursor: pointer;
-                float: right;
                 color: $orange;
                 position: relative;
                 &.spin{
@@ -132,6 +154,21 @@ main{
         }
     }
 
+    #showTabsMenu{
+        @include font-size (1.5rem);
+        position: fixed;
+        top: 80%;
+        color:$white;
+        background:$orange;
+        z-index: 1002;
+        cursor: pointer;
+        padding: 0.5rem 0.6rem 0.5rem 1rem;
+        right: -100%;
+        border-radius: 50% 0 0 50%;
+        @media screen and (max-width: $mobile-breakpoint) {
+            right: 0;
+        }
+    }
     
 }
 

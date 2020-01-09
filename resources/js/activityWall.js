@@ -35,18 +35,17 @@ function main() {
         if ($('.friendsList:first').hasClass('show') || $('.wallExtraFunctions:first').hasClass('show')) {
             $('.wallExtraFunctions').removeClass('show');
             $('.friendsList').removeClass('show');
-            $('#showSidePanels').html('<i class="fas fa-arrows-alt-h"></i>');
+            $(this).html('<i class="fas fa-arrows-alt-h"></i>');
             setTimeout(function(){
                 $('.darkOverlay').addClass('d-none');
             }, 900);
         }else{
-
             $('.wallExtraFunctions').addClass('show');
             $('.friendsList').addClass('show');
             $('.darkOverlay').removeClass('d-none');
-                $('#showSidePanels').html('<i class="fas fa-times"></i>');
+            $(this).html('<i class="fas fa-times"></i>');
 
-            $('#friendsWall').off('click');
+            $('.darkOverlay').off('click');
             $('.darkOverlay').on('click',function(){
                 $('.wallExtraFunctions').removeClass('show');
                 $('.friendsList').removeClass('show');

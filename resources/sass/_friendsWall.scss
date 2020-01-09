@@ -580,8 +580,8 @@
 .friendsList{
     position: fixed;
     right: 0;
-    transition:right 1s linear;
     @media screen and (max-width: $mobile-breakpoint) {
+        transition:right 1s linear;
         right: -80%;
         top: 10%;
         max-width: 50%;
@@ -604,8 +604,8 @@
 .wallExtraFunctions{
     position: fixed;
     left: 0;
-    transition:left 1s linear;
     @media screen and (max-width: $mobile-breakpoint) {
+        transition:left 1s linear;
         top: 10%;
         left: -50%;
         max-width: 40%;

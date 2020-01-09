@@ -13,6 +13,28 @@ main .tabsPills {
   align-items: center;
 }
 
+@media screen and (max-width: 767px) {
+  main .tabsPills {
+    transition: left 1s linear;
+    position: fixed;
+    left: -100%;
+    max-width: 80%;
+    background: #f8fafc;
+    z-index: 1001;
+    overflow-y: auto;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 1rem;
+    border: solid 3px #a1a1a1;
+    border-left: 0;
+    padding-left: 0.3rem;
+  }
+}
+
+main .tabsPills.show {
+  left: 0;
+}
+
 main .tabsPills .nav-pills {
   width: 100%;
   margin-top: 2.5rem;
@@ -38,19 +60,24 @@ main .tabsPills a .ticketCount {
   color: #e3342f;
 }
 
+main .tabsContent thead {
+  text-align: center;
+}
+
 main .tabsContent div.tab-pane {
-  max-height: 60vh;
+  max-height: 75vh;
   overflow-y: auto;
 }
 
 main .tabsContent div.tab-pane .form-btn {
   font-size: 0.7rem;
   font-weight: bold;
+  margin-top: 0.5rem;
 }
 
 main .tabsContent div.tab-pane .fetchBtn {
+  padding: 1rem;
   cursor: pointer;
-  float: right;
   color: #f66103;
   position: relative;
 }
@@ -151,6 +178,31 @@ main .tabsContent #adminWideInfo-content #adminInfoForm .wideInfoBtn {
 @media (min-width: 1200px) {
   main .tabsContent #adminWideInfo-content #adminInfoForm .wideInfoBtn {
     font-size: 1.3rem;
+  }
+}
+
+main #showTabsMenu {
+  font-size: calc(1.275rem + 0.3vw);
+  position: fixed;
+  top: 80%;
+  color: #ffffff;
+  background: #f66103;
+  z-index: 1002;
+  cursor: pointer;
+  padding: 0.5rem 0.6rem 0.5rem 1rem;
+  right: -100%;
+  border-radius: 50% 0 0 50%;
+}
+
+@media (min-width: 1200px) {
+  main #showTabsMenu {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  main #showTabsMenu {
+    right: 0;
   }
 }
 

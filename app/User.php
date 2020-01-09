@@ -84,6 +84,14 @@ class User extends Authenticatable implements MustVerifyEmail
         // Delete Likes
         DB::table('likeable_likes')->where('user_id',$this->id)->delete();
 
+        DB::table('posts')->where('user_id',$this->id)->delete();
+
+        DB::table('comments')->where('author_id',$this->id)->delete();
+
+        DB::table('friendships')->where('sender_id',$this->id)->orWhere('receipient_id',$this->id)->delete();
+
+
+
         $this->notify(new UserDeleted($this->name));
         $this->delete();
         return true;

@@ -12,6 +12,8 @@ use App\User;
 use Nahid\Talk\Facades\Talk;
 use App\Events\MessagesWereSeen;
 
+use App\Jobs\FlagOfflineUsers;
+
 class MessageController extends Controller
 {
     public function __construct()
@@ -32,6 +34,8 @@ class MessageController extends Controller
 
     public function chatHistory(Request $request, $name)
     {
+        FlagOfflineUsers::dispatch()->delay(now()->addMinutes(10));
+        
         $id =  User::where('name', $name)->first()->id;
         if($request->ajax()){
             $pagi = $request->input('pagi');

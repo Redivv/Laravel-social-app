@@ -11,9 +11,11 @@
             <span class="sr-only">Loading...</span>
     </div>
 </div>
-<div class="container-fluid">
+<div class="darkOverlay d-none"></div>
+
+<div id="adminPane" class="container-fluid">
     <div class="row">
-        <div class="tabsPills col-md-4 col-sm-12">
+        <div class="tabsPills col-md-4">
             <div class="nav flex-column nav-pills" id="pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link tab" id="profileTicket" data-toggle="pill" href="#profileTicket-content" role="tab" aria-controls="profileTicket" aria-selected="true">
                     {{__('admin.profileTicket')}} <span id="profileTicketCount" class="ticketCount">@if($pictureTickets != 0){{$pictureTickets}}@endif</span>
@@ -41,6 +43,8 @@
         </div>
     </div>
 </div>
+
+<span id="showTabsMenu"><i class="fas fa-arrow-left"></i></span>
 @endsection
 
 @push('scripts')

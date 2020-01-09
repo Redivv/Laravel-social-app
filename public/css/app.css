@@ -19136,11 +19136,11 @@ html {
 .friendsList {
   position: fixed;
   right: 0;
-  transition: right 1s linear;
 }
 
 @media screen and (max-width: 767px) {
   .friendsList {
+    transition: right 1s linear;
     right: -80%;
     top: 10%;
     max-width: 50%;
@@ -19164,11 +19164,11 @@ html {
 .wallExtraFunctions {
   position: fixed;
   left: 0;
-  transition: left 1s linear;
 }
 
 @media screen and (max-width: 767px) {
   .wallExtraFunctions {
+    transition: left 1s linear;
     top: 10%;
     left: -50%;
     max-width: 40%;
