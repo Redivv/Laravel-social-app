@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->text('description')->nullable()->default(null);
             $table->unsignedBigInteger('city_id')->nullable()->default(null)->index();
             $table->integer('hidden_status')->default(0);
+            $table->boolean('newsletter_status')->default(true);
             $table->boolean('relationship_status')->default(false);
             $table->unsignedBigInteger('partner_id')->nullable()->default(null);
             $table->string('picture')->default('default-picture.png');

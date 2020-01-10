@@ -262,6 +262,8 @@
 
                     <div class="dropdown-menu dropdown-menu-right" style="left:0" aria-labelledby="navbarDropdown">
                         <a href="{{ route('ProfileView') }}" class="dropdown-item">{{__('app.profile')}}</a>
+
+                        <a href="{{ route('SettingsPage') }}" class="dropdown-item">{{__('app.settings')}}</a>    
                         
                         @if(auth()->user()->isAdmin())
                             <a href="{{ route('adminHome') }}" class="dropdown-item">{{__('app.adminDashboard')}}</a>
@@ -522,6 +524,8 @@
 
                         <div class="dropdown-menu dropdown-menu-right" style="min-width:25vw" aria-labelledby="navbarDropdown">
                             <a href="{{ route('ProfileView') }}" class="dropdown-item">{{__('app.profile')}}</a>
+
+                            <a href="{{ route('SettingsPage') }}" class="dropdown-item">{{__('app.settings')}}</a>
                             
                             @if(auth()->user()->isAdmin())
                                 <a href="{{ route('adminHome') }}" class="dropdown-item">{{__('app.adminDashboard')}}</a>

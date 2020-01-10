@@ -88,9 +88,10 @@ class AdminController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
-                'decision'     =>
+                'decision'     => [
                     'string',
-                    Rule::in(['accept','refuse']),
+                    Rule::in(['accept','refuse'])
+                ]
             ]);
             $ticketId = substr($request->ticketId,9);
             $ticket = Auth::user()->notifications()->where('id', $ticketId)->first();
@@ -117,12 +118,14 @@ class AdminController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
-                'decision'     =>
+                'decision'     => [
                     'string',
-                    Rule::in(['delete','edit']),
-                'target'       =>
+                    Rule::in(['delete','edit'])
+                ],
+                'target'       =>[
                     'string',
-                    Rule::in(['userList','tagList','cityList']),
+                    Rule::in(['userList','tagList','cityList'])
+                ]
             ]);
             $elementId = intVal(substr($request->elementId,10));
             switch ($request->target) {
@@ -189,7 +192,7 @@ class AdminController extends Controller
 
                 if( (!empty(trim($subject))) && (!empty(trim($desc))) ){
 
-                    $users = User::whereNotIn('id',[Auth::id()])->get();
+                    $users = User::whereNotIn('id',[Auth::id()])->where('newsletter_status',1)->get();
                     
                     SendAdminNewsletter::dispatch($subject,$desc,$users)->delay(now()->addMinutes(1));
 

@@ -1,0 +1,40 @@
+.profileVisibility, .newsletterSettings{
+    padding: 0 1.5rem;
+    h3{
+        @include font-size(1.5rem);
+        font-weight: bold;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+    }
+    .form-check{
+        margin: 1rem auto 0 auto;
+        text-align: center;
+        input{
+            height: 0.8rem;
+        }
+        label{
+            @include font-size (1rem);
+            letter-spacing: 0.5px;
+            margin-top: 0.3rem;
+        }
+        @media screen and (max-width: $mobile-breakpoint) {
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-top: 2rem;
+        }
+    }
+}
+
+.submitButton{
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 2rem auto;
+    padding: 1rem;
+    @include font-size(1.3rem);
+    color: $white;
+    background-color: $orange;
+    &:hover{
+        color: $white;
+        background-color: $orange-hover;
+    }
+}

@@ -31,7 +31,7 @@ return [
     'desc_err'              => 'Brak opisu',
     'city_err'              => 'Nie podano miasta',
     'email_hidden'          => '---',
-    'see_profile'               => 'Zobacz Profil',
+    'see_profile'           => 'Zobacz Profil',
     'cancel'                => 'Anuluj',
     'Tags'                  => 'Zainteresowania',
     'addTag'                => 'Dodaj',
@@ -45,5 +45,6 @@ return [
     'updated'               => 'Profil został zaktualizowany',
     'status'                => 'Status',
     'status_taken'          => 'w zaiązku',
-    'status_free'           => 'wolna'
+    'status_free'           => 'wolna',
+    
 ];

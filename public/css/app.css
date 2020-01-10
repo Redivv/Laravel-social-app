@@ -19519,6 +19519,74 @@ html {
   }
 }
 
+.profileVisibility,
+.newsletterSettings {
+  padding: 0 1.5rem;
+}
+
+.profileVisibility h3,
+.newsletterSettings h3 {
+  font-size: calc(1.275rem + 0.3vw);
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 1200px) {
+  .profileVisibility h3,
+  .newsletterSettings h3 {
+    font-size: 1.5rem;
+  }
+}
+
+.profileVisibility .form-check,
+.newsletterSettings .form-check {
+  margin: 1rem auto 0 auto;
+  text-align: center;
+}
+
+.profileVisibility .form-check input,
+.newsletterSettings .form-check input {
+  height: 0.8rem;
+}
+
+.profileVisibility .form-check label,
+.newsletterSettings .form-check label {
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  margin-top: 0.3rem;
+}
+
+@media screen and (max-width: 767px) {
+  .profileVisibility .form-check,
+  .newsletterSettings .form-check {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-top: 2rem;
+  }
+}
+
+.submitButton {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-size: calc(1.255rem + 0.06vw);
+  color: #ffffff;
+  background-color: #f66103;
+}
+
+@media (min-width: 1200px) {
+  .submitButton {
+    font-size: 1.3rem;
+  }
+}
+
+.submitButton:hover {
+  color: #ffffff;
+  background-color: #e26103;
+}
+
 html {
   font-size: 2vw;
   scroll-behavior: smooth;

@@ -73,6 +73,9 @@ Route::prefix('user')->group(function(){
 
     Route::get('profile', 'ProfileController@index')->middleware('auth')->name('ProfileView');
     Route::get('profile/{user}','ProfileController@visit');
+
+    Route::get('settings', 'SettingsController@index')->middleware('auth')->name('SettingsPage');
+    Route::patch('settings', 'SettingsController@updateSettings')->middleware('auth')->name('SettingsUpdate');
 });
 
 Route::prefix('admin')->group(function(){

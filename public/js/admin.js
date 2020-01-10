@@ -129,25 +129,29 @@ function main() {
     }
   });
   $('#infoNotDesc').emojioneArea({
-    pickerPosition: "bottom",
+    pickerPosition: "left",
     placeholder: "\xa0",
-    autocomplete: false
+    autocomplete: true,
+    shortcuts: false
   });
   $('#infoWallDesc').emojioneArea({
-    pickerPosition: "bottom",
+    pickerPosition: "left",
     placeholder: "\xa0",
-    autocomplete: false
+    autocomplete: true,
+    shortcuts: false
   });
   $('#infoMailTitle').emojioneArea({
     inline: true,
     pickerPosition: "bottom",
     placeholder: "\xa0",
-    autocomplete: false
+    autocomplete: true,
+    shortcuts: false
   });
   $('#infoMailDesc').emojioneArea({
     pickerPosition: "bottom",
     placeholder: "\xa0",
-    autocomplete: false
+    autocomplete: true,
+    shortcuts: false
   });
   $('#postPicture').change(function (evt) {
     var files = evt.target.files; // FileList object

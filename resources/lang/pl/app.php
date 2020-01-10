@@ -9,5 +9,6 @@ return [
     'toggle-nav'        => 'Rozwiń Menu',
     'profile'           => 'Profil',
     'adminDashboard'    => 'Panel Administratora',
-    'profile'           => 'Profil'
+    'profile'           => 'Profil',
+    'settings'          => "Ustawienia"
 ];

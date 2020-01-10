@@ -68,8 +68,6 @@
                     @yield('buttons')
                     
                     @yield('photo')
-
-                    @yield('status')
             </div>
 
         </div>

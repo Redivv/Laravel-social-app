@@ -40,8 +40,9 @@ class HomeController extends Controller
         
         if ($request->has('sortBy')) {
             $request->validate([
-                'sortBy'    => ['string',
-                Rule::in(['public', 'friends', 'admin'])
+                'sortBy'    => [
+                    'string',
+                    Rule::in(['public', 'friends', 'admin'])
                 ]
             ]);
             switch ($request->sortBy) {
@@ -94,8 +95,10 @@ class HomeController extends Controller
         if ($request->ajax()) {
             $request->validate([
                 'pagiTime'   => 'numeric',
-                'sortBy'    => ['string',
-                Rule::in(['public', 'friends', 'admin'])]
+                'sortBy'    => [
+                    'string',
+                    Rule::in(['public', 'friends', 'admin'])
+                ]
             ]);
 
             $bek = $request->all();
