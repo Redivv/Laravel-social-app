@@ -8,5 +8,6 @@ return [
     'newsletterSettings'    => 'Ustawienia Newslettera Administracji',
     'newsletterSettings1'   => 'Otrzymuj wiadomości email od administracji',
     'newsletterSettings2'   => 'Nie otrzymuj żadnych wiadomości email',
-    'save'                  => 'Zapisz Ustawienia'
+    'save'                  => 'Zapisz Ustawienia',
+    'saveMessage'           => "Ustawienia Zostały Zapisane"
 ];

@@ -19587,6 +19587,75 @@ html {
   background-color: #e26103;
 }
 
+#contactForm {
+  padding: 0 3rem;
+}
+
+#contactForm legend h3 {
+  font-size: calc(1.275rem + 0.3vw);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+@media (min-width: 1200px) {
+  #contactForm legend h3 {
+    font-size: 1.5rem;
+  }
+}
+
+#contactForm .form-group {
+  margin-left: 2rem;
+  padding-right: 2rem;
+}
+
+#contactForm .form-group label h4 {
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+#contactForm .form-group .contactSubmitButton {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  color: #ffffff;
+  background-color: #f66103;
+}
+
+#contactForm .form-group .contactSubmitButton:hover {
+  background-color: #e26103;
+}
+
+#administrators .card-body {
+  padding-top: 0.8rem;
+}
+
+#administrators .card-body .adminName {
+  margin-bottom: 0;
+}
+
+#administrators .card-body .adminName a {
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: #000;
+  font-size: calc(1.265rem + 0.18vw);
+}
+
+@media (min-width: 1200px) {
+  #administrators .card-body .adminName a {
+    font-size: 1.4rem;
+  }
+}
+
+#administrators .card-body .adminMail {
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+  color: #000;
+  font-size: 1rem;
+  font-style: italic;
+}
+
 html {
   font-size: 2vw;
   scroll-behavior: smooth;

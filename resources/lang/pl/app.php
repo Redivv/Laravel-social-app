@@ -10,5 +10,6 @@ return [
     'profile'           => 'Profil',
     'adminDashboard'    => 'Panel Administratora',
     'profile'           => 'Profil',
-    'settings'          => "Ustawienia"
+    'settings'          => "Ustawienia",
+    'contact'           => 'Kontakt z Administracją'
 ];

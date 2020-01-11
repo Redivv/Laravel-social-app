@@ -33,6 +33,9 @@ class SettingsController extends Controller
         $user->newsletter_status    = $request->newsletter;
 
         if($user->update()){
+
+            $request->session()->flash('message', __('settings.saveMessage'));
+
             return redirect(route('SettingsPage'));
         }
     }

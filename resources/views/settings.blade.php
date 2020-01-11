@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container-fluid">
+
+        @if (session()->has('message'))
+            <div class="alert alert-success mt-3" role="alert">
+                {{session()->get('message')}}
+            </div>
+        @endif
+
         <form method="post" id="settingsForm" class="mt-4">
             @csrf
             @method('patch')

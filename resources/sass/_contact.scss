@@ -1,0 +1,55 @@
+#contactForm{
+    padding: 0 3rem;
+    legend{
+        h3{
+            @include font-size(1.5rem);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+    }
+
+    .form-group{
+        margin-left: 2rem;
+        padding-right: 2rem;
+        label{
+            h4{
+                @include font-size(1rem);
+                letter-spacing: 0.5px;
+            }
+        }
+        .contactSubmitButton{
+            text-transform: uppercase;
+            font-weight: bold;
+            margin: 1rem auto;
+            padding: 0.5rem 1rem;
+            @include font-size (1.1rem);
+            color:$white;
+            background-color:$orange;
+            &:hover{
+                background-color: $orange-hover;
+            }
+        }
+    }
+}
+
+#administrators{
+    .card-body{
+        padding-top: 0.8rem;
+        .adminName{
+            margin-bottom: 0;
+            a{
+                letter-spacing: 1px;
+                font-weight: bold;
+                color: $black;
+                @include font-size(1.4rem);
+            }
+        }
+        .adminMail{
+            margin-top: 0.5rem;
+            padding-left: 1rem;
+            color: $black;
+            @include font-size(1rem);
+            font-style: italic;
+        }
+    }
+}
