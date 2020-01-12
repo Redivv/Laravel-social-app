@@ -204,9 +204,92 @@ class AdminController extends Controller
         }
     }
 
+    public function getPagi(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $request->validate([
+                'pagiTarget'    => [
+                    'string',
+                    Rule::in(['profileTicket', 'userTicket','userList','tagList','cityList']),
+                ],
+                'pagiCount' => ['numeric','min:0']
+            ]);
+
+            $pagiTarget = $request->pagiTarget;
+            $pagiCount = $request->pagiCount;
+            $pagiNext = true;
+
+            switch ($pagiTarget) {
+                case 'userList':
+                    $users = User::whereNotIn('id',[Auth::id()])->whereNotNull('email_verified_at')->skip(5*$pagiCount)->take(5)->get();
+                    if (count($users) < 5) {
+                        $pagiNext = false;
+                    }
+                    $html = view('partials.admin.userListPagi')->withUsers($users)->render();
+                    break;
+                case 'tagList':
+                    $tags = Tag::skip(10*$pagiCount)->take(10)->get();
+                    if (count($tags) < 10) {
+                        $pagiNext = false;
+                    }
+                    $html = view('partials.admin.tagListPagi')->withTags($tags)->render();
+                    break;
+                case 'cityList':
+                    $cities = City::take(10)->skip(10*$pagiCount)->get();
+                    if (count($cities) < 10) {
+                        $pagiNext = false;
+                    }
+                    $html = view('partials.admin.cityListPagi')->withCities($cities)->render();
+                    break;
+                case 'profileTicket':
+                    $tickets = Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->take(5)->skip(5*$pagiCount)->get();
+                    $validTickets = array();
+                    foreach ($tickets as $ticket) {
+                        $validUser = User::where('name','=',$ticket->data['user_name'])->where('pending_picture','=',$ticket->data['image'])->first();
+                        if($validUser){
+                            $validTickets[] = $ticket;
+                        }else{
+                            $ticket->delete();
+                        }
+                    }
+                    if (count($validTickets) < 5) {
+                        $pagiNext = false;
+                    }
+                    $html = view('partials.admin.profileTicketPagi')->withTickets($validTickets)->render();
+                    break;
+                case 'userTicket':
+                    $tickets = Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->take(10)->skip(10*$pagiCount)->get();
+                    $validTickets = array();
+                    $duplicateAuthors = array();
+                    foreach ($tickets as $ticket) {
+                        if (!in_array($ticket->data['author'],$duplicateAuthors)) {
+                            $duplicateAuthors[] = $ticket->data['author'];
+                            $validUser = User::where('name','=',$ticket->data['user_name'])->first();
+                            if($validUser){
+                                $validTickets[] = $ticket;
+                            }else{
+                                $ticket->delete();
+                            }
+                        }else{
+                            $ticket->delete();
+                        }
+                    }
+                    if (count($validTickets) < 10) {
+                        $pagiNext = false;
+                    }
+                    $html = view('partials.admin.userTicketPagi')->withTickets($validTickets)->render();
+
+                    break;
+            }
+
+            return response()->json(['status' => 'success','html' => $html, 'pagiNext' => $pagiNext], 200);
+        }
+    }
+
     private function getProfileTickets() : array
     {
-        $tickets = Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->get();
+        $tickets = Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->take(5)->get();
         $validTickets = array();
         foreach ($tickets as $ticket) {
             $validUser = User::where('name','=',$ticket->data['user_name'])->where('pending_picture','=',$ticket->data['image'])->first();
@@ -221,12 +304,18 @@ class AdminController extends Controller
 
     private function getUserTickets() : array
     {
-        $tickets = Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->get();
+        $tickets = Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->take(10)->get();
         $validTickets = array();
+        $duplicateAuthors = array();
         foreach ($tickets as $ticket) {
-            $validUser = User::where('name','=',$ticket->data['user_name'])->first();
-            if($validUser){
-                $validTickets[] = $ticket;
+            if (!in_array($ticket->data['author'],$duplicateAuthors)) {
+                $duplicateAuthors[] = $ticket->data['author'];
+                $validUser = User::where('name','=',$ticket->data['user_name'])->first();
+                if($validUser){
+                    $validTickets[] = $ticket;
+                }else{
+                    $ticket->delete();
+                }
             }else{
                 $ticket->delete();
             }
@@ -238,18 +327,17 @@ class AdminController extends Controller
     {
         DeleteNonVerifiedUsers::dispatch()->delay(now()->addMinutes(10));
 
-        return User::whereNotIn('id',[Auth::id()])->whereNotNull('email_verified_at')->get();
+        return User::whereNotIn('id',[Auth::id()])->whereNotNull('email_verified_at')->take(5)->get();
     }
 
     private function getTags() : object
     {
-        $keke = Tag::first();
-        return Tag::all();
+        return Tag::take(10)->get();
     }
 
     private function getCities() : object
     {
-        return City::all();
+        return City::take(10)->get();
     }
 
     private function resolveProfileTicket(array $data, string $decision) : void

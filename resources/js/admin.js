@@ -1,5 +1,21 @@
 import "lightbox2";
 
+var pagiTarget = {
+    'userList'      :       true,
+    'tagList'       :       true,
+    'cityList'      :       true,
+    'profileTicket' :       true,
+    'userTicket'    :       true,
+};
+
+var pagiCount = {
+    'userList'      :   0,
+    'tagList'       :   0,
+    'cityList'      :   0,
+    'profileTicket' :   0,
+    'userTicket'    :   0
+}
+
 $(document).ready(function () {
 
     $.ajaxSetup({
@@ -96,7 +112,9 @@ function main() {
         request.fail(function (xhr){
             alert(xhr.responseJSON.message);
         });
-    })
+    });
+
+
 }
 
 function renderContent(selected) {
@@ -126,25 +144,32 @@ function renderContent(selected) {
                 $('#'+targetId+'Count').html(response.amount);
             }
 
+            $('#'+targetId+'-content').on('scroll',function() {
+                if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight - 200) {
+                    $(this).off('scroll');
+                    pagiContent(targetId);
+                }
+             });
+
             $('button.ticketBtn').on('click',function(e) {
                 e.preventDefault();
                 if (confirm(confirmMsg)) {
                     $('.spinnerOverlay').removeClass('d-none');
                     carryTicket(this,targetId);
                 }
-            })
+            });
 
             $('button.listBtn').on('click',function(e) {
                 e.preventDefault();
                 if (confirm(confirmMsg)) {
                     carryList(this,targetId);
                 }
-            })
+            });
 
             $('span.fetchBtn').on('click',function() {
                 $(this).addClass('spin');
                 fetchContent(this);
-            })
+            });
 
         }
     });
@@ -167,6 +192,13 @@ function fetchContent(selected) {
         url: url,
         data: {target:targetId}
     });
+
+    $('#'+targetId+'-content').on('scroll',function() {
+        if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight - 200) {
+            $(this).off('scroll');
+            pagiContent(targetId);
+        }
+     });
     
     
     request.done(function(response){
@@ -286,5 +318,63 @@ function carryList(decided,target) {
     
     request.fail(function (xhr){
         alert(xhr.responseJSON.message);
+        $('.spinnerOverlay').addClass('d-none');
     });
+}
+
+function pagiContent(target) {
+    if (pagiTarget[target]) {
+
+        let url = __baseUrl+'/admin/ajax/pagiContent';
+        pagiCount[target] = pagiCount[target]+1;
+
+        var request = $.ajax({
+            method : 'get',
+            url: url,
+            data: {pagiTarget:target, pagiCount:pagiCount[target]}
+        });
+        
+        
+        request.done(function(response){
+            if (response.status === 'success') {
+                pagiTarget[target] = response.pagiNext;
+                $('#'+target+'-table').append(response.html);
+ 
+                $('#'+target+'-content').on('scroll',function() {
+                    if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight - 200) {
+                        $(this).off('scroll');
+                        pagiContent(target);
+                    }
+                });
+
+                $('button.ticketBtn').off('click');
+                $('button.ticketBtn').on('click',function(e) {
+                    e.preventDefault();
+                    if (confirm(confirmMsg)) {
+                        $('.spinnerOverlay').removeClass('d-none');
+                        carryTicket(this,target);
+                    }
+                });
+    
+                $('button.listBtn').off('click');
+                $('button.listBtn').on('click',function(e) {
+                    e.preventDefault();
+                    if (confirm(confirmMsg)) {
+                        carryList(this,target);
+                    }
+                });
+    
+                $('span.fetchBtn').off('click');
+                $('span.fetchBtn').on('click',function() {
+                    $(this).addClass('spin');
+                    fetchContent(this);
+                });
+            }
+        });
+        
+        
+        request.fail(function (xhr){
+            alert(xhr.responseJSON.message);
+        });
+    }
 }

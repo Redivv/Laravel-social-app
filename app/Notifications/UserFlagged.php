@@ -15,16 +15,18 @@ class UserFlagged extends Notification
 
     public $user_name;
     public $reason;
+    public $author;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(string $user_name, string $reason)
+    public function __construct(string $user_name, string $reason, string $author)
     {
-        $this->user_name = $user_name;
-        $this->reason = $reason;
+        $this->user_name    = $user_name;
+        $this->reason       = $reason;
+        $this->author       = $author;
     }
 
     /**
@@ -48,7 +50,8 @@ class UserFlagged extends Notification
     {
         return [
             'user_name'     => $this->user_name,
-            'reason'        => $this->reason
+            'reason'        => $this->reason,
+            'author'        => $this->author
         ];
     }
 
@@ -56,7 +59,8 @@ class UserFlagged extends Notification
     {
         return new BroadcastMessage([
             'user_name'     => $this->user_name,
-            'reason'        => $this->reason
+            'reason'        => $this->reason,
+            'author'        => $this->author
         ]);
     }
 }

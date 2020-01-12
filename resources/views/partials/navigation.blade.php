@@ -494,6 +494,7 @@
                                             @break
                                     @endswitch
                                 @endforeach
+                                </div>
                                 <div class="dropdown-divider"></div>
                                 <a class="clearAllBtn" data-type="sysNoNot">{{__('nav.deleteAll')}}</a>
                             @endif

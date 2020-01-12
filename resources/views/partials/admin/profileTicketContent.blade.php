@@ -14,7 +14,7 @@
             <th scope="col"><span id="profileTicket-fetchBtn" class="fetchBtn"><i class="fas fa-sync"></i></span></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="profileTicket-table">
         @foreach ($tickets as $ticket)
             <tr>
                 <th scope="row">{{$ticket->data['user_name']}}</th>

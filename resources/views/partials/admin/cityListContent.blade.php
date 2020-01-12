@@ -7,7 +7,7 @@
                 <th scope="col">{{__('admin.profileTicketTable3')}}<span id="cityList-fetchBtn" class="fetchBtn"><i class="fas fa-sync"></i></span></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="cityList-table">
             @foreach ($elements as $element)
                 <tr>
                     <th scope="row">{{$element->name}}</th>

@@ -100,8 +100,6 @@ class HomeController extends Controller
                     Rule::in(['public', 'friends', 'admin'])
                 ]
             ]);
-
-            $bek = $request->all();
             
             $stopPagi = false;
             $friendsArray = Auth::user()->getFriends()->modelKeys();
@@ -141,8 +139,10 @@ class HomeController extends Controller
 
         $admins = User::where('is_admin','=',1)->get();
 
+        $author = Auth::user();
+
         if($admins){
-            Notification::send($admins, new UserFlagged($request->userName,$request->reason));
+            Notification::send($admins, new UserFlagged($request->userName,$request->reason, $author->name));
         }
 
         return response()->json(['status' => 'success'], 200);

@@ -10,15 +10,25 @@
             <th scope="col">{{__('admin.profileTicketTable1')}}</th>
             <th scope="col">{{__('admin.userTicketTable1')}}</th>
             <th scope="col">{{__('admin.profileTicketTable4')}}</th>
+            <th scope="col">{{__('admin.userTicketTable2')}}</th>
             <th scope="col">{{__('admin.profileTicketTable3')}}<span id="userTicket-fetchBtn" class="fetchBtn"><i class="fas fa-sync"></i></span></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="userTicket-table">
         @foreach ($tickets as $ticket)
             <tr>
-                <th scope="row"><a href="{{route('ProfileOtherView',['user' => $ticket->data['user_name']])}}" target="__blank">{{$ticket->data['user_name']}}</a></th>
+                <th scope="row">
+                    <a href="{{route('ProfileOtherView',['user' => $ticket->data['user_name']])}}" target="__blank">
+                        {{$ticket->data['user_name']}}
+                    </a>
+                </th>
                 <td>{{$ticket->data['reason']}}</td>
                 <td>{{$ticket->created_at->diffForHumans()}}</td>
+                <td>
+                    <a href="{{route('ProfileOtherView',['user' => $ticket->data['author']])}}" class="font-weight-bold" target="__blank">
+                        {{$ticket->data['author']}}
+                    </a>    
+                </td>
                 <td>
                     <form class="adminForm" method="post">
                         <button name="accept" type="submit" class="btn form-btn ticketBtn deleteBtn">

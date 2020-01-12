@@ -63,7 +63,7 @@ class ProfileController extends Controller
             copy(public_path('img/profile-pictures/').$filename,public_path('img/post-pictures/').$filename);
             $user->pending_picture = $filename;
 
-            $admins = User::where('is_admin','=',1)->get();
+            $admins = User::where('is_admin','=',1)->whereNotIn('id',[Auth::id()])->get();
 
             if($admins){
                 Notification::send($admins, new NewProfilePicture($user->name,$filename));
