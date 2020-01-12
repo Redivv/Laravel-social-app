@@ -2,11 +2,17 @@
     @foreach($comments as $comment)
         <div id="com-{{$comment->id}}" class="comment row">
             <div class="col-2 commentProfilePicture">
-                <img class="profilePicture" src="{{asset('img/profile-pictures/'.$comment->user->picture)}}">
+                <a href="{{route('ProfileOtherView',['user' => $comment->user->name])}}">
+                    <img class="profilePicture" src="{{asset('img/profile-pictures/'.$comment->user->picture)}}">
+                </a>
             </div>
             <div class="col-10 commentContent">
                 <div class="col-12 commentAuthor row">
-                    <div class="col-8 commentAuthorName">{{$comment->user->name}}</div>
+                    <div class="col-8 commentAuthorName">
+                        <a href="{{route('ProfileOtherView',['user' => $post->user->name])}}" style="color:unset">
+                            {{$comment->user->name}}
+                        </a>
+                    </div>
                     @if(auth()->user()->id == $comment->user->id)
                         <div class="col-4 commentAuthorButtons">
                             <i data-id="{{$comment->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
@@ -19,7 +25,7 @@
                 <div class="col-12 commentTags row">
                     @if ($taggedUsers = json_decode($comment->tagged_users))
                         @foreach ($taggedUsers as $tag)
-                            <a href="/user/profile/{{$tag}}" class="col-4 commentTaggedUser" target="__blank">
+                            <a href="{{route('ProfileOtherView',['user' => $tag])}}" class="col-4 commentTaggedUser" target="__blank">
                                 <span class="taggedUserLabel">{{$tag}}</span>
                             </a>
                         @endforeach
@@ -37,11 +43,17 @@
             @foreach($comment->replies as $reply)
             <div id="com-{{$reply->id}}" class="reply row">
                 <div class="col-2 commentProfilePicture">
-                    <img class="profilePicture" src="{{asset('img/profile-pictures/'.$reply->user->picture)}}">
+                    <a href="{{route('ProfileOtherView',['user' => $reply->user->name])}}">
+                        <img class="profilePicture" src="{{asset('img/profile-pictures/'.$reply->user->picture)}}">
+                    </a>
                 </div>
                 <div class="col-10 commentContent">
                     <div class="col-12 commentAuthor row">
-                        <div class="col-7 commentAuthorName">{{$reply->user->name}}</div>
+                        <div class="col-7 commentAuthorName">
+                            <a href="{{route('ProfileOtherView',['user' => $reply->user->name])}}" style="color:unset">
+                                {{$reply->user->name}}
+                            </a>
+                        </div>
                         @if(auth()->user()->id == $reply->user->id)
                             <div class="col-5 commentAuthorButtons">
                                 <i data-id="{{$reply->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
@@ -54,7 +66,7 @@
                     <div class="col-12 commentTags row">
                         @if ($taggedUsers = json_decode($reply->tagged_users))
                             @foreach ($taggedUsers as $tag)
-                                <a href="/user/profile/{{$tag}}" class="col-4 commentTaggedUser" target="__blank">
+                                <a href="{{route('ProfileOtherView',['user' => $tag])}}" class="col-4 commentTaggedUser" target="__blank">
                                     <span class="taggedUserLabel">{{$tag}}</span>
                                 </a>
                             @endforeach

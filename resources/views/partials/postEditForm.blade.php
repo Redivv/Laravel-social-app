@@ -3,7 +3,9 @@
         @if ($pictures = json_decode($post->pictures))
             <div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt"></i></div>
             @foreach ($pictures as $picture)
+            <a href="{{asset('img/post-pictures/'.$picture)}}" data-lightbox="postEdit">
                 <img class="thumb" src="{{asset('img/post-pictures/'.$picture)}}">
+            </a>
             @endforeach
         @endif
     </output>

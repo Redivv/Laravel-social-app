@@ -39,7 +39,7 @@
                         @foreach ($admins as $admin)
                             <div class="col">
                                 <h5 class="card-title adminName">
-                                    <a href="{{url('user/profile/'.$admin->name)}}" target="__blank">
+                                    <a href="{{route('ProfileOtherView',['user' => $admin->name])}}" target="__blank">
                                         {{$admin->name}}
                                     </a>
                                 </h5>

@@ -27,6 +27,7 @@
     "dependencies": {
         "emojionearea": "^3.0.0",
         "laravel-echo": "^1.6.1",
+        "lightbox2": "^2.11.1",
         "pusher-js": "^5.0.3",
         "rfs": "^9.0.2"
     }

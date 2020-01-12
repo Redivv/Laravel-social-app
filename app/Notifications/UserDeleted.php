@@ -44,7 +44,7 @@ class UserDeleted extends Notification
     {
         return (new MailMessage)
                 ->subject(__('admin.deletedUser-subject'))
-                ->greeting(__('admin.deletedUser-greet').$this->user_name)
+                ->greeting(__('admin.deletedUser-greet',['user' => $this->user_name]))
                 ->line(__('admin.deletedUser-message'))
                 ->line(__('admin.deletedUser-messageInfo'));
     }

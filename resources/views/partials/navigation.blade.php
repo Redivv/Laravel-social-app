@@ -25,7 +25,7 @@
                                     @foreach ($notifications['FR'] as $frNot)
                                         <li class="dropdown-item">
                                             <div class="row" id="{{$frNot['name']}}">
-                                                <a class="col-7" href="/user/profile/{{$frNot['name']}}">
+                                                <a class="col-7" href="{{route('ProfileOtherView',['user' => $frNot['name']])}}" target="__blank">
                                                     <div class="row">
                                                         <div class="col-4" >
                                                             <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
@@ -66,7 +66,7 @@
                                             @break
 
                                         @case('App\Notifications\FriendRequestAccepted')
-                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="/profile/{{$userNot->data['sender_name']}}" target="__blank">
+                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('ProfileOtherView',['user' => $userNot->data['sender_name']])}}" target="__blank">
                                                 <div class="row">
                                                     <div class="notificationImageBox col-2">
                                                         <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['sender_picture'])}}">
@@ -332,7 +332,7 @@
                                         @foreach ($notifications['FR'] as $frNot)
                                             <li class="dropdown-item">
                                                 <div class="row" id="{{$frNot['name']}}">
-                                                    <a class="col-7" href="/user/profile/{{$frNot['name']}}">
+                                                    <a class="col-7" href="{{route('ProfileOtherView',['user' => $frNot['name']])}}">
                                                         <div class="row">
                                                             <div class="col-4" >
                                                                 <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
@@ -373,7 +373,7 @@
                                                 @break
 
                                             @case('App\Notifications\FriendRequestAccepted')
-                                                <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="/profile/{{$userNot->data['sender_name']}}" target="__blank">
+                                                <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('ProfileOtherView',['user' => $userNot->data['sender_name']])}}" target="__blank">
                                                     <div class="row">
                                                         <div class="notificationImageBox col-2">
                                                             <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['sender_picture'])}}">
@@ -633,7 +633,7 @@
                     case 'App/Notifications/FriendRequestAccepted':
                         updateUserNotifications()
 
-                        html = '<a class="dropdown-item container" href="/profile/'+notification.sender_name+'" target="__blank">'+
+                        html = '<a class="dropdown-item container" href="/user/profile/'+notification.sender_name+'" target="__blank">'+
                                     '<div class="row">'+
                                         '<div class="notificationImageBox col-2">'+
                                             '<img class="notificationImage" src="/img/profile-pictures/'+notification.sender_picture+'">'+

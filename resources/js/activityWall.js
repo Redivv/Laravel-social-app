@@ -1,3 +1,4 @@
+import "lightbox2";
 var pagi = 0;
 var pagiReply = 0;
 var position = $(window).scrollTop(); 
@@ -110,8 +111,8 @@ function main() {
             return function(e) {
             // Render thumbnail.
             var span = document.createElement('span');
-            span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                                '" title="', escape(theFile.name), '"/>'].join('');
+            span.innerHTML = ['<a href="', e.target.result,'" data-lightbox="newPost"><img class="thumb" src="', e.target.result,
+                                '" title="', escape(theFile.name), '"/></a>'].join('');
             $('#picture-preview').append(span, null);
             $('.emojionearea-editor').focus();
             };
@@ -274,8 +275,8 @@ function main() {
                         return function(e) {
                         // Render thumbnail.
                         var span = document.createElement('span');
-                        span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                                            '" title="', escape(theFile.name), '"/>'].join('');
+                        span.innerHTML = ['<a href="', e.target.result,'" data-lightbox="editPost"><img class="thumb" src="', e.target.result,
+                                            '" title="', escape(theFile.name), '"/></a>'].join('');
                         $('#modalPicture-preview').append(span, null);
                         $('.emojionearea-editor').focus();
                         };

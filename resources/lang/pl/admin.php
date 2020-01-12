@@ -25,7 +25,7 @@ return [
     'noContentList'             => 'Brak Elementów',
     'confirmMsg'                => 'Potwierdź Swoją Decyzję',
     'deletedUser-subject'       => 'Usunięcie Konta', 
-    'deletedUser-greet'         => 'Witaj ',
+    'deletedUser-greet'         => 'Witaj :user',
     'deletedUser-message'       => 'Z przykrością zawiadamiamy, że Twoje konto w serwisie Safo zostało usunięte',
     'deletedUser-messageInfo'   => 'Jeśli uważasz, że jesteś niewinny prosimy o kontakt w formie odpowiedzi na ten email',
     'adminWideInfo'             => 'Wiadomość do użytkowników',
@@ -35,6 +35,8 @@ return [
     'infoSend'                  => 'Wyślij Powiadomienie',
     'mailCheck'                 => 'Wyślij Wiadomość E-mail',
     'infoTitleContent'          => 'Tytuł',
-    'mailInfoGreet'             => 'Wiadomość od Administracji'
+    'mailInfoGreet'             => 'Wiadomość od Administracji',
+    'profileTicketImageCaption' => 'Zdjęcie przesłane przez użytkownika :user',
+    'userListImageCaption'      => 'Zdjęcie Użytkownika :user'
 
 ];

@@ -1,11 +1,17 @@
 @foreach ($replies as $reply)
     <div id="com-{{$reply->id}}" class="reply row">
         <div class="col-2 commentProfilePicture">
-            <img class="profilePicture" src="{{asset('img/profile-pictures/'.$reply->user->picture)}}">
+            <a href="{{route('ProfileOtherView',['user' => $reply->user->name])}}">
+                <img class="profilePicture" src="{{asset('img/profile-pictures/'.$reply->user->picture)}}">
+            </a>
         </div>
         <div class="col-10 commentContent">
             <div class="col-12 commentAuthor row">
-                <div class="col-7 commentAuthorName">{{$reply->user->name}}</div>
+                <div class="col-7 commentAuthorName">
+                    <a href="{{route('ProfileOtherView',['user' => $reply->user->name])}}" style="color:unset">
+                        {{$reply->user->name}}
+                    </a>
+                </div>
                 @if(auth()->user()->id == $reply->user->id)
                     <div class="col-5 commentAuthorButtons">
                         <i data-id="{{$reply->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>

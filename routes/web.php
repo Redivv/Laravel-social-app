@@ -19,9 +19,11 @@ Route::get('logout', 'Auth\LoginController@logout');
 
 Route::get('searcher', 'SearchController@index')->name('searcher');
 
+Route::get('user/profile/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');
+Route::patch('user/profile/edit', 'ProfileController@update')->middleware('auth')->name('ProfileUpdate');
+
 Route::middleware(['verified'])->group(function () {
-    Route::patch('profile', 'ProfileController@update')->name('ProfileUpdate');
-    Route::get('profile/edit','ProfileController@edit')->name('ProfileEdition');
+    
     // List of friend-related routes
     Route::group(['prefix'=>'friends'], function() {
         Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
@@ -30,8 +32,9 @@ Route::middleware(['verified'])->group(function () {
             Route::patch('accept/{user}','AjaxFriendsController@acceptFriend');
             Route::delete('deny/{user}','AjaxFriendsController@denyFriend');
         });
+    });
 
-});});
+});
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
     Route::get('tag/autocompleteHobby', 'AjaxTagsController@autocompleteHobby');
@@ -72,7 +75,7 @@ Route::prefix('user')->group(function(){
     });
 
     Route::get('profile', 'ProfileController@index')->middleware('auth')->name('ProfileView');
-    Route::get('profile/{user}','ProfileController@visit');
+    Route::get('profile/{user}','ProfileController@visit')->name('ProfileOtherView');
 
     Route::get('settings', 'SettingsController@index')->middleware('auth')->name('SettingsPage');
     Route::patch('settings', 'SettingsController@updateSettings')->middleware('auth')->name('SettingsUpdate');

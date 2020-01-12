@@ -3,10 +3,12 @@
         <article id="post{{$post->id}}" class="post">
             <header class="postAuthor row">
                 <div class="col-1">
-                    <img class="postAuthorPicture" src="{{asset('img/profile-pictures/'.$post->user->picture)}}">
+                    <a href="{{route('ProfileOtherView',['user' => $post->user->name])}}">
+                        <img class="postAuthorPicture" src="{{asset('img/profile-pictures/'.$post->user->picture)}}">
+                    </a>
                 </div>
                 <div class="col-6 postAuthorName">
-                    <a class="postAuthorLink" href="{{route('ProfileView')."/".$post->user->name}}">
+                    <a class="postAuthorLink" href="{{route('ProfileOtherView',['user' => $post->user->name])}}">
                         {{$post->user->name}}@if($post->user->is_admin)<small class="text-muted adminStatus">{{__('activityWall.adminStatus')}}</small>@endif
                     </a>
                 </div>
@@ -21,7 +23,9 @@
                 <div class="postPhotos col-12">
                     @if ($pictures = json_decode($post->pictures))
                         @foreach ($pictures as $picture)
-                            <img class="postPicture" src="{{asset('img/post-pictures/'.$picture)}}">
+                            <a href="{{asset('img/post-pictures/'.$picture)}}" data-lightbox="post{{$post->id}}-Pictures">
+                                <img class="postPicture" src="{{asset('img/post-pictures/'.$picture)}}">
+                            </a>
                         @endforeach
                     @endif
                 </div>
@@ -29,7 +33,7 @@
                 <div class="postTags col-12 row">
                     @if ($taggedUsers = json_decode($post->tagged_users))
                         @foreach ($taggedUsers as $tags)
-                            <a href="/user/profile/{{$tags}}" class="col-4 postTaggedUser" target="__blank">
+                            <a href="{{route('ProfileOtherView',['user' => $tags])}}" class="col-4 postTaggedUser" target="__blank">
                                 <span class="taggedUserLabel">{{$tags}}</span>
                             </a>
                         @endforeach

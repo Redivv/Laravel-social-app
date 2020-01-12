@@ -18,7 +18,11 @@
         @foreach ($tickets as $ticket)
             <tr>
                 <th scope="row">{{$ticket->data['user_name']}}</th>
-                <td><img src="{{asset('img/profile-pictures/'.$ticket->data['image'])}}" class="profilePicture"></td>
+                <td>
+                    <a href="{{asset('img/profile-pictures/'.$ticket->data['image'])}}" data-lightbox="ticket-{{$ticket->id}}" data-title="{{__('admin.profileTicketImageCaption', ['user' => $ticket->data['user_name']])}}">
+                        <img src="{{asset('img/profile-pictures/'.$ticket->data['image'])}}" class="profilePicture">
+                    </a>
+                </td>
                 <td>{{$ticket->created_at->diffForHumans()}}</td>
                 <td>
                     <form class="adminForm" method="post" enctype="multipart/form-data">

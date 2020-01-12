@@ -1,3 +1,4 @@
+import "lightbox2";
 $(document).ready(function () {
     $('#profile-picture').change(function(evt){
         var files = evt.target.files; // FileList object
@@ -23,8 +24,8 @@ $(document).ready(function () {
             return function(e) {
             // Render thumbnail.
             var span = document.createElement('span');
-            span.innerHTML = ['<img class="profile-picture" src="', e.target.result,
-                                '" title="', escape(theFile.name), '"/>'].join('');
+            span.innerHTML = ['<a href="', e.target.result,'" data-lightbox="register"><img class="profile-picture" src="', e.target.result,
+                                '" title="', escape(theFile.name), '"/></a>'].join('');
             $('#picture-preview').prepend(span, null);
             $('#message-data').focus();
             };

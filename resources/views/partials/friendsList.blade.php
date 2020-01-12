@@ -1,12 +1,16 @@
 @foreach ($friends as $friend)
     <li class="row active friendObject" id="{{$friend->name}}">
-        <a href="../user/profile/{{$friend->name}}" class="col-7">
+        <a href="{{route('ProfileOtherView',['user' => $friend->name])}}" class="col-7">
             <div class="row">
                 <div class="col-4 profilePicture">
-                    <img src="{{asset('img/profile-pictures/'.$friend->picture)}}">
+                    <a href="{{route('ProfileOtherView',['user' => $friend->name])}}">
+                        <img src="{{asset('img/profile-pictures/'.$friend->picture)}}">
+                    </a>
                 </div>
                 <div class="col-6 friendName">
-                    <span>{{$friend->name}}</span>
+                    <a href="{{route('ProfileOtherView',['user' => $friend->name])}}">
+                        <span>{{$friend->name}}</span>
+                    </a>
                 </div>
             </div>
         </a>

@@ -76,7 +76,6 @@ class ProfileController extends Controller
         ]);
 
         $user->city_id = $city->id;
-        $user->hidden_status = request('status');
         $user->relationship_status = request('relations');
         $user->description = request('description');
         //Save changes in user profile

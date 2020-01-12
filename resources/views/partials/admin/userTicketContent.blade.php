@@ -16,7 +16,7 @@
     <tbody>
         @foreach ($tickets as $ticket)
             <tr>
-                <th scope="row"><a href="profile/{{$ticket->data['user_name']}}">{{$ticket->data['user_name']}}</a></th>
+                <th scope="row"><a href="{{route('ProfileOtherView',['user' => $ticket->data['user_name']])}}" target="__blank">{{$ticket->data['user_name']}}</a></th>
                 <td>{{$ticket->data['reason']}}</td>
                 <td>{{$ticket->created_at->diffForHumans()}}</td>
                 <td>
