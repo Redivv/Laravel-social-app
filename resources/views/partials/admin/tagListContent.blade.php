@@ -1,32 +1,30 @@
 @if (count($elements) > 0)
-    <table class="table table-fixed table-bordered table-hover">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">{{__('admin.tagListTable1')}}</th>
-                <th scope="col">{{__('admin.tagListTable2')}}</th>
-                <th scope="col">{{__('admin.profileTicketTable3')}}<span id="tagList-fetchBtn" class="fetchBtn"><i class="fas fa-sync"></i></span></th>
-            </tr>
-        </thead>
-        <tbody id="tagList-table">
-            @foreach ($elements as $element)
-                <tr>
-                    <th scope="row">{{$element->name}}</th>
-                    <td>{{$element->count}}</td>
-                    <td>
-                        <form class="adminForm" method="post">
-                            <button name="edit" type="submit" class="btn form-btn listBtn editBtn">
-                                {{__('admin.edit')}} 
-                            </button>
-                            <input type="hidden" name="elementId" value="{{$element->id}}">
-                            <button name="delete" type="submit" class="btn form-btn listBtn deleteBtn">
-                                {{__('admin.delete')}} 
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    @include('partials.admin.tagListTable')
+    <!-- Modal -->
+    <div class="modal fade" id="tagListModal" tabindex="-1" role="dialog" aria-labelledby="tagListModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="tagListModalLabel">{{{__('admin.searchTitle')}}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form id="tagListSearch" class="container searchForm" data-target="tagList">
+                    <div class="form-group row">
+                        <label class="col-12 p-0" for="tagListSearchInput">
+                            {{__('admin.searchTag')}}
+                        </label>
+                        <input id="tagListSearch-input" class="form-control col-md-9 col-sm-12" name="cryteria" type="text">
+                        <button class="col-md-2 col-sm-12 btn form-btn ml-md-2 ml-sm-0 mt-md-0 mt-sm-2" type="submit">{{__('admin.searchButton')}}</button>
+                    </div>
+                </form>
+                <output id="tagList-searchOut"></output>
+            </div>
+        </div>
+        </div>
+    </div>
     @else
         <div class="alert alert-warning" role="alert">
                 {{__('admin.noContentList')}}

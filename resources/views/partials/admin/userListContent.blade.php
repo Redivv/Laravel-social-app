@@ -1,35 +1,30 @@
 @if (count($elements) > 0)
-    <table class="table table-fixed table-bordered table-hover">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">{{__('admin.profileTicketTable1')}}</th>
-                <th scope="col">{{__('admin.profileTicketTable2')}}</th>
-                <th scope="col">{{__('admin.userListTable3')}}</th>
-                <th scope="col">{{__('admin.profileTicketTable3')}}<span id="userList-fetchBtn" class="fetchBtn"><i class="fas fa-sync"></i></span></th>
-            </tr>
-        </thead>
-        <tbody id="userList-table">
-            @foreach ($elements as $element)
-                <tr>
-                    <th scope="row">{{$element->name}}</th>
-                    <td>
-                        <a href="{{asset('img/profile-pictures/'.$element->picture)}}" data-lightbox="picture-{{$element->id}}" data-title="{{__('admin.userListImageCaption', ['user' => $element->name])}}">
-                            <img class="profilePicture" src="{{asset('img/profile-pictures/'.$element->picture)}}">
-                        </a>
-                    </td>
-                    <td>{{$element->created_at->diffForHumans()}}</td>
-                    <td>
-                        <form class="adminForm" method="post">
-                            <button name="delete" type="submit" class="btn form-btn listBtn">
-                            {{__('admin.userDelete')}} 
-                            </button>
-                            <input type="hidden" name="elementId" value="{{$element->id}}">
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    @include('partials.admin.userListTable')
+    <!-- Modal -->
+    <div class="modal fade" id="userListModal" tabindex="-1" role="dialog" aria-labelledby="userListModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="userListModalLabel">{{{__('admin.searchTitle')}}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form id="userListSearch" class="container searchForm" data-target="userList">
+                    <div class="form-group row">
+                        <label class="col-12 p-0" for="userListSearchInput">
+                            {{__('admin.profileTicketTable1')}}
+                        </label>
+                        <input id="userListSearch-input" class="form-control col-md-9 col-sm-12" name="cryteria" type="text">
+                        <button class="col-md-2 col-sm-12 btn form-btn ml-md-2 ml-sm-0 mt-md-0 mt-sm-2" type="submit">{{__('admin.searchButton')}}</button>
+                    </div>
+                </form>
+                <output id="userList-searchOut"></output>
+            </div>
+        </div>
+        </div>
+    </div>
     @else
         <div class="alert alert-warning" role="alert">
                 {{__('admin.noContentList')}}

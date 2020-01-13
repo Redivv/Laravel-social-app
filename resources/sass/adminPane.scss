@@ -92,7 +92,18 @@ main{
                     top: 50%;
                     left: 68%;
                 }
-
+                i:hover{
+                    color: $orange-hover;
+                }
+            }
+            .searchBtn{
+                padding: 1rem;
+                cursor: pointer;
+                color: $orange;
+                position: relative;
+                i:hover{
+                    color: $orange-hover;
+                }
             }
         }
         .profilePicture{
@@ -172,6 +183,21 @@ main{
         }
     }
     
+}
+
+.modal-dialog{
+    margin: 2rem auto;
+    max-width: 80vw;
+    output{
+        width: 100%;
+    }
+    .fetchBtn,.searchBtn{
+        display: none;
+    }
+    .modal-body{
+        overflow: auto;
+    }
+
 }
 
 @keyframes spin {

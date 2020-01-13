@@ -49,7 +49,7 @@ function main() {
             $('.darkOverlay').off('click');
             $('.darkOverlay').on('click',function(){
                 $('.tabsPills').removeClass('show');
-                $(this).html('<i class="fas fa-arrow-left"></i>');
+                $('#showTabsMenu').html('<i class="fas fa-arrow-left"></i>');
                 setTimeout(function(){
                     $('.darkOverlay').addClass('d-none');
                 }, 900);
@@ -171,6 +171,11 @@ function renderContent(selected) {
                 fetchContent(this);
             });
 
+            $('.searchForm').on('submit',function(e) {
+                e.preventDefault();
+                search(this);
+            });
+
         }
     });
     
@@ -192,13 +197,6 @@ function fetchContent(selected) {
         url: url,
         data: {target:targetId}
     });
-
-    $('#'+targetId+'-content').on('scroll',function() {
-        if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight - 200) {
-            $(this).off('scroll');
-            pagiContent(targetId);
-        }
-     });
     
     
     request.done(function(response){
@@ -210,25 +208,37 @@ function fetchContent(selected) {
                 $('#'+targetId+'Count').html(response.amount);
             }
 
+            $('#'+targetId+'-content').on('scroll',function() {
+                if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight - 200) {
+                    $(this).off('scroll');
+                    pagiContent(targetId);
+                }
+             });
+
             $('button.ticketBtn').on('click',function(e) {
                 e.preventDefault();
                 if (confirm(confirmMsg)) {
                     $('.spinnerOverlay').removeClass('d-none');
                     carryTicket(this,targetId);
                 }
-            })
+            });
 
             $('button.listBtn').on('click',function(e) {
                 e.preventDefault();
                 if (confirm(confirmMsg)) {
                     carryList(this,targetId);
                 }
-            })
+            });
 
             $('span.fetchBtn').on('click',function() {
                 $(this).addClass('spin');
                 fetchContent(this);
-            })
+            });
+
+            $('.searchForm').on('submit',function(e) {
+                e.preventDefault();
+                search(this);
+            });
 
         }
     });
@@ -368,6 +378,48 @@ function pagiContent(target) {
                 $('span.fetchBtn').on('click',function() {
                     $(this).addClass('spin');
                     fetchContent(this);
+                });
+            }
+        });
+        
+        
+        request.fail(function (xhr){
+            alert(xhr.responseJSON.message);
+        });
+    }
+}
+
+function search(form) {
+    let targetId = $(form).data('target');
+    let searchCriteria = $('#'+targetId+'Search-input').val().trim();
+
+    if (searchCriteria != "") {
+
+        let url = baseUrl + "/admin/ajax/searchList";
+
+        var request = $.ajax({
+            method : 'get',
+            url: url,
+            data: {target:targetId,criteria:searchCriteria}
+        });
+        
+        
+        request.done(function(response){
+            if (response.status === 'success') {
+                $('#'+targetId+'-searchOut').html(response.html);
+                $('#'+targetId+'-searchOut').find('button.ticketBtn').on('click',function(e) {
+                    e.preventDefault();
+                    if (confirm(confirmMsg)) {
+                        $('.spinnerOverlay').removeClass('d-none');
+                        carryTicket(this,targetId);
+                    }
+                });
+
+                $('#'+targetId+'-searchOut').find('button.listBtn').on('click',function(e) {
+                    e.preventDefault();
+                    if (confirm(confirmMsg)) {
+                        carryList(this,targetId);
+                    }
                 });
             }
         });

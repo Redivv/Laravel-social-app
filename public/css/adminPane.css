@@ -300,6 +300,21 @@ main .tabsContent div.tab-pane .fetchBtn.new:after {
   left: 68%;
 }
 
+main .tabsContent div.tab-pane .fetchBtn i:hover {
+  color: #e26103;
+}
+
+main .tabsContent div.tab-pane .searchBtn {
+  padding: 1rem;
+  cursor: pointer;
+  color: #f66103;
+  position: relative;
+}
+
+main .tabsContent div.tab-pane .searchBtn i:hover {
+  color: #e26103;
+}
+
 main .tabsContent .profilePicture {
   max-width: 100px;
 }
@@ -399,6 +414,24 @@ main #showTabsMenu {
   main #showTabsMenu {
     right: 0;
   }
+}
+
+.modal-dialog {
+  margin: 2rem auto;
+  max-width: 80vw;
+}
+
+.modal-dialog output {
+  width: 100%;
+}
+
+.modal-dialog .fetchBtn,
+.modal-dialog .searchBtn {
+  display: none;
+}
+
+.modal-dialog .modal-body {
+  overflow: auto;
 }
 
 @-webkit-keyframes spin {

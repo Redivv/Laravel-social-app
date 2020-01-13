@@ -1,32 +1,30 @@
 @if (count($elements) > 0)
-    <table class="table table-fixed table-bordered table-hover">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">{{__('admin.tagListTable1')}}</th>
-                <th scope="col">{{__('admin.cityListTable2')}}</th>
-                <th scope="col">{{__('admin.profileTicketTable3')}}<span id="cityList-fetchBtn" class="fetchBtn"><i class="fas fa-sync"></i></span></th>
-            </tr>
-        </thead>
-        <tbody id="cityList-table">
-            @foreach ($elements as $element)
-                <tr>
-                    <th scope="row">{{$element->name}}</th>
-                    <td>{{$element->created_at->diffForHumans()}}</td>
-                    <td>
-                        <form class="adminForm" method="post">
-                            <button name="edit" type="submit" class="btn form-btn listBtn editBtn">
-                                {{__('admin.edit')}} 
-                            </button>
-                            <input type="hidden" name="elementId" value="{{$element->id}}">
-                            <button name="delete" type="submit" class="btn form-btn listBtn deleteBtn">
-                                {{__('admin.delete')}} 
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    @include('partials.admin.cityListTable')
+    <!-- Modal -->
+    <div class="modal fade" id="cityListModal" tabindex="-1" role="dialog" aria-labelledby="cityListModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="cityListModalLabel">{{{__('admin.searchTitle')}}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form id="cityListSearch" class="container searchForm" data-target="cityList">
+                    <div class="form-group row">
+                        <label class="col-12 p-0" for="cityListSearchInput">
+                            {{__('admin.searchCity')}}
+                        </label>
+                        <input id="cityListSearch-input" class="form-control col-md-9" name="cryteria" type="text">
+                        <button class="col-md-2 col-sm-12 btn form-btn ml-md-2 ml-sm-0 mt-md-0 mt-sm-2" type="submit">{{__('admin.searchButton')}}</button>
+                    </div>
+                </form>
+                <output id="cityList-searchOut"></output>
+            </div>
+        </div>
+        </div>
+    </div>
     @else
         <div class="alert alert-warning" role="alert">
                 {{__('admin.noContentList')}}

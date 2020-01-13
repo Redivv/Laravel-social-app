@@ -287,6 +287,55 @@ class AdminController extends Controller
         }
     }
 
+    public function searchList(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->validate([
+                'target'    => [
+                    'string',
+                    Rule::in(['userList','tagList','cityList']),
+                ],
+                'criteria'  => [
+                    'string'
+                ]
+            ]);
+            
+            $target = $request->target;
+            $criteria = $request->criteria;
+
+            switch ($target) {
+                case 'userList':
+                    $users = User::where('name','like','%'.$criteria.'%')->get();
+                    if (count($users) <= 0) {
+                        $html = "<span class='searchNoResults'>".__('admin.noSearchResults')."</span>";
+                    }else{
+                        $html = view('partials.admin.userListTable')->withElements($users)->render();
+                    }
+                    break;
+                
+                case 'tagList':
+                    $tags = Tag::where('name','like','%'.$criteria.'%')->orWhere('slug','like','%'.$criteria.'%')->get();
+                    if (count($tags) <= 0) {
+                        $html = "<span class='searchNoResults'>".__('admin.noSearchResults')."</span>";
+                    }else{
+                        $html = view('partials.admin.tagListTable')->withElements($tags)->render();
+                    }
+                    break;
+                case 'cityList':
+                    $cities = City::where('name','like','%'.$criteria.'%')->orWhere('name_slug','like','%'.$criteria.'%')->get();
+                    if (count($cities) <= 0) {
+                        $html = "<span class='searchNoResults'>".__('admin.noSearchResults')."</span>";
+                    }else{
+                        $html = view('partials.admin.cityListTable')->withElements($cities)->render();
+                    }
+                    break;
+            }
+
+            return response()->json(['status' => 'success','html' => $html], 200);
+
+        }
+    }
+
     private function getProfileTickets() : array
     {
         $tickets = Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->take(5)->get();

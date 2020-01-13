@@ -95,6 +95,7 @@ Route::prefix('admin')->group(function(){
             Route::post('wideInfo', 'AdminController@wideInfo')->name('adminWideInfo');
 
             Route::get('pagiContent', 'AdminController@getPagi')->name('adminPagi');
+            Route::get('searchList', 'AdminController@searchList')->name('adminSearch');
         });
 
     });

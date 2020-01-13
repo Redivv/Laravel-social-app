@@ -9,5 +9,6 @@ return [
     'newsletterSettings1'   => 'Otrzymuj wiadomości email od administracji',
     'newsletterSettings2'   => 'Nie otrzymuj żadnych wiadomości email',
     'save'                  => 'Zapisz Ustawienia',
-    'saveMessage'           => "Ustawienia Zostały Zapisane"
+    'saveMessage'           => "Ustawienia Zostały Zapisane",
+    'bannedMessage'         => "Ten Adres Email Jest Zablokowany"
 ];

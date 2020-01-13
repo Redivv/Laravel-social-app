@@ -7,6 +7,9 @@ use Illuminate\Auth\Events\Registered;
 
 use App\User;
 use App\Notifications\NewProfilePicture;
+use Illuminate\Support\Facades\DB;
+
+use App\Rules\NotBanned;
 
 use Illuminate\Support\Facades\Notification;
 use App\Http\Controllers\Controller;
@@ -56,10 +59,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         $data['birth_year'] = intVal($data['birth_year']);
-        
         return Validator::make($data, [
             'name'              => ['required', 'string', 'alpha_dash', 'unique:users', 'max:255'],
-            'email'             => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email'             => ['required', 'string', 'email', 'max:255', 'unique:users', new NotBanned],
             'password'          => ['required', 'string', 'min:8', 'confirmed'],
             'birth_year'        => ['required', 'integer', 'between:1950,'.intVal(date('Y')-18)],
             'profile-picture'   => ['file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],

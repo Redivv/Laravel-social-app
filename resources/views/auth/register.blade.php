@@ -103,6 +103,12 @@
                             </div>
                         </div>
                     </div>
+
+                    @if (session()->has('message'))
+                        <div class="alert alert-danger mt-3" role="alert">
+                            <b>{{session()->get('message')}}</b>
+                        </div>
+                    @endif
                     
                     <button type="submit" class="form-btn btn btn-block">
                         {{ __('registeration.register-button') }}

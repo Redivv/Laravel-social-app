@@ -38,6 +38,11 @@ return [
     'mailInfoGreet'             => 'Wiadomość od Administracji',
     'profileTicketImageCaption' => 'Zdjęcie przesłane przez użytkownika :user',
     'userListImageCaption'      => 'Zdjęcie Użytkownika :user',
-    'userTicketTable2'          => 'Autor Zgłoszenia'
+    'userTicketTable2'          => 'Autor Zgłoszenia',
+    'searchTitle'               => 'Wyszukaj',
+    'searchButton'              => 'Szukaj',
+    'searchTag'                 => 'Zainteresowanie',
+    'searchCity'                => 'Miasto',
+    'noSearchResults'           => 'Brak Wyników'
 
 ];

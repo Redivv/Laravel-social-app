@@ -20134,3 +20134,11 @@ div.cookie-consent,
   font-size: 1.5rem;
 }
 
+.modal {
+  z-index: 999;
+}
+
+.modal-backdrop {
+  z-index: 998;
+}
+
