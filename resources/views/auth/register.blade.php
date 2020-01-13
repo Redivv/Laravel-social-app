@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <header class="container">
+    <header class="container-fluid">
         <div class="pageLogo text-center">
             <img src="{{asset('img/safo_logo.png')}}" alt="" srcset="">
         </div>

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css?family=Lobster);.emojione {
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css?family=Righteous);.emojione {
   /* Emoji Sizing */
   font-size: inherit;
   height: 3ex;
@@ -18582,25 +18582,21 @@ body {
   text-align: center;
 }
 
+main .pageLogo img {
+  max-width: 18rem;
+}
+
 main .pageTestimonial {
-  margin-bottom: 3rem;
-  padding: 0 5rem;
+  padding: 0 12rem;
   text-align: center;
 }
 
 main .pageTestimonial .testimonial {
-  font-family: "Lobster";
-  font-size: calc(1.255rem + 0.06vw);
+  font-family: "Righteous";
+  font-size: 1.1rem;
   color: #f66103;
-  font-style: italic;
   letter-spacing: 1.5px;
   font-weight: bold;
-}
-
-@media (min-width: 1200px) {
-  main .pageTestimonial .testimonial {
-    font-size: 1.3rem;
-  }
 }
 
 main .registerForm {
@@ -18661,6 +18657,7 @@ main .additionalLinks a {
   width: 20rem;
   font-size: calc(1.275rem + 0.3vw);
   display: block;
+  font-weight: bold;
   background-color: #f66103;
   color: #ffffff;
   margin: auto;
@@ -18745,6 +18742,7 @@ main .loginForm .registerLink a {
   letter-spacing: 2px;
   text-transform: uppercase;
   background-color: #f66103;
+  font-size: 1rem;
   color: #ffffff;
 }
 

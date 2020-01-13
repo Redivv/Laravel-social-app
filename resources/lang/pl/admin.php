@@ -37,6 +37,7 @@ return [
     'infoTitleContent'          => 'Tytuł',
     'mailInfoGreet'             => 'Wiadomość od Administracji',
     'profileTicketImageCaption' => 'Zdjęcie przesłane przez użytkownika :user',
-    'userListImageCaption'      => 'Zdjęcie Użytkownika :user'
+    'userListImageCaption'      => 'Zdjęcie Użytkownika :user',
+    'userTicketTable2'          => 'Autor Zgłoszenia'
 
 ];

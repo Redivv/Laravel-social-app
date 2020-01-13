@@ -1,13 +1,16 @@
 main{
+    .pageLogo{
+        img{
+            max-width: 18rem;
+        }
+    }
     .pageTestimonial{
-        margin-bottom: 3rem;
-        padding: 0 5rem;
+        padding: 0 12rem;
         text-align: center;
         .testimonial{
-            font-family: 'Lobster';
-            @include font-size (1.3rem);
+            font-family: 'Righteous';
+            @include font-size (1.1rem);
             color: $orange;
-            font-style: italic;
             letter-spacing: 1.5px;
             font-weight: bold;
         }
@@ -54,6 +57,7 @@ main{
             width: 20rem;
             @include font-size(1.5rem);
             display: block;
+            font-weight: bold;
             background-color: $orange;
             color: $white;
             margin: auto;
@@ -127,6 +131,7 @@ main{
     letter-spacing: 2px;
     text-transform: uppercase;
     background-color: $orange;
+    @include font-size(1rem);
     color: $white;
     &:hover{
         background-color: $orange-hover;
