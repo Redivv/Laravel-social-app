@@ -137,7 +137,7 @@ class HomeController extends Controller
             'reason'      => ['required','string','max:255']
         ]);
 
-        $admins = User::where('is_admin','=',1)->get();
+        $admins = User::where('is_admin','=',1)->whereNotIn('id',[Auth::id()])->get();
 
         $author = Auth::user();
 
