@@ -11720,6 +11720,7 @@ a.text-dark:focus {
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentDate,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentDate,
 #friendsWall .friendsWall #friendsWallFeed .noContent,
+.profileData .userStatus span,
 .nav-bar-height .chatNotifications .dropdown-item .notificationDesc .descTime,
 .nav-bar-height .chatNotifications .clearAllBtn .notificationDesc .descTime,
 .nav-bar-height .userNotifications .dropdown-item .notificationDesc .descTime,
@@ -18737,8 +18738,7 @@ main .loginForm .registerLink a {
   transition: all 1s ease;
 }
 
-.form-btn,
-.tag {
+.form-btn {
   letter-spacing: 2px;
   text-transform: uppercase;
   background-color: #f66103;
@@ -18746,8 +18746,7 @@ main .loginForm .registerLink a {
   color: #ffffff;
 }
 
-.form-btn:hover,
-.tag:hover {
+.form-btn:hover {
   background-color: #e26103;
   color: #ffffff;
 }
@@ -18766,102 +18765,99 @@ html {
   font-size: 16px !important;
 }
 
-.profile_view {
-  padding: 20px 30px;
-  margin: 0 !important;
+.profileData {
+  margin-top: 1rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 1rem;
+}
+
+.profileData .row {
+  margin-left: 0;
+}
+
+.profileData .userName span {
   font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 1.5px;
 }
 
-.profile_view .small_box {
-  background-color: #f0f;
+.profileData .userPicture {
+  padding-top: 0.5rem;
 }
 
-.profile_view .foto_frame {
-  height: auto;
-  overflow: hidden;
-  padding: 5px;
-}
-
-.profile_view .foto_frame .foto {
-  border-radius: 10px;
-  max-width: 100%;
-  height: auto;
-  box-shadow: 0.5px 0.5px 5px 0.5px rgba(0, 0, 0, 0.7);
-}
-
-.profile_view .button {
-  box-shadow: 0.5px 0.5px 5px 0.5px rgba(0, 0, 0, 0.7);
-}
-
-.profile_view .desc {
-  border-radius: 10px;
-  word-wrap: break-word;
-}
-
-.profile_view i {
-  font-size: 2rem;
-}
-
-.profile_view .profile_title {
-  font-size: 2rem;
-  margin-left: 7px;
-}
-
-.profile-paragraph {
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #f66103;
-  color: #ffffff;
-  box-shadow: 0.5px 0.5px 5px 0.5px rgba(0, 0, 0, 0.7);
-}
-
-.profileButtons {
-  cursor: pointer;
-}
-
-.profileButtons i {
-  font-size: calc(1.275rem + 0.3vw);
-  color: #000;
-}
-
-@media (min-width: 1200px) {
-  .profileButtons i {
-    font-size: 1.5rem;
-  }
-}
-
-.profileButtons:hover i {
-  color: #f66103;
-}
-
-.profileButtons.active i {
-  color: #f66103;
-}
-
-.profileButtons .likesAmount {
-  font-size: 0.6rem;
-  background-color: #f66103;
-  color: #ffffff;
-  padding: 0.25rem 0.35rem;
+.profileData .userPicture img {
+  width: 6rem;
+  height: 6rem;
   border-radius: 50%;
 }
 
-.profileButtons .likesAmount.invisible {
-  display: none;
+.profileData .userStatus {
+  padding-top: 0.5rem;
 }
 
-.tag:hover {
+.profileData .userStatus span {
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.profileData .userData {
+  padding-top: 0.5rem;
+}
+
+.profileData .userData .userDataCell {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #f66103;
+}
+
+.profileData .userTags {
+  padding-top: 0.5rem;
+  justify-content: center;
+}
+
+.profileData .userTags span {
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.3rem;
   color: #ffffff;
+  letter-spacing: 1px;
+  background-color: #f66103;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 20px;
 }
 
-.tag i {
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.5s ease;
+.profileData .userTags button {
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
-.tag i:hover {
-  color: #000;
+.profileData .userTags button:hover {
+  color: #f66103;
+}
+
+.profileData .userButtons {
+  margin-top: 1rem;
+}
+
+.profileData .userButtons button {
+  font-size: 1.2rem;
+  text-align: center;
+  position: relative;
+}
+
+.profileData .userButtons button:hover {
+  color: #f66103;
+}
+
+.profileData .userButtons button i {
+  display: block;
+}
+
+.profileData .userButtons button .badge {
+  position: absolute;
 }
 
 #wallFetchBtn {
