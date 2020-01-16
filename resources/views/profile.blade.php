@@ -117,24 +117,25 @@
                     <b>{{session()->get('guest')}}</b>
                 </div>
             @else
-                <div class="col-12 closeFriends">
-                    <header data-tool="tooltip" title="{{__('profile.allFriends')}}" data-placement="bottom">
-                        {{__('profile.closeFriends',['amount' => count($friends)])}}
-                    </header>
-                    <main class="row">
-                        @foreach ($friends as $friend)
-                            <div class="userFriend col">
-                                <a href="{{route('ProfileOtherView',['user' => $friend->name])}}">
-                                    <img src="{{asset('img/profile-pictures/'.$friend->picture)}}" alt="{{__("profile.photo", ['user' => $friend->name])}}">
-                                </a>
-                                <a href="{{route('ProfileOtherView',['user' => $friend->name])}}">
-                                    <span>{{$friend->name}}</span>
-                                </a>
-                            </div>
-                        @endforeach
-                    </main>
-                </div>
-                <hr>
+                @if (count($friends) > 0)
+                    <div class="col-12 closeFriends">
+                        <header data-tool="tooltip" title="{{__('profile.allFriends')}}" data-placement="bottom">
+                            {{__('profile.closeFriends',['amount' => count($friends)])}}
+                        </header>
+                        <main class="row">
+                            @foreach ($friends as $friend)
+                                <div class="userFriend col">
+                                    <a href="{{route('ProfileOtherView',['user' => $friend->name])}}">
+                                        <img src="{{asset('img/profile-pictures/'.$friend->picture)}}" alt="{{__("profile.photo", ['user' => $friend->name])}}">
+                                    </a>
+                                    <a href="{{route('ProfileOtherView',['user' => $friend->name])}}">
+                                        <span>{{$friend->name}}</span>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </main>
+                    </div>
+                @endif
                 <div class="col-12 activity">
                     kek
                 </div>
