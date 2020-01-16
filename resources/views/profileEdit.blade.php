@@ -73,11 +73,11 @@
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="{{asset("jqueryUi\jquery-ui.min.css")}}">
 @endpush
     
 @push('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
     <script>
         var delete_msg = "{{__('profile.deleteTag')}}";
         var base_url = "{{url('/')}}";

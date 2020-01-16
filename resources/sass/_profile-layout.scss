@@ -1,6 +1,13 @@
 html{font-size: 16px !important;}
+.row{
+    margin-left: 0;
+    margin-right: 0;
+}
 .profileData{
-    margin-top: 1rem;
+    overflow: hidden;
+    height: 80vh;
+    max-height: 80vh;
+    margin-top: 0.5rem;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 1rem;
     .row{
@@ -37,8 +44,24 @@ html{font-size: 16px !important;}
             color: $orange;
         }
     }
+    .userDesc{
+        padding-top: 0.5rem;
+        span{
+            @include font-size(0.9rem);
+            letter-spacing: 1px;
+            text-align: justify;
+        }
+        button{
+            @include font-size(0.95rem);
+            font-weight: bold;
+            display: block;
+            &:hover{
+                color: $orange;
+            }
+        }
+    }
     .userTags{
-        padding-top: 0.5rem;  
+        padding-top: 1rem;  
         justify-content: center;
         span{
             @include font-size(0.85rem);
@@ -63,19 +86,77 @@ html{font-size: 16px !important;}
     }
     .userButtons{
         margin-top: 1rem;
-        button{
-            @include font-size(1.2rem);
-            text-align: center;
-            position: relative;
-            &:hover{
-                color: $orange;
-            }
-            i{
-                display: block;
-            }
-            .badge{
-                position: absolute;
+        .ico{
+            button{
+                @include font-size(1.2rem);
+                text-align: center;
+                position: relative;
+                &:hover{
+                    i{
+                        color: $orange;
+                    }
+                }
+                i{
+                    color: $black;
+                    display: block;
+                    &.active{
+                        color: $orange;
+                    }
+                }
+                .badge{
+                    position: absolute;
+                    @include font-size(0.6rem);
+                    color: $white;
+                    background-color: $orange;
+                    border-radius: 50%;
+                    top: 1rem;
+                    left: 1.5rem;
+                }
+                &.active{
+                    i{
+                        color: $orange;
+                    }
+                }
             }
         }
     }
+}
+
+.closeFriends{
+    margin-top: 0.5rem;
+    height: min-content;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    header{
+        @include font-size(0.8rem);
+        cursor: pointer;
+        font-weight: bold;
+        letter-spacing: 1px;
+        &:hover{
+            text-decoration: underline;
+            color: $orange;
+        }
+    }
+    .userFriend{
+        padding-top: 0.5rem;
+        a{
+            display: block;
+            color: $black;
+            span{
+                @include font-size(0.85rem);
+                letter-spacing: 0.5px;
+            }
+            &:hover{
+                color: $orange;
+            }
+        }
+        img{
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+        }
+    }
+}
+
+.activity{
+    height: 65vh;
 }

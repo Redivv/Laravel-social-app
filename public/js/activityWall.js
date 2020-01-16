@@ -11277,7 +11277,7 @@ var pagi = 0;
 var pagiReply = 0;
 var position = $(window).scrollTop();
 $(document).ready(function () {
-  $('[data-toggle="tooltip"]').tooltip();
+  $('[data-tool="tooltip"]').tooltip();
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

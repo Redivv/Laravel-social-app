@@ -498,9 +498,6 @@
         .friendsListBox{
             .friendList{
                 padding: 0.1rem;
-                &:hover{
-                    background-color: #aaaaaa;
-                }
             }
             display: block;
             width: 100%;
@@ -538,10 +535,18 @@
                         display: flex;
                         align-items: center;
                         margin-left: 0.5rem;
+                        span{
+                            color: $black;
+                        }
                     }
                     .friendObject{
-                        .row{
-                            background-color: #000000;
+                        &:hover{
+                            background-color: $white;
+                        }
+                        .friendsName{
+                            a{
+                                color: $black;
+                            }
                         }
                     }
                     .friendName{

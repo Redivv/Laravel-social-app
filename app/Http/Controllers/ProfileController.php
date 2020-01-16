@@ -32,7 +32,10 @@ class ProfileController extends Controller
         foreach ($profileNotifications as $profNot) {
             $profNot->delete();
         }
-        return view('profile')->with(compact('user'))->with(compact('tags'));
+
+        $friends = $user->getFriends();
+
+        return view('profile')->with(compact('user'))->with(compact('tags'))->with(compact('friends'));
     }
 
     public function edit(){
@@ -84,29 +87,42 @@ class ProfileController extends Controller
         return redirect(route('ProfileView'))->with(['status' => __('profile.updated')]);
     }
 
-    public function visit(User $user){
+    public function visit(Request $request,User $user){
         
         if ($user->id == Auth::id()) {
             return redirect(url('user/profile'));
         }else{
-            $user->email='Private data';  //Seeing other's email is impossible (safety reasons);
-            if(Auth::check()){ //If user's logged in, he can explore any profile
+            if(Auth::check()){
+
                 $tags = $user->tagNames();
                 $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
-                return view('profile')->with(compact('user'))->with(compact('tags'));
+
+                $friends = $user->getFriends();
+
+                return view('profile')->with(compact('user'))->with(compact('tags'))->with(compact('friends'));
+
             }else{
-                if($user->hidden_status == 0){ //Guests can freely see profile of any person with hidden_status==0;
-                    //Show user's profile 
-                    $tags = $user->tagNames();
-                    return view('profile')->with(compact('user'))->with(compact('tags'));
-                }elseif($user->hidden_status == 1){ // Guests have restricted access to profile with hidden_status==1;
-                    $user->description='err0000';
-                    $user->city_id=null;
-                    $user->birth_year='err0000';
+                if($user->hidden_status == 0){
+
                     $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
-                    return view('profile')->with(compact('user'))->with(['status' => 'Nie jesteś zalogowany']);
-                }else{ //Guests cannot find anyone with hidden_status==2, if they even try they get redirrected back to searcher (or mb register/login, dunno yet);
-                    return redirect('searcher')->with(['status' => 'Nie można wyświetlić profilu użytkownika '.$user->name.' jako gość.']);
+                    $tags = $user->tagNames();
+
+                    $friends = $user->getFriends();
+
+                    return view('profile')->with(compact('user'))->with(compact('tags'))->with(compact('friends'));
+
+                }elseif($user->hidden_status == 1){
+
+                    $user->description=null;
+                    $user->city_id=null;
+                    $user->birth_year=null;
+                    $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
+
+                    $request->session()->flash('guest', __('profile.logInToSee'));
+
+                    return view('profile')->with(compact('user'));
+                }else{
+                    return abort(404);
                 }
             }
         }

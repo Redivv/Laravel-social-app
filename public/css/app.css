@@ -18765,8 +18765,16 @@ html {
   font-size: 16px !important;
 }
 
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .profileData {
-  margin-top: 1rem;
+  overflow: hidden;
+  height: 80vh;
+  max-height: 80vh;
+  margin-top: 0.5rem;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 1rem;
 }
@@ -18810,8 +18818,28 @@ html {
   color: #f66103;
 }
 
-.profileData .userTags {
+.profileData .userDesc {
   padding-top: 0.5rem;
+}
+
+.profileData .userDesc span {
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-align: justify;
+}
+
+.profileData .userDesc button {
+  font-size: 0.95rem;
+  font-weight: bold;
+  display: block;
+}
+
+.profileData .userDesc button:hover {
+  color: #f66103;
+}
+
+.profileData .userTags {
+  padding-top: 1rem;
   justify-content: center;
 }
 
@@ -18842,22 +18870,85 @@ html {
   margin-top: 1rem;
 }
 
-.profileData .userButtons button {
+.profileData .userButtons .ico button {
   font-size: 1.2rem;
   text-align: center;
   position: relative;
 }
 
-.profileData .userButtons button:hover {
+.profileData .userButtons .ico button:hover i {
   color: #f66103;
 }
 
-.profileData .userButtons button i {
+.profileData .userButtons .ico button i {
+  color: #000;
   display: block;
 }
 
-.profileData .userButtons button .badge {
+.profileData .userButtons .ico button i.active {
+  color: #f66103;
+}
+
+.profileData .userButtons .ico button .badge {
   position: absolute;
+  font-size: 0.6rem;
+  color: #ffffff;
+  background-color: #f66103;
+  border-radius: 50%;
+  top: 1rem;
+  left: 1.5rem;
+}
+
+.profileData .userButtons .ico button.active i {
+  color: #f66103;
+}
+
+.closeFriends {
+  margin-top: 0.5rem;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.closeFriends header {
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.closeFriends header:hover {
+  text-decoration: underline;
+  color: #f66103;
+}
+
+.closeFriends .userFriend {
+  padding-top: 0.5rem;
+}
+
+.closeFriends .userFriend a {
+  display: block;
+  color: #000;
+}
+
+.closeFriends .userFriend a span {
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.closeFriends .userFriend a:hover {
+  color: #f66103;
+}
+
+.closeFriends .userFriend img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+
+.activity {
+  height: 65vh;
 }
 
 #wallFetchBtn {
@@ -19481,10 +19572,6 @@ html {
   padding: 0.1rem;
 }
 
-#friendsWall .friendsList .friendsListBox .friendList:hover {
-  background-color: #aaaaaa;
-}
-
 #friendsWall .friendsList .friendsListBox ul {
   padding-left: 1rem;
   list-style: none;
@@ -19526,8 +19613,17 @@ html {
   margin-left: 0.5rem;
 }
 
-#friendsWall .friendsList .friendsListBox ul li .friendObject .row {
-  background-color: #000000;
+#friendsWall .friendsList .friendsListBox ul li .friendName span,
+#friendsWall .friendsList .friendsListBox ul li .friendOptions span {
+  color: #000;
+}
+
+#friendsWall .friendsList .friendsListBox ul li .friendObject:hover {
+  background-color: #ffffff;
+}
+
+#friendsWall .friendsList .friendsListBox ul li .friendObject .friendsName a {
+  color: #000;
 }
 
 #friendsWall .friendsList .friendsListBox ul li .friendName {
