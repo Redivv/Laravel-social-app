@@ -22,7 +22,7 @@ return [
     'logInToSee'            => 'Zaloguj się aby zobaczyć pełne dane',
     'allFriends'            => 'Zobacz Wszystkich',
     'modalTitle'            => "Szczegółowe Informacje",
-    'emptyModal'            => "Brak danych do wyświetlenia"
-
-    
+    'emptyModal'            => "Brak danych do wyświetlenia",
+    'activityHeader'        => "Ostatnia Aktywność",
+    'comment'               => "Komentarze"
 ];

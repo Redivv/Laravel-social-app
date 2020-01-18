@@ -1,5 +1,5 @@
 @foreach ($friends as $friend)
-    <li class="row active friendObject" id="{{$friend->name}}">
+    <li class="row @if($friend->status=="online") active @endif friendObject" id="{{$friend->name}}">
         <div class="row">
             <div class="col-4 profilePicture">
                 <a href="{{route('ProfileOtherView',['user' => $friend->name])}}">
@@ -13,9 +13,17 @@
             </div>
         </div>
         <div class="col-12 friendOptions">
-            <span class="deleteFriend" data-name="{{$friend->name}}" id="{{$friend->name}}"><i class="fas fa-user-minus"></i></span>
-            <span><a href="{{route('message.read', ['name' => $friend->name])}}" target="__blank"><i class="far fa-comment-dots"></i></a></span>
-            <span class="reportBtn" data-name="{{$friend->name}}"><i class="fas fa-exclamation"></i></span>
+            <span class="deleteFriend" data-name="{{$friend->name}}" id="{{$friend->name}}" data-tool="tooltip" title="{{__("activityWall.deleteFriend")}}" data-placement="bottom">
+                <i class="fas fa-user-minus"></i>
+            </span>
+            <span>
+                <a href="{{route('message.read', ['name' => $friend->name])}}" target="__blank" data-tool="tooltip" title="{{__('profile.messageUser')}}" data-placement="bottom">
+                    <i class="far fa-comment-dots"></i>
+                </a>
+            </span>
+            <span class="reportBtn" data-name="{{$friend->name}}" data-tool="tooltip" title="{{__('profile.reportUser')}}" data-placement="bottom">
+                <i class="fas fa-exclamation"></i>
+            </span>
         </div>
     </li>
 @endforeach

@@ -1,12 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="spinnerOverlay d-none">
+        <div class="spinner-border text-warning" role="status">
+                <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
     <div class="container-fluid row p-0">
         <div class="col-3 text-center profileData row">
             <div class="col-12 userName">
                 <span>
                     <i class="fas fa-user"></i>
-                    {{$user->name}}
+                    <span id="userName">{{$user->name}}</span>
                 </span>
             </div>
             <div class="col-12 userPicture">
@@ -125,14 +131,17 @@
                 @endif
             </div>
         </div>
-        <div class="text-center col-md-9 col-sm-12 row p-2">
+        <div class="text-center col-md-9 col-sm-12 container activity">
             @if (session()->has('guest'))
                 <div class="alert alert-warning" role="alert" style="width: 100%; align-self:center;">
                     <b>{{session()->get('guest')}}</b>
                 </div>
             @else
-                <div class="col-12 activity">
-                    kek
+                <header>
+                    {{__('profile.activityHeader')}}
+                </header>
+                <div class="activityPosts"> 
+                    @include('partials.profile.userActivity')
                 </div>
             @endif
         </div>
@@ -164,9 +173,12 @@
     <script>
         var base_url                = "{{url('/')}}";
         var reportUser              = "{{__('searcher.reportUser')}}";
+        var deletePostMsg           =  "{{__('activityWall.deletePost')}}";
         var reportUserReason        = "{{__('searcher.reportUserReason')}}";
         var reportUserReasonErr     = "{{__('searcher.reportUserReasonErr')}}";
         var reportUserSuccess       = "{{__('searcher.reportUserSuccess')}}";
+
+        var userName                = "{{$user->name}}"
     </script>
     <script src="{{asset('js/profile.js')}}"></script>
 @endpush

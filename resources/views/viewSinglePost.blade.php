@@ -7,13 +7,15 @@
     </div>
 </div>
 
-<div id="friendsWall" class="container-fluid mt-4">
+<div class="darkOverlay d-none"></div>
+
+<div id="friendsWall" class="container-fluid mt-4 p-0">
     <div class="row text-center">
         <div class="col-3 text-center wallExtraFunctions">
             @include('partials.wallExtraFunctions')
         </div>
-        <div class="col-6 friendsWall">
-            <output id="friendsWallFeed" class="">
+        <div class="offset-3 col-6 friendsWall">
+            <output id="friendsWallFeed" class="p-0">
                 @include('partials.wallSinglePost')
             </output>
         </div>
@@ -34,25 +36,45 @@
     </div>
 </div>
 
+<a id="scrollUpAnchor" href="#navBar"><i class="fas fa-arrow-up"></i></a>
+
+<span id="showSidePanels"><i class="fas fa-arrows-alt-h"></i></span>
+
 @include('partials.postEditModal')
 
 @include('partials.commentEditModal')
 
+@include('partials.tagUsersModal')
+
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{asset("jqueryUi\jquery-ui.min.css")}}">
+@endpush
 
 @push('scripts')
 
 <script>
-    var badFileType      = "{{__('chat.badFileType')}}";
-    var deletePostMsg    = "{{__('activityWall.deletePost')}}";
-    var emptyCommentMsg  = "{{__('activityWall.emptyComment')}}";
-    var deleteCommentMsg = "{{__('activityWall.deleteComment')}}";
-    var resetImgMsg      =  "{{__('activityWall.resetPictures')}}";
-    var baseUrl = "{{url('/')}}";
+    var badFileType             =  "{{__('chat.badFileType')}}";
+    var deletePostMsg           =  "{{__('activityWall.deletePost')}}";
+    var emptyCommentMsg         =  "{{__('activityWall.emptyComment')}}";
+    var deleteCommentMsg        =  "{{__('activityWall.deleteComment')}}";
+    var resetImgMsg             =  "{{__('activityWall.resetPictures')}}";
+    var userNotFound            =  "{{__('activityWall.noUserFound')}}";
+    var deleteUserTag           =  "{{__('activityWall.deleteTaggedUser')}}";
+    var emptyUser               =  "{{__('activityWall.emptyUser')}}";
+    var reportUser              = "{{__('searcher.reportUser')}}";
+    var reportUserReason        = "{{__('searcher.reportUserReason')}}";
+    var reportUserReasonErr     = "{{__('searcher.reportUserReasonErr')}}";
+    var reportUserSuccess       = "{{__('searcher.reportUserSuccess')}}";
+    var deleteFriend            = "{{__('activityWall.deleteFriend')}}";
+    var friendDeleted           = "{{__('activityWall.friendDeleted')}}";
 </script>
 
 <script src="{{asset('js/emoji.js')}}"></script>
 <script src="{{asset('js/singlePost.js')}}"></script>
+
+<script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
 
 <script defer>
     Echo.join('online')

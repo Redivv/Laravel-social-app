@@ -6,15 +6,15 @@
     </div>
     <div class="col-10 commentContent">
         <div class="col-12 commentAuthor row">
-            <a href="{{route('ProfileOtherView',['user' => $comment->user->name])}}" style="color:unset">
-                <div class="col-9 commentAuthorName">
-                    {{$comment->user->name}}
-                </div>
-            </a>
+            <div class="col-7 commentAuthorName">
+                <a href="{{route('ProfileOtherView',['user' => $comment->user->name])}}" style="color:unset">
+                        {{$comment->user->name}}
+                </a>
+            </div>
             @if(auth()->user()->id == $comment->user->id)
-                <div class="col-3 commentAuthorButtons">
-                    <i data-id="{{$comment->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
-                    <i data-id="{{$comment->id}}" class="fas replyDelete commentDelete fa-times"></i>
+                <div class="col-5 commentAuthorButtons">
+                    <i data-id="{{$comment->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.editComment')}}"></i>
+                    <i data-id="{{$comment->id}}" class="fas replyDelete commentDelete fa-times" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deleteComment')}}"></i>
                 </div>
             @endif
         </div>
@@ -31,6 +31,9 @@
         </div>
     </div>
     <div class="col-12 commentUserButtons">
-        <i class="fas fa-fire likeCommentButton @if($comment->liked()){{"active"}}@endif" data-id="{{$comment->id}}"></i><span class="badge likesCount badge-pill badge-warning">@if($comment->likeCount != 0){{$comment->likeCount}}@endif</span>
+        <i class="fas fa-fire likeCommentButton @if($comment->liked()){{"active"}}@endif" data-id="{{$comment->id}}"></i>
+        <span class="badge likesCount badge-pill badge-warning" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}">
+            @if($comment->likeCount != 0){{$comment->likeCount}}@endif
+        </span>
     </div>
 </div>

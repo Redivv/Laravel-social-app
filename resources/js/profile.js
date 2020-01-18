@@ -1,4 +1,5 @@
 import "lightbox2";
+var pagi = 0;
 
 $(document).ready(function() {
     $('[data-tool="tooltip"]').tooltip();
@@ -12,6 +13,12 @@ $(document).ready(function() {
 
 
 function main() {
+
+    $('.activityPosts:first').on('scroll',function() {
+        pagiPosts(this);
+    });
+
+
     $('.likeBtn').on('click',function() {
         likeUser(this);
     });
@@ -34,6 +41,14 @@ function main() {
             '<span class="sr-only">Loading...</span>'+
         '</div>';
         $(this).find('.modal-body').html(spinnerHtml);
+    });
+
+    $('.likePostButton').on('click',function() {
+        likePost(this);
+    });
+
+    $('.postDelete').on('click',function(){
+        deletePost(this);
     });
 }
 
@@ -149,3 +164,109 @@ function fetchContent(button) {
         alert(xhr.responseJSON.message);
     });
 }
+
+function likePost(selected) {
+    let postId = $(selected).data('id');
+    let url = base_url + "/user/ajax/likePost";
+
+    let likesCount = $(selected).children('.likesCount').html().trim();
+    if (likesCount == "") {
+        likesCount = 0;
+    }
+    likesCount = parseInt(likesCount);
+
+    if ($(selected).hasClass('active')) {
+        $(selected).removeClass('active');
+        if (likesCount - 1 == 0) {
+            $(selected).children('.likesCount').html('');
+        }else{
+            $(selected).children('.likesCount').html(likesCount-1);
+        }
+    }else{
+        $(selected).addClass('active');
+        $(selected).children('.likesCount').html(likesCount+1);
+    }
+
+    var request = $.ajax({
+        method : 'post',
+        url: url,
+        data: {'_method':'PATCH', postId:postId}
+    });
+}
+
+function pagiPosts(selected) {
+    if($(selected).scrollTop() + $(selected).innerHeight() >= $(selected)[0].scrollHeight - 200) {
+        $(selected).off('scroll');
+        pagi++;
+        let url = base_url + "/user/ajax/getMorePosts";
+
+        let sortParam = "userName";
+        let userName  = $('#userName').text().trim();
+
+        var request = $.ajax({
+            method : 'get',
+            url: url,
+            data: {pagiTime:pagi,sortBy:sortParam, userName:userName}
+        });
+        
+        
+        request.done(function(response){
+            if (response.status === 'success') {
+                $('.activityPosts:first').append(response.html);
+                if (response.stopPagi == false) {
+
+                    $('.activityPosts:first').on('scroll',function() {
+                        pagiPosts(this);
+                    });
+
+                }
+
+                $('.postDelete').off('click');
+                $('.postDelete').on('click',function(){
+                    deletePost(this);
+                });
+
+                $('.likePostButton').off('click');
+                $('.likePostButton').on('click',function() {
+                    likePost(this);
+                });
+            
+            }
+        });
+        
+        
+        request.fail(function (xhr){
+            alert(xhr.responseJSON.message);
+        });
+    }
+}
+
+function deletePost(selected) { 
+    if (confirm(deletePostMsg)) {
+        let url = base_url + "/user/ajax/deletePost";
+        let postId = $(selected).data('id');
+        $('.spinnerOverlay').removeClass('d-none');
+
+        var request = $.ajax({
+            method : 'post',
+            url: url,
+            data: {'_method': 'DELETE',id:postId}
+        });
+        
+        
+        request.done(function(response){
+            if (response.status === 'success') {
+                $('#post'+postId).next().remove();
+                $('#post'+postId).remove();
+                $('.spinnerOverlay').addClass('d-none');
+            }
+        });
+        
+        
+        request.fail(function (xhr){
+            $('.spinnerOverlay').addClass('d-none');
+            alert(xhr.responseJSON.message);
+        });
+    }
+}
+

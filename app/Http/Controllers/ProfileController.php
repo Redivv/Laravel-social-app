@@ -12,8 +12,10 @@ use App\Notifications\NewProfilePicture;
 use App\Notifications\SystemNotification;
 
 use Illuminate\Support\Facades\Notification;
+
 use App\User;
 use App\City;
+use App\Post;
 
 class ProfileController extends Controller
 {
@@ -36,7 +38,9 @@ class ProfileController extends Controller
 
         $friends = count($user->getFriends());
 
-        return view('profile')->with(compact('user'))->with(compact('tags'))->with(compact('friends'));
+        $posts = Post::where("user_id",Auth::id())->orderBy('created_at','desc')->take(5)->get();
+
+        return view('profile')->withUser($user)->withTags($tags)->withFriends($friends)->withPosts($posts);
     }
 
     public function edit(){
@@ -93,26 +97,18 @@ class ProfileController extends Controller
         if ($user->id == Auth::id()) {
             return redirect(url('user/profile'));
         }else{
-            if(Auth::check()){
+            if(Auth::check() || $user->hidden_status == 0){
 
                 $tags = $user->tagNames();
                 $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
 
                 $friends = count($user->getFriends());
 
-                return view('profile')->with(compact('user'))->with(compact('tags'))->with(compact('friends'));
+                $posts = Post::where("user_id",$user->id);
 
-            }else{
-                if($user->hidden_status == 0){
+                return view('profile')->withUser($user)->withTags($tags)->withFriends($friends)->withPosts($posts);
 
-                    $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
-                    $tags = $user->tagNames();
-
-                    $friends = count($user->getFriends());
-
-                    return view('profile')->with(compact('user'))->with(compact('tags'))->with(compact('friends'));
-
-                }elseif($user->hidden_status == 1){
+            }elseif($user->hidden_status == 1){
 
                     $user->description=null;
                     $user->city_id=null;
@@ -125,10 +121,9 @@ class ProfileController extends Controller
 
                     $request->session()->flash('guest', __('profile.logInToSee'));
 
-                    return view('profile')->with(compact('user'))->with(compact('tags'))->with(compact('friends'));
-                }else{
-                    return abort(404);
-                }
+                    return view('profile')->withUser($user)->withTags($tags)->withFriends($friends);
+            }else{
+                return abort(404);
             }
         }
     }

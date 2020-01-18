@@ -11323,9 +11323,6 @@ function main() {
       });
     }
   });
-  $('#wallFetchBtn').on('click', function () {
-    refreshWall(this);
-  });
   $('#addPost').emojioneArea({
     pickerPosition: "bottom",
     placeholder: "\xa0",
@@ -11341,8 +11338,9 @@ function main() {
     // Empty the preview list
 
     $('#picture-preview').empty();
-    var html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt"></i></div>';
+    var html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt" data-tool="tooltip" title="' + deleteImages + '" data-placement="bottom"></i></div>';
     $('#picture-preview').append(html);
+    $('[data-tool="tooltip"]').tooltip();
     var tag = $(this);
     $('.resetPicture').one('click', function () {
       if (confirm(resetImgMsg)) {
@@ -11435,6 +11433,7 @@ function main() {
             });
             getComments(this);
           });
+          $('[data-tool="tooltip"]').tooltip();
         }
       });
       request.fail(function (xhr) {
@@ -11457,6 +11456,7 @@ function main() {
     request.done(function (response) {
       if (response.status === 'success') {
         modal.find('.modal-body').html(response.html);
+        $('[data-tool="tooltip"]').tooltip();
         $('.resetPicture').one('click', function () {
           if (confirm(resetImgMsg)) {
             $('#editPicture').val("");
@@ -11474,8 +11474,9 @@ function main() {
           // Empty the preview list
 
           $('#modalPicture-preview').empty();
-          var html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt"></i></div>';
+          var html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt" data-tool="tooltip" title="' + deleteImages + '" data-placement="bottom"></i></div>';
           $('#modalPicture-preview').append(html);
+          $('[data-tool="tooltip"]').tooltip();
           var tag = $(this);
           $('.resetPicture').one('click', function () {
             if (confirm(resetImgMsg)) {
@@ -11539,6 +11540,7 @@ function main() {
               if (response.status === 'success') {
                 $('.spinnerOverlay').addClass('d-none');
                 $('#post' + post).parent().replaceWith(response.html);
+                $('[data-tool="tooltip"]').tooltip();
                 $('.postDelete').off('click');
                 $('.postDelete').on('click', function () {
                   deletePost(this);
@@ -11551,6 +11553,7 @@ function main() {
                 $('.commentsForm').on('submit', function (e) {
                   addComment(e, this);
                 });
+                $('[data-tool="tooltip"]').tooltip();
                 $('.btnComment').one('click', function () {
                   $('#post' + post).parent().find('.commentsDesc:first').emojioneArea({
                     pickerPosition: "top",
@@ -11582,7 +11585,7 @@ function main() {
       alert(xhr.responseJSON.message);
     });
   });
-  $('#editModal').on('hide.bs.modal', function () {
+  $('#editModal').on('hidden.bs.modal', function () {
     $('#editPicture').off('change');
     $(this).find('.modal-body').html('');
   });
@@ -11724,6 +11727,7 @@ function main() {
             $('.replyButton').on('click', function () {
               addReplyForm(this);
             });
+            $('[data-tool="tooltip"]').tooltip();
           }
         });
         request.fail(function (xhr) {
@@ -11821,7 +11825,7 @@ function deletePost(selected) {
     });
     request.done(function (response) {
       if (response.status === 'success') {
-        $('#post' + postId).next().remove();
+        $('#post' + postId).next().next().remove();
         $('#post' + postId).remove();
         $('.spinnerOverlay').addClass('d-none');
       }
@@ -11913,6 +11917,7 @@ function getComments(selected) {
     request.done(function (response) {
       if (response.status === 'success') {
         $('#feed-' + postId).html(response.html);
+        $('[data-tool="tooltip"]').tooltip();
         $('.commentDelete').off('click');
         $('.commentDelete').on('click', function (e) {
           deleteComment(this);
@@ -11944,10 +11949,10 @@ function getComments(selected) {
 function addReplyForm(selected) {
   $('#replyForm').remove();
   var parentId = $(selected).data('id');
-  var formHtml = '<div class="replyForm">' + '<form id="replyForm" method="post">' + '<div class="input-group row">' + '<input type="text" name="commentDesc" id="replyInput" class="form-control replyDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">' + '<div class="input-group-append col-1 commentButtons">' + '<i class="fas fa-user-tag commentUserTag" data-toggle="modal" data-target="#tagUsersModal"></i>' + '</div>' + '</div>' + '<output id="replyUsersTag"></output>';
+  var formHtml = '<div class="replyForm">' + '<form id="replyForm" method="post">' + '<div class="input-group row">' + '<input type="text" name="commentDesc" id="replyInput" class="form-control replyDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">' + '<div class="input-group-append col-1 commentButtons">' + '<i class="fas fa-user-tag commentUserTag" data-toggle="modal" data-target="#tagUsersModal" data-tool="tooltip" data-placement="bottom" title="' + tagUserMessage + '"></i>' + '</div>' + '</div>' + '<output id="replyUsersTag"></output>';
   '</form>' + '</div>';
-  var parentComment = $('#com-' + parentId);
   $(formHtml).insertAfter('#com-' + parentId);
+  $('[data-tool="tooltip"]').tooltip();
   $('#replyInput').emojioneArea({
     pickerPosition: "top",
     placeholder: "Napisz Komentarz",
@@ -11990,9 +11995,14 @@ function addReplyForm(selected) {
         if (response.status === 'success') {
           $('.ajaxSpinner').remove();
           $('#com-' + parentId).next().prepend(response.html);
+          $('[data-tool="tooltip"]').tooltip();
           $('.commentDelete').off('click');
           $('.commentDelete').on('click', function (e) {
             deleteComment(this);
+          });
+          $('.likeCommentButton').off('click');
+          $('.likeCommentButton').on('click', function () {
+            likeComment(this);
           });
         }
       });
@@ -12033,6 +12043,7 @@ function addComment(event, selected) {
       if (response.status === 'success') {
         $('.ajaxSpinner').remove();
         $('#feed-' + postId).prepend(response.html);
+        $('[data-tool="tooltip"]').tooltip();
         $('.commentDelete').off('click');
         var commentAmount = $('#post' + postId).find('.postCommentsCount').html().trim();
 
@@ -12089,6 +12100,7 @@ function loadReplies(selected) {
       button.parents('.commentRepliesBox').append(response.html);
       $('.ajaxSpinner').remove();
       button.remove();
+      $('[data-tool="tooltip"]').tooltip();
       $('.commentDelete').off('click');
       $('.commentDelete').on('click', function (e) {
         deleteComment(this);
@@ -12133,6 +12145,7 @@ function loadMoreComments(selected) {
       button.parents('.commentsFeed').append(response.html);
       $('.ajaxSpinner').remove();
       button.remove();
+      $('[data-tool="tooltip"]').tooltip();
       $('.commentDelete').off('click');
       $('.commentDelete').on('click', function (e) {
         deleteComment(this);
@@ -12271,46 +12284,13 @@ function pagiPosts() {
         $('.likePostButton').on('click', function () {
           likePost(this);
         });
+        $('[data-tool="tooltip"]').tooltip();
       }
     });
     request.fail(function (xhr) {
       alert(xhr.responseJSON.message);
     });
   }
-}
-
-function refreshWall(selected) {
-  $(selected).addClass('d-none');
-  $(selected).removeClass('ready');
-  $('.spinnerOverlay').removeClass('d-none');
-  var url = baseUrl + "/user/home";
-  var request = $.ajax({
-    method: 'get',
-    url: url
-  });
-  request.done(function (response) {
-    if (response.status === 'success') {
-      $(selected).removeClass('spin');
-      $('#friendsWallFeed').html(response.html);
-      $('.spinnerOverlay').addClass('d-none');
-      window.scrollTo(0, 0);
-      $('.postDelete').off('click');
-      $('.postDelete').on('click', function () {
-        deletePost(this);
-      });
-      $('.likePostButton').off('click');
-      $('.likePostButton').on('click', function () {
-        likePost(this);
-      });
-      $('.btnComment').off('click');
-      $('.btnComment').one('click', function () {
-        getComments(this);
-      });
-    }
-  });
-  request.fail(function (xhr) {
-    alert(xhr.responseJSON.message);
-  });
 }
 
 function addTagUser(selected) {
@@ -12330,8 +12310,9 @@ function addTagUser(selected) {
     });
     request.done(function (response) {
       if (response.status === 'success') {
-        html = '<div class="col-3 taggedUser">' + '<label class="taggedUserLabel">' + userName + '</label>' + '<input type="hidden" value="' + response.userId + '" name="taggedUser[]">' + '</div>';
+        html = '<div class="col-3 taggedUser">' + '<label class="taggedUserLabel" data-tool="tooltip" title="' + deleteTags + '" data-placement="bottom">' + userName + '</label>' + '<input type="hidden" value="' + response.userId + '" name="taggedUser[]">' + '</div>';
         $('#taggedUsers').find('#tagSpinner').replaceWith(html);
+        $('[data-tool="tooltip"]').tooltip();
         $('.taggedUser').off('click');
         $('.taggedUser').on('click', function () {
           if (confirm(deleteUserTag)) {

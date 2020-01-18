@@ -8,15 +8,15 @@
             </div>
             <div class="col-10 commentContent">
                 <div class="col-12 commentAuthor row">
-                    <div class="col-8 commentAuthorName">
+                    <div class="col-7 commentAuthorName">
                         <a href="{{route('ProfileOtherView',['user' => $post->user->name])}}" style="color:unset">
                             {{$comment->user->name}}
                         </a>
                     </div>
                     @if(auth()->user()->id == $comment->user->id)
-                        <div class="col-4 commentAuthorButtons">
-                            <i data-id="{{$comment->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
-                            <i data-id="{{$comment->id}}" class="fas commentDelete fa-times"></i>
+                        <div class="col-5 commentAuthorButtons">
+                            <i data-id="{{$comment->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.editComment')}}"></i>
+                            <i data-id="{{$comment->id}}" class="fas commentDelete fa-times" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deleteComment')}}"></i>
                         </div>
                     @endif
                 </div>
@@ -33,8 +33,9 @@
                 </div>
             </div>
             <div class="col-12 commentUserButtons">
-                <i class="fas fa-fire likeCommentButton @if($comment->liked()){{"active"}}@endif" data-id="{{$comment->id}}"></i><span class="badge likesCount badge-pill badge-warning">@if($comment->likeCount != 0){{$comment->likeCount}}@endif</span>
-                <i class="fas fa-reply replyButton" data-id="{{$comment->id}}"></i>
+                <i class="fas fa-fire likeCommentButton @if($comment->liked()){{"active"}}@endif" data-id="{{$comment->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}"></i>
+                <span class="badge likesCount badge-pill badge-warning">@if($comment->likeCount != 0){{$comment->likeCount}}@endif</span>
+                <i class="fas fa-reply replyButton" data-id="{{$comment->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.reply')}}"></i>
             </div>
         </div>
 
@@ -56,8 +57,8 @@
                         </div>
                         @if(auth()->user()->id == $reply->user->id)
                             <div class="col-5 commentAuthorButtons">
-                                <i data-id="{{$reply->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
-                                <i data-id="{{$reply->id}}" class="fas replyDelete commentDelete fa-times"></i>
+                                <i data-id="{{$reply->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.editComment')}}"></i>
+                                <i data-id="{{$reply->id}}" class="fas replyDelete commentDelete fa-times" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deleteComment')}}"></i>
                             </div>
                         @endif
                     </div>
@@ -74,7 +75,10 @@
                     </div>
                 </div>
                 <div class="col-12 commentUserButtons">
-                    <i class="fas fa-fire likeCommentButton @if($reply->liked()){{"active"}}@endif" data-id="{{$reply->id}}"></i><span class="badge likesCount badge-pill badge-warning">@if($reply->likeCount != 0){{$reply->likeCount}}@endif</span>
+                    <i class="fas fa-fire likeCommentButton @if($reply->liked()){{"active"}}@endif" data-id="{{$reply->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}"></i>
+                    <span class="badge likesCount badge-pill badge-warning">
+                        @if($reply->likeCount != 0){{$reply->likeCount}}@endif
+                    </span>
                 </div>
             </div>
             @endforeach
