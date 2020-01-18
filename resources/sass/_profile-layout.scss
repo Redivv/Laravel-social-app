@@ -9,7 +9,6 @@ html{font-size: 16px !important;}
     max-height: 80vh;
     margin-top: 0.5rem;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
-    padding-top: 1rem;
     .row{
         margin-left: 0;
     }
@@ -26,6 +25,7 @@ html{font-size: 16px !important;}
             width: 6rem;
             height: 6rem;
             border-radius: 50%;
+            color: $black;
         }
     }
     .userStatus{
@@ -39,20 +39,20 @@ html{font-size: 16px !important;}
     .userData{
         padding-top: 0.5rem;
         .userDataCell{
-            @include font-size(1.1rem);
+            @include font-size(1rem);
             font-weight: bold;
             color: $orange;
         }
     }
     .userDesc{
-        padding-top: 0.5rem;
         span{
-            @include font-size(0.9rem);
+            @include font-size(0.85rem);
             letter-spacing: 1px;
             text-align: justify;
         }
         button{
-            @include font-size(0.95rem);
+            padding: 0.3rem;
+            @include font-size(0.9rem);
             font-weight: bold;
             display: block;
             &:hover{
@@ -61,10 +61,10 @@ html{font-size: 16px !important;}
         }
     }
     .userTags{
-        padding-top: 1rem;  
         justify-content: center;
+        margin-top: -0.5rem;
         span{
-            @include font-size(0.85rem);
+            @include font-size(0.8rem);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -75,19 +75,36 @@ html{font-size: 16px !important;}
             margin-left: 0.5rem;
             margin-top: 0.5rem;
             border-radius: 20px;
+            &:hover{
+                background-color: $orange-hover;
+            }
         }
         button{
+            margin-top: 0.4rem;
+            padding: 0.3rem;
             font-weight: bold;
+            @include font-size(0.85rem);
+            &:hover{
+                color: $orange;
+            }
+        }
+    }
+    .userFriends{
+        margin-top: 0.5rem;
+        button{
+            padding: 0.3rem;
             @include font-size(0.9rem);
+            font-weight: bold;
+            letter-spacing: 1px;
             &:hover{
                 color: $orange;
             }
         }
     }
     .userButtons{
-        margin-top: 1rem;
         .ico{
             button{
+                padding: 0.3rem;
                 @include font-size(1.2rem);
                 text-align: center;
                 position: relative;
@@ -122,41 +139,66 @@ html{font-size: 16px !important;}
     }
 }
 
-.closeFriends{
-    margin-top: 0.5rem;
-    height: min-content;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    header{
-        @include font-size(0.8rem);
-        cursor: pointer;
-        font-weight: bold;
-        letter-spacing: 1px;
-        &:hover{
-            text-decoration: underline;
-            color: $orange;
-        }
-    }
-    .userFriend{
-        padding-top: 0.5rem;
-        a{
-            display: block;
-            color: $black;
-            span{
-                @include font-size(0.85rem);
-                letter-spacing: 0.5px;
-            }
-            &:hover{
-                color: $orange;
-            }
-        }
-        img{
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-        }
-    }
-}
-
 .activity{
     height: 65vh;
+}
+
+#expandInfoModal{
+    .modal-dialog{
+        max-width: 60vw;
+    }
+    .modalDesc{
+        @include font-size(1.1rem);
+        letter-spacing: 0.5px;
+    }
+    .modalTags{
+        justify-content: center;
+        span{
+            @include font-size(1rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 0.3rem;
+            color: $white;
+            letter-spacing: 1px;
+            background-color: $orange;
+            margin-left: 0.5rem;
+            margin-top: 0.5rem;
+            border-radius: 20px;
+            &:hover{
+                background-color: $orange-hover;
+            }
+        }
+    }
+    .modalFriends{
+        .userFriend{
+            text-align: center;
+            img{
+                width: 4rem;
+                height: 4rem;
+                border-radius: 50%;
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 0.5rem;
+                color: $black;
+            }
+            span{
+                @include font-size(1rem);
+                font-weight: bold;
+                color: $black;
+                letter-spacing: 0.5px;
+            }
+            a:hover{
+                color: $orange;
+                span{
+                    color: $orange;
+                }
+            }
+        }
+    }
+    .noInfo{
+        @include font-size(1.1rem);
+        font-weight: bold;
+        letter-spacing: 0.5px;
+    }
 }

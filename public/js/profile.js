@@ -11293,6 +11293,14 @@ function main() {
   $('.addFriend').on('click', function () {
     addFriend(this);
   });
+  $('#expandInfoModal').on('show.bs.modal', function (e) {
+    var button = $(e.relatedTarget);
+    fetchContent(button);
+  });
+  $('#expandInfoModal').on('hidden.bs.modal', function (e) {
+    var spinnerHtml = '<div class="spinner-border" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>';
+    $(this).find('.modal-body').html(spinnerHtml);
+  });
 }
 
 function likeUser(selected) {
@@ -11371,6 +11379,28 @@ function addFriend(selected) {
     url: url,
     data: {
       "_method": "put"
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJSON.message);
+  });
+}
+
+function fetchContent(button) {
+  var requestedContent = button.data('content');
+  var userId = button.data('id');
+  var url = base_url + "/user/profile/ajax/fetchContent";
+  var request = $.ajax({
+    method: 'get',
+    url: url,
+    data: {
+      userId: userId,
+      requestedContent: requestedContent
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      $("#expandInfoModal").find('.modal-body').html(response.html);
     }
   });
   request.fail(function (xhr) {

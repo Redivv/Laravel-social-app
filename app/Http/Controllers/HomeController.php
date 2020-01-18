@@ -444,7 +444,7 @@ class HomeController extends Controller
 
     public function likeUser(Request $request)
     {
-        if($request->ajax()){
+        if($request->ajax() && Auth::check()){
             $request->validate([
                 'userId' => 'exists:users,id'
             ]);

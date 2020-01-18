@@ -18062,6 +18062,7 @@ body.lb-disable-scrolling {
 
 .searchResults-box .searchResult .picture img {
   width: 8em;
+  height: 8em;
   border-radius: 50%;
 }
 
@@ -18776,7 +18777,6 @@ html {
   max-height: 80vh;
   margin-top: 0.5rem;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
-  padding-top: 1rem;
 }
 
 .profileData .row {
@@ -18797,6 +18797,7 @@ html {
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
+  color: #000;
 }
 
 .profileData .userStatus {
@@ -18813,23 +18814,20 @@ html {
 }
 
 .profileData .userData .userDataCell {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #f66103;
 }
 
-.profileData .userDesc {
-  padding-top: 0.5rem;
-}
-
 .profileData .userDesc span {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   letter-spacing: 1px;
   text-align: justify;
 }
 
 .profileData .userDesc button {
-  font-size: 0.95rem;
+  padding: 0.3rem;
+  font-size: 0.9rem;
   font-weight: bold;
   display: block;
 }
@@ -18839,12 +18837,12 @@ html {
 }
 
 .profileData .userTags {
-  padding-top: 1rem;
   justify-content: center;
+  margin-top: -0.5rem;
 }
 
 .profileData .userTags span {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18857,20 +18855,38 @@ html {
   border-radius: 20px;
 }
 
+.profileData .userTags span:hover {
+  background-color: #e26103;
+}
+
 .profileData .userTags button {
+  margin-top: 0.4rem;
+  padding: 0.3rem;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .profileData .userTags button:hover {
   color: #f66103;
 }
 
-.profileData .userButtons {
-  margin-top: 1rem;
+.profileData .userFriends {
+  margin-top: 0.5rem;
+}
+
+.profileData .userFriends button {
+  padding: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.profileData .userFriends button:hover {
+  color: #f66103;
 }
 
 .profileData .userButtons .ico button {
+  padding: 0.3rem;
   font-size: 1.2rem;
   text-align: center;
   position: relative;
@@ -18903,52 +18919,74 @@ html {
   color: #f66103;
 }
 
-.closeFriends {
-  margin-top: 0.5rem;
-  height: -webkit-min-content;
-  height: -moz-min-content;
-  height: min-content;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+.activity {
+  height: 65vh;
 }
 
-.closeFriends header {
-  font-size: 0.8rem;
-  cursor: pointer;
-  font-weight: bold;
-  letter-spacing: 1px;
+#expandInfoModal .modal-dialog {
+  max-width: 60vw;
 }
 
-.closeFriends header:hover {
-  text-decoration: underline;
-  color: #f66103;
-}
-
-.closeFriends .userFriend {
-  padding-top: 0.5rem;
-}
-
-.closeFriends .userFriend a {
-  display: block;
-  color: #000;
-}
-
-.closeFriends .userFriend a span {
-  font-size: 0.85rem;
+#expandInfoModal .modalDesc {
+  font-size: 1.1rem;
   letter-spacing: 0.5px;
 }
 
-.closeFriends .userFriend a:hover {
+#expandInfoModal .modalTags {
+  justify-content: center;
+}
+
+#expandInfoModal .modalTags span {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.3rem;
+  color: #ffffff;
+  letter-spacing: 1px;
+  background-color: #f66103;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 20px;
+}
+
+#expandInfoModal .modalTags span:hover {
+  background-color: #e26103;
+}
+
+#expandInfoModal .modalFriends .userFriend {
+  text-align: center;
+}
+
+#expandInfoModal .modalFriends .userFriend img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5rem;
+  color: #000;
+}
+
+#expandInfoModal .modalFriends .userFriend span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: 0.5px;
+}
+
+#expandInfoModal .modalFriends .userFriend a:hover {
   color: #f66103;
 }
 
-.closeFriends .userFriend img {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
+#expandInfoModal .modalFriends .userFriend a:hover span {
+  color: #f66103;
 }
 
-.activity {
-  height: 65vh;
+#expandInfoModal .noInfo {
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
 }
 
 #wallFetchBtn {

@@ -76,6 +76,8 @@ Route::prefix('user')->group(function(){
 
     Route::get('profile', 'ProfileController@index')->middleware('auth')->name('ProfileView');
     Route::get('profile/{user}','ProfileController@visit')->name('ProfileOtherView');
+    
+    Route::get('profile/ajax/fetchContent', 'ProfileController@fetchContent')->name('ProfileFetchContent');
 
     Route::get('settings', 'SettingsController@index')->middleware('auth')->name('SettingsPage');
     Route::patch('settings', 'SettingsController@updateSettings')->middleware('auth')->name('SettingsUpdate');

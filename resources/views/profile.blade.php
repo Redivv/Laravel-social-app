@@ -25,6 +25,7 @@
                 </span>
             </div>
             <div class="col-12 userData row">
+
                 @if ($user->city_id)
                     <div class="col userDataCell">
                         <main>
@@ -32,55 +33,68 @@
                         </main>
                     </div>
                 @endif
+                
+                @if ($user->age)
+                    <div class="col userDataCell">
+                        <main>
+                            {{$user->displayAge()}}
+                        </main>
+                    </div>
+                @endif
 
-                <div class="col userDataCell">
-                    <main>
-                        {{$user->displayAge()}}
-                    </main>
-                </div>
-
-                <div class="col userDataCell">
-                    <main>
-                        @if ($user->relationship_status)
-                            {{__('profile.status_taken')}}
-                        @else
-                            {{__('profile.status_free')}}
-                        @endif
-                    </main>
-                </div>
+                @if ($user->relationship_status != null)
+                    <div class="col userDataCell">
+                        <main>
+                            @if ($user->relationship_status)
+                                {{__('profile.status_taken')}}
+                            @else
+                                {{__('profile.status_free')}}
+                            @endif
+                        </main>
+                    </div>
+                @endif
 
             </div>
             <div class="col-12 userDesc">
                 <span>
                     @if (str_word_count($user->description) > 25)
                         {{Illuminate\Support\Str::words($user->description, 25, "...")}}
-                        <button class="col-4 mx-auto p-0 mt-1 btn">{{__('profile.readMore')}}</button>
+                        <button class="col-4 mx-auto btn" data-toggle="modal" data-target="#expandInfoModal" data-content="desc" data-id="{{$user->id}}">{{__('profile.readMore')}}</button>
                     @else
                         {{$user->description}}
                     @endif
                 </span>
             </div>
-            <div class="col-12 userTags row">
-                @foreach ($tags as $tag)
-                    <span class="col-3">
-                        {{$tag}} 
-                    </span>
-                    @if ($loop->iteration == 6 && $loop->remaining > 0)
-                        <button class="col-4 mx-auto p-0 mt-2 btn">{{__('profile.moreContent',['remaining' => $loop->remaining])}}</button>
-                        @break
-                    @endif
-                @endforeach
-            </div>
+            @if($tags)
+                <div class="col-12 userTags row">
+                    @foreach ($tags as $tag)
+                        <span class="col-3">
+                            {{$tag}} 
+                        </span>
+                        @if ($loop->iteration == 6 && $loop->remaining > 0)
+                            <button class="col-4 mx-auto btn" data-toggle="modal" data-target="#expandInfoModal" data-content="tags" data-id="{{$user->id}}">{{__('profile.moreContent',['remaining' => $loop->remaining])}}</button>
+                            @break
+                        @endif
+                    @endforeach
+                </div>
+            @endif
+            @if($friends)
+                <div class="col-12 userFriends">
+                    <button class="btn" data-tool="tooltip" title="{{__('profile.allFriends')}}" data-placement="bottom" data-toggle="modal" data-target="#expandInfoModal" data-content="friends" data-id="{{$user->id}}">
+                        {{__('profile.closeFriends',['amount' => $friends])}}
+                    </button>
+                </div>
+            @endif
             <div class="col-12 userButtons row">
                 <div class="col text-center ico likeProfile">
-                    <button class="btn likeBtn @if($user->liked()) active @endif" data-id="{{$user->id}}" data-tool="tooltip" title="{{__('profile.likeUser')}}" data-placement="bottom">
+                    <button class="btn likeUser @if(auth()->check()) likeBtn @endif @if($user->liked()) active @endif" data-id="{{$user->id}}" data-tool="tooltip" title="{{__('profile.likeUser')}}" data-placement="bottom">
                         <i class="fas fa-fire"></i>
                         <span class="badge likesAmount @if($user->likeCount <= 0) invisible @endif">
                             {{$user->likeCount}}
                         </span>
                     </button>
                 </div>
-                @if ($user->id != auth()->id())
+                @if (auth()->check() && $user->id != auth()->id())
                     <div class="col ico">
                         <a href="{{route('message.read', ['name' => $user->name])}}" target="__blank">
                             <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.messageUser')}}" data-placement="bottom">
@@ -90,15 +104,15 @@
                     </div>
                     <div class="col ico addFriend" data-name="{{$user->name}}" id="{{$user->name}}">
                             @if($user->isFriendWith(auth()->user()))
-                                <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend1')}}" data-placement="bottom">
-                                    <i class="fas fa-user-friends"></i>
+                                <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend3')}}" data-placement="bottom">
+                                    <i class="active fas fa-user-friends"></i>
                                 </button>
                             @elseif(auth()->user()->hasSentFriendRequestTo($user))
                                 <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend2')}}" data-placement="bottom">
                                     <i class="active fas fa-user-check"></i>
                                 </button>
                             @else
-                                <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend3')}}" data-placement="bottom">
+                                <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend1')}}" data-placement="bottom">
                                     <i class="active fas fa-user-plus"></i>
                                 </button>
                             @endif
@@ -111,35 +125,37 @@
                 @endif
             </div>
         </div>
-        <div class="text-center col-md-9 col-sm-12 row">
+        <div class="text-center col-md-9 col-sm-12 row p-2">
             @if (session()->has('guest'))
-                <div class="alert alert-warning" role="alert">
+                <div class="alert alert-warning" role="alert" style="width: 100%; align-self:center;">
                     <b>{{session()->get('guest')}}</b>
                 </div>
             @else
-                @if (count($friends) > 0)
-                    <div class="col-12 closeFriends">
-                        <header data-tool="tooltip" title="{{__('profile.allFriends')}}" data-placement="bottom">
-                            {{__('profile.closeFriends',['amount' => count($friends)])}}
-                        </header>
-                        <main class="row">
-                            @foreach ($friends as $friend)
-                                <div class="userFriend col">
-                                    <a href="{{route('ProfileOtherView',['user' => $friend->name])}}">
-                                        <img src="{{asset('img/profile-pictures/'.$friend->picture)}}" alt="{{__("profile.photo", ['user' => $friend->name])}}">
-                                    </a>
-                                    <a href="{{route('ProfileOtherView',['user' => $friend->name])}}">
-                                        <span>{{$friend->name}}</span>
-                                    </a>
-                                </div>
-                            @endforeach
-                        </main>
-                    </div>
-                @endif
                 <div class="col-12 activity">
                     kek
                 </div>
             @endif
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="expandInfoModal" tabindex="-1" role="dialog" aria-labelledby="expandInfoModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {{__('profile.modalTitle')}}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

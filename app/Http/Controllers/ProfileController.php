@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -33,7 +34,7 @@ class ProfileController extends Controller
             $profNot->delete();
         }
 
-        $friends = $user->getFriends();
+        $friends = count($user->getFriends());
 
         return view('profile')->with(compact('user'))->with(compact('tags'))->with(compact('friends'));
     }
@@ -97,7 +98,7 @@ class ProfileController extends Controller
                 $tags = $user->tagNames();
                 $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
 
-                $friends = $user->getFriends();
+                $friends = count($user->getFriends());
 
                 return view('profile')->with(compact('user'))->with(compact('tags'))->with(compact('friends'));
 
@@ -107,7 +108,7 @@ class ProfileController extends Controller
                     $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
                     $tags = $user->tagNames();
 
-                    $friends = $user->getFriends();
+                    $friends = count($user->getFriends());
 
                     return view('profile')->with(compact('user'))->with(compact('tags'))->with(compact('friends'));
 
@@ -116,15 +117,57 @@ class ProfileController extends Controller
                     $user->description=null;
                     $user->city_id=null;
                     $user->birth_year=null;
+                    $user->relationship_status = null;
                     $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
+
+                    $tags = null;
+                    $friends = null;
 
                     $request->session()->flash('guest', __('profile.logInToSee'));
 
-                    return view('profile')->with(compact('user'));
+                    return view('profile')->with(compact('user'))->with(compact('tags'))->with(compact('friends'));
                 }else{
                     return abort(404);
                 }
             }
+        }
+    }
+
+    public function fetchContent(Request $request)
+    {
+        $request->validate([
+            "requestedContent"  => [
+                'string',
+                Rule::in(['desc','tags','friends']),
+            ],
+            "userId" => [
+                'numeric',
+                'exists:users,id'
+            ]
+        ]);
+        $requestedContent = $request->requestedContent;
+        $user = User::find($request->userId);
+
+        if (Auth::check() || $user->hidden_status == 0) {
+            switch ($requestedContent) {
+                case 'desc':
+                    $desc = $user->description;
+                    $html = view('partials.profile.descInfo')->withDesc($desc)->render();
+                    break;
+                case 'tags':
+                    $tags = $user->tagNames();
+                    $html = view('partials.profile.tagsInfo')->withTags($tags)->render();
+                    break;
+                case 'friends':
+                    $friends = $user->getFriends();
+                    $html = view('partials.profile.friendsInfo')->withFriends($friends)->render();
+                    break;
+            }
+            return response()->json(['status' => 'success', 'html' => $html], 200);
+        }elseif($user->hidden_status == 1){
+            
+        }else{
+            return response()->json(['status' => 'error', 'message' => 'user not found'], 404);
         }
     }
 }

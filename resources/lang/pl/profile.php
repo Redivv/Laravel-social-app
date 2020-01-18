@@ -20,7 +20,9 @@ return [
     'moreContent'           => "Pokaż Więcej (:remaining)",
     'closeFriends'          => 'Znajomi (:amount)',
     'logInToSee'            => 'Zaloguj się aby zobaczyć pełne dane',
-    'allFriends'            => 'Zobacz Wszystkich'
+    'allFriends'            => 'Zobacz Wszystkich',
+    'modalTitle'            => "Szczegółowe Informacje",
+    'emptyModal'            => "Brak danych do wyświetlenia"
 
     
 ];

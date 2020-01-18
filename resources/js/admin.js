@@ -166,6 +166,10 @@ function renderContent(selected) {
                 }
             });
 
+            $('span.fetchBtn').tooltip();
+
+            $('span.searchBtn').tooltip();
+
             $('span.fetchBtn').on('click',function() {
                 $(this).addClass('spin');
                 fetchContent(this);
@@ -229,6 +233,10 @@ function fetchContent(selected) {
                     carryList(this,targetId);
                 }
             });
+
+            $('span.fetchBtn').tooltip();
+
+            $('span.searchBtn').tooltip();
 
             $('span.fetchBtn').on('click',function() {
                 $(this).addClass('spin');

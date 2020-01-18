@@ -43,6 +43,8 @@ return [
     'searchButton'              => 'Szukaj',
     'searchTag'                 => 'Zainteresowanie',
     'searchCity'                => 'Miasto',
-    'noSearchResults'           => 'Brak Wyników'
+    'noSearchResults'           => 'Brak Wyników',
+    'fetch'                     => 'Odśwież Wyniki',
+    'search'                    => 'Wyszukaj'
 
 ];
