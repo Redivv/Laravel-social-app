@@ -31,7 +31,7 @@
                         Miasto
                     </label>
                 </legend>
-                <input type="text" class="form-control" name="profileCity" id="profileCityInput" value="{{$user->city->name}}">
+                <input type="text" class="form-control" name="profileCity" id="profileCityInput" value="@if($user->city_id){{$user->city->name}}@endif">
             </fieldset>
 
             <fieldset class="form-group col-12 row profileRelationship">
