@@ -146,17 +146,18 @@
                     <b>{{session()->get('guest')}}</b>
                 </div>
             @else
-            @if ($user->id == auth()->id() && $user->email_verified_at === null)
-                <div class="alert alert-danger" role="alert" style="width: 100%; align-self:center;">
-                    <b>{{__("profile.verifyEmailAlert")}}</b>
-                </div>
-            @endif
-                <header>
-                    {{__('profile.activityHeader')}}
-                </header>
-                <div class="activityPosts"> 
-                    @include('partials.profile.userActivity')
-                </div>
+                @if ($user->id == auth()->id() && $user->email_verified_at === null)
+                    <div class="alert alert-danger" role="alert" style="width: 100%; align-self:center;">
+                        <b>{{__("profile.verifyEmailAlert")}}</b>
+                    </div>
+                @else
+                    <header>
+                        {{__('profile.activityHeader')}}
+                    </header>
+                    <div class="activityPosts"> 
+                        @include('partials.profile.userActivity')
+                    </div>
+                @endif
             @endif
         </div>
     </div>
