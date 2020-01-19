@@ -14,24 +14,28 @@
                 </div>
                 @if(auth()->user()->id == $reply->user->id)
                     <div class="col-5 commentAuthorButtons">
-                        <i data-id="{{$reply->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal"></i>
-                        <i data-id="{{$reply->id}}" class="fas commentDelete replyDelete fa-times"></i>
+                        <i data-id="{{$reply->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.editComment')}}"></i>
+                        <i data-id="{{$reply->id}}" class="fas commentDelete replyDelete fa-times" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deleteComment')}}"></i>
                     </div>
                 @endif
             </div>
             <div class="col-12 commentDate">{{$reply->created_at->diffForHumans()}}</div>
             <div class="col-12 commentDesc">{{$reply->message}}</div>
             <div class="col-12 commentTags row">
-                <a href="/user/profile" class="col-3 commentTaggedUser" target="__blank">
-                    <span class="taggedUserLabel">Beniz</span>
-                </a>
-                <a href="/user/profile" class="col-3 commentTaggedUser" target="__blank">
-                    <span class="taggedUserLabel">Beniz</span>
-                </a>
+                @if ($taggedUsers = json_decode($reply->tagged_users))
+                    @foreach ($taggedUsers as $tag)
+                        <a href="{{route('ProfileOtherView',['user' => $tag])}}" class="col-3 commentTaggedUser" target="__blank">
+                            <span class="taggedUserLabel">{{$tag}}</span>
+                        </a>
+                    @endforeach
+                @endif
             </div>
         </div>
         <div class="col-12 commentUserButtons">
-            <i class="fas fa-fire likeCommentButton @if($reply->liked()){{"active"}}@endif" data-id="{{$reply->id}}"></i><span class="badge likesCount badge-pill badge-warning">@if($reply->likeCount != 0){{$reply->likeCount}}@endif</span>
+            <i class="fas fa-fire likeCommentButton @if($reply->liked()){{"active"}}@endif" data-id="{{$reply->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}"></i>
+            <span class="badge likesCount badge-pill badge-warning">
+                @if($reply->likeCount != 0){{$reply->likeCount}}@endif
+            </span>
         </div>
     </div>
     

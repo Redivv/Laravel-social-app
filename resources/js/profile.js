@@ -1,135 +1,78 @@
-$(document).ready(function(){
-    // Setup Ajax csrf for future requests
+import "lightbox2";
+var pagi = 0;
+
+$(document).ready(function() {
+    $('[data-tool="tooltip"]').tooltip();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     main();
-})
+});
 
 
 function main() {
 
-    var img = new Image();
-    img.src = base_url+"/chat/loading.gif";
-
-    $('#tagForm').on('submit',function(e){
-        e.preventDefault();
-        let data = $('#tagInput').val().trim();
-        if (data !== '') {
-            let url = base_url+'/ajax/tag/addNew';
-
-            $(document).one("ajaxSend", function(){
-                $('#tagForm')[0].reset();
-                let html = ' <div id="load" class="col-md-2 ml-sm-0 ml-md-5 mt-3">'+
-                        '<img src="'+img.src+'">'+
-                '</div>';
-                $('.tagList').append(html);
-            }); 
-
-            var request = $.ajax({
-                method: "post",
-                url: url,
-                data: {"tag":data, "_method": "PUT"}
-            });
-
-            request.done(function(response){
-                if (response.status === "success") {
-                    $('#load').replaceWith(response.html);
-
-                    $('i.delete').on('click',function(){
-                        deleteTag(this);
-                    });
-                }
-             });
-
-            request.fail(function (xhr){
-                if (xhr.responseJSON.status == "repeat") {
-                    alert("To zainteresowanie zostało już dodane")
-                    $('#load').remove();
-                }
-            });
-
-        }else{
-            alert('Nie możesz wysłać pustego formularza');
-        }
+    $('.activityPosts:first').on('scroll',function() {
+        pagiPosts(this);
     });
 
-    $( "#tagInput" ).autocomplete({
- 
-        source: function(request, response) {
-            $.ajax({
-                url: base_url+"/ajax/tag/autocompleteHobby",
-                data: {
-                    term : request.term
-                },
-                dataType: "json",
-                success: function(data){
-                    var resp = $.map(data,function(obj){
-                    return obj.name;
-                }); 
-                response(resp);
-                }
-            });
-        },
-        minLength: 1
-    });
 
-    $( "input#city" ).autocomplete({
- 
-        source: function(request, response) {
-            $.ajax({
-                url: base_url+"/ajax/tag/autocompleteCity",
-                data: {
-                    term : request.term
-                },
-                dataType: "json",
-                success: function(data){
-                    var resp = $.map(data,function(obj){
-                    return obj.name;
-                }); 
-                response(resp);
-                }
-            });
-        },
-        minLength: 1
-    });
-
-    $('.likeUserBtn').on('click',function() {
+    $('.likeBtn').on('click',function() {
         likeUser(this);
     });
-
-    $('i.delete').on('click',function(){
-        deleteTag(this);
+    
+    $('.reportBtn').on('click',function() {
+        reportUser(this);
     });
-}
 
-function deleteTag(tag) {
-    if(confirm(delete_msg)){
+    $('.addFriend').on('click',function() {
+        addFriend(this);
+    });
 
-        var url = base_url+'/ajax/tag/deleteTag';
+    $('#expandInfoModal').on('show.bs.modal', function (e) {
+        let button = $(e.relatedTarget);
+        fetchContent(button);
+      });
 
-        let data = $(tag).prev().html();
+    $('#expandInfoModal').on('hidden.bs.modal', function (e) {
+        let spinnerHtml = '<div class="spinner-border" role="status">'+
+            '<span class="sr-only">Loading...</span>'+
+        '</div>';
+        $(this).find('.modal-body').html(spinnerHtml);
+    });
 
-        var request = $.ajax({
-            method: "post",
-            url: url,
-            data: {"tag" : data, "_method" : "DELETE"}
-        });
+    $('.likePostButton').on('click',function() {
+        likePost(this);
+    });
 
-        request.done(function(response){
-            if (response.status === 'success') {
-                $(tag).parent().remove();
-            }
-        });
+    $('.postDelete').on('click',function(){
+        deletePost(this);
+    });
 
-        request.fail(function (xhr){
-            if (xhr.responseJSON.status == "not-found") {
-                alert("Nie znaleziono podanego tagu")
-            }
-        });
-    }
+    $('#showUserData').on('click',function() {
+        if ($('.profileData:first').hasClass('show')) {
+            $('.profileData').removeClass('show');
+            $(this).html('<i class="fas fa-user-circle"></i>');
+            setTimeout(function(){
+                $('.darkOverlay').addClass('d-none');
+            }, 900);
+        }else{
+            $('.profileData').addClass('show');
+            $('.darkOverlay').removeClass('d-none');
+            $(this).html('<i class="fas fa-times"></i>');
+
+            $('.darkOverlay').one('click',function(){
+                $('.profileData').removeClass('show');
+                $('#showUserData').html('<i class="fas fa-arrows-alt-h"></i>');
+                setTimeout(function(){
+                    $('.darkOverlay').addClass('d-none');
+                }, 900);
+            });
+
+        }
+    });
 }
 
 function likeUser(selected) {
@@ -165,3 +108,188 @@ function likeUser(selected) {
         alert(xhr.responseJSON.message);
     });
 }
+
+function reportUser(selected) {
+    let reportReason = prompt(reportUserReason);
+        if (reportReason.trim() == '') {
+            alert(reportUserReasonErr);
+        }else{
+            $('.spinnerOverlay').removeClass('d-none');
+
+            let userName = $(selected).data('name');
+            let url = base_url+"/user/report";
+
+            var request = $.ajax({
+                method : 'post',
+                url: url,
+                data: {"_method": 'PUT', userName:userName, reason:reportReason.trim()}
+            });
+            
+            
+            request.done(function(response){
+                if (response.status === 'success') {
+                    $('.spinnerOverlay').addClass('d-none');
+                    alert(reportUserSuccess);
+                    $(selected).removeClass('reportBtn');
+                }
+            });
+            
+            
+            request.fail(function (xhr){
+                alert(xhr.responseJSON.message);
+            });
+        }
+}
+
+function addFriend(selected){
+    
+    let friendName = $(selected).data('name');
+    
+    let url= baseUrl+"/friends/ajax/add/"+friendName;
+
+    let html= '<i class="active fas fa-user-check"></i>';
+    $(selected).find('i').replaceWith(html);
+    $(selected).removeClass('addFriend');
+    
+    var request = $.ajax({
+        method : 'post',
+        url: url,
+        data: {"_method":"put",}
+    });
+    
+    request.fail(function (xhr){
+        
+        alert(xhr.responseJSON.message);
+    });
+}
+
+function fetchContent(button) {
+    let requestedContent = button.data('content');
+    let userId = button.data('id');
+    
+    let url = base_url + "/user/profile/ajax/fetchContent";
+
+    var request = $.ajax({
+        method : 'get',
+        url: url,
+        data: {userId: userId,requestedContent: requestedContent}
+    });
+    
+    
+    request.done(function(response){
+        if (response.status === 'success') {
+            $("#expandInfoModal").find('.modal-body').html(response.html);
+        }
+    });
+    
+    
+    request.fail(function (xhr){
+        alert(xhr.responseJSON.message);
+    });
+}
+
+function likePost(selected) {
+    let postId = $(selected).data('id');
+    let url = base_url + "/user/ajax/likePost";
+
+    let likesCount = $(selected).children('.likesCount').html().trim();
+    if (likesCount == "") {
+        likesCount = 0;
+    }
+    likesCount = parseInt(likesCount);
+
+    if ($(selected).hasClass('active')) {
+        $(selected).removeClass('active');
+        if (likesCount - 1 == 0) {
+            $(selected).children('.likesCount').html('');
+        }else{
+            $(selected).children('.likesCount').html(likesCount-1);
+        }
+    }else{
+        $(selected).addClass('active');
+        $(selected).children('.likesCount').html(likesCount+1);
+    }
+
+    var request = $.ajax({
+        method : 'post',
+        url: url,
+        data: {'_method':'PATCH', postId:postId}
+    });
+}
+
+function pagiPosts(selected) {
+    if($(selected).scrollTop() + $(selected).innerHeight() >= $(selected)[0].scrollHeight - 200) {
+        $(selected).off('scroll');
+        pagi++;
+        let url = base_url + "/user/ajax/getMorePosts";
+
+        let sortParam = "userName";
+        let userName  = $('#userName').text().trim();
+
+        var request = $.ajax({
+            method : 'get',
+            url: url,
+            data: {pagiTime:pagi,sortBy:sortParam, userName:userName}
+        });
+        
+        
+        request.done(function(response){
+            if (response.status === 'success') {
+                $('.activityPosts:first').append(response.html);
+                if (response.stopPagi == false) {
+
+                    $('.activityPosts:first').on('scroll',function() {
+                        pagiPosts(this);
+                    });
+
+                }
+
+                $('.postDelete').off('click');
+                $('.postDelete').on('click',function(){
+                    deletePost(this);
+                });
+
+                $('.likePostButton').off('click');
+                $('.likePostButton').on('click',function() {
+                    likePost(this);
+                });
+            
+            }
+        });
+        
+        
+        request.fail(function (xhr){
+            alert(xhr.responseJSON.message);
+        });
+    }
+}
+
+function deletePost(selected) { 
+    if (confirm(deletePostMsg)) {
+        let url = base_url + "/user/ajax/deletePost";
+        let postId = $(selected).data('id');
+        $('.spinnerOverlay').removeClass('d-none');
+
+        var request = $.ajax({
+            method : 'post',
+            url: url,
+            data: {'_method': 'DELETE',id:postId}
+        });
+        
+        
+        request.done(function(response){
+            if (response.status === 'success') {
+                $('#post'+postId).next().remove();
+                $('#post'+postId).remove();
+                $('.spinnerOverlay').addClass('d-none');
+            }
+        });
+        
+        
+        request.fail(function (xhr){
+            $('.spinnerOverlay').addClass('d-none');
+            alert(xhr.responseJSON.message);
+        });
+    }
+}
+

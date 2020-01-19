@@ -15,6 +15,7 @@ return [
     'adminStatus'       => 'administrator',
     'like'              => 'Poleć',
     'comment'           => 'Skomentuj',
+    'reply'             => 'Odpowiedz',
     'emptyComment'      => 'Nie możesz wysłać pustego komentarza',
     'moreReplies'       => 'Pokaż Więcej Odpowiedzi',
     'moreComments'      => 'Pokaż Więcej Komentarzy',
@@ -33,5 +34,11 @@ return [
     'sortPublic'        => 'Posty Publiczne',
     'sortFriends'       => 'Posty Znajomych',
     'sortAdmin'         => 'Posty Administratorów',
-    'tagUsersHint'      => '(Wpisz nazwę użytkownika i zatwierdź enterem aby dodać oznaczenie)'
+    'tagUsersHint'      => '(Wpisz nazwę użytkownika i zatwierdź enterem aby dodać oznaczenie)',
+    'deletePost'        => "Usuń Post",
+    'deleteFriend'      => "Usuń Znajomego",
+    'deleteImages'      => "Usuń Zdjęcia",
+    "deleteTags"        => "Usuń Wybrane Oznaczenie",
+    'deleteComment'     => "Usuń Komentarz",
+    'editComment'       => "Edytuj Komentarz"
 ];

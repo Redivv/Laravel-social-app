@@ -32,6 +32,7 @@
             }
         }
         #picture-preview{
+            padding: 0.5rem;
             display: block;
             width:100%;
             .resetPictureBox{
@@ -45,8 +46,8 @@
                 }
             }
             .thumb{
-                max-width: 150px;
-                max-height: 150px;
+                width: 9rem;
+                height: 9rem;
                 margin-left: 0.5rem;
                 margin-bottom: 0.5rem;
             }
@@ -134,8 +135,8 @@
                     margin-top: 1rem;
                     .postAuthor{
                         .postAuthorPicture{
-                            max-width: 50px;
-                            max-height: 50px;
+                            width: 3rem;
+                            height: 3rem;
                             border-radius: 50%;
                         }
                         .postAuthorName{
@@ -170,12 +171,13 @@
                         }
                     }
                     .postDesc{
-                        padding: 0 1rem;
+                        padding: 0 3rem;
                         margin-top: 0.5rem;
                         .postPhotos{
+                            padding: 0.5rem 0;
                             .postPicture{
-                                max-width: 500px;
-                                max-height: 200px;
+                                width: 11rem;
+                                height: 8rem;
                             }
                         }
                         .postContent{
@@ -412,8 +414,8 @@
                             }
                             .commentProfilePicture{
                                 img{
-                                    max-width: 35px;
-                                    max-height: 35px;
+                                    width: 2.5rem;
+                                    height: 2.5rem;
                                     border-radius: 50%;
                                 }
                             }
@@ -498,9 +500,6 @@
         .friendsListBox{
             .friendList{
                 padding: 0.1rem;
-                &:hover{
-                    background-color: #aaaaaa;
-                }
             }
             display: block;
             width: 100%;
@@ -517,8 +516,8 @@
                     .profilePicture{
                         position: relative;
                         img{
-                            max-width: 35px;
-                            max-height: 35px;
+                            width: 2.5rem;
+                            height: 2.5rem;
                             border-radius: 50%;
                         }
                     }
@@ -526,11 +525,11 @@
                         .profilePicture::after{
                             content: "";
                             position: absolute;
-                            width: 12px;
-                            height: 12px;
+                            width: 1.5rem;
+                            height: 1.5rem;
                             background-color: $green;
                             border-radius: 50%;
-                            top: 1.55rem;
+                            top: 1.7rem;
                             left: 2.5rem;
                         }
                     }
@@ -538,10 +537,18 @@
                         display: flex;
                         align-items: center;
                         margin-left: 0.5rem;
+                        span{
+                            color: $black;
+                        }
                     }
                     .friendObject{
-                        .row{
-                            background-color: #000000;
+                        &:hover{
+                            background-color: $white;
+                        }
+                        .friendsName{
+                            a{
+                                color: $black;
+                            }
                         }
                     }
                     .friendName{
@@ -585,7 +592,7 @@
         right: -80%;
         top: 10%;
         max-width: 50%;
-        background:#f8fafc;
+        background: $laravel-grey;
         height: 80%;
         z-index: 1001;
         overflow-y: auto;
@@ -609,7 +616,7 @@
         top: 10%;
         left: -50%;
         max-width: 40%;
-        background:#f8fafc;
+        background: $laravel-grey;
         height: 80%;
         z-index: 1001;
         overflow-y: auto;
@@ -662,6 +669,7 @@
             display: block;
             width:100%;
             .resetPictureBox{
+                padding: 0.5rem 0;
                 text-align: right;
                 i{
                     cursor: pointer;
@@ -672,8 +680,8 @@
                 }
             }
             .thumb{
-                max-width: 150px;
-                max-height: 150px;
+                width: 9rem;
+                height: 9rem;
                 margin-left: 0.5rem;
                 margin-bottom: 0.5rem;
             }

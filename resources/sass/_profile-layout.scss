@@ -1,97 +1,654 @@
-html{font-size:16px !important;}
-.profile_view{
-    padding:20px 30px;
-    margin:0 !important;
-    font-size:1.1rem;
-    .small_box{
-        background-color:#f0f;
+html{font-size: 16px !important;}
+.row{
+    margin-left: 0;
+    margin-right: 0;
+}
+.profileData{
+    position: relative;
+    overflow: hidden;
+    height: 82vh;
+    margin-top: 0.5rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    .row{
+        margin-left: 0;
     }
-
-    .foto_frame{
-        height:auto;
-        overflow: hidden;
-        padding:5px;
-        .foto{
-            border-radius:10px;
-            max-width: 100%;
-            height: auto;
-            -webkit-box-shadow: 0.5px 0.5px 5px 0.5px rgba(0,0,0,0.7);
-            box-shadow: 0.5px 0.5px 5px 0.5px rgba(0,0,0,0.7);
+    .userName{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span{
+            @include font-size(1.1rem);
+            font-weight: bold;
+            letter-spacing: 1.5px;
         }
     }
-
-    .button{
-        -webkit-box-shadow: 0.5px 0.5px 5px 0.5px rgba(0,0,0,0.7);
-        box-shadow: 0.5px 0.5px 5px 0.5px rgba(0,0,0,0.7);
-    }
-
-    .desc{
-        border-radius: 10px;
-        word-wrap: break-word;
-    }
-
-    i{
-        font-size:2rem;
-    }
-    .profile_title{
-        font-size:2rem;
-        margin-left:7px;
-    }
-
-}
-.profile-paragraph{
-    padding: 10px;
-    border-radius: 10px;
-    background-color: $orange;
-    color:#ffffff;
-    -webkit-box-shadow: 0.5px 0.5px 5px 0.5px rgba(0,0,0,0.7);
-    box-shadow: 0.5px 0.5px 5px 0.5px rgba(0,0,0,0.7);
-}
-
-.profileButtons{
-    cursor: pointer;
-    i{
-        @include font-size(1.5rem);
+    #profileEditLink{
+        right: 5%;
+        top:0;
+        padding: 0.5rem;
+        position: absolute;
+        @include font-size(0.9rem);
         color: $black;
-    }
-    &:hover{
-        i{
+        text-decoration: none;
+        &:hover{
             color: $orange;
         }
     }
-    &.active{
-        i{
+    .userPicture{
+        padding-top: 0.5rem;
+        img{
+            width: 6rem;
+            height: 6rem;
+            border-radius: 50%;
+            color: $black;
+        }
+    }
+    .userStatus{
+        padding-top:0.5rem;
+        span{
+            @extend .text-muted;
+            @include font-size(0.75rem);
+            text-align: center;
+        }
+    }
+    .userData{
+        padding-top: 0.5rem;
+        .userDataCell{
+            @include font-size(1rem);
+            font-weight: bold;
             color: $orange;
         }
     }
-    .likesAmount{
-        @include font-size(0.6rem);
-        background-color: $orange;
-        color: $white;
-        padding: 0.25rem 0.35rem;
-        border-radius: 50%;
-        &.invisible{
-            display: none;
+    .userDesc{
+        span{
+            @include font-size(0.9rem);
+            letter-spacing: 1px;
+            text-align: justify;
+        }
+        button{
+            padding: 0.3rem;
+            @include font-size(0.9rem);
+            font-weight: bold;
+            display: block;
+            &:hover{
+                color: $orange;
+            }
+        }
+    }
+    .userTags{
+        justify-content: center;
+        margin-top: -1rem;
+        span{
+            @include font-size(0.83rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $white;
+            letter-spacing: 0.5px;
+            background-color: $orange;
+            margin-left: 0.5rem;
+            margin-top: 0.5rem;
+            border-radius: 20px;
+            &:hover{
+                background-color: $orange-hover;
+            }
+        }
+        button{
+            margin-top: 0.4rem;
+            padding: 0.3rem;
+            font-weight: bold;
+            @include font-size(0.85rem);
+            &:hover{
+                color: $orange;
+            }
+        }
+    }
+    .userFriends{
+        margin-top: 0.5rem;
+        button{
+            padding: 0.3rem;
+            @include font-size(0.9rem);
+            font-weight: bold;
+            letter-spacing: 1px;
+            &:hover{
+                color: $orange;
+            }
+        }
+    }
+    .userButtons{
+        .ico{
+            button{
+                padding: 0.3rem;
+                @include font-size(1.2rem);
+                text-align: center;
+                position: relative;
+                &:hover{
+                    i{
+                        color: $orange;
+                    }
+                }
+                i{
+                    color: $black;
+                    display: block;
+                    &.active{
+                        color: $orange;
+                    }
+                }
+                .badge{
+                    position: absolute;
+                    @include font-size(0.6rem);
+                    color: $white;
+                    background-color: $orange;
+                    border-radius: 50%;
+                    top: 1rem;
+                    left: 1.5rem;
+                }
+                &.active{
+                    i{
+                        color: $orange;
+                    }
+                }
+            }
+        }
+    }
+    @media screen and (max-width: $breakpoint1) {
+        flex: 0 0 41.6666666667%;
+        max-width: 41.6666666667%;
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        position:fixed;
+        left:-100%;
+        transition:left 1s linear;
+        z-index: 1002;
+        width: 65vw;
+        max-width: unset;
+        background-color: $laravel-grey;
+        border: 2px solid $grey;
+        border-left: 0;
+        top: 3.5%;
+        height: 90vh;
+        overflow: auto;
+        padding: 1rem;
+        &.show{
+            left: 0;
         }
     }
 }
 
-.tag{
-    @extend .form-btn;
-    &:hover{
-        color:$white;
+.activity{
+    height: 83vh;
+    padding: 1rem;
+    header{
+        @include font-size(1.1rem);
+        font-weight: bold;
+        letter-spacing: 1.5px;
     }
+    .activityPosts{
+        height: 77.5vh;
+        overflow: auto;
+        .postBox{
+            .post{
+                margin-top: 1rem;
+                .postAuthor{
+                    .postAuthorPicture{
+                        width: 3rem;
+                        height: 3rem;
+                        border-radius: 50%;
+                    }
+                    .postAuthorName{
+                        display: flex;
+                        align-items: center;
+                        @include font-size(1.3rem);
+                        font-weight: bold;
+                        padding-left:3rem;
+                        letter-spacing: 1.5px;
+                        a{
+                            color: $black;
+                        }
+                        small{
+                            @include font-size(0.6rem);
+                            font-weight: normal;
+                            margin-left: 0.25rem;
+                        }
+                    }
+                    .postAuthorButtons{
+                        text-align: right;
+                        @include font-size(0.9rem);
+                        i{
+                            text-decoration: none;
+                            color: $black;
+                            padding: 0.5rem;
+                            cursor: pointer;
+                            &:hover{
+                                text-decoration: none;
+                                color: $orange;
+                            }
+                            &.postEdit{
+                                margin-left: 1.05rem;
+                            }
+                        }
+                    }
+                }
+                .postDesc{
+                    padding: 0 1rem;
+                    margin-top: 0.5rem;
+                    .postPhotos{
+                        padding: 0.5rem 0;
+                        .postPicture{
+                            width: 11rem;
+                            height: 8rem;
+                        }
+                    }
+                    .postContent{
+                        margin-top: 0.25rem;
+                        @include font-size(1rem);
+                    }
+                    .postTags{
+                        padding: 1rem 0.5rem;
+                        .postTaggedUser{
+                            @extend div;
+                            text-align: center;
+                            margin-left: 0.5rem;
+                            text-decoration: none;
+                            margin-top: 0.5rem;
+                            @media screen and (max-width: $mobile-breakpoint) {
+                                flex: 0 0 50%;
+                                max-width: 50%;
+                            }
+                            @media screen and (max-width: $ultra-small) {
+                                flex: 0 0 100%;
+                                max-width: 100%;
+                            }
+                            span{
+                                display: block;
+                                width: 100%;
+                                @include font-size(0.9rem);
+                                font-weight: bold;
+                                padding: 0.4rem;
+                                border-radius: 50px;
+                                background-color: $orange;
+                                color: $white;
+                                &:hover{
+                                    background-color: $orange-hover;
+                                }
+                            }
+                        }
+                    }
+                }
+                .postFooter{
+                    margin-top: 0.5rem;
+                    a,button{
+                        @include font-size(1.2rem);
+                        letter-spacing: 2px;
+                        margin: 0 auto;
+                        color: $black;
+                        font-weight: bold;
+                        &:hover{
+                            color:$orange;
+                        }
+                        &.active{
+                            color: $orange;
+                        }
+                        .postCommentsCount,.likesCount{
+                            background-color: $orange;
+                            color:$white;
+                            @include font-size(0.6rem);
+                            padding: 0.2rem 0.3rem;
+                            top:0.2rem;
+                            left: -0.5rem;
+                        }
+                    }
+                }
+            }
+            .postComments{
+                .input-group{
+                    padding: 0 5%;
+                    width: auto;
+                    .emojionearea-editor{
+                        min-height: unset;
+                    }
+                    .emojionearea-button{
+                        margin-top: 3px;
+                    }
+                }
+                #commentUserTags{
+                    padding: 0 2rem;
+                    margin-top: 1rem;
+                    margin-bottom: 0.5rem;
+                    width: 100%;
+                    .taggedUser{
+                        label{
+                            padding: 0.5rem 1rem;
+                            border-radius: 50px;
+                            background-color: $orange;
+                            color: $white;
+                            font-weight: bold;
+                            letter-spacing: 1px;
+                            @include font-size(0.6rem);
+                        }
+                    }
+                }
+                .commentsDesc{
+                    border-right: 0;
+                }
+                .commentButtons{
+                    padding: 0;
+                    border: 1px solid#CCC;
+                    border-left-color: rgb(204, 204, 204);
+                    border-left-style: solid;
+                    border-left-width: 1px;
+                    border-left: 0;
+                    background: $white;
+                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+                    align-content: center;
+                    align-items: center;
+                    i{
+                        cursor: pointer;
+                        color: #a1a1a1;
+                        margin: auto;
+                        @include font-size(0.9rem);
+                        transition: all 400ms ease-in-out;
+                        &:hover{
+                            color: #757575;
+                        }
+                    }
+                }
+                .commentsFeed{
+                    display: block;
+                    width: 100%;
+                    margin-top: 1.5rem;
+                    .comment,.reply{
+                        padding: 0 3rem;
+                        @media screen and (max-width: $mobile-breakpoint) {
+                            padding: 0 1rem;
+                        }
+                        .commentProfilePicture{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            img{
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 50%;
+                                @media screen and (max-width: $mobile-breakpoint) {
+                                    width: 35px;
+                                    height: 35px;
+                                }
+                            }
+                        }
+                        .commentContent{
+                            .commentAuthor{
+                                .commentAuthorName{
+                                    font-weight: bold;
+                                    letter-spacing: 1.5px;
+                                    @include font-size(1rem);
+                                }
+                                .commentAuthorButtons{
+                                    i{
+                                        cursor: pointer;
+                                        @include font-size(0.8rem);
+                                        margin-left: 0.5rem;
+                                        padding:0.5rem;
+                                        &:hover{
+                                            color:$orange;
+                                        }
+                                    }
+                                }
+                            }
+                            .commentDate{
+                                @extend .text-muted;
+                                @include font-size(0.6rem);
+                            }
+                            .commentDesc{
+                                @include font-size(0.9rem);
+                            }
+                            .commentTags{
+                                margin-top: 1rem;
+                                margin-bottom: 0.5rem;
+                                a{
+                                    @extend div;
+                                    text-align: center;
+                                    text-decoration: none;
+                                    margin-top: 0.5rem;
+                                    @media screen and (max-width: $mobile-breakpoint) {
+                                        flex: 0 0 50%;
+                                        max-width: 50%;
+                                    }
+                                    @media screen and (max-width: $ultra-small) {
+                                        flex: 0 0 100%;
+                                        max-width: 100%;
+                                    }
+                                    span{
+                                        display: block;
+                                        width: 100%;
+                                        @include font-size (0.7rem);
+                                        font-weight: bold;
+                                        letter-spacing: 1px;
+                                        border-radius: 50px;
+                                        padding: 0.3rem;
+                                        background-color: $orange;
+                                        color: $white;
+                                        &:hover{
+                                            background-color: $orange-hover;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .commentUserButtons{
+                            padding: 0;
+                            text-align: left;
+                            i{
+                                cursor: pointer;
+                                margin-left: 0.5rem;
+                                @include font-size(0.9rem);
+                                color: $black;
+                                &:hover{
+                                    color: $orange;
+                                }
 
-    i{
-        cursor: pointer;
-        @include font-size(1rem);
-        -webkit-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -ms-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        transition: all 0.5s ease;
-        &:hover{
-            color:$black;
+                                &.active{
+                                    color: $orange;
+                                }
+                            }
+                            .likesCount{
+                                @include font-size(0.8rem);
+                                background: transparent;
+                                color: $red;
+                            }
+                        }
+                    }
+                    #replyForm{
+                        margin-top: 2rem;
+                        margin-bottom: 1rem;
+                        padding: 0 3rem;
+                        #replyUsersTag{
+                            @extend #commentUserTags;
+                        }
+                    }
+                    .commentRepliesBox{
+                        .spinner-border{
+                            width: 1.5rem;
+                            height: 1.5rem;
+                            font-size: 0.8rem;
+                        }
+                        .commentProfilePicture{
+                            img{
+                                width: 2.5rem;
+                                height: 2.5rem;
+                                border-radius: 50%;
+                            }
+                        }
+                        .commentContent{
+                            .commentAuthor{
+                                .commentAuthorName{
+                                    @include font-size(0.8rem);
+                                }
+                                .commentAuthorButtons{
+                                    i{
+                                        @include font-size(0.6rem);
+                                        margin-left: 0.3rem;
+                                    }
+                                }
+                            }
+                            .commentDate{
+                                @include font-size(0.5rem);
+                            }
+                            .commentDesc{
+                                @include font-size(0.75rem);
+                            }
+                            .commentTags{
+                                .taggedUserLabel{
+                                    @include font-size (0.6rem);
+                                }
+                            }
+                        }
+                        .commentUserButtons{
+                            i{
+                                margin-left: 0.3rem;
+                                @include font-size(0.75rem);
+                            }
+                            .likesCount{
+                                @include font-size(0.55rem);
+                                background: transparent;
+                                color: $red;
+                            }
+                        }
+                        .repliesMoreBtn{
+                            background-color: $orange;
+                            color: $white;
+                            @include font-size(0.7rem);
+                            font-weight: bold;
+                            padding: 0.4rem;
+                            margin: 2% 0 2% 5%;
+                            .repliesCount{
+                                @include font-size(0.5rem);
+                                color: $white;
+                                background: $orange;
+                                top: 0.3rem;
+                                right: 0.2rem;
+                            }
+                        }
+                    }
+                    .commentsMoreBtn{
+                        background-color: $orange;
+                        color: $white;
+                        @include font-size(1rem);
+                        padding: 0.6rem;
+                        font-weight: bold;
+                        margin: 2% 0 2% 5%;
+                        .commentsMoreCount{
+                            @include font-size(0.65rem);
+                            color: $white;
+                            background: $orange;
+                            top: 0.3rem;
+                            right: 0.2rem;
+                        }
+                    }
+                }
+            }
         }
+    }
+    @media screen and (max-width: $breakpoint1) {
+        flex: 0 0 58.3333333333%;
+        max-width: 58.3333333333%;
+    }
+    @media screen and (max-width: $mobile-breakpoint) {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+#expandInfoModal{
+    @media screen and (max-width: $mobile-breakpoint) {
+        z-index: 1003;
+    }
+    .modal-dialog{
+        width: 70vw;
+        max-width: unset;
+        @media screen and (max-width: $mobile-breakpoint) {
+            width: 85vw
+        }
+    }
+    .modalDesc{
+        @include font-size(1.1rem);
+        letter-spacing: 0.5px;
+    }
+    .modalTags{
+        justify-content: center;
+        span{
+            @include font-size(1rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 0.3rem;
+            color: $white;
+            letter-spacing: 1px;
+            background-color: $orange;
+            margin-left: 0.5rem;
+            margin-top: 0.5rem;
+            border-radius: 20px;
+            &:hover{
+                background-color: $orange-hover;
+            }
+            @media screen and (max-width: $mobile-breakpoint) {
+                @include font-size(0.9rem);
+            }
+        }
+    }
+    .modalFriends{
+        .userFriend{
+            text-align: center;
+            img{
+                width: 4rem;
+                height: 4rem;
+                border-radius: 50%;
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 0.5rem;
+                color: $black;
+            }
+            span{
+                @include font-size(1rem);
+                font-weight: bold;
+                color: $black;
+                letter-spacing: 0.5px;
+            }
+            a:hover{
+                color: $orange;
+                span{
+                    color: $orange;
+                }
+            }
+        }
+    }
+    .noInfo{
+        @include font-size(1.1rem);
+        font-weight: bold;
+        letter-spacing: 0.5px;
+    }
+}
+
+#showUserData{
+    @include font-size (1.5rem);
+    position: fixed;
+    top: 80%;
+    color:$white;
+    background:$orange;
+    z-index: 1002;
+    transition:left 1s linear;
+    cursor: pointer;
+    padding: 0.5rem 0.6rem 0.5rem 1rem;
+    right: -50%;
+    border-radius: 50% 0 0 50%;
+    @media screen and (max-width: $mobile-breakpoint) {
+        right: 0;
+    }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    .modal-backdrop{
+        z-index: 1002 !important;
     }
 }

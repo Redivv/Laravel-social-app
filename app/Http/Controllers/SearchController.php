@@ -58,49 +58,52 @@ class SearchController extends Controller
     {
         if ($request_data->input('age-min') === null && $request_data->input('age-max') !== null ) {
             $validated_data = $request_data->validate([
-                'username' => ['string',  'nullable', 'max:255'],
-                'age-max'  => ['integer', 'nullable', 'min:18'],
-                'city'     => ['string','nullable','exists:cities,name'],
-                'sortOptions_crit'      => [
+                'username'                  => ['string',  'nullable', 'max:255'],
+                'age-max'                   => ['integer', 'nullable', 'min:18'],
+                'city'                      => ['string','nullable','exists:cities,name'],
+                'sortOptions_crit'          => [
                     'string',
-                    Rule::in(['birth_year', 'name','created_at']),
+                    Rule::in(['birth_year', 'name','created_at','likes']),
                 ],
-                'sortOptions_dir'       => [
+                'sortOptions_dir'           => [
                     'string',
                     Rule::in(['asc', 'desc']),
                 ],
-                'hobby.*'               => ['distinct','string','max:255']
+                'hobby.*'                   => ['distinct','string','max:255'],
+                'activeOnly'                => [Rule::in(['on'])]
             ]);
         }elseif ($request_data->input('age-min') !== null && $request_data->input('age-max') === null ) {
             $validated_data = $request_data->validate([
-                'username'              => ['string',  'nullable', 'max:255'],
-                'age-min'               => ['integer', 'nullable', 'min:18'],
-                'city'                  => ['string','nullable','exists:cities,name'],
-                'sortOptions_crit'      => [
+                'username'                  => ['string',  'nullable', 'max:255'],
+                'age-min'                   => ['integer', 'nullable', 'min:18'],
+                'city'                      => ['string','nullable','exists:cities,name'],
+                'sortOptions_crit'          => [
                     'string',
-                    Rule::in(['birth_year', 'name','created_at']),
+                    Rule::in(['birth_year', 'name','created_at','likes']),
                 ],
-                'sortOptions_dir'       => [
+                'sortOptions_dir'           => [
                     'string',
                     Rule::in(['asc', 'desc']),
                 ],
-                'hobby.*'               => ['distinct','string','max:255']
+                'hobby.*'                   => ['distinct','string','max:255'],
+                'activeOnly'                => [Rule::in(['on'])]
             ]);
         }else{
             $validated_data = $request_data->validate([
-                'username' => ['string',  'nullable', 'max:255'],
-                'age-min'  => ['integer', 'nullable', 'min:18', 'lte:age-max'],
-                'age-max'  => ['integer', 'nullable', 'min:18', 'gte:age-min'],
-                'city'     => ['string','nullable','exists:cities,name'],
-                'sortOptions_crit'      => [
+                'username'                  => ['string',  'nullable', 'max:255'],
+                'age-min'                   => ['integer', 'nullable', 'min:18', 'lte:age-max'],
+                'age-max'                   => ['integer', 'nullable', 'min:18', 'gte:age-min'],
+                'city'                      => ['string','nullable','exists:cities,name'],
+                'sortOptions_crit'          => [
                     'string',
-                    Rule::in(['birth_year', 'name','created_at']),
+                    Rule::in(['birth_year', 'name','created_at','likes']),
                 ],
-                'sortOptions_dir'       => [
+                'sortOptions_dir'           => [
                     'string',
                     Rule::in(['asc', 'desc']),
                 ],
-                'hobby.*'               => ['distinct','string','max:255'] 
+                'hobby.*'                   => ['distinct','string','max:255'],
+                'activeOnly'                => [Rule::in(['on'])]
             ]);
         }
 
@@ -134,8 +137,38 @@ class SearchController extends Controller
 
         $request_data->user()   === null ?: $search_results = $search_results->whereNotIn('users.id',[$request_data->user()->id]);
 
-        $search_results = $search_results->orderBy('users.'.$validated_data['sortOptions_crit'], $validated_data['sortOptions_dir'])->paginate(5);
-        
+        if (isset($validated_data['activeOnly'])) {
+            $search_results = $search_results->where("status","online");
+        }
+
+        if ($validated_data['sortOptions_crit'] == "likes") {
+            
+            $searchLikes = $search_results->get();
+
+            $resultsCount = count($search_results);
+            
+            if ($validated_data['sortOptions_dir'] == "asc") {
+
+                $searchLikes = $searchLikes->sortByDesc(function($user,$key){
+                    return $user->likeCount;
+                })->pluck('id')->toArray();
+            }else{
+                $searchLikes = $searchLikes->sortBy(function($user,$key){
+                    return $user->likeCount;
+                })->pluck('id')->toArray();
+            }
+
+            $orderedIds = implode(',',$searchLikes);
+
+            $search_results = $search_results
+                ->orderByRaw(\DB::raw("FIELD(users.id, ".$orderedIds." )"))            
+                ->paginate(5);
+        }else{
+            $resultsCount = count($search_results->get());
+            $search_results = $search_results->orderBy('users.'.$validated_data['sortOptions_crit'], $validated_data['sortOptions_dir'])->paginate(5);
+        }
+
+
         if(Auth::check()){
             for ($i=0; $i < count($search_results); $i++) { 
                 $user=$search_results[$i];
@@ -151,7 +184,7 @@ class SearchController extends Controller
         
         FlagOfflineUsers::dispatch()->delay(now()->addMinutes(10));
 
-        return [$search_results,__('searcher.resultNormal',['number' => count($search_results)])];
+        return [$search_results,__('searcher.resultNormal',['number' => $resultsCount])];
     }
 
     public function getSimmilarAgeUsers(object $authenticated_user) : array

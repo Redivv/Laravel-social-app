@@ -1,11 +1,5 @@
 @extends('layouts.app')
 
-@section('floatingPopUps')
-    <div id="wallFetchBtn" class="newPostsBox d-none">
-        <span class="fetchBtn">{{__('activityWall.refreshWall')}}</span>
-    </div>
-@endsection
-
 @section('content')
 <div class="spinnerOverlay d-none">
     <div class="spinner-border text-warning" role="status">
@@ -15,7 +9,7 @@
 
 <div class="darkOverlay d-none"></div>
 
-<div id="friendsWall" class="container-fluid mt-4">
+<div id="friendsWall" class="container-fluid mt-4 p-0">
     <div class="row text-center">
         <div class="col-3 text-center wallExtraFunctions">
             @include('partials.wallExtraFunctions')
@@ -30,8 +24,12 @@
                 <output id="postTaggedUsers" class="row"></output>
 
                 <div class="friendsWallButtons">
-                    <span class="additionalButton tagUserButton" data-toggle="modal" data-target="#tagUsersModal"><i class="fas fa-user-tag"></i></span>
-                    <label for="postPicture" class="additionalButton"><i class="far fa-image"></i></label>
+                    <span class="additionalButton tagUserButton" data-toggle="modal" data-target="#tagUsersModal" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.tagUser')}}">
+                        <i class="fas fa-user-tag"></i>
+                    </span>
+                    <label for="postPicture" class="additionalButton" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.addImage')}}">
+                        <i class="far fa-image"></i>
+                    </label>
                     <input type="file" class="d-none" name="postPicture[]" accept="image/*" id="postPicture" multiple>
 
                     <div class="custom-control custom-switch">
@@ -43,7 +41,7 @@
                     <button name="sendPost" id="newPostButton" type="submit" class="btn btn-block">{{__('activityWall.createPost')}}</button>
                 </div>
             </form>
-            <output id="friendsWallFeed" class="">
+            <output id="friendsWallFeed" class="p-0">
                 @if (count($posts) > 0)
                     @include('partials.friendsWallPosts')
                 @else
@@ -81,19 +79,19 @@
 @endsection
 
 @push('styles')
-<style>
-    .navHome > .nav-link{
-        color: #f66103 !important;
-    }
-</style>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <style>
+        .navHome > .nav-link{
+            color: #f66103 !important;
+        }
+    </style>
+    <link rel="stylesheet" href="{{asset("jqueryUi\jquery-ui.min.css")}}">
 @endpush
 
 @push('scripts')
-
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script>
     var badFileType             =  "{{__('chat.badFileType')}}";
+    var deleteImages            =  "{{__('activityWall.deleteImages')}}";
+    var deleteTags              =  "{{__('activityWall.deleteTags')}}";
     var deletePostMsg           =  "{{__('activityWall.deletePost')}}";
     var emptyCommentMsg         =  "{{__('activityWall.emptyComment')}}";
     var deleteCommentMsg        =  "{{__('activityWall.deleteComment')}}";
@@ -101,18 +99,21 @@
     var userNotFound            =  "{{__('activityWall.noUserFound')}}";
     var deleteUserTag           =  "{{__('activityWall.deleteTaggedUser')}}";
     var emptyUser               =  "{{__('activityWall.emptyUser')}}";
-    var reportUser              = "{{__('searcher.reportUser')}}";
-    var reportUserReason        = "{{__('searcher.reportUserReason')}}";
-    var reportUserReasonErr     = "{{__('searcher.reportUserReasonErr')}}";
-    var reportUserSuccess       = "{{__('searcher.reportUserSuccess')}}";
-    var deleteFriend            = "{{__('activityWall.deleteFriend')}}";
-    var friendDeleted           = "{{__('activityWall.friendDeleted')}}";
+    var reportUser              =  "{{__('searcher.reportUser')}}";
+    var reportUserReason        =  "{{__('searcher.reportUserReason')}}";
+    var reportUserReasonErr     =  "{{__('searcher.reportUserReasonErr')}}";
+    var reportUserSuccess       =  "{{__('searcher.reportUserSuccess')}}";
+    var deleteFriend            =  "{{__('activityWall.deleteFriend')}}";
+    var friendDeleted           =  "{{__('activityWall.friendDeleted')}}";
+    var tagUserMessage          =  "{{__('activityWall.tagUser')}}";
 
     var baseUrl = "{{url('/')}}";
 </script>
 
 <script src="{{asset('js/emoji.js')}}"></script>
 <script src="{{asset('js/activityWall.js')}}"></script>
+
+<script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
 
 <script defer>
     Echo.join('online')

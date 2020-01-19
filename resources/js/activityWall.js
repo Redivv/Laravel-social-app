@@ -5,7 +5,7 @@ var position = $(window).scrollTop();
 
 $(document).ready(function() {
 
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-tool="tooltip"]').tooltip();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -59,10 +59,6 @@ function main() {
         }
     });
 
-    $('#wallFetchBtn').on('click',function() {
-        refreshWall(this);
-    })
-
     $('#addPost').emojioneArea({
         pickerPosition: "bottom",
         placeholder: "\xa0",
@@ -82,8 +78,9 @@ function main() {
         $('#picture-preview').empty();
 
         
-        let html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt"></i></div>';
+        let html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt" data-tool="tooltip" title="'+deleteImages+'" data-placement="bottom"></i></div>';
         $('#picture-preview').append(html);
+        $('[data-tool="tooltip"]').tooltip();
         let tag = $(this);
 
         $('.resetPicture').one('click',function() {
@@ -191,6 +188,8 @@ function main() {
                         });
                         getComments(this);
                     });
+                    
+                    $('[data-tool="tooltip"]').tooltip();
                 }
             });
             
@@ -226,6 +225,9 @@ function main() {
         request.done(function(response){
             if (response.status === 'success') {
                 modal.find('.modal-body').html(response.html);
+
+                $('[data-tool="tooltip"]').tooltip();
+
                 $('.resetPicture').one('click',function() {
                     if (confirm(resetImgMsg)) {
                         $('#editPicture').val("");
@@ -245,8 +247,12 @@ function main() {
                     // Empty the preview list
                     $('#modalPicture-preview').empty();
 
-                    let html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt"></i></div>';
+                    let html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt" data-tool="tooltip" title="'+deleteImages+'" data-placement="bottom"></i></div>';
                     $('#modalPicture-preview').append(html);
+                    
+                    
+                    $('[data-tool="tooltip"]').tooltip();
+
                     let tag = $(this);
 
                     $('.resetPicture').one('click',function() {
@@ -318,6 +324,8 @@ function main() {
                             if (response.status === 'success') {
                                 $('.spinnerOverlay').addClass('d-none'); 
                                 $('#post'+post).parent().replaceWith(response.html);
+                                
+                                $('[data-tool="tooltip"]').tooltip();
 
                                 $('.postDelete').off('click');
                                 $('.postDelete').on('click',function(){
@@ -333,6 +341,8 @@ function main() {
                                 $('.commentsForm').on('submit',function(e){
                                     addComment(e,this);
                                 });
+
+                                $('[data-tool="tooltip"]').tooltip();
 
                                 $('.btnComment').one('click',function() {
                                     $('#post'+post).parent().find('.commentsDesc:first').emojioneArea({
@@ -369,7 +379,7 @@ function main() {
         });
     });
 
-    $('#editModal').on('hide.bs.modal', function () {
+    $('#editModal').on('hidden.bs.modal', function () {
         $('#editPicture').off('change');
         $(this).find('.modal-body').html('');
     });
@@ -541,6 +551,8 @@ function main() {
                         $('.replyButton').on('click',function() {
                             addReplyForm(this);
                         });
+                        
+                        $('[data-tool="tooltip"]').tooltip();
                     }
                 });
                 
@@ -646,7 +658,7 @@ function deletePost(selected) {
         
         request.done(function(response){
             if (response.status === 'success') {
-                $('#post'+postId).next().remove();
+                $('#post'+postId).next().next().remove();
                 $('#post'+postId).remove();
                 $('.spinnerOverlay').addClass('d-none');
             }
@@ -698,7 +710,7 @@ function deleteComment(selected) {
 }
 
 function getComments(selected) {
-
+        
         $('.commentsForm').on('submit',function(e){
             addComment(e,this);
         });
@@ -751,6 +763,9 @@ function getComments(selected) {
             request.done(function(response){
                 if (response.status === 'success') {
                     $('#feed-'+postId).html(response.html);
+                    
+                    $('[data-tool="tooltip"]').tooltip();
+
                     $('.commentDelete').off('click');
                     $('.commentDelete').on('click',function(e) {
                         deleteComment(this);
@@ -793,14 +808,16 @@ function addReplyForm(selected) {
         '<div class="input-group row">'+
             '<input type="text" name="commentDesc" id="replyInput" class="form-control replyDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">'+
             '<div class="input-group-append col-1 commentButtons">'+
-                '<i class="fas fa-user-tag commentUserTag" data-toggle="modal" data-target="#tagUsersModal"></i>'+
+                '<i class="fas fa-user-tag commentUserTag" data-toggle="modal" data-target="#tagUsersModal" data-tool="tooltip" data-placement="bottom" title="'+tagUserMessage+'"></i>'+
             '</div>'+
         '</div>'+
         '<output id="replyUsersTag"></output>'
         '</form>'+
     '</div>';
-    let parentComment = $('#com-'+parentId);
+
     $(formHtml).insertAfter('#com-'+parentId);
+                    
+    $('[data-tool="tooltip"]').tooltip();
 
     $('#replyInput').emojioneArea({
         pickerPosition: "top",
@@ -854,10 +871,17 @@ function addReplyForm(selected) {
                 if (response.status === 'success') {
                     $('.ajaxSpinner').remove();
                     $('#com-'+parentId).next().prepend(response.html);
+                    
+                    $('[data-tool="tooltip"]').tooltip();
 
                     $('.commentDelete').off('click');
                     $('.commentDelete').on('click',function(e) {
                         deleteComment(this);
+                    });
+
+                    $('.likeCommentButton').off('click');
+                    $('.likeCommentButton').on('click',function() {
+                        likeComment(this);
                     });
                 }
             });
@@ -907,6 +931,9 @@ function addComment(event, selected) {
                 if (response.status === 'success') {
                     $('.ajaxSpinner').remove();
                     $('#feed-'+postId).prepend(response.html);
+                    
+                    $('[data-tool="tooltip"]').tooltip();
+
                     $('.commentDelete').off('click');
 
                     let commentAmount = $('#post'+postId).find('.postCommentsCount').html().trim();
@@ -924,7 +951,7 @@ function addComment(event, selected) {
                     $('.likeCommentButton').off('click');
                     $('.likeCommentButton').on('click',function() {
                         likeComment(this);
-                    })
+                    });
                     
                     $('.replyButton').off('click');
                     $('.replyButton').on('click',function() {
@@ -976,6 +1003,8 @@ function loadReplies(selected) {
             button.parents('.commentRepliesBox').append(response.html);
             $('.ajaxSpinner').remove();
             button.remove();
+                    
+            $('[data-tool="tooltip"]').tooltip();
 
             $('.commentDelete').off('click');
             $('.commentDelete').on('click',function(e) {
@@ -1030,9 +1059,12 @@ function loadMoreComments(selected) {
             if (pagi == 0) {
                 button.prev().remove();
             }
+
             button.parents('.commentsFeed').append(response.html);
             $('.ajaxSpinner').remove();
             button.remove();
+                    
+            $('[data-tool="tooltip"]').tooltip();
             
             $('.commentDelete').off('click');
             $('.commentDelete').on('click',function(e) {
@@ -1173,6 +1205,8 @@ function pagiPosts() {
                 $('.likePostButton').on('click',function() {
                     likePost(this);
                 });
+
+                $('[data-tool="tooltip"]').tooltip();
             
             }
         });
@@ -1182,52 +1216,6 @@ function pagiPosts() {
             alert(xhr.responseJSON.message);
         });
     }
-}
-
-function refreshWall(selected) {
-    $(selected).addClass('d-none');
-    $(selected).removeClass('ready');
-
-    $('.spinnerOverlay').removeClass('d-none');
-
-    let url = baseUrl+"/user/home";
-
-    var request = $.ajax({
-        method : 'get',
-        url: url,
-    });
-    
-    
-    request.done(function(response){
-        if (response.status === 'success') {
-            $(selected).removeClass('spin');
-            $('#friendsWallFeed').html(response.html);
-            $('.spinnerOverlay').addClass('d-none');
-
-            window.scrollTo(0,0);
-
-            $('.postDelete').off('click');
-            $('.postDelete').on('click',function(){
-                deletePost(this);
-            });
-        
-            $('.likePostButton').off('click');
-            $('.likePostButton').on('click',function() {
-                likePost(this);
-            });
-
-            $('.btnComment').off('click');
-            $('.btnComment').one('click',function() {
-                getComments(this);
-            });
-            
-        }
-    });
-    
-    
-    request.fail(function (xhr){
-        alert(xhr.responseJSON.message);
-    });
 }
 
 function addTagUser(selected) {
@@ -1255,10 +1243,12 @@ function addTagUser(selected) {
         request.done(function(response){
             if (response.status === 'success') {
                 html = '<div class="col-3 taggedUser">'+
-                    '<label class="taggedUserLabel">'+userName+'</label>'+
+                    '<label class="taggedUserLabel" data-tool="tooltip" title="'+deleteTags+'" data-placement="bottom">'+userName+'</label>'+
                     '<input type="hidden" value="'+response.userId+'" name="taggedUser[]">'+
                 '</div>';
                 $('#taggedUsers').find('#tagSpinner').replaceWith(html);
+                
+                $('[data-tool="tooltip"]').tooltip();
 
                 $('.taggedUser').off('click');
                 $('.taggedUser').on('click',function() {

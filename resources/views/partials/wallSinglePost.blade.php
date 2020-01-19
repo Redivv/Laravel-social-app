@@ -13,8 +13,8 @@
             </div>
             @if ($post->user_id == auth()->user()->id)
                 <div class="col-4 postAuthorButtons">
-                    <i class="fas postEdit fa-edit" data-id="{{$post->id}}" data-toggle="modal" data-target="#editModal"></i>
-                    <i class="fas postDelete fa-times" data-id="{{$post->id}}"></i>
+                    <i class="fas postEdit fa-edit" data-id="{{$post->id}}" data-toggle="modal" data-target="#editModal" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.editPost')}}"></i>
+                    <i class="fas postDelete fa-times" data-id="{{$post->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deletePost')}}"></i>
                 </div>
             @endif
         </header>
@@ -43,9 +43,9 @@
     <div class="postComments mt-4">
         <form class="commentsForm" data-id="{{$post->id}}" method="post">
             <div class="input-group row">
-                <input type="text" name="commentDesc" class="form-control commentsDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">
+                <input id="commentsInputDesc" type="text" name="commentDesc" class="form-control commentsDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">
                 <div class="input-group-append col-1 commentButtons">
-                    <i class="fas fa-user-tag"></i>
+                    <i class="fas fa-user-tag commentUserTag" data-toggle="modal" data-target="#tagUsersModal"></i>
                 </div>
             </div>
         </form>

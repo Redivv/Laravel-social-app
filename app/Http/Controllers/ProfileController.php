@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -11,8 +12,10 @@ use App\Notifications\NewProfilePicture;
 use App\Notifications\SystemNotification;
 
 use Illuminate\Support\Facades\Notification;
+
 use App\User;
 use App\City;
+use App\Post;
 
 class ProfileController extends Controller
 {
@@ -21,6 +24,8 @@ class ProfileController extends Controller
         
         $user = Auth::user();
         $tags = $user->tagNames();
+
+        shuffle($tags);
 
         $profileNotifications = $user->notifications()->whereIn(
             'type',
@@ -32,7 +37,12 @@ class ProfileController extends Controller
         foreach ($profileNotifications as $profNot) {
             $profNot->delete();
         }
-        return view('profile')->with(compact('user'))->with(compact('tags'));
+
+        $friends = count($user->getFriends());
+
+        $posts = Post::where("user_id",Auth::id())->orderBy('created_at','desc')->take(5)->get();
+
+        return view('profile')->withUser($user)->withTags($tags)->withFriends($friends)->withPosts($posts);
     }
 
     public function edit(){
@@ -43,23 +53,26 @@ class ProfileController extends Controller
         return view('profileEdit')->with(compact('user'))->with(compact('tags'));
     }
 
-    public function update(){
+    public function update(Request $request){
+
+        $kek = $request->all();
 
         $user = Auth::user();
 
         // If request is valid
-        request()->validate([
-            'photo'             =>  'mimes:jpeg,png,jpg,gif|max:2048',
-            'city'              =>  ['string','nullable','max:250'],
-            'description'       =>  ['string','nullable','max:500'],
-            'status'            =>  ['numeric', 'gte:0', 'lte:2' ],
-            'relations'         =>  ['boolean']
+        $request->validate([
+            'profilePicture'                =>  ['file','image','max:2000', 'nullable', 'mimes:jpeg,png,jpg,gif,svg'],
+            'profileCity'                   =>  ['string','nullable','max:250'],
+            'profileDesc'                   =>  ['string','nullable'],
+            'profileRelationship'           =>  ['numeric', 'gte:0', 'lte:2','nullable'],
+            'profileTags.*'                 =>  ['string','max:100','nullable']
         ]);
+
         //If there's a file
-        if (request()->hasFile('photo')) {
+        if ($request->hasFile('profilePicture')) {
             //Change original name of the file
-            $filename = hash_file('haval160,4',request('photo')->getPathname()).'.'.request('photo')->getClientOriginalExtension();
-            request('photo')->move(public_path('img/profile-pictures/'), $filename);
+            $filename = hash_file('haval160,4',$request->profilePicture->getPathname()).'.'.$request->profilePicture->getClientOriginalExtension();
+            $request->profilePicture->move(public_path('img/profile-pictures/'), $filename);
             copy(public_path('img/profile-pictures/').$filename,public_path('img/post-pictures/').$filename);
             $user->pending_picture = $filename;
 
@@ -69,46 +82,113 @@ class ProfileController extends Controller
                 Notification::send($admins, new NewProfilePicture($user->name,$filename));
             }
         }
-        
-        $city = City::firstOrCreate([
-            'name'      => Str::title(request('city')),
-            'name_slug' => Str::slug(request('city'))
-        ]);
 
-        $user->city_id = $city->id;
-        $user->relationship_status = request('relations');
-        $user->description = request('description');
+        if (isset($request->profileCity)) {
+            $city = City::firstOrCreate([
+                'name'      => Str::title($request->profileCity),
+                'name_slug' => Str::slug($request->profileCity)
+            ]);
+
+            $user->city_id = $city->id;
+        }
+
+        if (isset($request->profileRelationship)) {
+            if ($request->profileRelationship == 3) {
+                $user->relationship_status = null;
+            }
+            $user->relationship_status = $request->profileRelationship;
+        }
+
+        if (isset($request->profileDesc)) {
+            $user->description = $request->profileDesc;
+        }
+        if (isset($request->profileTags)) {
+            $user->untag();
+            foreach ($request->profileTags as $tag) {
+                $user->tag($tag);
+            }
+        }
         //Save changes in user profile
-        $user->update();
 
-        return redirect(route('ProfileView'))->with(['status' => __('profile.updated')]);
+        if($user->update()){
+
+            $request->session()->flash('message', __('profile.savedChanges'));
+    
+            return redirect(route('ProfileEdition'));
+        }
     }
 
-    public function visit(User $user){
+    public function visit(Request $request,User $user){
         
         if ($user->id == Auth::id()) {
             return redirect(url('user/profile'));
         }else{
-            $user->email='Private data';  //Seeing other's email is impossible (safety reasons);
-            if(Auth::check()){ //If user's logged in, he can explore any profile
+            if(Auth::check() || $user->hidden_status == 0){
+
                 $tags = $user->tagNames();
                 $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
-                return view('profile')->with(compact('user'))->with(compact('tags'));
-            }else{
-                if($user->hidden_status == 0){ //Guests can freely see profile of any person with hidden_status==0;
-                    //Show user's profile 
-                    $tags = $user->tagNames();
-                    return view('profile')->with(compact('user'))->with(compact('tags'));
-                }elseif($user->hidden_status == 1){ // Guests have restricted access to profile with hidden_status==1;
-                    $user->description='err0000';
+
+                $friends = count($user->getFriends());
+
+                $posts = Post::where("user_id",$user->id);
+
+                return view('profile')->withUser($user)->withTags($tags)->withFriends($friends)->withPosts($posts);
+
+            }elseif($user->hidden_status == 1){
+
+                    $user->description=null;
                     $user->city_id=null;
-                    $user->birth_year='err0000';
+                    $user->birth_year=null;
+                    $user->relationship_status = null;
                     $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
-                    return view('profile')->with(compact('user'))->with(['status' => 'Nie jesteś zalogowany']);
-                }else{ //Guests cannot find anyone with hidden_status==2, if they even try they get redirrected back to searcher (or mb register/login, dunno yet);
-                    return redirect('searcher')->with(['status' => 'Nie można wyświetlić profilu użytkownika '.$user->name.' jako gość.']);
-                }
+
+                    $tags = null;
+                    $friends = null;
+
+                    $request->session()->flash('guest', __('profile.logInToSee'));
+
+                    return view('profile')->withUser($user)->withTags($tags)->withFriends($friends);
+            }else{
+                return abort(404);
             }
+        }
+    }
+
+    public function fetchContent(Request $request)
+    {
+        $request->validate([
+            "requestedContent"  => [
+                'string',
+                Rule::in(['desc','tags','friends']),
+            ],
+            "userId" => [
+                'numeric',
+                'exists:users,id'
+            ]
+        ]);
+        $requestedContent = $request->requestedContent;
+        $user = User::find($request->userId);
+
+        if (Auth::check() || $user->hidden_status == 0) {
+            switch ($requestedContent) {
+                case 'desc':
+                    $desc = $user->description;
+                    $html = view('partials.profile.descInfo')->withDesc($desc)->render();
+                    break;
+                case 'tags':
+                    $tags = $user->tagNames();
+                    $html = view('partials.profile.tagsInfo')->withTags($tags)->render();
+                    break;
+                case 'friends':
+                    $friends = $user->getFriends();
+                    $html = view('partials.profile.friendsInfo')->withFriends($friends)->render();
+                    break;
+            }
+            return response()->json(['status' => 'success', 'html' => $html], 200);
+        }elseif($user->hidden_status == 1){
+            
+        }else{
+            return response()->json(['status' => 'error', 'message' => 'user not found'], 404);
         }
     }
 }

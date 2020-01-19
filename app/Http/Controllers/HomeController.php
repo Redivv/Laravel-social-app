@@ -75,19 +75,18 @@ class HomeController extends Controller
         
         foreach ($userNotifications as $usNot) {
             $usNot->delete();
-        }
+        };
 
-        //Friendships 
-        $you=Auth::user();
-        //gets your friends
-        $friends=$you->getFriends();
+        $friends=Auth::user()->getFriends();
 
         return view('home')->withPosts($posts)->withFriends($friends);
     }
 
     public function viewPost(Post $post)
     {
-        return view('viewSinglePost')->withPost($post);
+        $friends=Auth::user()->getFriends();
+
+        return view('viewSinglePost')->withPost($post)->withFriends($friends);
     }
 
     public function getMorePosts(Request $request)
@@ -97,12 +96,14 @@ class HomeController extends Controller
                 'pagiTime'   => 'numeric',
                 'sortBy'    => [
                     'string',
-                    Rule::in(['public', 'friends', 'admin'])
-                ]
+                    Rule::in(['public', 'friends', 'admin','userName'])
+                ],
+                'userName'  => ['string','exists:users,name']
             ]);
             
             $stopPagi = false;
             $friendsArray = Auth::user()->getFriends()->modelKeys();
+            $user = User::where('name',$request->userName)->first();
 
             if ($request->has('sortBy')) {
                 switch ($request->sortBy) {
@@ -116,6 +117,11 @@ class HomeController extends Controller
                         $adminsArray = User::where('is_admin','=',1)->whereNotIn('id',[Auth::id()])->get()->modelKeys();
                         $posts = Post::orderBy('created_at', 'desc')->whereIn('user_id',$adminsArray)->whereNotIn('id',[Auth::id()])->skip(5*$request->pagiTime)->take(5)->get();
                         break;
+                    case 'userName':
+                        if ($user) {
+                            $posts = Post::orderBy('created_at', 'desc')->where('user_id',$user->id)->skip(5*$request->pagiTime)->take(5)->get();
+                            break;
+                        }
                 }
             }else{
                 $posts = Post::orderBy('created_at', 'desc')->where('is_public',1)->orWhereIn('user_id',$friendsArray)->orWhere('user_id',Auth::id())->skip(5*$request->pagiTime)->take(5)->get();
@@ -444,7 +450,7 @@ class HomeController extends Controller
 
     public function likeUser(Request $request)
     {
-        if($request->ajax()){
+        if($request->ajax() && Auth::check()){
             $request->validate([
                 'userId' => 'exists:users,id'
             ]);

@@ -10,8 +10,12 @@
             <th scope="col">{{__('admin.profileTicketTable1')}}</th>
             <th scope="col">{{__('admin.profileTicketTable2')}}</th>
             <th scope="col">{{__('admin.profileTicketTable4')}}</th>
-            <th scope="col">{{__('admin.profileTicketTable3')}}</th>
-            <th scope="col"><span id="profileTicket-fetchBtn" class="fetchBtn"><i class="fas fa-sync"></i></span></th>
+            <th scope="col">
+                {{__('admin.profileTicketTable3')}}
+                <span id="profileTicket-fetchBtn" class="fetchBtn" title="{{__('admin.fetch')}}" data-placement="bottom">
+                    <i class="fas fa-sync"></i>
+                </span>
+            </th>
         </tr>
     </thead>
     <tbody id="profileTicket-table">

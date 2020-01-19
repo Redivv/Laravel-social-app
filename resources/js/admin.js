@@ -45,9 +45,8 @@ function main() {
             $('.tabsPills').addClass('show');
             $('.darkOverlay').removeClass('d-none');
             $(this).html('<i class="fas fa-times"></i>');
-
-            $('.darkOverlay').off('click');
-            $('.darkOverlay').on('click',function(){
+            
+            $('.darkOverlay').one('click',function(){
                 $('.tabsPills').removeClass('show');
                 $('#showTabsMenu').html('<i class="fas fa-arrow-left"></i>');
                 setTimeout(function(){
@@ -166,6 +165,10 @@ function renderContent(selected) {
                 }
             });
 
+            $('span.fetchBtn').tooltip();
+
+            $('span.searchBtn').tooltip();
+
             $('span.fetchBtn').on('click',function() {
                 $(this).addClass('spin');
                 fetchContent(this);
@@ -229,6 +232,10 @@ function fetchContent(selected) {
                     carryList(this,targetId);
                 }
             });
+
+            $('span.fetchBtn').tooltip();
+
+            $('span.searchBtn').tooltip();
 
             $('span.fetchBtn').on('click',function() {
                 $(this).addClass('spin');

@@ -3,9 +3,14 @@
         <tr>
             <th scope="col">{{__('admin.tagListTable1')}}</th>
             <th scope="col">{{__('admin.tagListTable2')}}</th>
-            <th scope="col">{{__('admin.profileTicketTable3')}}
-                <span id="tagList-fetchBtn" class="fetchBtn"><i class="fas fa-sync"></i></span>
-                <span id="tagList-searchBtn" class="searchBtn" data-toggle="modal" data-target="#tagListModal"><i class="fas fa-search"></i></span>
+            <th scope="col">
+                {{__('admin.profileTicketTable3')}}
+                <span id="tagList-fetchBtn" class="fetchBtn" title="{{__('admin.fetch')}}" data-placement="bottom">
+                    <i class="fas fa-sync"></i>
+                </span>
+                <span id="tagList-searchBtn" class="searchBtn" data-toggle="modal" data-target="#tagListModal" title="{{__('admin.search')}}" data-placement="bottom">
+                    <i class="fas fa-search"></i>
+                </span>
             </th>
         </tr>
     </thead>
