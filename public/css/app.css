@@ -18613,6 +18613,15 @@ body.lb-disable-scrolling {
   border-color: #f66103;
 }
 
+.searcher .form .hobbyCriteria button {
+  color: #ffffff;
+  background-color: #f66103;
+}
+
+.searcher .form .hobbyCriteria button:hover {
+  background-color: #e26103;
+}
+
 .searcher .form #hobbyOutput {
   margin-top: 1rem;
   padding: 0 1rem;

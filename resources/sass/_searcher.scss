@@ -70,6 +70,16 @@
                 }
             }
         }
+        
+        .hobbyCriteria{
+            button{
+                color: $white;
+                background-color: $orange;
+                &:hover{
+                    background-color: $orange-hover;
+                }
+            }
+        }
 
         #hobbyOutput{
             margin-top: 1rem;
