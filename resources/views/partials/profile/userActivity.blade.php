@@ -1,5 +1,5 @@
 @foreach ($posts as $post)
-    <div class="postBox container">
+    <div class="postBox container-fluid">
         <article id="post{{$post->id}}" class="post">
             <header class="postAuthor row">
                 <div class="col-1">

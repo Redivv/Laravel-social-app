@@ -181,7 +181,7 @@ $(document).ready(function () {
         events: {
             keypress: function(editor,e) {
         
-                if(((e.keyCode || e.which) == 13)) {
+                if(((e.keyCode == 13 || e.which) == 13)) {
                     e.preventDefault();
                     $('#message-data').val(this.getText());
                     $('#talkSendMessage').submit();

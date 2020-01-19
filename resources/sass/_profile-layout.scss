@@ -4,19 +4,34 @@ html{font-size: 16px !important;}
     margin-right: 0;
 }
 .profileData{
+    position: relative;
     overflow: hidden;
-    height: 80vh;
-    max-height: 80vh;
+    height: 82vh;
     margin-top: 0.5rem;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     .row{
         margin-left: 0;
     }
     .userName{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         span{
             @include font-size(1.1rem);
             font-weight: bold;
             letter-spacing: 1.5px;
+        }
+    }
+    #profileEditLink{
+        right: 5%;
+        top:0;
+        padding: 0.5rem;
+        position: absolute;
+        @include font-size(0.9rem);
+        color: $black;
+        text-decoration: none;
+        &:hover{
+            color: $orange;
         }
     }
     .userPicture{
@@ -46,7 +61,7 @@ html{font-size: 16px !important;}
     }
     .userDesc{
         span{
-            @include font-size(0.85rem);
+            @include font-size(0.9rem);
             letter-spacing: 1px;
             text-align: justify;
         }
@@ -62,15 +77,14 @@ html{font-size: 16px !important;}
     }
     .userTags{
         justify-content: center;
-        margin-top: -0.5rem;
+        margin-top: -1rem;
         span{
-            @include font-size(0.8rem);
+            @include font-size(0.83rem);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0.5rem 0.3rem;
             color: $white;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             background-color: $orange;
             margin-left: 0.5rem;
             margin-top: 0.5rem;
@@ -135,6 +149,29 @@ html{font-size: 16px !important;}
                     }
                 }
             }
+        }
+    }
+    @media screen and (max-width: $breakpoint1) {
+        flex: 0 0 41.6666666667%;
+        max-width: 41.6666666667%;
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        position:fixed;
+        left:-100%;
+        transition:left 1s linear;
+        z-index: 1002;
+        width: 65vw;
+        max-width: unset;
+        background-color: $laravel-grey;
+        border: 2px solid $grey;
+        border-left: 0;
+        top: 3.5%;
+        height: 90vh;
+        overflow: auto;
+        padding: 1rem;
+        &.show{
+            left: 0;
         }
     }
 }
@@ -259,6 +296,7 @@ html{font-size: 16px !important;}
                             @include font-size(0.6rem);
                             padding: 0.2rem 0.3rem;
                             top:0.2rem;
+                            left: -0.5rem;
                         }
                     }
                 }
@@ -512,11 +550,26 @@ html{font-size: 16px !important;}
             }
         }
     }
+    @media screen and (max-width: $breakpoint1) {
+        flex: 0 0 58.3333333333%;
+        max-width: 58.3333333333%;
+    }
+    @media screen and (max-width: $mobile-breakpoint) {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
 
 #expandInfoModal{
+    @media screen and (max-width: $mobile-breakpoint) {
+        z-index: 1003;
+    }
     .modal-dialog{
-        max-width: 60vw;
+        width: 70vw;
+        max-width: unset;
+        @media screen and (max-width: $mobile-breakpoint) {
+            width: 85vw
+        }
     }
     .modalDesc{
         @include font-size(1.1rem);
@@ -538,6 +591,9 @@ html{font-size: 16px !important;}
             border-radius: 20px;
             &:hover{
                 background-color: $orange-hover;
+            }
+            @media screen and (max-width: $mobile-breakpoint) {
+                @include font-size(0.9rem);
             }
         }
     }
@@ -571,5 +627,28 @@ html{font-size: 16px !important;}
         @include font-size(1.1rem);
         font-weight: bold;
         letter-spacing: 0.5px;
+    }
+}
+
+#showUserData{
+    @include font-size (1.5rem);
+    position: fixed;
+    top: 80%;
+    color:$white;
+    background:$orange;
+    z-index: 1002;
+    transition:left 1s linear;
+    cursor: pointer;
+    padding: 0.5rem 0.6rem 0.5rem 1rem;
+    right: -50%;
+    border-radius: 50% 0 0 50%;
+    @media screen and (max-width: $mobile-breakpoint) {
+        right: 0;
+    }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    .modal-backdrop{
+        z-index: 1002 !important;
     }
 }

@@ -11311,6 +11311,26 @@ function main() {
   $('.postDelete').on('click', function () {
     deletePost(this);
   });
+  $('#showUserData').on('click', function () {
+    if ($('.profileData:first').hasClass('show')) {
+      $('.profileData').removeClass('show');
+      $(this).html('<i class="fas fa-user-circle"></i>');
+      setTimeout(function () {
+        $('.darkOverlay').addClass('d-none');
+      }, 900);
+    } else {
+      $('.profileData').addClass('show');
+      $('.darkOverlay').removeClass('d-none');
+      $(this).html('<i class="fas fa-times"></i>');
+      $('.darkOverlay').one('click', function () {
+        $('.profileData').removeClass('show');
+        $('#showUserData').html('<i class="fas fa-arrows-alt-h"></i>');
+        setTimeout(function () {
+          $('.darkOverlay').addClass('d-none');
+        }, 900);
+      });
+    }
+  });
 }
 
 function likeUser(selected) {

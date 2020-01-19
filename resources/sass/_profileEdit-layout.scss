@@ -1,0 +1,54 @@
+#profileEditForm{
+    padding: 0.5rem;
+    .profilePicture{
+        margin: auto;
+        img{
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
+            margin: auto;
+            cursor: pointer;
+        }
+        input{
+            width: 100%;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+    }
+    .profileRelationship{
+        .form-check-inline{
+            text-align: center;
+        }
+    }
+    .profileTags{
+        #profileTagsOut{
+            justify-content: center;
+            .userTag{
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: $orange;
+                color: $white;
+                @include font-size(0.9rem);
+                border-radius: 50px;
+                margin-left: 0.5rem;
+                margin-top: 0.5rem;
+                padding: 0.5rem 0.2rem;
+                &:hover{
+                    background-color: $orange-active-hover;
+                }
+            }
+        }
+    }
+    .profileSave{
+        button{
+            padding: 0.5rem 1rem;
+            background-color: $orange;
+            color: $white;
+            &:hover{
+                background-color: $orange-hover;
+            }
+        }
+    }
+}

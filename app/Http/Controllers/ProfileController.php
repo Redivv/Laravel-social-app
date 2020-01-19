@@ -25,6 +25,8 @@ class ProfileController extends Controller
         $user = Auth::user();
         $tags = $user->tagNames();
 
+        shuffle($tags);
+
         $profileNotifications = $user->notifications()->whereIn(
             'type',
             [
@@ -51,23 +53,26 @@ class ProfileController extends Controller
         return view('profileEdit')->with(compact('user'))->with(compact('tags'));
     }
 
-    public function update(){
+    public function update(Request $request){
+
+        $kek = $request->all();
 
         $user = Auth::user();
 
         // If request is valid
-        request()->validate([
-            'photo'             =>  'mimes:jpeg,png,jpg,gif|max:2048',
-            'city'              =>  ['string','nullable','max:250'],
-            'description'       =>  ['string','nullable','max:500'],
-            'status'            =>  ['numeric', 'gte:0', 'lte:2' ],
-            'relations'         =>  ['boolean']
+        $request->validate([
+            'profilePicture'                =>  ['file','image','max:2000', 'nullable', 'mimes:jpeg,png,jpg,gif,svg'],
+            'profileCity'                   =>  ['string','nullable','max:250'],
+            'profileDesc'                   =>  ['string','nullable'],
+            'profileRelationship'           =>  ['numeric', 'gte:0', 'lte:2','nullable'],
+            'profileTags.*'                 =>  ['string','max:100','nullable']
         ]);
+
         //If there's a file
-        if (request()->hasFile('photo')) {
+        if ($request->hasFile('profilePicture')) {
             //Change original name of the file
-            $filename = hash_file('haval160,4',request('photo')->getPathname()).'.'.request('photo')->getClientOriginalExtension();
-            request('photo')->move(public_path('img/profile-pictures/'), $filename);
+            $filename = hash_file('haval160,4',$request->profilePicture->getPathname()).'.'.$request->profilePicture->getClientOriginalExtension();
+            $request->profilePicture->move(public_path('img/profile-pictures/'), $filename);
             copy(public_path('img/profile-pictures/').$filename,public_path('img/post-pictures/').$filename);
             $user->pending_picture = $filename;
 
@@ -77,19 +82,40 @@ class ProfileController extends Controller
                 Notification::send($admins, new NewProfilePicture($user->name,$filename));
             }
         }
-        
-        $city = City::firstOrCreate([
-            'name'      => Str::title(request('city')),
-            'name_slug' => Str::slug(request('city'))
-        ]);
 
-        $user->city_id = $city->id;
-        $user->relationship_status = request('relations');
-        $user->description = request('description');
+        if (isset($request->profileCity)) {
+            $city = City::firstOrCreate([
+                'name'      => Str::title($request->profileCity),
+                'name_slug' => Str::slug($request->profileCity)
+            ]);
+
+            $user->city_id = $city->id;
+        }
+
+        if (isset($request->profileRelationship)) {
+            if ($request->profileRelationship == 3) {
+                $user->relationship_status = null;
+            }
+            $user->relationship_status = $request->profileRelationship;
+        }
+
+        if (isset($request->profileDesc)) {
+            $user->description = $request->profileDesc;
+        }
+        if (isset($request->profileTags)) {
+            $user->untag();
+            foreach ($request->profileTags as $tag) {
+                $user->tag($tag);
+            }
+        }
         //Save changes in user profile
-        $user->update();
 
-        return redirect(route('ProfileView'))->with(['status' => __('profile.updated')]);
+        if($user->update()){
+
+            $request->session()->flash('message', __('profile.savedChanges'));
+    
+            return redirect(route('ProfileEdition'));
+        }
     }
 
     public function visit(Request $request,User $user){

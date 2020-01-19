@@ -11312,8 +11312,7 @@ function main() {
       $('.tabsPills').addClass('show');
       $('.darkOverlay').removeClass('d-none');
       $(this).html('<i class="fas fa-times"></i>');
-      $('.darkOverlay').off('click');
-      $('.darkOverlay').on('click', function () {
+      $('.darkOverlay').one('click', function () {
         $('.tabsPills').removeClass('show');
         $('#showTabsMenu').html('<i class="fas fa-arrow-left"></i>');
         setTimeout(function () {

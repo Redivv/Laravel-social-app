@@ -268,7 +268,7 @@ $(document).ready(function () {
     filtersPosition: "bottom",
     events: {
       keypress: function keypress(editor, e) {
-        if ((e.keyCode || e.which) == 13) {
+        if ((e.keyCode == 13 || e.which) == 13) {
           e.preventDefault();
           $('#message-data').val(this.getText());
           $('#talkSendMessage').submit();

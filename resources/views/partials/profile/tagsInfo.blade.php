@@ -2,7 +2,7 @@
     @if ($tags && count($tags) > 0)
         <div class="row modalTags">
             @foreach ($tags as $tag)
-                <span class="col-2">
+                <span class="col-5">
                     {{$tag}} 
                 </span>
             @endforeach

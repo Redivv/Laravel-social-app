@@ -11312,8 +11312,8 @@ function main() {
       $('.friendsList').addClass('show');
       $('.darkOverlay').removeClass('d-none');
       $(this).html('<i class="fas fa-times"></i>');
-      $('.darkOverlay').off('click');
-      $('.darkOverlay').on('click', function () {
+
+      $('.darkOverlay').one('click', function () {
         $('.wallExtraFunctions').removeClass('show');
         $('.friendsList').removeClass('show');
         $('#showSidePanels').html('<i class="fas fa-arrows-alt-h"></i>');
@@ -11328,6 +11328,7 @@ function main() {
     placeholder: "\xa0",
     buttonTitle: ""
   });
+  
   $('#editPostDesc').emojioneArea({
     pickerPosition: "top",
     placeholder: "\xa0",

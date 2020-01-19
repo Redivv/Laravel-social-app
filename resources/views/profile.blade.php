@@ -7,14 +7,23 @@
         </div>
     </div>
 
+    <div class="darkOverlay d-none"></div>
+
     <div class="container-fluid row p-0">
-        <div class="col-3 text-center profileData row">
+        <div class="col-4 text-center profileData row">
             <div class="col-12 userName">
                 <span>
                     <i class="fas fa-user"></i>
                     <span id="userName">{{$user->name}}</span>
                 </span>
             </div>
+                
+            @if($user->id == auth()->id())
+                <a id="profileEditLink" href="{{route('ProfileEdition')}}" data-tool="tooltip" title="{{__('profile.editProfile')}}" data-placement="bottom">
+                    <i class="fas fa-user-edit"></i>
+                </a>
+            @endif
+
             <div class="col-12 userPicture">
                 <a href="{{asset('img/profile-pictures/'.$user->picture)}}" data-lightbox="Profile" data-title="{{__("profile.photo", ['user' => $user->name])}}">
                     <img src="{{asset('img/profile-pictures/'.$user->picture)}}" alt="{{__("profile.photo", ['user' => $user->name])}}">
@@ -40,15 +49,15 @@
                     </div>
                 @endif
                 
-                @if ($user->age)
+                @if ($user->birth_year)
                     <div class="col userDataCell">
                         <main>
                             {{$user->displayAge()}}
                         </main>
                     </div>
                 @endif
-
-                @if ($user->relationship_status != null)
+                
+                @if ($user->relationship_status !== null)
                     <div class="col userDataCell">
                         <main>
                             @if ($user->relationship_status)
@@ -63,9 +72,9 @@
             </div>
             <div class="col-12 userDesc">
                 <span>
-                    @if (str_word_count($user->description) > 25)
-                        {{Illuminate\Support\Str::words($user->description, 25, "...")}}
-                        <button class="col-4 mx-auto btn" data-toggle="modal" data-target="#expandInfoModal" data-content="desc" data-id="{{$user->id}}">{{__('profile.readMore')}}</button>
+                    @if (str_word_count($user->description) > 20)
+                        {{Illuminate\Support\Str::words($user->description, 20, "...")}}
+                        <button class="col-12 mx-auto btn" data-toggle="modal" data-target="#expandInfoModal" data-content="desc" data-id="{{$user->id}}">{{__('profile.readMore')}}</button>
                     @else
                         {{$user->description}}
                     @endif
@@ -77,16 +86,16 @@
                         <span class="col-3">
                             {{$tag}} 
                         </span>
-                        @if ($loop->iteration == 6 && $loop->remaining > 0)
-                            <button class="col-4 mx-auto btn" data-toggle="modal" data-target="#expandInfoModal" data-content="tags" data-id="{{$user->id}}">{{__('profile.moreContent',['remaining' => $loop->remaining])}}</button>
+                        @if ($loop->iteration == 3 && $loop->remaining > 0)
+                            <button class="col-12 mx-auto btn" data-toggle="modal" data-target="#expandInfoModal" data-content="tags" data-id="{{$user->id}}">{{__('profile.moreContent',['remaining' => $loop->remaining])}}</button>
                             @break
                         @endif
                     @endforeach
                 </div>
             @endif
             @if($friends)
-                <div class="col-12 userFriends">
-                    <button class="btn" data-tool="tooltip" title="{{__('profile.allFriends')}}" data-placement="bottom" data-toggle="modal" data-target="#expandInfoModal" data-content="friends" data-id="{{$user->id}}">
+                <div class="col-12 userFriends row">
+                    <button class="btn col-12" data-tool="tooltip" title="{{__('profile.allFriends')}}" data-placement="bottom" data-toggle="modal" data-target="#expandInfoModal" data-content="friends" data-id="{{$user->id}}">
                         {{__('profile.closeFriends',['amount' => $friends])}}
                     </button>
                 </div>
@@ -131,7 +140,7 @@
                 @endif
             </div>
         </div>
-        <div class="text-center col-md-9 col-sm-12 container activity">
+        <div class="text-center col-8 container activity">
             @if (session()->has('guest'))
                 <div class="alert alert-warning" role="alert" style="width: 100%; align-self:center;">
                     <b>{{session()->get('guest')}}</b>
@@ -167,7 +176,17 @@
             </div>
         </div>
     </div>
+    
+    <span id="showUserData"><i class="fas fa-user-circle"></i></span>
 @endsection
+
+@push('styles')
+    <style>
+        body{
+            overflow: hidden;
+        }
+    </style>
+@endpush
 
 @push('scripts')
     <script>

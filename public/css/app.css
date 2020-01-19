@@ -18895,7 +18895,7 @@ body {
 }
 
 .nav-bar-height .navMobile .dropdown-menu {
-  left: -7rem;
+  left: -8rem;
   min-width: 70vw;
 }
 
@@ -19430,9 +19430,9 @@ html {
 }
 
 .profileData {
+  position: relative;
   overflow: hidden;
-  height: 80vh;
-  max-height: 80vh;
+  height: 82vh;
   margin-top: 0.5rem;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -19441,10 +19441,30 @@ html {
   margin-left: 0;
 }
 
+.profileData .userName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .profileData .userName span {
   font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 1.5px;
+}
+
+.profileData #profileEditLink {
+  right: 5%;
+  top: 0;
+  padding: 0.5rem;
+  position: absolute;
+  font-size: 0.9rem;
+  color: #000;
+  text-decoration: none;
+}
+
+.profileData #profileEditLink:hover {
+  color: #f66103;
 }
 
 .profileData .userPicture {
@@ -19478,7 +19498,7 @@ html {
 }
 
 .profileData .userDesc span {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   letter-spacing: 1px;
   text-align: justify;
 }
@@ -19496,17 +19516,16 @@ html {
 
 .profileData .userTags {
   justify-content: center;
-  margin-top: -0.5rem;
+  margin-top: -1rem;
 }
 
 .profileData .userTags span {
-  font-size: 0.8rem;
+  font-size: 0.83rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 0.3rem;
   color: #ffffff;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   background-color: #f66103;
   margin-left: 0.5rem;
   margin-top: 0.5rem;
@@ -19575,6 +19594,35 @@ html {
 
 .profileData .userButtons .ico button.active i {
   color: #f66103;
+}
+
+@media screen and (max-width: 992px) {
+  .profileData {
+    flex: 0 0 41.6666666667%;
+    max-width: 41.6666666667%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profileData {
+    position: fixed;
+    left: -100%;
+    transition: left 1s linear;
+    z-index: 1002;
+    width: 65vw;
+    max-width: unset;
+    background-color: #f8fafc;
+    border: 2px solid #a1a1a1;
+    border-left: 0;
+    top: 3.5%;
+    height: 90vh;
+    overflow: auto;
+    padding: 1rem;
+  }
+
+  .profileData.show {
+    left: 0;
+  }
 }
 
 .activity {
@@ -19740,6 +19788,7 @@ html {
   font-size: 0.6rem;
   padding: 0.2rem 0.3rem;
   top: 0.2rem;
+  left: -0.5rem;
 }
 
 .activity .activityPosts .postBox .postComments .input-group {
@@ -20039,8 +20088,35 @@ html {
   right: 0.2rem;
 }
 
+@media screen and (max-width: 992px) {
+  .activity {
+    flex: 0 0 58.3333333333%;
+    max-width: 58.3333333333%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .activity {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #expandInfoModal {
+    z-index: 1003;
+  }
+}
+
 #expandInfoModal .modal-dialog {
-  max-width: 60vw;
+  width: 70vw;
+  max-width: unset;
+}
+
+@media screen and (max-width: 767px) {
+  #expandInfoModal .modal-dialog {
+    width: 85vw;
+  }
 }
 
 #expandInfoModal .modalDesc {
@@ -20068,6 +20144,12 @@ html {
 
 #expandInfoModal .modalTags span:hover {
   background-color: #e26103;
+}
+
+@media screen and (max-width: 767px) {
+  #expandInfoModal .modalTags span {
+    font-size: 0.9rem;
+  }
 }
 
 #expandInfoModal .modalFriends .userFriend {
@@ -20103,6 +20185,96 @@ html {
   font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 0.5px;
+}
+
+#showUserData {
+  font-size: calc(1.275rem + 0.3vw);
+  position: fixed;
+  top: 80%;
+  color: #ffffff;
+  background: #f66103;
+  z-index: 1002;
+  transition: left 1s linear;
+  cursor: pointer;
+  padding: 0.5rem 0.6rem 0.5rem 1rem;
+  right: -50%;
+  border-radius: 50% 0 0 50%;
+}
+
+@media (min-width: 1200px) {
+  #showUserData {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #showUserData {
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .modal-backdrop {
+    z-index: 1002 !important;
+  }
+}
+
+#profileEditForm {
+  padding: 0.5rem;
+}
+
+#profileEditForm .profilePicture {
+  margin: auto;
+}
+
+#profileEditForm .profilePicture img {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  margin: auto;
+  cursor: pointer;
+}
+
+#profileEditForm .profilePicture input {
+  width: 100%;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+#profileEditForm .profileRelationship .form-check-inline {
+  text-align: center;
+}
+
+#profileEditForm .profileTags #profileTagsOut {
+  justify-content: center;
+}
+
+#profileEditForm .profileTags #profileTagsOut .userTag {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f66103;
+  color: #ffffff;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.2rem;
+}
+
+#profileEditForm .profileTags #profileTagsOut .userTag:hover {
+  background-color: #d22103;
+}
+
+#profileEditForm .profileSave button {
+  padding: 0.5rem 1rem;
+  background-color: #f66103;
+  color: #ffffff;
+}
+
+#profileEditForm .profileSave button:hover {
+  background-color: #e26103;
 }
 
 #wallFetchBtn {

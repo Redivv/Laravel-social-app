@@ -18,7 +18,7 @@ main{
             position: fixed;
             left: -100%;
             max-width: 80%;
-            background:#f8fafc;
+            background:$laravel-grey;
             z-index: 1001;
             overflow-y: auto;
             padding-top: 0.5rem;

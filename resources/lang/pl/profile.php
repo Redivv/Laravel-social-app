@@ -24,5 +24,8 @@ return [
     'modalTitle'            => "Szczegółowe Informacje",
     'emptyModal'            => "Brak danych do wyświetlenia",
     'activityHeader'        => "Ostatnia Aktywność",
-    'comment'               => "Komentarze"
+    'comment'               => "Komentarze",
+    'deleteTag'             => "Czy na pewno chcesz usunąć zainteresowanie?",
+    'savedChanges'          => "Zapisano Zmiany",
+    'editProfile'           => "Edytuj Profil"
 ];
