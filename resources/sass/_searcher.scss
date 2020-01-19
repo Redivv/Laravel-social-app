@@ -51,12 +51,23 @@
             }
         }
 
-        .button{
-            background-color: $orange;
-            color: $white;
-            &:hover{
+        .submitBox{
+            align-items: center;
+            .button{
+                width: 15%;
+                background-color: $orange;
                 color: $white;
-                background-color: $orange-hover;
+                &:hover{
+                    color: $white;
+                    background-color: $orange-hover;
+                }
+            }
+            .custom-switch{
+                margin-left: 1rem;
+                .custom-control-input:checked ~ .custom-control-label::before{
+                    background-color: $orange;
+                    border-color: $orange;
+                }
             }
         }
 
@@ -114,11 +125,20 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
             img{
                 width: 8em;
                 height: 8em;
                 border-radius: 50%;
+            }
+            .activeUserBadge{
+                width: 1.8rem;
+                height: 1.8rem;
+                background-color:$green;
+                border-radius: 50%;
+                display: none;
+                align-self: end;
+                margin-left: -2rem;
+                margin-bottom: 0.5rem;
             }
         }
 
@@ -158,6 +178,8 @@
 
         .icons{
             .ico{
+                padding: 0;
+                text-align: center;
                 @media screen and (max-width: $breakpoint1) {
                     float: left;
                     text-align: center;
@@ -187,8 +209,8 @@
                     background-color: $orange;
                     color: $white;
                     border-radius: 50%;
-                    top: 0.3rem;
-                    right: 0.3rem;
+                    top: 2rem;
+                    position: absolute;
                     &.invisible{
                         color: transparent;
                         background-color: transparent;
@@ -196,18 +218,14 @@
                 }
             }
             .likeProfile{
-                padding: 0.5rem 0 0.5rem 2rem;
-                @media screen and (max-width: $breakpoint1) {
-                    padding: 0.5rem 0 0.5rem 0.4rem;
-                  }
+                padding: 0;
             }
         }
     }
     div.searchResult.activeUser{
-        a{
-            color: $green;
-            .name{
-                color: $green;
+        .picture{
+            .activeUserBadge{
+                display: inline;
             }
         }
     }

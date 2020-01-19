@@ -55,18 +55,26 @@
                     <div class="col">
                         <label for="sort">{{__('searcher.searchOptions')}}</label>
                         <select class="form-control" name="sortOptions_crit" id="sort">
-                            @if (request('sortOptions_crit') == 'created_at')
+                            @if(request('sortOptions_crit') == "likes")
+                                <option value="birth_year">{{__('searcher.age')}}</option>
+                                <option value="name">{{__('searcher.username')}}</option>
+                                <option value="created_at">{{__('searcher.registerDate')}}</option>
+                                <option value="likes" selected>{{__('searcher.likes')}}</option>
+                            @elseif (request('sortOptions_crit') == 'created_at')
                                 <option value="birth_year">{{__('searcher.age')}}</option>
                                 <option value="name">{{__('searcher.username')}}</option>
                                 <option value="created_at" selected>{{__('searcher.registerDate')}}</option>
+                                <option value="likes">{{__('searcher.likes')}}</option>
                             @elseif(request('sortOptions_crit') == 'name')
                                 <option value="birth_year">{{__('searcher.age')}}</option>
                                 <option value="name" selected>{{__('searcher.username')}}</option>
                                 <option value="created_at">{{__('searcher.registerDate')}}</option>
+                                <option value="likes">{{__('searcher.likes')}}</option>
                             @else
                                 <option value="birth_year" selected>{{__('searcher.age')}}</option>
                                 <option value="name">{{__('searcher.username')}}</option>
                                 <option value="created_at">{{__('searcher.registerDate')}}</option>
+                                <option value="likes">{{__('searcher.likes')}}</option>
                             @endif
                         </select>
                         <div class="text-center">
@@ -107,7 +115,13 @@
                     {{__('searcher.advancedSearchToggle')}} <span class="toggleArrow"><i class="fas fa-sort-up"></i></span>
                 </a>
             </div>
-            <button class="btn button" type="submit">{{__('searcher.search')}}</button>
+            <div class="submitBox row">
+                <button class="btn button" type="submit">{{__('searcher.search')}}</button>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" name="activeOnly" class="custom-control-input" id="activeOnlySwitch" @if(request('activeOnly') == "on") checked @endif>
+                    <label class="custom-control-label" for="activeOnlySwitch">{{__('searcher.activeOnly')}}</label>
+                </div>
+            </div>
         </form>
         <hr>
         @if ($results)

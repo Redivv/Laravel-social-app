@@ -14,9 +14,7 @@
                 </div>
                 @if ($post->user_id == auth()->user()->id)
                     <div class="col-4 postAuthorButtons">
-                        <a href="{{route("viewPost",['post' => $post->id])}}" target="__blank">
-                            <i class="fas postEdit fa-edit"></i>
-                        </a>
+                        <a href="{{route("viewPost",['post' => $post->id])}}" target="__blank"><i class="fas postEdit fa-edit"></i></a>
                         <i class="fas postDelete fa-times" data-id="{{$post->id}}"></i>
                     </div>
                 @endif

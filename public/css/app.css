@@ -18589,14 +18589,28 @@ body.lb-disable-scrolling {
   transform: rotate(180deg);
 }
 
-.searcher .form .button {
+.searcher .form .submitBox {
+  align-items: center;
+}
+
+.searcher .form .submitBox .button {
+  width: 15%;
   background-color: #f66103;
   color: #ffffff;
 }
 
-.searcher .form .button:hover {
+.searcher .form .submitBox .button:hover {
   color: #ffffff;
   background-color: #e26103;
+}
+
+.searcher .form .submitBox .custom-switch {
+  margin-left: 1rem;
+}
+
+.searcher .form .submitBox .custom-switch .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #f66103;
+  border-color: #f66103;
 }
 
 .searcher .form #hobbyOutput {
@@ -18668,6 +18682,17 @@ body.lb-disable-scrolling {
   border-radius: 50%;
 }
 
+.searchResults-box .searchResult .picture .activeUserBadge {
+  width: 1.8rem;
+  height: 1.8rem;
+  background-color: #38c172;
+  border-radius: 50%;
+  display: none;
+  align-self: end;
+  margin-left: -2rem;
+  margin-bottom: 0.5rem;
+}
+
 @media screen and (max-width: 992px) {
   .searchResults-box .searchResult .data {
     text-align: center;
@@ -18699,6 +18724,11 @@ body.lb-disable-scrolling {
 
 .searchResults-box .searchResult .data .description-box .description {
   font-size: 1.1rem;
+}
+
+.searchResults-box .searchResult .icons .ico {
+  padding: 0;
+  text-align: center;
 }
 
 @media screen and (max-width: 992px) {
@@ -18740,8 +18770,8 @@ body.lb-disable-scrolling {
   background-color: #f66103;
   color: #ffffff;
   border-radius: 50%;
-  top: 0.3rem;
-  right: 0.3rem;
+  top: 2rem;
+  position: absolute;
 }
 
 .searchResults-box .searchResult .icons .ico .likesAmount.invisible {
@@ -18750,45 +18780,23 @@ body.lb-disable-scrolling {
 }
 
 .searchResults-box .searchResult .icons .likeProfile {
-  padding: 0.5rem 0 0.5rem 2rem;
+  padding: 0;
 }
 
-@media screen and (max-width: 992px) {
-  .searchResults-box .searchResult .icons .likeProfile {
-    padding: 0.5rem 0 0.5rem 0.4rem;
-  }
-}
-
-.searchResults-box div.searchResult.activeUser a,
-.searchResults-box #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.searchResult.activeUser a,
-#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags .searchResults-box a.searchResult.activeUser a,
-.searchResults-box #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a.searchResult.activeUser a,
-#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags .searchResults-box a.searchResult.activeUser a,
-.searchResults-box #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .searchResult.activeUser.postTaggedUser a,
-#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .searchResults-box .searchResult.activeUser.postTaggedUser a,
-.searchResults-box .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.searchResult.activeUser a,
-.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags .searchResults-box a.searchResult.activeUser a,
-.searchResults-box .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a.searchResult.activeUser a,
-.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags .searchResults-box a.searchResult.activeUser a,
-.searchResults-box .activity .activityPosts .postBox .post .postDesc .postTags .searchResult.activeUser.postTaggedUser a,
-.activity .activityPosts .postBox .post .postDesc .postTags .searchResults-box .searchResult.activeUser.postTaggedUser a {
-  color: #38c172;
-}
-
-.searchResults-box div.searchResult.activeUser a .name,
-.searchResults-box #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.searchResult.activeUser a .name,
-#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags .searchResults-box a.searchResult.activeUser a .name,
-.searchResults-box #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a.searchResult.activeUser a .name,
-#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags .searchResults-box a.searchResult.activeUser a .name,
-.searchResults-box #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .searchResult.activeUser.postTaggedUser a .name,
-#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .searchResults-box .searchResult.activeUser.postTaggedUser a .name,
-.searchResults-box .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.searchResult.activeUser a .name,
-.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags .searchResults-box a.searchResult.activeUser a .name,
-.searchResults-box .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a.searchResult.activeUser a .name,
-.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags .searchResults-box a.searchResult.activeUser a .name,
-.searchResults-box .activity .activityPosts .postBox .post .postDesc .postTags .searchResult.activeUser.postTaggedUser a .name,
-.activity .activityPosts .postBox .post .postDesc .postTags .searchResults-box .searchResult.activeUser.postTaggedUser a .name {
-  color: #38c172;
+.searchResults-box div.searchResult.activeUser .picture .activeUserBadge,
+.searchResults-box #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.searchResult.activeUser .picture .activeUserBadge,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags .searchResults-box a.searchResult.activeUser .picture .activeUserBadge,
+.searchResults-box #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a.searchResult.activeUser .picture .activeUserBadge,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags .searchResults-box a.searchResult.activeUser .picture .activeUserBadge,
+.searchResults-box #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .searchResult.activeUser.postTaggedUser .picture .activeUserBadge,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .searchResults-box .searchResult.activeUser.postTaggedUser .picture .activeUserBadge,
+.searchResults-box .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.searchResult.activeUser .picture .activeUserBadge,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags .searchResults-box a.searchResult.activeUser .picture .activeUserBadge,
+.searchResults-box .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a.searchResult.activeUser .picture .activeUserBadge,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags .searchResults-box a.searchResult.activeUser .picture .activeUserBadge,
+.searchResults-box .activity .activityPosts .postBox .post .postDesc .postTags .searchResult.activeUser.postTaggedUser .picture .activeUserBadge,
+.activity .activityPosts .postBox .post .postDesc .postTags .searchResults-box .searchResult.activeUser.postTaggedUser .picture .activeUserBadge {
+  display: inline;
 }
 
 .searchResults-box ul.pagination {
@@ -20749,11 +20757,11 @@ html {
 #friendsWall .friendsList .friendsListBox ul li.active .profilePicture::after {
   content: "";
   position: absolute;
-  width: 12px;
-  height: 12px;
+  width: 1.5rem;
+  height: 1.5rem;
   background-color: #38c172;
   border-radius: 50%;
-  top: 1.55rem;
+  top: 1.7rem;
   left: 2.5rem;
 }
 

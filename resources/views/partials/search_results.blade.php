@@ -10,12 +10,13 @@
         <div data-id="{{$result->id}}" class="searchResult container-fluid mb-4 @if($result->status == 'online') activeUser @endif">
             <div class="row">
                 <div class="picture col-lg-2">
-                    <a href="{{route('ProfileView')}}/{{$result->name}}" target="__blank">
+                    <a href="{{route('ProfileOtherView',['user' => $result->name])}}" target="__blank">
                         <img src="{{asset('img/profile-pictures/'.$result->picture)}}" alt="">
                     </a>
+                    <span class="badge activeUserBadge"></span>
                 </div>
                 <div class="data col-lg-8">
-                    <a href="{{route('ProfileView')}}/{{$result->name}}" target="__blank">
+                    <a href="{{route('ProfileOtherView',['user' => $result->name])}}" target="__blank">
                         <div class="personalInfo-box">
                             <span class="name">
                                 {{$result->name}}
@@ -58,7 +59,7 @@
                               <i class="fas fa-exclamation"></i>
                           </button>
                       </div>
-                      <div class="col-12 text-center ico likeProfile">
+                      <div class="col-4 offset-4 text-center ico likeProfile">
                           <button class="btn likeBtn @if($result->liked()) active @endif" data-id="{{$result->id}}" data-tool="tooltip" title="{{__('profile.likeUser')}}" data-placement="bottom">
                               <i class="fas fa-fire"></i>
                               <span class="badge likesAmount @if($result->likeCount <= 0) invisible @endif">{{$result->likeCount}}</span>
