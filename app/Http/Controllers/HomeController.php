@@ -455,21 +455,16 @@ class HomeController extends Controller
                 'userId' => 'exists:users,id'
             ]);
 
-            if ($request->userId != Auth::id()) {
+            $user = User::find($request->userId);
 
-                $user = User::find($request->userId);
-    
-                if ($user->liked()) {
-                    $user->unlike();
-                }else{
-                    $user->like();
-                    $user->notify(new SystemNotification(__('nav.likeUser'),'success','_user_profile','','', 'likeUser'));
-                }
-    
-                return response()->json(['status' => 'success'], 200);
+            if ($user->liked()) {
+                $user->unlike();
             }else{
-                return response()->json(['status' => 'error', 'message' => 'No'], 400);
+                $user->like();
+                $user->notify(new SystemNotification(__('nav.likeUser'),'success','_user_profile','','', 'likeUser'));
             }
+
+            return response()->json(['status' => 'success'], 200);
         }
     }
 }
