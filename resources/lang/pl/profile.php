@@ -27,5 +27,6 @@ return [
     'comment'               => "Komentarze",
     'deleteTag'             => "Czy na pewno chcesz usunąć zainteresowanie?",
     'savedChanges'          => "Zapisano Zmiany",
-    'editProfile'           => "Edytuj Profil"
+    'editProfile'           => "Edytuj Profil",
+    'noActivity'            => "Brak Postów"
 ];

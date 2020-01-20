@@ -1,1 +1,456 @@
-body.lb-disable-scrolling{overflow:hidden}.lightboxOverlay{position:absolute;top:0;left:0;z-index:9999;background-color:#000;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=80);opacity:.8;display:none}.lightbox{position:absolute;left:0;width:100%;z-index:10000;text-align:center;line-height:0;font-weight:400;outline:none}.lightbox .lb-image{display:block;height:auto;max-width:inherit;max-height:none;border-radius:3px;border:4px solid #fff}.lightbox a img{border:none}.lb-outerContainer{position:relative;*zoom:1;width:250px;height:250px;margin:0 auto;border-radius:4px;background-color:#fff}.lb-outerContainer:after{content:"";display:table;clear:both}.lb-loader{position:absolute;top:43%;left:0;height:25%;width:100%;text-align:center;line-height:0}.lb-cancel{display:block;width:32px;height:32px;margin:0 auto;background:url(/images/vendor/lightbox2/dist/loading.gif?2299ad0b3f63413f026dfec20c205b8f) no-repeat}.lb-nav{position:absolute;top:0;left:0;height:100%;width:100%;z-index:10}.lb-container>.nav{left:0}.lb-nav a{outline:none;background-image:url("data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")}.lb-next,.lb-prev{height:100%;cursor:pointer;display:block}.lb-nav a.lb-prev{width:34%;left:0;float:left;background:url(/images/vendor/lightbox2/dist/prev.png?84b76dee6b27b795e89e3649078a11c2) left 48% no-repeat;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0;transition:opacity .6s}.lb-nav a.lb-prev:hover{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);opacity:1}.lb-nav a.lb-next{width:64%;right:0;float:right;background:url(/images/vendor/lightbox2/dist/next.png?31f15875975aab69085470aabbfec802) right 48% no-repeat;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0;transition:opacity .6s}.lb-nav a.lb-next:hover{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);opacity:1}.lb-dataContainer{margin:0 auto;padding-top:5px;*zoom:1;width:100%;border-bottom-left-radius:4px;border-bottom-right-radius:4px}.lb-dataContainer:after{content:"";display:table;clear:both}.lb-data{padding:0 4px;color:#ccc}.lb-data .lb-details{width:85%;float:left;text-align:left;line-height:1.1em}.lb-data .lb-caption{font-size:13px;font-weight:700;line-height:1em}.lb-data .lb-caption a{color:#4ae}.lb-data .lb-number{display:block;clear:left;padding-bottom:1em;font-size:12px;color:#999}.lb-data .lb-close{display:block;float:right;width:30px;height:30px;background:url(/images/vendor/lightbox2/dist/close.png?d9d2d0b1308cb694aa8116915592e2a9) 100% 0 no-repeat;text-align:right;outline:none;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=70);opacity:.7;transition:opacity .2s}.lb-data .lb-close:hover{cursor:pointer;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);opacity:1}main{min-height:80vh}main hr{margin-top:.1rem;margin-bottom:.1rem}main .tabsPills{display:flex;justify-content:center;align-items:center}@media screen and (max-width:767px){main .tabsPills{transition:left 1s linear;position:fixed;left:-100%;max-width:80%;background:#f8fafc;z-index:1001;overflow-y:auto;border:3px solid #a1a1a1;border-left:0;padding:.5rem 1rem .5rem .3rem}}main .tabsPills.show{left:0}main .tabsPills .nav-pills{width:100%;margin-top:2.5rem}main .tabsPills .nav-pills .nav-link.active{background-color:#f66103}main .tabsPills .nav-pills .nav-link.active .ticketCount{color:#ffed4a}main .tabsPills a{margin-bottom:1rem!important;padding:5%;color:#333;text-transform:uppercase;font-weight:700}main .tabsPills a .ticketCount{color:#e3342f}main .tabsContent thead{text-align:center}main .tabsContent div.tab-pane{max-height:75vh;overflow-y:auto}main .tabsContent div.tab-pane .form-btn{font-size:.7rem;font-weight:700;margin-top:.5rem}main .tabsContent div.tab-pane .fetchBtn{padding:1rem;cursor:pointer;color:#f66103;position:relative}main .tabsContent div.tab-pane .fetchBtn.spin i{-webkit-animation-name:spin;animation-name:spin;-webkit-animation-duration:2s;animation-duration:2s;-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite;-webkit-animation-timing-function:linear;animation-timing-function:linear}main .tabsContent div.tab-pane .fetchBtn.new:after{content:"";width:10px;height:10px;background:#e3342f;border-radius:50%;display:block;position:absolute;top:50%;left:68%}main .tabsContent div.tab-pane .fetchBtn i:hover{color:#e26103}main .tabsContent div.tab-pane .searchBtn{padding:1rem;cursor:pointer;color:#f66103;position:relative}main .tabsContent div.tab-pane .searchBtn i:hover{color:#e26103}main .tabsContent .profilePicture{max-width:100px}main .tabsContent #adminWideInfo-content{overflow-y:unset}main .tabsContent #adminWideInfo-content #adminInfoForm .form-group{display:block;width:100%}main .tabsContent #adminWideInfo-content #adminInfoForm .form-group label{font-size:1.2rem;font-weight:700}main .tabsContent #adminWideInfo-content #adminInfoForm .form-group input[type=checkbox]{width:1rem;height:1rem}main .tabsContent #adminWideInfo-content #adminInfoForm .form-group #adminPicture-preview{display:block;width:100%}main .tabsContent #adminWideInfo-content #adminInfoForm .form-group #adminPicture-preview .resetPictureBox{text-align:right}main .tabsContent #adminWideInfo-content #adminInfoForm .form-group #adminPicture-preview .resetPictureBox i{cursor:pointer;font-size:1.2rem}main .tabsContent #adminWideInfo-content #adminInfoForm .form-group #adminPicture-preview .resetPictureBox i:hover{color:#f66103}main .tabsContent #adminWideInfo-content #adminInfoForm .form-group #adminPicture-preview .thumb{margin-right:.5rem;margin-bottom:1rem;max-width:200px;max-height:200px}main .tabsContent #adminWideInfo-content #adminInfoForm .form-group .friendsWallButtons{padding-left:.25rem}main .tabsContent #adminWideInfo-content #adminInfoForm .form-group .friendsWallButtons i{font-size:1.2rem;margin-left:.5rem;cursor:pointer}main .tabsContent #adminWideInfo-content #adminInfoForm .form-group .friendsWallButtons i:hover{color:#f66103}main .tabsContent #adminWideInfo-content #adminInfoForm .wideInfoBtn{font-size:calc(1.255rem + .06vw);background-color:#f66103;color:#fff;text-transform:uppercase;font-weight:700}@media (min-width:1200px){main .tabsContent #adminWideInfo-content #adminInfoForm .wideInfoBtn{font-size:1.3rem}}main #showTabsMenu{font-size:calc(1.275rem + .3vw);position:fixed;top:80%;color:#fff;background:#f66103;z-index:1002;cursor:pointer;padding:.5rem .6rem .5rem 1rem;right:-100%;border-radius:50% 0 0 50%}@media (min-width:1200px){main #showTabsMenu{font-size:1.5rem}}@media screen and (max-width:767px){main #showTabsMenu{right:0}}.modal-dialog{margin:2rem auto;max-width:80vw}.modal-dialog output{width:100%}.modal-dialog .fetchBtn,.modal-dialog .searchBtn{display:none}.modal-dialog .modal-body{overflow:auto}@-webkit-keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}@keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}
+body.lb-disable-scrolling {
+  overflow: hidden;
+}
+
+.lightboxOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: black;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  opacity: 0.8;
+  display: none;
+}
+
+.lightbox {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  text-align: center;
+  line-height: 0;
+  font-weight: normal;
+  outline: none;
+}
+
+.lightbox .lb-image {
+  display: block;
+  height: auto;
+  max-width: inherit;
+  max-height: none;
+  border-radius: 3px;
+  /* Image border */
+  border: 4px solid white;
+}
+
+.lightbox a img {
+  border: none;
+}
+
+.lb-outerContainer {
+  position: relative;
+  *zoom: 1;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  border-radius: 4px;
+  /* Background color behind image.
+     This is visible during transitions. */
+  background-color: white;
+}
+
+.lb-outerContainer:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.lb-loader {
+  position: absolute;
+  top: 43%;
+  left: 0;
+  height: 25%;
+  width: 100%;
+  text-align: center;
+  line-height: 0;
+}
+
+.lb-cancel {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin: 0 auto;
+  background: url(/images/vendor/lightbox2/dist/loading.gif?2299ad0b3f63413f026dfec20c205b8f) no-repeat;
+}
+
+.lb-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+}
+
+.lb-container > .nav {
+  left: 0;
+}
+
+.lb-nav a {
+  outline: none;
+  background-image: url("data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==");
+}
+
+.lb-prev,
+.lb-next {
+  height: 100%;
+  cursor: pointer;
+  display: block;
+}
+
+.lb-nav a.lb-prev {
+  width: 34%;
+  left: 0;
+  float: left;
+  background: url(/images/vendor/lightbox2/dist/prev.png?84b76dee6b27b795e89e3649078a11c2) left 48% no-repeat;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+
+.lb-nav a.lb-prev:hover {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+
+.lb-nav a.lb-next {
+  width: 64%;
+  right: 0;
+  float: right;
+  background: url(/images/vendor/lightbox2/dist/next.png?31f15875975aab69085470aabbfec802) right 48% no-repeat;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+
+.lb-nav a.lb-next:hover {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+
+.lb-dataContainer {
+  margin: 0 auto;
+  padding-top: 5px;
+  *zoom: 1;
+  width: 100%;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.lb-dataContainer:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.lb-data {
+  padding: 0 4px;
+  color: #ccc;
+}
+
+.lb-data .lb-details {
+  width: 85%;
+  float: left;
+  text-align: left;
+  line-height: 1.1em;
+}
+
+.lb-data .lb-caption {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1em;
+}
+
+.lb-data .lb-caption a {
+  color: #4ae;
+}
+
+.lb-data .lb-number {
+  display: block;
+  clear: left;
+  padding-bottom: 1em;
+  font-size: 12px;
+  color: #999999;
+}
+
+.lb-data .lb-close {
+  display: block;
+  float: right;
+  width: 30px;
+  height: 30px;
+  background: url(/images/vendor/lightbox2/dist/close.png?d9d2d0b1308cb694aa8116915592e2a9) top right no-repeat;
+  text-align: right;
+  outline: none;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.lb-data .lb-close:hover {
+  cursor: pointer;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+
+main {
+  min-height: 80vh;
+}
+
+main hr {
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+
+main .tabsPills {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 767px) {
+  main .tabsPills {
+    transition: left 1s linear;
+    position: fixed;
+    left: -100%;
+    max-width: 80%;
+    background: #f8fafc;
+    z-index: 1001;
+    overflow-y: auto;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 1rem;
+    border: solid 3px #a1a1a1;
+    border-left: 0;
+    padding-left: 0.3rem;
+  }
+}
+
+main .tabsPills.show {
+  left: 0;
+}
+
+main .tabsPills .nav-pills {
+  width: 100%;
+  margin-top: 2.5rem;
+}
+
+main .tabsPills .nav-pills .nav-link.active {
+  background-color: #f66103;
+}
+
+main .tabsPills .nav-pills .nav-link.active .ticketCount {
+  color: #ffed4a;
+}
+
+main .tabsPills a {
+  margin-bottom: 1rem !important;
+  padding: 5%;
+  color: #333333;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+main .tabsPills a .ticketCount {
+  color: #e3342f;
+}
+
+main .tabsContent thead {
+  text-align: center;
+}
+
+main .tabsContent div.tab-pane {
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+main .tabsContent div.tab-pane .form-btn {
+  font-size: 0.7rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+main .tabsContent div.tab-pane .fetchBtn {
+  padding: 1rem;
+  cursor: pointer;
+  color: #f66103;
+  position: relative;
+}
+
+main .tabsContent div.tab-pane .fetchBtn.spin i {
+  -webkit-animation-name: spin;
+          animation-name: spin;
+  -webkit-animation-duration: 2000ms;
+          animation-duration: 2000ms;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+main .tabsContent div.tab-pane .fetchBtn.new:after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #e3342f;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 68%;
+}
+
+main .tabsContent div.tab-pane .fetchBtn i:hover {
+  color: #e26103;
+}
+
+main .tabsContent div.tab-pane .searchBtn {
+  padding: 1rem;
+  cursor: pointer;
+  color: #f66103;
+  position: relative;
+}
+
+main .tabsContent div.tab-pane .searchBtn i:hover {
+  color: #e26103;
+}
+
+main .tabsContent .profilePicture {
+  max-width: 100px;
+}
+
+main .tabsContent #adminWideInfo-content {
+  overflow-y: unset;
+}
+
+main .tabsContent #adminWideInfo-content #adminInfoForm .form-group {
+  display: block;
+  width: 100%;
+}
+
+main .tabsContent #adminWideInfo-content #adminInfoForm .form-group label {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+main .tabsContent #adminWideInfo-content #adminInfoForm .form-group input[type=checkbox] {
+  width: 1rem;
+  height: 1rem;
+}
+
+main .tabsContent #adminWideInfo-content #adminInfoForm .form-group #adminPicture-preview {
+  display: block;
+  width: 100%;
+}
+
+main .tabsContent #adminWideInfo-content #adminInfoForm .form-group #adminPicture-preview .resetPictureBox {
+  text-align: right;
+}
+
+main .tabsContent #adminWideInfo-content #adminInfoForm .form-group #adminPicture-preview .resetPictureBox i {
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+main .tabsContent #adminWideInfo-content #adminInfoForm .form-group #adminPicture-preview .resetPictureBox i:hover {
+  color: #f66103;
+}
+
+main .tabsContent #adminWideInfo-content #adminInfoForm .form-group #adminPicture-preview .thumb {
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+main .tabsContent #adminWideInfo-content #adminInfoForm .form-group .friendsWallButtons {
+  padding-left: 0.25rem;
+}
+
+main .tabsContent #adminWideInfo-content #adminInfoForm .form-group .friendsWallButtons i {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+main .tabsContent #adminWideInfo-content #adminInfoForm .form-group .friendsWallButtons i:hover {
+  color: #f66103;
+}
+
+main .tabsContent #adminWideInfo-content #adminInfoForm .wideInfoBtn {
+  font-size: calc(1.255rem + 0.06vw);
+  background-color: #f66103;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+@media (min-width: 1200px) {
+  main .tabsContent #adminWideInfo-content #adminInfoForm .wideInfoBtn {
+    font-size: 1.3rem;
+  }
+}
+
+main #showTabsMenu {
+  font-size: calc(1.275rem + 0.3vw);
+  position: fixed;
+  top: 80%;
+  color: #ffffff;
+  background: #f66103;
+  z-index: 1002;
+  cursor: pointer;
+  padding: 0.5rem 0.6rem 0.5rem 1rem;
+  right: -100%;
+  border-radius: 50% 0 0 50%;
+}
+
+@media (min-width: 1200px) {
+  main #showTabsMenu {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  main #showTabsMenu {
+    right: 0;
+  }
+}
+
+.modal-dialog {
+  margin: 2rem auto;
+  max-width: 80vw;
+}
+
+.modal-dialog output {
+  width: 100%;
+}
+
+.modal-dialog .fetchBtn,
+.modal-dialog .searchBtn {
+  display: none;
+}
+
+.modal-dialog .modal-body {
+  overflow: auto;
+}
+
+@-webkit-keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
