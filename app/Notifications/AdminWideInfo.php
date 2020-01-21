@@ -8,9 +8,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class AdminWideInfo extends Notification implements ShouldBroadcast, ShouldQueue
+class AdminWideInfo extends Notification implements ShouldBroadcast
 {
-    use Queueable;
 
     public $content;
 

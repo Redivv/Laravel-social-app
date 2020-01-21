@@ -40,16 +40,16 @@
                       </div>
                       <div class="col-4 ico addFriend" data-name="{{$result->name}}" id="{{$result->name}}">
                           @if($result->isFriendWith(auth()->user()))
-                              <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend3')}}" data-placement="bottom">
-                                  <i class="fas fa-user-friends"></i>
+                              <button class="btn text-reset active" data-tool="tooltip" title="{{__('profile.addFriend3')}}" data-placement="bottom">
+                                  <i class="active fas fa-user-friends"></i>
                               </button>
                           @elseif(auth()->user()->hasSentFriendRequestTo($result))
-                              <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend2')}}" data-placement="bottom">
+                              <button class="btn text-reset active" data-tool="tooltip" title="{{__('profile.addFriend2')}}" data-placement="bottom">
                                   <i class="active fas fa-user-check"></i>
                               </button>
                           @else
                               <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend1')}}" data-placement="bottom">
-                                  <i class="active fas fa-user-plus"></i>
+                                  <i class="fas fa-user-plus"></i>
                               </button>
                           @endif
                               </button>

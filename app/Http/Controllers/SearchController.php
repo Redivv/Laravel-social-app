@@ -182,7 +182,7 @@ class SearchController extends Controller
             }
         }
         
-        FlagOfflineUsers::dispatch()->delay(now()->addMinutes(10));
+        FlagOfflineUsers::dispatch()->delay(now()->addMinutes(2));
 
         return [$search_results,__('searcher.resultNormal',['number' => $resultsCount])];
     }

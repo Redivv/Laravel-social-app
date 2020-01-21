@@ -40,7 +40,7 @@
                                 </button>
                             @else
                                 <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend1')}}" data-placement="bottom">
-                                    <i class="active fas fa-user-plus"></i>
+                                    <i class="fas fa-user-plus"></i>
                                 </button>
                             @endif
                     </div>
@@ -55,7 +55,7 @@
             <div class="col-12 userName">
                 <span>
                     <i class="fas fa-user"></i>
-                    <span id="userName">{{$user->name}}</span>
+                    <span id="userName" data-id="{{$user->id}}">{{$user->name}}</span>
                 </span>
             </div>
                 
@@ -71,7 +71,7 @@
                 </a>
             </div>
             <div class="col-12 userStatus">
-                <span>
+                <span id="userStatus" data-id="{{$user->id}}">
                     {{__('profile.lastActive')}}
                     @if ($user->status == "online")
                         <span style="font-weight: bold; color: lawngreen !important">{{{__('profile.active')}}}</span>
@@ -208,4 +208,33 @@
         var userName                = "{{$user->name}}"
     </script>
     <script src="{{asset('js/profile.js')}}"></script>
+
+    <script>
+
+        let htmlActive = '{{__("profile.lastActive")}}<span style="font-weight: bold; color: lawngreen !important">{{__("profile.active")}}</span>';
+        let htmlUnactive = '{{__("profile.lastActive1sec")}}';
+        
+        Echo.join('online')
+        
+            .joining((user) => {
+                axios.patch('/api/user/'+ user.name +'/online', {
+                        api_token : user.api_token
+                });
+            })
+
+            .leaving((user) => {
+                axios.patch('/api/user/'+ user.name +'/offline', {
+                    api_token : user.api_token
+                });
+            })
+            
+            .listen('UserOnline', (e) => {
+                $('#userStatus[data-id="'+e.user.id+'"]').html(htmlActive);
+            })
+
+            .listen('UserOffline', (e) => {
+                $('#userStatus[data-id="'+e.user.id+'"]').html(htmlUnactive);
+            });
+            
+    </script>
 @endpush

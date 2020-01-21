@@ -1,5 +1,5 @@
 @foreach ($friends as $friend)
-    <li class="row @if($friend->status=="online") active @endif friendObject" id="{{$friend->name}}">
+    <li class="row @if($friend->status=="online") active @endif friendObject" id="{{$friend->name}}" data-id="{{$friend->id}}">
         <div class="row">
             <div class="col-4 profilePicture">
                 <a href="{{route('ProfileOtherView',['user' => $friend->name])}}">

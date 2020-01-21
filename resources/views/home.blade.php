@@ -128,5 +128,13 @@
                 api_token : user.api_token
             });
         })
+            
+        .listen('UserOnline', (e) => {
+            $('.friendObject[data-id="'+e.user.id+'"]').addClass('active');
+        })
+
+        .listen('UserOffline', (e) => {
+            $('.friendObject[data-id="'+e.user.id+'"]').removeClass('active');
+        });
 </script>
 @endpush

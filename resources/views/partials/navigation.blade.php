@@ -44,7 +44,6 @@
                                         </li>                                        
                                     @endforeach
                                 </ul>
-                                <hr>
                             @endif
                             @if(count($notifications['user']) > 0)
                                 @foreach ($notifications['user'] as $userNot)
@@ -351,7 +350,6 @@
                                             </li>                                        
                                         @endforeach
                                     </ul>
-                                    <hr>
                                 @endif
                                 @if (count($notifications['user']) > 0)
                                     @foreach ($notifications['user'] as $userNot)

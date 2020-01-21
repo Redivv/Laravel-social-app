@@ -130,7 +130,7 @@ class ProfileController extends Controller
 
                 $friends = count($user->getFriends());
 
-                $posts = Post::where("user_id",$user->id);
+                $posts = Post::where("user_id",$user->id)->get();
 
                 return view('profile')->withUser($user)->withTags($tags)->withFriends($friends)->withPosts($posts);
 
@@ -142,12 +142,14 @@ class ProfileController extends Controller
                     $user->relationship_status = null;
                     $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
 
+                    $posts == null;
+
                     $tags = null;
                     $friends = null;
 
                     $request->session()->flash('guest', __('profile.logInToSee'));
 
-                    return view('profile')->withUser($user)->withTags($tags)->withFriends($friends);
+                    return view('profile')->withUser($user)->withTags($tags)->withFriends($friends)->withPosts($posts);
             }else{
                 return abort(404);
             }
