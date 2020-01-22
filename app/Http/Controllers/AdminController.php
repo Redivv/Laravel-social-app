@@ -402,13 +402,13 @@ class AdminController extends Controller
 
                     $post = new Post;
                     $post->user_id      = $validUser->id;
-                    $post->desc         = $validUser->name.__('activityWall.friendNewPicture');
+                    $post->desc         = __('activityWall.friendNewPicture', ['user' => $validUser->name]);
                     $post->is_public    = false;
                     $post->pictures     = json_encode([$validUser->picture]);
 
 
                     if ($post->save()) {
-                        Notification::send($validUser->getFriends(), new UserNotification($validUser, '_user_home_post_',$post->id, '', __('nav.userNot3'), 'newPost'));
+                        Notification::send($validUser->getFriends(), new UserNotification($validUser, '_user_home_post_',$post->id, '', __('nav.userNot3'), 'newPost'.$post->id));
                     }
 
                     break;

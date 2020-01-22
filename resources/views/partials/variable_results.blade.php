@@ -44,7 +44,7 @@
                                 </button>
                             @else
                                 <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend1')}}" data-placement="bottom">
-                                    <i class="active fas fa-user-plus"></i>
+                                    <i class="fas fa-user-plus"></i>
                                 </button>
                             @endif
                                 </button>

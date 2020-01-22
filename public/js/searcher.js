@@ -195,7 +195,7 @@ function addFriend(selected) {
   var friendName = $(selected).data('name'); //get url we want to visit with ajax
 
   var url = baseUrl + "/friends/ajax/add/" + friendName;
-  var html = '<i class="fas fa-user-check"></i>';
+  var html = '<i class="active fas fa-user-check"></i>';
   $(selected).find('i').replaceWith(html);
   $(selected).removeClass('addFriend'); //make request in ajax:
 

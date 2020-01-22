@@ -260,7 +260,7 @@ class HomeController extends Controller
                 $posts = [$post];
                 $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
                 $friends = Auth::user()->getFriends();
-                Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2'), 'newPost'));
+                Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2'), 'newPost'.$post->id));
                 if ($taggedUsers) {
                     Notification::send($taggedUsersArray, new SystemNotification(__('nav.taggedInPost'),'success','_user_home_post_',$post->id, '', 'tagPost'));
                 }

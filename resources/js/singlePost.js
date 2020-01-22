@@ -429,7 +429,7 @@ function main() {
         //local var in JS == let
         //get name of friend you want to delete
         let friendName = $(this).data('name');
-        let confirmation = confirm(deleteFriend+friendName+"?");
+        let confirmation = confirm(deleteFriend+" "+friendName+"?");
         //get url we want to visit with ajax
         if(confirmation==true){
             let url= baseUrl+"/friends/ajax/delete/"+friendName;

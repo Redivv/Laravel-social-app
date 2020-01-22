@@ -18775,6 +18775,10 @@ body.lb-disable-scrolling {
   color: #f66103;
 }
 
+.searchResults-box .searchResult .icons .ico button i.active {
+  color: #f66103;
+}
+
 .searchResults-box .searchResult .icons .ico .likesAmount {
   font-size: 0.7rem;
   background-color: #f66103;
@@ -18899,13 +18903,13 @@ body {
 }
 
 .nav-bar-height .navMobile .notificationImageBox .notificationImage {
-  max-width: 40px;
-  max-height: 40px;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
 }
 
 .nav-bar-height .navMobile .dropdown-menu {
-  left: -8rem;
+  left: -6.5rem;
   min-width: 70vw;
 }
 
@@ -18931,8 +18935,8 @@ body {
 }
 
 .nav-bar-height .navDesc .notificationImage {
-  max-width: 40px;
-  max-height: 40px;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
 }
 
@@ -19008,8 +19012,8 @@ body {
 .nav-bar-height .userNotifications .dropdown-item .notificationImageBox .notificationImage,
 .nav-bar-height .userNotifications .clearAllBtn .notificationImageBox .notificationImage {
   padding-left: 0;
-  max-width: 50px;
-  max-height: 50px;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
 }
 
@@ -19144,8 +19148,8 @@ body {
 .nav-bar-height .chatNotifications .dropdown-item .notificationImageBox .notificationImage,
 .nav-bar-height .chatNotifications .clearAllBtn .notificationImageBox .notificationImage {
   padding-left: 0;
-  max-width: 50px;
-  max-height: 50px;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
 }
 
@@ -20535,6 +20539,7 @@ html {
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postPhotos .postPicture {
   width: 11rem;
   height: 8rem;
+  margin-left: 0.5rem;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postContent {

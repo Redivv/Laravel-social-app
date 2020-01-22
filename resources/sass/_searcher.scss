@@ -213,6 +213,9 @@
                             color: $orange;
                         }
                     }
+                    i.active{
+                        color: $orange;
+                    }
                 }
                 .likesAmount{
                     @include font-size(0.7rem);

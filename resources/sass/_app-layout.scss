@@ -51,13 +51,13 @@ body{
         .notificationImageBox{
             padding: 0;
             .notificationImage{
-                max-width: 40px;
-                max-height: 40px;
+                width: 2rem;
+                height: 2rem;
                 border-radius: 50%;
             }
         }
         .dropdown-menu{
-            left: -8rem;
+            left: -6.5rem;
             min-width: 70vw;
         }
     }
@@ -71,8 +71,8 @@ body{
             @include font-size(1.5rem);
         }
         .notificationImage{
-            max-width: 40px;
-            max-height: 40px;
+            width: 2rem;
+            height: 2rem;
             border-radius: 50%;
         }
         .dropdown-menu{
@@ -133,8 +133,8 @@ body{
                 justify-content: center;
                 .notificationImage{
                     padding-left: 0;
-                    max-width: 50px;
-                    max-height: 50px;
+                    width: 2rem;
+                    height: 2rem;
                     border-radius: 50%;
                 }
             }
@@ -225,8 +225,8 @@ body{
                 justify-content: center;
                 .notificationImage{
                     padding-left: 0;
-                    max-width: 50px;
-                    max-height: 50px;
+                    width: 2rem;
+                    height: 2rem;
                     border-radius: 50%;
                 }
             }
