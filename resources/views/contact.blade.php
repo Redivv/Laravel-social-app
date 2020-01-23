@@ -9,7 +9,7 @@
             </div>
         @endif
 
-        <form method="post" class="mt-4" id="contactForm">
+        <form method="post" class="mt-4" id="contactForm" enctype="multipart/form-data">
             @csrf
             <legend>
                 <h3>
@@ -24,6 +24,11 @@
               <label for="EmailContent"><h4>{{__('contact.emailContent')}}</h4></label>
               <textarea required class="form-control" id="EmailContent" name="EmailContent" placeholder="{{__('contact.emailContentPlaceholder')}}" rows="3"></textarea>
             </div>
+            <div class="form-group">
+                <label for="EmailAttachments"><h4>{{__('contact.emailAttachments')}}</h4></label>
+                <input type="file" name="EmailAttachments[]" id="EmailAttachments" multiple accept="image/*">
+            </div>
+            <output id="EmailAttachmentsOut"></output>
             <div class="form-group row mt-2">
                 <button class="btn contactSubmitButton" type="submit">{{__('contact.send')}}</button>
             </div>
@@ -56,12 +61,14 @@
 @endsection
 
 @push('scripts')
-    <script src="{{asset('js/emoji.js')}}"></script>
 
     <script>
-        $('#EmailContent').emojioneArea({
-        pickerPosition: "bottom",
-        placeholder: "{{__('contact.emailContentPlaceholder')}}",
-    });
+        var badFileType             =  "{{__('chat.badFileType')}}";
+        var deleteImages            =  "{{__('activityWall.deleteImages')}}";
+        var resetImgMsg             =  "{{__('activityWall.resetPictures')}}";
+        var descPlaceholder         =  "{{__('contact.emailContentPlaceholder')}}";
     </script>
+
+    <script src="{{asset('js/emoji.js')}}"></script>
+    <script src="{{asset('js/contact.js')}}"></script>
 @endpush

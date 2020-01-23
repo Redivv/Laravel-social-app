@@ -202,7 +202,6 @@ class HomeController extends Controller
     public function newPost(Request $request)
     {
         if ($request->ajax()) {
-            $kek = $request->all();
             $request->validate([
                 'postDesc'       =>['required_without:postPicture','string','nullable'],
                 'postPicture.*'  =>['required_without:postDesc','file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],

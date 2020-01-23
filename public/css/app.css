@@ -21496,6 +21496,10 @@ html {
   padding-right: 2rem;
 }
 
+#contactForm .form-group label {
+  display: block;
+}
+
 #contactForm .form-group label h4 {
   font-size: 1rem;
   letter-spacing: 0.5px;
@@ -21513,6 +21517,31 @@ html {
 
 #contactForm .form-group .contactSubmitButton:hover {
   background-color: #e26103;
+}
+
+#contactForm #EmailAttachmentsOut {
+  padding: 0 2rem;
+}
+
+#contactForm #EmailAttachmentsOut .resetPictureBox {
+  text-align: right;
+  margin-bottom: 0.5rem;
+}
+
+#contactForm #EmailAttachmentsOut .resetPictureBox i {
+  color: #000;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#contactForm #EmailAttachmentsOut .resetPictureBox i:hover {
+  color: #f66103;
+}
+
+#contactForm #EmailAttachmentsOut img {
+  width: 10rem;
+  height: 10rem;
+  margin-left: 1rem;
 }
 
 #administrators .card-body {

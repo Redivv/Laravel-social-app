@@ -12,6 +12,7 @@
         margin-left: 2rem;
         padding-right: 2rem;
         label{
+            display: block;
             h4{
                 @include font-size(1rem);
                 letter-spacing: 0.5px;
@@ -28,6 +29,26 @@
             &:hover{
                 background-color: $orange-hover;
             }
+        }
+    }
+    #EmailAttachmentsOut{
+        padding: 0 2rem;
+        .resetPictureBox{
+            text-align: right;
+            margin-bottom: 0.5rem;
+            i{
+                color: $black;
+                cursor: pointer;
+                @include font-size (1rem);
+                &:hover{
+                    color: $orange;
+                }
+            }
+        }
+        img{
+            width: 10rem;
+            height: 10rem;
+            margin-left: 1rem;
         }
     }
 }
