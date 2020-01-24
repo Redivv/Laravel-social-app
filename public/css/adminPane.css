@@ -430,10 +430,6 @@ main #showTabsMenu {
   display: none;
 }
 
-.modal-dialog .modal-body {
-  overflow: auto;
-}
-
 @-webkit-keyframes spin {
   from {
     transform: rotate(0deg);

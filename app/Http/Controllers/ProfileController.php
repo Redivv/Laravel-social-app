@@ -193,4 +193,29 @@ class ProfileController extends Controller
             return response()->json(['status' => 'error', 'message' => 'user not found'], 404);
         }
     }
+
+    public function searchFriends(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->validate([
+                'criteria'  => ['string']
+            ]);
+
+            $searchCriteria = $request->criteria;
+
+            $friendsList = Auth::user()->getFriends()->filter(function($user,$key) use ($searchCriteria){
+                return (Str::contains($user->name,$searchCriteria)) && !$user->relationship_status;
+            });
+
+            if (count($friendsList) > 0) {
+                $html = view('partials.profile.friendsSearchResults')->withFriends($friendsList)->render();
+            }else{
+                $html = '<div class="col text-bold">'.__('profile.emptyModal').'</div>';
+            }
+
+            return response()->json(['status' => 'success', 'html' => $html], 200);
+        }else{
+            abort(401);
+        }
+    }
 }

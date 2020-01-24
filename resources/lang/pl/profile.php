@@ -7,9 +7,16 @@ return [
     'verifyEmailAlert'      => 'Konieczna weryfikacja adresu email. Aby korzystać z wszystkich funkcji portalu kliknij w link wysłany na podany adres email',
     'pictureInfo'           => 'Twoje zdjęcie zostało wysłane do administracji do akceptacji',
     'updated'               => 'Profil został zaktualizowany',
+    'picture'               => 'Zdjęcie Profilowe',
+    'city'                  => 'Miasto',
     'status'                => 'Status',
+    'relationStatus'        => 'Status Związku',
     'status_taken'          => 'W Związku',
+    'status_hidden'         => 'Nie Wyświetlaj',
     'status_free'           => 'Wolna',
+    'desc'                  => 'Opis',
+    'hobby'                 => 'Zainteresowania',
+    'save'                  => 'Zapisz Zmiany',
     'likeUser'              => "Poleć Użytkownika",
     'messageUser'           => "Napisz",
     'addFriend1'            => 'Dodaj do Znajomych',
@@ -28,5 +35,9 @@ return [
     'deleteTag'             => "Czy na pewno chcesz usunąć zainteresowanie?",
     'savedChanges'          => "Zapisano Zmiany",
     'editProfile'           => "Edytuj Profil",
-    'noActivity'            => "Brak Postów"
+    'noActivity'            => "Brak Postów",
+    'tagPartner'            => "Oznacz Partnerkę",
+    "searchFriend"          => "Nazwa znajomego użytkownika",
+    'addPartner'            => "Dodaj",
+    'searchTitle'           => "Wyszukaj Wolnego Użytkownika"
 ];

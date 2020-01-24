@@ -19,6 +19,44 @@
         .form-check-inline{
             text-align: center;
         }
+        .userFriend{
+            div{
+                margin: auto;
+                text-align: center;
+                img{
+                    width: 4rem;
+                    height: 4rem;
+                    border-radius: 50%;
+                    display: block;
+                    margin: 0 auto;
+                    margin-bottom: 0.5rem;
+                    color: $black;
+                }
+                span{
+                    @include font-size(1rem);
+                    font-weight: bold;
+                    color: $black;
+                    letter-spacing: 0.5px;
+                }
+                a:hover{
+                    color: $orange;
+                    span{
+                        color: $orange;
+                    }
+                }
+            }
+        }
+    }
+    .tagPartner{
+        margin: 0.5rem 0;
+        i{
+            cursor: pointer;
+            padding: 0.5rem;
+            @include font-size(1.2rem);
+            &:hover{
+                color: $orange;
+            }
+        }
     }
     .profileTags{
         #profileTagsOut{
@@ -48,6 +86,58 @@
             color: $white;
             &:hover{
                 background-color: $orange-hover;
+            }
+        }
+    }
+}
+
+#tagPartnerModal{
+    z-index: 1050;
+    .modal-dialog{
+        margin: 2rem auto;
+        max-width: 80vw;
+        output{
+            width: 100%;
+        }
+        @media screen and (max-width: $mobile-breakpoint) {
+            button{
+                margin-top: 0.5rem;
+            }
+        }
+        .userFriend{
+            text-align: center;
+            div{
+                cursor: pointer;
+                width: min-content;
+                margin: auto;
+                padding: 0.5rem 2rem;
+                img{
+                    width: 4rem;
+                    height: 4rem;
+                    border-radius: 50%;
+                    display: block;
+                    margin: 0 auto;
+                    margin-bottom: 0.5rem;
+                    color: $black;
+                }
+                span{
+                    @include font-size(1rem);
+                    font-weight: bold;
+                    color: $black;
+                    letter-spacing: 0.5px;
+                }
+                &:hover{
+                    background-color: $light-orange;
+                }
+                &.selected{
+                    background-color: $orange;
+                    span{
+                        color: $white;
+                    }
+                    &:hover{
+                        background-color: $orange;
+                    }
+                }
             }
         }
     }

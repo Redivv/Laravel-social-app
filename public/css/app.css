@@ -20272,6 +20272,110 @@ html {
   text-align: center;
 }
 
+#profileEditForm .profileRelationship .userFriend div,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser,
+.activity .activityPosts .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a {
+  margin: auto;
+  text-align: center;
+}
+
+#profileEditForm .profileRelationship .userFriend div img,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a img,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a img,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a img,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a img,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser img,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser img,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser img,
+.activity .activityPosts .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser img,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a img,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a img,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a img,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5rem;
+  color: #000;
+}
+
+#profileEditForm .profileRelationship .userFriend div span,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a span,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a span,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a span,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a span,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser span,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser span,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser span,
+.activity .activityPosts .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser span,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a span,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a span,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a span,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: 0.5px;
+}
+
+#profileEditForm .profileRelationship .userFriend div a:hover,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a a:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a a:hover,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a a:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a a:hover,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser a:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser a:hover,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser a:hover,
+.activity .activityPosts .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser a:hover,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a a:hover,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a a:hover,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a a:hover,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a a:hover {
+  color: #f66103;
+}
+
+#profileEditForm .profileRelationship .userFriend div a:hover span,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a a:hover span,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a a:hover span,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a a:hover span,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a a:hover span,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser a:hover span,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser a:hover span,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser a:hover span,
+.activity .activityPosts .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser a:hover span,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a a:hover span,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a a:hover span,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a a:hover span,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a a:hover span {
+  color: #f66103;
+}
+
+#profileEditForm .tagPartner {
+  margin: 0.5rem 0;
+}
+
+#profileEditForm .tagPartner i {
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+
+#profileEditForm .tagPartner i:hover {
+  color: #f66103;
+}
+
 #profileEditForm .profileTags #profileTagsOut {
   justify-content: center;
 }
@@ -20302,6 +20406,155 @@ html {
 
 #profileEditForm .profileSave button:hover {
   background-color: #e26103;
+}
+
+#tagPartnerModal {
+  z-index: 1050;
+}
+
+#tagPartnerModal .modal-dialog {
+  margin: 2rem auto;
+  max-width: 80vw;
+}
+
+#tagPartnerModal .modal-dialog output {
+  width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  #tagPartnerModal .modal-dialog button {
+    margin-top: 0.5rem;
+  }
+}
+
+#tagPartnerModal .modal-dialog .userFriend {
+  text-align: center;
+}
+
+#tagPartnerModal .modal-dialog .userFriend div,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .postTaggedUser,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser,
+.activity .activityPosts .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .postTaggedUser,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a {
+  cursor: pointer;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  margin: auto;
+  padding: 0.5rem 2rem;
+}
+
+#tagPartnerModal .modal-dialog .userFriend div img,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a img,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a img,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a img,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a img,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser img,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .postTaggedUser img,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser img,
+.activity .activityPosts .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .postTaggedUser img,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a img,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a img,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a img,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5rem;
+  color: #000;
+}
+
+#tagPartnerModal .modal-dialog .userFriend div span,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a span,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a span,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a span,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a span,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser span,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .postTaggedUser span,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser span,
+.activity .activityPosts .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .postTaggedUser span,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a span,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a span,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a span,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: 0.5px;
+}
+
+#tagPartnerModal .modal-dialog .userFriend div:hover,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a:hover,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a:hover,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .postTaggedUser:hover,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser:hover,
+.activity .activityPosts .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .postTaggedUser:hover,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a:hover,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a:hover,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a:hover,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a:hover {
+  background-color: rgba(255, 140, 0, 0.7);
+}
+
+#tagPartnerModal .modal-dialog .userFriend div.selected,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.selected,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a.selected,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a.selected,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a.selected,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .selected.postTaggedUser,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .selected.postTaggedUser,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .selected.postTaggedUser,
+.activity .activityPosts .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .selected.postTaggedUser,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.selected,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a.selected,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a.selected,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a.selected {
+  background-color: #f66103;
+}
+
+#tagPartnerModal .modal-dialog .userFriend div.selected span,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.selected span,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a.selected span,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a.selected span,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a.selected span,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .selected.postTaggedUser span,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .selected.postTaggedUser span,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .selected.postTaggedUser span,
+.activity .activityPosts .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .selected.postTaggedUser span,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.selected span,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a.selected span,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a.selected span,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a.selected span {
+  color: #ffffff;
+}
+
+#tagPartnerModal .modal-dialog .userFriend div.selected:hover,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.selected:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a.selected:hover,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a.selected:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a.selected:hover,
+#tagPartnerModal .modal-dialog .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .selected.postTaggedUser:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .selected.postTaggedUser:hover,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .selected.postTaggedUser:hover,
+.activity .activityPosts .postBox .post .postDesc .postTags #tagPartnerModal .modal-dialog .userFriend .selected.postTaggedUser:hover,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.selected:hover,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a.selected:hover,
+#tagPartnerModal .modal-dialog .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a.selected:hover,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #tagPartnerModal .modal-dialog .userFriend a.selected:hover {
+  background-color: #f66103;
 }
 
 #wallFetchBtn {

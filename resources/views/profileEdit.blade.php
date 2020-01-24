@@ -13,12 +13,12 @@
             @method("patch")
 
             <fieldset class="form-group col-12 row profilePicture">
-                <legend>Zdjęcie Profilowe</legend>
+                <legend>{{__('profile.picture')}}</legend>
                 <label for="profilePictureInput" class="col-12 col-form-label">
                     <img src="{{asset('img/profile-pictures/'.$user->picture)}}" alt="{{__("profile.photo", ['user' => $user->name])}}">
                     @if ($user->pending_picture)
                         <div class="alert alert-primary mt-2" role="alert">
-                            Twoje Zdjęcie Profilowe Zostało Wysłane do Administracji w celu Akceptacji
+                            {{__('profile.pictureInfo')}}
                         </div>
                     @endif
                 </label>
@@ -28,7 +28,7 @@
             <fieldset class="form-group col-12 row profileCity">
                 <legend class="m-0">
                     <label for="profileCityInput" class="col-12 col-form-label">
-                        Miasto
+                        {{__('profile.city')}}
                     </label>
                 </legend>
                 <input type="text" class="form-control" name="profileCity" id="profileCityInput" value="@if($user->city_id){{$user->city->name}}@endif">
@@ -37,27 +37,34 @@
             <fieldset class="form-group col-12 row profileRelationship">
                 <legend class="m-0">
                     <label for="profileRelationshipInput" class="col-12 col-form-label">
-                        Status Związku
+                        {{__('profile.relationStatus')}}
                     </label>
                 </legend>
                 <div class="form-check form-check-inline col row">
                     <input class="form-check-input col-12" type="radio" name="profileRelationship" id="profileRelationshipInput1" value="0" @if($user->relationship_status === 0) checked @endif >
-                    <label class="form-check-label col-12" for="profileRelationshipInput1">Wolna</label>
+                    <label class="form-check-label col-12" for="profileRelationshipInput1">{{__('profile.status_free')}}</label>
                 </div>
                 <div class="form-check form-check-inline col row">
                     <input class="form-check-input col-12" type="radio" name="profileRelationship" id="profileRelationshipInput2" value="1" @if($user->relationship_status === 1) checked @endif>
-                    <label class="form-check-label col-12" for="profileRelationshipInput2">W związku</label>
+                    <label class="form-check-label col-12" for="profileRelationshipInput2">{{__('profile.status_taken')}}</label>
                 </div>
                 <div class="form-check form-check-inline col row">
                     <input class="form-check-input col-12" type="radio" name="profileRelationship" id="profileRelationshipInput3" value="2" @if($user->relationship_status === null) checked @endif>
-                    <label class="form-check-label col-12" for="profileRelationshipInput3">Nie Wyświetlaj</label>
+                    <label class="form-check-label col-12" for="profileRelationshipInput3">{{__('profile.status_hidden')}}</label>
+                </div>
+
+                
+                <span class="col-12 tagPartner"><i class="fas fa-user-tag" data-toggle="modal" data-target="#tagPartnerModal" data-tool="tooltip" title="{{__('profile.tagPartner')}}" data-placement="bottom"></i></span>
+
+                <div id="userPartner" class="col-12">
+                    
                 </div>
             </fieldset>
 
             <fieldset class="form-group col-12 row profileDesc">
                 <legend class="m-0">
                     <label for="profileDescInput" class="col-12 col-form-label">
-                        Opis
+                        {{__('profile.desc')}}
                     </label>
                 </legend>
                 <textarea type="text" class="form-control" name="profileDesc" id="profileDescInput" rows="4">
@@ -68,7 +75,7 @@
             <fieldset class="form-group col-12 row profileTags">
                 <legend class="m-0">
                     <label for="profileTagsInput" class="col-12 col-form-label">
-                        Zainteresowania
+                        {{__('profile.hobby')}}
                     </label>
                 </legend>
                 <input type="text" class="form-control" name="profileTags" id="profileTagsInput" placeholder="Wpisz zainteresowanie i zatwierdź enterem">
@@ -83,10 +90,12 @@
             </fieldset>
 
             <div class="form-group col-12 row profileSave">
-                <button type="submit" class="btn">Zapisz</button>
+                <button type="submit" class="btn">{{__('profile.save')}}</button>
             </div>
         </form>
     </div>
+
+    @include('partials.profile.tagPartnerModal')
 @endsection
 
 @push('styles')
@@ -153,13 +162,74 @@
         minLength: 1
     });
 
+    
 
-        function deleteTag(selected) {
-            if (confirm(delete_msg)) {
-                $(selected).remove();
-                $('.tooltip:first').remove();
-            }
+    $('#friendsSearch').on('submit',function(e) {
+        e.preventDefault();
+        search(this);
+    });
+
+
+    function deleteTag(selected) {
+        if (confirm(delete_msg)) {
+            $(selected).remove();
+            $('.tooltip:first').remove();
         }
+    }
+
+    function search(form) {
+        let searchCriteria = $('#friendsSearch-input').val().trim();
+
+        if (searchCriteria != "") {
+
+            let url = baseUrl + "/user/profile/ajax/searchFriends";
+                
+            let spinnerHtml = '<div id="spinner" class="ajaxSpinner m-auto">'+
+                '<div class="spinner-border text-dark" role="status">'+
+                    '<span class="sr-only">Loading...</span>'+
+                '</div>'+
+            '</div>';
+
+            $('#friends-searchOut').html(spinnerHtml);
+
+            var request = $.ajax({
+                method : 'get',
+                url: url,
+                data: {criteria:searchCriteria}
+            });
+            
+            
+            request.done(function(response){
+                if (response.status === 'success') {
+                    $('#friends-searchOut').html(response.html);
+
+                    $('.userFriend>div').off('click');
+                    $(".userFriend>div").on('click',function() {
+                        $('.userFriend>div').removeClass('selected');
+                        $(this).addClass('selected');
+                    });
+
+                    $('#tagPartnerButton').one('click',function() {
+                        $('#tagPartnerModal').modal('hide');
+
+                        let selectedFriend = $('.userFriendContainer.selected').parent();
+
+                        $('#userPartner').html("");
+
+                        $(selectedFriend).prependTo('#userPartner');
+
+                        $('#friends-searchOut').html("");
+                    });
+                }
+            });
+            
+            
+            request.fail(function (xhr){
+                alert(xhr.responseJSON.message);
+                $('#friends-searchOut').html("");
+            });
+        }
+    }
 
     </script>
     
