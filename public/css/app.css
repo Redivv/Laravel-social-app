@@ -18985,6 +18985,7 @@ body {
 .nav-bar-height .userNotifications ul .friendOptions .friendRelated {
   cursor: pointer;
   color: black;
+  padding: 0.5rem;
   transition: all 0.5s ease;
 }
 
@@ -20272,6 +20273,10 @@ html {
   text-align: center;
 }
 
+#profileEditForm .profileRelationship .userFriend {
+  margin-top: 1rem;
+}
+
 #profileEditForm .profileRelationship .userFriend div,
 #profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a,
@@ -20287,6 +20292,43 @@ html {
 .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a {
   margin: auto;
   text-align: center;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+}
+
+#profileEditForm .profileRelationship .userFriend div #deletePartner,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a #deletePartner,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a #deletePartner,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a #deletePartner,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a #deletePartner,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser #deletePartner,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser #deletePartner,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser #deletePartner,
+.activity .activityPosts .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser #deletePartner,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a #deletePartner,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a #deletePartner,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a #deletePartner,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a #deletePartner {
+  float: right;
+  text-align: 0.9rem;
+  cursor: pointer;
+}
+
+#profileEditForm .profileRelationship .userFriend div #deletePartner:hover,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a #deletePartner:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a #deletePartner:hover,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a #deletePartner:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a #deletePartner:hover,
+#profileEditForm .profileRelationship .userFriend #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser #deletePartner:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser #deletePartner:hover,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser #deletePartner:hover,
+.activity .activityPosts .postBox .post .postDesc .postTags #profileEditForm .profileRelationship .userFriend .postTaggedUser #deletePartner:hover,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a #deletePartner:hover,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a #deletePartner:hover,
+#profileEditForm .profileRelationship .userFriend .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a #deletePartner:hover,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #profileEditForm .profileRelationship .userFriend a #deletePartner:hover {
+  color: #f66103;
 }
 
 #profileEditForm .profileRelationship .userFriend div img,

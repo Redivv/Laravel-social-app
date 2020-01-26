@@ -39,5 +39,8 @@ return [
     'tagPartner'            => "Oznacz Partnerkę",
     "searchFriend"          => "Nazwa znajomego użytkownika",
     'addPartner'            => "Dodaj",
-    'searchTitle'           => "Wyszukaj Wolnego Użytkownika"
+    'searchTitle'           => "Wyszukaj Wolnego Użytkownika",
+    'deletePartnerMsgs'     => 'Czy na pewno chcesz usunąć partnera?',
+    'wrongPartner'          => "Nieprawidłowy partner",
+    'partnerInfo'           => "Propozycja ogłoszenia związku została wysłana"
 ];

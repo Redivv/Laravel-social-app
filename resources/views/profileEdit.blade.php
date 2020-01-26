@@ -45,7 +45,7 @@
                     <label class="form-check-label col-12" for="profileRelationshipInput1">{{__('profile.status_free')}}</label>
                 </div>
                 <div class="form-check form-check-inline col row">
-                    <input class="form-check-input col-12" type="radio" name="profileRelationship" id="profileRelationshipInput2" value="1" @if($user->relationship_status === 1) checked @endif>
+                    <input class="form-check-input col-12" type="radio" name="profileRelationship" id="profileRelationshipInput2" value="1" @if($user->relationship_status === 1 || $user->relationship_status === 4) checked @endif>
                     <label class="form-check-label col-12" for="profileRelationshipInput2">{{__('profile.status_taken')}}</label>
                 </div>
                 <div class="form-check form-check-inline col row">
@@ -57,7 +57,19 @@
                 <span class="col-12 tagPartner"><i class="fas fa-user-tag" data-toggle="modal" data-target="#tagPartnerModal" data-tool="tooltip" title="{{__('profile.tagPartner')}}" data-placement="bottom"></i></span>
 
                 <div id="userPartner" class="col-12">
-                    
+                    @if($user->relationship_status == 4)
+                        <div class="alert alert-primary mt-2" role="alert">
+                            {{__('profile.partnerInfo')}}
+                        </div>
+                    @elseif($user->partner_id)
+                        <div class="userFriend col">
+                            <div class="userFriendContainer">
+                                <i id="deletePartner" class="fa fa-times"></i>
+                                <img src="{{asset('img/profile-pictures/'.$user->partner->picture)}}" alt="{{__('profile.photo', ['user' => $user->partner->name])}}">
+                                <span>{{$user->partner->name}}</span>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </fieldset>
 
@@ -107,8 +119,16 @@
     <script src="{{asset('js/emoji.js')}}"></script>
 
     <script defer>
-        var delete_msg = "{{__('profile.deleteTag')}}";
-        var base_url = "{{url('/')}}";
+        var delete_msg          = "{{__('profile.deleteTag')}}";
+        var base_url            = "{{url('/')}}";
+        var deletePartnerMsgs   = "{{__('profile.deletePartnerMsgs')}}";
+
+        $('#deletePartner').on('click',function() {
+            if(confirm(deletePartnerMsgs)){
+                html = '<input type="hidden" name="deletePartner" value="true">';
+                $('#deletePartner').parents('.userFriend').replaceWith(html);
+            } 
+        });
 
         
         $('[data-tool="tooltip"]').tooltip();
@@ -209,6 +229,7 @@
                         $(this).addClass('selected');
                     });
 
+                    $('#tagPartnerButton').off('click');
                     $('#tagPartnerButton').one('click',function() {
                         $('#tagPartnerModal').modal('hide');
 
@@ -219,6 +240,17 @@
                         $(selectedFriend).prependTo('#userPartner');
 
                         $('#friends-searchOut').html("");
+
+                        let html ='<i id="deletePartner" class="fa fa-times"></i>';
+
+                        $('.userFriendContainer.selected').prepend(html);
+
+                        $('#deletePartner').on('click',function() {
+                           if(confirm(deletePartnerMsgs)){
+                               html = '<input type="hidden" name="deletePartner" value="true">';
+                               $('#deletePartner').parents('.userFriend').replaceWith(html);
+                           } 
+                        });
                     });
                 }
             });

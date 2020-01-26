@@ -20,9 +20,19 @@
             text-align: center;
         }
         .userFriend{
+            margin-top: 1rem;
             div{
+                #deletePartner{ 
+                    float: right;
+                    text-align: (0.9rem);
+                    cursor: pointer;
+                    &:hover{
+                        color: $orange;
+                    }
+                }
                 margin: auto;
                 text-align: center;
+                width: min-content;
                 img{
                     width: 4rem;
                     height: 4rem;

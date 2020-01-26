@@ -24,24 +24,29 @@
                                 <ul class="friendRequests">
                                     @foreach ($notifications['FR'] as $frNot)
                                         <li class="dropdown-item">
-                                            <div class="row" id="{{$frNot['name']}}">
-                                                <a class="col-7" href="{{route('ProfileOtherView',['user' => $frNot['name']])}}" target="__blank">
-                                                    <div class="row">
-                                                        <div class="col-4" >
-                                                            <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
-                                                        </div>
-                                                        <div class="col-8 friendName">
-                                                            <span>{{$frNot['name']}}</span>
-                                                        </div>
+                                            <div id="{{$frNot->name}}">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <img src="{{asset('img/profile-pictures/'.$frNot->picture)}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
                                                     </div>
-                                                </a>
-                                                <div class="col-5 friendOptions">
-                                                    <span class="acceptFriend friendRelated" id="{{$frNot['name']}}Add"  data-name="{{$frNot['name']}}"><i class="fas fa-plus"></i></span>
-                                                    <a href="/message/{{$frNot['name']}}" class="chatWith friendRelated" id="{{$frNot['name']}}Chat"><i class="far fa-comment-dots"></i></a>
-                                                    <span class="denyFriend friendRelated" id="{{$frNot['name']}}Deny" data-name="{{$frNot['name']}}"><i class="fas fa-times"></i></span>
+                                                    <div class="col-10 friendName">
+                                                        <a href="{{route('ProfileOtherView',['user' => $frNot->name])}}">
+                                                            <span class="font-weight-bold mb-2">{{$frNot->name}}</span>
+                                                        </a> 
+                                                        @if ($frNot->isFriendWith(auth()->user()))
+                                                            {{__('nav.partnerReq')}}
+                                                        @else
+                                                            {{__('nav.friendReq')}}
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 friendOptions">
+                                                    <span class="acceptFriend friendRelated" id="{{$frNot->name}}Add"  data-name="{{$frNot->name}}"><i class="fas fa-plus"></i></span>
+                                                    <a href="/message/{{$frNot->name}}" class="chatWith friendRelated" id="{{$frNot->name}}Chat"><i class="far fa-comment-dots"></i></a>
+                                                    <span class="denyFriend friendRelated" id="{{$frNot->name}}Deny" data-name="{{$frNot->name}}"><i class="fas fa-times"></i></span>
                                                 </div>
                                             </div>
-                                        </li>                                        
+                                        </li>                                      
                                     @endforeach
                                 </ul>
                             @endif
@@ -327,29 +332,34 @@
                             @else
                             {{-- Friend request notifications --}}
                                 @if ($notifications['FRAmount'] > 0)
-                                    <ul class="friendRequests">
-                                        @foreach ($notifications['FR'] as $frNot)
-                                            <li class="dropdown-item">
-                                                <div class="row" id="{{$frNot['name']}}">
-                                                    <a class="col-7" href="{{route('ProfileOtherView',['user' => $frNot['name']])}}">
-                                                        <div class="row">
-                                                            <div class="col-4" >
-                                                                <img src="{{asset('img/profile-pictures/'.$frNot['picture'])}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
-                                                            </div>
-                                                            <div class="col-8 friendName">
-                                                                <span>{{$frNot['name']}}</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <div class="col-5 friendOptions">
-                                                        <span class="acceptFriend friendRelated" id="{{$frNot['name']}}Add"  data-name="{{$frNot['name']}}"><i class="fas fa-plus"></i></span>
-                                                        <a href="/message/{{$frNot['name']}}" class="chatWith friendRelated" id="{{$frNot['name']}}Chat"><i class="far fa-comment-dots"></i></a>
-                                                        <span class="denyFriend friendRelated" id="{{$frNot['name']}}Deny" data-name="{{$frNot['name']}}"><i class="fas fa-times"></i></span>
+                                <ul class="friendRequests">
+                                    @foreach ($notifications['FR'] as $frNot)
+                                        <li class="dropdown-item">
+                                            <div id="{{$frNot->name}}">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <img src="{{asset('img/profile-pictures/'.$frNot->picture)}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
+                                                    </div>
+                                                    <div class="col-10 friendName">
+                                                        <a href="{{route('ProfileOtherView',['user' => $frNot->name])}}">
+                                                            <span class="font-weight-bold mb-2">{{$frNot->name}}</span>
+                                                        </a> 
+                                                        @if ($frNot->isFriendWith(auth()->user()))
+                                                            {{__('nav.partnerReq')}}
+                                                        @else
+                                                            {{__('nav.friendReq')}}
+                                                        @endif
                                                     </div>
                                                 </div>
-                                            </li>                                        
-                                        @endforeach
-                                    </ul>
+                                                <div class="col-12 friendOptions">
+                                                    <span class="acceptFriend friendRelated" id="{{$frNot->name}}Add"  data-name="{{$frNot->name}}"><i class="fas fa-plus"></i></span>
+                                                    <a href="/message/{{$frNot->name}}" class="chatWith friendRelated" id="{{$frNot->name}}Chat"><i class="far fa-comment-dots"></i></a>
+                                                    <span class="denyFriend friendRelated" id="{{$frNot->name}}Deny" data-name="{{$frNot->name}}"><i class="fas fa-times"></i></span>
+                                                </div>
+                                            </div>
+                                        </li>                                      
+                                    @endforeach
+                                </ul>
                                 @endif
                                 @if (count($notifications['user']) > 0)
                                     @foreach ($notifications['user'] as $userNot)
@@ -576,17 +586,57 @@
                         }
                         html = '<li class="dropdown-item">'+
                                     '<div class="row" id="'+notification.sender_name+'">'+
-                                        '<a class="col-7 " href="/user/profile/'+notification.sender_name+'">'+
-                                            '<div class="row">'+
-                                                '<div class="col-4" >'+
-                                                    '<img src="/img/profile-pictures/'+notification.sender_picture+'" style="max-width: 35px; max-height: 35px; border-radius: 50%;">'+
-                                                '</div>'+
-                                                '<div class="col-8 friendName">'+
-                                                    '<span>'+notification.sender_name+'</span>'+
-                                                '</div>'+
+                                        '<div class="row">'+
+                                            '<div class="col-2" >'+
+                                                '<img src="/img/profile-pictures/'+notification.sender_picture+'" style="max-width: 35px; max-height: 35px; border-radius: 50%;">'+
                                             '</div>'+
-                                        '</a>'+
-                                        '<div class="col-5 friendOptions">'+
+                                            '<div class="col-10 friendName">'+
+                                                '<a href="/user/profile/'+notification.sender_name+'">'+
+                                                    '<span class="font-weight-bold mb-2">'+notification.sender_name+'</span>'+
+                                                '</a>'+
+                                                '{{__("nav.friendReq")}}'+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="col-12 friendOptions">'+
+                                            '<span class="acceptFriend friendRelated" id="'+notification.sender_name+'Add"  data-name="'+notification.sender_name+'"><i class="fas fa-plus"></i></span>'+
+                                            '<span class="chatWith friendRelated" id="'+notification.sender_name+'Chat" data-name="'+notification.sender_name+'"><i class="far fa-comment-dots"></i></span>'+
+                                            '<span class="denyFriend friendRelated" id="'+notification.sender_name+'Deny" data-name="'+notification.sender_name+'"><i class="fas fa-times"></i></span>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</li>';
+                        $('.friendRequests').prepend(html);
+
+                        $('.acceptFriend').off('click');
+                        $('.acceptFriend').on('click',function() {
+                            acceptFriend(this);
+                        });
+
+                        $('.denyFriend').off('click');
+                        $('.denyFriend').on('click',function() {
+                            denyFriend(this);
+                        });
+
+                        break;
+
+                        case 'App/Notifications/PendingPartnerRequest':
+                        updateUserNotifications();
+                        if (!($('.friendRequests:first').length)) {
+                            $('.userNotifications').prepend('<ul class="friendRequests"></ul>');
+                        }
+                        html = '<li class="dropdown-item">'+
+                                    '<div class="row" id="'+notification.sender_name+'">'+
+                                        '<div class="row">'+
+                                            '<div class="col-2" >'+
+                                                '<img src="/img/profile-pictures/'+notification.sender_picture+'" style="max-width: 35px; max-height: 35px; border-radius: 50%;">'+
+                                            '</div>'+
+                                            '<div class="col-10 friendName">'+
+                                                '<a href="/user/profile/'+notification.sender_name+'">'+
+                                                    '<span class="font-weight-bold mb-2">'+notification.sender_name+'</span>'+
+                                                '</a> '+
+                                                '{{__("nav.partnerReq")}}'+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="col-12 friendOptions">'+
                                             '<span class="acceptFriend friendRelated" id="'+notification.sender_name+'Add"  data-name="'+notification.sender_name+'"><i class="fas fa-plus"></i></span>'+
                                             '<span class="chatWith friendRelated" id="'+notification.sender_name+'Chat" data-name="'+notification.sender_name+'"><i class="far fa-comment-dots"></i></span>'+
                                             '<span class="denyFriend friendRelated" id="'+notification.sender_name+'Deny" data-name="'+notification.sender_name+'"><i class="fas fa-times"></i></span>'+

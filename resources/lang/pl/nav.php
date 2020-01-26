@@ -24,5 +24,8 @@ return [
     'likeUser'                  => 'Ktoś poleca Twój profil',
     'denyFriendMsg'             => 'Na pewno chcesz odrzucić zaproszenie ',
     'acceptFriendMsg'           => 'Na pewno chcesz zaakceptować zaproszenie ',
-    'seenYourProfile'           => 'Ktoś odwiedził Twój profil'
+    'seenYourProfile'           => 'Ktoś odwiedził Twój profil',
+    'deletedPartner'            => ':user Usunął Wasz Związek',
+    'friendReq'                 => ' zaprasza Cię do znajomych',
+    'partnerReq'                 => ' chce zaproponować ogłoszenie waszego związku'
 ]; 

@@ -8,18 +8,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class PendingFriendRequest extends Notification
+class PendingPartnerRequest extends Notification implements ShouldQueue
 {
     use Queueable;
+
+    public $sender;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(string $content)
+    public function __construct(object $user)
     {
-        $this->content = $content;
+        $this->sender = $user;
     }
 
     /**
@@ -42,8 +44,9 @@ class PendingFriendRequest extends Notification
     public function toArray($notifiable)
     {
         return [
-            //to edit
-            'content'     => $this->content
+            'sender_id'         => $this->sender->id,
+            'sender_name'       => $this->sender->name,
+            'sender_picture'    => $this->sender->picture
         ];
     }
 
@@ -51,7 +54,9 @@ class PendingFriendRequest extends Notification
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'content'     => $this->content
+            'sender_id'         => $this->sender->id,
+            'sender_name'       => $this->sender->name,
+            'sender_picture'    => $this->sender->picture
         ]);
     }
 }

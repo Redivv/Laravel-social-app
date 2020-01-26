@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Notifications\NewProfilePicture;
 use App\Notifications\SystemNotification;
+use App\Notifications\PendingPartnerRequest;
 
 use Illuminate\Support\Facades\Notification;
 
@@ -65,7 +66,12 @@ class ProfileController extends Controller
             'profileCity'                   =>  ['string','nullable','max:250'],
             'profileDesc'                   =>  ['string','nullable'],
             'profileRelationship'           =>  ['numeric', 'gte:0', 'lte:2','nullable'],
-            'profileTags.*'                 =>  ['string','max:100','nullable']
+            'profileTags.*'                 =>  ['string','max:100','nullable'],
+            'userPartner'                   =>  ['numeric', 'exists:users,id'],
+            'deletePartner'                 =>  [
+                'boolean',
+                Rule::in(['true']),
+            ]
         ]);
 
         //If there's a file
@@ -93,10 +99,79 @@ class ProfileController extends Controller
         }
 
         if (isset($request->profileRelationship)) {
-            if ($request->profileRelationship == 3) {
-                $user->relationship_status = null;
+            switch ($request->profileRelationship) {
+                case 2:
+                    $user->relationship_status = null;
+
+                    if ($user->partner_id) {
+                        $partner = User::find($user->partner_id);
+
+                        $partner->partner_id = null;
+                        $partner->relationship_status = 0;
+                        if($partner->update()){
+                            $partner->notify(new SystemNotification(__('nav.deletedPartner', ['user' => $user->name]),'danger','_user_profile_',$user->name,'','userDeletedPartner'));
+                        }
+
+                        $user->partner_id = null;
+                    }
+
+                    break;
+                case 1:
+                    if (isset($request->userPartner)) {
+                        if ($request->userPartner != $user->partner_id) {
+
+                            if ($user->partner_id) {
+                                $partner = $user->partner;
+        
+                                $partner->partner_id = null;
+                                $partner->relationship_status = 0;
+                                if($partner->update()){
+                                    $partner->notify(new SystemNotification(__('nav.deletedPartner', ['user' => $user->name]),'danger','_user_profile_',$user->name,'','userDeletedPartner'));
+                                }
+                            }
+
+                            $partner = User::find($request->userPartner);
+
+                            if ($user->isFriendWith($partner) && $partner->partner_id === null && !$partner->relationship_status) {
+                                $user->partner_id = null;
+                                $user->relationship_status = 4;
+                                $partner->notify(new PendingPartnerRequest($user));
+                            }else{
+                                $request->session()->flash('message', __('profile.wrongPartner'));
+                                return redirect(route('ProfileEdition'));
+                            }
+                        }
+                    }elseif(isset($request->deletePartner)){
+                        if ($user->partner_id) {
+                            $partner = User::find($user->partner_id);
+
+                            $partner->partner_id = null;
+                            $partner->relationship_status = 0;
+                            if($partner->update()){
+                                $partner->notify(new SystemNotification(__('nav.deletedPartner', ['user' => $user->name]),'danger','_user_profile_',$user->name,'','userDeletedPartner'));
+                            }
+
+                            $user->partner_id = null;
+                        }
+                    }
+
+                    break;
+                
+                default:
+                    $user->relationship_status = $request->profileRelationship;
+                    if ($user->partner_id) {
+                        $partner = User::find($user->partner_id);
+
+                        $partner->partner_id = null;
+                        $partner->relationship_status = 0;
+                        if($partner->update()){
+                            $partner->notify(new SystemNotification(__('nav.deletedPartner', ['user' => $user->name]),'danger','_user_profile_',$user->name,'','userDeletedPartner'));
+                        }
+
+                        $user->partner_id = null;
+                    }
+                    break;
             }
-            $user->relationship_status = $request->profileRelationship;
         }
 
         if (isset($request->profileDesc)) {
