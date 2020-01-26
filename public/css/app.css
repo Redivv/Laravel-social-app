@@ -19515,8 +19515,8 @@ html {
 
 .profileData .userData .userDataCell .userPartner {
   display: block;
-  margin-top: 0.3rem;
-  font-size: 1.05rem;
+  margin-top: -0.5rem;
+  font-size: 1.02rem;
 }
 
 .profileData .userDesc span {
