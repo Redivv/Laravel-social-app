@@ -13,6 +13,7 @@ return [
     'userNot3'                  => 'ma nowe zdjęcie profilowe',
     'userNot4'                  => 'zaakceptował Twoje zaproszenie do znajomych',
     'userNot5'                  => 'przyjął zaproszenie do znajomych użytkownika :user',
+    'userNot6'                  => 'jest w związku z :user',
     'userNotAdmin'              => 'Administrator dodał nowy post na tablicy',
     'adminWideInfoHeader'       => 'Wiadomość od administracji',
     'replyNot'                  => 'Ktoś odpowiedział na Twój komentarz',
@@ -27,5 +28,7 @@ return [
     'seenYourProfile'           => 'Ktoś odwiedził Twój profil',
     'deletedPartner'            => ':user Usunął Wasz Związek',
     'friendReq'                 => ' zaprasza Cię do znajomych',
-    'partnerReq'                 => ' chce zaproponować ogłoszenie waszego związku'
+    'partnerReq'                => ' chce zaproponować ogłoszenie waszego związku',
+    'acceptedPartner'           => 'Użytkownik :user przyjął Twoją propozycję związku',
+    'deniedPartner'             => 'Użytkownik :user odrzucił Twoją propozycję związku'
 ]; 

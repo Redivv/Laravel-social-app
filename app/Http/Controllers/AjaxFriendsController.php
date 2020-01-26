@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Notifications\FriendRequestSend;
 use App\Notifications\FriendRequestAccepted;
 use App\Notifications\UserNotification;
+use App\Notifications\SystemNotification;
 use Illuminate\Support\Facades\Notification;
 
 use App\User;
@@ -35,6 +36,7 @@ class AjaxFriendsController extends Controller
             return response()->json(['status' => 'success'],200);
         }
     }
+
     public function deleteFriend(Request $request,User $user){
         if($request->ajax()){
             if(Auth::user()->isFriendWith($user)){
@@ -43,41 +45,135 @@ class AjaxFriendsController extends Controller
             }
         }
     }
+
     public function acceptFriend(Request $request,User $user){
         if($request->ajax()){
             $you = Auth::user();
+
+            if ($you->isFriendWith($user)) {
+                if ($user->relationship_status == 4 && $user->partner_id === null) {
+
+                    $you->partner_id = $user->id;
+                    $you->relationship_status = 1;
+
+                    $user->partner_id = $you->id;
+                    $user->relationship_status = 1;
+
+                    if ($you->update() && $user->update()) {
+
+                        $partnerRequests = $you->notifications()->whereIn('type',
+                        [
+                            'App\Notifications\PendingPartnerRequest',
+                        ])->get();
+    
+                        foreach ($partnerRequests as $request) {
+                            $request->delete();
+                        }
+
+                        $user->notify(new SystemNotification(__('nav.acceptedPartner', ['user' => $you->name]),'success','_user_profile_',$you->name,'','userAcceptedPartner'));
             
-            $yourFriends = $you->getFriends();
-            $allFriends = $yourFriends->merge($user->getFriends());
+                        $yourFriends = $you->getFriends()->reject(function ($friend,$key) use ($user){
+                            return $friend->id == $user->id;
+                        });
 
-            $you->acceptFriendRequest($user);
+                        $userFriends = $user->getFriends()->reject(function($friend,$key) use ($you){
+                            return $friend->id == $you->id;
+                        });
 
-            $user->notify(new FriendRequestAccepted($you));
+                        $post = new Post;
+                        $post->user_id      = $you->id;
+                        $post->desc         = __('activityWall.newPartner', ['user1' => $you->name, 'user2' => $user->name]);
+                        $post->is_public    = false;
+                        $post->pictures     = json_encode([$you->picture,$user->picture]);
+        
+                        $post2 = new Post;
+                        $post2->user_id      = $user->id;
+                        $post2->desc         = __('activityWall.newPartner', ['user1' => $you->name, 'user2' => $user->name]);
+                        $post2->is_public    = false;
+                        $post2->pictures     = json_encode([$you->picture,$user->picture]);
+                        
+                        copy(public_path('img/profile-pictures/').$you->picture,public_path('img/post-pictures/').$you->picture);
+                        copy(public_path('img/profile-pictures/').$user->picture,public_path('img/post-pictures/').$user->picture);
+        
+                        if ($post->save()) {
+                            Notification::send($yourFriends, new UserNotification($you, '_user_home_post_',$post->id, '', __('nav.userNot6',['user' => $user->name]), 'newPost'.$post->id));
+                        }
 
-            $post = new Post;
-            $post->user_id      = $you->id;
-            $post->desc         = __('activityWall.newFriend', ['user1' => $you->name, 'user2' => $user->name]);
-            $post->is_public    = false;
+                        if ($post2->save()) {
+                            Notification::send($userFriends, new UserNotification($user, '_user_home_post_',$post2->id, '', __('nav.userNot6',['user' => $you->name]), 'newPost'.$post2->id));
+                        }
+                    }
+                }
+            }else{
             
-            
-            copy(public_path('img/profile-pictures/').$you->picture,public_path('img/post-pictures/').$you->picture);
-            copy(public_path('img/profile-pictures/').$user->picture,public_path('img/post-pictures/').$user->picture);
+                $yourFriends = $you->getFriends()->reject(function ($friend,$key) use ($user){
+                    return $friend->id == $user->id;
+                });
 
-            $post->pictures     = json_encode([$you->picture,$user->picture]);
+                $userFriends = $user->getFriends()->reject(function($friend,$key) use ($you){
+                    return $friend->id == $you->id;
+                });
 
+                $you->acceptFriendRequest($user);
 
-            if ($post->save()) {
-                Notification::send($allFriends, new UserNotification($you, '_user_home_post_',$post->id, '', __('nav.userNot5',['user' => $user->name]), 'newPost'.$post->id));
+                $user->notify(new FriendRequestAccepted($you));
+
+                $post = new Post;
+                $post->user_id      = $you->id;
+                $post->desc         = __('activityWall.newFriend', ['user1' => $you->name, 'user2' => $user->name]);
+                $post->is_public    = false;
+                $post->pictures     = json_encode([$you->picture,$user->picture]);
+
+                $post2 = new Post;
+                $post2->user_id      = $user->id;
+                $post2->desc         = __('activityWall.newFriend', ['user1' => $you->name, 'user2' => $user->name]);
+                $post2->is_public    = false;
+                $post2->pictures     = json_encode([$you->picture,$user->picture]);
+                
+                copy(public_path('img/profile-pictures/').$you->picture,public_path('img/post-pictures/').$you->picture);
+                copy(public_path('img/profile-pictures/').$user->picture,public_path('img/post-pictures/').$user->picture);
+
+                if ($post->save()) {
+                    Notification::send($yourFriends, new UserNotification($you, '_user_home_post_',$post->id, '', __('nav.userNot5',['user' => $user->name]), 'newPost'.$post->id));
+                }
+
+                if ($post2->save()) {
+                    Notification::send($userFriends, new UserNotification($user, '_user_home_post_',$post2->id, '', __('nav.userNot5',['user' => $you->name]), 'newPost'.$post2->id));
+                }
+
+                return response()->json(['status' => 'success'],200);
             }
-
-            return response()->json(['status' => 'success'],200);
         }
     }
+
     public function denyFriend(Request $request,User $user){
         if($request->ajax()){
             $you = Auth::user();
-            $you->denyFriendRequest($user);
-            return response()->json(['status' => 'success'],200);
+            if ($you->isFriendWith($user)) {
+                $user->partner_id = null;
+                $user->relationship_status = 0;
+
+                $partnerRequests = $you->notifications()->whereIn('type',
+                    [
+                        'App\Notifications\PendingPartnerRequest',
+                    ])->get();
+
+                foreach ($partnerRequests as $request) {
+                    if ($request->data['sender_id'] == $user->id) {
+                        $request->delete();
+                    }
+                }
+
+                if ($user->update()) {
+                    $user->notify(new SystemNotification(__('nav.deniedPartner', ['user' => $you->name]),'danger','_user_profile_',$you->name,'','userDeniedPartner'));
+                }
+            }else{
+                $you = Auth::user();
+                $you->denyFriendRequest($user);
+                return response()->json(['status' => 'success'],200);
+            }
+
+
         }
     }
 }

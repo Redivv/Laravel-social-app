@@ -50,13 +50,22 @@ class ProfileController extends Controller
         
         $user = Auth::user();
 
+        $profileNotifications = $user->notifications()->whereIn(
+            'type',
+            [
+                'App\Notifications\SystemNotification',
+                'App\Notifications\AdminWideInfo'
+                ])->get();
+        
+        foreach ($profileNotifications as $profNot) {
+            $profNot->delete();
+        }
+
         $tags = $user->tagNames();
         return view('profileEdit')->with(compact('user'))->with(compact('tags'));
     }
 
     public function update(Request $request){
-
-        $kek = $request->all();
 
         $user = Auth::user();
 
@@ -69,7 +78,6 @@ class ProfileController extends Controller
             'profileTags.*'                 =>  ['string','max:100','nullable'],
             'userPartner'                   =>  ['numeric', 'exists:users,id'],
             'deletePartner'                 =>  [
-                'boolean',
                 Rule::in(['true']),
             ]
         ]);
@@ -147,11 +155,13 @@ class ProfileController extends Controller
 
                             $partner->partner_id = null;
                             $partner->relationship_status = 0;
+                            
                             if($partner->update()){
                                 $partner->notify(new SystemNotification(__('nav.deletedPartner', ['user' => $user->name]),'danger','_user_profile_',$user->name,'','userDeletedPartner'));
                             }
 
                             $user->partner_id = null;
+                            $user->relationship_status = 0;
                         }
                     }
 

@@ -42,5 +42,6 @@ return [
     'searchTitle'           => "Wyszukaj Wolnego Użytkownika",
     'deletePartnerMsgs'     => 'Czy na pewno chcesz usunąć partnera?',
     'wrongPartner'          => "Nieprawidłowy partner",
-    'partnerInfo'           => "Propozycja ogłoszenia związku została wysłana"
+    'partnerInfo'           => "Propozycja ogłoszenia związku została wysłana",
+    'mutualFriends'         => "W tym Wspólni (:count)"
 ];

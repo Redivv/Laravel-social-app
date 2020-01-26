@@ -103,6 +103,9 @@
                         <main>
                             @if ($user->relationship_status)
                                 {{__('profile.status_taken')}}
+                                @if ($user->partner_id)
+                                    <a href="{{route('ProfileOtherView',['user' => $user->partner->name])}}" class="userPartner text-bold">{{$user->partner->name}}</a>
+                                @endif
                             @else
                                 {{__('profile.status_free')}}
                             @endif
@@ -139,6 +142,9 @@
                     <button class="btn col-12" data-tool="tooltip" title="{{__('profile.allFriends')}}" data-placement="bottom" data-toggle="modal" data-target="#expandInfoModal" data-content="friends" data-id="{{$user->id}}">
                         {{__('profile.closeFriends',['amount' => $friends])}}
                     </button>
+                    @if ( ($user->id != auth()->id()) && ($user->getMutualFriendsCount(auth()->user()) > -1))
+                        <span class="mutualFriends">{{__('profile.mutualFriends',['count' => $user->getMutualFriendsCount(auth()->user()) ])}}</span>
+                    @endif
                 </div>
             @endif
         </div>

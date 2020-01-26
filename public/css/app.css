@@ -12323,6 +12323,7 @@ a.text-dark:focus {
 .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentDate,
 .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentDate,
 .activity .noActivity,
+.profileData .userFriends .mutualFriends,
 .profileData .userStatus span,
 .nav-bar-height .chatNotifications .dropdown-item .notificationDesc .descTime,
 .nav-bar-height .chatNotifications .clearAllBtn .notificationDesc .descTime,
@@ -18943,7 +18944,7 @@ body {
 .nav-bar-height .navDesc .dropdown-menu {
   left: -80%;
   overflow-x: hidden;
-  width: 30vw;
+  width: 35vw;
 }
 
 @media screen and (max-width: 1200px) {
@@ -19449,7 +19450,7 @@ html {
   overflow: hidden;
   height: 82vh;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 1rem 0.5rem;
+  padding: 0 0.5rem;
 }
 
 .profileData .col-12 {
@@ -19510,6 +19511,12 @@ html {
   font-size: 1rem;
   font-weight: bold;
   color: #f66103;
+}
+
+.profileData .userData .userDataCell .userPartner {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 1.05rem;
 }
 
 .profileData .userDesc span {
@@ -19575,6 +19582,12 @@ html {
 
 .profileData .userFriends button:hover {
   color: #f66103;
+}
+
+.profileData .userFriends .mutualFriends {
+  font-size: 0.7rem;
+  margin-top: -1.5rem;
+  letter-spacing: 0.5px;
 }
 
 .profileData .userButtons {
@@ -19735,8 +19748,10 @@ html {
 }
 
 .activity .activityPosts .postBox .post .postDesc .postPhotos .postPicture {
-  width: 11rem;
-  height: 8rem;
+  width: 8rem;
+  height: 7rem;
+  margin-right: 0.5rem;
+  margin-top: 0.3rem;
 }
 
 .activity .activityPosts .postBox .post .postDesc .postContent {

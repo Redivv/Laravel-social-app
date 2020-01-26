@@ -41,5 +41,6 @@ return [
     "deleteTags"        => "Usuń Wybrane Oznaczenie",
     'deleteComment'     => "Usuń Komentarz",
     'editComment'       => "Edytuj Komentarz",
-    'newFriend'     => ":user1 przyjął zaproszenie do znajomych od :user2"
+    'newFriend'         => ":user1 przyjął zaproszenie do znajomych od :user2",
+    'newPartner'        => ":user1 jest w związku z :user2",
 ];

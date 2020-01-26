@@ -8,7 +8,7 @@ html{font-size: 16px !important;}
     overflow: hidden;
     height: 82vh;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 1rem 0.5rem;
+    padding: 0 0.5rem;
     .col-12{
         display:flex;
         justify-content: center;
@@ -59,6 +59,11 @@ html{font-size: 16px !important;}
             @include font-size(1rem);
             font-weight: bold;
             color: $orange;
+            .userPartner{
+                display:block;
+                margin-top: 0.3rem;
+                @include font-size(1.05rem);
+            }
         }
     }
     .userDesc{
@@ -115,6 +120,12 @@ html{font-size: 16px !important;}
             &:hover{
                 color: $orange;
             }
+        }
+        .mutualFriends{
+            @extend .text-muted;
+            @include font-size (0.7rem);
+            margin-top: -1.5rem;
+            letter-spacing: 0.5px;
         }
     }
     .userButtons{
@@ -248,8 +259,10 @@ html{font-size: 16px !important;}
                     .postPhotos{
                         padding: 0;
                         .postPicture{
-                            width: 11rem;
-                            height: 8rem;
+                            width: 8rem;
+                            height: 7rem;
+                            margin-right: 0.5rem;
+                            margin-top: 0.3rem;
                         }
                     }
                     .postContent{
