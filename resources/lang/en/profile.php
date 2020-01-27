@@ -43,6 +43,5 @@ return [
     'deletePartnerMsgs'     => 'Czy na pewno chcesz usunąć partnera?',
     'wrongPartner'          => "Nieprawidłowy partner",
     'partnerInfo'           => "Propozycja ogłoszenia związku została wysłana",
-    'mutualFriends'         => "W tym Wspólni (:count)",
-    'termsOfDoc2'           => "Polityka Prywatności"
+    'mutualFriends'         => "W tym Wspólni (:count)"
 ];

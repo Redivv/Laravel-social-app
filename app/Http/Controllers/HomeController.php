@@ -17,6 +17,8 @@ use App\Notifications\SystemNotification;
 use App\Notifications\UserNotification;
 use Illuminate\Support\Facades\Notification;
 
+use Leewillis77\CachedEmbed\CachedEmbed;
+
 class HomeController extends Controller
 {
     /**
@@ -36,6 +38,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        
         $friendsArray = Auth::user()->getFriends()->modelKeys();
         
         if ($request->has('sortBy')) {

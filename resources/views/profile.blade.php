@@ -120,7 +120,18 @@
                         {{Illuminate\Support\Str::words($user->description, 20, "...")}}
                         <button class="col-12 mx-auto btn" data-toggle="modal" data-target="#expandInfoModal" data-content="desc" data-id="{{$user->id}}">{{__('profile.readMore')}}</button>
                     @else
-                        {{$user->description}}
+                        @php
+                            $regex = '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#';
+                            preg_match_all($regex, e($user->description), $commentLinks);
+                            if (isset($commentLinks)) {
+                                $embedLinks = array();
+                                foreach ($commentLinks[0] as $link) {
+                                    $html = "<a href='".$link."' target='__blank'>".$link."</a>";
+                                    $embedLinks[] = $html;
+                                }
+                                echo nl2br(preg_replace_array($regex, $embedLinks, e($user->description)));
+                            }
+                        @endphp
                     @endif
                 </span>
             </div>

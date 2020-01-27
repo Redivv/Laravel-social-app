@@ -23,7 +23,7 @@
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('registeration.name') }}</label>
     
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
     
                             @error('name')
@@ -36,7 +36,7 @@
     
                     <div class="form-group row">
                         <label for="birth_year" class="col-md-4 col-form-label text-md-right">{{ __('registeration.age') }}</label>
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <select id="birth_year" class="form-control @error('birth_year') is-invalid @enderror" name="birth_year" required>
                                 @for ($year = date("Y")-1; $year >= 1950; $year --)
                                     <option value="{{$year}}" @if(old('birth_year') == $year) selected @endif>{{$year}}</option>
@@ -54,7 +54,7 @@
                     <div class="form-group row">
                         <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('registeration.email') }}</label>
     
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
     
                             @error('email')
@@ -68,7 +68,7 @@
                     <div class="form-group row">
                         <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('registeration.password') }}</label>
     
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
     
                             @error('password')
@@ -82,7 +82,7 @@
                     <div class="form-group row">
                         <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('registeration.password-confirm') }}</label>
     
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                     <div class="form-group row">
                         <label for="profile-picture" class="col-md-4 col-form-label text-md-right">{{ __('registeration.profile-picture') }}</label>
     
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <input id="profile-picture" type="file" class="form-control-file" name="profile-picture" accept="image/*">
                             @error('profile-picture')
                                 <span class="invalid-feedback" role="alert">
@@ -101,6 +101,23 @@
                             <div class="alert alert-info" role="alert">
                                 {{__('registeration.infoAlert')}}
                             </div>
+                        </div>
+                    </div>
+    
+                    <div class="form-group row termsOfContainer">
+                        <label for="termsOfService" class="col-md-8 form-check-label text-md-right">
+                            {{__('registeration.termsOf')}}
+                            <a class="termsOf-doc" href="{{asset('files/Regulamin_portalu_Safo.pdf')}}" target="__blank">{{__('registeration.termsOfDoc1')}}</a>
+                            &
+                            <a class="termsOf-doc" href="{{asset('files/Polityka_prywatnosci.pdf')}}" target="__blank">{{__('registeration.termsOfDoc2')}}</a>
+                        </label>
+                        <div class="col-md-4 termsOfInput">
+                            <input id="termsOfService" type="checkbox" class="form-check-input" name="termsOfService" required>
+                            @error('termsOfService')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
 

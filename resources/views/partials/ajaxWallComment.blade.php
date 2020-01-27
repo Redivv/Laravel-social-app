@@ -20,7 +20,20 @@
                 @endif
             </div>
             <div class="col-12 commentDate">{{$comment->created_at->diffForHumans()}}</div>
-            <div class="col-12 commentDesc">{{$comment->message}}</div>
+            <div class="col-12 commentDesc">
+                @php
+                    $regex = '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#';
+                    preg_match_all($regex, e($comment->message), $commentLinks);
+                    if (isset($commentLinks)) {
+                        $embedLinks = array();
+                        foreach ($commentLinks[0] as $link) {
+                            $html = "<a href='".$link."' target='__blank'>".$link."</a>";
+                            $embedLinks[] = $html;
+                        }
+                        echo nl2br(preg_replace_array($regex, $embedLinks, e($comment->message)));
+                    }
+                @endphp
+            </div>
             <div class="col-12 commentTags row">
                 @if ($taggedUsers = json_decode($comment->tagged_users))
                     @foreach ($taggedUsers as $tag)
@@ -64,7 +77,20 @@
                     @endif
                 </div>
                 <div class="col-12 commentDate">{{$comment->replies[0]->created_at->diffForHumans()}}</div>
-                <div class="col-12 commentDesc">{{$comment->replies[0]->message}}</div>
+                <div class="col-12 commentDesc">
+                    @php
+                        $regex = '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#';
+                        preg_match_all($regex, e($comment->replies[0]->message), $commentLinks);
+                        if (isset($commentLinks)) {
+                            $embedLinks = array();
+                            foreach ($commentLinks[0] as $link) {
+                                $html = "<a href='".$link."' target='__blank'>".$link."</a>";
+                                $embedLinks[] = $html;
+                            }
+                            echo nl2br(preg_replace_array($regex, $embedLinks, e($comment->replies[0]->message)));
+                        }
+                    @endphp
+                </div>
                 <div class="col-12 commentTags row">
                     @if ($taggedUsers = json_decode($comment->replies[0]->tagged_users))
                         @foreach ($taggedUsers as $tag)

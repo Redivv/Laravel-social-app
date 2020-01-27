@@ -13,6 +13,7 @@
         "hootlex/laravel-friendships": "^1.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
+        "leewillis77/cached-embed": "^0.7.0",
         "nahid/talk": "^2.3",
         "rtconner/laravel-likeable": "~1.2",
         "rtconner/laravel-tagging": "~3.2",

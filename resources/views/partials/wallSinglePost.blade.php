@@ -28,7 +28,27 @@
                     @endforeach
                 @endif
             </div>
-            <div class="postContent col-12">{{$post->desc}}</div>
+            
+            <div class="postContent col-12">
+                @php
+                    $regex = '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#';
+                    preg_match_all($regex, e($post->desc), $postLinks);
+                    if (isset($postLinks)) {
+                        $embedLinks = array();
+                        foreach ($postLinks[0] as $link) {
+                            $data = CachedEmbed::create($link);
+                            if ($data->code) {
+                                $embedLinks[] = $data->code;
+                            }else{
+                                $html = "<a href='".$link."' target='__blank'>".$link."</a>";
+                                $embedLinks[] = $html;
+                            }
+                        }
+                        echo nl2br(preg_replace_array($regex, $embedLinks, e($post->desc)));
+                    }
+                @endphp
+            </div>
+
             <div class="postTags col-12"></div>
         </main>
         <footer class="postFooter row">

@@ -19384,9 +19384,23 @@ main .loginForm .registerLink a {
 }
 
 .login-window {
-  border-radius: 50%;
   overflow: hidden;
   text-align: center;
+}
+
+@media screen and (min-width: 767px) {
+  .login-window {
+    border-radius: 50%;
+  }
+}
+
+.login-window .btn-link {
+  color: #f66103;
+  font-weight: bold;
+}
+
+.login-window .btn-link:hover {
+  color: #e26103;
 }
 
 .login-button {
@@ -19411,6 +19425,23 @@ main .loginForm .registerLink a {
 .login-button:hover {
   background-color: #000;
   transition: all 1s ease;
+}
+
+.termsOfContainer label a {
+  font-weight: bold;
+  color: #f66103;
+}
+
+.termsOfContainer label a:hover {
+  color: #e26103;
+}
+
+@media screen and (max-width: 767px) {
+  .termsOfContainer .termsOfInput {
+    text-align: center;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .form-btn {
@@ -19757,6 +19788,12 @@ html {
 .activity .activityPosts .postBox .post .postDesc .postContent {
   margin-top: 0.25rem;
   font-size: 1rem;
+}
+
+.activity .activityPosts .postBox .post .postDesc .postContent iframe {
+  display: block;
+  margin: 0.5rem 0;
+  width: 100%;
 }
 
 .activity .activityPosts .postBox .post .postDesc .postTags {
@@ -20857,6 +20894,12 @@ html {
   font-size: 1rem;
 }
 
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postContent iframe {
+  display: block;
+  margin: 0.5rem 0;
+  width: 100%;
+}
+
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags {
   padding: 1rem 0.5rem;
 }
@@ -21029,6 +21072,7 @@ html {
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentAuthor .commentAuthorName,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentAuthor .commentAuthorName {
+  padding-left: 0;
   font-weight: bold;
   letter-spacing: 1.5px;
   font-size: 1rem;
@@ -21154,6 +21198,7 @@ html {
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentContent .commentAuthor .commentAuthorName {
+  padding-left: 0;
   font-size: 0.8rem;
 }
 
@@ -21783,6 +21828,22 @@ html {
 .submitButton:hover {
   color: #ffffff;
   background-color: #e26103;
+}
+
+.termsOfService {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.termsOfService .termsOf-doc {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #f66103;
+  letter-spacing: 0.5px;
+}
+
+.termsOfService .termsOf-doc:hover {
+  color: #e26103;
 }
 
 #contactForm {

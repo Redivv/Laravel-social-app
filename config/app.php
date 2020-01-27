@@ -229,6 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Talk' => Nahid\Talk\Facades\Talk::class,
+        'CachedEmbed'  => Leewillis77\CachedEmbed\CachedEmbed::class
 
     ],
 

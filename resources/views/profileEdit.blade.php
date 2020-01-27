@@ -22,7 +22,7 @@
                         </div>
                     @endif
                 </label>
-                <input type="file" name="profilePicture" id="profilePictureInput">
+                <input type="file" class="form-control-file" name="profilePicture" id="profilePictureInput">
             </fieldset>
 
             <fieldset class="form-group col-12 row profileCity">

@@ -98,9 +98,18 @@ main{
     }
 }
 .login-window{
-    border-radius: 50%;
+    @media screen and (min-width: $mobile-breakpoint) {
+        border-radius: 50%;
+    }
     overflow: hidden;
     text-align: center;
+    .btn-link{
+        color: $orange;
+        font-weight: bold;
+        &:hover{
+            color: $orange-hover;
+        }
+    }
 }
 .login-button{
     border: 0;
@@ -124,6 +133,24 @@ main{
         -ms-transition: all 1s ease;
         -o-transition: all 1s ease;
         transition: all 1s ease;
+    }
+}
+.termsOfContainer{
+    label{
+        a{
+            font-weight: bold;
+            color: $orange;
+            &:hover{
+                color: $orange-hover;
+            }
+        }
+    }
+    @media screen and (max-width: $mobile-breakpoint) {
+        .termsOfInput{
+            text-align: center;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+        }
     }
 }
 

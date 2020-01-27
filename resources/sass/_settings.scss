@@ -38,3 +38,17 @@
         background-color: $orange-hover;
     }
 }
+
+.termsOfService{
+    margin: 1.5rem 0;
+    text-align: center;
+    .termsOf-doc{
+        @include font-size(1.1rem);
+        font-weight: bold;
+        color: $orange;
+        letter-spacing: 0.5px;
+        &:hover{
+            color: $orange-hover;
+        }
+    }
+}

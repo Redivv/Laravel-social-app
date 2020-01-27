@@ -19,5 +19,9 @@ return [
     'joinUs'                    => 'Dołącz Do Naszej Społeczności',
     'loginLink1'                => 'Masz Już Konto?',
     'loginLink2'                => 'Zaloguj Się',
-    'searcherLink'              => 'Zobacz Naszych Użytkowników'
+    'searcherLink'              => 'Zobacz Naszych Użytkowników',
+    'termsOf'                   => 'Wyrażam Zgodę na ',
+    'termsOfDoc1'               => 'Regulamin',
+    'termsOfDoc2'               => 'Politykę Prywatności',
+
 ];

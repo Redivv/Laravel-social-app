@@ -58,5 +58,9 @@
                 <button class="btn submitButton" type="submit">{{__('settings.save')}}</button>
             </div>
         </form>
+        <div class="termsOfService row">
+            <a class="termsOf-doc col-6" href="{{asset('files/Regulamin_portalu_Safo.pdf')}}" target="__blank">{{__('registeration.termsOfDoc1')}}</a>
+            <a class="termsOf-doc col-6" href="{{asset('files/Polityka_prywatnosci.pdf')}}" target="__blank">{{__('profile.termsOfDoc2')}}</a>
+        </div>
     </div>
 @endsection

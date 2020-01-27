@@ -65,6 +65,7 @@ class RegisterController extends Controller
             'password'          => ['required', 'string', 'min:8', 'confirmed'],
             'birth_year'        => ['required', 'integer', 'between:1950,'.intVal(date('Y')-18)],
             'profile-picture'   => ['file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
+            'termsOfService'    => ['accepted']
         ]);
     }
 
