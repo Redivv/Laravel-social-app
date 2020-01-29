@@ -14,5 +14,6 @@ return [
     'lastActive'        =>  'Ostatnio Aktywny:',
     'lastActive1sec'    =>  'Ostatnio Aktywny: 1 sekunda temu',
     'noThread'          =>  'Nie wybrano rozmowy',
-    'badFileType'       =>  'Niewłaściwy Typ Pliku!'
+    'badFileType'       =>  'Niewłaściwy Typ Pliku!',
+    'messagePicture'    =>  "Zdjęcie dołączone do wiadomości"
 ];

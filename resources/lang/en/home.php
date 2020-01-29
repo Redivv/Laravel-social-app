@@ -1,5 +1,5 @@
 <?php
 return [
-    'header'        => 'Profil Użytkownika',
-    'logged_in'     => 'Jesteś Zalogowany'
+    'header'        => 'User profil',
+    'logged_in'     => 'You are logged in'
 ];

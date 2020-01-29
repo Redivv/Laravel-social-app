@@ -27,6 +27,14 @@
         </main>
         <footer id="footer" class="pt-2 pb-2">
             <span>Copyright 2020 &copy Safo</span>
+            <span class="localeOptions">
+                <a href="{{route('setLocale',['locale' => 'pl'])}}">
+                    <img src="{{asset('img/locales/pl.png')}}">
+                </a>
+                <a href="{{route('setLocale',['locale' => 'en'])}}">
+                    <img src="{{asset('img/locales/eng.png')}}">
+                </a>
+            </span>
         </footer>
         @stack('scripts')
 </body>

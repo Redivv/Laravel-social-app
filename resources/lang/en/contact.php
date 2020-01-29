@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'send'                          => 'Wyślij Wiadomość',
-    'formLegend'                    => 'Jeśli masz jakiś problem - napisz prosto do nas',
-    'emailSubject'                  => 'Temat Wiadomości',
-    'emailSubjectPlaceholder'       => 'Temat',
-    'emailContent'                  => 'Treść Wiadomości',
-    'emailContentPlaceholder'       => 'Treść',
-    'admins'                        => 'Administratorzy',
-    'mailSent'                      => 'Dziękujemy za wysłanie wiadomości',
-    'emailAttachments'              => 'Załączone Zdjęcia'
+    'send'                          => 'Send message',
+    'formLegend'                    => 'If you have any problem - write to us',
+    'emailSubject'                  => 'Message subject',
+    'emailSubjectPlaceholder'       => 'Subject',
+    'emailContent'                  => 'Message content',
+    'emailContentPlaceholder'       => 'Content',
+    'admins'                        => 'Admins',
+    'mailSent'                      => 'Thank you for your message',
+    'emailAttachments'              => 'Attachments'
 ];

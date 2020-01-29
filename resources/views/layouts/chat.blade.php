@@ -1,35 +1,19 @@
-<!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="UTF-8">
-    @include('partials.favicon')
-    <meta name="csrf-token" content="{{csrf_token()}}">
-    <title>{{ config('app.name', 'Safo') }}</title>
-    <script>
-      window.Laravel = {!! json_encode([
-          'user' => auth()->check() ? auth()->user()->id : null,
-      ]) !!};
-    </script>
-    
-    <link rel="stylesheet" href="{{asset('chat/css/reset.css')}}">
-    <link rel="stylesheet" href="{{asset('chat/css/chat.css')}}">
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <script src={{asset('js/app.js')}}></script>
-        
-  </head>
+@extends('layouts.app')
 
-  <body>
-    <div class="container p-0 clearfix body">
-   @include('partials.peoplelist')
-    
-    <div class="chat col-lg-8">
+@section('content')
+  <div class="darkOverlay d-none"></div>
+
+  <div class="container p-0 clearfix chatBody row">
+    @include('partials.peoplelist')
+
+    <div class="chat col-9">
       <div class="chat-header clearfix">
         <div class="chat-about">
             @if(isset($user))
                 <div class="chat-with">{{$user->name}}</div>
                 <div data-id="{{$user->id}}" id="status" class="text-muted">
                     @if ($user->status == "online")
-                      {{__('chat.active')}}
+                      <span style="font-weight: bold; color: lawngreen !important">{{__('chat.active')}}</span>
                     @else
                       {{__('chat.lastActive')}} {{$user->updated_at->diffForHumans()}}
                     @endif
@@ -40,9 +24,9 @@
         </div>
       </div> <!-- end chat-header -->
       
-      @yield('content')
-      
-      <hr style="background-color:#f66103">
+      @yield('contentChat')
+
+      <hr>
 
       @if(isset($user))
         <div class="chat-message clearfix">
@@ -52,102 +36,106 @@
                 <output id="picture-preview"></output>
                 <textarea style="border-color: Transparent !important;" name="message-data" id="message-data" placeholder ="{{__('chat.placeholder')}}" rows="3"></textarea>
                 <input type="hidden" name="_id" value="{{$sender}}">
-                <button type="submit">{{__('chat.send')}}</button>
+                <button class="btn" type="submit"><i class="fas fa-paper-plane"></i></button>
           </form>
         </div> <!-- end chat-message -->
       @endif
       
     </div> <!-- end chat -->
-    
+
+    <button id="showPeopleList" class="btn"><i class="fas fa-arrow-left"></i></button>
+
   </div> <!-- end container -->
+    
+@endsection
 
+@push('scripts')
+  <script>
+      var audioElement  = document.createElement('audio');
+      var __baseUrl     = "{{url('/')}}";
+      var deleteConvo   = "{{__('chat.deleteConvo')}}";
+      var deleteMessage = "{{__('chat.deleteMessage')}}";
+      var blockConvo    = "{{__('chat.blockConvo')}}";
+      var badFileType   = "{{__('chat.badFileType')}}";
 
-      <script>
-        var audioElement  = document.createElement('audio');
-          var __baseUrl     = "{{url('/')}}";
-          var deleteConvo   = "{{__('chat.deleteConvo')}}";
-          var deleteMessage = "{{__('chat.deleteMessage')}}";
-          var blockConvo    = "{{__('chat.blockConvo')}}";
-          var badFileType   = "{{__('chat.badFileType')}}";
+      var pagi            = 0;
+      var pagi_convo      = 0;
+      var stop_pagi       = false;
+      var stop_pagi_convo = false;
+  </script>
+  
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="{{asset('chat/js/functions.js')}}"></script>
 
-          var pagi            = 0;
-          var pagi_convo      = 0;
-          var stop_pagi       = false;
-          var stop_pagi_convo = false;
-      </script>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="{{asset('chat/js/functions.js')}}"></script>
+  <script>
+    var focus_status = true;
 
-    <script>
-        var focus_status = true;
+    $(window).focus(function() {
+      
+      focus_status = true;
+      makeAllMessagesSeen('{{$sender}}');
+    }).blur(function() {
+      focus_status = false;
+    });
 
-        $(window).focus(function() {
-          
-          focus_status = true;
-          makeAllMessagesSeen('{{$sender}}');
-        }).blur(function() {
-          focus_status = false;
-        });
+    var new_messages = 0;
+    var title = $(document).prop('title');
 
-        var new_messages = 0;
-        var title = $(document).prop('title');
+    var newmsg = function(data) {
+        new_messages++;
+        $(document).prop('title', '('+new_messages+') '+title);
+        playSound('{{asset("chat/new_message.mp3")}}', audioElement);
+        if($("div.chat-with").text() == data.sender.name){
+          addNewMessage(data.id);
+          $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
+          updateThreads(data);
+          if(focus_status){
+            makeOneMessageSeen(data);
+          }
 
-        var newmsg = function(data) {
-            new_messages++;
-            $(document).prop('title', '('+new_messages+') '+title);
-            playSound('{{asset("chat/new_message.mp3")}}', audioElement);
-            if($("div.chat-with").text() == data.sender.name){
-              addNewMessage(data.id);
-              $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
-              updateThreads(data);
-              if(focus_status){
-                makeOneMessageSeen(data);
-              }
-
-            }else{
-              updateThreads(data,'new');
-            }
+        }else{
+          updateThreads(data,'new');
         }
+    }
 
-        Echo.private(`seen.` + window.Laravel.user)
-          .listen('MessagesWereSeen', (e) => {
-            $('.seen-info-'+e.conversation_id).removeClass('d-none');
+    Echo.private(`seen.` + window.Laravel.user)
+      .listen('MessagesWereSeen', (e) => {
+        $('.seen-info-'+e.conversation_id).removeClass('d-none');
 
-            $('#to-be-seen-thread-'+e.conversation_id).removeClass('d-none');
-            $('#to-be-seen-thread-'+e.conversation_id).removeAttr('id');
-        });
+        $('#to-be-seen-thread-'+e.conversation_id).removeClass('d-none');
+        $('#to-be-seen-thread-'+e.conversation_id).removeAttr('id');
+    });
 
-        var active_id = new Array();
-        Echo.join('online')
-          .joining((user) => {
-              axios.patch('/api/user/'+ user.name +'/online', {
-                      api_token : user.api_token
-              });
-          })
-
-          .leaving((user) => {
-              axios.patch('/api/user/'+ user.name +'/offline', {
+    var active_id = new Array();
+    Echo.join('online')
+      .joining((user) => {
+          axios.patch('/api/user/'+ user.name +'/online', {
                   api_token : user.api_token
-              });
-          })
-
-          .listen('UserOnline', (e) => {
-              $('#user-'+e.user.id).addClass('activeUser');
-              if (e.user.id == $('#status').data('id')) {
-                  $('#status').html('{{__("chat.active")}}');
-              }
-          })
-
-          .listen('UserOffline', (e) => {
-              $('#user-'+e.user.id).removeClass('activeUser');
-              if (e.user.id == $('#status').data('id')) {
-                  $('#status').html('{{__("chat.lastActive1sec")}}');
-              }
           });
-    </script>
-    <script src="{{asset('js/emoji.js')}}"></script>
-    <script src="{{asset('chat/js/talk.js')}}"></script>
-    {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}
+      })
 
-  </body>
-</html>
+      .leaving((user) => {
+          axios.patch('/api/user/'+ user.name +'/offline', {
+              api_token : user.api_token
+          });
+      })
+
+      .listen('UserOnline', (e) => {
+          $('#user-'+e.user.id).addClass('activeUser');
+          if (e.user.id == $('#status').data('id')) {
+              $('#status').html('<span style="font-weight: bold; color: lawngreen !important">{{__("chat.active")}}</span>');
+          }
+      })
+
+      .listen('UserOffline', (e) => {
+          $('#user-'+e.user.id).removeClass('activeUser');
+          if (e.user.id == $('#status').data('id')) {
+              $('#status').html('{{__("chat.lastActive1sec")}}');
+          }
+      });
+  </script>
+  <script src="{{asset('js/emoji.js')}}"></script>
+  <script src="{{asset('chat/js/talk.js')}}"></script>
+  {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}
+    
+@endpush

@@ -1,4 +1,4 @@
 <?php
 return [
-    "Regards" => "Z wyrazami szacunku",
+    "Regards" => "Best regards",
 ];

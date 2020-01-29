@@ -27,7 +27,7 @@
                   <div class="icons col-lg-2">
                     <div class="row">
                         <div class="col-4 ico">
-                            <a href="{{route('message.read', ['name' => $result->name])}}">
+                            <a href="{{route('message.read', ['name' => $result->name])}}" target="__blank">
                                 <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.messageUser')}}" data-placement="bottom">
                                     <i class="far fa-comment-dots"></i>
                                 </button>

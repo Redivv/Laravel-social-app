@@ -1,15 +1,15 @@
 <?php
 return [
-    'searcher'          => 'Społeczność',
-    'login'             => 'Zaloguj Się',
-    'register'          => 'Zarejestruj Się',
-    'dashboard'         => 'Tablica',
-    'chat'              => 'Rozmowy',
-    'logout'            => 'Wyloguj Się',
-    'toggle-nav'        => 'Rozwiń Menu',
+    'searcher'          => 'Community',
+    'login'             => 'Loggin',
+    'register'          => 'Register',
+    'dashboard'         => 'Dashboard',
+    'chat'              => 'Chat',
+    'logout'            => 'Logout',
+    'toggle-nav'        => 'Expand menu',
     'profile'           => 'Profil',
-    'adminDashboard'    => 'Panel Administratora',
-    'profile'           => 'Profil',
-    'settings'          => "Ustawienia",
-    'contact'           => 'Kontakt z Administracją'
+    'adminDashboard'    => 'Admin dashboard',
+    'profile'           => 'Profile',
+    'settings'          => "Settings",
+    'contact'           => 'Contact with administration'
 ];

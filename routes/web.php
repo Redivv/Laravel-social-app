@@ -119,3 +119,5 @@ Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
    Route::patch('message/seen/{id}', 'AjaxMessageController@ajaxSeenMessage')->name('message.seen');
 });
 
+Route::get('setLocale/{locale}', "LocaleController@setLocale")->name('setLocale');
+

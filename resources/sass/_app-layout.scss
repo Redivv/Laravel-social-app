@@ -7,6 +7,7 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    padding-bottom: 2.25rem !important;
 }
 #navbarMobile{
     @media screen and (min-width: $mobile-breakpoint) {
@@ -283,4 +284,11 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
+    .localeOptions{
+        right: 2%;
+        position: absolute;
+        img{
+            margin-left: 0.5rem;
+        }
+    }
 }

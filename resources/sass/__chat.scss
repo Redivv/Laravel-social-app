@@ -1,0 +1,282 @@
+.chatBody{
+  hr{
+    margin: 0;
+  }
+  height: 84.3vh;
+  overflow: hidden;
+  margin: 0;
+  max-width: unset;
+  #people-list{
+    @media screen and (max-width: $mobile-breakpoint) {
+      top: 5%;
+      background-color: rgb(55,55,55);
+      position:absolute;
+      left: -100%;
+      z-index: 1001;
+      transition:left 1s linear;
+      flex: 0 0 50%;
+      max-width: 50%;
+      &.show{
+        left: 0;
+      }
+    }
+    height: inherit;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding: 1rem 0;
+    background-color: $light-blac;
+    .search{
+      height: 10vh;
+    }
+    ul{
+      height: 70vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      margin-top: 1rem;
+      padding: 0 1rem;
+      list-style: none;
+      .thread{
+        padding: 0.2rem 0;
+        border-radius: 4px;
+        .threadForms{
+          @media screen and (max-width: $breakpoint1+200) {
+            display: flex;
+            justify-content: center;
+          }
+          @media screen and (max-width: $mobile-breakpoint) {
+            display: block;
+          }
+          button{
+            padding: 0.5rem;
+            &:hover{
+              i{
+                color: $orange-active-hover;
+              }
+            }
+            i{
+              @include font-size(0.8rem);
+              color: $white;
+            }
+          }
+        }
+        a{
+          text-decoration: none;
+          .profile-picture{
+            margin: 0.5rem 0;
+            width: auto;
+            height: auto;
+            img{
+              width: 2.5rem;
+              height: 2.5rem;
+              border-radius: 50%;
+            }
+          }
+          .about{
+            @media screen and (max-width: $breakpoint2+200) {
+              text-align: center;
+            }
+            @media screen and (max-width: $mobile-breakpoint) {
+              text-align: left;
+            }
+            .name{
+              @include font-size(0.9rem);
+              color: $white;
+              font-weight: bold;
+              text-decoration: none;
+              letter-spacing: 0.5px;
+            }
+            .status{
+              @include font-size(0.8rem);
+              color: $white;
+              text-decoration: none;
+            }
+          }
+        }
+        &.active{
+          background-color: $orange;
+          &:hover{
+            background-color: $orange;
+          }
+        }
+        &:hover{
+          background-color: $orange-trans;
+        }
+        &:not(:first-child){
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+  .chat{
+    @media screen and (max-width: $mobile-breakpoint) {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    padding: 0;
+    .chat-header{
+      height: 8vh;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+      background-color: $white;
+      border-top: 1px solid rgba(55, 55, 55, 0.15);
+      .chat-with{
+        @include font-size(1rem);
+        font-weight: bold;
+      }
+      #status{
+        @include font-size(0.65rem);
+        letter-spacing: 1px;
+      }
+    }
+    .chat-history{
+      &.imagePresent{
+        max-height: 41vh;
+      }
+      max-height: 51vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 1rem;
+      ul{
+        list-style: none;
+        padding: 0;
+        li{
+          width: 100%;
+          justify-content: left;
+          text-align: left;
+          .talkDeleteMessage,.message-data,.seenInfo{
+            padding: 0rem;
+          }
+          .message-data{
+            .message-data-time{
+              @extend .text-muted;
+              @include font-size(0.8rem);
+              letter-spacing: 0.5px;
+              margin-left: 0.5rem;
+            }
+            .message-data-name{
+              @include font-size(1rem);
+              font-weight: bold;
+              letter-spacing: 0.3px;
+            }
+          }
+          .my-message,.other-message{
+            padding: 0.25rem 1rem;
+            margin: 0.5rem 0;
+            .messagePictures{
+              padding: 0.5rem 0;
+              display: block;
+              width: 100%;
+              img{
+                width: 10rem;
+                height: 10rem;
+              }
+            }
+            .messageText{
+              width: 60%;
+              white-space: normal;
+              background-color: $orange;
+              border-radius: 20px;
+              padding: 0.3rem 0;
+              span{
+                padding: 0rem 1rem;
+                @include font-size(1rem);
+                color: $white;
+              }
+            }
+          }
+          &.authMessage{
+            justify-content: right;
+            text-align: right;
+            .message-data-time{
+              margin-left: 0;
+              margin-right: 0.5rem;
+            }
+            .talkDeleteMessage{
+              color: $blac;
+              @include font-size(0.95rem);
+              &:hover{
+                color: $orange;
+              }
+            }
+            .messageText{
+              margin-left: auto;
+            }
+          }
+          &:not(:first-child){
+            margin-top: 1rem;
+          }
+        }
+        .clearfix{
+          clear: both;
+        }       
+      }
+    }
+    .chat-message{
+      padding: 0rem 1rem 0.5rem 1rem;
+      display: flex;
+      #talkSendMessage{
+        width: 100%;
+        margin-top: auto;
+        #picture-preview{
+          margin-top: 0.5rem;
+          margin-bottom: 0.25rem;
+          max-height: 5rem;
+          overflow-y: auto;
+          overflow-x: hidden;
+          img{
+            width: 5rem;
+            height: 5rem;
+            margin-left: 0.5rem;
+          }
+        }
+        label{
+          margin-left: 0.5rem;
+          padding: 0.5rem;
+          margin-bottom: 0;
+          cursor: pointer;
+          i{
+            @include font-size(1rem);
+          }
+          &:hover{
+            i{
+              color: $orange;
+            }
+          }
+        }
+        .emojionearea .emojionearea-editor{
+          min-height: 5rem;
+          max-height: 5rem;
+          height: 5rem;
+          overflow-y: auto;
+        }
+        button{
+          margin-top: 0.5rem;
+          color: $white;
+          background-color: $orange;
+          padding: 0.4rem 2rem;
+          margin-left: 0.5rem;
+          border-radius: 50px;
+          @include font-size(1.1rem);
+          &:hover{
+            color: $orange-hover;
+          }
+        }
+      }
+    }
+  }
+
+  #showPeopleList{
+    @media screen and (min-width: $mobile-breakpoint) {
+      display: none !important;
+    }
+    @include font-size (1.5rem);
+    color: $white;
+    position: absolute;
+    right: 0;
+    top: 85%;
+    border-radius: 50% 0 0 50%;
+    z-index: 1002;
+    background-color: $orange;
+    padding: 0.5rem 0.6rem 0.5rem 1rem;
+  }
+}

@@ -916,12 +916,12 @@
                 if (data.message == null || data.message.trim() == "") {
                     data.message = '<i class="far fa-file-image"></i>';
                 }
-                html = '<a class="chat-'+data.conversation_id+' dropdown-item container" href="/message/'+data.sender.name+' target="__blank">'+
+                html = '<a class="chat-'+data.conversation_id+' dropdown-item container" href="/message/'+data.sender.name+'" target="__blank">'+
                     '<div class="row">'+
                         '<div class="notificationImageBox col-2">'+
                             '<img class="notificationImage" src="/img/profile-pictures/'+data.sender.picture+'" alt="" srcset="">'+
                         '</div>'+
-                        '<div class="notificationDesc col-8">'+
+                        '<div class="notificationDesc col-10">'+
                             '<div class="col-12 ">'+data.sender.name+'</div>'+
                             '<div class="col-12 descTime">'+data.humans_time+' {{__("nav.ago")}}</div>'+
                             '<div class="col-12">'+data.message.substring(0,20)+'</div>'+

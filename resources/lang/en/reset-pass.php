@@ -1,10 +1,10 @@
 <?php
 return [
-    'pass-reset'        =>  'Zmień Hasło',
+    'pass-reset'        =>  'Change password',
     'email'             =>  'E-mail',
-    'send'              =>  'Wyślij Link',
-    'success'           =>  'Wysłaliśmy Ci Link do Zmiany Hasła',
-    'password'          =>  'Nowe Hasło',
-    'password-confirm'  =>  'Potwierdź Nowe Hasło',
-    'reset'             =>  'Zmień Hasło'
+    'send'              =>  'Send link',
+    'success'           =>  'Link to change password has been sent',
+    'password'          =>  'New password',
+    'password-confirm'  =>  'Confirm new password',
+    'reset'             =>  'Reset password'
 ];

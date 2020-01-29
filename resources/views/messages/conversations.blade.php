@@ -1,44 +1,57 @@
 @extends('layouts.chat')
 
-@section('content')
+@section('contentChat')
     <div class="chat-history">
         <ul id="talkMessages">
             @foreach($messages as $message)
                 @if($message->sender->id == auth()->user()->id)
-                    <li class="clearfix" id="message-{{$message->id}}">
-                        <div class="message-data align-right">
-                            <span class="message-data-time" >{{$message->humans_time}} {{__('chat.time')}}</span> &nbsp; &nbsp;
-                            <span class="message-data-name" >{{$message->sender->name}}</span>
-                            <a href="#" class="talkDeleteMessage" data-message-id="{{$message->id}}" title="Delete Message"><i class="fas fa-times"></i></a>
+                    <li class="authMessage row" id="message-{{$message->id}}">
+                        <a href="#" class="talkDeleteMessage" data-message-id="{{$message->id}}" title="Delete Message"><i class="fas fa-times"></i></a>
+                        <div class="message-data col-12">
+                            <span class="message-data-time">{{$message->humans_time}} {{__('chat.time')}}</span> &nbsp; &nbsp;
+                            <span class="message-data-name">{{$message->sender->name}}</span>
                         </div>
-                        <div class="message other-message float-right">
+                        <div class="message my-message col-12">
                             @if ($message->pictures)
+                            <output class="messagePictures">
                                 @foreach (json_decode($message->pictures) as $picture)
-                                    <img class="picture" src="{{asset('img/message-pictures/'.$picture)}}">
+                                    <a href="{{asset('img/message-pictures/'.$picture)}}" data-lightbox="message-{{$message->id}}" data-title="{{__('chat.messagePicture')}}">
+                                        <img class="picture" src="{{asset('img/message-pictures/'.$picture)}}">
+                                    </a>
                                 @endforeach  
+                            </output>
                             @endif
-                            {!!nl2br($message->toHtmlString()->toHtml())!!}
+                            <div class="messageText">
+                                <span>{!!nl2br($message->toHtmlString()->toHtml())!!}</span>
+                            </div>
                         </div>
                         @if ($message->is_seen)
-                            <div class="clearfix"><span>{{__('chat.seen')}}</span></div>
+                            <div class="clearfix seenInfo"><span>{{__('chat.seen')}}</span></div>
                         @endif
                     </li>
                 @else
-                    <li id="message-{{$message->id}}">
-                        <div class="message-data">
-                            <span class="message-data-name"> <a href="#" class="talkDeleteMessage" data-message-id="{{$message->id}}" title="Delete Message"><i class="fas fa-times" style="margin-right: 3px;"></i></a>{{$message->sender->name}}</span>
-                            <span class="message-data-time">{{$message->humans_time}} {{__('chat.time')}}</span>
+                    <li class="clearfix" id="message-{{$message->id}}">
+                        <div class="message-data col-12">
+                            <span class="message-data-name">{{$message->sender->name}}</span>
+                            <span class="message-data-time">{{$message->humans_time}} {{__('chat.time')}}</span> &nbsp; &nbsp;
                         </div>
-                        <div class="message my-message">
+                        <div class="message other-message">
                             @if ($message->pictures)
+                            <output class="messagePictures">
                                 @foreach (json_decode($message->pictures) as $picture)
-                                    <img class="picture" src="{{asset('img/message-pictures/'.$picture)}}">
+                                    <a href="{{asset('img/message-pictures/'.$picture)}}" data-lightbox="message-{{$message->id}}" data-title="{{__('chat.messagePicture')}}">
+                                        <img class="picture" src="{{asset('img/message-pictures/'.$picture)}}">
+                                    </a>
                                 @endforeach  
+                            </output>
                             @endif
-                            {!!nl2br($message->toHtmlString()->toHtml())!!}
+                            <div class="messageText">
+                                <span>{!!nl2br($message->toHtmlString()->toHtml())!!}</span>
+                            </div>
                         </div>
                     </li>
                 @endif
+                <div class="clearfix"></div>
             @endforeach
 
 

@@ -26,7 +26,9 @@ function playSound(sound,element){
       if (active_id.includes(parseInt(data.sender.id,10))) {
         active = "activeUser";
     }
-      var html = '<li data-id="'+data.sender.id+'" id="user-'+data.sender.id+'" class="clearfix thread '+active+'">'+
+      var html = '<li data-id="'+data.sender.id+'" id="user-'+data.sender.id+'" class="clearfix thread row '+active+'">'+
+          '<a class="row col-12" href="/message/'+data.sender.name+'">'+
+          '<div class="threadForms col-12">'+
           '<form action="/message/'+data.sender.id+'" class="talkDeleteConversation float-left" method="POST">'+
           '<input type="hidden" name="_method" value="DELETE">'+
           '<input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'">'+
@@ -37,11 +39,11 @@ function playSound(sound,element){
           '<input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'">'+
           '<button class="btn btn-link btn-sm" type="submit"><i class="fas fa-user-times"></i></button>'+
           '</form>'+
-          '<a href="/message/'+data.sender.name+'">'+
-          '<div class="profile-picture">'+
+          '</div>'+
+          '<div class="profile-picture col-2">'+
                 '<img src="'+__baseUrl+'/img/profile-pictures/'+data.sender.picture+'" alt="profile picture">'+
             '</div>'+
-            '<div class="about '+is_new+'">'+
+            '<div class="about col-10 '+is_new+'">'+
               '<div class="name">'+data.sender.name+'</div>'+
               '<div class="status">'+
               '<span>';
@@ -56,8 +58,7 @@ function playSound(sound,element){
           '</div>'+
           '</a>'+
       '</li>'+
-      '<hr style="background-color:#f66103;">';
-      $('#people-list .list').prepend(html);
+      $('#people-list').children('.list').prepend(html);
 
       $('.talkDeleteConversation').on('submit',function(e){
         if(!confirm(deleteConvo)) {

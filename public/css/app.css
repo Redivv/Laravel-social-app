@@ -12317,6 +12317,7 @@ a.text-dark:focus {
 }
 
 .text-muted,
+.chatBody .chat .chat-history ul li .message-data .message-data-time,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentDate,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentDate,
 #friendsWall .friendsWall #friendsWallFeed .noContent,
@@ -18838,6 +18839,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  padding-bottom: 2.25rem !important;
 }
 
 @media screen and (min-width: 767px) {
@@ -19256,6 +19258,15 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+#footer .localeOptions {
+  right: 2%;
+  position: absolute;
+}
+
+#footer .localeOptions img {
+  margin-left: 0.5rem;
 }
 
 main .pageLogo img {
@@ -21942,6 +21953,363 @@ html {
   color: #000;
   font-size: 1rem;
   font-style: italic;
+}
+
+.chatBody {
+  height: 84.3vh;
+  overflow: hidden;
+  margin: 0;
+  max-width: unset;
+}
+
+.chatBody hr {
+  margin: 0;
+}
+
+.chatBody #people-list {
+  height: inherit;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 1rem 0;
+  background-color: rgba(55, 55, 55, 0.9);
+}
+
+@media screen and (max-width: 767px) {
+  .chatBody #people-list {
+    top: 5%;
+    background-color: #373737;
+    position: absolute;
+    left: -100%;
+    z-index: 1001;
+    transition: left 1s linear;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .chatBody #people-list.show {
+    left: 0;
+  }
+}
+
+.chatBody #people-list .search {
+  height: 10vh;
+}
+
+.chatBody #people-list ul {
+  height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 1rem;
+  padding: 0 1rem;
+  list-style: none;
+}
+
+.chatBody #people-list ul .thread {
+  padding: 0.2rem 0;
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 1192px) {
+  .chatBody #people-list ul .thread .threadForms {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .chatBody #people-list ul .thread .threadForms {
+    display: block;
+  }
+}
+
+.chatBody #people-list ul .thread .threadForms button {
+  padding: 0.5rem;
+}
+
+.chatBody #people-list ul .thread .threadForms button:hover i {
+  color: #d22103;
+}
+
+.chatBody #people-list ul .thread .threadForms button i {
+  font-size: 0.8rem;
+  color: #ffffff;
+}
+
+.chatBody #people-list ul .thread a {
+  text-decoration: none;
+}
+
+.chatBody #people-list ul .thread a .profile-picture {
+  margin: 0.5rem 0;
+  width: auto;
+  height: auto;
+}
+
+.chatBody #people-list ul .thread a .profile-picture img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 1400px) {
+  .chatBody #people-list ul .thread a .about {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .chatBody #people-list ul .thread a .about {
+    text-align: left;
+  }
+}
+
+.chatBody #people-list ul .thread a .about .name {
+  font-size: 0.9rem;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.chatBody #people-list ul .thread a .about .status {
+  font-size: 0.8rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.chatBody #people-list ul .thread.active {
+  background-color: #f66103;
+}
+
+.chatBody #people-list ul .thread.active:hover {
+  background-color: #f66103;
+}
+
+.chatBody #people-list ul .thread:hover {
+  background-color: rgba(226, 97, 3, 0.4);
+}
+
+.chatBody #people-list ul .thread:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.chatBody .chat {
+  padding: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .chatBody .chat {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+.chatBody .chat .chat-header {
+  height: 8vh;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  background-color: #ffffff;
+  border-top: 1px solid rgba(55, 55, 55, 0.15);
+}
+
+.chatBody .chat .chat-header .chat-with {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.chatBody .chat .chat-header #status {
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+}
+
+.chatBody .chat .chat-history {
+  max-height: 51vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem;
+}
+
+.chatBody .chat .chat-history.imagePresent {
+  max-height: 41vh;
+}
+
+.chatBody .chat .chat-history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.chatBody .chat .chat-history ul li {
+  width: 100%;
+  justify-content: left;
+  text-align: left;
+}
+
+.chatBody .chat .chat-history ul li .talkDeleteMessage,
+.chatBody .chat .chat-history ul li .message-data,
+.chatBody .chat .chat-history ul li .seenInfo {
+  padding: 0rem;
+}
+
+.chatBody .chat .chat-history ul li .message-data .message-data-time {
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  margin-left: 0.5rem;
+}
+
+.chatBody .chat .chat-history ul li .message-data .message-data-name {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+}
+
+.chatBody .chat .chat-history ul li .my-message,
+.chatBody .chat .chat-history ul li .other-message {
+  padding: 0.25rem 1rem;
+  margin: 0.5rem 0;
+}
+
+.chatBody .chat .chat-history ul li .my-message .messagePictures,
+.chatBody .chat .chat-history ul li .other-message .messagePictures {
+  padding: 0.5rem 0;
+  display: block;
+  width: 100%;
+}
+
+.chatBody .chat .chat-history ul li .my-message .messagePictures img,
+.chatBody .chat .chat-history ul li .other-message .messagePictures img {
+  width: 10rem;
+  height: 10rem;
+}
+
+.chatBody .chat .chat-history ul li .my-message .messageText,
+.chatBody .chat .chat-history ul li .other-message .messageText {
+  width: 60%;
+  white-space: normal;
+  background-color: #f66103;
+  border-radius: 20px;
+  padding: 0.3rem 0;
+}
+
+.chatBody .chat .chat-history ul li .my-message .messageText span,
+.chatBody .chat .chat-history ul li .other-message .messageText span {
+  padding: 0rem 1rem;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.chatBody .chat .chat-history ul li.authMessage {
+  justify-content: right;
+  text-align: right;
+}
+
+.chatBody .chat .chat-history ul li.authMessage .message-data-time {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+.chatBody .chat .chat-history ul li.authMessage .talkDeleteMessage {
+  color: #333333;
+  font-size: 0.95rem;
+}
+
+.chatBody .chat .chat-history ul li.authMessage .talkDeleteMessage:hover {
+  color: #f66103;
+}
+
+.chatBody .chat .chat-history ul li.authMessage .messageText {
+  margin-left: auto;
+}
+
+.chatBody .chat .chat-history ul li:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.chatBody .chat .chat-history ul .clearfix {
+  clear: both;
+}
+
+.chatBody .chat .chat-message {
+  padding: 0rem 1rem 0.5rem 1rem;
+  display: flex;
+}
+
+.chatBody .chat .chat-message #talkSendMessage {
+  width: 100%;
+  margin-top: auto;
+}
+
+.chatBody .chat .chat-message #talkSendMessage #picture-preview {
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  max-height: 5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.chatBody .chat .chat-message #talkSendMessage #picture-preview img {
+  width: 5rem;
+  height: 5rem;
+  margin-left: 0.5rem;
+}
+
+.chatBody .chat .chat-message #talkSendMessage label {
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.chatBody .chat .chat-message #talkSendMessage label i {
+  font-size: 1rem;
+}
+
+.chatBody .chat .chat-message #talkSendMessage label:hover i {
+  color: #f66103;
+}
+
+.chatBody .chat .chat-message #talkSendMessage .emojionearea .emojionearea-editor {
+  min-height: 5rem;
+  max-height: 5rem;
+  height: 5rem;
+  overflow-y: auto;
+}
+
+.chatBody .chat .chat-message #talkSendMessage button {
+  margin-top: 0.5rem;
+  color: #ffffff;
+  background-color: #f66103;
+  padding: 0.4rem 2rem;
+  margin-left: 0.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+}
+
+.chatBody .chat .chat-message #talkSendMessage button:hover {
+  color: #e26103;
+}
+
+.chatBody #showPeopleList {
+  font-size: calc(1.275rem + 0.3vw);
+  color: #ffffff;
+  position: absolute;
+  right: 0;
+  top: 85%;
+  border-radius: 50% 0 0 50%;
+  z-index: 1002;
+  background-color: #f66103;
+  padding: 0.5rem 0.6rem 0.5rem 1rem;
+}
+
+@media screen and (min-width: 767px) {
+  .chatBody #showPeopleList {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .chatBody #showPeopleList {
+    font-size: 1.5rem;
+  }
 }
 
 html {

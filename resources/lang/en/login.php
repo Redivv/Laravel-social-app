@@ -1,11 +1,11 @@
 <?php
 return [
     'email-address'     => 'Email',
-    'password'          => 'Hasło',
-    'forgot'            => 'Nie pamiętasz hasła?',
-    'remember'          => 'Zapamiętaj Mnie',
-    'login-button'      => 'Zaloguj się',
-    'error'             => 'Brak Konta o Podanych Danych',
-    'registerLink1'     => 'Nie Masz Jeszcze Konta?',
-    'registerLink2'     => 'Zarejestruj Się',
+    'password'          => 'Password',
+    'forgot'            => 'Forgot a password?',
+    'remember'          => 'Remember me',
+    'login-button'      => 'Loggin',
+    'error'             => 'No account with given details',
+    'registerLink1'     => "You haven't got account?",
+    'registerLink2'     => 'Register yourself',
 ];

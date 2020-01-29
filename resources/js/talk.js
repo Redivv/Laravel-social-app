@@ -1,3 +1,5 @@
+import "lightbox2";
+
 $(document).ready(function () {
     // Setup Ajax csrf for future requests
     $.ajaxSetup({
@@ -36,6 +38,7 @@ $(document).ready(function () {
                 tag[0].reset();
                 $('.emojionearea-editor').empty();
                 $('#picture-preview').empty();
+                $('.chat-history').removeClass('imagePresent');
                 let html = '<li class="clearfix" id="to-be-replaced">'+
                                 '<div class="spinner-border text-dark" role="status">'+
                                     '<span class="sr-only">Loading...</span>'+
@@ -67,7 +70,7 @@ $(document).ready(function () {
                         $('#user-'+response.receiver_id+'+hr').remove();
                         $('#user-'+response.receiver_id).remove();
                     }
-                    $('#people-list .list').prepend(response.html2);
+                    $('#people-list').children('.list').prepend(response.html2);
                     if (active_id.includes(parseInt(response.receiver_id,10))) {
                         $('#user-'+response.receiver_id).addClass('activeUser');
                     }
@@ -97,7 +100,7 @@ $(document).ready(function () {
                 $('#to-be-replaced').remove();
             });
         }else{
-            alert('Nie możesz wysłać pustej wiadomości');
+            alert('Empty Message');
         }
     });
 
@@ -127,13 +130,15 @@ $(document).ready(function () {
                 });
            }
         });
-    })
+    });
+
     // Confirm blocking or deleting a Convo
     $('.talkDeleteConversation').on('submit',function(e){
         if(!confirm(deleteConvo)) {
             e.preventDefault();
         }   
     });
+
     $('.talkBlockConversation').on('submit',function(e){
         if(!confirm(blockConvo)) {
             e.preventDefault();
@@ -154,6 +159,7 @@ $(document).ready(function () {
             $(this).val("");
             alert(badFileType);
             $('#picture-preview').empty();
+            $('.chat-history').removeClass('imagePresent');
             break;
         }
 
@@ -164,8 +170,8 @@ $(document).ready(function () {
             return function(e) {
             // Render thumbnail.
             var span = document.createElement('span');
-            span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                                '" title="', escape(theFile.name), '"/>'].join('');
+            span.innerHTML = ['<a href="'+e.target.result+'" data-lightbox="PreviewImages" data-title="Preview Images"><img class="thumb" src="', e.target.result,
+                                '" title="', escape(theFile.name), '"/></a>'].join('');
             $('#picture-preview').prepend(span, null);
             $('.emojionearea-editor').focus();
             };
@@ -173,8 +179,9 @@ $(document).ready(function () {
 
         // Read in the image file as a data URL.
         reader.readAsDataURL(f);
+        $('.chat-history').addClass('imagePresent');
         }
-    })
+    });
 
     $('#message-data').emojioneArea({
         filtersPosition: "bottom",
@@ -189,12 +196,38 @@ $(document).ready(function () {
             }
           }
     });
+
+    
+
+    $('#showPeopleList').on('click',function() {
+        if ($('#people-list').hasClass('show')){
+                $('#people-list').removeClass('show');
+                $(this).html('<i class="fas fa-arrow-left"></i>');
+                setTimeout(function(){
+                    $('.darkOverlay').addClass('d-none');
+                }, 900);
+        }else{
+            $('#people-list').addClass('show');
+            $('.darkOverlay').removeClass('d-none');
+            $(this).html('<i class="fas fa-times"></i>');
+            
+            $('.darkOverlay').one('click',function(){
+                $('#people-list').removeClass('show');
+                $('#showPeopleList').html('<i class="fas fa-arrow-left"></i>');
+                setTimeout(function(){
+                    $('.darkOverlay').addClass('d-none');
+                }, 900);
+            });
+
+        }
+    });
     
 });
 
 // On full up scroll chat history try to load more messages
 function chk_scroll(e) {
     var elem = $(e.currentTarget);
+    $(elem).off('scroll');
     if (elem.scrollTop() == 0 && stop_pagi === false){
         pagi++;
         var url = window.location.href;
@@ -211,6 +244,9 @@ function chk_scroll(e) {
                     $('#talkMessages').prepend(response.html);
                     $("div.chat-history").scrollTop($("div.chat-history").scrollTop() + $("#top-msg").position().top - $("div.chat-history").height()/4 + $("#top-msg").height()/4);
                     stop_pagi = response.stop;
+                    if(!stop_pagi){
+                        $(elem).bind('scroll',chk_scroll);
+                    }
                 }
             }
         });
@@ -219,6 +255,7 @@ function chk_scroll(e) {
 
 function chk_scroll_down(e) {
     var elem = $(e.currentTarget);
+    $(elem).off('scroll');
     if (($(elem).scrollTop() + $(elem).innerHeight() >= $(elem)[0].scrollHeight) && (stop_pagi_convo === false)){
         pagi_convo++;
         var url = __baseUrl + '/ajax/message/getMore/'+pagi_convo;
@@ -233,6 +270,7 @@ function chk_scroll_down(e) {
             if (response.status == 'success') {
                 $(elem).append(response.html);
                 stop_pagi_convo = response.stop;
+                $(elem).bind('scroll',chk_scroll_down);
             }
         });
     }
