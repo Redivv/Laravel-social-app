@@ -178,7 +178,19 @@
                             .postPicture{
                                 width: 11rem;
                                 height: 8rem;
-                                margin-left: 0.5rem;
+                                margin-top: 0.5rem;
+                                &:not(:first-child){
+                                    margin-left: 0.5rem;
+                                }
+                            }
+                            .morePhotos{
+                                @include font-size(0.9rem);
+                                color: $black;
+                                padding: 0.5rem;
+                                font-weight: bold;
+                                &:hover{
+                                    color: $orange;
+                                }
                             }
                         }
                         .postContent{
@@ -242,6 +254,11 @@
                                 @include font-size(0.6rem);
                                 padding: 0.2rem 0.3rem;
                                 top:0.2rem;
+                            }
+                        }
+                        @media screen and (max-width: $mobile-breakpoint) {
+                            i{
+                                display:block;
                             }
                         }
                     }

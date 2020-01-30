@@ -26,10 +26,9 @@
       
       @yield('contentChat')
 
-      <hr>
-
       @if(isset($user))
         <div class="chat-message clearfix">
+          <hr>
           <form action="" method="post" id="talkSendMessage"class="message-box" enctype="multipart/form-data">
                 <label for="upload-pictures"><i class="far fa-images"></i></label>
                 <input id="upload-pictures" class="d-none" name="pictures[]" type="file" accept="image/*" multiple>
@@ -51,7 +50,6 @@
 
 @push('scripts')
   <script>
-      var audioElement  = document.createElement('audio');
       var __baseUrl     = "{{url('/')}}";
       var deleteConvo   = "{{__('chat.deleteConvo')}}";
       var deleteMessage = "{{__('chat.deleteMessage')}}";
@@ -78,13 +76,7 @@
       focus_status = false;
     });
 
-    var new_messages = 0;
-    var title = $(document).prop('title');
-
     var newmsg = function(data) {
-        new_messages++;
-        $(document).prop('title', '('+new_messages+') '+title);
-        playSound('{{asset("chat/new_message.mp3")}}', audioElement);
         if($("div.chat-with").text() == data.sender.name){
           addNewMessage(data.id);
           $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
@@ -136,6 +128,5 @@
   </script>
   <script src="{{asset('js/emoji.js')}}"></script>
   <script src="{{asset('chat/js/talk.js')}}"></script>
-  {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}
     
 @endpush

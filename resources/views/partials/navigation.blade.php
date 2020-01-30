@@ -566,10 +566,13 @@
 @auth
     @push('scripts')
         <script>
+            var audioElement  = document.createElement('audio');
             var baseUrl =   "{{url('/')}}";
             var noNotifications = "{{__('nav.noNotifications')}}";
             var friendAcceptMsg = "{{__('nav.acceptFriendMsg')}}";
             var friendDenyMsg   = "{{__('nav.denyFriendMsg')}}";
+            var new_messages = 0;
+            var title = $(document).prop('title');
         </script>
         <script src="{{asset('js/navigation.js')}}"></script>
         <script>
@@ -581,6 +584,7 @@
 
                     case 'App/Notifications/FriendRequestSend':
                         updateUserNotifications();
+                        playNotSound();
                         if (!($('.friendRequests:first').length)) {
                             $('.userNotifications').prepend('<ul class="friendRequests"></ul>');
                         }
@@ -620,6 +624,7 @@
 
                         case 'App/Notifications/PendingPartnerRequest':
                         updateUserNotifications();
+                        playNotSound();
                         if (!($('.friendRequests:first').length)) {
                             $('.userNotifications').prepend('<ul class="friendRequests"></ul>');
                         }
@@ -658,8 +663,8 @@
                         break;
                     // User Notification 
                     case 'App/Notifications/UserNotification':
-                        updateUserNotifications()
-                        
+                        updateUserNotifications();
+                        playNotSound();
                         if (!($('#wallFetchBtn').hasClass('ready'))) {
                             $('#wallFetchBtn').addClass('ready');
                         }
@@ -680,8 +685,8 @@
 
                     // Accepted Friend Request Notification
                     case 'App/Notifications/FriendRequestAccepted':
-                        updateUserNotifications()
-
+                        updateUserNotifications();
+                        playNotSound();
                         html = '<a class="dropdown-item container" href="/user/profile/'+notification.sender_name+'" target="__blank">'+
                                     '<div class="row">'+
                                         '<div class="notificationImageBox col-2">'+
@@ -698,7 +703,8 @@
 
                     // Special Admin Notifications
                     case 'App/Notifications/NewAdminPost':
-                        updateUserNotifications()
+                        updateUserNotifications();
+                        playNotSound();
                         $('#wallFetchBtn').removeClass('d-none');
                         html = '<a class="dropdown-item container" href="/user/home/#post'+notification.postId+'" target="__blank">'+
                                     '<div class="row">'+
@@ -717,6 +723,7 @@
                     // System Notification
                     case 'App/Notifications/SystemNotification':
                         updateSystemNotifications();
+                        playNotSound();
                         if ($('.'+notification.action+notification.contentId+':first').length) {
                             $('.'+notification.action+notification.contentId).removeClass('read');
                             let amount = $('.'+notification.action+notification.contentId+':first').find('.'+notification.action+notification.contentId+'Amount').text().trim();
@@ -740,6 +747,7 @@
                     // Special Admin Notification
                     case 'App/Notifications/AdminWideInfo':
                         updateSystemNotifications();
+                        playNotSound();
                         html = '<a class="'+notification.id+' dropdown-item alert alert-info" href="/user/profile" target="_blank">'+
                                     '<div class="systemNotificationDate">{{__("nav.newSysNotTime")}}</div>'+
                                     '<div class="adminWideHeader">{{__("nav.adminWideInfoHeader")}}</div>'+
@@ -749,6 +757,7 @@
                         break;
                     case 'App/Notifications/NewProfilePicture':
                         updateSystemNotifications();
+                        playNotSound();
                         html = '<a class="'+notification.id+' newPictureNot dropdown-item alert alert-info" href="/admin/home" target="_blank">'+
                                     '<div class="row systemNotificationDate">'+
                                         '<div class="col-6 text-left">{{__("nav.newSysNotTime")}}</div>'+
@@ -759,6 +768,7 @@
                         break;
                     case 'App/Notifications/UserFlagged':
                         updateSystemNotifications();
+                        playNotSound();
                         html = '<a class="'+notification.id+' userFlaggedNot dropdown-item alert alert-info" href="/admin/home" target="_blank">'+
                                     '<div class="row systemNotificationDate">'+
                                         '<div class="col-6 text-left">{{__("nav.newSysNotTime")}}</div>'+
@@ -771,6 +781,49 @@
                 }
         
             });
+
+            var newmsg = function(data) {
+                let newMessages = $('#desktopTalk').html();
+                let html;
+                if(newMessages.trim() == ""){
+                    newMessages = 0;
+                    if($('.chatNoNot').length){
+                        $('.chatNoNot').remove();
+                        html = '<div class="dropdown-divider"></div>'+
+                                    '<a class="clearAllBtn">{{__("nav.deleteAll")}}</a>';
+                        $('.chatNotifications').append(html);
+                    }
+                }
+                if (data.message == null || data.message.trim() == "") {
+                    data.message = '<i class="far fa-file-image"></i>';
+                }
+                html = '<a class="chat-'+data.conversation_id+' dropdown-item container" href="/message/'+data.sender.name+'" target="__blank">'+
+                    '<div class="row">'+
+                        '<div class="notificationImageBox col-2">'+
+                            '<img class="notificationImage" src="/img/profile-pictures/'+data.sender.picture+'" alt="" srcset="">'+
+                        '</div>'+
+                        '<div class="notificationDesc col-10">'+
+                            '<div class="col-12 ">'+data.sender.name+'</div>'+
+                            '<div class="col-12 descTime">'+data.humans_time+' {{__("nav.ago")}}</div>'+
+                            '<div class="col-12">'+data.message.substring(0,20)+'</div>'+
+                        '</div>'+
+                    '</div>'+
+                '</a>';
+                if($('a.chat-'+data.conversation_id).length) {
+                    if ($('a.chat-'+data.conversation_id).hasClass('read')) {
+                        $('#desktopTalk').html(parseInt(newMessages)+1);
+                    }
+                    $('a.chat-'+data.conversation_id).remove();
+                    $('.chatNotifications').prepend(html);
+                }else{
+                    newMessages++;
+                    $('.chatNotificationsCount').html(newMessages);
+                    $('.chatNotifications').prepend(html);
+                    $('#desktopTalk').html(parseInt(newMessages)+1);
+                }
+                playNotSound();
+
+            }
 
             Echo.private(`seen.` + window.Laravel.user)
 
@@ -897,51 +950,18 @@
                     });
                 }
             }
-
-        </script>
-
-        <script>
-            var newmsg = function(data) {
-                let newMessages = $('#desktopTalk').html();
-                let html;
-                if(newMessages.trim() == ""){
-                    newMessages = 0;
-                    if($('.chatNoNot').length){
-                        $('.chatNoNot').remove();
-                        html = '<div class="dropdown-divider"></div>'+
-                                    '<a class="clearAllBtn">{{__("nav.deleteAll")}}</a>';
-                        $('.chatNotifications').append(html);
-                    }
-                }
-                if (data.message == null || data.message.trim() == "") {
-                    data.message = '<i class="far fa-file-image"></i>';
-                }
-                html = '<a class="chat-'+data.conversation_id+' dropdown-item container" href="/message/'+data.sender.name+'" target="__blank">'+
-                    '<div class="row">'+
-                        '<div class="notificationImageBox col-2">'+
-                            '<img class="notificationImage" src="/img/profile-pictures/'+data.sender.picture+'" alt="" srcset="">'+
-                        '</div>'+
-                        '<div class="notificationDesc col-10">'+
-                            '<div class="col-12 ">'+data.sender.name+'</div>'+
-                            '<div class="col-12 descTime">'+data.humans_time+' {{__("nav.ago")}}</div>'+
-                            '<div class="col-12">'+data.message.substring(0,20)+'</div>'+
-                        '</div>'+
-                    '</div>'+
-                '</a>';
-                if($('a.chat-'+data.conversation_id).length) {
-                    if ($('a.chat-'+data.conversation_id).hasClass('read')) {
-                        $('#desktopTalk').html(parseInt(newMessages)+1);
-                    }
-                    $('a.chat-'+data.conversation_id).remove();
-                    $('.chatNotifications').prepend(html);
-                }else{
-                    newMessages++;
-                    $('.chatNotificationsCount').html(newMessages);
-                    $('.chatNotifications').prepend(html);
-                    $('#desktopTalk').html(parseInt(newMessages)+1);
-                }
-
+            
+            function playSound(sound,element){
+                element.setAttribute('src', sound);
+                element.play();
             }
+
+            function playNotSound() {
+                new_messages++;
+                $(document).prop('title', '('+new_messages+') '+title);
+                playSound('{{asset("chat/new_message.mp3")}}', audioElement);
+            }
+
         </script>
             {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsg']]]) !!}
     @endpush

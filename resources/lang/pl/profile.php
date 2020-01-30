@@ -26,7 +26,7 @@ return [
     'readMore'              => "Czytaj Dalej",
     'moreContent'           => "Pokaż Więcej (:remaining)",
     'closeFriends'          => 'Znajomi (:amount)',
-    'logInToSee'            => 'Zaloguj się aby zobaczyć pełne dane',
+    'logInToSeeActivity'    => 'Zaloguj się aby zobaczyć aktywność użytkownika',
     'allFriends'            => 'Zobacz Wszystkich',
     'modalTitle'            => "Szczegółowe Informacje",
     'emptyModal'            => "Brak danych do wyświetlenia",

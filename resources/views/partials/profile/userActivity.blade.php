@@ -24,9 +24,16 @@
                     <div class="postPhotos col-12">
                         @if ($pictures = json_decode($post->pictures))
                             @foreach ($pictures as $picture)
-                                <a href="{{asset('img/post-pictures/'.$picture)}}" data-lightbox="post{{$post->id}}-Pictures">
-                                    <img class="postPicture" src="{{asset('img/post-pictures/'.$picture)}}">
-                                </a>
+                                @if ($loop->iteration == 4)   
+                                <div class="mt-2"> 
+                                    <a class="morePhotos" href="{{route('viewPost',['post' => $post->id])}}" target="__blank">Pozostałe Zdjęcia ({{$loop->remaining+1}})</a>
+                                </div>
+                                @break
+                                @else
+                                    <a href="{{asset('img/post-pictures/'.$picture)}}" data-lightbox="post{{$post->id}}-Pictures">
+                                        <img class="postPicture" src="{{asset('img/post-pictures/'.$picture)}}">
+                                    </a>
+                                @endif
                             @endforeach
                         @endif
                     </div>

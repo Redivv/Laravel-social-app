@@ -16,9 +16,11 @@
             @endforeach  
         </output>
         @endif
-        <div class="messageText">
-            <span>{!!nl2br($message->toHtmlString()->toHtml())!!}</span>
-        </div>
+        @if (!empty($message->message))
+            <div class="messageText">
+                <span>{!!nl2br($message->toHtmlString()->toHtml())!!}</span>
+            </div>
+        @endif
     </div>
     @if ($message->is_seen)
         <div class="clearfix seenInfo"><span>{{__('chat.seen')}}</span></div>
@@ -40,9 +42,11 @@
             @endforeach  
         </output>
         @endif
-        <div class="messageText">
-            <span>{!!nl2br($message->toHtmlString()->toHtml())!!}</span>
-        </div>
+        @if (!empty($message->message))
+            <div class="messageText">
+                <span>{!!nl2br($message->toHtmlString()->toHtml())!!}</span>
+            </div>
+        @endif
     </div>
 </li>
 @endif

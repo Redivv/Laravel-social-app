@@ -257,12 +257,23 @@ html{font-size: 16px !important;}
                     padding: 0 1rem;
                     margin-top: 0.5rem;
                     .postPhotos{
-                        padding: 0;
+                        padding: 0.5rem 0;
                         .postPicture{
-                            width: 8rem;
-                            height: 7rem;
-                            margin-right: 0.5rem;
-                            margin-top: 0.3rem;
+                            width: 11rem;
+                            height: 8rem;
+                            margin-top: 0.5rem;
+                            &:not(:first-child){
+                                margin-left: 0.5rem;
+                            }
+                        }
+                        .morePhotos{
+                            @include font-size(0.9rem);
+                            color: $black;
+                            padding: 0.5rem;
+                            font-weight: bold;
+                            &:hover{
+                                color: $orange;
+                            }
                         }
                     }
                     .postContent{
@@ -327,6 +338,11 @@ html{font-size: 16px !important;}
                             padding: 0.2rem 0.3rem;
                             top:0.2rem;
                             left: -0.5rem;
+                        }
+                        @media screen and (max-width: $mobile-breakpoint) {
+                            i{
+                                display:block;
+                            }
                         }
                     }
                 }

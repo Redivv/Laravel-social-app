@@ -8,9 +8,13 @@ function main() {
     $('a.navNotifications').on('click',function() {
         let type = $(this).data('type');
         $('.'+type+'Count').html('');
+            
+        new_messages = 0;
+        $(document).prop('title',title);
+
         $(this).parent().one('hidden.bs.dropdown',function() {
             $('.'+type).find('.dropdown-item').addClass('read');
-        })
+        });
 
         if (type !== "chatNotifications") {
             $.ajaxSetup({

@@ -11,46 +11,47 @@
 
     <div class="container-fluid row p-0">
         <div class="col-4 text-center profileData row">
-
-            <div class="col-12 userButtons row">
-                <div class="col text-center ico likeProfile">
-                    <button class="btn likeUser @if(auth()->check()) likeBtn @endif @if($user->liked()) active @endif" data-id="{{$user->id}}" data-tool="tooltip" title="{{__('profile.likeUser')}}" data-placement="bottom">
-                        <i class="fas fa-fire"></i>
-                        <span class="badge likesAmount @if($user->likeCount <= 0) invisible @endif">
-                            {{$user->likeCount}}
-                        </span>
-                    </button>
-                </div>
-                @if (auth()->check() && $user->id != auth()->id())
-                    <div class="col ico">
-                        <a href="{{route('message.read', ['name' => $user->name])}}" target="__blank">
-                            <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.messageUser')}}" data-placement="bottom">
-                                <i class="far fa-comment-dots"></i>
-                            </button>
-                        </a>
-                    </div>
-                    <div class="col ico addFriend" data-name="{{$user->name}}" id="{{$user->name}}">
-                            @if($user->isFriendWith(auth()->user()))
-                                <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend3')}}" data-placement="bottom">
-                                    <i class="active fas fa-user-friends"></i>
-                                </button>
-                            @elseif(auth()->user()->hasSentFriendRequestTo($user))
-                                <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend2')}}" data-placement="bottom">
-                                    <i class="active fas fa-user-check"></i>
-                                </button>
-                            @else
-                                <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend1')}}" data-placement="bottom">
-                                    <i class="fas fa-user-plus"></i>
-                                </button>
-                            @endif
-                    </div>
-                    <div class="col ico">
-                        <button class="btn reportBtn text-reset" data-name="{{$user->name}}" data-tool="tooltip" title="{{__('profile.reportUser')}}" data-placement="bottom">
-                            <i class="fas fa-exclamation"></i>
+            @auth
+                <div class="col-12 userButtons row">
+                    <div class="col text-center ico likeProfile">
+                        <button class="btn likeUser @if(auth()->check()) likeBtn @endif @if($user->liked()) active @endif" data-id="{{$user->id}}" data-tool="tooltip" title="{{__('profile.likeUser')}}" data-placement="bottom">
+                            <i class="fas fa-fire"></i>
+                            <span class="badge likesAmount @if($user->likeCount <= 0) invisible @endif">
+                                {{$user->likeCount}}
+                            </span>
                         </button>
                     </div>
-                @endif
-            </div>
+                    @if (auth()->check() && $user->id != auth()->id())
+                        <div class="col ico">
+                            <a href="{{route('message.read', ['name' => $user->name])}}" target="__blank">
+                                <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.messageUser')}}" data-placement="bottom">
+                                    <i class="far fa-comment-dots"></i>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="col ico addFriend" data-name="{{$user->name}}" id="{{$user->name}}">
+                                @if($user->isFriendWith(auth()->user()))
+                                    <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend3')}}" data-placement="bottom">
+                                        <i class="active fas fa-user-friends"></i>
+                                    </button>
+                                @elseif(auth()->user()->hasSentFriendRequestTo($user))
+                                    <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend2')}}" data-placement="bottom">
+                                        <i class="active fas fa-user-check"></i>
+                                    </button>
+                                @else
+                                    <button class="btn text-reset" data-tool="tooltip" title="{{__('profile.addFriend1')}}" data-placement="bottom">
+                                        <i class="fas fa-user-plus"></i>
+                                    </button>
+                                @endif
+                        </div>
+                        <div class="col ico">
+                            <button class="btn reportBtn text-reset" data-name="{{$user->name}}" data-tool="tooltip" title="{{__('profile.reportUser')}}" data-placement="bottom">
+                                <i class="fas fa-exclamation"></i>
+                            </button>
+                        </div>
+                    @endif
+                </div>
+            @endauth
             
             <div class="col-12 userName">
                 <span>
@@ -58,13 +59,14 @@
                     <span id="userName" data-id="{{$user->id}}">{{$user->name}}</span>
                 </span>
             </div>
-                
-            @if($user->id == auth()->id())
-                <a id="profileEditLink" href="{{route('ProfileEdition')}}" data-tool="tooltip" title="{{__('profile.editProfile')}}" data-placement="bottom">
-                    <i class="fas fa-user-edit"></i>
-                </a>
-            @endif
-
+            
+            @auth()
+                @if($user->id == auth()->id())
+                    <a id="profileEditLink" href="{{route('ProfileEdition')}}" data-tool="tooltip" title="{{__('profile.editProfile')}}" data-placement="bottom">
+                        <i class="fas fa-user-edit"></i>
+                    </a>
+                @endif
+            @endauth
             <div class="col-12 userPicture">
                 <a href="{{asset('img/profile-pictures/'.$user->picture)}}" data-lightbox="Profile" data-title="{{__("profile.photo", ['user' => $user->name])}}">
                     <img src="{{asset('img/profile-pictures/'.$user->picture)}}" alt="{{__("profile.photo", ['user' => $user->name])}}">
@@ -148,21 +150,25 @@
                     @endforeach
                 </div>
             @endif
+
             @if($friends)
                 <div class="col-12 userFriends row">
                     <button class="btn col-12" data-tool="tooltip" title="{{__('profile.allFriends')}}" data-placement="bottom" data-toggle="modal" data-target="#expandInfoModal" data-content="friends" data-id="{{$user->id}}">
                         {{__('profile.closeFriends',['amount' => $friends])}}
                     </button>
-                    @if ( ($user->id != auth()->id()) && ($user->getMutualFriendsCount(auth()->user()) > -1))
-                        <span class="mutualFriends">{{__('profile.mutualFriends',['count' => $user->getMutualFriendsCount(auth()->user()) ])}}</span>
-                    @endif
+                    @auth
+                        @if ( ($user->id != auth()->id()) && ($user->getMutualFriendsCount(auth()->user()) > -1))
+                            <span class="mutualFriends">{{__('profile.mutualFriends',['count' => $user->getMutualFriendsCount(auth()->user()) ])}}</span>
+                        @endif
+                    @endauth
                 </div>
             @endif
+
         </div>
         <div class="text-center col-8 container activity">
-            @if (session()->has('guest'))
+            @guest (session()->has('guest'))
                 <div class="alert alert-warning" role="alert" style="width: 100%; align-self:center;">
-                    <b>{{session()->get('guest')}}</b>
+                    <b>{{__('profile.logInToSeeActivity')}}</b>
                 </div>
             @else
                 @if ($user->id == auth()->id() && $user->email_verified_at === null)
@@ -177,7 +183,7 @@
                         @include('partials.profile.userActivity')
                     </div>
                 @endif
-            @endif
+            @endguest
         </div>
     </div>
     

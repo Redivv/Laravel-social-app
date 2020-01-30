@@ -1,8 +1,3 @@
-function playSound(sound,element){
-    element.setAttribute('src', sound);
-    element.play();
-  }
-
   function addNewMessage(id) {
     var request = $.ajax({
       method: "get",

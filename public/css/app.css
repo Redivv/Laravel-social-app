@@ -18979,9 +18979,11 @@ body {
 
 .nav-bar-height .userNotifications ul .friendOptions {
   text-align: center;
+  margin-top: 0.5rem;
 }
 
 .nav-bar-height .userNotifications ul .friendOptions i {
+  font-size: 1rem;
   margin: 0 0.5rem;
 }
 
@@ -19786,14 +19788,28 @@ html {
 }
 
 .activity .activityPosts .postBox .post .postDesc .postPhotos {
-  padding: 0;
+  padding: 0.5rem 0;
 }
 
 .activity .activityPosts .postBox .post .postDesc .postPhotos .postPicture {
-  width: 8rem;
-  height: 7rem;
-  margin-right: 0.5rem;
-  margin-top: 0.3rem;
+  width: 11rem;
+  height: 8rem;
+  margin-top: 0.5rem;
+}
+
+.activity .activityPosts .postBox .post .postDesc .postPhotos .postPicture:not(:first-child) {
+  margin-left: 0.5rem;
+}
+
+.activity .activityPosts .postBox .post .postDesc .postPhotos .morePhotos {
+  font-size: 0.9rem;
+  color: #000;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+.activity .activityPosts .postBox .post .postDesc .postPhotos .morePhotos:hover {
+  color: #f66103;
 }
 
 .activity .activityPosts .postBox .post .postDesc .postContent {
@@ -19880,6 +19896,13 @@ html {
   padding: 0.2rem 0.3rem;
   top: 0.2rem;
   left: -0.5rem;
+}
+
+@media screen and (max-width: 767px) {
+  .activity .activityPosts .postBox .post .postFooter a i,
+  .activity .activityPosts .postBox .post .postFooter button i {
+    display: block;
+  }
 }
 
 .activity .activityPosts .postBox .postComments .input-group {
@@ -20897,7 +20920,22 @@ html {
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postPhotos .postPicture {
   width: 11rem;
   height: 8rem;
+  margin-top: 0.5rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postPhotos .postPicture:not(:first-child) {
   margin-left: 0.5rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postPhotos .morePhotos {
+  font-size: 0.9rem;
+  color: #000;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postPhotos .morePhotos:hover {
+  color: #f66103;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postContent {
@@ -20978,6 +21016,12 @@ html {
   font-size: 0.6rem;
   padding: 0.2rem 0.3rem;
   top: 0.2rem;
+}
+
+@media screen and (max-width: 767px) {
+  #friendsWall .friendsWall #friendsWallFeed .postBox .post .postFooter i {
+    display: block;
+  }
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .input-group {
@@ -22105,7 +22149,7 @@ html {
 }
 
 .chatBody .chat .chat-header {
-  height: 8vh;
+  height: 4rem;
   padding: 0.5rem 1rem;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
   background-color: #ffffff;
@@ -22123,14 +22167,14 @@ html {
 }
 
 .chatBody .chat .chat-history {
-  max-height: 51vh;
+  max-height: 55vh;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 1rem;
 }
 
 .chatBody .chat .chat-history.imagePresent {
-  max-height: 41vh;
+  max-height: 45.5vh;
 }
 
 .chatBody .chat .chat-history ul {
@@ -22185,7 +22229,7 @@ html {
 .chatBody .chat .chat-history ul li .other-message .messageText {
   width: 60%;
   white-space: normal;
-  background-color: #f66103;
+  background-color: rgba(90, 90, 90, 0.8);
   border-radius: 20px;
   padding: 0.3rem 0;
 }
@@ -22218,6 +22262,7 @@ html {
 
 .chatBody .chat .chat-history ul li.authMessage .messageText {
   margin-left: auto;
+  background-color: #f66103;
 }
 
 .chatBody .chat .chat-history ul li:not(:first-child) {
@@ -22229,11 +22274,14 @@ html {
 }
 
 .chatBody .chat .chat-message {
-  padding: 0rem 1rem 0.5rem 1rem;
-  display: flex;
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  background-color: #f8fafc;
 }
 
 .chatBody .chat .chat-message #talkSendMessage {
+  padding: 0rem 1rem 0.5rem 1rem;
   width: 100%;
   margin-top: auto;
 }
@@ -22268,9 +22316,9 @@ html {
 }
 
 .chatBody .chat .chat-message #talkSendMessage .emojionearea .emojionearea-editor {
-  min-height: 5rem;
-  max-height: 5rem;
-  height: 5rem;
+  min-height: 3rem;
+  max-height: 3rem;
+  height: 3rem;
   overflow-y: auto;
 }
 
@@ -22285,7 +22333,11 @@ html {
 }
 
 .chatBody .chat .chat-message #talkSendMessage button:hover {
-  color: #e26103;
+  background-color: #e26103;
+}
+
+.chatBody .chat .chat-message hr {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .chatBody #showPeopleList {

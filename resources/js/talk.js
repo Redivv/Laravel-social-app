@@ -28,7 +28,7 @@ $(document).ready(function () {
     // Sending a message dynamicly
     $('#talkSendMessage').on('submit', function(e) {
         e.preventDefault();
-        if ($('#message-data').val() || $('#addPost').val()) { 
+        if ($('#message-data').val() || $('#upload-pictures').val()) { 
             var url, request, tag;
             tag = $(this);
             url = __baseUrl + '/ajax/message/send';
