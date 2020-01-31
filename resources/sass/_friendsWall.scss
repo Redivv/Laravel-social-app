@@ -150,10 +150,17 @@
                                 color: $black;
                             }
                             small{
-                                @include font-size(0.6rem);
+                                @include font-size(0.7rem);
                                 font-weight: normal;
                                 margin-left: 0.25rem;
                             }
+                        }
+                        .postCreatedAt{
+                            @include font-size (0.75rem);
+                            @extend .text-muted;
+                            padding-left: 3rem;
+                            letter-spacing: 0.5px;
+                            margin-top: -0.6rem;
                         }
                         .postAuthorButtons{
                             text-align: right;

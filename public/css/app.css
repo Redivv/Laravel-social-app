@@ -12320,9 +12320,11 @@ a.text-dark:focus {
 .chatBody .chat .chat-history ul li .message-data .message-data-time,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentDate,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentDate,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postCreatedAt,
 #friendsWall .friendsWall #friendsWallFeed .noContent,
 .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentDate,
 .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentDate,
+.activity .activityPosts .postBox .post .postAuthor .postCreatedAt,
 .activity .noActivity,
 .profileData .userFriends .mutualFriends,
 .profileData .userStatus span,
@@ -19756,9 +19758,18 @@ html {
 }
 
 .activity .activityPosts .postBox .post .postAuthor .postAuthorName small {
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   font-weight: normal;
   margin-left: 0.25rem;
+}
+
+.activity .activityPosts .postBox .post .postAuthor .postCreatedAt {
+  font-size: 0.75rem;
+  padding-left: 3rem;
+  letter-spacing: 0.5px;
+  margin-top: -0.6rem;
+  font-weight: normal;
+  text-align: left;
 }
 
 .activity .activityPosts .postBox .post .postAuthor .postAuthorButtons {
@@ -20885,9 +20896,16 @@ html {
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorName small {
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   font-weight: normal;
   margin-left: 0.25rem;
+}
+
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postCreatedAt {
+  font-size: 0.75rem;
+  padding-left: 3rem;
+  letter-spacing: 0.5px;
+  margin-top: -0.6rem;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postAuthor .postAuthorButtons {

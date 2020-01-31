@@ -41,6 +41,6 @@ return [
     "deleteTags"        => "Delete tag",
     'deleteComment'     => "Delete comment",
     'editComment'       => "Edit comment",
-    'newFriend'         => " accept friend request from ",
+    'newFriend'         => " accepted friend request from ",
     'newPartner'        => " is in relationship with ",
 ];

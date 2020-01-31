@@ -11,6 +11,7 @@
                     <a class="postAuthorLink" href="{{route('ProfileOtherView',['user' => $post->user->name])}}">
                         {{$post->user->name}}@if($post->user->is_admin)<small class="text-muted adminStatus">{{__('activityWall.adminStatus')}}</small>@endif
                     </a>
+                    <br>
                 </div>
                 @if ($post->user_id == auth()->user()->id)
                     <div class="col-4 postAuthorButtons">
@@ -18,6 +19,7 @@
                         <i class="fas postDelete fa-times" data-id="{{$post->id}}" data-tool="tooltip" title="{{__("activityWall.deletePost")}}" data-placement="bottom"></i>
                     </div>
                 @endif
+                <div class="offset-1 col-6 postCreatedAt">{{$post->created_at->diffForHumans()}}</div>
             </header>
             <main class="postDesc row">
                 <div class="postPhotos col-12">
