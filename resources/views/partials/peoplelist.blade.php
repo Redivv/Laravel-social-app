@@ -11,12 +11,12 @@
                     <form action="{{route('conversation.delete',['id'=>$inbox->withUser->id])}}" class="talkDeleteConversation float-left" method="POST">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button class="btn btn-link btn-sm" type="submit"><i class="fas fa-times"></i></button>
+                        <button class="btn btn-link btn-sm" type="submit" data-tool="tooltip" title="{{__('chat.deleteConvoTool')}}"><i class="fas fa-times"></i></button>
                     </form>
                     <form action="{{route('conversation.block',['id'=>$inbox->withUser->id])}}" class="talkBlockConversation" method="POST">
                         <input type="hidden" name="_method" value="PATCH">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button class="btn btn-link btn-sm ml-2" type="submit"><i class="fas fa-user-times"></i></button>
+                        <button class="btn btn-link btn-sm ml-2" type="submit" data-tool="tooltip" title="{{__('chat.blockConvoTool')}}"><i class="fas fa-user-times"></i></button>
                     </form>
                 </div>
                 <div class="profile-picture col-2">

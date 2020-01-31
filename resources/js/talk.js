@@ -1,6 +1,7 @@
 import "lightbox2";
 
 $(document).ready(function () {
+    $('[data-tool="tooltip"]').tooltip();
     // Setup Ajax csrf for future requests
     $.ajaxSetup({
         headers: {
@@ -20,11 +21,7 @@ $(document).ready(function () {
 
     // Bind scroll function to chat history for pagination request
     $( "ul.list" ).bind('scroll',chk_scroll_down);
-
     
-    // Enter key will send a message, Shift+enter will do normal break
-    
-
     // Sending a message dynamicly
     $('#talkSendMessage').on('submit', function(e) {
         e.preventDefault();
@@ -60,6 +57,7 @@ $(document).ready(function () {
             request.done(function (response) {
                 if (response.status == 'success') {
                     $('#to-be-replaced').replaceWith(response.html);
+                    $('[data-tool="tooltip"]').tooltip();
                     $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
                     var $thread = $('#user-'+response.receiver_id);
                     var active_flag = true;
@@ -71,6 +69,7 @@ $(document).ready(function () {
                         $('#user-'+response.receiver_id).remove();
                     }
                     $('#people-list').children('.list').prepend(response.html2);
+                    $('[data-tool="tooltip"]').tooltip();
                     if (active_id.includes(parseInt(response.receiver_id,10))) {
                         $('#user-'+response.receiver_id).addClass('activeUser');
                     }

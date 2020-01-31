@@ -37,33 +37,57 @@
                     @endif
                 </div>
                 <div class="postContent col-12">
-                    @php
-                        $regex = '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#';
-                        preg_match_all($regex, e($post->desc), $postLinks);
-                        if (isset($postLinks)) {
-                            $embedLinks = array();
-                            foreach ($postLinks[0] as $link) {
-                                $data = CachedEmbed::create($link);
-                                if ($data->code) {
-                                    $embedLinks[] = $data->code;
-                                }else{
-                                    $html = "<a href='".$link."' target='__blank'>".$link."</a>";
-                                    $embedLinks[] = $html;
+                    @switch($post->type)
+                        @case('newPicture')
+                            @if ($taggedUsers = json_decode($post->tagged_users))
+                                <a href="{{route('ProfileOtherView',['user' => $taggedUsers[0]])}}" target="__blank">{{$taggedUsers[0]}}</a> {{__('activityWall.friendNewPicture')}}
+                            @endif
+                            @break
+                        @case('newFriend')
+                            @if ($taggedUsers = json_decode($post->tagged_users))
+                                <a href="{{route('ProfileOtherView',['user' => $taggedUsers[0]])}}" target="__blank">{{$taggedUsers[0]}}</a>
+                                {{__('activityWall.newFriend')}}
+                                <a href="{{route('ProfileOtherView',['user' => $taggedUsers[1]])}}" target="__blank">{{$taggedUsers[1]}}</a>
+                            @endif
+                            @break
+                        @case('newPartner')
+                            @if ($taggedUsers = json_decode($post->tagged_users))
+                                <a href="{{route('ProfileOtherView',['user' => $taggedUsers[0]])}}" target="__blank">{{$taggedUsers[0]}}</a>
+                                {{__('activityWall.newPartner')}}
+                                <a href="{{route('ProfileOtherView',['user' => $taggedUsers[1]])}}" target="__blank">{{$taggedUsers[1]}}</a>
+                            @endif
+                            @break
+                        @default
+                            @php
+                                $regex = '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#';
+                                preg_match_all($regex, e($post->desc), $postLinks);
+                                if (isset($postLinks)) {
+                                    $embedLinks = array();
+                                    foreach ($postLinks[0] as $link) {
+                                        $data = CachedEmbed::create($link);
+                                        if ($data->code) {
+                                            $embedLinks[] = $data->code;
+                                        }else{
+                                            $html = "<a href='".$link."' target='__blank'>".$link."</a>";
+                                            $embedLinks[] = $html;
+                                        }
+                                    }
+                                    echo nl2br(preg_replace_array($regex, $embedLinks, e($post->desc)));
                                 }
-                            }
-                            echo nl2br(preg_replace_array($regex, $embedLinks, e($post->desc)));
-                        }
-                    @endphp
+                            @endphp
+                    @endswitch
                 </div>
-                <div class="postTags col-12 row">
-                    @if ($taggedUsers = json_decode($post->tagged_users))
-                        @foreach ($taggedUsers as $tags)
-                            <a href="{{route('ProfileOtherView',['user' => $tags])}}" class="col-4 postTaggedUser" target="__blank">
-                                <span class="taggedUserLabel">{{$tags}}</span>
-                            </a>
-                        @endforeach
-                    @endif
-                </div>
+                @if ($post->type == "default")
+                    <div class="postTags col-12 row">
+                        @if ($taggedUsers = json_decode($post->tagged_users))
+                            @foreach ($taggedUsers as $tags)
+                                <a href="{{route('ProfileOtherView',['user' => $tags])}}" class="col-4 postTaggedUser" target="__blank">
+                                    <span class="taggedUserLabel">{{$tags}}</span>
+                                </a>
+                            @endforeach
+                        @endif
+                    </div>
+                @endif
             </main>
             <footer class="postFooter row">
                 <button class="col-5 btn btn-block likePostButton @if($post->liked()){{"active"}}@endif" data-id="{{$post->id}}"><i class="fas fa-fire"></i><span class="badge likesCount badge-pill badge-warning">@if($post->likeCount != 0){{$post->likeCount}}@endif</span> {{__('activityWall.like')}}</button>

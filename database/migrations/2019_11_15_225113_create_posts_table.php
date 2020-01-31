@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->boolean('is_public')->default(true);
             $table->longText('pictures')->nullable()->default(null);
             $table->longText('tagged_users')->nullable()->default(null);
+            $table->string('type')->default('default');
             $table->timestamps();
 
             $table->foreign("user_id")->references('id')->on('users')->onDelete('cascade');

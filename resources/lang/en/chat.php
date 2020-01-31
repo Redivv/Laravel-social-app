@@ -14,5 +14,10 @@ return [
     'lastActive'        =>  'Last activity',
     'lastActive1sec'    =>  'Last activity: 1 second ago',
     'noThread'          =>  'No conversation selected',
-    'badFileType'       =>  'Bad file type!'
+    'badFileType'       =>  'Bad file type!',
+    'messagePicture'    =>  "Message Photo",
+    'deleteConvoTool'   =>  "Delete Conversation",
+    'blockConvoTool'    =>  "Block Conversation",
+    'deleteMessageTool' =>  "Soft Delete Message",
+    'addPictures'       =>  "Add Photos"
 ];

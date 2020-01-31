@@ -22026,8 +22026,8 @@ html {
     left: -100%;
     z-index: 1001;
     transition: left 1s linear;
-    flex: 0 0 50%;
-    max-width: 50%;
+    flex: 0 0 80%;
+    max-width: 80%;
   }
 
   .chatBody #people-list.show {
@@ -22116,9 +22116,20 @@ html {
 }
 
 .chatBody #people-list ul .thread a .about .status {
-  font-size: 0.8rem;
+  font-size: 0.83rem;
   color: #ffffff;
   text-decoration: none;
+}
+
+.chatBody #people-list ul .thread a .about.new:after {
+  content: "NEW";
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: #f22103;
+  position: absolute;
+  top: 1rem;
+  right: 0;
 }
 
 .chatBody #people-list ul .thread.active {
@@ -22135,6 +22146,17 @@ html {
 
 .chatBody #people-list ul .thread:not(:first-child) {
   margin-top: 1rem;
+}
+
+.chatBody #people-list ul .thread.activeUser .profile-picture:after {
+  content: "";
+  position: absolute;
+  width: 0.9rem;
+  height: 0.9rem;
+  background-color: #38c172;
+  border-radius: 50%;
+  top: 1.7rem;
+  left: 2.5rem;
 }
 
 .chatBody .chat {
@@ -22192,6 +22214,10 @@ html {
 .chatBody .chat .chat-history ul li .message-data,
 .chatBody .chat .chat-history ul li .seenInfo {
   padding: 0rem;
+}
+
+.chatBody .chat .chat-history ul li .seenInfo {
+  margin-left: auto;
 }
 
 .chatBody .chat .chat-history ul li .message-data .message-data-time {
@@ -22254,6 +22280,7 @@ html {
 .chatBody .chat .chat-history ul li.authMessage .talkDeleteMessage {
   color: #333333;
   font-size: 0.95rem;
+  margin-left: auto;
 }
 
 .chatBody .chat .chat-history ul li.authMessage .talkDeleteMessage:hover {

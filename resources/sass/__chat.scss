@@ -14,8 +14,8 @@
       left: -100%;
       z-index: 1001;
       transition:left 1s linear;
-      flex: 0 0 50%;
-      max-width: 50%;
+      flex: 0 0 80%;
+      max-width: 80%;
       &.show{
         left: 0;
       }
@@ -86,9 +86,19 @@
               letter-spacing: 0.5px;
             }
             .status{
-              @include font-size(0.8rem);
+              @include font-size(0.83rem);
               color: $white;
               text-decoration: none;
+            }
+            &.new:after{
+              content: "NEW";
+              @include font-size(0.9rem);
+              letter-spacing: 1px;
+              font-weight: bold;
+              color: $orange-active;
+              position: absolute;
+              top: 1rem;
+              right: 0;
             }
           }
         }
@@ -103,6 +113,18 @@
         }
         &:not(:first-child){
           margin-top: 1rem;
+        }
+        &.activeUser{
+          .profile-picture:after{
+            content: "";
+            position: absolute;
+            width: 0.9rem;
+            height: 0.9rem;
+            background-color: $green;
+            border-radius: 50%;
+            top: 1.7rem;
+            left: 2.5rem;
+          }
         }
       }
     }
@@ -145,6 +167,9 @@
           text-align: left;
           .talkDeleteMessage,.message-data,.seenInfo{
             padding: 0rem;
+          }
+          .seenInfo{
+            margin-left: auto;
           }
           .message-data{
             .message-data-time{
@@ -194,6 +219,7 @@
             .talkDeleteMessage{
               color: $blac;
               @include font-size(0.95rem);
+              margin-left: auto;
               &:hover{
                 color: $orange;
               }

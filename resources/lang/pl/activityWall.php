@@ -29,7 +29,7 @@ return [
     'togglePublic'      => 'Tylko dla znajomych',
     'deleteFriend'      => 'Czy na pewno chcesz usunąć ',
     'friendDeleted'     => 'Znajomy został usunięty',
-    'friendNewPicture'  => ':user zmienił swoje zdjęcie profilowe',
+    'friendNewPicture'  => ' zmienił swoje zdjęcie profilowe',
     'sortNone'          => 'Wszystkie Posty',
     'sortPublic'        => 'Posty Publiczne',
     'sortFriends'       => 'Posty Znajomych',
@@ -41,6 +41,6 @@ return [
     "deleteTags"        => "Usuń Wybrane Oznaczenie",
     'deleteComment'     => "Usuń Komentarz",
     'editComment'       => "Edytuj Komentarz",
-    'newFriend'         => ":user1 przyjął zaproszenie do znajomych od :user2",
-    'newPartner'        => ":user1 jest w związku z :user2",
+    'newFriend'         => " przyjął zaproszenie do znajomych od ",
+    'newPartner'        => " jest w związku z ",
 ];

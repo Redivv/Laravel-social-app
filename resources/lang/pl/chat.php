@@ -15,5 +15,9 @@ return [
     'lastActive1sec'    =>  'Ostatnio Aktywny: 1 sekunda temu',
     'noThread'          =>  'Nie wybrano rozmowy',
     'badFileType'       =>  'Niewłaściwy Typ Pliku!',
-    'messagePicture'    =>  "Zdjęcie dołączone do wiadomości"
+    'messagePicture'    =>  "Zdjęcie dołączone do wiadomości",
+    'deleteConvoTool'   =>  "Usuń Konwersację",
+    'blockConvoTool'    =>  "Zablokuj Konwersację",
+    'deleteMessageTool' =>  "Usuń Wiadomość (u Siebie)",
+    'addPictures'       =>  "Dodaj Zdjęcia"
 ];

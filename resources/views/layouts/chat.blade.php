@@ -30,7 +30,7 @@
         <div class="chat-message clearfix">
           <hr>
           <form action="" method="post" id="talkSendMessage"class="message-box" enctype="multipart/form-data">
-                <label for="upload-pictures"><i class="far fa-images"></i></label>
+                <label for="upload-pictures" data-tool="tooltip" title="{{__("chat.addPictures")}}"><i class="far fa-images"></i></label>
                 <input id="upload-pictures" class="d-none" name="pictures[]" type="file" accept="image/*" multiple>
                 <output id="picture-preview"></output>
                 <textarea style="border-color: Transparent !important;" name="message-data" id="message-data" placeholder ="{{__('chat.placeholder')}}" rows="3"></textarea>
@@ -56,14 +56,20 @@
       var blockConvo    = "{{__('chat.blockConvo')}}";
       var badFileType   = "{{__('chat.badFileType')}}";
 
+      var toolDeleteConvo = "{{__('chat.deleteConvoTool')}}";
+      var toolBlockConvo = "{{__('chat.blockConvoTool')}}";
+
       var pagi            = 0;
       var pagi_convo      = 0;
       var stop_pagi       = false;
       var stop_pagi_convo = false;
   </script>
-  
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+  <script src="{{asset('js/emoji.js')}}"></script>
   <script src="{{asset('chat/js/functions.js')}}"></script>
+  <script src="{{asset('chat/js/talk.js')}}"></script>
+
+  <script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
 
   <script>
     var focus_status = true;
@@ -76,7 +82,8 @@
       focus_status = false;
     });
 
-    var newmsg = function(data) {
+    var newmsgChat = function(data) {
+      console.log($("div.chat-with").text());
         if($("div.chat-with").text() == data.sender.name){
           addNewMessage(data.id);
           $( "div.chat-history" ).scrollTop($('div.chat-history').prop('scrollHeight'));
@@ -98,7 +105,6 @@
         $('#to-be-seen-thread-'+e.conversation_id).removeAttr('id');
     });
 
-    var active_id = new Array();
     Echo.join('online')
       .joining((user) => {
           axios.patch('/api/user/'+ user.name +'/online', {
@@ -126,7 +132,6 @@
           }
       });
   </script>
-  <script src="{{asset('js/emoji.js')}}"></script>
-  <script src="{{asset('chat/js/talk.js')}}"></script>
+  {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsgChat']]]) !!}
     
 @endpush

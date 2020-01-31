@@ -13,26 +13,29 @@
 
   function updateThreads(data, is_new = '') {
       var $thread = $('#user-'+data.sender.id);
-      var active = '';
+      var active = "";
+      var selectedConvo = "";
       if($thread.length){
-        $('#user-'+data.sender.id+'+hr').remove();
+        if ($('#user-'+data.sender.id).hasClass('activeUser')) {
+          active = "activeUser";
+        }
+        if ($('#user-'+data.sender.id).hasClass('active')) {
+          selectedConvo = "active";
+        }
         $('#user-'+data.sender.id).remove();
       }
-      if (active_id.includes(parseInt(data.sender.id,10))) {
-        active = "activeUser";
-    }
-      var html = '<li data-id="'+data.sender.id+'" id="user-'+data.sender.id+'" class="clearfix thread row '+active+'">'+
+      var html = '<li data-id="'+data.sender.id+'" id="user-'+data.sender.id+'" class="clearfix thread row '+active+" "+selectedConvo+'">'+
           '<a class="row col-12" href="/message/'+data.sender.name+'">'+
           '<div class="threadForms col-12">'+
           '<form action="/message/'+data.sender.id+'" class="talkDeleteConversation float-left" method="POST">'+
           '<input type="hidden" name="_method" value="DELETE">'+
           '<input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'">'+
-          '<button class="btn btn-link btn-sm" type="submit"><i class="fas fa-times"></i></button>'+
+          '<button class="btn btn-link btn-sm" type="submit" data-tool="tooltip" title="'+toolDeleteConvo+'"><i class="fas fa-times"></i></button>'+
           '</form>'+
           '<form action="/message/'+data.sender.id+'" class="talkBlockConversation" method="POST">'+
           '<input type="hidden" name="_method" value="PATCH">'+
           '<input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'">'+
-          '<button class="btn btn-link btn-sm" type="submit"><i class="fas fa-user-times"></i></button>'+
+          '<button class="btn btn-link btn-sm" type="submit" data-tool="tooltip" title="'+toolBlockConvo+'"><i class="fas fa-user-times"></i></button>'+
           '</form>'+
           '</div>'+
           '<div class="profile-picture col-2">'+
@@ -54,6 +57,7 @@
           '</a>'+
       '</li>'+
       $('#people-list').children('.list').prepend(html);
+      $('[data-tool="tooltip"]').tooltip();
 
       $('.talkDeleteConversation').on('submit',function(e){
         if(!confirm(deleteConvo)) {

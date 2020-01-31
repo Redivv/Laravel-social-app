@@ -29,7 +29,7 @@ return [
     'togglePublic'      => 'Only for friends',
     'deleteFriend'      => 'Are you sure to delete? ',
     'friendDeleted'     => 'Friend is delete',
-    'friendNewPicture'  => ':user change main picture',
+    'friendNewPicture'  => ' changed profile picture',
     'sortNone'          => 'All posts',
     'sortPublic'        => 'Public posts',
     'sortFriends'       => 'Friends posts',
@@ -41,6 +41,6 @@ return [
     "deleteTags"        => "Delete tag",
     'deleteComment'     => "Delete comment",
     'editComment'       => "Edit comment",
-    'newFriend'         => ":user1 accept friend request from :user2",
-    'newPartner'        => ":user1 is in relationship with :user2",
+    'newFriend'         => " accept friend request from ",
+    'newPartner'        => " is in relationship with ",
 ];
