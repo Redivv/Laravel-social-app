@@ -117,6 +117,8 @@ Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
    Route::post('message/send', 'AjaxMessageController@ajaxSendMessage')->name('message.new');
    Route::delete('message/delete/{id}', 'AjaxMessageController@ajaxDeleteMessage')->name('message.delete');
    Route::patch('message/seen/{id}', 'AjaxMessageController@ajaxSeenMessage')->name('message.seen');
+
+   Route::get('message/searchConvo', "AjaxMessageController@searchConvo")->name('message.search');
 });
 
 Route::get('setLocale/{locale}', "LocaleController@setLocale")->name('setLocale');

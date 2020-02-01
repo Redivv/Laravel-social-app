@@ -27,7 +27,7 @@
                                             <div id="{{$frNot->name}}">
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <img src="{{asset('img/profile-pictures/'.$frNot->picture)}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
+                                                        <img src="{{asset('img/profile-pictures/'.$frNot->picture)}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;" alt="profile picture">
                                                     </div>
                                                     <div class="col-10 friendName">
                                                         <a href="{{route('ProfileOtherView',['user' => $frNot->name])}}">
@@ -59,7 +59,7 @@
                                             <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('_','/',$userNot->data['link']).$userNot->data['contentId'].$userNot->data['contentAnchor']}}" target="__blank">
                                                 <div class="row">
                                                     <div class="notificationImageBox col-2">
-                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}">
+                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}" alt="profile picture">
                                                     </div>
                                                     <div class="notificationDesc col-10">
                                                         <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
@@ -73,7 +73,7 @@
                                             <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('ProfileOtherView',['user' => $userNot->data['sender_name']])}}" target="__blank">
                                                 <div class="row">
                                                     <div class="notificationImageBox col-2">
-                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['sender_picture'])}}">
+                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['sender_picture'])}}" alt="profile picture">
                                                     </div>
                                                     <div class="notificationDesc col-10">
                                                         <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
@@ -88,7 +88,7 @@
                                             <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('home').'/#post'.$userNot->data['postId']}}" target="__blank">
                                                 <div class="row">
                                                     <div class="notificationImageBox col-2">
-                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}">
+                                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}" alt="profile picture">
                                                     </div>
                                                     <div class="notificationDesc col-10">
                                                         <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
@@ -121,7 +121,7 @@
                             <a class="chat-{{$chatNot->thread->conversation_id}} dropdown-item container @if(($chatNot->thread->is_seen == 1) || ($chatNot->thread->user_id == auth()->id())){{'read'}}@endif" href="/message/{{$chatNot->withUser->name}}" target="__blank">
                                 <div class="row">
                                     <div class="notificationImageBox col-2">
-                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot->withUser->picture)}}" alt="" srcset="">
+                                        <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot->withUser->picture)}}" alt="profile picture">
                                     </div>
                                     <div class="notificationDesc col-10">
                                         <div class="col-12 ">{{$chatNot->withUser->name}}</div>
@@ -338,7 +338,7 @@
                                             <div id="{{$frNot->name}}">
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <img src="{{asset('img/profile-pictures/'.$frNot->picture)}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;">
+                                                        <img src="{{asset('img/profile-pictures/'.$frNot->picture)}}" style="max-width: 35px; max-height: 35px; border-radius: 50%;" alt="profile picture">
                                                     </div>
                                                     <div class="col-10 friendName">
                                                         <a href="{{route('ProfileOtherView',['user' => $frNot->name])}}">
@@ -370,7 +370,7 @@
                                                 <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('_','/',$userNot->data['link']).$userNot->data['contentId'].$userNot->data['contentAnchor']}}" target="__blank">
                                                     <div class="row">
                                                         <div class="notificationImageBox col-2">
-                                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}">
+                                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}" alt="profile picture">
                                                         </div>
                                                         <div class="notificationDesc col-10">
                                                             <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
@@ -384,7 +384,7 @@
                                                 <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('ProfileOtherView',['user' => $userNot->data['sender_name']])}}" target="__blank">
                                                     <div class="row">
                                                         <div class="notificationImageBox col-2">
-                                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['sender_picture'])}}">
+                                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['sender_picture'])}}" alt="profile picture">
                                                         </div>
                                                         <div class="notificationDesc col-10">
                                                             <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
@@ -399,7 +399,7 @@
                                                 <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('home').'/#post'.$userNot->data['postId']}}" target="__blank">
                                                     <div class="row">
                                                         <div class="notificationImageBox col-2">
-                                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}">
+                                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}" alt="profile picture">
                                                         </div>
                                                         <div class="notificationDesc col-10">
                                                             <div class="col-12 descTime">{{$userNot->created_at->diffForHumans()}}</div>
@@ -431,7 +431,7 @@
                                 <a class="chat-{{$chatNot->thread->conversation_id}} dropdown-item container @if(($chatNot->thread->is_seen == 1) || ($chatNot->thread->user_id == auth()->id())){{'read'}}@endif" href="/message/{{$chatNot->withUser->name}}" target="__blank">
                                     <div class="row">
                                         <div class="notificationImageBox col-2">
-                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot->withUser->picture)}}" alt="" srcset="">
+                                            <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot->withUser->picture)}}" alt="profile picture">
                                         </div>
                                         <div class="notificationDesc col-10">
                                             <div class="col-12 ">{{$chatNot->withUser->name}}</div>
@@ -592,7 +592,7 @@
                                     '<div class="row" id="'+notification.sender_name+'">'+
                                         '<div class="row">'+
                                             '<div class="col-2" >'+
-                                                '<img src="/img/profile-pictures/'+notification.sender_picture+'" style="max-width: 35px; max-height: 35px; border-radius: 50%;">'+
+                                                '<img src="/img/profile-pictures/'+notification.sender_picture+'" style="max-width: 35px; max-height: 35px; border-radius: 50%;" alt="profile picture">'+
                                             '</div>'+
                                             '<div class="col-10 friendName">'+
                                                 '<a href="/user/profile/'+notification.sender_name+'">'+
@@ -632,7 +632,7 @@
                                     '<div class="row" id="'+notification.sender_name+'">'+
                                         '<div class="row">'+
                                             '<div class="col-2" >'+
-                                                '<img src="/img/profile-pictures/'+notification.sender_picture+'" style="max-width: 35px; max-height: 35px; border-radius: 50%;">'+
+                                                '<img src="/img/profile-pictures/'+notification.sender_picture+'" style="max-width: 35px; max-height: 35px; border-radius: 50%;" alt="profile picture">'+
                                             '</div>'+
                                             '<div class="col-10 friendName">'+
                                                 '<a href="/user/profile/'+notification.sender_name+'">'+
@@ -672,7 +672,7 @@
                         html = '<a class="dropdown-item container" href="'+notification.link.replace(/_/g,'/')+notification.contentId+notification.contentAnchor+'" target="__blank">'+
                                     '<div class="row">'+
                                         '<div class="notificationImageBox col-2">'+
-                                            '<img class="notificationImage" src="/img/profile-pictures/'+notification.user_image+'">'+
+                                            '<img class="notificationImage" src="/img/profile-pictures/'+notification.user_image+'" alt="profile picture">'+
                                         '</div>'+
                                         '<div class="notificationDesc col-10">'+
                                             '<div class="col-12 descTime">{{__("nav.newSysNotTime")}}</div>'+
@@ -690,7 +690,7 @@
                         html = '<a class="dropdown-item container" href="/user/profile/'+notification.sender_name+'" target="__blank">'+
                                     '<div class="row">'+
                                         '<div class="notificationImageBox col-2">'+
-                                            '<img class="notificationImage" src="/img/profile-pictures/'+notification.sender_picture+'">'+
+                                            '<img class="notificationImage" src="/img/profile-pictures/'+notification.sender_picture+'" alt="profile picture">'+
                                         '</div>'+
                                         '<div class="notificationDesc col-10">'+
                                             '<div class="col-12 descTime">{{__("nav.newSysNotTime")}}</div>'+
@@ -709,7 +709,7 @@
                         html = '<a class="dropdown-item container" href="/user/home/#post'+notification.postId+'" target="__blank">'+
                                     '<div class="row">'+
                                         '<div class="notificationImageBox col-2">'+
-                                            '<img class="notificationImage" src="/img/profile-pictures/'+notification.author_image+'">'+
+                                            '<img class="notificationImage" src="/img/profile-pictures/'+notification.author_image+'" alt="profile picture">'+
                                         '</div>'+
                                         '<div class="notificationDesc col-10">'+
                                             '<div class="col-12 descTime">{{__("nav.newSysNotTime")}}</div>'+
@@ -800,7 +800,7 @@
                 html = '<a class="chat-'+data.conversation_id+' dropdown-item container" href="/message/'+data.sender.name+'" target="__blank">'+
                     '<div class="row">'+
                         '<div class="notificationImageBox col-2">'+
-                            '<img class="notificationImage" src="/img/profile-pictures/'+data.sender.picture+'" alt="" srcset="">'+
+                            '<img class="notificationImage" src="/img/profile-pictures/'+data.sender.picture+'" alt="profile picture">'+
                         '</div>'+
                         '<div class="notificationDesc col-10">'+
                             '<div class="col-12 ">'+data.sender.name+'</div>'+

@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('titleTag')
+    <title>
+        {{__('app.profile')}}
+    </title>
+@endsection
+
 @section('content')
     <div class="spinnerOverlay d-none">
         <div class="spinner-border text-warning" role="status">

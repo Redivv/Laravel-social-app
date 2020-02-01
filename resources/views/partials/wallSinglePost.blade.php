@@ -3,7 +3,7 @@
         <header class="postAuthor row">
             <div class="col-1">
                 <a href="{{route('ProfileOtherView',['user' => $post->user->name])}}">
-                    <img class="postAuthorPicture" src="{{asset('img/profile-pictures/'.$post->user->picture)}}">
+                    <img class="postAuthorPicture" src="{{asset('img/profile-pictures/'.$post->user->picture)}}" alt="profile picture">
                 </a>
             </div>
             <div class="col-6 postAuthorName">
@@ -24,7 +24,7 @@
                 @if ($pictures = json_decode($post->pictures))
                     @foreach ($pictures as $picture)
                         <a href="{{asset('img/post-pictures/'.$picture)}}" data-lightbox="post{{$post->id}}-Pictures">
-                            <img class="postPicture" src="{{asset('img/post-pictures/'.$picture)}}">
+                            <img class="postPicture" src="{{asset('img/post-pictures/'.$picture)}}" alt="post picture">
                         </a>
                     @endforeach
                 @endif

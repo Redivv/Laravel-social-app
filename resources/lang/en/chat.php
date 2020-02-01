@@ -19,5 +19,7 @@ return [
     'deleteConvoTool'   =>  "Delete Conversation",
     'blockConvoTool'    =>  "Block Conversation",
     'deleteMessageTool' =>  "Soft Delete Message",
-    'addPictures'       =>  "Add Photos"
+    'addPictures'       =>  "Add Photos",
+    'searchUser'        =>  "Search for Conversation...",
+    'noResults'         =>  "No Results"
 ];

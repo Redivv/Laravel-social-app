@@ -43,5 +43,6 @@ return [
     'deletePartnerMsgs'     => 'Are you sure to delete partner?',
     'wrongPartner'          => "Wrong partner",
     'partnerInfo'           => "Your relationship request has been sent",
-    'mutualFriends'         => "Mutual friends (:count)"
+    'mutualFriends'         => "Mutual friends (:count)",
+    'remainingPhotos'       => "Remaining Photos "
 ];

@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="picture col-lg-2">
                     <a href="{{route('ProfileOtherView',['user' => $result->name])}}" target="__blank">
-                        <img src="{{asset('img/profile-pictures/'.$result->picture)}}" alt="">
+                        <img src="{{asset('img/profile-pictures/'.$result->picture)}}" alt="profile picture">
                     </a>
                     <span class="badge activeUserBadge"></span>
                 </div>

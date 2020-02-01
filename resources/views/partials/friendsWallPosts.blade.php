@@ -4,7 +4,7 @@
             <header class="postAuthor row">
                 <div class="col-1">
                     <a href="{{route('ProfileOtherView',['user' => $post->user->name])}}">
-                        <img class="postAuthorPicture" src="{{asset('img/profile-pictures/'.$post->user->picture)}}">
+                        <img class="postAuthorPicture" src="{{asset('img/profile-pictures/'.$post->user->picture)}}" alt="Profile Picture">
                     </a>
                 </div>
                 <div class="col-6 postAuthorName">
@@ -32,7 +32,7 @@
                             @break
                             @else
                                 <a href="{{asset('img/post-pictures/'.$picture)}}" data-lightbox="post{{$post->id}}-Pictures">
-                                    <img class="postPicture" src="{{asset('img/post-pictures/'.$picture)}}">
+                                    <img class="postPicture" src="{{asset('img/post-pictures/'.$picture)}}" alt="Post Picture">
                                 </a>
                             @endif
                         @endforeach

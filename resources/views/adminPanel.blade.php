@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('titleTag')
+    <title>
+        {{__('app.adminDashboard')}}
+    </title>
+@endsection
+
 @push('styles')
     <link rel="stylesheet" href="{{asset('css/adminPane.css')}}">
 @endpush

@@ -1,4 +1,11 @@
 import "lightbox2";
+    
+let idleTimer = null;
+let idleWait = 1000;
+
+let spinnerHtml = '<div class="spinner-border text-warning d-block mx-auto mt-2" role="status">'+
+                    '<span class="sr-only">Loading...</span>'
+                '</div>';
 
 $(document).ready(function () {
     $('[data-tool="tooltip"]').tooltip();
@@ -170,7 +177,7 @@ $(document).ready(function () {
             // Render thumbnail.
             var span = document.createElement('span');
             span.innerHTML = ['<a href="'+e.target.result+'" data-lightbox="PreviewImages" data-title="Preview Images"><img class="thumb" src="', e.target.result,
-                                '" title="', escape(theFile.name), '"/></a>'].join('');
+                                '" title="', escape(theFile.name), '" alt="Picture Preview"/></a>'].join('');
             $('#picture-preview').prepend(span, null);
             $('.emojionearea-editor').focus();
             };
@@ -194,6 +201,10 @@ $(document).ready(function () {
                 }
             }
           }
+    });
+
+    $('#searchForConvo').on('keyup',function(e){
+        searchConvo(this,e);
     });
 
     
@@ -258,7 +269,6 @@ function chk_scroll_down(e) {
     if (($(elem).scrollTop() + $(elem).innerHeight() >= $(elem)[0].scrollHeight) && (stop_pagi_convo === false)){
         pagi_convo++;
         var url = __baseUrl + '/ajax/message/getMore/'+pagi_convo;
-        console.log(url);
         var request = $.ajax({
             method: "get",
             url: url,
@@ -270,7 +280,98 @@ function chk_scroll_down(e) {
                 $(elem).append(response.html);
                 stop_pagi_convo = response.stop;
                 $(elem).bind('scroll',chk_scroll_down);
+                if(!stop_pagi_convo){
+                    $(elem).bind('scroll',chk_scroll_down);
+                }
             }
         });
     }
+}
+
+function searchConvo(selected,event) {
+    let searchCryteria = $('#searchForConvo').val().trim();
+    if (searchCryteria != "") {
+
+        clearTimeout(idleTimer);
+            
+            idleTimer = setTimeout(function () { 
+                
+                let url = __baseUrl+"/ajax/message/searchConvo";
+
+                var request = $.ajax({
+                    method : 'get',
+                    url: url,
+                    data: {searchCryteria:searchCryteria}
+                });
+                
+                
+                request.done(function(response){
+                    if (response.status === 'success') {
+
+                        $('ul.searchList').html(response.html);
+                        $('[data-tool="tooltip"]').tooltip();
+
+                        $('.talkDeleteConversation').off('submit');
+                        $('.talkDeleteConversation').on('submit',function(e){
+                            if(!confirm(deleteConvo)) {
+                                e.preventDefault();
+                            }   
+                        });
+                    
+                        $('.talkBlockConversation').off('submit');
+                        $('.talkBlockConversation').on('submit',function(e){
+                            if(!confirm(blockConvo)) {
+                                e.preventDefault();
+                            }   
+                        });
+                    }
+                });
+                
+                
+                request.fail(function (xhr){
+                    alert(xhr.responseJson.message);
+                });
+
+
+            }, idleWait);
+
+        $(selected).siblings('label').html('<i class="fas fa-times"></i>');
+
+        $('ul.searchList').html(spinnerHtml);
+
+        $('ul.list').addClass('d-none');
+        $('ul.searchList').removeClass('d-none');
+
+        $(selected).siblings('label').off('click');
+        $(selected).siblings('label').one('click',function() {
+            clearSearchInput();
+        });
+
+
+
+    }else{
+        clearTimeout(idleTimer);
+
+        $(selected).siblings('label').html('<i class="fas fa-search"></i>');
+
+        $('ul.searchList').addClass('d-none');
+
+        $('ul.searchList').html(spinnerHtml);
+
+        $('ul.list').removeClass('d-none');
+    }
+}
+
+function clearSearchInput() {
+
+    clearTimeout(idleTimer);
+
+    $('#searchForConvo').val("");
+    $('#searchForConvo').siblings('label').html('<i class="fas fa-search"></i>');
+
+    $('ul.searchList').addClass('d-none');
+
+    $('ul.searchList').html(spinnerHtml);
+
+    $('ul.list').removeClass('d-none');
 }

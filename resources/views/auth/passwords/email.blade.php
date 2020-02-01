@@ -1,5 +1,11 @@
 @extends('layouts.forms')
 
+@section('titleTag')
+    <title>
+        {{__('app.resetPasswordTitle')}}
+    </title>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -45,3 +51,13 @@
     </div>
 </div>
 @endsection
+
+
+@push('styles')
+    <style>
+        body{
+            background-image: url("/images/background.jpg");
+        }
+
+    </style>
+@endpush

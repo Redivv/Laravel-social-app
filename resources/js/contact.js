@@ -50,7 +50,7 @@ function main() {
             // Render thumbnail.
             var span = document.createElement('span');
             span.innerHTML = ['<a href="', e.target.result,'" data-lightbox="newPost"><img class="thumb" src="', e.target.result,
-                                '" title="', escape(theFile.name), '"/></a>'].join('');
+                                '" title="', escape(theFile.name), '" alt="Picture Preview"/></a>'].join('');
             $('#EmailAttachmentsOut').append(span, null);
             };
         })(f);

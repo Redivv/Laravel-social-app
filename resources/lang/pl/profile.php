@@ -44,5 +44,6 @@ return [
     'wrongPartner'          => "Nieprawidłowy partner",
     'partnerInfo'           => "Propozycja ogłoszenia związku została wysłana",
     'mutualFriends'         => "W tym Wspólni (:count)",
-    'termsOfDoc2'           => "Polityka Prywatności"
+    'termsOfDoc2'           => "Polityka Prywatności",
+    'remainingPhotos'       => "Pozostałe Zdjęcia "
 ];

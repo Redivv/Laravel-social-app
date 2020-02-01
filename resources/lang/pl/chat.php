@@ -19,5 +19,7 @@ return [
     'deleteConvoTool'   =>  "Usuń Konwersację",
     'blockConvoTool'    =>  "Zablokuj Konwersację",
     'deleteMessageTool' =>  "Usuń Wiadomość (u Siebie)",
-    'addPictures'       =>  "Dodaj Zdjęcia"
+    'addPictures'       =>  "Dodaj Zdjęcia",
+    'searchUser'        =>  "Wyszukaj Konwersację...",
+    'noResults'         =>  "Brak Wyników"
 ];

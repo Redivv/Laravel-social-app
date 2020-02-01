@@ -1,5 +1,11 @@
 @extends('layouts.forms')
 
+@section('titleTag')
+    <title>
+        {{__('app.verifyTitle')}}
+    </title>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

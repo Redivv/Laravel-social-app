@@ -22054,7 +22054,25 @@ html {
 }
 
 .chatBody #people-list .search {
-  height: 10vh;
+  height: 5vh;
+  align-items: center;
+  align-content: center;
+}
+
+.chatBody #people-list .search label {
+  font-size: 1rem;
+  margin: 0;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.chatBody #people-list .search label:hover i {
+  color: #f66103;
+}
+
+.chatBody #people-list .search #searchForConvo {
+  font-size: 0.9rem;
+  border-radius: 50px;
 }
 
 .chatBody #people-list ul {
@@ -22175,6 +22193,24 @@ html {
   border-radius: 50%;
   top: 1.7rem;
   left: 2.5rem;
+}
+
+.chatBody #people-list .searchList {
+  height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 1rem;
+  padding: 0 1rem;
+  list-style: none;
+}
+
+.chatBody #people-list .searchList .noSearchResulsts {
+  margin-top: 1rem;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-align: center;
 }
 
 .chatBody .chat {

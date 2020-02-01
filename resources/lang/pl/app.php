@@ -11,5 +11,9 @@ return [
     'adminDashboard'    => 'Panel Administratora',
     'profile'           => 'Profil',
     'settings'          => "Ustawienia",
-    'contact'           => 'Kontakt z Administracją'
+    'contact'           => 'Kontakt z Administracją',
+
+    'profileEditTitle'  => 'Edycja Profilu',
+    'verifyTitle'       => 'Weryfikacja Adresu Email',
+    'resetPasswordTitle'=> 'Zresetuj Hasło',
 ];

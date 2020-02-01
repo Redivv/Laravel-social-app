@@ -11295,7 +11295,7 @@ $(document).ready(function () {
         return function (e) {
           // Render thumbnail.
           var span = document.createElement('span');
-          span.innerHTML = ['<a href="', e.target.result, '" data-lightbox="register"><img class="profile-picture" src="', e.target.result, '" title="', escape(theFile.name), '"/></a>'].join('');
+          span.innerHTML = ['<a href="', e.target.result, '" data-lightbox="register"><img class="profile-picture" src="', e.target.result, '" title="', escape(theFile.name), '" alt="Picture Preview"/></a>'].join('');
           $('#picture-preview').prepend(span, null);
           $('#message-data').focus();
         };

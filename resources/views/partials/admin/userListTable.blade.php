@@ -21,7 +21,7 @@
                 <th scope="row">{{$element->name}}</th>
                 <td>
                     <a href="{{asset('img/profile-pictures/'.$element->picture)}}" data-lightbox="picture-{{$element->id}}" data-title="{{__('admin.userListImageCaption', ['user' => $element->name])}}">
-                        <img class="profilePicture" src="{{asset('img/profile-pictures/'.$element->picture)}}">
+                        <img class="profilePicture" src="{{asset('img/profile-pictures/'.$element->picture)}}" alt="Profile Picture">
                     </a>
                 </td>
                 <td>{{$element->created_at->diffForHumans()}}</td>

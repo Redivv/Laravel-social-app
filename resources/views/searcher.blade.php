@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('titleTag')
+    <title>
+        {{__('app.searcher')}}
+    </title>
+@endsection
+
 @section('content')
 
 <div class="spinnerOverlay d-none">

@@ -26,7 +26,24 @@
     padding: 1rem 0;
     background-color: $light-blac;
     .search{
-      height: 10vh;
+      height: 5vh;
+      align-items: center;
+      align-content: center;
+      label{
+        @include font-size(1rem);
+        margin: 0;
+        color: $white;
+        cursor: pointer;
+        &:hover{
+          i{
+            color:$orange;
+          }
+        }
+      }
+      #searchForConvo{
+        @include font-size(0.9rem);
+        border-radius: 50px;
+      }
     }
     ul{
       height: 70vh;
@@ -126,6 +143,22 @@
             left: 2.5rem;
           }
         }
+      }
+    }
+    .searchList{
+      height: 70vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      margin-top: 1rem;
+      padding: 0 1rem;
+      list-style: none;
+      .noSearchResulsts{
+        margin-top: 1rem;
+        color: $white;
+        @include font-size(1.1rem);
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        text-align: center;
       }
     }
   }

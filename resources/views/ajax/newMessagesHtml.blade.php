@@ -11,7 +11,7 @@
         <output class="messagePictures">
             @foreach (json_decode($message->pictures) as $picture)
                 <a href="{{asset('img/message-pictures/'.$picture)}}" data-lightbox="message-{{$message->id}}" data-title="{{__('chat.messagePicture')}}">
-                    <img class="picture" src="{{asset('img/message-pictures/'.$picture)}}">
+                    <img class="picture" src="{{asset('img/message-pictures/'.$picture)}}" alt="Message Picture">
                 </a>
             @endforeach  
         </output>
@@ -37,7 +37,7 @@
         <output class="messagePictures">
             @foreach (json_decode($message->pictures) as $picture)
                 <a href="{{asset('img/message-pictures/'.$picture)}}" data-lightbox="message-{{$message->id}}" data-title="{{__('chat.messagePicture')}}">
-                    <img class="picture" src="{{asset('img/message-pictures/'.$picture)}}">
+                    <img class="picture" src="{{asset('img/message-pictures/'.$picture)}}" alt="Message Picture">
                 </a>
             @endforeach  
         </output>

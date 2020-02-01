@@ -42,8 +42,8 @@ return [
     'email' => 'Pole :attribute musi być poprawnym adresem Email',
     'ends_with' => 'The :attribute must end with one of the following: :values',
     'exists' => 'Pole :attribute nie istnieje w bazie',
-    'file' => 'The :attribute must be a file.',
-    'filled' => 'The :attribute field must have a value.',
+    'file' => 'Pole :attribute musi być plikiem.',
+    'filled' => 'Pole :attribute nie może być puste.',
     'gt' => [
         'numeric' => 'The :attribute must be greater than :value.',
         'file' => 'The :attribute must be greater than :value kilobytes.',

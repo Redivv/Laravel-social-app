@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-4 profilePicture">
                 <a href="{{route('ProfileOtherView',['user' => $friend->name])}}">
-                    <img src="{{asset('img/profile-pictures/'.$friend->picture)}}">
+                    <img src="{{asset('img/profile-pictures/'.$friend->picture)}}" alt="Profile Picture">
                 </a>
             </div>
             <div class="col-6 friendName">

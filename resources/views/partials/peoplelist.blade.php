@@ -1,6 +1,9 @@
 <div class="people-list col-3" id="people-list">
-    <div class="search" style="text-align: center">
-        
+    <div class="search row" style="text-align: center">
+        <label for="searchForConvo" class="col-3">
+            <i class="fas fa-search"></i>
+        </label>
+        <input class="col-8 form-control" type="text" name="searchForConvo" id="searchForConvo" placeholder="{{__('chat.searchUser')}}">
     </div>
     <ul class="list">
         @foreach($threads as $inbox)
@@ -60,5 +63,10 @@
             @endif
         @endforeach
 
+    </ul>
+    <ul class="searchList d-none">
+        <div class="spinner-border text-warning d-block mx-auto mt-2" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
     </ul>
 </div>
