@@ -65,11 +65,11 @@ html{
         color:#385d7a;
         background-color:#e2f0fb;
         border-color:#d6e9f9;
-        margin: 4rem auto;
+        margin: 2rem auto;
         display: flex;
         align-items: center;
         justify-content: center;
-        top: 82%;
+        bottom: 0;
         button{
             @extend .btn;
             @extend .btn-primary;
