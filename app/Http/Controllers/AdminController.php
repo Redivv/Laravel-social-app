@@ -402,9 +402,10 @@ class AdminController extends Controller
 
                     $post = new Post;
                     $post->user_id      = $validUser->id;
-                    $post->desc         = __('activityWall.friendNewPicture', ['user' => $validUser->name]);
                     $post->is_public    = false;
                     $post->pictures     = json_encode([$validUser->picture]);
+                    $post->type         = "newPicture";
+                    $post->tagged_users = json_encode([$validUser->name]);
 
 
                     if ($post->save()) {

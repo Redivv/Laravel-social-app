@@ -11,5 +11,9 @@ return [
     'adminDashboard'    => 'Admin dashboard',
     'profile'           => 'Profile',
     'settings'          => "Settings",
-    'contact'           => 'Contact with administration'
+    'contact'           => 'Contact with administration',
+
+    'profileEditTitle'  => 'Profile Edit',
+    'verifyTitle'       => 'Email Address Verification',
+    'resetPasswordTitle'=> 'Password Reset'
 ];

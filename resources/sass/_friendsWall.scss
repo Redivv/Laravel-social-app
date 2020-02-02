@@ -150,10 +150,17 @@
                                 color: $black;
                             }
                             small{
-                                @include font-size(0.6rem);
+                                @include font-size(0.7rem);
                                 font-weight: normal;
                                 margin-left: 0.25rem;
                             }
+                        }
+                        .postCreatedAt{
+                            @include font-size (0.75rem);
+                            @extend .text-muted;
+                            padding-left: 3rem;
+                            letter-spacing: 0.5px;
+                            margin-top: -0.6rem;
                         }
                         .postAuthorButtons{
                             text-align: right;
@@ -178,7 +185,19 @@
                             .postPicture{
                                 width: 11rem;
                                 height: 8rem;
-                                margin-left: 0.5rem;
+                                margin-top: 0.5rem;
+                                &:not(:first-child){
+                                    margin-left: 0.5rem;
+                                }
+                            }
+                            .morePhotos{
+                                @include font-size(0.9rem);
+                                color: $black;
+                                padding: 0.5rem;
+                                font-weight: bold;
+                                &:hover{
+                                    color: $orange;
+                                }
                             }
                         }
                         .postContent{
@@ -242,6 +261,11 @@
                                 @include font-size(0.6rem);
                                 padding: 0.2rem 0.3rem;
                                 top:0.2rem;
+                            }
+                        }
+                        @media screen and (max-width: $mobile-breakpoint) {
+                            i{
+                                display:block;
                             }
                         }
                     }

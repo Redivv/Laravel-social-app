@@ -232,8 +232,6 @@ class ProfileController extends Controller
                     $tags = null;
                     $friends = null;
 
-                    $request->session()->flash('guest', __('profile.logInToSee'));
-
                     return view('profile')->withUser($user)->withTags($tags)->withFriends($friends)->withPosts($posts);
             }else{
                 return abort(404);

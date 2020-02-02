@@ -19,5 +19,8 @@ return [
     'joinUs'                    => 'Join our community',
     'loginLink1'                => 'You have account? ',
     'loginLink2'                => 'Loggin',
-    'searcherLink'              => 'See our users'
+    'searcherLink'              => 'See our users',
+    'termsOf'                   => 'I consent to ',
+    'termsOfDoc1'               => 'Terms of Service',
+    'termsOfDoc2'               => 'Privacy policy',
 ];

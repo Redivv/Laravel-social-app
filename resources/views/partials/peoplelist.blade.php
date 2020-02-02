@@ -1,6 +1,9 @@
 <div class="people-list col-3" id="people-list">
-    <div class="search" style="text-align: center">
-        
+    <div class="search row" style="text-align: center">
+        <label for="searchForConvo" class="col-3">
+            <i class="fas fa-search"></i>
+        </label>
+        <input class="col-8 form-control" type="text" name="searchForConvo" id="searchForConvo" placeholder="{{__('chat.searchUser')}}">
     </div>
     <ul class="list">
         @foreach($threads as $inbox)
@@ -11,12 +14,12 @@
                     <form action="{{route('conversation.delete',['id'=>$inbox->withUser->id])}}" class="talkDeleteConversation float-left" method="POST">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button class="btn btn-link btn-sm" type="submit"><i class="fas fa-times"></i></button>
+                        <button class="btn btn-link btn-sm" type="submit" data-tool="tooltip" title="{{__('chat.deleteConvoTool')}}"><i class="fas fa-times"></i></button>
                     </form>
                     <form action="{{route('conversation.block',['id'=>$inbox->withUser->id])}}" class="talkBlockConversation" method="POST">
                         <input type="hidden" name="_method" value="PATCH">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button class="btn btn-link btn-sm ml-2" type="submit"><i class="fas fa-user-times"></i></button>
+                        <button class="btn btn-link btn-sm ml-2" type="submit" data-tool="tooltip" title="{{__('chat.blockConvoTool')}}"><i class="fas fa-user-times"></i></button>
                     </form>
                 </div>
                 <div class="profile-picture col-2">
@@ -60,5 +63,10 @@
             @endif
         @endforeach
 
+    </ul>
+    <ul class="searchList d-none">
+        <div class="spinner-border text-warning d-block mx-auto mt-2" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
     </ul>
 </div>

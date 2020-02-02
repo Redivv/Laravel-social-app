@@ -49,7 +49,7 @@ class ContactController extends Controller
             $message->from($user->email,$user->name);
             $message->replyTo($user->email);
             $message->sender($user->email,$user->name);
-            $message->to('administracja@safo.com.pl');
+            $message->to(env('MAIL_FROM_ADDRESS','administracja@safo.com.pl'));
 
             foreach ($readyPictures as $key => $picture) {
                 $message->attach(public_path("img/email-pictures/".$picture['name']),[

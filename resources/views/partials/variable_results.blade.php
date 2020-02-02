@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="picture col-lg-2">
                     <a href="{{route('ProfileView')}}/{{$result->name}}" target="__blank">
-                        <img src="{{asset('img/profile-pictures/'.$result->picture)}}" alt="">
+                        <img src="{{asset('img/profile-pictures/'.$result->picture)}}" alt="profile picture">
                     </a>
                 </div>
                 <div class="data col-lg-8">

@@ -10,6 +10,8 @@ use App\User;
 use Nahid\Talk\Facades\Talk;
 use App\Events\MessagesWereSeen;
 
+use Illuminate\Support\Str;
+
 class AjaxMessageController extends Controller
 {
 
@@ -133,6 +135,27 @@ class AjaxMessageController extends Controller
             }
              
         }
-        
+    }
+
+    public function searchConvo(Request $request)
+    {
+        if ($request->ajax()) {
+            $kek = $request->all();
+            $request->validate([
+                'searchCryteria'    => ['string','filled']
+            ]);
+    
+            $cryteria = Str::slug($request->searchCryteria);
+    
+            $threads = Talk::user(Auth::id())->getInbox('desc',0,1000)->filter(function($item,$key) use ($cryteria){
+                $userName = Str::slug($item->withUser->name);
+    
+                return Str::contains($userName,$cryteria);
+            });
+    
+            $html = view('partials.chatSearchResults')->withThreads($threads)->render();
+    
+            return response()->json(['status' => 'success', 'html'  => $html], 200);
+        }
     }
 }

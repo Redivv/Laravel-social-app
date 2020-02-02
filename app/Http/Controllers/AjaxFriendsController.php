@@ -82,15 +82,17 @@ class AjaxFriendsController extends Controller
 
                         $post = new Post;
                         $post->user_id      = $you->id;
-                        $post->desc         = __('activityWall.newPartner', ['user1' => $you->name, 'user2' => $user->name]);
                         $post->is_public    = false;
                         $post->pictures     = json_encode([$you->picture,$user->picture]);
+                        $post->type         = "newPartner";
+                        $post->tagged_users = json_encode([$you->name,$user->name]);
         
                         $post2 = new Post;
                         $post2->user_id      = $user->id;
-                        $post2->desc         = __('activityWall.newPartner', ['user1' => $you->name, 'user2' => $user->name]);
                         $post2->is_public    = false;
                         $post2->pictures     = json_encode([$you->picture,$user->picture]);
+                        $post2->type         = "newPartner";
+                        $post2->tagged_users = json_encode([$user->name,$you->name]);
                         
                         copy(public_path('img/profile-pictures/').$you->picture,public_path('img/post-pictures/').$you->picture);
                         copy(public_path('img/profile-pictures/').$user->picture,public_path('img/post-pictures/').$user->picture);
@@ -120,15 +122,17 @@ class AjaxFriendsController extends Controller
 
                 $post = new Post;
                 $post->user_id      = $you->id;
-                $post->desc         = __('activityWall.newFriend', ['user1' => $you->name, 'user2' => $user->name]);
                 $post->is_public    = false;
                 $post->pictures     = json_encode([$you->picture,$user->picture]);
+                $post->type         = "newFriend";
+                $post->tagged_users = json_encode([$you->name,$user->name]);
 
                 $post2 = new Post;
                 $post2->user_id      = $user->id;
-                $post2->desc         = __('activityWall.newFriend', ['user1' => $you->name, 'user2' => $user->name]);
                 $post2->is_public    = false;
                 $post2->pictures     = json_encode([$you->picture,$user->picture]);
+                $post2->type         = "newFriend";
+                $post2->tagged_users = json_encode([$you->name,$user->name]);
                 
                 copy(public_path('img/profile-pictures/').$you->picture,public_path('img/post-pictures/').$you->picture);
                 copy(public_path('img/profile-pictures/').$user->picture,public_path('img/post-pictures/').$user->picture);

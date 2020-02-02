@@ -14,8 +14,8 @@
       left: -100%;
       z-index: 1001;
       transition:left 1s linear;
-      flex: 0 0 50%;
-      max-width: 50%;
+      flex: 0 0 80%;
+      max-width: 80%;
       &.show{
         left: 0;
       }
@@ -26,7 +26,24 @@
     padding: 1rem 0;
     background-color: $light-blac;
     .search{
-      height: 10vh;
+      height: 5vh;
+      align-items: center;
+      align-content: center;
+      label{
+        @include font-size(1rem);
+        margin: 0;
+        color: $white;
+        cursor: pointer;
+        &:hover{
+          i{
+            color:$orange;
+          }
+        }
+      }
+      #searchForConvo{
+        @include font-size(0.9rem);
+        border-radius: 50px;
+      }
     }
     ul{
       height: 70vh;
@@ -86,9 +103,19 @@
               letter-spacing: 0.5px;
             }
             .status{
-              @include font-size(0.8rem);
+              @include font-size(0.83rem);
               color: $white;
               text-decoration: none;
+            }
+            &.new:after{
+              content: "NEW";
+              @include font-size(0.9rem);
+              letter-spacing: 1px;
+              font-weight: bold;
+              color: $orange-active;
+              position: absolute;
+              top: 1rem;
+              right: 0;
             }
           }
         }
@@ -104,6 +131,34 @@
         &:not(:first-child){
           margin-top: 1rem;
         }
+        &.activeUser{
+          .profile-picture:after{
+            content: "";
+            position: absolute;
+            width: 0.9rem;
+            height: 0.9rem;
+            background-color: $green;
+            border-radius: 50%;
+            top: 1.7rem;
+            left: 2.5rem;
+          }
+        }
+      }
+    }
+    .searchList{
+      height: 70vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      margin-top: 1rem;
+      padding: 0 1rem;
+      list-style: none;
+      .noSearchResulsts{
+        margin-top: 1rem;
+        color: $white;
+        @include font-size(1.1rem);
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        text-align: center;
       }
     }
   }
@@ -114,14 +169,14 @@
     }
     padding: 0;
     .chat-header{
-      height: 8vh;
+      height: 4rem;
       padding: 0.5rem 1rem;
       box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
       background-color: $white;
       border-top: 1px solid rgba(55, 55, 55, 0.15);
       .chat-with{
         @include font-size(1rem);
-        font-weight: bold;
+        font-weight: bold;  
       }
       #status{
         @include font-size(0.65rem);
@@ -130,9 +185,9 @@
     }
     .chat-history{
       &.imagePresent{
-        max-height: 41vh;
+        max-height: 45.5vh;
       }
-      max-height: 51vh;
+      max-height: 55vh;
       overflow-y: auto;
       overflow-x: hidden;
       padding: 1rem;
@@ -145,6 +200,9 @@
           text-align: left;
           .talkDeleteMessage,.message-data,.seenInfo{
             padding: 0rem;
+          }
+          .seenInfo{
+            margin-left: auto;
           }
           .message-data{
             .message-data-time{
@@ -174,7 +232,7 @@
             .messageText{
               width: 60%;
               white-space: normal;
-              background-color: $orange;
+              background-color: $trans-grey;
               border-radius: 20px;
               padding: 0.3rem 0;
               span{
@@ -194,12 +252,14 @@
             .talkDeleteMessage{
               color: $blac;
               @include font-size(0.95rem);
+              margin-left: auto;
               &:hover{
                 color: $orange;
               }
             }
             .messageText{
               margin-left: auto;
+              background-color: $orange;
             }
           }
           &:not(:first-child){
@@ -212,9 +272,12 @@
       }
     }
     .chat-message{
-      padding: 0rem 1rem 0.5rem 1rem;
-      display: flex;
+      position: absolute;
+      bottom: 0%;
+      width: 100%;
+      background-color: $laravel-grey;
       #talkSendMessage{
+        padding: 0rem 1rem 0.5rem 1rem;
         width: 100%;
         margin-top: auto;
         #picture-preview{
@@ -244,9 +307,9 @@
           }
         }
         .emojionearea .emojionearea-editor{
-          min-height: 5rem;
-          max-height: 5rem;
-          height: 5rem;
+          min-height: 3rem;
+          max-height: 3rem;
+          height: 3rem;
           overflow-y: auto;
         }
         button{
@@ -258,9 +321,12 @@
           border-radius: 50px;
           @include font-size(1.1rem);
           &:hover{
-            color: $orange-hover;
+            background-color: $orange-hover;
           }
         }
+      }
+      hr{
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
       }
     }
   }

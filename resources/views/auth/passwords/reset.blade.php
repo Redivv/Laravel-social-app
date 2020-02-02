@@ -63,3 +63,13 @@
     </div>
 </div>
 @endsection
+
+
+@push('styles')
+    <style>
+        body{
+            background-image: url("/images/background.jpg");
+        }
+
+    </style>
+@endpush

@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('titleTag')
+    <title>
+        {{__('app.profileEditTitle')}}
+    </title>
+@endsection
+
 @section('content')
     @if (session()->has('message'))
         <div class="alert alert-success mt-2 mb-2 mx-auto text-center" style="width:50%" role="alert">
@@ -82,6 +88,7 @@
                 <textarea type="text" class="form-control" name="profileDesc" id="profileDescInput" rows="4">
                     {{$user->description}}
                 </textarea>
+                <a class="btn form-btn mt-2 mx-auto" href="{{url('password/reset')}}">Zmień Hasło</a>
             </fieldset>
 
             <fieldset class="form-group col-12 row profileTags">

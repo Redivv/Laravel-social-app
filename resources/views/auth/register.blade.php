@@ -1,10 +1,16 @@
 @extends('layouts.forms')
 
+@section('titleTag')
+    <title>
+        {{config('app.name','Safo')}}
+    </title>
+@endsection
+
 @section('content')
 
     <header class="container-fluid">
         <div class="pageLogo text-center">
-            <img src="{{asset('img/safo_logo.png')}}" alt="" srcset="">
+            <img src="{{asset('img/safo_logo.png')}}" alt="Safo Logo" srcset="">
         </div>
         <div class="pageTestimonial">
             <h2 class="testimonial">{{__('registeration.testimonial')}}</h2>

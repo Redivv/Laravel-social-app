@@ -1,7 +1,7 @@
 <div id="com-{{$comment->id}}" class="comment row">
     <div class="col-2 commentProfilePicture">
         <a href="{{route('ProfileOtherView',['user' => $comment->user->name])}}">
-            <img class="profilePicture" src="{{asset('img/profile-pictures/'.$comment->user->picture)}}">
+            <img class="profilePicture" src="{{asset('img/profile-pictures/'.$comment->user->picture)}}" alt="Profile Picture">
         </a>
     </div>
     <div class="col-10 commentContent">

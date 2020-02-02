@@ -4,7 +4,7 @@
             <div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt" data-tool="tooltip" title="{{__('activityWall.deleteImages')}}" data-placement="bottom"></i></div>
             @foreach ($pictures as $picture)
             <a href="{{asset('img/post-pictures/'.$picture)}}" data-lightbox="postEdit">
-                <img class="thumb" src="{{asset('img/post-pictures/'.$picture)}}">
+                <img class="thumb" src="{{asset('img/post-pictures/'.$picture)}}" alt="Post Picture">
             </a>
             @endforeach
         @endif

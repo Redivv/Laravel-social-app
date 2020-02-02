@@ -103,7 +103,9 @@ body{
             }
             .friendOptions{
                 text-align: center;
+                margin-top: 0.5rem;
                 i{
+                    @include font-size(1rem);
                     margin: 0 0.5rem;
                 }
                 .friendRelated{

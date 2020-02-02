@@ -148,7 +148,7 @@ function main() {
                         // Render thumbnail.
                         var span = document.createElement('span');
                         span.innerHTML = ['<a href="', e.target.result,'" data-lightbox="editPost"><img class="thumb" src="', e.target.result,
-                                            '" title="', escape(theFile.name), '"/></a>'].join('');
+                                            '" title="', escape(theFile.name), '" alt="Picture Preview"/></a>'].join('');
                         $('#modalPicture-preview').append(span, null);
                         $('.emojionearea-editor').focus();
                         };

@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('titleTag')
+    <title>
+        {{__('app.contact')}}
+    </title>
+@endsection
+
 @section('content')
     <div class="container-fluid">
 

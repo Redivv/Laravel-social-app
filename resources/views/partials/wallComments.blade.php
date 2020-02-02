@@ -3,7 +3,7 @@
         <div id="com-{{$comment->id}}" class="comment row">
             <div class="col-2 commentProfilePicture">
                 <a href="{{route('ProfileOtherView',['user' => $comment->user->name])}}">
-                    <img class="profilePicture" src="{{asset('img/profile-pictures/'.$comment->user->picture)}}">
+                    <img class="profilePicture" src="{{asset('img/profile-pictures/'.$comment->user->picture)}}" alt="profile picture">
                 </a>
             </div>
             <div class="col-10 commentContent">
@@ -58,7 +58,7 @@
             <div id="com-{{$reply->id}}" class="reply row">
                 <div class="col-2 commentProfilePicture">
                     <a href="{{route('ProfileOtherView',['user' => $reply->user->name])}}">
-                        <img class="profilePicture" src="{{asset('img/profile-pictures/'.$reply->user->picture)}}">
+                        <img class="profilePicture" src="{{asset('img/profile-pictures/'.$reply->user->picture)}}" alt="profile picture"> 
                     </a>
                 </div>
                 <div class="col-10 commentContent">

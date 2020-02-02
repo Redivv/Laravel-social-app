@@ -1,12 +1,18 @@
 @extends('layouts.forms')
 
+@section('titleTag')
+    <title>
+        {{config('app.name','Safo')}}
+    </title>
+@endsection
+
 @section('content')
 
     <div class="container loginForm">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card login-window shadow">
-                    <div class="card-header login-header login-title-size"><img src="img/safo_logo_white.png" alt="Safo"></div>
+                    <div class="card-header login-header login-title-size"><img src="img/safo_logo_white.png" alt="Safo Logo"></div>
 
                     <div class="card-body loginCard">
                         <form method="POST" action="{{ route('login') }}">
