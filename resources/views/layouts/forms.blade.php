@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157589744-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-157589744-1');
+        </script>
+        <script data-ad-client="ca-pub-1435964054112470" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         @include('partials.favicon')
         
         <meta charset="utf-8">
