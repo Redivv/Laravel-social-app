@@ -15,6 +15,7 @@ use App\Post;
 use App\User;
 use App\Notifications\SystemNotification;
 use App\Notifications\UserNotification;
+use App\Notifications\NewAdminPost;
 use Illuminate\Support\Facades\Notification;
 
 use Leewillis77\CachedEmbed\CachedEmbed;
@@ -271,8 +272,13 @@ class HomeController extends Controller
             if ($post->save()) {
                 $posts = [$post];
                 $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
-                $friends = Auth::user()->getFriends();
-                Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2'), 'newPost'.$post->id));
+                if ($post->type == "AdminPost") {
+                    $users = User::whereNotIn('id',[Auth::id()])->get();
+                    Notification::send($users, new NewAdminPost($author,$post->id));
+                }else{
+                    $friends = Auth::user()->getFriends();
+                    Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2'), 'newPost'.$post->id));
+                }
                 if ($taggedUsers) {
                     Notification::send($taggedUsersArray, new SystemNotification(__('nav.taggedInPost'),'success','_user_home_post_',$post->id, '', 'tagPost'));
                 }
