@@ -18609,6 +18609,15 @@ body.lb-disable-scrolling {
   background-color: #e26103;
 }
 
+@media screen and (max-width: 767px) {
+  .searcher .form .submitBox .button {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    padding: 0.5rem 2rem;
+  }
+}
+
 .searcher .form .submitBox .custom-switch {
   margin-left: 1rem;
 }
@@ -18616,6 +18625,12 @@ body.lb-disable-scrolling {
 .searcher .form .submitBox .custom-switch .custom-control-input:checked ~ .custom-control-label::before {
   background-color: #f66103;
   border-color: #f66103;
+}
+
+@media screen and (max-width: 398px) {
+  .searcher .form .submitBox .custom-switch {
+    margin-top: 0.5rem;
+  }
 }
 
 .searcher .form .hobbyCriteria button {
