@@ -407,6 +407,8 @@ class AdminController extends Controller
                     $post->type         = "newPicture";
                     $post->tagged_users = json_encode([$validUser->name]);
 
+                    copy(public_path('img/profile-pictures/').$validUser->picture,public_path('img/post-pictures/').$validUser->picture);
+
 
                     if ($post->save()) {
                         Notification::send($validUser->getFriends(), new UserNotification($validUser, '_user_home_post_',$post->id, '', __('nav.userNot3'), 'newPost'.$post->id));

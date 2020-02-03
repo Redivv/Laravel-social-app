@@ -83,19 +83,14 @@ class AjaxFriendsController extends Controller
                         $post = new Post;
                         $post->user_id      = $you->id;
                         $post->is_public    = false;
-                        $post->pictures     = json_encode([$you->picture,$user->picture]);
                         $post->type         = "newPartner";
                         $post->tagged_users = json_encode([$you->name,$user->name]);
-        
+
                         $post2 = new Post;
                         $post2->user_id      = $user->id;
                         $post2->is_public    = false;
-                        $post2->pictures     = json_encode([$you->picture,$user->picture]);
                         $post2->type         = "newPartner";
-                        $post2->tagged_users = json_encode([$user->name,$you->name]);
-                        
-                        copy(public_path('img/profile-pictures/').$you->picture,public_path('img/post-pictures/').$you->picture);
-                        copy(public_path('img/profile-pictures/').$user->picture,public_path('img/post-pictures/').$user->picture);
+                        $post2->tagged_users = json_encode([$you->name,$user->name]);
         
                         if ($post->save()) {
                             Notification::send($yourFriends, new UserNotification($you, '_user_home_post_',$post->id, '', __('nav.userNot6',['user' => $user->name]), 'newPost'.$post->id));
@@ -123,19 +118,14 @@ class AjaxFriendsController extends Controller
                 $post = new Post;
                 $post->user_id      = $you->id;
                 $post->is_public    = false;
-                $post->pictures     = json_encode([$you->picture,$user->picture]);
                 $post->type         = "newFriend";
                 $post->tagged_users = json_encode([$you->name,$user->name]);
 
                 $post2 = new Post;
                 $post2->user_id      = $user->id;
                 $post2->is_public    = false;
-                $post2->pictures     = json_encode([$you->picture,$user->picture]);
                 $post2->type         = "newFriend";
                 $post2->tagged_users = json_encode([$you->name,$user->name]);
-                
-                copy(public_path('img/profile-pictures/').$you->picture,public_path('img/post-pictures/').$you->picture);
-                copy(public_path('img/profile-pictures/').$user->picture,public_path('img/post-pictures/').$user->picture);
 
                 if ($post->save()) {
                     Notification::send($yourFriends, new UserNotification($you, '_user_home_post_',$post->id, '', __('nav.userNot5',['user' => $user->name]), 'newPost'.$post->id));
