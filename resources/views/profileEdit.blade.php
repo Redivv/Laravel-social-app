@@ -88,7 +88,8 @@
                 <textarea type="text" class="form-control" name="profileDesc" id="profileDescInput" rows="4">
                     {{$user->description}}
                 </textarea>
-                <a class="btn form-btn mt-2 mx-auto" href="{{url('password/reset')}}">Zmień Hasło</a>
+                <hr style="width:100%">
+                <a class="btn form-btn mx-auto" href="{{url('password/reset')}}">{{__('profile.changePass')}}</a>
             </fieldset>
 
             <fieldset class="form-group col-12 row profileTags">

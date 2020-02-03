@@ -220,7 +220,7 @@
 @push('styles')
     <style>
         body{
-            overflow: hidden;
+            overflow: hidden !important;
         }
     </style>
 @endpush

@@ -44,5 +44,6 @@ return [
     'wrongPartner'          => "Wrong partner",
     'partnerInfo'           => "Your relationship request has been sent",
     'mutualFriends'         => "Mutual friends (:count)",
-    'remainingPhotos'       => "Remaining Photos "
+    'remainingPhotos'       => "Remaining Photos ",
+    'changePass'            => "Change Password"
 ];

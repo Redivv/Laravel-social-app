@@ -29,7 +29,7 @@
         <input type="file" class="d-none" name="editPicture[]" accept="image/*" id="editPicture" multiple>
 
         <div class="custom-control custom-switch">
-            <input type="checkbox" name="isPublic" class="custom-control-input" id="isPublicSwitch2" @if(!$post->is_public) checked @endif>
+            <input type="checkbox" name="isPublic" class="custom-control-input" id="isPublicSwitch2" @if(!$post->is_public) checked @endif @if($post->type == "AdminPost") disabled @endif>
             <label class="custom-control-label" for="isPublicSwitch2">{{__('activityWall.togglePublic')}}</label>
         </div>
     </div>

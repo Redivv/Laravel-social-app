@@ -42,6 +42,13 @@
                         <input type="checkbox" name="isPublic" class="custom-control-input" id="isPublicSwitch1">
                         <label class="custom-control-label" for="isPublicSwitch1">{{__('activityWall.togglePublic')}}</label>
                     </div>
+
+                    @if (auth()->user()->isAdmin())
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" name="isAdmin" class="custom-control-input" id="isAdminSwitch1">
+                            <label class="custom-control-label" for="isAdminSwitch1">{{__('activityWall.toggleAdmin')}}</label>
+                        </div>
+                    @endif
                 </div>
                 <div class="friendsWallSendButton">
                     <button name="sendPost" id="newPostButton" type="submit" class="btn btn-block">{{__('activityWall.createPost')}}</button>

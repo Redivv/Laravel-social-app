@@ -11281,6 +11281,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+var shiftPressed = false;
 var idleTimer = null;
 var idleWait = 1000;
 var spinnerHtml = '<div class="spinner-border text-warning d-block mx-auto mt-2" role="status">' + '<span class="sr-only">Loading...</span>';
@@ -11456,11 +11457,15 @@ $(document).ready(function () {
   $('#message-data').emojioneArea({
     filtersPosition: "bottom",
     events: {
-      keypress: function keypress(editor, e) {
-        if ((e.keyCode == 13 || e.which) == 13) {
+      keydown: function keydown(editor, e) {
+        if (!shiftPressed && (e.keyCode == 13 || e.which == 13)) {
           e.preventDefault();
           $('#message-data').val(this.getText());
           $('#talkSendMessage').submit();
+        } else if (e.keyCode == 16 || e.which == 16) {
+          shiftPressed = true;
+        } else {
+          shiftPressed = false;
         }
       }
     }

@@ -18890,6 +18890,12 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.nav-bar-height .dropdown-menu .dropdown-item:active,
+.nav-bar-height .dropdown-menu .clearAllBtn:active {
+  background-color: #f66103;
+  color: #ffffff;
+}
+
 .nav-bar-height .nav-link .badge {
   color: #ffffff;
   background-color: #f66103;
@@ -19512,6 +19518,7 @@ html {
   height: 82vh;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   padding: 0 0.5rem;
+  overflow-y: auto;
 }
 
 .profileData .col-12 {
@@ -22007,11 +22014,51 @@ html {
   padding-top: 0.8rem;
 }
 
-#administrators .card-body .adminName {
+#administrators .card-body div,
+#administrators .card-body .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser,
+.activity .activityPosts .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser,
+#administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a,
+#administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a {
+  text-align: center;
+}
+
+#administrators .card-body div .adminName,
+#administrators .card-body .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser .adminName,
+.activity .activityPosts .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminName,
+#administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminName,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminName,
+#administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminName,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminName,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser .adminName,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminName,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminName,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminName,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminName,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminName {
   margin-bottom: 0;
 }
 
-#administrators .card-body .adminName a {
+#administrators .card-body div .adminName a,
+#administrators .card-body .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser .adminName a,
+.activity .activityPosts .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminName a,
+#administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminName a,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminName a,
+#administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminName a,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminName a,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser .adminName a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminName a,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminName a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminName a,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminName a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminName a {
   letter-spacing: 1px;
   font-weight: bold;
   color: #000;
@@ -22019,12 +22066,36 @@ html {
 }
 
 @media (min-width: 1200px) {
-  #administrators .card-body .adminName a {
+  #administrators .card-body div .adminName a,
+  #administrators .card-body .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser .adminName a,
+  .activity .activityPosts .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminName a,
+  #administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminName a,
+  .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminName a,
+  #administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminName a,
+  .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminName a,
+  #administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser .adminName a,
+  #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminName a,
+  #administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminName a,
+  #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminName a,
+  #administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminName a,
+  #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminName a {
     font-size: 1.4rem;
   }
 }
 
-#administrators .card-body .adminMail {
+#administrators .card-body div .adminMail,
+#administrators .card-body .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser .adminMail,
+.activity .activityPosts .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminMail,
+#administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminMail,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminMail,
+#administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminMail,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminMail,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser .adminMail,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminMail,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminMail,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminMail,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminMail,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminMail {
   margin-top: 0.5rem;
   padding-left: 1rem;
   color: #000;
@@ -22329,11 +22400,19 @@ html {
   padding: 0.3rem 0;
 }
 
-.chatBody .chat .chat-history ul li .my-message .messageText span,
-.chatBody .chat .chat-history ul li .other-message .messageText span {
+.chatBody .chat .chat-history ul li .my-message .messageText p,
+.chatBody .chat .chat-history ul li .other-message .messageText p {
+  margin: 0;
   padding: 0rem 1rem;
   font-size: 1rem;
   color: #ffffff;
+}
+
+.chatBody .chat .chat-history ul li .my-message .messageText p iframe,
+.chatBody .chat .chat-history ul li .other-message .messageText p iframe {
+  display: block;
+  margin: 0.5rem 0;
+  width: 100%;
 }
 
 .chatBody .chat .chat-history ul li.authMessage {

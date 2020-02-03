@@ -56,21 +56,24 @@
 #administrators{
     .card-body{
         padding-top: 0.8rem;
-        .adminName{
-            margin-bottom: 0;
-            a{
-                letter-spacing: 1px;
-                font-weight: bold;
-                color: $black;
-                @include font-size(1.4rem);
+        div{
+            text-align: center;
+            .adminName{
+                margin-bottom: 0;
+                a{
+                    letter-spacing: 1px;
+                    font-weight: bold;
+                    color: $black;
+                    @include font-size(1.4rem);
+                }
             }
-        }
-        .adminMail{
-            margin-top: 0.5rem;
-            padding-left: 1rem;
-            color: $black;
-            @include font-size(1rem);
-            font-style: italic;
+            .adminMail{
+                margin-top: 0.5rem;
+                padding-left: 1rem;
+                color: $black;
+                @include font-size(1rem);
+                font-style: italic;
+            }
         }
     }
 }

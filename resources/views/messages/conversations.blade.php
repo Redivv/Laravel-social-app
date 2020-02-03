@@ -29,7 +29,7 @@
                             @endif
                             @if (!empty($message->message))
                                 <div class="messageText">
-                                    <span>{!!nl2br($message->toHtmlString()->toHtml())!!}</span>
+                                    <p>{!!nl2br($message->toHtmlString()->toHtml())!!}</p>
                                 </div>
                             @endif
                         </div>
@@ -55,7 +55,7 @@
                             @endif
                             @if (!empty($message->message))
                                 <div class="messageText">
-                                    <span>{!!nl2br($message->toHtmlString()->toHtml())!!}</span>
+                                    <p>{!!nl2br($message->toHtmlString()->toHtml())!!}</p>
                                 </div>
                             @endif
                         </div>
