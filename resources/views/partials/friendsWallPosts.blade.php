@@ -19,23 +19,37 @@
                         <i class="fas postDelete fa-times" data-id="{{$post->id}}" data-tool="tooltip" title="{{__("activityWall.deletePost")}}" data-placement="bottom"></i>
                     </div>
                 @endif
-                <div class="offset-1 col-6 postCreatedAt">{{$post->created_at->diffForHumans()}}</div>
+                <div class="offset-1 col postCreatedAt">{{$post->created_at->diffForHumans()}}</div>
             </header>
             <main class="postDesc row">
                 <div class="postPhotos col-12">
-                    @if ($pictures = json_decode($post->pictures))
-                        @foreach ($pictures as $picture)
-                            @if ($loop->iteration == 4)   
-                            <div class="mt-2"> 
-                                <a class="morePhotos" href="{{route('viewPost',['post' => $post->id])}}" target="__blank">Pozostałe Zdjęcia ({{$loop->remaining+1}})</a>
-                            </div>
-                            @break
-                            @else
-                                <a href="{{asset('img/post-pictures/'.$picture)}}" data-lightbox="post{{$post->id}}-Pictures">
-                                    <img class="postPicture" src="{{asset('img/post-pictures/'.$picture)}}" alt="Post Picture">
-                                </a>
-                            @endif
-                        @endforeach
+                    @if ($post->type == "newPartner" || $post->type == "newFriend")
+                        @php 
+                            $taggedUsers = json_decode($post->tagged_users);
+                            $user1 = App\User::where("name",$taggedUsers[0])->first();
+                            $user2 = App\User::where("name",$taggedUsers[1])->first();
+                        @endphp
+                        <a href="{{asset('img/profile-pictures/'.$user1->picture)}}" data-lightbox="post{{$post->id}}-Pictures">
+                            <img class="postPicture" src="{{asset('img/profile-pictures/'.$user1->picture)}}" alt="Post Picture">
+                        </a>
+                        <a href="{{asset('img/profile-pictures/'.$user2->picture)}}" data-lightbox="post{{$post->id}}-Pictures">
+                            <img class="postPicture" src="{{asset('img/profile-pictures/'.$user2->picture)}}" alt="Post Picture">
+                        </a>
+                    @else
+                        @if ($pictures = json_decode($post->pictures))
+                            @foreach ($pictures as $picture)
+                                @if ($loop->iteration == 4)   
+                                    <div class="mt-2"> 
+                                        <a class="morePhotos" href="{{route('viewPost',['post' => $post->id])}}" target="__blank">{{__('profile.remainingPhotos')}} ({{$loop->remaining+1}})</a>
+                                    </div>
+                                @break
+                                @else
+                                    <a href="{{asset('img/post-pictures/'.$picture)}}" data-lightbox="post{{$post->id}}-Pictures">
+                                        <img class="postPicture" src="{{asset('img/post-pictures/'.$picture)}}" alt="Post Picture">
+                                    </a>
+                                @endif
+                            @endforeach
+                        @endif
                     @endif
                 </div>
                 <div class="postContent col-12">
@@ -47,16 +61,16 @@
                             @break
                         @case('newFriend')
                             @if ($taggedUsers = json_decode($post->tagged_users))
-                                <a href="{{route('ProfileOtherView',['user' => $taggedUsers[0]])}}" target="__blank">{{$taggedUsers[0]}}</a>
+                                <a href="{{route('ProfileOtherView',['user' => $user1->name])}}" target="__blank">{{$user1->name}}</a>
                                 {{__('activityWall.newFriend')}}
-                                <a href="{{route('ProfileOtherView',['user' => $taggedUsers[1]])}}" target="__blank">{{$taggedUsers[1]}}</a>
+                                <a href="{{route('ProfileOtherView',['user' => $user2->name])}}" target="__blank">{{$user2->name}}</a>
                             @endif
                             @break
                         @case('newPartner')
                             @if ($taggedUsers = json_decode($post->tagged_users))
-                                <a href="{{route('ProfileOtherView',['user' => $taggedUsers[0]])}}" target="__blank">{{$taggedUsers[0]}}</a>
+                                <a href="{{route('ProfileOtherView',['user' => $user1->name])}}" target="__blank">{{$user1->name}}</a>
                                 {{__('activityWall.newPartner')}}
-                                <a href="{{route('ProfileOtherView',['user' => $taggedUsers[1]])}}" target="__blank">{{$taggedUsers[1]}}</a>
+                                <a href="{{route('ProfileOtherView',['user' => $user2->name])}}" target="__blank">{{$user2->name}}</a>
                             @endif
                             @break
                         @default
