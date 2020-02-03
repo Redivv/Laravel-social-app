@@ -1,5 +1,7 @@
 import "lightbox2";
-    
+
+let shiftPressed = false;
+
 let idleTimer = null;
 let idleWait = 1000;
 
@@ -192,12 +194,15 @@ $(document).ready(function () {
     $('#message-data').emojioneArea({
         filtersPosition: "bottom",
         events: {
-            keypress: function(editor,e) {
-        
-                if(((e.keyCode == 13 || e.which) == 13)) {
+            keydown: function(editor,e) {
+                if( !shiftPressed && (e.keyCode == 13 || e.which == 13)){
                     e.preventDefault();
                     $('#message-data').val(this.getText());
                     $('#talkSendMessage').submit();
+                }else if(e.keyCode == 16 || e.which == 16){
+                    shiftPressed = true;
+                }else{
+                    shiftPressed = false;
                 }
             }
           }

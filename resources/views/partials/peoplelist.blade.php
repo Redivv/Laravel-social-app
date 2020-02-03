@@ -36,7 +36,7 @@
                                 @if ($inbox->thread->pictures)
                                     <i class="far fa-file-image"></i>
                                 @endif
-                                {!!nl2br(substr($inbox->thread->message, 0, 20))!!}
+                                {!!nl2br(Str::limit($inbox->thread->message,20,'...'))!!}
                             </span>
                             @if ($inbox->thread->is_seen)
                                 <span class="fa fa-check"></span> 
@@ -53,7 +53,7 @@
                                 @if ($inbox->thread->pictures)
                                     <i class="far fa-file-image"></i>
                                 @endif
-                                {!!nl2br(substr($inbox->thread->message, 0, 20))!!}
+                                {!!nl2br(Str::limit($inbox->thread->message,20,'...'))!!}
                             </span>
                         </div>
                     </div>

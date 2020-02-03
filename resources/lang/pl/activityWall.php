@@ -43,4 +43,5 @@ return [
     'editComment'       => "Edytuj Komentarz",
     'newFriend'         => " przyjął zaproszenie do znajomych od ",
     'newPartner'        => " jest w związku z ",
+    'toggleAdmin'       => "Post Administratorski"
 ];

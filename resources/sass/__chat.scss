@@ -235,10 +235,16 @@
               background-color: $trans-grey;
               border-radius: 20px;
               padding: 0.3rem 0;
-              span{
+              p{
+                margin: 0;
                 padding: 0rem 1rem;
                 @include font-size(1rem);
                 color: $white;
+                iframe{
+                    display: block;
+                    margin: 0.5rem 0;
+                    width: 100%;
+                }
               }
             }
           }

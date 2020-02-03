@@ -41,7 +41,7 @@ class ProfileController extends Controller
 
         $friends = count($user->getFriends());
 
-        $posts = Post::where("user_id",Auth::id())->orderBy('created_at','desc')->take(5)->get();
+        $posts = Post::where("user_id",Auth::id())->whereNotIn('type',['AdminPost'])->orderBy('created_at','desc')->take(5)->get();
 
         return view('profile')->withUser($user)->withTags($tags)->withFriends($friends)->withPosts($posts);
     }
@@ -215,7 +215,7 @@ class ProfileController extends Controller
 
                 $friends = count($user->getFriends());
 
-                $posts = Post::where("user_id",$user->id)->orderBy('created_at','desc')->take(5)->get();
+                $posts = Post::where("user_id",$user->id)->whereNotIn('type',['AdminPost'])->orderBy('created_at','desc')->take(5)->get();
 
                 return view('profile')->withUser($user)->withTags($tags)->withFriends($friends)->withPosts($posts);
 

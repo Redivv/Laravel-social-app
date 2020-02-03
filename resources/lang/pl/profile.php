@@ -45,5 +45,6 @@ return [
     'partnerInfo'           => "Propozycja ogłoszenia związku została wysłana",
     'mutualFriends'         => "W tym Wspólni (:count)",
     'termsOfDoc2'           => "Polityka Prywatności",
-    'remainingPhotos'       => "Pozostałe Zdjęcia "
+    'remainingPhotos'       => "Pozostałe Zdjęcia ",
+    'changePass'            => "Zmień Hasło"
 ];

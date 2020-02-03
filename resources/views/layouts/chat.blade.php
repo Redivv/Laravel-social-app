@@ -135,3 +135,12 @@
   {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['newmsgChat']]]) !!}
     
 @endpush
+
+@push('styles')
+  <style>
+    body{
+      overflow-y: hidden !important;
+    }
+  </style>
+@endpush
+

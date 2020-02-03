@@ -30,6 +30,10 @@ body{
         .dropdown-item{
             white-space: normal;
             margin-bottom: 0.5rem;
+            &:active{
+                background-color: $orange;
+                color: $white;
+            }
         }
     }
     .nav-link{

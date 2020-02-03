@@ -43,4 +43,5 @@ return [
     'editComment'       => "Edit comment",
     'newFriend'         => " accepted friend request from ",
     'newPartner'        => " is in relationship with ",
+    'toggleAdmin'       => "Admin Post"
 ];
