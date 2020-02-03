@@ -85,7 +85,7 @@
                                         
                                         {{-- Admin Special Notification --}}
                                         @case('App\Notifications\NewAdminPost')
-                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('home').'/#post'.$userNot->data['postId']}}" target="__blank">
+                                            <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('viewPost',['post' => $userNot->data['postId']])}}" target="__blank">
                                                 <div class="row">
                                                     <div class="notificationImageBox col-2">
                                                         <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}" alt="profile picture">
@@ -126,7 +126,7 @@
                                     <div class="notificationDesc col-10">
                                         <div class="col-12 ">{{$chatNot->withUser->name}}</div>
                                         <div class="col-12 descTime">{{$chatNot->thread->updated_at->diffForHumans()}}</div>
-                                        <div class="col-12 descBody">@if($chatNot->thread->pictures)<i class="far fa-file-image"></i>@endif @if($chatNot->thread->user_id == auth()->id())<i class="fas fa-reply"></i>@endif {{substr($chatNot->thread->message, 0, 20)}} @if($chatNot->thread->is_seen)<i class="fa fa-check"></i>@endif</div>
+                                        <div class="col-12 descBody">@if($chatNot->thread->pictures)<i class="far fa-file-image"></i>@endif @if($chatNot->thread->user_id == auth()->id())<i class="fas fa-reply"></i>@endif {{Str::limit($chatNot->thread->message, 20, "...")}} @if($chatNot->thread->is_seen)<i class="fa fa-check"></i>@endif</div>
                                     </div>
                                 </div>
                             </a>
@@ -396,7 +396,7 @@
                                             
                                             {{-- Admin Special Notification --}}
                                             @case('App\Notifications\NewAdminPost')
-                                                <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('home').'/#post'.$userNot->data['postId']}}" target="__blank">
+                                                <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('viewPost',['post' => $userNot->data['postId']])}}" target="__blank">
                                                     <div class="row">
                                                         <div class="notificationImageBox col-2">
                                                             <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}" alt="profile picture">
@@ -436,7 +436,7 @@
                                         <div class="notificationDesc col-10">
                                             <div class="col-12 ">{{$chatNot->withUser->name}}</div>
                                             <div class="col-12 descTime">{{$chatNot->thread->updated_at->diffForHumans()}}</div>
-                                            <div class="col-12 descBody">@if($chatNot->thread->pictures)<i class="far fa-file-image"></i>@endif @if($chatNot->thread->user_id == auth()->id())<i class="fas fa-reply"></i>@endif {{substr($chatNot->thread->message, 0, 20)}} @if($chatNot->thread->is_seen)<i class="fa fa-check"></i>@endif</div>
+                                            <div class="col-12 descBody">@if($chatNot->thread->pictures)<i class="far fa-file-image"></i>@endif @if($chatNot->thread->user_id == auth()->id())<i class="fas fa-reply"></i>@endif {{Str::limit($chatNot->thread->message,20,"...")}} @if($chatNot->thread->is_seen)<i class="fa fa-check"></i>@endif</div>
                                         </div>
                                     </div>
                                 </a>
@@ -706,7 +706,7 @@
                         updateUserNotifications();
                         playNotSound();
                         $('#wallFetchBtn').removeClass('d-none');
-                        html = '<a class="dropdown-item container" href="/user/home/#post'+notification.postId+'" target="__blank">'+
+                        html = '<a class="dropdown-item container" href="/user/home/post/'+notification.postId+'" target="__blank">'+
                                     '<div class="row">'+
                                         '<div class="notificationImageBox col-2">'+
                                             '<img class="notificationImage" src="/img/profile-pictures/'+notification.author_image+'" alt="profile picture">'+
@@ -805,7 +805,7 @@
                         '<div class="notificationDesc col-10">'+
                             '<div class="col-12 ">'+data.sender.name+'</div>'+
                             '<div class="col-12 descTime">'+data.humans_time+' {{__("nav.ago")}}</div>'+
-                            '<div class="col-12">'+data.message.substring(0,20)+'</div>'+
+                            '<div class="col-12">'+data.message.substring(0,20)+'...</div>'+
                         '</div>'+
                     '</div>'+
                 '</a>';

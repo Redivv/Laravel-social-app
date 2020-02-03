@@ -15,6 +15,7 @@ use App\Post;
 use App\User;
 use App\Notifications\SystemNotification;
 use App\Notifications\UserNotification;
+use App\Notifications\NewAdminPost;
 use Illuminate\Support\Facades\Notification;
 
 use Leewillis77\CachedEmbed\CachedEmbed;
@@ -50,18 +51,21 @@ class HomeController extends Controller
             ]);
             switch ($request->sortBy) {
                 case 'public':
-                    $posts = Post::orderBy('created_at', 'desc')->where('is_public',1)->whereNotIn('id',[Auth::id()])->take(5)->get();
+                    $posts = Post::orderBy('created_at', 'desc')->whereNotIn('type',['AdminPost','newFriend','newPartner'])->where('is_public',1)->whereNotIn('id',[Auth::id()])->take(5)->get();
                     break;
                 case 'friends':
-                    $posts = Post::orderBy('created_at', 'desc')->whereIn('user_id',$friendsArray)->whereNotIn('id',[Auth::id()])->take(5)->get();
+                    $posts = Post::orderBy('created_at', 'desc')->whereNotIn('type',['AdminPost','newFriend','newPartner'])->whereIn('user_id',$friendsArray)->whereNotIn('id',[Auth::id()])->take(5)->get();
                     break;
                 case 'admin':
-                    $adminsArray = User::where('is_admin','=',1)->whereNotIn('id',[Auth::id()])->get()->modelKeys();
-                    $posts = Post::orderBy('created_at', 'desc')->whereIn('user_id',$adminsArray)->whereNotIn('id',[Auth::id()])->take(5)->get();
+                    $posts = Post::orderBy('created_at', 'desc')->where('type','AdminPost')->take(5)->get();
                     break;
             }
         }else{
-            $posts = Post::orderBy('created_at', 'desc')->where('is_public',1)->orWhereIn('user_id',$friendsArray)->orWhere('user_id',Auth::id())->take(5)->get();
+            $posts = Post::orderBy('created_at', 'desc')->whereNotIn('type',['AdminPost','newFriend','newPartner'])->where(function($query) use ($friendsArray){
+                $query->where('is_public',1)
+                ->orWhereIn('user_id',$friendsArray)
+                ->orWhere('user_id',Auth::id());
+            })->take(5)->get();
         }
         if ($request->ajax()) {
             $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
@@ -111,23 +115,26 @@ class HomeController extends Controller
             if ($request->has('sortBy')) {
                 switch ($request->sortBy) {
                     case 'public':
-                        $posts = Post::orderBy('created_at', 'desc')->where('is_public',1)->whereNotIn('id',[Auth::id()])->skip(5*$request->pagiTime)->take(5)->get();
+                        $posts = Post::orderBy('created_at', 'desc')->whereNotIn('type',['AdminPost','newFriend','newPartner'])->where('is_public',1)->whereNotIn('id',[Auth::id()])->skip(5*$request->pagiTime)->take(5)->get();
                         break;
                     case 'friends':
-                        $posts = Post::orderBy('created_at', 'desc')->whereIn('user_id',$friendsArray)->whereNotIn('id',[Auth::id()])->skip(5*$request->pagiTime)->take(5)->get();
+                        $posts = Post::orderBy('created_at', 'desc')->whereNotIn('type',['AdminPost','newFriend','newPartner'])->whereIn('user_id',$friendsArray)->whereNotIn('id',[Auth::id()])->skip(5*$request->pagiTime)->take(5)->get();
                         break;
                     case 'admin':
-                        $adminsArray = User::where('is_admin','=',1)->whereNotIn('id',[Auth::id()])->get()->modelKeys();
-                        $posts = Post::orderBy('created_at', 'desc')->whereIn('user_id',$adminsArray)->whereNotIn('id',[Auth::id()])->skip(5*$request->pagiTime)->take(5)->get();
+                        $posts = Post::orderBy('created_at', 'desc')->where('type','AdminPost')->skip(5*$request->pagiTime)->take(5)->get();
                         break;
                     case 'userName':
                         if ($user) {
-                            $posts = Post::orderBy('created_at', 'desc')->where('user_id',$user->id)->skip(5*$request->pagiTime)->take(5)->get();
+                            $posts = Post::orderBy('created_at', 'desc')->whereNotIn('type',['AdminPost'])->where('user_id',$user->id)->skip(5*$request->pagiTime)->take(5)->get();
                             break;
                         }
                 }
             }else{
-                $posts = Post::orderBy('created_at', 'desc')->where('is_public',1)->orWhereIn('user_id',$friendsArray)->orWhere('user_id',Auth::id())->skip(5*$request->pagiTime)->take(5)->get();
+                $posts = Post::orderBy('created_at', 'desc')->whereNotIn('type',['AdminPost','newFriend','newPartner'])->where(function($query) use ($friendsArray){
+                    $query->where('is_public',1)
+                    ->orWhereIn('user_id',$friendsArray)
+                    ->orWhere('user_id',Auth::id());
+                })->skip(5*$request->pagiTime)->take(5)->get();
             }
                 if (count($posts) < 5) {
                 $stopPagi = true;
@@ -209,7 +216,8 @@ class HomeController extends Controller
                 'postDesc'       =>['required_without:postPicture','string','nullable'],
                 'postPicture.*'  =>['required_without:postDesc','file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
                 'taggedUser.*'   =>['exists:users,id','distinct'],
-                'isPublic'       =>[Rule::in(['on'])]
+                'isPublic'       =>[Rule::in(['on'])],
+                'isAdmin'        =>[Rule::in(['on'])],
             ]);
 
             $postDesc           = $request->input('postDesc');
@@ -255,14 +263,22 @@ class HomeController extends Controller
             $post->desc         = $postDesc;
             $post->pictures     = $pictures_json;
             $post->tagged_users = $taggedUsers_json;
+            if ($request->isAdmin && $author->isAdmin()) {
+                $post->type = "AdminPost";
+            }
             $post->is_public    = $isPublic;
 
             
             if ($post->save()) {
                 $posts = [$post];
                 $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
-                $friends = Auth::user()->getFriends();
-                Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2'), 'newPost'.$post->id));
+                if ($post->type == "AdminPost") {
+                    $users = User::whereNotIn('id',[Auth::id()])->get();
+                    Notification::send($users, new NewAdminPost($author,$post->id));
+                }else{
+                    $friends = Auth::user()->getFriends();
+                    Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2'), 'newPost'.$post->id));
+                }
                 if ($taggedUsers) {
                     Notification::send($taggedUsersArray, new SystemNotification(__('nav.taggedInPost'),'success','_user_home_post_',$post->id, '', 'tagPost'));
                 }
@@ -324,7 +340,7 @@ class HomeController extends Controller
                 $post->tagged_users = null;
             }
 
-            if ($isPublic) {
+            if ($isPublic && !$post->type == "AdminPost") {
                 $post->is_public = false;
             }else{
                 $post->is_public = true;

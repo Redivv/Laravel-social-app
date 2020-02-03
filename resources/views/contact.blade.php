@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label for="EmailAttachments"><h4>{{__('contact.emailAttachments')}}</h4></label>
-                <input type="file" name="EmailAttachments[]" id="EmailAttachments" multiple accept="image/*">
+                <input class="form-control-file" type="file" name="EmailAttachments[]" id="EmailAttachments" multiple accept="image/*">
             </div>
             <output id="EmailAttachmentsOut"></output>
             <div class="form-group row mt-2">
