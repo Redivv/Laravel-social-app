@@ -97,7 +97,7 @@
                         <label for="profile-picture" class="col-md-4 col-form-label text-md-right">{{ __('registeration.profile-picture') }}</label>
     
                         <div class="col-md-7">
-                            <input id="profile-picture" type="file" class="form-control-file" name="profile-picture" accept="image/*">
+                            <input required id="profile-picture" type="file" class="form-control-file" name="profile-picture" accept="image/*">
                             @error('profile-picture')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

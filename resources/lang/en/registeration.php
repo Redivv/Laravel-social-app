@@ -14,7 +14,7 @@ return [
     'verificationInfo2'         => "If you don't have email",
     'verificationInfo3'         => 'click here to get email again',
     'newMail'                   => 'New email has been sent',
-    'infoAlert'                 => 'In Safo we care about authenticity so your picture has been sent to the administration',
+    'infoAlert'                 => 'In Safo we care about authenticity so you need to upload a profile picture and it will be sent to the administration',
     'testimonial'               => 'Created by women for womans. We care about authenticity so be yourself! Here you can share your life, experience, help people with coming-out or just help with hard times.You will also see news from LGBT word- movies, books or news form world.',
     'joinUs'                    => 'Join our community',
     'loginLink1'                => 'You have account? ',
