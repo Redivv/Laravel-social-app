@@ -191,8 +191,9 @@ $(document).ready(function () {
         }
     });
 
-    $('#message-data').emojioneArea({
+    let emoji = $('#message-data').emojioneArea({
         filtersPosition: "bottom",
+        autocomplete:false,
         events: {
             keydown: function(editor,e) {
                 if( !shiftPressed && (e.keyCode == 13 || e.which == 13)){
@@ -207,6 +208,8 @@ $(document).ready(function () {
             }
           }
     });
+
+    emoji[0].emojioneArea.setFocus();
 
     $('#searchForConvo').on('keyup',function(e){
         searchConvo(this,e);

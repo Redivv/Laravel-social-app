@@ -23,5 +23,5 @@ return [
     'termsOf'                   => 'Wyrażam Zgodę na ',
     'termsOfDoc1'               => 'Regulamin',
     'termsOfDoc2'               => 'Politykę Prywatności',
-
+    'mailInfo'                  => 'Po rejestracji wymagane jest potwierdzenie maila za pomocą linku w wiadomości wysłanej nad podany adres. Maile przychodzą w czasie od kilku minut do maksymalnie godziny'
 ];

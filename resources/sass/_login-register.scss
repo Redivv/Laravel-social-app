@@ -37,6 +37,13 @@ main{
                 margin-bottom: 2rem;
             }
         }
+        .registerMailInfo{
+            @extend .text-muted;
+            @include font-size(0.7rem);
+            letter-spacing: 0.5px;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
         .loginLink{
             @include font-size(1rem);
             a{

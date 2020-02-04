@@ -136,6 +136,7 @@
                     <button type="submit" class="form-btn btn btn-block">
                         {{ __('registeration.register-button') }}
                     </button>
+                    <div class="registerMailInfo">{{__('registeration.mailInfo')}}</div>
                     <div class="loginLink mt-2">{{__('registeration.loginLink1')}} <a href="{{route('login')}}">{{__('registeration.loginLink2')}}</a></div>
                 </form>
             </div>

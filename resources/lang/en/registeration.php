@@ -23,4 +23,5 @@ return [
     'termsOf'                   => 'I consent to ',
     'termsOfDoc1'               => 'Terms of Service',
     'termsOfDoc2'               => 'Privacy policy',
+    'mailInfo'                  => 'After registering it is required to verify email address via link send in a message. Messages typically come after a few minutes up to an hour.'
 ];
