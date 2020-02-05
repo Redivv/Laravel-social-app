@@ -74,6 +74,9 @@
                 @include font-size(1rem);
                 font-style: italic;
             }
+            @media screen and (max-width: $mobile-breakpoint) {
+                margin-top:1rem;
+            }
         }
     }
 }

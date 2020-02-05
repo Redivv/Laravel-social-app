@@ -111,8 +111,10 @@ class NavigationComposer
                         ])->where('read_at',null)->count();
 
             foreach ($this->notifications['chat'] as $chatNot) {
-                if ($chatNot->thread->is_seen == 0 && $chatNot->thread->user_id != Auth::id()) {
-                    $this->notifications['chatAmount']++;
+                if ($chatNot) {
+                    if ($chatNot->thread->is_seen == 0 && $chatNot->thread->user_id != Auth::id()) {
+                        $this->notifications['chatAmount']++;
+                    }
                 }
             }
 

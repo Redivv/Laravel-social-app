@@ -1,5 +1,15 @@
 @if (count($posts) > 0)
     @foreach ($posts as $post)
+        @if ($post->type == "newPartner" || $post->type == "newFriend")
+            @php 
+                $taggedUsers = json_decode($post->tagged_users);
+                $user1 = App\User::where("name",$taggedUsers[0])->first();
+                $user2 = App\User::where("name",$taggedUsers[1])->first();
+            @endphp
+            @if (!$user1 || $user2)
+                @continue;
+            @endif
+        @endif
         <div class="postBox container-fluid">
             <article id="post{{$post->id}}" class="post">
                 <header class="postAuthor row">
@@ -24,11 +34,6 @@
                 <main class="postDesc row">
                     <div class="postPhotos col-12">
                         @if ($post->type == "newPartner" || $post->type == "newFriend")
-                            @php 
-                                $taggedUsers = json_decode($post->tagged_users);
-                                $user1 = App\User::where("name",$taggedUsers[0])->first();
-                                $user2 = App\User::where("name",$taggedUsers[1])->first();
-                            @endphp
                             <a href="{{asset('img/profile-pictures/'.$user1->picture)}}" data-lightbox="post{{$post->id}}-Pictures">
                                 <img class="postPicture" src="{{asset('img/profile-pictures/'.$user1->picture)}}" alt="Post Picture">
                             </a>
