@@ -165,7 +165,6 @@ class AdminController extends Controller
     public function wideInfo(Request $request)
     {
         if($request->ajax()){
-            $kek = $request->all();
             $request->validate([
                 'infoNotCheck'  => ['nullable','string'],
                 'infoNotDesc'   => ['nullable','string','max:255','required_with:infoNotCheck'],

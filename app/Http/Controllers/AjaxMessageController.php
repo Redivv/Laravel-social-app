@@ -140,7 +140,6 @@ class AjaxMessageController extends Controller
     public function searchConvo(Request $request)
     {
         if ($request->ajax()) {
-            $kek = $request->all();
             $request->validate([
                 'searchCryteria'    => ['string','filled']
             ]);

@@ -56,7 +56,6 @@ class CommentController extends Controller
     public function newComment(Request $request)
     {
         if ($request->ajax()) {
-            $kek = $request->all();
             $request->validate([
                 'data.0.value' => ['string','max:255'],
                 'postId'       => ['exists:posts,id','nullable','required_without:parentId'],

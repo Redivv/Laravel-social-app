@@ -68,13 +68,14 @@ class NavigationComposer
                 }else{
                     $this->notifications['FR'] = $friend_results;
                 }
-            }   
-            $kek = $this->notifications['FR'];
+            }  
             
                 //saves results to notifiation
             $this->notifications['FRAmount'] = $frCount+$partnerRequestsCount;
                 //rest of the code :v
-            $this->notifications['chat'] = $threads = Talk::user(Auth::id())->getInbox();
+            $this->notifications['chat'] = $threads = Talk::user(Auth::id())->getInbox()->filter(function($chatNot,$key){
+                return isset($chatNot->thread);
+            });
             $this->notifications['chatAmount'] = 0;
 
             $this->notifications['user'] = $notifications->whereIn('type',
@@ -111,7 +112,7 @@ class NavigationComposer
                         ])->where('read_at',null)->count();
 
             foreach ($this->notifications['chat'] as $chatNot) {
-                if ($chatNot) {
+                if ($chatNot->thread) {
                     if ($chatNot->thread->is_seen == 0 && $chatNot->thread->user_id != Auth::id()) {
                         $this->notifications['chatAmount']++;
                     }
@@ -145,7 +146,6 @@ class NavigationComposer
         }else{
             $this->notifications = null;
         }
-        $kek = $this->notifications;
     }
 
     /**
