@@ -373,7 +373,7 @@ class AdminController extends Controller
 
     private function getUsers() : object
     {
-        DeleteNonVerifiedUsers::dispatch()->delay(now()->addMinutes(10));
+        DeleteNonVerifiedUsers::dispatchNow();
 
         return User::whereNotIn('id',[Auth::id()])->whereNotNull('email_verified_at')->take(5)->get();
     }
