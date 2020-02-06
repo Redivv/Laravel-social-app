@@ -203,11 +203,6 @@
                         .postContent{
                             margin-top: 0.25rem;
                             @include font-size(1rem);
-                            iframe{
-                                display: block;
-                                margin: 0.5rem 0;
-                                width: 100%;
-                            }
                         }
                         .postTags{
                             padding: 1rem 0.5rem;
@@ -240,6 +235,9 @@
                                 }
                             }
                         }
+                        @media screen and (max-width: $mobile-breakpoint) {
+                            padding:0;
+                        }
                     }
                     .postFooter{
                         margin-top: 0.5rem;
@@ -260,7 +258,11 @@
                                 color:$white;
                                 @include font-size(0.6rem);
                                 padding: 0.2rem 0.3rem;
-                                top:0.2rem;
+                                left: 25%;
+                                right: unset;
+                                bottom: -5%;
+                                top: unset;
+                                position: absolute;
                             }
                         }
                         @media screen and (max-width: $mobile-breakpoint) {
@@ -518,6 +520,9 @@
                             }
                         }
                     }
+                }
+                @media screen and (max-width: $mobile-breakpoint) {
+                    padding:0;
                 }
             }
         }

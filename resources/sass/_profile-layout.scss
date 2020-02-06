@@ -289,11 +289,6 @@ html{font-size: 16px !important;}
                     .postContent{
                         margin-top: 0.25rem;
                         @include font-size(1rem);
-                        iframe{
-                            display: block;
-                            margin: 0.5rem 0;
-                            width: 100%;
-                        }
                     }
                     .postTags{
                         padding: 1rem 0.5rem;
@@ -325,6 +320,9 @@ html{font-size: 16px !important;}
                                 }
                             }
                         }
+                    }
+                    @media screen and (max-width: $mobile-breakpoint) {
+                        padding:0;
                     }
                 }
                 .postFooter{
@@ -604,6 +602,12 @@ html{font-size: 16px !important;}
                     }
                 }
             }
+            @media screen and (max-width: $mobile-breakpoint) {
+                padding:0;
+            }
+        }
+        @media screen and (max-width: $mobile-breakpoint) {
+            padding:0;
         }
     }
     @media screen and (max-width: $breakpoint1) {

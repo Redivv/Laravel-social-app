@@ -9,6 +9,14 @@ body{
     background-size: cover;
     padding-bottom: 2.25rem !important;
 }
+
+iframe{
+    display: block;
+    margin: 0.5rem 0 !important;
+    width: 100% !important;
+    min-width: unset !important;
+    max-width: unset !important;
+}
 #navbarMobile{
     @media screen and (min-width: $mobile-breakpoint) {
         display: none !important;
@@ -62,8 +70,8 @@ body{
             }
         }
         .dropdown-menu{
-            left: -6.5rem;
-            min-width: 70vw;
+            left: -36vw;
+            min-width: 85vw;
         }
     }
     .navDesc{
