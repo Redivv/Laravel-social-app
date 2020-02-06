@@ -192,6 +192,8 @@ class ProfileController extends Controller
             foreach ($request->profileTags as $tag) {
                 $user->tag($tag);
             }
+        }elseif ($request->profileTags === null) {
+            $user->untag();
         }
         //Save changes in user profile
 

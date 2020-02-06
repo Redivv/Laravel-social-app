@@ -98,7 +98,7 @@
                         {{__('profile.hobby')}}
                     </label>
                 </legend>
-                <input type="text" class="form-control" name="profileTags" id="profileTagsInput" placeholder="Wpisz zainteresowanie i zatwierdź enterem">
+                <input type="text" class="form-control" name="profileTags[]" id="profileTagsInput" placeholder="Wpisz zainteresowanie i zatwierdź enterem">
                 <output id="profileTagsOut" class="container row">
                     @foreach ($tags as $tag)
                         <div class="col-2 userTag" data-tool="tooltip" title="{{__('activityWall.deleteTags')}}" data-placement="bottom">

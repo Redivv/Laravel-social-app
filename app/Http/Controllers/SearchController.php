@@ -139,13 +139,15 @@ class SearchController extends Controller
 
         if (isset($validated_data['activeOnly'])) {
             $search_results = $search_results->where("status","online");
+        
+            FlagOfflineUsers::dispatch()->delay(now()->addMinutes(5));
         }
 
         if ($validated_data['sortOptions_crit'] == "likes") {
             
             $searchLikes = $search_results->get();
 
-            $resultsCount = count($search_results);
+            $resultsCount = count($searchLikes);
             
             if ($validated_data['sortOptions_dir'] == "asc") {
 
@@ -181,8 +183,6 @@ class SearchController extends Controller
                 }
             }
         }
-        
-        FlagOfflineUsers::dispatch()->delay(now()->addMinutes(2));
 
         return [$search_results,__('searcher.resultNormal',['number' => $resultsCount])];
     }
