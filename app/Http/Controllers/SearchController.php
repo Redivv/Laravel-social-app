@@ -140,7 +140,7 @@ class SearchController extends Controller
         if (isset($validated_data['activeOnly'])) {
             $search_results = $search_results->where("status","online");
         
-            FlagOfflineUsers::dispatch()->delay(now()->addMinutes(5));
+            FlagOfflineUsers::dispatchNow();
         }
 
         if ($validated_data['sortOptions_crit'] == "likes") {
