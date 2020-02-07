@@ -24,6 +24,8 @@ use App\Notifications\SystemNotification;
 use App\Jobs\SendAdminNewsletter;
 use App\Jobs\SendAdminWideInfo;
 use App\Jobs\DeleteNonVerifiedUsers;
+use App\Jobs\DeleteUser;
+use App\Jobs\HandleProfilePictureTicket;
 
 class AdminController extends Controller
 {
@@ -179,7 +181,7 @@ class AdminController extends Controller
             if ( (isset($request->infoNotCheck))){
                 if(!empty(trim($request->infoNotDesc))){
                     $users = User::whereNotIn('id',[Auth::id()])->get();
-                    SendAdminWideInfo::dispatch($request->infoNotDesc,$users)->delay(now()->addMinutes(2));;
+                    SendAdminWideInfo::dispatch($request->infoNotDesc,$users)->delay(now()->addMinutes(2));
                 }else{
                     return response()->json(['status' => 'error', 'message' => 'Empty Message'], 400);
                 }
@@ -392,35 +394,7 @@ class AdminController extends Controller
     {
         $validUser = User::where('name','=',$data['user_name'])->where('pending_picture','=',$data['image'])->first();
         if($validUser){
-            switch ($decision) {
-                case 'accept':
-                    $validUser->picture = $validUser->pending_picture;
-                    $validUser->pending_picture = null;
-                    $validUser->update();
-                    $validUser->notify(new SystemNotification(__('nav.pictureOk'),'success','_user_profile','','','userPictureOk'));
-
-                    $post = new Post;
-                    $post->user_id      = $validUser->id;
-                    $post->is_public    = false;
-                    $post->pictures     = json_encode([$validUser->picture]);
-                    $post->type         = "newPicture";
-                    $post->tagged_users = json_encode([$validUser->name]);
-
-                    copy(public_path('img/profile-pictures/').$validUser->picture,public_path('img/post-pictures/').$validUser->picture);
-
-
-                    if ($post->save()) {
-                        Notification::send($validUser->getFriends(), new UserNotification($validUser, '_user_home_post_',$post->id, '', __('nav.userNot3'), 'newPost'.$post->id));
-                    }
-
-                    break;
-                case 'refuse':
-                    $validUser->pending_picture = null;
-                    $validUser->update();
-                    unlink(public_path('img/profile-pictures/'.$data['image']));
-                    $validUser->notify(new SystemNotification(__('nav.pictureDeny'),'danger','_user_profile','','','userPictureNo'));
-                    break;
-            }
+            HandleProfilePictureTicket::dispatch($validUser,$decision);
         }
     }
 
@@ -430,7 +404,7 @@ class AdminController extends Controller
         if($validUser){
             switch ($decision) {
                 case 'accept':
-                    $validUser->deleteAll();
+                    DeleteUser::dispatch($validUser->id);
                     break;
                 case 'refuse':
                     break;
@@ -442,7 +416,7 @@ class AdminController extends Controller
     {
         switch ($decision) {
             case 'delete':
-                $user->deleteAll();
+                DeleteUser::dispatch($user->id);
                 break;
         }
     }

@@ -72,6 +72,7 @@ iframe{
         .dropdown-menu{
             left: -36vw;
             min-width: 85vw;
+            overflow-y: auto;
         }
     }
     .navDesc{

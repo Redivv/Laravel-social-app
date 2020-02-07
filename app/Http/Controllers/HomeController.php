@@ -78,7 +78,7 @@ class HomeController extends Controller
                 'App\Notifications\UserNotification',
                 'App\Notifications\FriendRequestAccepted',
                 'App\Notifications\NewAdminPost',
-                ])->get();
+                ])->whereNotNull('read_at')->get();
         
         foreach ($userNotifications as $usNot) {
             $usNot->delete();
@@ -368,12 +368,24 @@ class HomeController extends Controller
             $request->validate([
                 'id'    => ['required','exists:posts']
             ]);
+
+            $post = Post::find($request->id);
             
-            if(Post::where('id',$request->id)->where('user_id',Auth::id())->delete()){
+            if($post->user->id == Auth::id()){
+
+                $post->delete();
                 
                 DB::table('likeable_like_counters')->where('likeable_id',$request->id)->delete();
                 DB::table('likeable_likes')->where('likeable_id',$request->id)->delete();
 
+                return response()->json(['status' => 'success'], 200);
+            }elseif(Auth::user()->isAdmin()){
+                
+                DB::table('likeable_like_counters')->where('likeable_id',$request->id)->delete();
+                DB::table('likeable_likes')->where('likeable_id',$request->id)->delete();
+
+                $post->user->notify(new SystemNotification(__('nav.adminDeletedPost'),'warning','_user_home','', '', 'deletedPost'));
+                $post->delete();
                 return response()->json(['status' => 'success'], 200);
             }
             return response()->json(['status' => 'error'], 400);

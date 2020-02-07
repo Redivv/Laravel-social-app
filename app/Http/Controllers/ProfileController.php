@@ -33,7 +33,7 @@ class ProfileController extends Controller
             [
                 'App\Notifications\SystemNotification',
                 'App\Notifications\AdminWideInfo'
-                ])->get();
+                ])->whereNotNull('read_at')->get();
         
         foreach ($profileNotifications as $profNot) {
             $profNot->delete();

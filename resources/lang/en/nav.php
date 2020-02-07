@@ -3,8 +3,8 @@ return [
     'noNotifications'           => 'No new notifications',
     'pictureTicket'             => 'Picture is waiting for admin aceptacion ',
     'userTicket'                => 'User reported',
-    'pictureOk'                 => 'Your main picture is accept',
-    'pictureDeny'               => 'Your main picture is rejected',
+    'pictureOk'                 => 'Your main picture was accepted',
+    'pictureDeny'               => 'Your main picture was rejected. We care a lot about authenticity so your profile picture should have a visible photo of your face.',
     'ago'                       => 'ago',
     'deleteAll'                 => 'Read all',
     'newSysNotTime'             => '1 second ago',
@@ -30,5 +30,6 @@ return [
     'friendReq'                 => ' add you for friends',
     'partnerReq'                => ' want to share your relationship',
     'acceptedPartner'           => 'User :user accept your relationship request ',
-    'deniedPartner'             => 'User :user reject your relationship request'
+    'deniedPartner'             => 'User :user reject your relationship request',
+    'adminDeletedPost'          => 'Administrator Deleted Your Post'
 ]; 

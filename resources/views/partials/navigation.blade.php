@@ -175,8 +175,8 @@
                                     @case('App\Notifications\SystemNotification')
                                         <a class="{{$sysNot['id']}} {{$sysNot->data['action']}}{{$sysNot->data['contentId']}} dropdown-item alert alert-{{$sysNot->data['color']}} @if($sysNot['read_at']){{'read'}}@endif" href="{{str_replace('_','/',$sysNot->data['link']).$sysNot->data['contentId'].$sysNot->data['contentAnchor']}}" target="_blank">
                                             <div class="row systemNotificationDate">
-                                                <div class="col-12 text-left">{{$sysNot['created_at']->diffForHumans()}}</div>
-                                                <div class="col-12 text-right"><span class="{{$sysNot->data['action']}}{{$sysNot->data['contentId']}}Amount badge ">@if($systemDuplicates[$i] > 1){{$systemDuplicates[$i]}}@endif</span></div>
+                                                <div class="col-11 text-left">{{$sysNot['created_at']->diffForHumans()}}</div>
+                                                <div class="col-1 text-right"><span class="{{$sysNot->data['action']}}{{$sysNot->data['contentId']}}Amount badge ">@if($systemDuplicates[$i] > 1){{$systemDuplicates[$i]}}@endif</span></div>
                                             </div>
                                             {{$sysNot->data['message']}}
                                         </a>
@@ -485,8 +485,8 @@
                                         @case('App\Notifications\SystemNotification')
                                             <a class="{{$sysNot['id']}} {{$sysNot->data['action']}}{{$sysNot->data['contentId']}} dropdown-item alert alert-{{$sysNot->data['color']}} @if($sysNot['read_at']){{'read'}}@endif" href="{{str_replace('_','/',$sysNot->data['link']).$sysNot->data['contentId'].$sysNot->data['contentAnchor']}}" target="_blank">
                                                 <div class="row systemNotificationDate">
-                                                    <div class="col-12 text-left">{{$sysNot['created_at']->diffForHumans()}}</div>
-                                                    <div class="col-12 text-right"><span class="{{$sysNot->data['action']}}{{$sysNot->data['contentId']}}Amount badge ">@if($systemDuplicates[$i] > 1){{$systemDuplicates[$i]}}@endif</span></div>
+                                                    <div class="col-11 text-left">{{$sysNot['created_at']->diffForHumans()}}</div>
+                                                    <div class="col-1 text-right"><span class="{{$sysNot->data['action']}}{{$sysNot->data['contentId']}}Amount badge ">@if($systemDuplicates[$i] > 1){{$systemDuplicates[$i]}}@endif</span></div>
                                                 </div>
                                                 {{$sysNot->data['message']}}
                                             </a>
@@ -735,8 +735,8 @@
 
                             html = '<a class="'+notification.id+' '+notification.action+notification.contentId+' dropdown-item alert alert-'+notification.color+'" href="'+notification.link.replace(/_/g,'/')+notification.contentId+notification.contentAnchor+'" target="_blank">'+
                                         '<div class="row systemNotificationDate">'+
-                                            '<div class="col-12 text-left">{{__("nav.newSysNotTime")}}</div>'+
-                                            '<div class="col-12 text-right"><span class="'+notification.action+notification.contentId+'Amount badge badge-light"></span></div>'+
+                                            '<div class="col-11 text-left">{{__("nav.newSysNotTime")}}</div>'+
+                                            '<div class="col-1 text-right"><span class="'+notification.action+notification.contentId+'Amount badge badge-light"></span></div>'+
                                         '</div>'+
                                         notification.message+
                                     '</a>';

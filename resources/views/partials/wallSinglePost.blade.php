@@ -26,6 +26,10 @@
                     <i class="fas postEdit fa-edit" data-id="{{$post->id}}" data-toggle="modal" data-target="#editModal" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.editPost')}}"></i>
                     <i class="fas postDelete fa-times" data-id="{{$post->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deletePost')}}"></i>
                 </div>
+            @elseif(auth()->user()->isAdmin())
+                <div class="col-4 postAuthorButtons">
+                    <i class="fas postDelete fa-times" data-id="{{$post->id}}" data-tool="tooltip" title="{{__("activityWall.deletePost")}}" data-placement="bottom"></i>
+                </div>
             @endif
             <div class="offset-1 col-11 postCreatedAt">{{$post->created_at->diffForHumans()}}</div>
         </header>

@@ -45,6 +45,7 @@ return [
     'searchCity'                => 'Miasto',
     'noSearchResults'           => 'Brak Wyników',
     'fetch'                     => 'Odśwież Wyniki',
-    'search'                    => 'Wyszukaj'
+    'search'                    => 'Wyszukaj',
+    'adminDeletedPost'          => 'Administrator Usunął Twój Post'
 
 ];

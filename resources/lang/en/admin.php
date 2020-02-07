@@ -45,6 +45,6 @@ return [
     'searchCity'                => 'City',
     'noSearchResults'           => 'No search results',
     'fetch'                     => 'Refresh results',
-    'search'                    => 'Search'
+    'search'                    => 'Search',
 
 ];

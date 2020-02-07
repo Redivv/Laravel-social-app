@@ -4,7 +4,7 @@ return [
     'pictureTicket'             => 'Zgłoszono Zdjęcie Profilowe do Weryfikacji',
     'userTicket'                => 'Zgłoszono Użytkownika',
     'pictureOk'                 => 'Twoje Zdjęcie Profilowe Zostało Zaakceptowane',
-    'pictureDeny'               => 'Twoje Zdjęcie Profilowe Zostało Odrzucone',
+    'pictureDeny'               => 'Twoje Zdjęcie Profilowe Zostało Odrzucone. Jako, że istotna jest dla nas autentyczność użytkowników zdjęcie profilowe powinno zawierać w widoczny sposób Twoją twarz.',
     'ago'                       => 'temu',
     'deleteAll'                 => 'Przeczytaj Wszystkie',
     'newSysNotTime'             => '1 sekunda temu',
@@ -30,5 +30,6 @@ return [
     'friendReq'                 => ' zaprasza Cię do znajomych',
     'partnerReq'                => ' chce zaproponować ogłoszenie waszego związku',
     'acceptedPartner'           => 'Użytkownik :user przyjął Twoją propozycję związku',
-    'deniedPartner'             => 'Użytkownik :user odrzucił Twoją propozycję związku'
+    'deniedPartner'             => 'Użytkownik :user odrzucił Twoją propozycję związku',
+    'adminDeletedPost'          => 'Administrator Usunął Twój Post'
 ]; 
