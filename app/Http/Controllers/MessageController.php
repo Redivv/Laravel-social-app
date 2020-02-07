@@ -36,7 +36,8 @@ class MessageController extends Controller
     {
         FlagOfflineUsers::dispatch()->delay(now()->addMinutes(10));
         
-        $id =  $user->id;
+        $id   =  $user->id;
+        $name = $user->name;
 
         if($request->ajax()){
             $pagi = $request->input('pagi');

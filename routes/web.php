@@ -106,7 +106,7 @@ Route::prefix('admin')->group(function(){
 });
 
 Route::get('message', 'MessageController@index')->name('message.app');
-Route::get('message/{name}', 'MessageController@chatHistory')->name('message.read');
+Route::get('message/{user}', 'MessageController@chatHistory')->name('message.read');
 Route::delete('message/{id}', 'MessageController@deleteConversation')->name('conversation.delete');
 Route::patch('message/{id}', 'MessageController@blockConversation')->name('conversation.block');
 
