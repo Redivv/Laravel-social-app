@@ -46,8 +46,9 @@ class ContactController extends Controller
 
             $message->subject($title);
 
-            $message->from($user->email);
-            $message->replyTo($user->email);
+            $message->from(env('MAIL_FROM_ADDRESS','administracja@safo.com.pl'),env('APP_NAME','Safo'));
+            $message->replyTo($user->email,$user->name);
+            $message->sender(env('MAIL_FROM_ADDRESS','administracja@safo.com.pl'),env('APP_NAME','Safo'));
             $message->to(env('MAIL_FROM_ADDRESS','administracja@safo.com.pl'));
 
             foreach ($readyPictures as $key => $picture) {
