@@ -46,7 +46,7 @@ class ContactController extends Controller
 
             $message->subject($title);
 
-            $message->from($user->email,$user->name);
+            $message->from($user->email);
             $message->replyTo($user->email);
             $message->sender($user->email);
             $message->to(env('MAIL_FROM_ADDRESS','administracja@safo.com.pl'));
