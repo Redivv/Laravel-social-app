@@ -71,7 +71,7 @@ class ProfileController extends Controller
 
         // If request is valid
         $request->validate([
-            'profilePicture'                =>  ['file','image','max:2000', 'nullable', 'mimes:jpeg,png,jpg,gif,svg'],
+            'profilePicture'                =>  ['file','image','max:5000', 'nullable', 'mimes:jpeg,png,jpg,gif,svg'],
             'profileCity'                   =>  ['string','nullable','max:250'],
             'profileDesc'                   =>  ['string','nullable'],
             'profileRelationship'           =>  ['numeric', 'gte:0', 'lte:2','nullable'],

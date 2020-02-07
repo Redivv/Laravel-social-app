@@ -32,11 +32,12 @@ class MessageController extends Controller
         return view('messages.conversations', compact('messages', 'user', 'threads'))->withSender(null);
     }
 
-    public function chatHistory(Request $request, $name)
+    public function chatHistory(Request $request, User $user)
     {
         FlagOfflineUsers::dispatch()->delay(now()->addMinutes(10));
         
-        $id =  User::where('name', $name)->first()->id;
+        $id =  $user->id;
+
         if($request->ajax()){
             $pagi = $request->input('pagi');
             if($conversations = Talk::user(Auth::id())->getMessagesByUserId($id, 10*$pagi,20*$pagi)){

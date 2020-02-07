@@ -173,7 +173,7 @@ class AdminController extends Controller
                 'infoMailCheck' => ['nullable','string'],
                 'infoMailTitle' => ['nullable','string','max:255'],
                 'infoMailDesc'  => ['nullable','string','max:255'],
-                'postPicture.*' => ['nullable','file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
+                'postPicture.*' => ['nullable','file','image','max:5000', 'mimes:jpeg,png,jpg,gif,svg'],
             ]);
 
             if ( (isset($request->infoNotCheck))){
@@ -417,11 +417,7 @@ class AdminController extends Controller
                 case 'refuse':
                     $validUser->pending_picture = null;
                     $validUser->update();
-                    $otherUser = User::where('pending_picture','=',$data['image'])->orWhere('picture','=',$data['image'])->first();
-                    if (!$otherUser) {
-                        unlink(public_path('img/profile-pictures/'.$data['image']));
-                        unlink(public_path('img/post-pictures/'.$data['image']));
-                    }
+                    unlink(public_path('img/profile-pictures/'.$data['image']));
                     $validUser->notify(new SystemNotification(__('nav.pictureDeny'),'danger','_user_profile','','','userPictureNo'));
                     break;
             }

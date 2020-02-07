@@ -36,7 +36,7 @@ class AjaxMessageController extends Controller
         if ($request->ajax()) {
             $rules = [
                 'message-data'=>['required_without:pictures','string','nullable'],
-                'pictures.*'  =>['required_without:message-data','file','image','max:2000', 'mimes:jpeg,png,jpg,gif,svg'],
+                'pictures.*'  =>['required_without:message-data','file','image','max:5000', 'mimes:jpeg,png,jpg,gif,svg'],
                 '_id'=>'required'
             ];
 

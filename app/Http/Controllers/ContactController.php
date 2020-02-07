@@ -22,7 +22,7 @@ class ContactController extends Controller
         $request->validate([
             'EmailSubject'        => ['required','string','max:255'],
             'EmailContent'        => ['required','string'],
-            'EmailAttachments.*'  => ['file','image','max:2000','mimes:jpeg,png,jpg,gif,svg'],
+            'EmailAttachments.*'  => ['file','image','max:5000','mimes:jpeg,png,jpg,gif,svg'],
         ]);
 
         $title      = $request->EmailSubject;
@@ -48,7 +48,7 @@ class ContactController extends Controller
 
             $message->from($user->email,$user->name);
             $message->replyTo($user->email);
-            $message->sender($user->email,$user->name);
+            $message->sender($user->email);
             $message->to(env('MAIL_FROM_ADDRESS','administracja@safo.com.pl'));
 
             foreach ($readyPictures as $key => $picture) {
