@@ -39,7 +39,7 @@ class AdminController extends Controller
         $pictureTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->get());
         $userTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->get());
     
-        $inactiveTimer = Carbon::now()->subDays(0)->toDateTimeString();
+        $inactiveTimer = Carbon::now()->subDays(4)->toDateTimeString();
         $inactiveUsers = User::where('created_at','<',$inactiveTimer)
         ->whereNull('pending_picture')
         ->whereNotIn('id',[1])
@@ -297,7 +297,7 @@ class AdminController extends Controller
                         }
                     }
 
-                    $inactiveTimer = Carbon::now()->subDays(0)->toDateTimeString();
+                    $inactiveTimer = Carbon::now()->subDays(4)->toDateTimeString();
                     $inactiveUsers = User::where('created_at','<',$inactiveTimer)
                     ->whereNull('pending_picture')
                     ->whereNotIn('id',[1])
@@ -406,7 +406,7 @@ class AdminController extends Controller
 
     private function getInactiveUsers() : object{
 
-        $inactiveTimer = Carbon::now()->subDays(0)->toDateTimeString();
+        $inactiveTimer = Carbon::now()->subDays(4)->toDateTimeString();
         $inactiveUsers = User::where('created_at','<',$inactiveTimer)
         ->whereNull('pending_picture')
         ->whereNotIn('id',[1])
