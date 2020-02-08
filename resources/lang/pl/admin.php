@@ -47,6 +47,7 @@ return [
     'fetch'                     => 'Odśwież Wyniki',
     'search'                    => 'Wyszukaj',
     'adminDeletedPost'          => 'Administrator Usunął Twój Post',
-    'inactiveUser'              => 'Nieaktywny Użytkownik'
+    'noEmail'                   => "Niezweryfikowany Adres Email",
+    'noProfile'                 => "Brak Zdjęcia Profilowego"
 
 ];

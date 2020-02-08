@@ -47,5 +47,7 @@ return [
     'fetch'                     => 'Refresh results',
     'search'                    => 'Search',
     'adminDeletedPost'          => 'Administrator Deleted Your Post',
-    'inactiveUser'              => 'Inactive User'
+    'inactiveUser'              => 'Inactive User',
+    'noEmail'                   => "Unverfied Email Address",
+    'noProfile'                 => "No Profile Picture"
 ];

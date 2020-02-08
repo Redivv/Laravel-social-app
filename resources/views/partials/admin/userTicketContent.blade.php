@@ -54,7 +54,13 @@
                         {{$user->name}}
                     </a>
                 </th>
-                <td>{{__('admin.inactiveUser')}}</td>
+                <td>
+                    @if (!$user->email_verified_at)
+                        {{__('admin.noEmail')}}
+                    @else
+                        {{__('admin.noProfile')}}
+                    @endif
+                </td>
                 <td>{{$user->created_at->diffForHumans()}}</td>
                 <td>
                     --   
