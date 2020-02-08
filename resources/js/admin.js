@@ -139,8 +139,6 @@ function renderContent(selected) {
             $('#'+targetId+'-content').html(response.html);
             if (response.amount == 0) {
                 $('#'+targetId+'Count').html('');
-            }else{
-                $('#'+targetId+'Count').html(response.amount);
             }
 
             $('#'+targetId+'-content').on('scroll',function() {

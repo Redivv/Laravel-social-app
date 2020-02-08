@@ -71,7 +71,7 @@ class ProfileController extends Controller
 
         // If request is valid
         $request->validate([
-            'profilePicture'                =>  ['file','image','max:5000', 'nullable', 'mimes:jpeg,png,jpg,gif,svg'],
+            'profilePicture'                =>  ['file','image','max:10000', 'nullable', 'mimes:jpeg,png,jpg,gif,svg'],
             'profileCity'                   =>  ['string','nullable','max:250'],
             'profileDesc'                   =>  ['string','nullable'],
             'profileRelationship'           =>  ['numeric', 'gte:0', 'lte:2','nullable'],
@@ -86,14 +86,21 @@ class ProfileController extends Controller
         if ($request->hasFile('profilePicture')) {
             //Change original name of the file
             $filename = hash_file('haval160,4',$request->profilePicture->getPathname()).'.'.$request->profilePicture->getClientOriginalExtension();
-            $request->profilePicture->move(public_path('img/profile-pictures/'), $filename);
-            copy(public_path('img/profile-pictures/').$filename,public_path('img/post-pictures/').$filename);
-            $user->pending_picture = $filename;
 
-            $admins = User::where('is_admin','=',1)->whereNotIn('id',[Auth::id()])->get();
+            $otherUser = User::where('picture',$filename)->orWhere('picture',$filename)->first();
 
-            if($admins){
-                Notification::send($admins, new NewProfilePicture($user->name,$filename));
+            if (!$otherUser) {
+                $request->profilePicture->move(public_path('img/profile-pictures/'), $filename);
+                copy(public_path('img/profile-pictures/').$filename,public_path('img/post-pictures/').$filename);
+                $user->pending_picture = $filename;
+    
+                $admins = User::where('is_admin','=',1)->whereNotIn('id',[Auth::id()])->get();
+    
+                if($admins){
+                    Notification::send($admins, new NewProfilePicture($user->name,$filename));
+                }
+            }else{
+                $request->session()->flash('alreadyTakenPicture', __('profile.takenPicture'));
             }
         }
 
@@ -229,7 +236,7 @@ class ProfileController extends Controller
                     $user->relationship_status = null;
                     $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
 
-                    $posts == null;
+                    $posts = null;
 
                     $tags = null;
                     $friends = null;

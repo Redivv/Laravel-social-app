@@ -8,7 +8,7 @@ return [
     'profileTicketTable4'       => 'Data Utworzenia',
     'accept'                    => 'Zaakceptuj',
     'refuse'                    => 'Odrzuć',
-    'userTicket'                => 'Zgłoszeni Użytkownicy',
+    'userTicket'                => 'Zgłoszeni i Nieaktywni Użytkownicy',
     'userList'                  => 'Wszyscy Użytkownicy',
     'tagList'                   => 'Zainteresowania Użytkowników',
     'cityList'                  => 'Dodane Miasta',
@@ -46,6 +46,7 @@ return [
     'noSearchResults'           => 'Brak Wyników',
     'fetch'                     => 'Odśwież Wyniki',
     'search'                    => 'Wyszukaj',
-    'adminDeletedPost'          => 'Administrator Usunął Twój Post'
+    'adminDeletedPost'          => 'Administrator Usunął Twój Post',
+    'inactiveUser'              => 'Nieaktywny Użytkownik'
 
 ];

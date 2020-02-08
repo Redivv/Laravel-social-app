@@ -4,7 +4,7 @@ return [
     'active'                => 'Aktywny',
     'lastActive'            => 'Ostatnio Aktywny: ',
     'lastActive1sec'        => 'Ostatnio Aktywny: 1 sekunda temu',
-    'verifyEmailAlert'      => 'Konieczna weryfikacja adresu email. Aby korzystać z wszystkich funkcji portalu kliknij w link wysłany na podany adres email',
+    'verifyEmailAlert'      => 'Cześć! 😊 <br> Cieszę się, że znalazłaś się tutaj i mogę oficjalnie Cię powitać. Portal SAFO został stworzony z myślą o kobietach lubiących kobiety. <br>Ważna jest też dla mnie geneza nazwy. Bardzo długo myślałyśmy o tym, aż w końcu przyszła Safona. Pierwsza lesbijka od której powstała wyspa lesbos. <br> Zweryfikuj swój adres email i dołącz do nas w pełni! <br>Bądź sobą! 🏳️‍🌈 <br><br>W razie jakichś uwag czy czegokolwiek <a href="/user/contactAdministration">piszcie do administracji</a>, jesteśmy dla Was.',
     'pictureInfo'           => 'Twoje zdjęcie zostało wysłane do administracji do akceptacji',
     'updated'               => 'Profil został zaktualizowany',
     'picture'               => 'Zdjęcie Profilowe',
@@ -46,5 +46,6 @@ return [
     'mutualFriends'         => "W tym Wspólni (:count)",
     'termsOfDoc2'           => "Polityka Prywatności",
     'remainingPhotos'       => "Pozostałe Zdjęcia ",
-    'changePass'            => "Zmień Hasło"
+    'changePass'            => "Zmień Hasło",
+    'takenPicture'          => "Zdjęcie jest już wykorzystywane przez użytkownika"
 ];

@@ -22,7 +22,7 @@ class ContactController extends Controller
         $request->validate([
             'EmailSubject'        => ['required','string','max:255'],
             'EmailContent'        => ['required','string'],
-            'EmailAttachments.*'  => ['file','image','max:5000','mimes:jpeg,png,jpg,gif,svg'],
+            'EmailAttachments.*'  => ['file','image','max:10000','mimes:jpeg,png,jpg,gif,svg'],
         ]);
 
         $title      = $request->EmailSubject;
