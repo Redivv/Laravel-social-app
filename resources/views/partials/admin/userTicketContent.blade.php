@@ -1,4 +1,4 @@
-@if (count($tickets) <= 0)
+@if ((count($tickets) + count($users)) <= 0)
     <div class="alert alert-success" role="alert">
             {{__('admin.noContent')}}
     </div>
@@ -43,6 +43,28 @@
                         <button name="refuse" type="submit" class="btn form-btn ticketBtn denyBtn">
                             {{__('admin.ignore')}}
                         </button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+        @foreach ($users as $user)
+            <tr>
+                <th scope="row">
+                    <a href="{{route('ProfileOtherView',['user' => $user->name])}}" target="__blank">
+                        {{$user->name}}
+                    </a>
+                </th>
+                <td>{{__('admin.inactiveUser')}}</td>
+                <td>{{$user->created_at->diffForHumans()}}</td>
+                <td>
+                    --   
+                </td>
+                <td>
+                    <form class="adminForm" method="post">
+                        <button name="delete" type="submit" class="btn form-btn listBtn">
+                        {{__('admin.userDelete')}} 
+                        </button>
+                        <input type="hidden" name="elementId" value="{{$user->id}}">
                     </form>
                 </td>
             </tr>

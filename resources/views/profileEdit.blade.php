@@ -12,6 +12,11 @@
             {{session()->get('message')}}
         </div>
     @endif
+    @if (session()->has('alreadyTakenPicture'))
+        <div class="alert alert-danger mt-2 mb-2 mx-auto text-center" style="width:50%" role="alert">
+            {{session()->get('alreadyTakenPicture')}}
+        </div>
+    @endif
 
     <div class="container">
         <form id="profileEditForm" action="{{route('ProfileUpdate')}}" class="row text-center" method="post" enctype="multipart/form-data">

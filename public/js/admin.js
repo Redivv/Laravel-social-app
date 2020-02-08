@@ -11390,8 +11390,6 @@ function renderContent(selected) {
 
       if (response.amount == 0) {
         $('#' + targetId + 'Count').html('');
-      } else {
-        $('#' + targetId + 'Count').html(response.amount);
       }
 
       $('#' + targetId + '-content').on('scroll', function () {

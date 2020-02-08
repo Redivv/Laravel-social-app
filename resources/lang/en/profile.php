@@ -45,5 +45,6 @@ return [
     'partnerInfo'           => "Your relationship request has been sent",
     'mutualFriends'         => "Mutual friends (:count)",
     'remainingPhotos'       => "Remaining Photos ",
-    'changePass'            => "Change Password"
+    'changePass'            => "Change Password",
+    'takenPicture'          => "Profile Picture is already being used by other user"
 ];

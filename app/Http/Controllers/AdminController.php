@@ -38,6 +38,16 @@ class AdminController extends Controller
     {
         $pictureTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->get());
         $userTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->get());
+    
+        $inactiveTimer = Carbon::now()->subDays(0)->toDateTimeString();
+        $inactiveUsers = User::where('created_at','<',$inactiveTimer)
+        ->whereNull('pending_picture')
+        ->whereNotIn('id',[1])
+        ->where(function($query){
+            $query->whereNull('email_verified_at')->orWhere('picture','default-picture.png');
+        })->take(10)->count();
+
+        $userTicketsAmount += $inactiveUsers;
         return view('adminPanel')->with('pictureTickets',$pictureTicketsAmount)->with('userTickets',$userTicketsAmount);
     }
 
@@ -59,8 +69,10 @@ class AdminController extends Controller
                     break;
                 case 'userTicket':
                     $validTickets = $this->getUserTickets();
+                    $inactiveUsers = $this->getInactiveUsers();
                     $amount = count($validTickets);
-                    $html = view('partials.admin.userTicketContent')->withTickets($validTickets)->render();
+                    $amount = $amount + count($inactiveUsers);
+                    $html = view('partials.admin.userTicketContent')->withTickets($validTickets)->withUsers($inactiveUsers)->render();
                     break;
                 case 'userList':
                     $elements = $this->getUsers();
@@ -126,7 +138,7 @@ class AdminController extends Controller
                 ],
                 'target'       =>[
                     'string',
-                    Rule::in(['userList','tagList','cityList'])
+                    Rule::in(['userTicket','userList','tagList','cityList'])
                 ]
             ]);
             $elementId = intVal(substr($request->elementId,10));
@@ -151,6 +163,14 @@ class AdminController extends Controller
                     $selectedElement = City::find($elementId);
                     if ($selectedElement) {
                         $this->resolveCityList($selectedElement,$request->decision,$request->editValue);
+                    }else{
+                        return response()->json(['status' => 'error'], 400);
+                    }
+                    break;
+                case 'userTicket':
+                    $selectedElement = User::find($elementId);
+                    if ($selectedElement) {
+                        $this->resolveUserList($selectedElement,$request->decision);
                     }else{
                         return response()->json(['status' => 'error'], 400);
                     }
@@ -276,10 +296,19 @@ class AdminController extends Controller
                             $ticket->delete();
                         }
                     }
-                    if (count($validTickets) < 10) {
+
+                    $inactiveTimer = Carbon::now()->subDays(0)->toDateTimeString();
+                    $inactiveUsers = User::where('created_at','<',$inactiveTimer)
+                    ->whereNull('pending_picture')
+                    ->whereNotIn('id',[1])
+                    ->where(function($query){
+                        $query->whereNull('email_verified_at')->orWhere('picture','default-picture.png');
+                    })->take(10)->skip(10*$pagiCount)->get();
+
+                    if ((count($validTickets) < 10) && (count($inactiveUsers) < 10)) {
                         $pagiNext = false;
                     }
-                    $html = view('partials.admin.userTicketPagi')->withTickets($validTickets)->render();
+                    $html = view('partials.admin.userTicketPagi')->withTickets($validTickets)->withUsers($inactiveUsers)->render();
 
                     break;
             }
@@ -356,6 +385,7 @@ class AdminController extends Controller
     {
         $tickets = Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->take(10)->get();
         $validTickets = array();
+
         $duplicateAuthors = array();
         foreach ($tickets as $ticket) {
             if (!in_array($ticket->data['author'],$duplicateAuthors)) {
@@ -370,7 +400,21 @@ class AdminController extends Controller
                 $ticket->delete();
             }
         }
+
         return $validTickets;
+    }
+
+    private function getInactiveUsers() : object{
+
+        $inactiveTimer = Carbon::now()->subDays(0)->toDateTimeString();
+        $inactiveUsers = User::where('created_at','<',$inactiveTimer)
+        ->whereNull('pending_picture')
+        ->whereNotIn('id',[1])
+        ->where(function($query){
+            $query->whereNull('email_verified_at')->orWhere('picture','default-picture.png');
+        })->take(10)->get();
+
+        return $inactiveUsers;
     }
 
     private function getUsers() : object

@@ -46,5 +46,6 @@ return [
     'mutualFriends'         => "W tym Wspólni (:count)",
     'termsOfDoc2'           => "Polityka Prywatności",
     'remainingPhotos'       => "Pozostałe Zdjęcia ",
-    'changePass'            => "Zmień Hasło"
+    'changePass'            => "Zmień Hasło",
+    'takenPicture'          => "Zdjęcie jest już wykorzystywane przez użytkownika"
 ];
