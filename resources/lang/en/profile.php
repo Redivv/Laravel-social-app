@@ -4,7 +4,7 @@ return [
     'active'                => 'Active',
     'lastActive'            => 'Last activity: ',
     'lastActive1sec'        => 'Last activity: 1 second ago',
-    'verifyEmailAlert'      => "Hi there, Hello! 😊 <br> I' so very happy that I can finally welcome you. Our site was created for women who like other women. <br>The origins of the site's name are important to me. We've been thinking about It for a long time and then came Safona - the very first lesbian woman . <br> So go verify your email address and fully join us! <br>Be Yourself! 🏳️‍🌈 <br><br>In case of any problems come <a href='/user/contactAdministration'>write to the adminitration</a>, we are here for you",
+    'verifyEmailAlert'      => "Hi there, Hello! 😊 <br> I' so very happy that I can finally welcome you. Our site was created for women who like other women. <br>The origins of the site's name are important to me. We've been thinking about It for a long time and then came Safona - the very first lesbian woman . <br> So go verify your email address and fully join us! <br>Be Yourself! 🏳️‍🌈 <br><br>In case of any problems come <a href='/user/contactAdministration'>write to the adminitration</a>, we are here for you. You didn't receive verification email? <a href ='/email/verify'>Send It Again</a>",
     'pictureInfo'           => 'Your photo has been sent for acceptance',
     'updated'               => 'Your profile has been updated',
     'picture'               => 'Main photo',
