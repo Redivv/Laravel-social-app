@@ -71,7 +71,7 @@ class ProfileController extends Controller
 
         // If request is valid
         $request->validate([
-            'profilePicture'                =>  ['file','image','max:5000', 'nullable', 'mimes:jpeg,png,jpg,gif,svg'],
+            'profilePicture'                =>  ['file','image','max:10000', 'nullable', 'mimes:jpeg,png,jpg,gif,svg'],
             'profileCity'                   =>  ['string','nullable','max:250'],
             'profileDesc'                   =>  ['string','nullable'],
             'profileRelationship'           =>  ['numeric', 'gte:0', 'lte:2','nullable'],
@@ -236,7 +236,7 @@ class ProfileController extends Controller
                     $user->relationship_status = null;
                     $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
 
-                    $posts == null;
+                    $posts = null;
 
                     $tags = null;
                     $friends = null;

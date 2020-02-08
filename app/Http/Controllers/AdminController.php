@@ -195,7 +195,7 @@ class AdminController extends Controller
                 'infoMailCheck' => ['nullable','string'],
                 'infoMailTitle' => ['nullable','string','max:255'],
                 'infoMailDesc'  => ['nullable','string','max:255'],
-                'postPicture.*' => ['nullable','file','image','max:5000', 'mimes:jpeg,png,jpg,gif,svg'],
+                'postPicture.*' => ['nullable','file','image','max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
             ]);
 
             if ( (isset($request->infoNotCheck))){

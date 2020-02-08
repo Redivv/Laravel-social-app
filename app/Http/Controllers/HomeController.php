@@ -214,7 +214,7 @@ class HomeController extends Controller
         if ($request->ajax()) {
             $request->validate([
                 'postDesc'       =>['required_without:postPicture','string','nullable'],
-                'postPicture.*'  =>['required_without:postDesc','file','image','max:5000', 'mimes:jpeg,png,jpg,gif,svg'],
+                'postPicture.*'  =>['required_without:postDesc','file','image','max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
                 'taggedUser.*'   =>['exists:users,id','distinct'],
                 'isPublic'       =>[Rule::in(['on'])],
                 'isAdmin'        =>[Rule::in(['on'])],
@@ -294,7 +294,7 @@ class HomeController extends Controller
         if ($request->ajax()) {
             $request->validate([
                 'postDesc'       =>['required_without:postPicture','string','nullable'],
-                'editPicture.*'  =>['required_without:postDesc', 'nullable','file','image','max:5000', 'mimes:jpeg,png,jpg,gif,svg'],
+                'editPicture.*'  =>['required_without:postDesc', 'nullable','file','image','max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
                 'postId'         =>['exists:posts,id'],
                 'noPicture'      =>['string','nullable'],
                 'taggedUser.*'   =>['exists:users,id','distinct'],

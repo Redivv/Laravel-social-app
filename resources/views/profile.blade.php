@@ -178,8 +178,8 @@
                 </div>
             @else
                 @if ($user->id == auth()->id() && $user->email_verified_at === null)
-                    <div class="alert alert-danger" role="alert" style="width: 100%; align-self:center;">
-                        <b>{{__("profile.verifyEmailAlert")}}</b>
+                    <div class="alert alert-success" role="alert" style="width: 100%; align-self:center;">
+                        <b>{!!__("profile.verifyEmailAlert")!!}</b>
                     </div>
                 @else
                     <header>
