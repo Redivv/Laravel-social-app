@@ -22142,6 +22142,58 @@ html {
   font-style: italic;
 }
 
+#administrators .card-body div .adminChat,
+#administrators .card-body .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser .adminChat,
+.activity .activityPosts .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminChat,
+#administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminChat,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminChat,
+#administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminChat,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminChat,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser .adminChat,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminChat,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminChat,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminChat,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminChat,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminChat {
+  font-size: calc(1.255rem + 0.06vw);
+  color: #000;
+  padding: 0.5rem;
+}
+
+@media (min-width: 1200px) {
+  #administrators .card-body div .adminChat,
+  #administrators .card-body .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser .adminChat,
+  .activity .activityPosts .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminChat,
+  #administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminChat,
+  .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminChat,
+  #administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminChat,
+  .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminChat,
+  #administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser .adminChat,
+  #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminChat,
+  #administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminChat,
+  #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminChat,
+  #administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminChat,
+  #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminChat {
+    font-size: 1.3rem;
+  }
+}
+
+#administrators .card-body div .adminChat:hover,
+#administrators .card-body .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser .adminChat:hover,
+.activity .activityPosts .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminChat:hover,
+#administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminChat:hover,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminChat:hover,
+#administrators .card-body .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminChat:hover,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminChat:hover,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .postTaggedUser .adminChat:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #administrators .card-body .postTaggedUser .adminChat:hover,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags a .adminChat:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #administrators .card-body a .adminChat:hover,
+#administrators .card-body #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags a .adminChat:hover,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #administrators .card-body a .adminChat:hover {
+  color: #f66103;
+}
+
 @media screen and (max-width: 767px) {
   #administrators .card-body div,
   #administrators .card-body .activity .activityPosts .postBox .post .postDesc .postTags .postTaggedUser,
