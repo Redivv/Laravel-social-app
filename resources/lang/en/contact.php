@@ -9,5 +9,6 @@ return [
     'emailContentPlaceholder'       => 'Content',
     'admins'                        => 'Admins',
     'mailSent'                      => 'Thank you for your message',
-    'emailAttachments'              => 'Attachments'
+    'emailAttachments'              => 'Attachments',
+    'chat'                          => 'Chat with Administrator'
 ];

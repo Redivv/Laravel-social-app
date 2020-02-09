@@ -57,6 +57,10 @@
                                 <a href="mailto:{{$admin->email}}" class="adminMail">
                                     {{$admin->email}}
                                 </a>
+                                <br>
+                                <a href="{{route('message.read',['user' => $admin->name])}}" class="adminChat" target="__blank" data-tool="tooltip" data-placement="bottom" title="{{__('contact.chat')}}"> 
+                                    <i class="far fa-comment-dots"></i>
+                                </a>
                             </div>
                         @endforeach
                     </div>

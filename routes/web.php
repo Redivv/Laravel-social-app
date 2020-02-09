@@ -83,8 +83,8 @@ Route::prefix('user')->group(function(){
     Route::get('settings', 'SettingsController@index')->middleware('auth')->name('SettingsPage');
     Route::patch('settings', 'SettingsController@updateSettings')->middleware('auth')->name('SettingsUpdate');
 
-    Route::get('contactAdministration', 'ContactController@index')->middleware('verified')->name('ContactPage');
-    Route::post('contactAdministration', 'ContactController@sendMail')->middleware('verified')->name('ContactSendMail');
+    Route::get('contactAdministration', 'ContactController@index')->middleware('auth')->name('ContactPage');
+    Route::post('contactAdministration', 'ContactController@sendMail')->middleware('auth')->name('ContactSendMail');
 });
 
 Route::prefix('admin')->group(function(){
