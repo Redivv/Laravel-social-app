@@ -270,6 +270,10 @@ main .tabsContent div.tab-pane .form-btn {
   margin-top: 0.5rem;
 }
 
+main .tabsContent div.tab-pane .form-btn.alreadySent {
+  background-color: #38c172;
+}
+
 main .tabsContent div.tab-pane .fetchBtn {
   padding: 1rem;
   cursor: pointer;

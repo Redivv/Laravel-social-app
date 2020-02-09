@@ -48,6 +48,9 @@ return [
     'search'                    => 'Wyszukaj',
     'adminDeletedPost'          => 'Administrator Usunął Twój Post',
     'noEmail'                   => "Niezweryfikowany Adres Email",
-    'noProfile'                 => "Brak Zdjęcia Profilowego"
+    'noProfile'                 => "Brak Zdjęcia Profilowego",
+    'userWrite'                 => "Wyślij Wiadomość",
+    'writeEmail'                => 'Cześć. Widzę, że nadal nie zweryfikowałaś swojego adresu email. Jeśli masz jakieś trudności możemy tutaj o tym porozmawiać',
+    'writeProfile'              => 'Cześć. Widzę, że nadal nie masz zdjęcia profilowego. Jeśli masz jakieś trudności możemy tutaj o tym porozmawiać'
 
 ];

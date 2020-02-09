@@ -205,10 +205,9 @@ function fetchContent(selected) {
             $('#'+targetId+'-content').html(response.html);
             if (response.amount == 0) {
                 $('#'+targetId+'Count').html('');
-            }else{
-                $('#'+targetId+'Count').html(response.amount);
             }
 
+            $('#'+targetId+'-content').off('scroll');
             $('#'+targetId+'-content').on('scroll',function() {
                 if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight - 200) {
                     $(this).off('scroll');
@@ -326,6 +325,10 @@ function carryList(decided,target) {
                 case 'edit':
                     $(decided).parent().parent().prev().prev().html(editValue);
                     $('.spinnerOverlay').addClass('d-none');
+                default:
+                    $(decided).addClass('alreadySent');
+                    $('.spinnerOverlay').addClass('d-none');
+                    break;
             }
         }
     });

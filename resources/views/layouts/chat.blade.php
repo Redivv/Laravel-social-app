@@ -10,7 +10,9 @@
       <div class="chat-header clearfix">
         <div class="chat-about">
             @if(isset($user))
-                <div class="chat-with">{{$user->name}}</div>
+                <div class="chat-with">
+                  <a href="{{route('ProfileOtherView',['user' => $user->name])}}" target="__blank">{{$user->name}}</a>
+                </div>
                 <div data-id="{{$user->id}}" id="status" class="text-muted">
                     @if ($user->status == "online")
                       <span style="font-weight: bold; color: lawngreen !important">{{__('chat.active')}}</span>

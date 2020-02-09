@@ -67,6 +67,9 @@ main{
                 @include font-size(0.7rem);
                 font-weight: bold;
                 margin-top: 0.5rem;
+                &.alreadySent{
+                    background-color: $green;
+                }
             }
             .fetchBtn{
                 padding: 1rem;

@@ -14,6 +14,9 @@ use App\Notifications\PendingPartnerRequest;
 
 use Illuminate\Support\Facades\Notification;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 use App\User;
 use App\City;
 use App\Post;
@@ -210,6 +213,44 @@ class ProfileController extends Controller
     
             return redirect(route('ProfileEdition'));
         }
+    }
+    
+
+    public function readNotifications(Request $request)
+    {
+        $request->validate([
+            'type'    => [
+                'string',
+                Rule::in(['userNotifications','systemNotifications']),
+            ]
+        ]);
+
+        switch ($request->type) {
+            case 'userNotifications':
+                DB::table('notifications')
+                    ->whereIn('type',[
+                        'App\Notifications\UserNotification',
+                        'App\Notifications\FriendRequestAccepted',
+                        'App\Notifications\NewAdminPost',
+                    ])
+                    ->where('notifiable_id',Auth::id())
+                    ->where('read_at',null)
+                    ->update(['read_at' => Carbon::now()->toDateTimeString()]);
+                break;
+            
+            case 'systemNotifications':
+                DB::table('notifications')
+                    ->whereIn('type',[
+                        'App\Notifications\NewProfilePicture',
+                        'App\Notifications\UserFlagged',
+                        'App\Notifications\SystemNotification',
+                    ])
+                    ->where('notifiable_id',Auth::id())
+                    ->where('read_at',null)
+                    ->update(['read_at' => Carbon::now()->toDateTimeString()]);
+                break;
+        }
+        return response()->json(['status' => 'success'], 200);
     }
 
     public function visit(Request $request,User $user){

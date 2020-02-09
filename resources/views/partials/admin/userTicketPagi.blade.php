@@ -28,18 +28,18 @@
 @foreach ($users as $user)
     <tr>
         <th scope="row">
-            <a href="{{route('ProfileOtherView',['user' => $user->name])}}" target="__blank">
-                {{$user->name}}
+            <a href="{{route('ProfileOtherView',['user' => $user['name']])}}" target="__blank">
+                {{$user['name']}}
             </a>
         </th>
         <td>
-            @if (!$user->email_verified_at)
+            @if (!$user['email_verified_at'])
                 {{__('admin.noEmail')}}
             @else
                 {{__('admin.noProfile')}}
             @endif
         </td>
-        <td>{{$user->created_at->diffForHumans()}}</td>
+        <td>{{$user['created_at']}}</td>
         <td>
             --   
         </td>
@@ -48,7 +48,16 @@
                 <button name="delete" type="submit" class="btn form-btn listBtn">
                 {{__('admin.userDelete')}} 
                 </button>
-                <input type="hidden" name="elementId" value="{{$user->id}}">
+                @if (!$user['email_verified_at'])
+                    <button name="writeEmail" type="submit" class="btn form-btn listBtn @if($user['adminConvo']) alreadySent @endif">
+                    {{__('admin.userWrite')}} 
+                    </button>
+                @else
+                    <button name="writeProfile" type="submit" class="btn form-btn listBtn @if($user['adminConvo']) alreadySent @endif">
+                    {{__('admin.userWrite')}} 
+                    </button>
+                @endif
+                <input type="hidden" name="elementId" value="{{$user['id']}}">
             </form>
         </td>
     </tr>

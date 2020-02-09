@@ -49,5 +49,8 @@ return [
     'adminDeletedPost'          => 'Administrator Deleted Your Post',
     'inactiveUser'              => 'Inactive User',
     'noEmail'                   => "Unverfied Email Address",
-    'noProfile'                 => "No Profile Picture"
+    'noProfile'                 => "No Profile Picture",
+    'userWrite'                 => "Write a Message",
+    'writeEmail'                => "Hi there. I can see that you didn't your email address. If you are expiriencing difficulties we can talk about them here.",
+    'writeProfile'              => "Hi there. I can see that you didn't change your profile picture. If you are expiriencing difficulties we can talk about them here."
 ];

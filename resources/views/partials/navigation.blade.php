@@ -819,7 +819,7 @@
                     newMessages++;
                     $('.chatNotificationsCount').html(newMessages);
                     $('.chatNotifications').prepend(html);
-                    $('#desktopTalk').html(parseInt(newMessages)+1);
+                    $('#desktopTalk').html(parseInt(newMessages));
                 }
                 playNotSound();
 

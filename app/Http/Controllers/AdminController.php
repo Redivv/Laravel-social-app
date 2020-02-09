@@ -23,9 +23,9 @@ use App\Notifications\SystemNotification;
 
 use App\Jobs\SendAdminNewsletter;
 use App\Jobs\SendAdminWideInfo;
-use App\Jobs\DeleteNonVerifiedUsers;
 use App\Jobs\DeleteUser;
 use App\Jobs\HandleProfilePictureTicket;
+use Nahid\Talk\Facades\Talk;
 
 class AdminController extends Controller
 {
@@ -39,7 +39,7 @@ class AdminController extends Controller
         $pictureTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->get());
         $userTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->get());
     
-        $inactiveTimer = Carbon::now()->subDays(4)->toDateTimeString();
+        $inactiveTimer = Carbon::now()->subDays(0)->toDateTimeString();
         $inactiveUsers = User::where('created_at','<',$inactiveTimer)
         ->whereNull('pending_picture')
         ->whereNotIn('id',[1])
@@ -134,7 +134,7 @@ class AdminController extends Controller
             $request->validate([
                 'decision'     => [
                     'string',
-                    Rule::in(['delete','edit'])
+                    Rule::in(['delete','edit','writeEmail','writeProfile'])
                 ],
                 'target'       =>[
                     'string',
@@ -297,13 +297,28 @@ class AdminController extends Controller
                         }
                     }
 
-                    $inactiveTimer = Carbon::now()->subDays(4)->toDateTimeString();
+                    $inactiveTimer = Carbon::now()->subDays(0)->toDateTimeString();
                     $inactiveUsers = User::where('created_at','<',$inactiveTimer)
                     ->whereNull('pending_picture')
                     ->whereNotIn('id',[1])
                     ->where(function($query){
                         $query->whereNull('email_verified_at')->orWhere('picture','default-picture.png');
-                    })->take(10)->skip(10*$pagiCount)->get();
+                    })->take(10)->skip(10*$pagiCount)->get()->toArray();
+
+                    $admins = User::where('is_admin',1)->get();
+
+                    foreach ($inactiveUsers as $key => $user) {
+                        $carbon = new Carbon($user['created_at']);
+                        $inactiveUsers[$key]['created_at'] = $carbon->diffForHumans();
+                        foreach ($admins as $admin) {
+                            if (Talk::user(Auth::id())->isConversationExists($user['id'])) {
+                                $inactiveUsers[$key]['adminConvo'] = true;
+                                break;
+                            }else{
+                                $inactiveUsers[$key]['adminConvo'] = false;
+                            }
+                        }
+                    }
 
                     if ((count($validTickets) < 10) && (count($inactiveUsers) < 10)) {
                         $pagiNext = false;
@@ -404,22 +419,36 @@ class AdminController extends Controller
         return $validTickets;
     }
 
-    private function getInactiveUsers() : object{
+    private function getInactiveUsers() : array{
 
-        $inactiveTimer = Carbon::now()->subDays(4)->toDateTimeString();
+        $inactiveTimer = Carbon::now()->subDays(0)->toDateTimeString();
         $inactiveUsers = User::where('created_at','<',$inactiveTimer)
         ->whereNull('pending_picture')
         ->whereNotIn('id',[1])
         ->where(function($query){
             $query->whereNull('email_verified_at')->orWhere('picture','default-picture.png');
-        })->take(10)->get();
+        })->take(10)->get()->toArray();
+
+        $admins = User::where('is_admin',1)->get();
+
+        foreach ($inactiveUsers as $key => $user) {
+            $carbon = new Carbon($user['created_at']);
+            $inactiveUsers[$key]['created_at'] = $carbon->diffForHumans();
+            foreach ($admins as $admin) {
+                if (Talk::user(Auth::id())->isConversationExists($user['id'])) {
+                    $inactiveUsers[$key]['adminConvo'] = true;
+                    break;
+                }else{
+                    $inactiveUsers[$key]['adminConvo'] = false;
+                }
+            }
+        }
 
         return $inactiveUsers;
     }
 
     private function getUsers() : object
     {
-        DeleteNonVerifiedUsers::dispatchNow();
 
         return User::whereNotIn('id',[Auth::id()])->whereNotNull('email_verified_at')->take(5)->get();
     }
@@ -461,6 +490,16 @@ class AdminController extends Controller
         switch ($decision) {
             case 'delete':
                 DeleteUser::dispatch($user->id);
+                break;
+            case 'writeEmail':
+                $body = __('admin.writeEmail') ;
+                $userId = $user->id;
+                Talk::user(Auth::id())->sendMessageByUserId($userId, $body);
+                break;
+            case 'writeProfile':
+                $body = __('admin.writeProfile') ;
+                $userId = $user->id;
+                Talk::user(Auth::id())->sendMessageByUserId($userId, $body);
                 break;
         }
     }
