@@ -33,7 +33,7 @@ class DeleteNonVerifiedUsers implements ShouldQueue
     public function handle()
     {
         
-        $notVerifiedTimer = Carbon::now()->subDays(3)->toDateTimeString();
+        $notVerifiedTimer = Carbon::now()->subDays(4)->toDateTimeString();
         $unverifiedUsers = User::whereNull('email_verified_at')->where('created_at','<',$notVerifiedTimer)->get();
 
         foreach ($unverifiedUsers as $user) {

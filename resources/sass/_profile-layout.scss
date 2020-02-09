@@ -19,10 +19,24 @@ html{font-size: 16px !important;}
         margin-left: 0;
     }
     .userName{
-        span{
+        span,i{
             @include font-size(1.1rem);
             font-weight: bold;
             letter-spacing: 1.5px;
+        }
+        i{
+            margin-right: 1%;
+        }
+        .userEmail{
+            margin-top: -5%;
+            span,i{
+                @extend .text-muted;
+                @include font-size(0.9rem);
+                letter-spacing: 1.5px;
+            }
+            i{
+                margin-right: 1%;
+            }
         }
     }
     #profileEditLink{

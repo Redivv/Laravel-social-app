@@ -59,11 +59,17 @@
                 </div>
             @endauth
             
-            <div class="col-12 userName">
-                <span>
+            <div class="col-12 userName row">
+                <span class="col-12">
                     <i class="fas fa-user"></i>
                     <span id="userName" data-id="{{$user->id}}">{{$user->name}}</span>
                 </span>
+                @if (auth()->id() == $user->id)
+                    <span class="userEmail col-12">
+                        <i class="fas fa-envelope"></i>
+                        <span>{{$user->email}}</span>
+                    </span>
+                @endif
             </div>
             
             @auth()

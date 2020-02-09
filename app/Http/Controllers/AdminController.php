@@ -39,7 +39,7 @@ class AdminController extends Controller
         $pictureTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->get());
         $userTicketsAmount = count(Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->get());
     
-        $inactiveTimer = Carbon::now()->subDays(4)->toDateTimeString();
+        $inactiveTimer = Carbon::now()->subDays(0)->toDateTimeString();
         $inactiveUsers = User::where('created_at','<',$inactiveTimer)
         ->whereNull('pending_picture')
         ->whereNotIn('id',[1])
@@ -297,7 +297,7 @@ class AdminController extends Controller
                         }
                     }
 
-                    $inactiveTimer = Carbon::now()->subDays(4)->toDateTimeString();
+                    $inactiveTimer = Carbon::now()->subDays(0)->toDateTimeString();
                     $inactiveUsers = User::where('created_at','<',$inactiveTimer)
                     ->whereNull('pending_picture')
                     ->whereNotIn('id',[1])
@@ -311,7 +311,7 @@ class AdminController extends Controller
                         $carbon = new Carbon($user['created_at']);
                         $inactiveUsers[$key]['created_at'] = $carbon->diffForHumans();
                         foreach ($admins as $admin) {
-                            if (Talk::user(Auth::id())->isConversationExists($user['id'])) {
+                            if (Talk::user($admin->id)->isConversationExists($user['id'])) {
                                 $inactiveUsers[$key]['adminConvo'] = true;
                                 break;
                             }else{
@@ -421,7 +421,7 @@ class AdminController extends Controller
 
     private function getInactiveUsers() : array{
 
-        $inactiveTimer = Carbon::now()->subDays(4)->toDateTimeString();
+        $inactiveTimer = Carbon::now()->subDays(0)->toDateTimeString();
         $inactiveUsers = User::where('created_at','<',$inactiveTimer)
         ->whereNull('pending_picture')
         ->whereNotIn('id',[1])
@@ -435,7 +435,7 @@ class AdminController extends Controller
             $carbon = new Carbon($user['created_at']);
             $inactiveUsers[$key]['created_at'] = $carbon->diffForHumans();
             foreach ($admins as $admin) {
-                if (Talk::user(Auth::id())->isConversationExists($user['id'])) {
+                if (Talk::user($admin->id)->isConversationExists($user['id'])) {
                     $inactiveUsers[$key]['adminConvo'] = true;
                     break;
                 }else{
