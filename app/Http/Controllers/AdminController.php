@@ -465,9 +465,9 @@ class AdminController extends Controller
 
     private function resolveProfileTicket(array $data, string $decision) : void
     {
-        $validUser = User::where('name','=',$data['user_name'])->where('pending_picture','=',$data['image'])->first();
+        $validUser = User::where('name',$data['user_name'])->where('pending_picture',$data['image'])->first();
         if($validUser){
-            HandleProfilePictureTicket::dispatch($validUser,$decision);
+            HandleProfilePictureTicket::dispatch($validUser,$decision,$data['image']);
         }
     }
 

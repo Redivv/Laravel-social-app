@@ -22,6 +22,7 @@ class HandleProfilePictureTicket implements ShouldQueue
 
     protected $user;
     protected $decision;
+    protected $backupImage;
 
     public $tries = 2;
 
@@ -30,10 +31,11 @@ class HandleProfilePictureTicket implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(User $user,string $decision)
+    public function __construct(User $user,string $decision, string $backupImage)
     {
         $this->user = $user;
         $this->decision = $decision;
+        $this->backupImage = $backupImage;
     }
 
     /**
@@ -45,10 +47,20 @@ class HandleProfilePictureTicket implements ShouldQueue
     {
         switch ($this->decision) {
             case 'accept':
+                $lastPicture = $this->user->picture;
                 $this->user->picture = $this->user->pending_picture;
+                
+                if (!$this->user->picture) {
+                    $this->user->picture = $this->backupImage;
+                }
+
                 $this->user->pending_picture = null;
                 $this->user->update();
                 $this->user->notify(new SystemNotification(__('nav.pictureOk'),'success','_user_profile','','','userPictureOk'));
+                
+                if ($lastPicture !== "default-picture.png") {
+                    unlink(public_path('img/profile-pictures/'.$lastPicture));
+                }
 
                 $post = new Post;
                 $post->user_id      = $this->user->id;
