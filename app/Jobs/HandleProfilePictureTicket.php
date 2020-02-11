@@ -47,7 +47,6 @@ class HandleProfilePictureTicket implements ShouldQueue
     {
         switch ($this->decision) {
             case 'accept':
-                $lastPicture = $this->user->picture;
                 $this->user->picture = $this->user->pending_picture;
                 
                 if (!$this->user->picture) {
@@ -57,10 +56,6 @@ class HandleProfilePictureTicket implements ShouldQueue
                 $this->user->pending_picture = null;
                 $this->user->update();
                 $this->user->notify(new SystemNotification(__('nav.pictureOk'),'success','_user_profile','','','userPictureOk'));
-                
-                if ($lastPicture !== "default-picture.png") {
-                    unlink(public_path('img/profile-pictures/'.$lastPicture));
-                }
 
                 $post = new Post;
                 $post->user_id      = $this->user->id;
