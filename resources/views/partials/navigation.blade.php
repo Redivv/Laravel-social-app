@@ -213,7 +213,7 @@
             <ul class="navbar-nav mr-auto text-center flex-row">
                 
                     @guest
-                        <li class="nav-item col-4">
+                        <li class="nav-item col">
                             <a class="nav-link" href="{{ route('login') }}">
                                 <i class="fas fa-sign-in-alt"></i>
                                 <br>
@@ -222,22 +222,29 @@
                         </li>
                     @endguest
 
-                    <li class="nav-item col-4 navSearcher">
+                    <li class="nav-item col navSearcher">
                         <a href="{{ url('/searcher') }}" class="nav-link">
                             <i class="fas fa-search"></i>
                             <br>
                             {{ __('app.searcher') }}
                         </a>
                     </li>
+                    <li class="nav-item col navCulture">
+                        <a href="{{ route('culture.mainPage') }}" class="nav-link">
+                            <i class="fas fa-book-reader"></i>
+                            <br>
+                            {{__('app.culture')}}
+                        </a>
+                    </li>
                     @auth
-                        <li class="nav-item col-4 navHome">
+                        <li class="nav-item col navHome">
                             <a href="{{ route('home') }}" class="nav-link">
                                 <i class="fas fa-users"></i>
                                 <br>
                                 {{__('app.dashboard')}}
                             </a>
                         </li>
-                        <li class="nav-item col-4 navChat">
+                        <li class="nav-item col navChat">
                             <a href="{{ url('/message') }}" class="nav-link">
                                 <i class="far fa-comments"></i>
                                 <br>
@@ -245,7 +252,7 @@
                             </a>
                         </li>
                     @else
-                        <li class="nav-item col-4">
+                        <li class="nav-item col">
                             <a class="nav-link" href="{{ route('register') }}">
                                 <i class="fas fa-female"></i>
                                 <br>
@@ -312,6 +319,11 @@
                         </a>
                     </li>
                 @endauth
+                <li class="nav-item navCulture">
+                    <a href="{{ route('culture.mainPage') }}" class="nav-link">
+                        {{__('app.culture')}}
+                    </a>
+                </li>
 
             </ul>
 

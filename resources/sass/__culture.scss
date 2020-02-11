@@ -1,0 +1,63 @@
+#cultureSearch{
+    margin-top: 2rem;
+    width: 70%;
+    .input-group{
+        input{
+            border-radius: 50px 0 0 50px;
+            font-style: italic;
+            @include font-size(1.1rem);
+            padding: 0.5rem 1.5rem;
+            letter-spacing: 0.5px;
+        }
+        .input-group-append{
+            width: 4rem;
+            button{
+                width: 100%;
+                border-radius: 0 50px 50px 0;
+                background-color: $orange;
+                @include font-size (1.05rem);
+                i{
+                    color: $white;
+                }
+                &:hover{
+                    background-color: $orange-active-hover;
+                }
+            }
+        }
+    }
+}
+#cultureSections{
+    margin-top: 1rem;
+    header>h3{
+        text-align: center;
+        @include font-size(1.5rem);
+        font-weight: bold;
+        letter-spacing: 1.2px;
+    }
+    #sectionsOutput{
+        justify-content: center;
+        margin-top: 0.5rem;
+        .cultureSection{
+            text-align: center;
+            display: flex;
+            align-items: center;
+            color: $white;
+            background-color: $orange;
+            padding: 0.5rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            h4{
+                letter-spacing: 1px;
+                margin: 0;
+                width: 100%;
+                @include font-size (1.1rem);
+            }
+            &:nth-child(2){
+                margin: 0 1rem;
+            }
+            &:hover{
+                background-color: $orange-hover;
+            }
+        }
+    }
+}

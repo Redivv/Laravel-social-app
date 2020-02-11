@@ -12,8 +12,9 @@ return [
     'profile'           => 'Profil',
     'settings'          => "Ustawienia",
     'contact'           => 'Kontakt z Administracją',
-
     'profileEditTitle'  => 'Edycja Profilu',
     'verifyTitle'       => 'Weryfikacja Adresu Email',
     'resetPasswordTitle'=> 'Zresetuj Hasło',
+    'culture'           => 'Kultura'
+
 ];

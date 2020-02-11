@@ -73,7 +73,8 @@ main{
                 background-color: $orange-hover;
             }
             @media screen and (max-width: $mobile-breakpoint) {
-                width: 17rem;
+                margin: 1rem auto 0 auto;
+                width: 15rem;
             }
         }
     }

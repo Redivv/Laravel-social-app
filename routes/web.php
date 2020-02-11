@@ -17,7 +17,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('logout', 'Auth\LoginController@logout');
 
-Route::get('searcher', 'SearchController@index')->name('searcher');
+Route::get('setLocale/{locale}', "LocaleController@setLocale")->name('setLocale');
 
 Route::get('user/profile/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');
 Route::patch('user/profile/edit', 'ProfileController@update')->middleware('auth')->name('ProfileUpdate');
@@ -122,5 +122,10 @@ Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
    Route::get('message/searchConvo', "AjaxMessageController@searchConvo")->name('message.search');
 });
 
-Route::get('setLocale/{locale}', "LocaleController@setLocale")->name('setLocale');
+
+Route::get('searcher', 'SearchController@index')->name('searcher');
+
+Route::prefix('culture')->group(function(){
+    Route::get('culture', 'CultureController@index')->name('culture.mainPage');
+});
 
