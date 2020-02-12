@@ -10,7 +10,7 @@
             letter-spacing: 0.5px;
         }
         .input-group-append{
-            width: 4rem;
+            width: 5rem;
             button{
                 width: 100%;
                 border-radius: 0 50px 50px 0;
@@ -20,14 +20,80 @@
                     color: $white;
                 }
                 &:hover{
+                    background-color: $orange-hover;
+                }
+            }
+        }
+    }
+    #advancedSearch{
+        padding: 0 1rem;
+        margin-top: 2rem;
+        .input-group{
+            input{
+                border-radius:0;
+                font-style: normal;
+                @include font-size(0.95rem);
+                padding: 0.5rem 1rem;
+                letter-spacing: 0.5px;
+            }
+            .input-group-append{
+                width: 4rem;
+                button{
+                    border-radius: 0;
+                    background-color: $orange;
+                    @include font-size (0.9rem);
+                    color: $white;
+                    &:hover{
+                        background-color: $orange-hover;
+                    }
+                    height: max-content;
+                    padding: 0.43rem 0;
+                }
+            }
+        }
+        .sortOptions{
+            .sortOptionBtn{
+                background-color: $orange;
+                color: $white;
+                @include font-size (0.9rem);
+                &.active:hover{
                     background-color: $orange-active-hover;
                 }
+                &:hover{
+                    background-color: $orange-hover;
+                }
+                &:nth-child(2){
+                    margin-left: 1rem;
+                    margin-right: 1rem;
+                }
+                input{
+                    display: none;
+                }
+            }
+        }
+    }
+    .togglerBox{
+        margin-top: 1rem;
+        text-align: center;
+        .advancedSearchToggle{
+            display: block;
+            width: max-content;
+            padding: 0.5rem;
+            margin: auto;
+            @include font-size(1.1rem);
+            color: $black;
+            i{
+                color: $orange;
+            }
+            .toggleArrow+div{
+                margin-top: -15%;
             }
         }
     }
 }
 #cultureSections{
     margin-top: 1rem;
+    padding: 0 5rem;
     header>h3{
         text-align: center;
         @include font-size(1.5rem);

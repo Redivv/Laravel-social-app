@@ -18583,7 +18583,6 @@ body.lb-disable-scrolling {
   padding: 0.5rem;
   font-size: 1rem;
   color: #000;
-  text-decoration: none;
 }
 
 .searcher .form .togglerBox .advancedSearchToggle .toggleArrow {
@@ -22677,7 +22676,7 @@ html {
 }
 
 #cultureSearch .input-group .input-group-append {
-  width: 4rem;
+  width: 5rem;
 }
 
 #cultureSearch .input-group .input-group-append button {
@@ -22692,11 +22691,103 @@ html {
 }
 
 #cultureSearch .input-group .input-group-append button:hover {
+  background-color: #e26103;
+}
+
+#cultureSearch #advancedSearch {
+  padding: 0 1rem;
+  margin-top: 2rem;
+}
+
+#cultureSearch #advancedSearch .input-group input {
+  border-radius: 0;
+  font-style: normal;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  letter-spacing: 0.5px;
+}
+
+#cultureSearch #advancedSearch .input-group .input-group-append {
+  width: 4rem;
+}
+
+#cultureSearch #advancedSearch .input-group .input-group-append button {
+  border-radius: 0;
+  background-color: #f66103;
+  font-size: 0.9rem;
+  color: #ffffff;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 0.43rem 0;
+}
+
+#cultureSearch #advancedSearch .input-group .input-group-append button:hover {
+  background-color: #e26103;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionBtn {
+  background-color: #f66103;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionBtn.active:hover {
   background-color: #d22103;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:hover {
+  background-color: #e26103;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionBtn input {
+  display: none;
+}
+
+#cultureSearch .togglerBox {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+#cultureSearch .togglerBox .advancedSearchToggle {
+  display: block;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0.5rem;
+  margin: auto;
+  font-size: 1.1rem;
+  color: #000;
+}
+
+#cultureSearch .togglerBox .advancedSearchToggle i {
+  color: #f66103;
+}
+
+#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + div,
+#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .post .postDesc .postTags .toggleArrow + .postTaggedUser,
+.activity .activityPosts .postBox .post .postDesc .postTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + .postTaggedUser,
+#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags .toggleArrow + a,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
+#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags .toggleArrow + a,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
+#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .toggleArrow + .postTaggedUser,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + .postTaggedUser,
+#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags .toggleArrow + a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
+#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags .toggleArrow + a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a {
+  margin-top: -15%;
 }
 
 #cultureSections {
   margin-top: 1rem;
+  padding: 0 5rem;
 }
 
 #cultureSections header > h3 {
