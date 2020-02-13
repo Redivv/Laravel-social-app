@@ -129,3 +129,5 @@ Route::prefix('culture')->group(function(){
     Route::get('culture', 'CultureController@index')->name('culture.mainPage');
 });
 
+Route::get('culture/item', "CultureController@item")->name('culture.read');
+

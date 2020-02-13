@@ -46912,8 +46912,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "11f6625c35d2a206a646",
-  cluster: "EU",
+  key: "3d1ef10925ca3ce93420",
+  cluster: "eu",
   encrypted: true
 });
 
@@ -46948,9 +46948,9 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\sass\adminPane.scss */"./resources/sass/adminPane.scss");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Safo\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\Safo\resources\sass\adminPane.scss */"./resources/sass/adminPane.scss");
+module.exports = __webpack_require__(/*! D:\Safo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

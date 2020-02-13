@@ -22945,6 +22945,40 @@ html {
   scroll-behavior: smooth;
 }
 
+.culture_advertisment-placeholder {
+  background-color: #f0f;
+  min-height: 85vh;
+}
+
+.culture_item-container {
+  margin-top: 1rem;
+}
+
+.culture_itemTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #444;
+}
+
+.culture_itemAuthor {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #f66103;
+}
+
+.culture_itemBorder {
+  border-right: 1px solid #888;
+}
+
+.culture_thumbnails {
+  border-right: 1px solid #999;
+  border-left: 1px solid #999;
+}
+
+.culture_centeredItems {
+  text-align: center;
+}
+
 div.cookie-consent,
 .activity .activityPosts .postBox .post .postDesc .postTags .cookie-consent.postTaggedUser,
 .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags a.cookie-consent,

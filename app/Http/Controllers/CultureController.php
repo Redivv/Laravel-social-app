@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 
 class CultureController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         return view('cultureMainPage');
+    }
+    public function item(){
+        return view('cultureItem');
     }
 }
