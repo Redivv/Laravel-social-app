@@ -124,3 +124,5 @@ Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
 
 Route::get('setLocale/{locale}', "LocaleController@setLocale")->name('setLocale');
 
+Route::get('culture/item', "CultureController@item")->name('culture.read');
+
