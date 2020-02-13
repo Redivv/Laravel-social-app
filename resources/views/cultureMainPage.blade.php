@@ -26,14 +26,29 @@
                 </div>
                 <div class="col-md-6 col-sm-12 sortOptions row">
                     <label class="col btn sortOptionBtn active">
-                        <input type="radio" name="options" id="lettersSort" autocomplete="off" checked> Active
+                        <input type="radio" name="options" id="lettersSort" autocomplete="off" checked>
+                        {{__('culture.likesSort')}}
                     </label>
                     <label class="col btn sortOptionBtn">
-                        <input type="radio" name="options" id="likesSort" autocomplete="off"> Radio
+                        <input type="radio" name="options" id="likesSort" autocomplete="off">
+                        {{__('culture.alfaSort')}}
                     </label>
                     <label class="col btn sortOptionBtn">
-                        <input type="radio" name="options" id="dateSort" autocomplete="off"> Radio
+                        <input type="radio" name="options" id="dateSort" autocomplete="off">
+                        {{__('culture.dateSort')}}
                     </label>
+                    <div class="col-12 sortOptionsDir row">
+                        <div class="sortOptionsDirBtn col">
+                            <input type="radio" name="sortOptionsDir" id="dirAsc" value="asc">
+                            <br>
+                            <label for="dirAsc">{{__('searcher.asc')}}</label>
+                        </div>
+                        <div class="sortOptionsDirBtn col">
+                            <input type="radio" name="sortOptionsDir" id="dirDesc" value="desc">
+                            <br>
+                            <label for="dirDesc">{{__('searcher.desc')}}</label>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="togglerBox">
@@ -67,6 +82,58 @@
                 </a>
             </output>
         </section>
+        <section id="cultureSugestions" class="row">
+            <div id="variableSugestions" class="column col-md-6 col-sm-12 border-right">
+                <h4>{{__('culture.sugestionTag',['tag' => 'penis'])}}</h4>
+                <output class="sugestions-out" id="variableSugestions-out">
+                    <a class="cultureItem row" href="#">
+                        <div class="col-2 itemImg">
+                            <img src="{{asset('img/profile-pictures/default-picture.png')}}" alt="Item Image">
+                        </div>
+                        <div class="col-7 itemDesc">
+                            <h5 class="itemTitle">Penis</h5>
+                            <output class="itemAttrs row">
+                                <span class="itemAttr col">Strony: 105</span>
+                            </output>
+                        </div>
+                        <div class="col-3 itemButtons row">
+                            <button class="btn col-12 likeBtn">
+                                <i class="fas fa-fire"></i>
+                                <span class="badge likesAmount active">5</span>
+                            </button>
+                            <button class="btn col-12 readBtn">
+                                <i class="fas fa-check"></i>
+                                <span class="badge readAmount active">10</span>
+                            </button>
+                        </div>
+                    </a>
+                </output>
+            </div>
+            <div id="newestSugestions" class="column col-md-6 col-sm-12">
+                <h4>{{__('culture.sugestionNew')}}</h4>
+                <output class="sugestions-out" id="newestSugestions-out">
+                    <a class="cultureItem row" href="#">
+                        <div class="col-2 itemImg">
+                            <img src="{{asset('img/profile-pictures/default-picture.png')}}" alt="Item Image">
+                        </div>
+                        <div class="col-7 itemDesc">
+                            <h5 class="itemTitle">Penis</h5>
+                            <output class="itemAttrs row">
+                                <span class="itemAttr col">Strony: 105</span>
+                            </output>
+                        </div>
+                        <div class="col-3 itemButtons row">
+                            <button class="btn col-12 likeBtn">
+                                <i class="fas fa-fire"></i>
+                            </button>
+                            <button class="btn col-12 readBtn">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </a>
+                </output>
+            </div>
+        </section>
     </div>
 @endsection
 
@@ -77,4 +144,28 @@
         }
     </style>
     <link rel="stylesheet" href="{{asset("jqueryUi\jquery-ui.min.css")}}">
+@endpush
+
+@push('scripts')
+<script>
+    var baseUrl = "{{url('/')}}";
+</script>
+<script src="{{asset('js/culture.js')}}"></script>
+
+<script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
+
+<script defer>
+    Echo.join('online')
+        .joining((user) => {
+            axios.patch('/api/user/'+ user.name +'/online', {
+                    api_token : user.api_token
+            });
+        })
+
+        .leaving((user) => {
+            axios.patch('/api/user/'+ user.name +'/offline', {
+                api_token : user.api_token
+            });
+        })
+</script>
 @endpush

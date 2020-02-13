@@ -57,7 +57,7 @@
                                         {{-- User Notification --}}
                                         @case('App\Notifications\UserNotification')
                                             <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('_','/',$userNot->data['link']).$userNot->data['contentId'].$userNot->data['contentAnchor']}}" target="__blank">
-                                                <div class="row">
+                                                <div class="row w-100">
                                                     <div class="notificationImageBox col-2">
                                                         <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}" alt="profile picture">
                                                     </div>
@@ -71,7 +71,7 @@
 
                                         @case('App\Notifications\FriendRequestAccepted')
                                             <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('ProfileOtherView',['user' => $userNot->data['sender_name']])}}" target="__blank">
-                                                <div class="row">
+                                                <div class="row w-100">
                                                     <div class="notificationImageBox col-2">
                                                         <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['sender_picture'])}}" alt="profile picture">
                                                     </div>
@@ -86,7 +86,7 @@
                                         {{-- Admin Special Notification --}}
                                         @case('App\Notifications\NewAdminPost')
                                             <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('viewPost',['post' => $userNot->data['postId']])}}" target="__blank">
-                                                <div class="row">
+                                                <div class="row w-100">
                                                     <div class="notificationImageBox col-2">
                                                         <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}" alt="profile picture">
                                                     </div>
@@ -119,7 +119,7 @@
                         @else
                             @foreach($notifications['chat'] as $chatNot)
                             <a class="chat-{{$chatNot->thread->conversation_id}} dropdown-item container @if(($chatNot->thread->is_seen == 1) || ($chatNot->thread->user_id == auth()->id())){{'read'}}@endif" href="/message/{{$chatNot->withUser->name}}" target="__blank">
-                                <div class="row">
+                                <div class="row w-100">
                                     <div class="notificationImageBox col-2">
                                         <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot->withUser->picture)}}" alt="profile picture">
                                     </div>
@@ -380,7 +380,7 @@
                                             {{-- User Notification --}}
                                             @case('App\Notifications\UserNotification')
                                                 <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{str_replace('_','/',$userNot->data['link']).$userNot->data['contentId'].$userNot->data['contentAnchor']}}" target="__blank">
-                                                    <div class="row">
+                                                    <div class="row w-100">
                                                         <div class="notificationImageBox col-2">
                                                             <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['user_image'])}}" alt="profile picture">
                                                         </div>
@@ -394,7 +394,7 @@
 
                                             @case('App\Notifications\FriendRequestAccepted')
                                                 <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('ProfileOtherView',['user' => $userNot->data['sender_name']])}}" target="__blank">
-                                                    <div class="row">
+                                                    <div class="row w-100">
                                                         <div class="notificationImageBox col-2">
                                                             <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['sender_picture'])}}" alt="profile picture">
                                                         </div>
@@ -409,7 +409,7 @@
                                             {{-- Admin Special Notification --}}
                                             @case('App\Notifications\NewAdminPost')
                                                 <a class="dropdown-item container @if($userNot['read_at']){{'read'}}@endif" href="{{route('viewPost',['post' => $userNot->data['postId']])}}" target="__blank">
-                                                    <div class="row">
+                                                    <div class="row w-100">
                                                         <div class="notificationImageBox col-2">
                                                             <img class="notificationImage" src="{{asset('img/profile-pictures/'.$userNot->data['author_image'])}}" alt="profile picture">
                                                         </div>
@@ -441,7 +441,7 @@
                             @else
                                 @foreach($notifications['chat'] as $chatNot)
                                 <a class="chat-{{$chatNot->thread->conversation_id}} dropdown-item container @if(($chatNot->thread->is_seen == 1) || ($chatNot->thread->user_id == auth()->id())){{'read'}}@endif" href="/message/{{$chatNot->withUser->name}}" target="__blank">
-                                    <div class="row">
+                                    <div class="row w-100">
                                         <div class="notificationImageBox col-2">
                                             <img class="notificationImage" src="{{asset('img/profile-pictures/'.$chatNot->withUser->picture)}}" alt="profile picture">
                                         </div>
@@ -682,7 +682,7 @@
                         }
 
                         html = '<a class="dropdown-item container" href="'+notification.link.replace(/_/g,'/')+notification.contentId+notification.contentAnchor+'" target="__blank">'+
-                                    '<div class="row">'+
+                                    '<div class="row w-100">'+
                                         '<div class="notificationImageBox col-2">'+
                                             '<img class="notificationImage" src="/img/profile-pictures/'+notification.user_image+'" alt="profile picture">'+
                                         '</div>'+
@@ -700,7 +700,7 @@
                         updateUserNotifications();
                         playNotSound();
                         html = '<a class="dropdown-item container" href="/user/profile/'+notification.sender_name+'" target="__blank">'+
-                                    '<div class="row">'+
+                                    '<div class="row w-100">'+
                                         '<div class="notificationImageBox col-2">'+
                                             '<img class="notificationImage" src="/img/profile-pictures/'+notification.sender_picture+'" alt="profile picture">'+
                                         '</div>'+
@@ -719,7 +719,7 @@
                         playNotSound();
                         $('#wallFetchBtn').removeClass('d-none');
                         html = '<a class="dropdown-item container" href="/user/home/post/'+notification.postId+'" target="__blank">'+
-                                    '<div class="row">'+
+                                    '<div class="row w-100">'+
                                         '<div class="notificationImageBox col-2">'+
                                             '<img class="notificationImage" src="/img/profile-pictures/'+notification.author_image+'" alt="profile picture">'+
                                         '</div>'+
@@ -810,7 +810,7 @@
                     data.message = '<i class="far fa-file-image"></i>';
                 }
                 html = '<a class="chat-'+data.conversation_id+' dropdown-item container" href="/message/'+data.sender.name+'" target="__blank">'+
-                    '<div class="row">'+
+                    '<div class="row w-100">'+
                         '<div class="notificationImageBox col-2">'+
                             '<img class="notificationImage" src="/img/profile-pictures/'+data.sender.picture+'" alt="profile picture">'+
                         '</div>'+

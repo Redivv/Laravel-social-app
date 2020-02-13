@@ -1,5 +1,5 @@
 #cultureSearch{
-    margin-top: 2rem;
+    padding-top: 1rem;
     width: 70%;
     .input-group{
         input{
@@ -27,7 +27,7 @@
     }
     #advancedSearch{
         padding: 0 1rem;
-        margin-top: 2rem;
+        padding-top: 2rem;
         .input-group{
             input{
                 border-radius:0;
@@ -46,6 +46,7 @@
                     &:hover{
                         background-color: $orange-hover;
                     }
+                    letter-spacing: 1px;
                     height: max-content;
                     padding: 0.43rem 0;
                 }
@@ -56,9 +57,7 @@
                 background-color: $orange;
                 color: $white;
                 @include font-size (0.9rem);
-                &.active:hover{
-                    background-color: $orange-active-hover;
-                }
+                letter-spacing: 0.7px;
                 &:hover{
                     background-color: $orange-hover;
                 }
@@ -68,6 +67,21 @@
                 }
                 input{
                     display: none;
+                }
+                &.active{
+                    background-color: $orange-active;
+                    &:hover{
+                        background-color: $orange-active-hover;
+                    }
+                }
+            }
+            .sortOptionsDirBtn{
+                text-align: center;
+                label{
+                    @include font-size (1rem);
+                    font-weight: bold;
+                    cursor: pointer;
+                    letter-spacing: 0.5px;
                 }
             }
         }
@@ -92,7 +106,7 @@
     }
 }
 #cultureSections{
-    margin-top: 1rem;
+    padding-top: 1rem;
     padding: 0 5rem;
     header>h3{
         text-align: center;
@@ -123,6 +137,75 @@
             }
             &:hover{
                 background-color: $orange-hover;
+            }
+        }
+    }
+}
+#cultureSugestions{
+    padding-top: 1rem;
+    .column{
+        text-align: center;
+        h4{
+            @include font-size (1.3rem);
+            font-weight: bold;
+            letter-spacing: 0.7px;
+        }
+        &:first{
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .sugestions-out{
+            display: block;
+            .cultureItem{
+                align-items: center;
+                text-decoration: none;
+                color: unset;
+                padding: 1rem 1.5rem;
+                border-radius: 20px;
+                .itemImg{
+                    img{
+                        width: 4rem;
+                        height: 4rem;
+                    }
+                }
+                .itemDesc{
+                    .itemTitle{
+                        font-weight: bold;
+                        @include font-size(1.2rem);
+                        letter-spacing: 1.5px;
+                    }
+                    text-align: left;
+                    padding-left: 0.5rem;
+                    .itemAttrs{
+                        @extend .text-muted;
+                        .itemAttr{
+                            padding: 0;
+                            letter-spacing: 0.5px;
+                        }
+                    }
+                }
+                .itemButtons{
+                    .likeBtn,.readBtn{
+                        i{
+                            @include font-size(1.4rem);
+                        }
+                        &:hover{
+                            color: $orange;
+                        }
+                        .badge{
+                            @include font-size(0.8rem);
+                            letter-spacing: 2px;
+                        }
+                        &.active{
+                            color: $orange;
+                            &:hover{
+                                color: $orange-hover;
+                            }
+                        }
+                    }
+                }
+                &:hover{
+                    background-color: $light-orange;
+                }
             }
         }
     }

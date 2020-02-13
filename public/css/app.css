@@ -12317,6 +12317,7 @@ a.text-dark:focus {
 }
 
 .text-muted,
+#cultureSugestions .column .sugestions-out .cultureItem .itemDesc .itemAttrs,
 .chatBody .chat .chat-history ul li .message-data .message-data-time,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentDate,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentDate,
@@ -22663,7 +22664,7 @@ html {
 }
 
 #cultureSearch {
-  margin-top: 2rem;
+  padding-top: 1rem;
   width: 70%;
 }
 
@@ -22696,7 +22697,7 @@ html {
 
 #cultureSearch #advancedSearch {
   padding: 0 1rem;
-  margin-top: 2rem;
+  padding-top: 2rem;
 }
 
 #cultureSearch #advancedSearch .input-group input {
@@ -22716,6 +22717,7 @@ html {
   background-color: #f66103;
   font-size: 0.9rem;
   color: #ffffff;
+  letter-spacing: 1px;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
@@ -22730,10 +22732,7 @@ html {
   background-color: #f66103;
   color: #ffffff;
   font-size: 0.9rem;
-}
-
-#cultureSearch #advancedSearch .sortOptions .sortOptionBtn.active:hover {
-  background-color: #d22103;
+  letter-spacing: 0.7px;
 }
 
 #cultureSearch #advancedSearch .sortOptions .sortOptionBtn:hover {
@@ -22747,6 +22746,25 @@ html {
 
 #cultureSearch #advancedSearch .sortOptions .sortOptionBtn input {
   display: none;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionBtn.active {
+  background-color: #f22103;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionBtn.active:hover {
+  background-color: #d22103;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionsDirBtn {
+  text-align: center;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionsDirBtn label {
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 0.5px;
 }
 
 #cultureSearch .togglerBox {
@@ -22786,7 +22804,7 @@ html {
 }
 
 #cultureSections {
-  margin-top: 1rem;
+  padding-top: 1rem;
   padding: 0 5rem;
 }
 
@@ -22832,6 +22850,100 @@ html {
 
 #cultureSections #sectionsOutput .cultureSection:hover {
   background-color: #e26103;
+}
+
+#cultureSugestions {
+  padding-top: 1rem;
+}
+
+#cultureSugestions .column {
+  text-align: center;
+}
+
+#cultureSugestions .column h4 {
+  font-size: calc(1.255rem + 0.06vw);
+  font-weight: bold;
+  letter-spacing: 0.7px;
+}
+
+@media (min-width: 1200px) {
+  #cultureSugestions .column h4 {
+    font-size: 1.3rem;
+  }
+}
+
+#cultureSugestions .column:first {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#cultureSugestions .column .sugestions-out {
+  display: block;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem {
+  align-items: center;
+  text-decoration: none;
+  color: unset;
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemImg img {
+  width: 4rem;
+  height: 4rem;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemDesc {
+  text-align: left;
+  padding-left: 0.5rem;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemDesc .itemTitle {
+  font-weight: bold;
+  font-size: 1.2rem;
+  letter-spacing: 1.5px;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemDesc .itemAttrs .itemAttr {
+  padding: 0;
+  letter-spacing: 0.5px;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn i,
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .readBtn i {
+  font-size: calc(1.265rem + 0.18vw);
+}
+
+@media (min-width: 1200px) {
+  #cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn i,
+  #cultureSugestions .column .sugestions-out .cultureItem .itemButtons .readBtn i {
+    font-size: 1.4rem;
+  }
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn:hover,
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .readBtn:hover {
+  color: #f66103;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn .badge,
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .readBtn .badge {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn.active,
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .readBtn.active {
+  color: #f66103;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn.active:hover,
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .readBtn.active:hover {
+  color: #e26103;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem:hover {
+  background-color: rgba(255, 140, 0, 0.7);
 }
 
 html {
