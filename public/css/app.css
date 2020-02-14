@@ -22653,31 +22653,47 @@ html {
 
 .culture_item-container {
   margin-top: 1rem;
+  padding: 0rem;
 }
 
-.culture_itemTitle {
+.culture_item-container .culture_itemTitle {
   font-size: 2rem;
   font-weight: bold;
   color: #444;
 }
 
-.culture_itemAuthor {
+.culture_item-container .culture_itemAuthor {
   font-size: 1rem;
   font-weight: bold;
   color: #f66103;
 }
 
-.culture_itemBorder {
+.culture_item-container .culture_tag {
+  background-color: #f66103;
+  color: #ffffff;
+  padding: 1px;
+  border-radius: 1rem;
+  margin: 1em;
+}
+
+.culture_item-container .culture_itemBorder {
   border-right: 1px solid #888;
 }
 
-.culture_thumbnails {
+.culture_item-container .culture_thumbnails {
   border-right: 1px solid #999;
   border-left: 1px solid #999;
 }
 
-.culture_centeredItems {
+.culture_item-container .culture_centeredItems {
   text-align: center;
+}
+
+.culture_item-container .likesCount {
+  background-color: #f66103;
+  color: #ffffff;
+  position: relative;
+  left: -1em;
 }
 
 div.cookie-consent,

@@ -39,11 +39,11 @@
                         <div class=" col-3 culture_tag">#zmiana</div>
                         <div class=" col-3 culture_tag">#zmiana</div>
                     </div>
-                    <div class="col-md-2 culture_likeItem ">
-                        <i class="fas fa-thumbs-up center-block"></i>
-                        <span class="badge likesAmount">5</span>
-                        <br>
-                        <button class="btn btn-danger">Me gusta</button>
+                    <div class="col-md-2 culture_likeItem text-center ico ">
+                        <button class="btn ">
+                            <i class="fas fa-fire fa-5x"></i>
+                            <span class="badge badge-pill likesCount">5</span>
+                        </button>
                     </div>
                 </div>
                 <hr>
