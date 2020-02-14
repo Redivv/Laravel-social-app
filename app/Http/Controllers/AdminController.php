@@ -208,7 +208,7 @@ class AdminController extends Controller
 
                     $users = User::whereNotIn('id', [Auth::id()])->where('newsletter_status', 1)->get();
 
-                    SendAdminNewsletter::dispatchNow($subject, $desc, $users);
+                    SendAdminNewsletter::dispatch($subject, $desc, $users)->delay(now()->addMinutes(1));
                 } else {
                     return response()->json(['status' => 'error', 'message' => 'Empty Message'], 400);
                 }
