@@ -1,83 +1,102 @@
-#cultureSearch{
+#cultureSearch {
     padding-top: 1rem;
     width: 70%;
-    .input-group{
-        input{
+
+    .input-group {
+        input {
             border-radius: 50px 0 0 50px;
             font-style: italic;
             @include font-size(1.1rem);
             padding: 0.5rem 1.5rem;
             letter-spacing: 0.5px;
         }
-        .input-group-append{
+
+        .input-group-append {
             width: 5rem;
-            button{
+
+            button {
                 width: 100%;
                 border-radius: 0 50px 50px 0;
                 background-color: $orange;
                 @include font-size (1.05rem);
-                i{
+
+                i {
                     color: $white;
                 }
-                &:hover{
+
+                &:hover {
                     background-color: $orange-hover;
                 }
             }
         }
     }
-    #advancedSearch{
+
+    #advancedSearch {
         padding: 0 1rem;
         padding-top: 2rem;
-        .input-group{
-            input{
-                border-radius:0;
+
+        .input-group {
+            input {
+                border-radius: 0;
                 font-style: normal;
                 @include font-size(0.95rem);
                 padding: 0.5rem 1rem;
                 letter-spacing: 0.5px;
             }
-            .input-group-append{
+
+            .input-group-append {
                 width: 4rem;
-                button{
+
+                button {
                     border-radius: 0;
                     background-color: $orange;
                     @include font-size (0.9rem);
                     color: $white;
-                    &:hover{
+
+                    &:hover {
                         background-color: $orange-hover;
                     }
+
                     letter-spacing: 1px;
                     height: max-content;
                     padding: 0.43rem 0;
                 }
             }
         }
-        .sortOptions{
-            .sortOptionBtn{
+
+        .sortOptions {
+            .sortOptionBtn {
                 background-color: $orange;
                 color: $white;
                 @include font-size (0.9rem);
                 letter-spacing: 0.7px;
-                &:hover{
+
+                &:hover {
                     background-color: $orange-hover;
                 }
-                &:nth-child(2){
+
+                &:nth-child(2) {
                     margin-left: 1rem;
                     margin-right: 1rem;
                 }
-                input{
+
+                input {
                     display: none;
                 }
-                &.active{
+
+                &.active {
                     background-color: $orange-active;
-                    &:hover{
+
+                    &:hover {
                         background-color: $orange-active-hover;
                     }
                 }
             }
-            .sortOptionsDirBtn{
+
+            .sortOptionsDirBtn {
                 text-align: center;
-                label{
+
+                label {
                     @include font-size (1rem);
                     font-weight: bold;
                     cursor: pointer;
@@ -86,38 +105,46 @@
             }
         }
     }
-    .togglerBox{
+
+    .togglerBox {
         margin-top: 1rem;
         text-align: center;
-        .advancedSearchToggle{
+
+        .advancedSearchToggle {
             display: block;
             width: max-content;
             padding: 0.5rem;
             margin: auto;
             @include font-size(1.1rem);
             color: $black;
-            i{
+
+            i {
                 color: $orange;
             }
-            .toggleArrow+div{
+
+            .toggleArrow+div {
                 margin-top: -15%;
             }
         }
     }
 }
-#cultureSections{
+
+#cultureSections {
     padding-top: 1rem;
     padding: 0 5rem;
-    header>h3{
+
+    header>h3 {
         text-align: center;
         @include font-size(1.5rem);
         font-weight: bold;
         letter-spacing: 1.2px;
     }
-    #sectionsOutput{
+
+    #sectionsOutput {
         justify-content: center;
         margin-top: 0.5rem;
-        .cultureSection{
+
+        .cultureSection {
             text-align: center;
             display: flex;
             align-items: center;
@@ -126,84 +153,106 @@
             padding: 0.5rem 2rem;
             border-radius: 50px;
             text-decoration: none;
-            h4{
+
+            h4 {
                 letter-spacing: 1px;
                 margin: 0;
                 width: 100%;
                 @include font-size (1.1rem);
             }
-            &:nth-child(2){
+
+            &:nth-child(2) {
                 margin: 0 1rem;
             }
-            &:hover{
+
+            &:hover {
                 background-color: $orange-hover;
             }
         }
     }
 }
-#cultureSugestions{
+
+#cultureSugestions {
     padding-top: 1rem;
-    .column{
+
+    .column {
         text-align: center;
-        h4{
+
+        h4 {
             @include font-size (1.3rem);
             font-weight: bold;
             letter-spacing: 0.7px;
         }
-        &:first{
+
+        &:first {
             border-right: 1px solid rgba(0, 0, 0, 0.1);
         }
-        .sugestions-out{
+
+        .sugestions-out {
             display: block;
-            .cultureItem{
+
+            .cultureItem {
                 align-items: center;
                 text-decoration: none;
                 color: unset;
                 padding: 1rem 1.5rem;
                 border-radius: 20px;
-                .itemImg{
-                    img{
+
+                .itemImg {
+                    img {
                         width: 4rem;
                         height: 4rem;
                     }
                 }
-                .itemDesc{
-                    .itemTitle{
+
+                .itemDesc {
+                    .itemTitle {
                         font-weight: bold;
                         @include font-size(1.2rem);
                         letter-spacing: 1.5px;
                     }
+
                     text-align: left;
                     padding-left: 0.5rem;
-                    .itemAttrs{
+
+                    .itemAttrs {
                         @extend .text-muted;
-                        .itemAttr{
+
+                        .itemAttr {
                             padding: 0;
                             letter-spacing: 0.5px;
                         }
                     }
                 }
-                .itemButtons{
-                    .likeBtn,.readBtn{
-                        i{
+
+                .itemButtons {
+
+                    .likeBtn,
+                    .readBtn {
+                        i {
                             @include font-size(1.4rem);
                         }
-                        &:hover{
+
+                        &:hover {
                             color: $orange;
                         }
-                        .badge{
+
+                        .badge {
                             @include font-size(0.8rem);
                             letter-spacing: 2px;
                         }
-                        &.active{
+
+                        &.active {
                             color: $orange;
-                            &:hover{
+
+                            &:hover {
                                 color: $orange-hover;
                             }
                         }
                     }
                 }
-                &:hover{
+
+                &:hover {
                     background-color: $light-orange;
                 }
             }

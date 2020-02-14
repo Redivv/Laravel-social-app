@@ -11,15 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 use App\User;
 use App\City;
-use App\Post;
 use Conner\Tagging\Model\Tag;
 
 use Carbon\Carbon;
-
-use Illuminate\Support\Facades\Notification;
-
-use App\Notifications\UserNotification;
-use App\Notifications\SystemNotification;
 
 use App\Jobs\SendAdminNewsletter;
 use App\Jobs\SendAdminWideInfo;
