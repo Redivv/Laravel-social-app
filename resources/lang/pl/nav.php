@@ -4,7 +4,7 @@ return [
     'pictureTicket'             => 'Zgłoszono Zdjęcie Profilowe do Weryfikacji',
     'userTicket'                => 'Zgłoszono Użytkownika',
     'pictureOk'                 => 'Zaakceptowaliśmy Twoje Zdjęcie. Witaj na Pokładzie :)',
-    'pictureDeny'               => 'Niesty odrzuciliśmy Twoje zdjęcie. Cześć! Miło nam,  że do nas dołączyłaś! Jednakże, jako że zależy nam na autentyczności konieczne jest wstawienie zdjęcia profilowego przedstawiającego Twoją osobę. W przeciwnym wypadku po ponownym ostrzeżeniu bedziemy zmuszeni usunąć konto.  Pozdrawiamy, Zespół Safo',
+    'pictureDeny'               => 'Niesty odrzuciliśmy Twoje zdjęcie. Cześć! Miło nam,  że do nas dołączyłaś! Jednakże, jako że zależy nam na autentyczności konieczne jest wstawienie zdjęcia profilowego przedstawiającego Twoją osobę.  Pozdrawiamy, Zespół Safo',
     'ago'                       => 'temu',
     'deleteAll'                 => 'Przeczytaj Wszystkie',
     'newSysNotTime'             => '1 sekunda temu',

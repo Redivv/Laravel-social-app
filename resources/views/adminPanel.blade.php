@@ -74,12 +74,14 @@
                         if(currentAmount == ""){currentAmount = 0;}
                         $('#profileTicketCount').html(parseInt(currentAmount)+1);
                         $('#profileTicket-fetchBtn').addClass('new');
+                        $('#profileTicket-fetchBtn').tooltip();
                         break;
                     case 'App/Notifications/UserFlagged':
                         currentAmount = $('#userTicketCount').html().trim();
                         if(currentAmount == ""){currentAmount = 0;}
                         $('#userTicketCount').html(parseInt(currentAmount)+1);
                         $('#userTicket-fetchBtn').addClass('new');
+                        $('#userTicket-fetchBtn').tooltip();
                         break;
                 
                     default:

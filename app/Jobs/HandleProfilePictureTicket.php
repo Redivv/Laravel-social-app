@@ -45,44 +45,41 @@ class HandleProfilePictureTicket implements ShouldQueue
      */
     public function handle()
     {
-        switch ($this->decision) {
-            case 'accept':
-                $lastPicture = $this->user->picture;
-                $this->user->picture = $this->user->pending_picture;
-                
-                if (!$this->user->picture) {
-                    $this->user->picture = $this->backupImage;
-                }
+        if ($this->user->pending_picture) {
+            switch ($this->decision) {
+                case 'accept':
+                    $this->user->picture = $this->user->pending_picture;
+                    
+                    if (!$this->user->picture) {
+                        $this->user->picture = $this->backupImage;
+                    }
 
-                $this->user->pending_picture = null;
-                $this->user->update();
-                $this->user->notify(new SystemNotification(__('nav.pictureOk'),'success','_user_profile','','','userPictureOk'));
-                
-                if ($lastPicture !== "default-picture.png") {
-                    unlink(public_path('img/profile-pictures/'.$lastPicture));
-                }
+                    $this->user->pending_picture = null;
+                    $this->user->update();
+                    $this->user->notify(new SystemNotification(__('nav.pictureOk'),'success','_user_profile','','','userPictureOk'));
 
-                $post = new Post;
-                $post->user_id      = $this->user->id;
-                $post->is_public    = false;
-                $post->pictures     = json_encode([$this->user->picture]);
-                $post->type         = "newPicture";
-                $post->tagged_users = json_encode([$this->user->name]);
+                    $post = new Post;
+                    $post->user_id      = $this->user->id;
+                    $post->is_public    = false;
+                    $post->pictures     = json_encode([$this->user->picture]);
+                    $post->type         = "newPicture";
+                    $post->tagged_users = json_encode([$this->user->name]);
 
-                copy(public_path('img/profile-pictures/').$this->user->picture,public_path('img/post-pictures/').$this->user->picture);
+                    copy(public_path('img/profile-pictures/').$this->user->picture,public_path('img/post-pictures/').$this->user->picture);
 
 
-                if ($post->save()) {
-                    Notification::send($this->user->getFriends(), new UserNotification($this->user, '_user_home_post_',$post->id, '', __('nav.userNot3'), 'newPost'.$post->id));
-                }
+                    if ($post->save()) {
+                        Notification::send($this->user->getFriends(), new UserNotification($this->user, '_user_home_post_',$post->id, '', __('nav.userNot3'), 'newPost'.$post->id));
+                    }
 
-                break;
-            case 'refuse':
-                unlink(public_path('img/profile-pictures/'.$this->user->pending_picture));
-                $this->user->pending_picture = null;
-                $this->user->update();
-                $this->user->notify(new SystemNotification(__('nav.pictureDeny'),'danger','_user_profile','','','userPictureNo'));
-                break;
+                    break;
+                case 'refuse':
+                    unlink(public_path('img/profile-pictures/'.$this->user->pending_picture));
+                    $this->user->pending_picture = null;
+                    $this->user->update();
+                    $this->user->notify(new SystemNotification(__('nav.pictureDeny'),'danger','_user_profile','','','userPictureNo'));
+                    break;
+            }
         }
     }
 }

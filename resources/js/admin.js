@@ -139,6 +139,8 @@ function renderContent(selected) {
             $('#'+targetId+'-content').html(response.html);
             if (response.amount == 0) {
                 $('#'+targetId+'Count').html('');
+            }else{
+                $('#'+targetId+'Count').html(response.amount);
             }
 
             $('#'+targetId+'-content').on('scroll',function() {
@@ -148,6 +150,7 @@ function renderContent(selected) {
                 }
              });
 
+            $('button.ticketBtn').off('click');
             $('button.ticketBtn').on('click',function(e) {
                 e.preventDefault();
                 if (confirm(confirmMsg)) {
@@ -156,6 +159,7 @@ function renderContent(selected) {
                 }
             });
 
+            $('button.listBtn').off('click');
             $('button.listBtn').on('click',function(e) {
                 e.preventDefault();
                 if (confirm(confirmMsg)) {
@@ -202,9 +206,12 @@ function fetchContent(selected) {
     
     request.done(function(response){
         if (response.status === 'success') {
+            $('.tooltip:first').remove();
             $('#'+targetId+'-content').html(response.html);
             if (response.amount == 0) {
                 $('#'+targetId+'Count').html('');
+            }else{
+                $('#'+targetId+'Count').html(response.amount);
             }
 
             $('#'+targetId+'-content').off('scroll');
@@ -215,6 +222,7 @@ function fetchContent(selected) {
                 }
              });
 
+            $('button.ticketBtn').off('click');
             $('button.ticketBtn').on('click',function(e) {
                 e.preventDefault();
                 if (confirm(confirmMsg)) {
@@ -223,6 +231,7 @@ function fetchContent(selected) {
                 }
             });
 
+            $('button.listBtn').off('click');
             $('button.listBtn').on('click',function(e) {
                 e.preventDefault();
                 if (confirm(confirmMsg)) {
@@ -415,6 +424,7 @@ function search(form) {
         request.done(function(response){
             if (response.status === 'success') {
                 $('#'+targetId+'-searchOut').html(response.html);
+                $('#'+targetId+'-searchOut').find('button.ticketBtn').off('click');
                 $('#'+targetId+'-searchOut').find('button.ticketBtn').on('click',function(e) {
                     e.preventDefault();
                     if (confirm(confirmMsg)) {
@@ -423,6 +433,7 @@ function search(form) {
                     }
                 });
 
+                $('#'+targetId+'-searchOut').find('button.listBtn').off('click');
                 $('#'+targetId+'-searchOut').find('button.listBtn').on('click',function(e) {
                     e.preventDefault();
                     if (confirm(confirmMsg)) {

@@ -90,7 +90,7 @@ class ProfileController extends Controller
             //Change original name of the file
             $filename = hash_file('haval160,4',$request->profilePicture->getPathname()).'.'.$request->profilePicture->getClientOriginalExtension();
 
-            $otherUser = User::where('picture',$filename)->orWhere('picture',$filename)->first();
+            $otherUser = User::where('picture',$filename)->orWhere('pending_picture',$filename)->first();
 
             if (!$otherUser) {
                 $request->profilePicture->move(public_path('img/profile-pictures/'), $filename);

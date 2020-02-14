@@ -64,14 +64,14 @@ class AdminController extends Controller
             switch ($target['target']) {
                 case 'profileTicket':
                     $validTickets = $this->getProfileTickets();
-                    $amount = count($validTickets);
+                    $amount = $this -> countProfileTickets();
                     $html = view('partials.admin.profileTicketContent')->withTickets($validTickets)->render();
                     break;
                 case 'userTicket':
                     $validTickets = $this->getUserTickets();
                     $inactiveUsers = $this->getInactiveUsers();
-                    $amount = count($validTickets);
-                    $amount = $amount + count($inactiveUsers);
+                    $amount = $this->countUserTickets();
+                    $amount = $amount + $this->countInactiveUsers();
                     $html = view('partials.admin.userTicketContent')->withTickets($validTickets)->withUsers($inactiveUsers)->render();
                     break;
                 case 'userList':
@@ -396,6 +396,11 @@ class AdminController extends Controller
         return $validTickets;
     }
 
+    private function countProfileTickets() : int
+    {
+        return Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->count();
+    }
+
     private function getUserTickets() : array
     {
         $tickets = Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->take(10)->get();
@@ -417,6 +422,11 @@ class AdminController extends Controller
         }
 
         return $validTickets;
+    }
+
+    private function countUserTickets() : int
+    {
+        return Auth::user()->notifications()->where('type', 'App\Notifications\UserFlagged')->count();
     }
 
     private function getInactiveUsers() : array{
@@ -443,6 +453,19 @@ class AdminController extends Controller
                 }
             }
         }
+
+        return $inactiveUsers;
+    }
+
+    private function countInactiveUsers() : int
+    {
+        $inactiveTimer = Carbon::now()->subDays(4)->toDateTimeString();
+        $inactiveUsers = User::where('created_at','<',$inactiveTimer)
+        ->whereNull('pending_picture')
+        ->whereNotIn('id',[1])
+        ->where(function($query){
+            $query->whereNull('email_verified_at')->orWhere('picture','default-picture.png');
+        })->count();
 
         return $inactiveUsers;
     }
