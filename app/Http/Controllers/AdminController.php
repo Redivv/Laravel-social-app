@@ -189,12 +189,12 @@ class AdminController extends Controller
         if($request->ajax()){
             $request->validate([
                 'infoNotCheck'  => ['nullable','string'],
-                'infoNotDesc'   => ['nullable','string','max:255','required_with:infoNotCheck'],
+                'infoNotDesc'   => ['nullable','string','required_with:infoNotCheck'],
                 'infoWallCheck' => ['nullable','string'],
-                'infoWallDesc'  => ['nullable','string','max:255'],
+                'infoWallDesc'  => ['nullable','string'],
                 'infoMailCheck' => ['nullable','string'],
-                'infoMailTitle' => ['nullable','string','max:255'],
-                'infoMailDesc'  => ['nullable','string','max:255'],
+                'infoMailTitle' => ['nullable','string'],
+                'infoMailDesc'  => ['nullable','string'],
                 'postPicture.*' => ['nullable','file','image','max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
             ]);
 
