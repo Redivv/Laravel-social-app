@@ -41,7 +41,8 @@ class SendAdminNewsletter implements ShouldQueue
      */
     public function handle()
     {
-
-        Notification::send($this->mailingList, new AdminMailInfo($this->subject, $this->contents));
+        foreach ($this->mailingList as $key => $user) {
+            $user->notify((new AdminMailInfo($this->subject, $this->contents))->delay(now()->addMinutes(5*$key)));
+        }
     }
 }
