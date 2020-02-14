@@ -240,7 +240,9 @@ class HomeController extends Controller
                     Notification::send($users, new NewAdminPost($author,$post->id));
                 }else{
                     $friends = Auth::user()->getFriends();
-                    Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2'), 'newPost'.$post->id));
+                    foreach ($friends as $friend) {
+                        $friend->notify(new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2',[],$friend->locale), 'newPost'.$post->id));
+                    }
                 }
                 if ($taggedUsers) {
                     foreach ($taggedUsersArray as $taggedUser) {

@@ -100,7 +100,7 @@ class User extends Authenticatable implements MustVerifyEmail
         DB::table('banned_users')->insert(['email' => $this->email]);
 
 
-        $this->notify(new UserDeleted($this->name));
+        $this->notify(new UserDeleted($this->name,$this->locale));
         $this->delete();
         return true;
     }

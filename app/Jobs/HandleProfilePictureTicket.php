@@ -68,7 +68,10 @@ class HandleProfilePictureTicket implements ShouldQueue
 
 
                 if ($post->save()) {
-                    Notification::send($this->user->getFriends(), new UserNotification($this->user, '_user_home_post_',$post->id, '', __('nav.userNot3'), 'newPost'.$post->id));
+                    $friends = $this->user->getFriends();
+                    foreach ($friends as $friend) {
+                        $friend->notify(new UserNotification($this->user, '_user_home_post_',$post->id, '', __('nav.userNot3',[],$friend->locale), 'newPost'.$post->id));
+                    }
                 }
 
                 break;
