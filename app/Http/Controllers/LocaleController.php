@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LocaleController extends Controller
 {
@@ -10,6 +10,11 @@ class LocaleController extends Controller
     {
         if (in_array($locale, \Config::get('app.locales'))) {
             session(['locale' => $locale]);
+            if (Auth::check()) {
+                $user = Auth::user();
+                $user->locale = $locale;
+                $user->update();
+            }
         }
         return redirect()->back();
     }

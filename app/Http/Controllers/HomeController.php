@@ -243,7 +243,9 @@ class HomeController extends Controller
                     Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2'), 'newPost'.$post->id));
                 }
                 if ($taggedUsers) {
-                    Notification::send($taggedUsersArray, new SystemNotification(__('nav.taggedInPost'),'success','_user_home_post_',$post->id, '', 'tagPost'));
+                    foreach ($taggedUsersArray as $taggedUser) {
+                        $taggedUser->notify(new SystemNotification(__('nav.taggedInPost',[],$taggedUser->locale),'success','_user_home_post_',$post->id, '', 'tagPost'));
+                    }
                 }
                 return response()->json(['status' => 'success', 'html' => $html], 200);
             }
@@ -315,7 +317,9 @@ class HomeController extends Controller
                 $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
 
                 if ($taggedUsers) {
-                    Notification::send($taggedUsersArray, new SystemNotification(__('nav.taggedInPost'),'success','_user_home_post_',$post->id, '', 'tagPost'));
+                    foreach ($taggedUsersArray as $taggedUser) {
+                        $taggedUser->notify(new SystemNotification(__('nav.taggedInPost',[],$taggedUser->locale),'success','_user_home_post_',$post->id, '', 'tagPost'));
+                    }
                 }
                 
                 return response()->json(['status' => 'success', 'html' => $html], 200);
@@ -347,7 +351,7 @@ class HomeController extends Controller
                 DB::table('likeable_like_counters')->where('likeable_id',$request->id)->delete();
                 DB::table('likeable_likes')->where('likeable_id',$request->id)->delete();
 
-                $post->user->notify(new SystemNotification(__('nav.adminDeletedPost'),'warning','_user_home','', '', 'deletedPost'));
+                $post->user->notify(new SystemNotification(__('nav.adminDeletedPost',[],$post->user->locale),'warning','_user_home','', '', 'deletedPost'));
                 $post->delete();
                 return response()->json(['status' => 'success'], 200);
             }
@@ -400,7 +404,7 @@ class HomeController extends Controller
                     $post->like();
     
                     if ($post->user_id != Auth::id()) {
-                        $post->user->notify(new SystemNotification(__('nav.likePostNot'),'info','_user_home_post_',$post->id, '', 'likePost'));
+                        $post->user->notify(new SystemNotification(__('nav.likePostNot',[],$post->user->locale),'info','_user_home_post_',$post->id, '', 'likePost'));
                     }
                 }
                 return response()->json(['status' => 'success'], 200);
@@ -454,7 +458,7 @@ class HomeController extends Controller
                 $user->unlike();
             }else{
                 $user->like();
-                $user->notify(new SystemNotification(__('nav.likeUser'),'success','_user_profile','','', 'likeUser'));
+                $user->notify(new SystemNotification(__('nav.likeUser',[],$user->locale),'success','_user_profile','','', 'likeUser'));
             }
 
             return response()->json(['status' => 'success'], 200);

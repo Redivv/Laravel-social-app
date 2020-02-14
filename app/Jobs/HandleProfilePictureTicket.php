@@ -55,7 +55,7 @@ class HandleProfilePictureTicket implements ShouldQueue
 
                 $this->user->pending_picture = null;
                 $this->user->update();
-                $this->user->notify(new SystemNotification(__('nav.pictureOk'),'success','_user_profile','','','userPictureOk'));
+                $this->user->notify(new SystemNotification(__("nav.pictureOk",[],$this->user->locale),'success','_user_profile','','','userPictureOk'));
 
                 $post = new Post;
                 $post->user_id      = $this->user->id;
@@ -76,7 +76,7 @@ class HandleProfilePictureTicket implements ShouldQueue
                 unlink(public_path('img/profile-pictures/'.$this->user->pending_picture));
                 $this->user->pending_picture = null;
                 $this->user->update();
-                $this->user->notify(new SystemNotification(__('nav.pictureDeny'),'danger','_user_profile','','','userPictureNo'));
+                $this->user->notify(new SystemNotification(__("nav.pictureDeny",[],$this->user->locale),'danger','_user_profile','','','userPictureNo'));
                 break;
         }
     }
