@@ -46,5 +46,7 @@ return [
     'mutualFriends'         => "Mutual friends (:count)",
     'remainingPhotos'       => "Remaining Photos ",
     'changePass'            => "Change Password",
-    'takenPicture'          => "Profile Picture is already being used by other user"
+    'takenPicture'          => "Profile Picture is already being used by other user",
+    'deleteProfile'         => "Delete Profile",
+    'disclaimer'            => "If you want to change your email address contact the administration"
 ];

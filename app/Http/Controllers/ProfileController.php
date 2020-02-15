@@ -351,4 +351,13 @@ class ProfileController extends Controller
             abort(401);
         }
     }
+
+    public function delete(Request $request)
+    {
+        if (Auth::check()) {
+            Auth::user()->deleteAll();
+            $request->session()->flash('deletedProfile', __('settings.deletedProfile'));
+            return redirect(url('/register'));
+        }
+    }
 }

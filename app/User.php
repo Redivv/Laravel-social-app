@@ -24,7 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'api_token', 'birth_year', 'pending_picture','city_id'
+        'name', 'email', 'password', 'api_token', 'birth_year', 'pending_picture', 'city_id'
     ];
 
     /**
@@ -64,7 +64,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo('App\City', 'city_id', 'id');
     }
-    
+
     public function partner()
     {
         return $this->hasOne('App\User', 'partner_id', 'id');
@@ -77,35 +77,37 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function deleteAll()
-    {   
+    {
         // Delete Conversation & Messages
-        $convoId = DB::table('conversations')->select('id')->where('user_one',$this->id)->orWhere('user_two',$this->id)->get()->toArray();
+        $convoId = DB::table('conversations')->select('id')->where('user_one', $this->id)->orWhere('user_two', $this->id)->get()->toArray();
         foreach ($convoId as $convo) {
-            DB::table('conversations')->where('id',$convo->id)->delete();
-            DB::table('messages')->where('conversation_id',$convo->id)->delete();
+            DB::table('conversations')->where('id', $convo->id)->delete();
+            DB::table('messages')->where('conversation_id', $convo->id)->delete();
         }
 
         // Delete notifications
-        DB::table('notifications')->where('notifiable_id',$this->id)->delete();
+        DB::table('notifications')->where('notifiable_id', $this->id)->delete();
 
         // Delete Likes
-        DB::table('likeable_likes')->where('user_id',$this->id)->delete();
+        DB::table('likeable_likes')->where('user_id', $this->id)->delete();
 
-        DB::table('posts')->where('user_id',$this->id)->delete();
+        DB::table('posts')->where('user_id', $this->id)->delete();
 
-        DB::table('comments')->where('author_id',$this->id)->delete();
+        DB::table('comments')->where('author_id', $this->id)->delete();
 
-        DB::table('friendships')->where('sender_id',$this->id)->orWhere('recipient_id',$this->id)->delete();
+        DB::table('friendships')->where('sender_id', $this->id)->orWhere('recipient_id', $this->id)->delete();
+
+        DB::table('users')->where('id', $this->partner_id)->update(['partner_id' => null]);
 
         DB::table('banned_users')->insert(['email' => $this->email]);
-
 
         $this->notify(new UserDeleted($this->name));
         $this->delete();
         return true;
     }
 
-    public function receivesBroadcastNotificationsOn() {
-        return 'users.'.$this->id;
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'users.' . $this->id;
     }
 }

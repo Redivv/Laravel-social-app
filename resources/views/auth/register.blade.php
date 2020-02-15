@@ -9,6 +9,11 @@
 @section('content')
 
     <header class="container-fluid">
+        @if (session()->has('deletedProfile'))
+            <div class="alert alert-success mt-3" role="alert">
+                <b>{{session()->get('deletedProfile')}}</b>
+            </div>
+        @endif
         <div class="pageLogo text-center">
             <img src="{{asset('img/safo_logo.png')}}" alt="Safo Logo" srcset="">
         </div>

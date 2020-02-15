@@ -10,5 +10,6 @@ return [
     'newsletterSettings2'   => 'Nie otrzymuj żadnych wiadomości email',
     'save'                  => 'Zapisz Ustawienia',
     'saveMessage'           => "Ustawienia Zostały Zapisane",
-    'bannedMessage'         => "Ten Adres Email Jest Zablokowany"
+    'bannedMessage'         => "Ten Adres Email Jest Zablokowany",
+    'deletedProfile'        => 'Successfully deleted Profile'
 ];

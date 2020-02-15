@@ -10,5 +10,6 @@ return [
     'newsletterSettings2'   => "Don't get any emails",
     'save'                  => 'Save settings',
     'saveMessage'           => "Settings has been saved",
-    'bannedMessage'         => "That email has been banned"
+    'bannedMessage'         => "That email has been banned",
+    'deletedProfile'        => "Profil został pomyślnie usunięty"
 ];

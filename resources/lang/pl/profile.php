@@ -47,5 +47,7 @@ return [
     'termsOfDoc2'           => "Polityka Prywatności",
     'remainingPhotos'       => "Pozostałe Zdjęcia ",
     'changePass'            => "Zmień Hasło",
-    'takenPicture'          => "Zdjęcie jest już wykorzystywane przez użytkownika"
+    'takenPicture'          => "Zdjęcie jest już wykorzystywane przez użytkownika",
+    'deleteProfile'         => "Usuń Profil",
+    'disclaimer'            => "W przypadku potrzeby zmiany adresu email prosimy o kontakt z administracją"
 ];

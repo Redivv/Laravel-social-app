@@ -21,6 +21,7 @@ Route::get('searcher', 'SearchController@index')->name('searcher');
 
 Route::get('user/profile/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');
 Route::patch('user/profile/edit', 'ProfileController@update')->middleware('auth')->name('ProfileUpdate');
+Route::delete('user/profile/delete', 'ProfileController@delete')->middleware('auth')->name('ProfileDelete');
 
 Route::middleware(['verified'])->group(function () {
     

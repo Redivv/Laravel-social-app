@@ -1,39 +1,48 @@
-#profileEditForm{
+#profileEditForm {
     padding: 0.5rem;
-    .profilePicture{
+
+    .profilePicture {
         margin: auto;
-        img{
+
+        img {
             width: 8rem;
             height: 8rem;
             border-radius: 50%;
             margin: auto;
             cursor: pointer;
         }
-        input{
+
+        input {
             width: 100%;
             margin-top: 0.5rem;
             text-align: center;
         }
     }
-    .profileRelationship{
-        .form-check-inline{
+
+    .profileRelationship {
+        .form-check-inline {
             text-align: center;
         }
-        .userFriend{
+
+        .userFriend {
             margin-top: 1rem;
-            div{
-                #deletePartner{ 
+
+            div {
+                #deletePartner {
                     float: right;
                     text-align: (0.9rem);
                     cursor: pointer;
-                    &:hover{
+
+                    &:hover {
                         color: $orange;
                     }
                 }
+
                 margin: auto;
                 text-align: center;
                 width: min-content;
-                img{
+
+                img {
                     width: 4rem;
                     height: 4rem;
                     border-radius: 50%;
@@ -42,36 +51,44 @@
                     margin-bottom: 0.5rem;
                     color: $black;
                 }
-                span{
+
+                span {
                     @include font-size(1rem);
                     font-weight: bold;
                     color: $black;
                     letter-spacing: 0.5px;
                 }
-                a:hover{
+
+                a:hover {
                     color: $orange;
-                    span{
+
+                    span {
                         color: $orange;
                     }
                 }
             }
         }
     }
-    .tagPartner{
+
+    .tagPartner {
         margin: 0.5rem 0;
-        i{
+
+        i {
             cursor: pointer;
             padding: 0.5rem;
             @include font-size(1.2rem);
-            &:hover{
+
+            &:hover {
                 color: $orange;
             }
         }
     }
-    .profileTags{
-        #profileTagsOut{
+
+    .profileTags {
+        #profileTagsOut {
             justify-content: center;
-            .userTag{
+
+            .userTag {
                 cursor: pointer;
                 display: flex;
                 align-items: center;
@@ -83,45 +100,77 @@
                 margin-left: 0.5rem;
                 margin-top: 0.5rem;
                 padding: 0.5rem 0.2rem;
-                &:hover{
+
+                &:hover {
                     background-color: $orange-active-hover;
                 }
             }
         }
     }
-    .profileSave{
-        button{
+
+    .profileSave {
+        button {
             padding: 0.5rem 1rem;
             background-color: $orange;
             color: $white;
-            &:hover{
+
+            &:hover {
                 background-color: $orange-hover;
             }
         }
     }
 }
+.profileDisclaimer{
+    margin-top: 1rem;
+    @include font-size(0.9rem);
+    @extend .text-muted;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+#deleteUser {
+    margin: 2rem;
+    button {
+        @include font-size (1.5rem);
+        font-weight: bold;
+        letter-spacing: 1px;
+        width: 100%;
+        background-color: $orange-active;
+        color: $white;
 
-#tagPartnerModal{
+        &:hover {
+            background-color: $orange-active-hover;
+        }
+    }
+}
+
+#tagPartnerModal {
     z-index: 1050;
-    .modal-dialog{
+
+    .modal-dialog {
         margin: 2rem auto;
         max-width: 80vw;
-        output{
+
+        output {
             width: 100%;
         }
+
         @media screen and (max-width: $mobile-breakpoint) {
-            button{
+            button {
                 margin-top: 0.5rem;
             }
         }
-        .userFriend{
+
+        .userFriend {
             text-align: center;
-            div{
+
+            div {
                 cursor: pointer;
                 width: min-content;
                 margin: auto;
                 padding: 0.5rem 2rem;
-                img{
+
+                img {
                     width: 4rem;
                     height: 4rem;
                     border-radius: 50%;
@@ -130,21 +179,26 @@
                     margin-bottom: 0.5rem;
                     color: $black;
                 }
-                span{
+
+                span {
                     @include font-size(1rem);
                     font-weight: bold;
                     color: $black;
                     letter-spacing: 0.5px;
                 }
-                &:hover{
+
+                &:hover {
                     background-color: $light-orange;
                 }
-                &.selected{
+
+                &.selected {
                     background-color: $orange;
-                    span{
+
+                    span {
                         color: $white;
                     }
-                    &:hover{
+
+                    &:hover {
                         background-color: $orange;
                     }
                 }
