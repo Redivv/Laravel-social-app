@@ -7,8 +7,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Hootlex\Friendships\Traits\Friendable;
 
-use Carbon\Carbon;
-
 use Conner\Tagging\Taggable;
 use App\Notifications\UserDeleted;
 use Illuminate\Support\Facades\DB;

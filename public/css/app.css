@@ -22909,36 +22909,30 @@ html {
   letter-spacing: 0.5px;
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn i,
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .readBtn i {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn i {
   font-size: calc(1.265rem + 0.18vw);
 }
 
 @media (min-width: 1200px) {
-  #cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn i,
-  #cultureSugestions .column .sugestions-out .cultureItem .itemButtons .readBtn i {
+  #cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn i {
     font-size: 1.4rem;
   }
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn:hover,
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .readBtn:hover {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn:hover {
   color: #f66103;
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn .badge,
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .readBtn .badge {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn .badge {
   font-size: 0.8rem;
   letter-spacing: 2px;
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn.active,
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .readBtn.active {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn.active {
   color: #f66103;
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn.active:hover,
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .readBtn.active:hover {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn.active:hover {
   color: #e26103;
 }
 

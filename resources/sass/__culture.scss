@@ -227,8 +227,7 @@
 
                 .itemButtons {
 
-                    .likeBtn,
-                    .readBtn {
+                    .likeBtn,{
                         i {
                             @include font-size(1.4rem);
                         }

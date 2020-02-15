@@ -101,10 +101,6 @@
                                 <i class="fas fa-fire"></i>
                                 <span class="badge likesAmount active">5</span>
                             </button>
-                            <button class="btn col-12 readBtn">
-                                <i class="fas fa-check"></i>
-                                <span class="badge readAmount active">10</span>
-                            </button>
                         </div>
                     </a>
                 </output>
@@ -125,9 +121,6 @@
                         <div class="col-3 itemButtons row">
                             <button class="btn col-12 likeBtn">
                                 <i class="fas fa-fire"></i>
-                            </button>
-                            <button class="btn col-12 readBtn">
-                                <i class="fas fa-check"></i>
                             </button>
                         </div>
                     </a>
