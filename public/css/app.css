@@ -22967,32 +22967,69 @@ html {
   color: #f66103;
 }
 
-.culture_item-container .culture_tag {
+.culture_item-container .culture_tagHolder {
+  padding: 2rem 0rem;
+}
+
+.culture_item-container .culture_tagHolder .culture_tag {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #f66103;
   color: #ffffff;
-  padding: 1px;
-  border-radius: 1rem;
-  margin: 1em;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  margin: 0rem 0.1rem;
+  padding: 0rem 0.2rem;
+  height: 2rem;
+}
+
+.culture_item-container .culture_tagHolder .culture_tag:hover {
+  background-color: #d22103;
+}
+
+.culture_item-container .culture_tagHolder .culture_tag p {
+  justify-content: center;
+  margin: 0rem;
 }
 
 .culture_item-container .culture_itemBorder {
   border-right: 1px solid #888;
 }
 
-.culture_item-container .culture_thumbnails {
-  border-right: 1px solid #999;
-  border-left: 1px solid #999;
+.culture_item-container .culture_itemBorder-left {
+  border-left: 1px solid #888;
 }
 
 .culture_item-container .culture_centeredItems {
   text-align: center;
 }
 
-.culture_item-container .likesCount {
+.culture_item-container .culture_likeBtn .likesCount {
   background-color: #f66103;
   color: #ffffff;
-  position: relative;
-  left: -1em;
+  font-size: 0.9rem;
+  left: -0.8em;
+  top: 1em;
+}
+
+.culture_item-container .active {
+  color: #f66103;
+}
+
+.culture_item-container .culture_pictures {
+  border-top: 1px dashed #888;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.culture_item-container .culture_similar-entries .culture_thumbnail {
+  justify-content: center;
+}
+
+.culture_item-container .culture_similar-entries .culture_thumbnail .img-thumbnail-small {
+  height: 8rem;
 }
 
 div.cookie-consent,
