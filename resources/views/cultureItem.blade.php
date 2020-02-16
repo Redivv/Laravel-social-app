@@ -11,15 +11,15 @@
                 <div class="row culture_centeredItems">
                     <div class="col-md-2 culture_thumbnail culture_itemBorder">
                     <!--<a href="{{asset('img/safo_logo.png')}}" data-lightbox="Profile" data-title="kek">-->
-                        <img src="{{asset('img/profile-pictures/default-picture.png')}}" alt="kek" class="img-thumbnail">
+                        <img src="{{asset('images/culture/'.$cultureItem->pictures)}}" alt="kek" class="img-thumbnail">
                     <!--</a>-->
             
             
                     </div>
                     <hgroup class="col-md-4 culture_itemBorder">
                         <h3 class="culture_itemTitle">
-                            
-                            O Obrotach Ceł Niebiańskch
+                            {{$cultureItem->name}}
+                            {{-- O Obrotach Ceł Niebiańskch --}}
                         </h3>
                         <h4 class="culture_itemAuthor">
                             M.Morawiecki
@@ -29,7 +29,7 @@
                         </h6>
                     </hgroup>
                     <div class="col-md-4 culture_tagHolder culture_itemBorder container row">
-                        <div class=" col culture_tag" data-tool="tooltip" data-placement="bottom" title="Wyszukaj po tagu: #finanse">
+                        <div class=" col culture_tag">
                             <p>#finanse</p>
                         </div>
                         <div class=" col culture_tag">

@@ -127,9 +127,7 @@ Route::get('searcher', 'SearchController@index')->name('searcher');
 
 Route::prefix('culture')->group(function(){
     Route::get('culture', 'CultureController@index')->name('culture.mainPage');
+    Route::get('{id}', "CultureController@item")->name('culture.read');
 });
 
-Route::get('culture/item', "CultureController@item")->name('culture.read');
-
-Route::get('culture/item', "CultureController@item")->name('culture.read');
 

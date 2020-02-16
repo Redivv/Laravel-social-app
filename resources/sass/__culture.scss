@@ -227,7 +227,7 @@
 
                 .itemButtons {
 
-                    .likeBtn,{
+                    .likeBtn{
                         i {
                             @include font-size(1.4rem);
                         }
@@ -258,3 +258,6 @@
         }
     }
 }
+
+
+
