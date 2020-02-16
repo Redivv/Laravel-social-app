@@ -126,6 +126,7 @@ Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
 Route::get('searcher', 'SearchController@index')->name('searcher');
 
 Route::prefix('culture')->group(function(){
-    Route::get('culture', 'CultureController@index')->name('culture.mainPage');
+    Route::get('/', 'CultureController@index')->name('culture.mainPage');
+    Route::get('/search', 'CultureController@searchResults')->name('culture.searchResults');
 });
 

@@ -10,4 +10,9 @@ class CultureController extends Controller
     {
         return view('cultureMainPage');
     }
+
+    public function searchResults(Request $request)
+    {
+        return view('cultureSearchResults');
+    }
 }

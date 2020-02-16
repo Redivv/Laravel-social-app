@@ -8,16 +8,16 @@
 
 @section('content')
     <div class="container-fluid">
-        <form id="cultureSearch" class="mx-auto">
+        <form id="cultureSearch" class="mx-auto" method="get" action="{{route('culture.searchResults')}}">
             <div class="input-group">
                 <input type="text" name="titleName" class="form-control" placeholder="{{__('culture.searchName')}}" aria-label="Title Name" aria-describedby="search Button">
                 <div class="input-group-append">
-                    <button class="btn" type="button"><i class="fas fa-search"></i></button>
+                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                 </div>
             </div>
             <div id="advancedSearch" class="form-group collapse row">
                 <div class="input-group col-md-6 col-sm-12 tagSearch">
-                    <input type="text" name="tagName" class="form-control" placeholder="{{__('culture.searchTags')}}" aria-label="Tag Name" aria-describedby="tag search button">
+                    <input type="text" class="form-control" placeholder="{{__('culture.searchTags')}}" aria-label="Tag Name" aria-describedby="tag search button">
                     <div class="input-group-append">
                         <button class="btn" type="button">
                             {{__('searcher.add')}}
@@ -26,15 +26,15 @@
                 </div>
                 <div class="col-md-6 col-sm-12 sortOptions row">
                     <label class="col btn sortOptionBtn active">
-                        <input type="radio" name="options" id="lettersSort" autocomplete="off" checked>
+                        <input type="radio" name="options" id="lettersSort" value="lettersSort" autocomplete="off" checked>
                         {{__('culture.likesSort')}}
                     </label>
                     <label class="col btn sortOptionBtn">
-                        <input type="radio" name="options" id="likesSort" autocomplete="off">
+                        <input type="radio" name="options" id="likesSort" value="likesSort" autocomplete="off">
                         {{__('culture.alfaSort')}}
                     </label>
                     <label class="col btn sortOptionBtn">
-                        <input type="radio" name="options" id="dateSort" autocomplete="off">
+                        <input type="radio" name="options" id="dateSort" value="dateSort" autocomplete="off">
                         {{__('culture.dateSort')}}
                     </label>
                     <div class="col-12 sortOptionsDir row">
@@ -44,7 +44,7 @@
                             <label for="dirAsc">{{__('searcher.asc')}}</label>
                         </div>
                         <div class="sortOptionsDirBtn col">
-                            <input type="radio" name="sortOptionsDir" id="dirDesc" value="desc">
+                            <input type="radio" name="sortOptionsDir" id="dirDesc" checked value="desc">
                             <br>
                             <label for="dirDesc">{{__('searcher.desc')}}</label>
                         </div>

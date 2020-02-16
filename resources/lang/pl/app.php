@@ -15,6 +15,7 @@ return [
     'profileEditTitle'  => 'Edycja Profilu',
     'verifyTitle'       => 'Weryfikacja Adresu Email',
     'resetPasswordTitle'=> 'Zresetuj Hasło',
-    'culture'           => 'Kultura'
+    'culture'           => 'Kultura',
+    'cultureSearch'     => 'Kultura - Wyszukiwanie',
 
 ];
