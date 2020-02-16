@@ -15,7 +15,8 @@ class CreateCultureCategoriesTable extends Migration
     {
         Schema::create('culture_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name',250);
+            $table->string('name');
+            $table->string('name_slug')->index();
 
             $table->longText('attributes');
 
