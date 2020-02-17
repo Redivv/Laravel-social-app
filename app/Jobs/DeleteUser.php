@@ -36,6 +36,8 @@ class DeleteUser implements ShouldQueue
     public function handle()
     {
         $user = User::find($this->userId);
-        $user->deleteAll();
+        if ($user) {
+            $user->deleteAll();
+        }
     }
 }
