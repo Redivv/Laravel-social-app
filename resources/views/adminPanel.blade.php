@@ -20,6 +20,14 @@
 <div class="darkOverlay d-none"></div>
 
 <div id="adminPane" class="container-fluid">
+    <div class="adminLinks row">
+        <a id="homeAdminLink" class="btn col-md-4 col-sm-12" href="{{route('adminHome')}}">
+            {{__('admin.home')}}
+        </a>
+        <a id="cultureAdminLink" class="btn col-md-4 col-sm-12" href="{{route('adminCulture')}}">
+            {{__('app.culture')}}
+        </a>
+    </div>
     <div class="row">
         <div class="tabsPills col-md-4">
             <div class="nav flex-column nav-pills" id="pills-tab" role="tablist" aria-orientation="vertical">
@@ -62,6 +70,14 @@
 
 <span id="showTabsMenu"><i class="fas fa-arrow-left"></i></span>
 @endsection
+
+@push('styles')
+    <style>
+        #homeAdminLink{
+            background-color: #f22103;
+        }
+    </style>
+@endpush    
 
 @push('scripts')
 <script>

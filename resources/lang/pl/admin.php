@@ -51,6 +51,6 @@ return [
     'noProfile'                 => "Brak Zdjęcia Profilowego",
     'userWrite'                 => "Wyślij Wiadomość",
     'writeEmail'                => 'Cześć. Widzę, że nadal nie zweryfikowałaś swojego adresu email. Jeśli masz jakieś trudności możemy tutaj o tym porozmawiać',
-    'writeProfile'              => 'Cześć. Widzę, że nadal nie masz zdjęcia profilowego. Jeśli masz jakieś trudności możemy tutaj o tym porozmawiać'
-
+    'writeProfile'              => 'Cześć. Widzę, że nadal nie masz zdjęcia profilowego. Jeśli masz jakieś trudności możemy tutaj o tym porozmawiać',
+    'home'                      => 'Zarządzanie Serwisem'
 ];

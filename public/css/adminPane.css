@@ -197,6 +197,36 @@ main {
   min-height: 80vh;
 }
 
+main .adminLinks {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+main .adminLinks a {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin: auto;
+  background-color: #f66103;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+main .adminLinks a:hover {
+  background-color: #e26103;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 767px) {
+  main .adminLinks a {
+    margin-top: 0.5rem;
+  }
+}
+
 main hr {
   margin-top: 0.1rem;
   margin-bottom: 0.1rem;
@@ -223,6 +253,7 @@ main .tabsPills {
     border: solid 3px #a1a1a1;
     border-left: 0;
     padding-left: 0.3rem;
+    top: 15%;
   }
 }
 
@@ -232,7 +263,6 @@ main .tabsPills.show {
 
 main .tabsPills .nav-pills {
   width: 100%;
-  margin-top: 2.5rem;
 }
 
 main .tabsPills .nav-pills .nav-link.active {

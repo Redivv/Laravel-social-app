@@ -46,6 +46,11 @@ class AdminController extends Controller
         return view('adminPanel')->with('pictureTickets', $pictureTicketsAmount)->with('userTickets', $userTicketsAmount);
     }
 
+    public function culture()
+    {
+        return view('adminCulturePanel');
+    }
+
     public function getTabContent(Request $request)
     {
         if ($request->ajax()) {
