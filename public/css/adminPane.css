@@ -230,6 +230,8 @@ main .adminLinks a:hover {
 main hr {
   margin-top: 0.1rem;
   margin-bottom: 0.1rem;
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 main .tabsPills {
@@ -273,6 +275,10 @@ main .tabsPills .nav-pills .nav-link.active .ticketCount {
   color: #ffed4a;
 }
 
+main .tabsPills .nav-pills .nav-link.active:hover {
+  background-color: #e26103;
+}
+
 main .tabsPills a {
   margin-bottom: 1rem !important;
   padding: 5%;
@@ -285,12 +291,22 @@ main .tabsPills a .ticketCount {
   color: #e3342f;
 }
 
+main .tabsPills a:hover {
+  background-color: rgba(255, 140, 0, 0.7);
+}
+
+main .tabsPills a.creatingTab {
+  padding: 2.5% 0;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
 main .tabsContent thead {
   text-align: center;
 }
 
 main .tabsContent div.tab-pane {
-  max-height: 75vh;
+  max-height: 72vh;
   overflow-y: auto;
 }
 
@@ -355,6 +371,10 @@ main .tabsContent .profilePicture {
 
 main .tabsContent #adminWideInfo-content {
   overflow-y: unset;
+}
+
+main .tabsContent #adminWideInfo-content #adminInfoForm {
+  padding-bottom: 0.5rem;
 }
 
 main .tabsContent #adminWideInfo-content #adminInfoForm .form-group {

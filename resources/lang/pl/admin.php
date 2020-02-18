@@ -52,5 +52,9 @@ return [
     'userWrite'                 => "Wyślij Wiadomość",
     'writeEmail'                => 'Cześć. Widzę, że nadal nie zweryfikowałaś swojego adresu email. Jeśli masz jakieś trudności możemy tutaj o tym porozmawiać',
     'writeProfile'              => 'Cześć. Widzę, że nadal nie masz zdjęcia profilowego. Jeśli masz jakieś trudności możemy tutaj o tym porozmawiać',
-    'home'                      => 'Zarządzanie Serwisem'
+    'home'                      => 'Zarządzanie Serwisem',
+    'cultureAllCategories'      => 'Wszystkie Kategorie',
+    'cultureAllItems'           => 'Wszystkie Przedmioty',
+    'cultureAddItem'            => 'Dodaj Nowy Przedmiot',
+    'cultureAddCategory'        => 'Dodaj Nową Kategorię'
 ];

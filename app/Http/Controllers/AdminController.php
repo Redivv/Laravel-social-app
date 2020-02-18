@@ -54,10 +54,12 @@ class AdminController extends Controller
     public function getTabContent(Request $request)
     {
         if ($request->ajax()) {
+            $validTargets = ['profileTicket', 'userTicket', 'userList', 'tagList', 'cityList','cultureItems','cultureCategories'];
+
             $target = $request->validate([
                 'target'    => [
                     'string',
-                    Rule::in(['profileTicket', 'userTicket', 'userList', 'tagList', 'cityList']),
+                    Rule::in($validTargets),
                 ]
             ]);
 
@@ -88,6 +90,16 @@ class AdminController extends Controller
                     $elements = $this->getCities();
                     $amount = null;
                     $html = view('partials.admin.cityListContent')->withElements($elements)->render();
+                    break;
+                case 'cultureItems':
+                    // $elements = $this->getCities();
+                    $amount = null;
+                    $html = view('partials.admin.culture.cultureItemsContent')->render();
+                    break;
+                case 'cultureCategories':
+                    // $elements = $this->getCities();
+                    $amount = null;
+                    $html = view('partials.admin.culture.cultureCategoriesContent')->render();
                     break;
             }
             return response()->json(['status' => 'success', 'html' => $html, 'amount' => $amount], 200);

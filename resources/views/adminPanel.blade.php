@@ -41,7 +41,6 @@
                     {{__('admin.userTicket')}} <span id="userTicketCount" class="ticketCount">@if($userTickets !=
                         0){{$userTickets}}@endif</span>
                 </a>
-                <hr>
                 <a class="nav-link tab" id="userList" data-toggle="pill" href="#userList-content" role="tab"
                     aria-controls="userList" aria-selected="true">{{__('admin.userList')}}</a>
                 <a class="nav-link tab" id="tagList" data-toggle="pill" href="#tagList-content" role="tab"
@@ -49,8 +48,10 @@
                 <a class="nav-link tab" id="cityList" data-toggle="pill" href="#cityList-content" role="tab"
                     aria-controls="cityList" aria-selected="true">{{__('admin.cityList')}}</a>
                 <hr>
-                <a class="nav-link bonusTab" id="adminWideInfo" data-toggle="pill" href="#adminWideInfo-content"
-                    role="tab" aria-controls="adminWideInfo" aria-selected="true">{{__('admin.adminWideInfo')}}</a>
+                <a class="nav-link creatingTab" id="adminWideInfo" data-toggle="pill" href="#adminWideInfo-content"
+                    role="tab" aria-controls="adminWideInfo" aria-selected="true">
+                    {{__('admin.adminWideInfo')}}
+                </a>
             </div>
         </div>
         <div class="tabsContent pt-2 pb-2 overflow-auto col-md-8 col-sm-12">
