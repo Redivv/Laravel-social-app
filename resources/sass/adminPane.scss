@@ -206,6 +206,39 @@ main{
                 }
             }
         }
+        #newCategoryForm{
+            padding: 0 0.5rem;
+            label{
+                font-weight: bold;
+                margin-bottom: 0.25rem;
+                letter-spacing: 0.5px;
+                @include font-size(0.9rem);
+            }
+            .attrBox{
+                align-items: center;
+                .categoryAttrAppend, .categoryAttrDelete{
+                    i{
+                        @include font-size(1rem);
+                        &:hover{
+                            color: $orange;
+                        }
+                        padding: 0.5rem;
+                        cursor: pointer;
+                    }
+                }
+            }
+            .newCategoryButton{
+                margin-top: 1rem;
+                background-color: $orange;
+                color: $white;
+                @include font-size (1.1rem);
+                font-weight: bold;
+                letter-spacing: 1px;
+                &:hover{
+                    background-color: $orange-hover;
+                }
+            }
+        }
     }
 
     #showTabsMenu{

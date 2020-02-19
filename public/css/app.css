@@ -12317,7 +12317,7 @@ a.text-dark:focus {
 }
 
 .text-muted,
-#searchResultsOutput .searchResult .itemAtributes .itemAttr,
+#searchResultsOutput .searchResult .itemAttributes .itemAttr,
 #cultureSugestions .column .sugestions-out .cultureItem .itemDesc .itemAttrs,
 .chatBody .chat .chat-history ul li .message-data .message-data-time,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentDate,
@@ -23066,21 +23066,21 @@ html {
   font-size: 1rem;
 }
 
-#searchResultsOutput .searchResult .itemAtributes .itemAttr {
+#searchResultsOutput .searchResult .itemAttributes .itemAttr {
   padding: 0;
   font-size: 0.9rem;
   letter-spacing: 0.5px;
   text-align: center;
 }
 
-#searchResultsOutput .searchResult .itemAtributes .itemAttr .attrTitle {
+#searchResultsOutput .searchResult .itemAttributes .itemAttr .attrTitle {
   padding: 0;
   font-size: 0.95rem;
   font-weight: bold;
   letter-spacing: 0.8px;
 }
 
-#searchResultsOutput .searchResult .itemAtributes .itemAttr .attrValue {
+#searchResultsOutput .searchResult .itemAttributes .itemAttr .attrValue {
   padding: 0;
 }
 

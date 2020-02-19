@@ -15,4 +15,10 @@ class CultureController extends Controller
     {
         return view('cultureSearchResults');
     }
+
+    public function newCategory(Request $request)
+    {
+        $kek = $request->all();
+        return response()->json(['status' => 'success'], 200);
+    }
 }

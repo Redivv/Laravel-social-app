@@ -79,11 +79,13 @@
 
 @push('scripts')
 <script>
-    var __baseUrl = "{{url('/')}}";
+    var __baseUrl           = "{{url('/')}}";
+    var deleteAttrMsg       = "{{__('admin.deleteAttrMsg')}}";
+    var emptyFieldsMsg      = "{{__('admin.emptyFields')}}"
 </script>
 
 <script src="{{asset('js/emoji.js')}}"></script>
-<script src="{{asset('js/admin.js')}}"></script>
+<script src="{{asset('js/adminCulture.js')}}"></script>
 
 <script defer>
 

@@ -445,6 +445,46 @@ main .tabsContent #adminWideInfo-content #adminInfoForm .wideInfoBtn {
   }
 }
 
+main .tabsContent #newCategoryForm {
+  padding: 0 0.5rem;
+}
+
+main .tabsContent #newCategoryForm label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+}
+
+main .tabsContent #newCategoryForm .attrBox {
+  align-items: center;
+}
+
+main .tabsContent #newCategoryForm .attrBox .categoryAttrAppend i,
+main .tabsContent #newCategoryForm .attrBox .categoryAttrDelete i {
+  font-size: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+main .tabsContent #newCategoryForm .attrBox .categoryAttrAppend i:hover,
+main .tabsContent #newCategoryForm .attrBox .categoryAttrDelete i:hover {
+  color: #f66103;
+}
+
+main .tabsContent #newCategoryForm .newCategoryButton {
+  margin-top: 1rem;
+  background-color: #f66103;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+main .tabsContent #newCategoryForm .newCategoryButton:hover {
+  background-color: #e26103;
+}
+
 main #showTabsMenu {
   font-size: calc(1.275rem + 0.3vw);
   position: fixed;

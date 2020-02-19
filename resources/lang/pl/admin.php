@@ -56,5 +56,10 @@ return [
     'cultureAllCategories'      => 'Wszystkie Kategorie',
     'cultureAllItems'           => 'Wszystkie Przedmioty',
     'cultureAddItem'            => 'Dodaj Nowy Przedmiot',
-    'cultureAddCategory'        => 'Dodaj Nową Kategorię'
+    'cultureAddCategory'        => 'Dodaj Nową Kategorię',
+    'categoryName'              => 'Nazwa Kategorii',
+    'attrs'                     => 'Atrybuty',
+    'addNewAttr'                => 'Dodaj Nowy Atrybut',
+    'deleteAttrMsg'             => 'Usuń Atrybut',
+    'emptyFields'               => "Formularz nie może być pusty"
 ];

@@ -57,5 +57,10 @@ return [
     'cultureAllCategories'      => 'All Categories',
     'cultureAllItems'           => 'All Items',
     'cultureAddItem'            => 'Add New Item',
-    'cultureAddCategory'        => 'Add New Category'
+    'cultureAddCategory'        => 'Add New Category',
+    'categoryName'              => 'Category Name',
+    'attrs'                     => 'Attributes',
+    'addNewAttr'                => 'Add New Attribute',
+    'deleteAttrMsg'             => 'Delete Attribute',
+    'emptyFields'               => "Form fields cannot be empty"
 ];

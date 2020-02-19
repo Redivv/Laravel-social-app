@@ -376,7 +376,7 @@
             font-weight: bold;
             @include font-size(1rem);
         }
-        .itemAtributes{
+        .itemAttributes{
             .itemAttr{
                 padding: 0;
                 @extend .text-muted;

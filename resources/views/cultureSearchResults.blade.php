@@ -73,7 +73,7 @@
                 <div class="itemTitle col-2">
                     Persona 4
                 </div>
-                <div class="itemAtributes col-7 row">
+                <div class="itemAttributes col-7 row">
                     <div class="itemAttr col row">
                         <span class="attrTitle col-12">
                             penis
@@ -122,7 +122,7 @@
                 <div class="itemTitle col-2">
                     Rodzinne Spotkanie
                 </div>
-                <div class="itemAtributes col-7 row">
+                <div class="itemAttributes col-7 row">
                     <div class="itemAttr col row">
                         <span class="attrTitle col-12">
                             Twój Stary

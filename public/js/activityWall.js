@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -12411,7 +12411,7 @@ function getUrlParameter(sParam) {
 
 /***/ }),
 
-/***/ 9:
+/***/ 10:
 /*!********************************************!*\
   !*** multi ./resources/js/activityWall.js ***!
   \********************************************/
