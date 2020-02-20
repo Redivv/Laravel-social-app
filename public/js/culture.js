@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/culture.js":
-/*!*********************************!*\
-  !*** ./resources/js/culture.js ***!
-  \*********************************/
+/***/ "./resources/js/culture/culture.js":
+/*!*****************************************!*\
+  !*** ./resources/js/culture/culture.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -106,14 +106,14 @@ function main() {
 
 /***/ }),
 
-/***/ 6:
-/*!***************************************!*\
-  !*** multi ./resources/js/culture.js ***!
-  \***************************************/
+/***/ 8:
+/*!***********************************************!*\
+  !*** multi ./resources/js/culture/culture.js ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\culture.js */"./resources/js/culture.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\culture\culture.js */"./resources/js/culture/culture.js");
 
 
 /***/ })

@@ -1,4 +1,5 @@
 <form id="newCategoryForm">
+    @method('put')
     <div class="form-group">
         <label for="categoryName">{{__('admin.categoryName')}}</label>
         <input type="text" class="categoryName form-control" name="categoryName" id="categoryName" required>

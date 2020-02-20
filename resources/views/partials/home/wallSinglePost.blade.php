@@ -126,7 +126,7 @@
                     </div>
                 </form>
                 <output class="commentsFeed"  id="feed-{{$post->id}}">
-                    @include('partials.wallComments')
+                    @include('partials.home.wallComments')
                 </output>
             </div>
             <hr>
@@ -250,7 +250,7 @@
                 </div>
             </form>
             <output class="commentsFeed"  id="feed-{{$post->id}}">
-                @include('partials.wallComments')
+                @include('partials.home.wallComments')
             </output>
         </div>
         <hr>

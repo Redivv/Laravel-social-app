@@ -46859,21 +46859,21 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
+/***/ "./resources/js/startup/app.js":
+/*!*************************************!*\
+  !*** ./resources/js/startup/app.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/startup/bootstrap.js");
 
 /***/ }),
 
-/***/ "./resources/js/bootstrap.js":
-/*!***********************************!*\
-  !*** ./resources/js/bootstrap.js ***!
-  \***********************************/
+/***/ "./resources/js/startup/bootstrap.js":
+/*!*******************************************!*\
+  !*** ./resources/js/startup/bootstrap.js ***!
+  \*******************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -46942,13 +46942,13 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /***/ }),
 
 /***/ 0:
-/*!*********************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/adminPane.scss ./resources/sass/app.scss ***!
-  \*********************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** multi ./resources/js/startup/app.js ./resources/sass/adminPane.scss ./resources/sass/app.scss ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\startup\app.js */"./resources/js/startup/app.js");
 __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\sass\adminPane.scss */"./resources/sass/adminPane.scss");
 module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\sass\app.scss */"./resources/sass/app.scss");
 

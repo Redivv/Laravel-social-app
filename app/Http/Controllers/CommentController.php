@@ -33,7 +33,7 @@ class CommentController extends Controller
 
             $comments = Comment::where('post_id',$post->id)->whereNull('parent_id')->take(5)->skip(5*$request->pagi)->orderBy('created_at','desc')->get();
 
-            $html = view('partials.ajaxWallComment')->withComments($comments)->withId($post->id)->withPagi($request->pagi+1)->withCommentsAmount($commentsAmount - count($comments))->render();
+            $html = view('partials.home.ajax.ajaxWallComment')->withComments($comments)->withId($post->id)->withPagi($request->pagi+1)->withCommentsAmount($commentsAmount - count($comments))->render();
             return response()->json(['status' => 'success', 'html' => $html], 200);
         }
     }
@@ -48,7 +48,7 @@ class CommentController extends Controller
 
             $replies = Comment::where('parent_id',$comment->id)->take(5)->skip(5*$request->pagi)->orderBy('created_at','desc')->get();
 
-            $html = view('partials.wallReplies')->withReplies($replies)->withId($comment->id)->withPagi($request->pagi+1)->render();
+            $html = view('partials..home.wallReplies')->withReplies($replies)->withId($comment->id)->withPagi($request->pagi+1)->render();
             return response()->json(['status' => 'success', 'html' => $html], 200);
         }
     }
@@ -106,7 +106,7 @@ class CommentController extends Controller
                         }
                     }
 
-                    $html = view('partials.ajaxWallReply')->withComment($newComment)->render();
+                    $html = view('partials.home.ajax.ajaxWallReply')->withComment($newComment)->render();
                 }else{
                     return response()->json(['status' => 'error', 'message' => 'You cannot see this post'], 400);
                 }
@@ -130,7 +130,7 @@ class CommentController extends Controller
                         }
                     }
 
-                    $html = view('partials.ajaxWallComment')->withComments([$newComment])->render();
+                    $html = view('partials.home.ajax.ajaxWallComment')->withComments([$newComment])->render();
                 }else{
                     return response()->json(['status' => 'error', 'message' => 'You cannot see this post'], 400);
                 }
@@ -178,7 +178,7 @@ class CommentController extends Controller
             }
 
             if ($comment->update()) {
-                $html = view('partials.ajaxWallCommentSingle')->withComments([$comment])->render();
+                $html = view('partials.home.ajaxWallCommentSingle')->withComments([$comment])->render();
                     
                 if ($taggedUsers) {
                     foreach ($taggedUsersArray as $taggedUser) {
@@ -248,7 +248,7 @@ class CommentController extends Controller
                 $users = User::whereIn('name',$taggedUsers)->get();
 
                 if (count($users) > 0) {
-                    $taggedUsersHtml = view('partials.wallTaggedUsers')->withTaggedUsers($users)->render();
+                    $taggedUsersHtml = view('partials.home.wallTaggedUsers')->withTaggedUsers($users)->render();
                 }else{
                     return response()->json(['status' => 'error'], 400);
                 }

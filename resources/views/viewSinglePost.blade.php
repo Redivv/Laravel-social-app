@@ -18,11 +18,11 @@
 <div id="friendsWall" class="container-fluid mt-4 p-0">
     <div class="row text-center">
         <div class="col-3 text-center wallExtraFunctions">
-            @include('partials.wallExtraFunctions')
+            @include('partials.home.wallExtraFunctions')
         </div>
         <div class="offset-3 col-6 friendsWall">
             <output id="friendsWallFeed" class="p-0">
-                @include('partials.wallSinglePost')
+                @include('partials.home.wallSinglePost')
             </output>
         </div>
         <div class="col-3 friendsList">
@@ -32,7 +32,7 @@
             <output class="friendsListBox">
                 @if(count($friends)>0)
                     <ul class="friendList">
-                        @include('partials.friendsList')
+                        @include('partials.home.friendsList')
                     </ul>
                 @else   
                     {{__('activityWall.noFriendsToShow')}}
@@ -46,11 +46,11 @@
 
 <span id="showSidePanels"><i class="fas fa-arrows-alt-h"></i></span>
 
-@include('partials.postEditModal')
+@include('partials.home.postEditModal')
 
-@include('partials.commentEditModal')
+@include('partials.home.commentEditModal'))
 
-@include('partials.tagUsersModal')
+@include('partials.home.tagUsersModal')
 
 @endsection
 

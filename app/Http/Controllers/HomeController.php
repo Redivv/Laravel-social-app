@@ -68,7 +68,7 @@ class HomeController extends Controller
             })->take(5)->get();
         }
         if ($request->ajax()) {
-            $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
+            $html = view('partials.home.friendsWallPosts')->withPosts($posts)->render();
             return response()->json(['status' => 'success', 'html' => $html], 200);
         }
 
@@ -140,7 +140,7 @@ class HomeController extends Controller
                 $stopPagi = true;
             }
 
-            $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
+            $html = view('partials.home.friendsWallPosts')->withPosts($posts)->render();
 
             return response()->json(['status' => 'success', 'html' => $html, 'stopPagi' => $stopPagi], 200);
         }
@@ -167,7 +167,7 @@ class HomeController extends Controller
     public function getPost(Request $request, Post $post)
     {
         if ($request->ajax()) {
-            $html = view('partials.postEditForm')->withPost($post)->render();
+            $html = view('partials.home.postEditForm')->withPost($post)->render();
             return response()->json(['status' => 'success', 'html' => $html], 200);
         }
     }
@@ -234,7 +234,7 @@ class HomeController extends Controller
             
             if ($post->save()) {
                 $posts = [$post];
-                $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
+                $html = view('partials.home.friendsWallPosts')->withPosts($posts)->render();
                 if ($post->type == "AdminPost") {
                     $users = User::whereNotIn('id',[Auth::id()])->get();
                     Notification::send($users, new NewAdminPost($author,$post->id));
@@ -316,7 +316,7 @@ class HomeController extends Controller
             
             if ($post->update()) {
                 $posts = [$post];
-                $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
+                $html = view('partials.home.friendsWallPosts')->withPosts($posts)->render();
 
                 if ($taggedUsers) {
                     foreach ($taggedUsersArray as $taggedUser) {
@@ -435,7 +435,7 @@ class HomeController extends Controller
                 $users = User::whereIn('name',$taggedUsers)->get();
 
                 if (count($users) > 0) {
-                    $taggedUsersHtml = view('partials.wallTaggedUsers')->withTaggedUsers($users)->render();
+                    $taggedUsersHtml = view('partials.home.wallTaggedUsers')->withTaggedUsers($users)->render();
                 }else{
                     return response()->json(['status' => 'error'], 400);
                 }

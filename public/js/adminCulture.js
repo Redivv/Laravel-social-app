@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11261,10 +11261,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ "./resources/js/adminCulture.js":
-/*!**************************************!*\
-  !*** ./resources/js/adminCulture.js ***!
-  \**************************************/
+/***/ "./resources/js/culture/adminCulture.js":
+/*!**********************************************!*\
+  !*** ./resources/js/culture/adminCulture.js ***!
+  \**********************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11272,10 +11272,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lightbox2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js");
 /* harmony import */ var lightbox2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lightbox2__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _cultureFunctions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cultureFunctions */ "./resources/js/culture/cultureFunctions.js");
+
 
 var pagiTarget = {};
 var pagiCount = {};
-var attributesCount = 1;
 $(document).ready(function () {
   $.ajaxSetup({
     headers: {
@@ -11311,62 +11312,19 @@ function main() {
       });
     }
   });
-  $('.categoryAttrAppend>i').on('click', addNewAttrForm);
+  $('.categoryAttrAppend>i').on('click', _cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewAttrForm"]);
   $('#newCategoryForm').on('submit', function (e) {
     e.preventDefault();
     var categoryNameIsFilled = $('#categoryName').val().trim() !== "";
     var firstAttributeIsFilled = $('#categoryAttr1').val().trim() !== "";
 
     if (categoryNameIsFilled && firstAttributeIsFilled) {
-      extractFormData(this);
+      $(this)[0].reset();
+      Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["sendAjaxRequestToWithFormData"])(baseUrl + "/culture/newCategory", this);
     } else {
       alert(emptyFieldsMsg);
     }
   });
-}
-
-function addNewAttrForm() {
-  attributesCount += 1;
-  var html = '<div class="attrBox row mt-2">' + '<input class="categoryAttr form-control col-md-6" name="categoryAttr[]" id="categoryAttr' + attributesCount + '">' + '<span class="categoryAttrDelete col">' + '<i class="fas fa-times" data-tool="tooltip" title="' + deleteAttrMsg + '" data-placement="bottom"></i>' + '</span>' + '</div>';
-  $('.newCultureAttributes').append(html);
-  $('[data-tool=tooltip]').tooltip();
-  $('.categoryAttrDelete>i:last').on('click', function () {
-    deleteAttrForm(this);
-  });
-}
-
-function extractFormData(form) {
-  var formData = new FormData(form);
-  sendAjaxRequestToUrlWithDataByOptionalMethod(baseUrl + '/culture/newCategory', formData, 'put');
-}
-
-function sendAjaxRequestToUrlWithDataByOptionalMethod(url, data, method) {
-  method = method || "get";
-  data.append('_method', method);
-  var request = $.ajax({
-    method: 'post',
-    url: url,
-    processData: false,
-    contentType: false,
-    data: data
-  });
-  receiveAjaxResponse(request);
-}
-
-function receiveAjaxResponse(request) {
-  request.done(function (response) {
-    if (response.status === 'success') {
-      alert('kek');
-    }
-  });
-  request.fail(function (xhr) {
-    alert(xhr.responseJson.message);
-  });
-}
-
-function deleteAttrForm(button) {
-  $(button).parents('.attrBox').remove();
-  $('.tooltip').remove();
 }
 
 function renderContent(selected) {
@@ -11583,14 +11541,78 @@ function search(form) {
 
 /***/ }),
 
-/***/ 8:
-/*!********************************************!*\
-  !*** multi ./resources/js/adminCulture.js ***!
-  \********************************************/
+/***/ "./resources/js/culture/cultureFunctions.js":
+/*!**************************************************!*\
+  !*** ./resources/js/culture/cultureFunctions.js ***!
+  \**************************************************/
+/*! exports provided: sendAjaxRequestToWithFormData, addNewAttrForm */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sendAjaxRequestToWithFormData", function() { return sendAjaxRequestToWithFormData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewAttrForm", function() { return addNewAttrForm; });
+var attributesCount = 1;
+function sendAjaxRequestToWithFormData(url, form) {
+  var formData = extractFormData(form);
+  sendAjaxRequestToUrlWithData(url, formData);
+}
+function addNewAttrForm() {
+  var html = createNewAttrInput();
+  $('.newCultureAttributes').append(html);
+  $('[data-tool=tooltip]').tooltip();
+  $('.categoryAttrDelete>i:last').on('click', function () {
+    deleteAttrForm(this);
+  });
+}
+
+function createNewAttrInput() {
+  attributesCount += 1;
+  var html = '<div class="attrBox row mt-2">' + '<input class="categoryAttr form-control col-md-6" name="categoryAttr[]" id="categoryAttr' + attributesCount + '">' + '<span class="categoryAttrDelete col">' + '<i class="fas fa-times" data-tool="tooltip" title="' + deleteAttrMsg + '" data-placement="bottom"></i>' + '</span>' + '</div>';
+  return html;
+}
+
+function deleteAttrForm(button) {
+  $(button).parents('.attrBox').remove();
+  $('.tooltip').remove();
+}
+
+function extractFormData(form) {
+  return new FormData(form);
+}
+
+function sendAjaxRequestToUrlWithData(url, data) {
+  var request = $.ajax({
+    method: 'post',
+    url: url,
+    processData: false,
+    contentType: false,
+    data: data
+  });
+  receiveAjaxResponse(request);
+}
+
+function receiveAjaxResponse(request) {
+  request.done(function (response) {
+    if (response.status === 'success') {
+      alert('kek');
+    }
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJson.message);
+  });
+}
+
+/***/ }),
+
+/***/ 7:
+/*!****************************************************!*\
+  !*** multi ./resources/js/culture/adminCulture.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\adminCulture.js */"./resources/js/adminCulture.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\culture\adminCulture.js */"./resources/js/culture/adminCulture.js");
 
 
 /***/ })

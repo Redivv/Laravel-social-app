@@ -131,11 +131,11 @@
         </form>
         <hr>
         @if ($results)
-            @include('partials.search_results')
+            @include('partials.searcher.search_results')
         @elseif ($resultsVar && count($resultsVar) > 0)
-            @include('partials.variable_results')
+            @include('partials.searcher.variable_results')
         @else
-            @include('partials.error')
+            @include('partials.searcher.error')
         @endif
     </div>
 @endsection

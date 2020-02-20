@@ -1,13 +1,11 @@
 import "lightbox2";
+import {sendAjaxRequestToWithFormData,addNewAttrForm} from "./cultureFunctions";
 
 var pagiTarget = {
 };
 
 var pagiCount = {
 }
-
-
-var attributesCount = 1;
 
 $(document).ready(function () {
 
@@ -60,61 +58,12 @@ function main() {
         let firstAttributeIsFilled  = $('#categoryAttr1').val().trim()  !== "";
 
         if (categoryNameIsFilled && firstAttributeIsFilled) {
-            extractFormData(this);
+            $(this)[0].reset();
+            sendAjaxRequestToWithFormData(baseUrl+"/culture/newCategory",this);
         }else{
             alert(emptyFieldsMsg);
         }
     });
-}
-
-function addNewAttrForm() {
-    attributesCount += 1;
-    let html = '<div class="attrBox row mt-2">'+
-        '<input class="categoryAttr form-control col-md-6" name="categoryAttr[]" id="categoryAttr'+attributesCount+'">'+
-        '<span class="categoryAttrDelete col">'+
-            '<i class="fas fa-times" data-tool="tooltip" title="'+deleteAttrMsg+'" data-placement="bottom"></i>'+
-        '</span>'+
-        '</div>';
-    $('.newCultureAttributes').append(html);
-    $('[data-tool=tooltip]').tooltip();
-
-    $('.categoryAttrDelete>i:last').on('click',function() {
-        deleteAttrForm(this);
-    });
-}
-
-function extractFormData(form) {
-    let formData = new FormData(form);
-    sendAjaxRequestToUrlWithDataByOptionalMethod(baseUrl+'/culture/newCategory',formData,'put');
-}
-
-function sendAjaxRequestToUrlWithDataByOptionalMethod(url, data, method) {
-    method = method || "get";
-    data.append('_method',method);
-    let request = $.ajax({
-        method : 'post',
-        url: url,
-        processData: false,
-        contentType: false,
-        data: data
-    });
-    receiveAjaxResponse(request);
-}
-
-function receiveAjaxResponse(request) {
-    request.done(function (response) {
-        if (response.status === 'success') {
-            alert('kek');
-        }
-    });
-    request.fail(function (xhr) {
-        alert(xhr.responseJson.message);
-    });
-}
-
-function deleteAttrForm(button) {
-    $(button).parents('.attrBox').remove();
-    $('.tooltip').remove();
 }
 
 function renderContent(selected) {

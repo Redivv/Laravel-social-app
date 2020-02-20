@@ -152,7 +152,7 @@ class AjaxMessageController extends Controller
                 return Str::contains($userName,$cryteria);
             });
     
-            $html = view('partials.chatSearchResults')->withThreads($threads)->render();
+            $html = view('partials.chat.chatSearchResults')->withThreads($threads)->render();
     
             return response()->json(['status' => 'success', 'html'  => $html], 200);
         }

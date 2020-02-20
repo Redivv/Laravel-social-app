@@ -84,7 +84,6 @@
     var emptyFieldsMsg      = "{{__('admin.emptyFields')}}"
 </script>
 
-<script src="{{asset('js/emoji.js')}}"></script>
 <script src="{{asset('js/adminCulture.js')}}"></script>
 
 <script defer>
