@@ -58,8 +58,9 @@ function main() {
         let firstAttributeIsFilled  = $('#categoryAttr1').val().trim()  !== "";
 
         if (categoryNameIsFilled && firstAttributeIsFilled) {
-            $(this)[0].reset();
+            $('.spinnerOverlay:first').removeClass('d-none');
             sendAjaxRequestToWithFormData(baseUrl+"/culture/newCategory",this);
+            $(this)[0].reset();
         }else{
             alert(emptyFieldsMsg);
         }

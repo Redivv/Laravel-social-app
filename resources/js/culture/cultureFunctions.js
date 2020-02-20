@@ -18,7 +18,7 @@ export function addNewAttrForm() {
 
 function createNewAttrInput() {
     attributesCount += 1;
-    let html = '<div class="attrBox row mt-2">'+
+    let html = '<div class="attrBox additionalAttr row mt-2">'+
         '<input class="categoryAttr form-control col-md-6" name="categoryAttr[]" id="categoryAttr'+attributesCount+'">'+
         '<span class="categoryAttrDelete col">'+
             '<i class="fas fa-times" data-tool="tooltip" title="'+deleteAttrMsg+'" data-placement="bottom"></i>'+
@@ -52,9 +52,15 @@ function receiveAjaxResponse(request) {
     request.done(function (response) {
         if (response.status === 'success') {
             alert('kek');
+            hideSpinnerOverlay();
         }
     });
     request.fail(function (xhr) {
         alert(xhr.responseJson.message);
+        hideSpinnerOverlay();
     });
+}
+
+function hideSpinnerOverlay() {
+    $('.spinnerOverlay:first').addClass('d-none');
 }

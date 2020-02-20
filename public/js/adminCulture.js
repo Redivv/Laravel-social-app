@@ -11319,8 +11319,9 @@ function main() {
     var firstAttributeIsFilled = $('#categoryAttr1').val().trim() !== "";
 
     if (categoryNameIsFilled && firstAttributeIsFilled) {
-      $(this)[0].reset();
+      $('.spinnerOverlay:first').removeClass('d-none');
       Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["sendAjaxRequestToWithFormData"])(baseUrl + "/culture/newCategory", this);
+      $(this)[0].reset();
     } else {
       alert(emptyFieldsMsg);
     }
@@ -11568,7 +11569,7 @@ function addNewAttrForm() {
 
 function createNewAttrInput() {
   attributesCount += 1;
-  var html = '<div class="attrBox row mt-2">' + '<input class="categoryAttr form-control col-md-6" name="categoryAttr[]" id="categoryAttr' + attributesCount + '">' + '<span class="categoryAttrDelete col">' + '<i class="fas fa-times" data-tool="tooltip" title="' + deleteAttrMsg + '" data-placement="bottom"></i>' + '</span>' + '</div>';
+  var html = '<div class="attrBox additionalAttr row mt-2">' + '<input class="categoryAttr form-control col-md-6" name="categoryAttr[]" id="categoryAttr' + attributesCount + '">' + '<span class="categoryAttrDelete col">' + '<i class="fas fa-times" data-tool="tooltip" title="' + deleteAttrMsg + '" data-placement="bottom"></i>' + '</span>' + '</div>';
   return html;
 }
 
@@ -11596,11 +11597,17 @@ function receiveAjaxResponse(request) {
   request.done(function (response) {
     if (response.status === 'success') {
       alert('kek');
+      hideSpinnerOverlay();
     }
   });
   request.fail(function (xhr) {
     alert(xhr.responseJson.message);
+    hideSpinnerOverlay();
   });
+}
+
+function hideSpinnerOverlay() {
+  $('.spinnerOverlay:first').addClass('d-none');
 }
 
 /***/ }),
