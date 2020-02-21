@@ -11365,7 +11365,9 @@ function main() {
       }
     });
     request.fail(function (xhr) {
-      alert(xhr.responseJSON.message);
+      $.each(xhr.responseJSON.errors, function (key, value) {
+        alert(value);
+      });
     });
   });
 }
@@ -11426,7 +11428,9 @@ function renderContent(selected) {
     }
   });
   request.fail(function (xhr) {
-    alert(xhr.responseJSON.message);
+    $.each(xhr.responseJSON.errors, function (key, value) {
+      alert(value);
+    });
     $('#' + targetId + '-content').html('');
   });
 }
@@ -11485,7 +11489,9 @@ function fetchContent(selected) {
     }
   });
   request.fail(function (xhr) {
-    alert(xhr.responseJSON.message);
+    $.each(xhr.responseJSON.errors, function (key, value) {
+      alert(value);
+    });
     $('#' + targetId + '-content').html('');
   });
 }
@@ -11530,7 +11536,9 @@ function carryTicket(decided, target) {
     }
   });
   request.fail(function (xhr) {
-    alert(xhr.responseJSON.message);
+    $.each(xhr.responseJSON.errors, function (key, value) {
+      alert(value);
+    });
   });
 }
 
@@ -11576,7 +11584,9 @@ function carryList(decided, target) {
     }
   });
   request.fail(function (xhr) {
-    alert(xhr.responseJSON.message);
+    $.each(xhr.responseJSON.errors, function (key, value) {
+      alert(value);
+    });
     $('.spinnerOverlay').addClass('d-none');
   });
 }
@@ -11628,7 +11638,9 @@ function pagiContent(target) {
       }
     });
     request.fail(function (xhr) {
-      alert(xhr.responseJSON.message);
+      $.each(xhr.responseJSON.errors, function (key, value) {
+        alert(value);
+      });
     });
   }
 }
@@ -11668,7 +11680,9 @@ function search(form) {
       }
     });
     request.fail(function (xhr) {
-      alert(xhr.responseJSON.message);
+      $.each(xhr.responseJSON.errors, function (key, value) {
+        alert(value);
+      });
     });
   }
 }

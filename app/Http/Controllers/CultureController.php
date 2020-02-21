@@ -18,7 +18,27 @@ class CultureController extends Controller
 
     public function newCategory(Request $request)
     {
-        $kek = $request->all();
+        $validatedData = $this->validateNewCategoryRequest($request);
+        $this->createNewCategoryFromData($validatedData);
         return response()->json(['status' => 'success'], 200);
+    }
+
+
+
+
+    // Private Functions
+
+    private function validateNewCategoryRequest(Request $categoryData) : array
+    {
+        $validatedRequest = $categoryData->validate([
+            'categoryName'      =>  ['max:1','numeric'],
+            'categoryAttr.*'    =>  ['required','string']  
+        ]);
+        return $validatedRequest;
+    }
+
+    private function createNewCategoryFromData(Array $data) : void
+    {
+        $kek = $data;
     }
 }

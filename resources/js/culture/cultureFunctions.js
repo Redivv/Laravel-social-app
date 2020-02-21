@@ -56,7 +56,9 @@ function receiveAjaxResponse(request) {
         }
     });
     request.fail(function (xhr) {
-        alert(xhr.responseJson.message);
+        $.each(xhr.responseJSON.errors,function(key,value) {
+            alert(value);
+        });
         hideSpinnerOverlay();
     });
 }

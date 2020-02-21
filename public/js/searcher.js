@@ -186,7 +186,9 @@ function likeUser(selected) {
     }
   });
   request.fail(function (xhr) {
-    alert(xhr.responseJSON.message);
+    $.each(xhr.responseJSON.errors, function (key, value) {
+      alert(value);
+    });
   });
 }
 
@@ -215,7 +217,9 @@ function addFriend(selected) {
 
   request.fail(function (xhr) {
     //we get our response as alert.
-    alert(xhr.responseJSON.message);
+    $.each(xhr.responseJSON.errors, function (key, value) {
+      alert(value);
+    });
   });
 }
 
@@ -245,7 +249,9 @@ function reportUser(selected) {
       }
     });
     request.fail(function (xhr) {
-      alert(xhr.responseJSON.message);
+      $.each(xhr.responseJSON.errors, function (key, value) {
+        alert(value);
+      });
     });
   }
 }

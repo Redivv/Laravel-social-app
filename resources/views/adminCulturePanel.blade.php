@@ -34,10 +34,6 @@
                     aria-controls="cultureCategories" aria-selected="true">
                     {{__('admin.cultureAllCategories')}} <span id="cultureCategoriesCount" class="ticketCount">5</span>
                 </a>
-                <a class="nav-link tab" id="cultureItems" data-toggle="pill" href="#cultureItems-content" role="tab"
-                    aria-controls="cultureItems" aria-selected="true">
-                    {{__('admin.cultureAllItems')}} <span id="cultureItemsCount" class="ticketCount">10</span>
-                </a>
                 <hr>
                 <a class="nav-link creatingTab" id="cultureNewCategory" data-toggle="pill" href="#cultureNewCategory-content" role="tab"
                     aria-controls="cultureNewCategory" aria-selected="true">
@@ -52,7 +48,6 @@
         <div class="tabsContent pt-2 pb-2 overflow-auto col-md-8 col-sm-12">
             <div class="tab-content" id="tabContent">
                 <div class="tab-pane" id="cultureCategories-content" role="tabpanel" aria-labelledby="cultureCategories-tab"></div>
-                <div class="tab-pane" id="cultureItems-content" role="tabpanel" aria-labelledby="cultureItems-tab"></div>
                 <div class="tab-pane" id="cultureNewCategory-content" role="tabpanel" aria-labelledby="cultureNewCategory-tab">
                     @include('partials.admin.culture.newCategoryForm')
                 </div>

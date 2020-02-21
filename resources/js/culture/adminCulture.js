@@ -135,7 +135,9 @@ function renderContent(selected) {
 
 
     request.fail(function (xhr) {
-        alert(xhr.responseJSON.message);
+        $.each(xhr.responseJSON.errors,function(key,value) {
+            alert(value);
+        });
         $('#' + targetId + '-content').html('');
     });
 
@@ -204,7 +206,9 @@ function fetchContent(selected) {
 
 
     request.fail(function (xhr) {
-        alert(xhr.responseJSON.message);
+        $.each(xhr.responseJSON.errors,function(key,value) {
+            alert(value);
+        });
         $('#' + targetId + '-content').html('');
     });
 
@@ -265,7 +269,9 @@ function pagiContent(target) {
 
 
         request.fail(function (xhr) {
-            alert(xhr.responseJSON.message);
+            $.each(xhr.responseJSON.errors,function(key,value) {
+                alert(value);
+            });
         });
     }
 }
@@ -310,7 +316,9 @@ function search(form) {
 
 
         request.fail(function (xhr) {
-            alert(xhr.responseJSON.message);
+            $.each(xhr.responseJSON.errors,function(key,value) {
+                alert(value);
+            });
         });
     }
 }
