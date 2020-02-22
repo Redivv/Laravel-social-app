@@ -1,5 +1,11 @@
 import "lightbox2";
-import {sendAjaxRequestToWithFormData,addNewAttrForm} from "./cultureFunctions";
+import {
+    sendAjaxRequestToWithFormData,
+    addNewAttrForm,
+    showSpinnerOverlay,
+    hideSpinnerOverlay,
+    deleteAttrForm
+} from "./cultureFunctions";
 
 var pagiTarget = {
 };
@@ -8,7 +14,6 @@ var pagiCount = {
 }
 
 $(document).ready(function () {
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -58,12 +63,16 @@ function main() {
         let firstAttributeIsFilled  = $('#categoryAttr1').val().trim()  !== "";
 
         if (categoryNameIsFilled && firstAttributeIsFilled) {
-            $('.spinnerOverlay:first').removeClass('d-none');
+            showSpinnerOverlay();
             sendAjaxRequestToWithFormData(baseUrl+"/culture/newCategory",this);
             $(this)[0].reset();
         }else{
             alert(emptyFieldsMsg);
         }
+    });
+
+    $('.categoryAttrDelete>i:last').on('click',function() {
+        deleteAttrForm(this);
     });
 }
 
@@ -90,44 +99,12 @@ function renderContent(selected) {
     request.done(function (response) {
         if (response.status === 'success') {
             $('#' + targetId + '-content').html(response.html);
-            if (response.amount == 0) {
-                $('#' + targetId + 'Count').html('');
-            }
-
-            $('#' + targetId + '-content').on('scroll', function () {
-                if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight - 200) {
-                    $(this).off('scroll');
-                    pagiContent(targetId);
-                }
-            });
-
-            $('button.ticketBtn').on('click', function (e) {
-                e.preventDefault();
-                if (confirm(confirmMsg)) {
-                    $('.spinnerOverlay').removeClass('d-none');
-                    carryTicket(this, targetId);
-                }
-            });
 
             $('button.listBtn').on('click', function (e) {
                 e.preventDefault();
                 if (confirm(confirmMsg)) {
                     carryList(this, targetId);
                 }
-            });
-
-            $('span.fetchBtn').tooltip();
-
-            $('span.searchBtn').tooltip();
-
-            $('span.fetchBtn').on('click', function () {
-                $(this).addClass('spin');
-                fetchContent(this);
-            });
-
-            $('.searchForm').on('submit', function (e) {
-                e.preventDefault();
-                search(this);
             });
 
         }
@@ -143,64 +120,44 @@ function renderContent(selected) {
 
 }
 
-function fetchContent(selected) {
-    let targetId = $(selected).attr('id').split('-');
-    targetId = targetId[0];
-    let url = __baseUrl + '/admin/ajax/tab';
+function carryList(decided, target) {
+    let decision = $(decided).attr('name');
+    if (decision == 'edit') {
+        var editValue = prompt("Nowa Nazwa");
+    } else {
+        var editValue = "";
+    }
+    $('.spinnerOverlay').removeClass('d-none');
+    let elementId = $(decided).parent().serialize();
 
     var request = $.ajax({
-        method: 'get',
-        url: url,
+        method: 'post',
+        url: __baseUrl + '/admin/ajax/list',
         data: {
-            target: targetId
+            "_method": "PATCH",
+            elementId: elementId,
+            decision: decision,
+            editValue: editValue,
+            target: target
         }
     });
-
 
     request.done(function (response) {
         if (response.status === 'success') {
-            $('#' + targetId + '-content').html(response.html);
-            if (response.amount == 0) {
-                $('#' + targetId + 'Count').html('');
+            switch (decision) {
+                case 'delete':
+                    $(decided).parent().parent().parent().remove();
+                    $('.spinnerOverlay').addClass('d-none');
+                    break;
+
+                case 'edit':
+                    $(decided).parent().parent().prev().prev().html(editValue);
+                    $('.spinnerOverlay').addClass('d-none');
+                default:
+                    $(decided).addClass('alreadySent');
+                    $('.spinnerOverlay').addClass('d-none');
+                    break;
             }
-
-            $('#' + targetId + '-content').off('scroll');
-            $('#' + targetId + '-content').on('scroll', function () {
-                if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight - 200) {
-                    $(this).off('scroll');
-                    pagiContent(targetId);
-                }
-            });
-
-            $('button.ticketBtn').on('click', function (e) {
-                e.preventDefault();
-                if (confirm(confirmMsg)) {
-                    $('.spinnerOverlay').removeClass('d-none');
-                    carryTicket(this, targetId);
-                }
-            });
-
-            $('button.listBtn').on('click', function (e) {
-                e.preventDefault();
-                if (confirm(confirmMsg)) {
-                    carryList(this, targetId);
-                }
-            });
-
-            $('span.fetchBtn').tooltip();
-
-            $('span.searchBtn').tooltip();
-
-            $('span.fetchBtn').on('click', function () {
-                $(this).addClass('spin');
-                fetchContent(this);
-            });
-
-            $('.searchForm').on('submit', function (e) {
-                e.preventDefault();
-                search(this);
-            });
-
         }
     });
 
@@ -209,116 +166,6 @@ function fetchContent(selected) {
         $.each(xhr.responseJSON.errors,function(key,value) {
             alert(value);
         });
-        $('#' + targetId + '-content').html('');
+        $('.spinnerOverlay').addClass('d-none');
     });
-
-}
-
-function pagiContent(target) {
-    if (pagiTarget[target]) {
-
-        let url = __baseUrl + '/admin/ajax/pagiContent';
-        pagiCount[target] = pagiCount[target] + 1;
-
-        var request = $.ajax({
-            method: 'get',
-            url: url,
-            data: {
-                pagiTarget: target,
-                pagiCount: pagiCount[target]
-            }
-        });
-
-
-        request.done(function (response) {
-            if (response.status === 'success') {
-                pagiTarget[target] = response.pagiNext;
-                $('#' + target + '-table').append(response.html);
-
-                $('#' + target + '-content').on('scroll', function () {
-                    if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight - 200) {
-                        $(this).off('scroll');
-                        pagiContent(target);
-                    }
-                });
-
-                $('button.ticketBtn').off('click');
-                $('button.ticketBtn').on('click', function (e) {
-                    e.preventDefault();
-                    if (confirm(confirmMsg)) {
-                        $('.spinnerOverlay').removeClass('d-none');
-                        carryTicket(this, target);
-                    }
-                });
-
-                $('button.listBtn').off('click');
-                $('button.listBtn').on('click', function (e) {
-                    e.preventDefault();
-                    if (confirm(confirmMsg)) {
-                        carryList(this, target);
-                    }
-                });
-
-                $('span.fetchBtn').off('click');
-                $('span.fetchBtn').on('click', function () {
-                    $(this).addClass('spin');
-                    fetchContent(this);
-                });
-            }
-        });
-
-
-        request.fail(function (xhr) {
-            $.each(xhr.responseJSON.errors,function(key,value) {
-                alert(value);
-            });
-        });
-    }
-}
-
-function search(form) {
-    let targetId = $(form).data('target');
-    let searchCriteria = $('#' + targetId + 'Search-input').val().trim();
-
-    if (searchCriteria != "") {
-
-        let url = baseUrl + "/admin/ajax/searchList";
-
-        var request = $.ajax({
-            method: 'get',
-            url: url,
-            data: {
-                target: targetId,
-                criteria: searchCriteria
-            }
-        });
-
-
-        request.done(function (response) {
-            if (response.status === 'success') {
-                $('#' + targetId + '-searchOut').html(response.html);
-                $('#' + targetId + '-searchOut').find('button.ticketBtn').on('click', function (e) {
-                    e.preventDefault();
-                    if (confirm(confirmMsg)) {
-                        $('.spinnerOverlay').removeClass('d-none');
-                        carryTicket(this, targetId);
-                    }
-                });
-
-                $('#' + targetId + '-searchOut').find('button.listBtn').on('click', function (e) {
-                    e.preventDefault();
-                    if (confirm(confirmMsg)) {
-                        carryList(this, targetId);
-                    }
-                });
-            }
-        });
-
-
-        request.fail(function (xhr) {
-            $.each(xhr.responseJSON.errors,function(key,value) {
-                alert(value);
-            });
-        });
-    }
 }

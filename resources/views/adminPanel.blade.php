@@ -82,10 +82,10 @@
 
 @push('scripts')
 <script>
-    var __baseUrl = "{{url('/')}}";
-    var confirmMsg = "{{__('admin.confirmMsg')}}";
-    var noNotifications = "{{__('nav.noNotifications')}}";
-    var resetImgMsg = "{{__('activityWall.resetPictures')}}";
+    var __baseUrl           = "{{url('/')}}";
+    var confirmMsg          = "{{__('admin.confirmMsg')}}";
+    var noNotifications     = "{{__('nav.noNotifications')}}";
+    var resetImgMsg         = "{{__('activityWall.resetPictures')}}";
 
 </script>
 

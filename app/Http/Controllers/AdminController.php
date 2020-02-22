@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\User;
 use App\City;
+use App\cultureCategory;
 use Conner\Tagging\Model\Tag;
 
 use Carbon\Carbon;
@@ -19,6 +20,7 @@ use App\Jobs\SendAdminNewsletter;
 use App\Jobs\SendAdminWideInfo;
 use App\Jobs\DeleteUser;
 use App\Jobs\HandleProfilePictureTicket;
+use Illuminate\Database\Eloquent\Collection;
 use Nahid\Talk\Facades\Talk;
 
 class AdminController extends Controller
@@ -46,9 +48,26 @@ class AdminController extends Controller
         return view('adminPanel')->with('pictureTickets', $pictureTicketsAmount)->with('userTickets', $userTicketsAmount);
     }
 
-    public function culture()
+    public function culture(Request $request)
     {
-        return view('adminCulturePanel');
+
+        $request->validate([
+            'elementType'   => Rule::in(['cultureCategory','cultureItem']),
+            'elementId'     => ['numeric']
+        ]);
+        
+        $editingElement = null;
+        $editingType = null;
+
+        if ((isset($request->elementType))) {
+            switch ($request->elementType) {
+                case 'cultureCategory':
+                    $editingElement = cultureCategory::find($request->elementId);
+                    $editingType    = "category";
+                    break;
+            }
+        }
+        return view('adminCulturePanel')->withElement($editingElement)->withElementType($editingType);
     }
 
     public function getTabContent(Request $request)
@@ -91,15 +110,10 @@ class AdminController extends Controller
                     $amount = null;
                     $html = view('partials.admin.cityListContent')->withElements($elements)->render();
                     break;
-                case 'cultureItems':
-                    // $elements = $this->getCities();
-                    $amount = null;
-                    $html = view('partials.admin.culture.cultureItemsContent')->render();
-                    break;
                 case 'cultureCategories':
-                    // $elements = $this->getCities();
+                    $elements = $this->getCultureCategories();
                     $amount = null;
-                    $html = view('partials.admin.culture.cultureCategoriesContent')->render();
+                    $html = view('partials.admin.culture.cultureCategoriesContent')->withElements($elements)->render();
                     break;
             }
             return response()->json(['status' => 'success', 'html' => $html, 'amount' => $amount], 200);
@@ -148,7 +162,7 @@ class AdminController extends Controller
                 ],
                 'target'       => [
                     'string',
-                    Rule::in(['userTicket', 'userList', 'tagList', 'cityList'])
+                    Rule::in(['userTicket', 'userList', 'tagList', 'cityList','cultureCategories'])
                 ]
             ]);
             $elementId = intVal(substr($request->elementId, 10));
@@ -181,6 +195,14 @@ class AdminController extends Controller
                     $selectedElement = User::find($elementId);
                     if ($selectedElement) {
                         $this->resolveUserList($selectedElement, $request->decision);
+                    } else {
+                        return response()->json(['status' => 'error'], 400);
+                    }
+                    break;
+                case 'cultureCategories':
+                    $selectedElement = cultureCategory::find($elementId);
+                    if ($selectedElement) {
+                        $this->resolveCultureCategory($selectedElement);
                     } else {
                         return response()->json(['status' => 'error'], 400);
                     }
@@ -389,6 +411,10 @@ class AdminController extends Controller
         }
     }
 
+
+
+    // Private Functions 
+
     private function getProfileTickets(): array
     {
         $tickets = Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->take(5)->get();
@@ -472,6 +498,11 @@ class AdminController extends Controller
         return City::take(10)->get();
     }
 
+    private function getCultureCategories() : Collection
+    {
+        return cultureCategory::all();
+    }
+
     private function resolveProfileTicket(array $data, string $decision): void
     {
         $validUser = User::where('name', $data['user_name'])->where('pending_picture', $data['image'])->first();
@@ -544,5 +575,10 @@ class AdminController extends Controller
                 $city->update();
                 break;
         }
+    }
+
+    private function resolveCultureCategory(cultureCategory $category)
+    {
+        $category->delete();
     }
 }

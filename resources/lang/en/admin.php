@@ -62,5 +62,8 @@ return [
     'attrs'                     => 'Attributes',
     'addNewAttr'                => 'Add New Attribute',
     'deleteAttrMsg'             => 'Delete Attribute',
-    'emptyFields'               => "Form fields cannot be empty"
+    'emptyFields'               => "Form fields cannot be empty",
+    'cultureEditCategory'       => "Edit Category",
+    'change'                    => "Change",
+    'back'                      => "Go Back"
 ];

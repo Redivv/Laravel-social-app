@@ -28,7 +28,7 @@ function createNewAttrInput() {
     return html;
 }
 
-function deleteAttrForm(button) {
+export function deleteAttrForm(button) {
     $(button).parents('.attrBox').remove();
     $('.tooltip').remove();
 }
@@ -50,8 +50,8 @@ function sendAjaxRequestToUrlWithData(url, data) {
 
 function receiveAjaxResponse(request) {
     request.done(function (response) {
-        if (response.status === 'success') {
-            alert('kek');
+        if (response.action === 'savedData') {
+            displaySuccessInformation();
             hideSpinnerOverlay();
         }
     });
@@ -63,6 +63,14 @@ function receiveAjaxResponse(request) {
     });
 }
 
-function hideSpinnerOverlay() {
+export function showSpinnerOverlay() {
+    $('.spinnerOverlay:first').removeClass('d-none');
+}
+
+export function hideSpinnerOverlay() {
     $('.spinnerOverlay:first').addClass('d-none');
+}
+
+function displaySuccessInformation() {
+    alert(savedChanges);
 }

@@ -61,5 +61,8 @@ return [
     'attrs'                     => 'Atrybuty',
     'addNewAttr'                => 'Dodaj Nowy Atrybut',
     'deleteAttrMsg'             => 'Usuń Atrybut',
-    'emptyFields'               => "Formularz nie może być pusty"
+    'emptyFields'               => "Formularz nie może być pusty",
+    'cultureEditCategory'       => "Edytuj Kategorię",
+    'change'                    => "Zmień",
+    'back'                      => "Wróć"
 ];

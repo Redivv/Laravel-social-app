@@ -445,6 +445,11 @@ main .tabsContent #adminWideInfo-content #adminInfoForm .wideInfoBtn {
   }
 }
 
+main .tabsContent .returnBtn {
+  padding: 0.5rem 1rem;
+  text-align: right;
+}
+
 main .tabsContent #newCategoryForm {
   padding: 0 0.5rem;
 }

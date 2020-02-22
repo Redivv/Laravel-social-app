@@ -32,12 +32,16 @@
             <div class="nav flex-column nav-pills" id="pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link tab" id="cultureCategories" data-toggle="pill" href="#cultureCategories-content" role="tab"
                     aria-controls="cultureCategories" aria-selected="true">
-                    {{__('admin.cultureAllCategories')}} <span id="cultureCategoriesCount" class="ticketCount">5</span>
+                    {{__('admin.cultureAllCategories')}}
                 </a>
                 <hr>
-                <a class="nav-link creatingTab" id="cultureNewCategory" data-toggle="pill" href="#cultureNewCategory-content" role="tab"
+                <a class="nav-link creatingTab @if($elementType === "category") active @endif" id="cultureNewCategory" data-toggle="pill" href="#cultureNewCategory-content" role="tab"
                     aria-controls="cultureNewCategory" aria-selected="true">
-                    {{__('admin.cultureAddCategory')}}
+                    @if($elementType === "category") 
+                        {{__('admin.cultureEditCategory')}}
+                    @else
+                        {{__('admin.cultureAddCategory')}}
+                    @endif
                 </a>
                 <a class="nav-link creatingTab" id="cultureNewItem" data-toggle="pill" href="#cultureNewItem-content" role="tab"
                     aria-controls="cultureNewItem" aria-selected="true">
@@ -48,7 +52,7 @@
         <div class="tabsContent pt-2 pb-2 overflow-auto col-md-8 col-sm-12">
             <div class="tab-content" id="tabContent">
                 <div class="tab-pane" id="cultureCategories-content" role="tabpanel" aria-labelledby="cultureCategories-tab"></div>
-                <div class="tab-pane" id="cultureNewCategory-content" role="tabpanel" aria-labelledby="cultureNewCategory-tab">
+                <div class="tab-pane @if($elementType === "category") active @endif" id="cultureNewCategory-content" role="tabpanel" aria-labelledby="cultureNewCategory-tab">
                     @include('partials.admin.culture.newCategoryForm')
                 </div>
                 <div class="tab-pane" id="cultureNewItem-content" role="tabpanel" aria-labelledby="cultureNewItem-tab">
@@ -75,8 +79,10 @@
 @push('scripts')
 <script>
     var __baseUrl           = "{{url('/')}}";
+    var savedChanges        = "{{__('profile.savedChanges')}}";
     var deleteAttrMsg       = "{{__('admin.deleteAttrMsg')}}";
     var emptyFieldsMsg      = "{{__('admin.emptyFields')}}"
+    var confirmMsg          = "{{__('admin.confirmMsg')}}";
 </script>
 
 <script src="{{asset('js/adminCulture.js')}}"></script>
