@@ -74,6 +74,7 @@
             background-color: #f22103;
         }
     </style>
+    <link rel="stylesheet" href="{{asset("jqueryUi\jquery-ui.min.css")}}">
 @endpush    
 
 @push('scripts')
@@ -83,8 +84,14 @@
     var deleteAttrMsg       = "{{__('admin.deleteAttrMsg')}}";
     var emptyFieldsMsg      = "{{__('admin.emptyFields')}}"
     var confirmMsg          = "{{__('admin.confirmMsg')}}";
+    var selectCategoryMsg   = "{{__('admin.selectCategory')}}";
+    var deleteHobby         = "{{__('searcher.deleteHobby')}}";
+    var resetImgMsg         =  "{{__('activityWall.resetPictures')}}";
+    var deleteImages        =  "{{__('activityWall.deleteImages')}}";
+    var badFileType         =  "{{__('chat.badFileType')}}";
 </script>
 
+<script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
 <script src="{{asset('js/adminCulture.js')}}"></script>
 
 <script defer>

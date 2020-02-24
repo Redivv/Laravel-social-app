@@ -64,5 +64,11 @@ return [
     'emptyFields'               => "Formularz nie może być pusty",
     'cultureEditCategory'       => "Edytuj Kategorię",
     'change'                    => "Zmień",
-    'back'                      => "Wróć"
+    'back'                      => "Wróć",
+    'itemName'                  => "Nazwa Przedmiotu",
+    'itemCategory'              => "Kategoria",
+    'itemTags'                  => "Tagi",
+    'itemImages'                => "Zdjęcia",
+    'itemReview'                => "Recenzja",
+    'selectCategory'            => "Wybierz Kategorię"
 ];

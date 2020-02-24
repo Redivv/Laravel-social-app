@@ -65,5 +65,11 @@ return [
     'emptyFields'               => "Form fields cannot be empty",
     'cultureEditCategory'       => "Edit Category",
     'change'                    => "Change",
-    'back'                      => "Go Back"
+    'back'                      => "Go Back",
+    'itemName'                  => "Item's Name",
+    'itemCategory'              => "Category",
+    'itemTags'                  => "Tags",
+    'itemImages'                => "Images",
+    'itemReview'                => "Review",
+    'selectCategory'            => "Select Category"
 ];

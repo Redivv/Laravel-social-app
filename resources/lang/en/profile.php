@@ -14,7 +14,7 @@ return [
     'status_taken'          => 'Taken',
     'status_hidden'         => 'Hide',
     'status_free'           => 'Free',
-    'desc'                  => 'Opis',
+    'desc'                  => 'Desciption',
     'hobby'                 => 'Hobby',
     'save'                  => 'Save changes',
     'likeUser'              => "Like user",

@@ -1,10 +1,14 @@
 import "lightbox2";
+
 import {
     sendAjaxRequestToWithFormData,
     addNewAttrForm,
     showSpinnerOverlay,
     hideSpinnerOverlay,
-    deleteAttrForm
+    deleteAttrForm,
+    displayCategoryAttrs,
+    addNewTagInput,
+    displayAddedImageIn
 } from "./cultureFunctions";
 
 var pagiTarget = {
@@ -74,6 +78,46 @@ function main() {
     $('.categoryAttrDelete>i:last').on('click',function() {
         deleteAttrForm(this);
     });
+
+    $('select#itemCategory').on('change',displayCategoryAttrs);
+
+    $('#itemTags').on('keydown',function(key){
+        if (key.which == 13 || key.keyCode == 13) {
+            key.preventDefault();
+            addNewTagInput(this);
+        }
+    });
+
+    $('#addTagBtn').on('click',function() {
+        addNewTagInput($('#itemTags'));
+    });
+
+    $('#itemImages').change(function(evt){
+        displayAddedImageIn(this,evt,'#itemImages-out');
+    });
+    
+    $( "#itemTags" ).autocomplete({
+ 
+        source: function(request, response) {
+            $.ajax({
+                url: __baseUrl+"/ajax/tag/autocompleteHobby",
+                data: {
+                    term : request.term
+                },
+                dataType: "json",
+                success: function(data){
+                    var resp = $.map(data,function(obj){
+                    return obj.name;
+                }); 
+                response(resp);
+                }
+            });
+        },
+        minLength: 1
+    });
+
+    let reviewCode = $('#itemReview').html();
+    $('#itemReview').summernote('code',reviewCode);
 }
 
 function renderContent(selected) {

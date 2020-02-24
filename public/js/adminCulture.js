@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11329,6 +11329,39 @@ function main() {
   $('.categoryAttrDelete>i:last').on('click', function () {
     Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["deleteAttrForm"])(this);
   });
+  $('select#itemCategory').on('change', _cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["displayCategoryAttrs"]);
+  $('#itemTags').on('keydown', function (key) {
+    if (key.which == 13 || key.keyCode == 13) {
+      key.preventDefault();
+      Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewTagInput"])(this);
+    }
+  });
+  $('#addTagBtn').on('click', function () {
+    Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewTagInput"])($('#itemTags'));
+  });
+  $('#itemImages').change(function (evt) {
+    Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["displayAddedImageIn"])(this, evt, '#itemImages-out');
+  });
+  $("#itemTags").autocomplete({
+    source: function source(request, response) {
+      $.ajax({
+        url: __baseUrl + "/ajax/tag/autocompleteHobby",
+        data: {
+          term: request.term
+        },
+        dataType: "json",
+        success: function success(data) {
+          var resp = $.map(data, function (obj) {
+            return obj.name;
+          });
+          response(resp);
+        }
+      });
+    },
+    minLength: 1
+  });
+  var reviewCode = $('#itemReview').html();
+  $('#itemReview').summernote('code', reviewCode);
 }
 
 function renderContent(selected) {
@@ -11420,7 +11453,7 @@ function carryList(decided, target) {
 /*!**************************************************!*\
   !*** ./resources/js/culture/cultureFunctions.js ***!
   \**************************************************/
-/*! exports provided: sendAjaxRequestToWithFormData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay */
+/*! exports provided: sendAjaxRequestToWithFormData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInput, displayAddedImageIn */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11430,6 +11463,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteAttrForm", function() { return deleteAttrForm; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showSpinnerOverlay", function() { return showSpinnerOverlay; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideSpinnerOverlay", function() { return hideSpinnerOverlay; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayCategoryAttrs", function() { return displayCategoryAttrs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewTagInput", function() { return addNewTagInput; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayAddedImageIn", function() { return displayAddedImageIn; });
 var attributesCount = 1;
 function sendAjaxRequestToWithFormData(url, form) {
   var formData = extractFormData(form);
@@ -11496,9 +11532,94 @@ function displaySuccessInformation() {
   alert(savedChanges);
 }
 
+function displayCategoryAttrs() {
+  var html = createAtrrInputsHtml($('select#itemCategory option:selected').data('attrs'));
+  $('#newItemAttributes').html(html);
+}
+
+function createAtrrInputsHtml(attrs) {
+  var inputs = "";
+
+  if (attrs) {
+    $.each(attrs, function (key, value) {
+      inputs += '<div class="attrBox">' + '<label class="d-block" for="itemAttr' + key + '-new">' + value + '</label>' + '<input class="itemAttr form-control col-6" name="itemAttr[]" id="itemAttr' + key + '-new">' + '</div>';
+    });
+  } else {
+    inputs = '<span class="noCategoryInfo">' + selectCategoryMsg + '</span>';
+  }
+
+  return inputs;
+}
+
+function addNewTagInput(input) {
+  var newTagValue = $(input).val().trim();
+
+  if (newTagValue !== "") {
+    var html = createNewTagInput(newTagValue);
+    $('#itemTags-out').append(html);
+    $(input).val('');
+    $('#itemTags-out>.itemTag:last').tooltip();
+    $('#itemTags-out>.itemTag:last').on('click', deleteClickedElement);
+  }
+}
+
+function createNewTagInput(tagName) {
+  var newTagHtml = '<div class="col itemTag" data-tool="tooltip" data-placement="bottom" title="' + deleteHobby + '">' + '<span>' + tagName + '</span>' + '<input type="hidden" name="itemTags[]" value="' + tagName + '">' + '</div>';
+  return newTagHtml;
+}
+
+function deleteClickedElement() {
+  if (confirm(confirmMsg)) {
+    $(this).remove();
+    $('.tooltip:first').remove();
+  }
+}
+
+function displayAddedImageIn(input, evt, container) {
+  var files = evt.target.files; // FileList object
+  // Empty the preview list
+
+  $(container).empty();
+  var html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt" data-tool="tooltip" title="' + deleteImages + '" data-placement="bottom"></i></div>';
+  $(container).append(html);
+  $('[data-tool="tooltip"]').tooltip();
+  var tag = $(input);
+  $('.resetPicture').one('click', function () {
+    if (confirm(resetImgMsg)) {
+      tag.val("");
+      $(container).empty();
+      $('.tooltip:first').remove();
+    }
+  }); // Loop through the FileList and render image files as thumbnails.
+
+  for (var i = 0, f; f = files[i]; i++) {
+    // Only process image files.
+    if (!f.type.match('image.*')) {
+      $(this).val("");
+      alert(badFileType);
+      $(container).empty();
+      break;
+    }
+
+    var reader = new FileReader(); // Closure to capture the file information.
+
+    reader.onload = function (theFile) {
+      return function (e) {
+        // Render thumbnail.
+        var span = document.createElement('span');
+        span.innerHTML = ['<a href="', e.target.result, '" data-lightbox="previewImage"><img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '" alt="Picture Preview"/></a>'].join('');
+        $(container).append(span, null);
+      };
+    }(f); // Read in the image file as a data URL.
+
+
+    reader.readAsDataURL(f);
+  }
+}
+
 /***/ }),
 
-/***/ 7:
+/***/ 8:
 /*!****************************************************!*\
   !*** multi ./resources/js/culture/adminCulture.js ***!
   \****************************************************/

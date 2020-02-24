@@ -51,11 +51,13 @@ class AdminController extends Controller
     public function culture(Request $request)
     {
 
+        $itemCategories = cultureCategory::all();
+
         $request->validate([
-            'elementType'   => Rule::in(['cultureCategory','cultureItem']),
+            'elementType'   => Rule::in(['cultureCategory', 'cultureItem']),
             'elementId'     => ['numeric']
         ]);
-        
+
         $editingElement = null;
         $editingType = null;
 
@@ -67,13 +69,13 @@ class AdminController extends Controller
                     break;
             }
         }
-        return view('adminCulturePanel')->withElement($editingElement)->withElementType($editingType);
+        return view('adminCulturePanel')->withElement($editingElement)->withElementType($editingType)->withCategories($itemCategories);
     }
 
     public function getTabContent(Request $request)
     {
         if ($request->ajax()) {
-            $validTargets = ['profileTicket', 'userTicket', 'userList', 'tagList', 'cityList','cultureItems','cultureCategories'];
+            $validTargets = ['profileTicket', 'userTicket', 'userList', 'tagList', 'cityList', 'cultureItems', 'cultureCategories'];
 
             $target = $request->validate([
                 'target'    => [
@@ -162,7 +164,7 @@ class AdminController extends Controller
                 ],
                 'target'       => [
                     'string',
-                    Rule::in(['userTicket', 'userList', 'tagList', 'cityList','cultureCategories'])
+                    Rule::in(['userTicket', 'userList', 'tagList', 'cityList', 'cultureCategories'])
                 ]
             ]);
             $elementId = intVal(substr($request->elementId, 10));
@@ -498,7 +500,7 @@ class AdminController extends Controller
         return City::take(10)->get();
     }
 
-    private function getCultureCategories() : Collection
+    private function getCultureCategories(): Collection
     {
         return cultureCategory::all();
     }

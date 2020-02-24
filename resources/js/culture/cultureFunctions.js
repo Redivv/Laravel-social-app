@@ -74,3 +74,103 @@ export function hideSpinnerOverlay() {
 function displaySuccessInformation() {
     alert(savedChanges);
 }
+
+export function displayCategoryAttrs() {
+    let html = createAtrrInputsHtml($('select#itemCategory option:selected').data('attrs'));
+    $('#newItemAttributes').html(html);
+}
+
+function createAtrrInputsHtml(attrs) {
+    let inputs = "";
+    if (attrs) {
+        $.each(attrs,function(key,value){
+            inputs += 
+            '<div class="attrBox">'+
+                '<label class="d-block" for="itemAttr'+key+'-new">'+value+'</label>'+
+                '<input class="itemAttr form-control col-6" name="itemAttr[]" id="itemAttr'+key+'-new">'+
+            '</div>';
+        });
+    }else{
+        inputs = '<span class="noCategoryInfo">'+selectCategoryMsg+'</span>'
+    }
+    return inputs;
+}
+
+export function addNewTagInput(input) {
+    let newTagValue = $(input).val().trim();
+    if (newTagValue !== "") {
+        let html = createNewTagInput(newTagValue);
+
+        $('#itemTags-out').append(html);
+        $(input).val('');
+
+        $('#itemTags-out>.itemTag:last').tooltip();
+        $('#itemTags-out>.itemTag:last').on('click',deleteClickedElement);
+    }
+}
+
+function createNewTagInput(tagName) {
+    let newTagHtml = 
+    '<div class="col itemTag" data-tool="tooltip" data-placement="bottom" title="'+deleteHobby+'">'+
+        '<span>'+tagName+'</span>'+
+        '<input type="hidden" name="itemTags[]" value="'+tagName+'">'+
+    '</div>';
+    
+    return newTagHtml;
+}
+
+function deleteClickedElement() {
+    if (confirm(confirmMsg)) {
+        $(this).remove();
+        $('.tooltip:first').remove();
+    }
+}
+
+export function displayAddedImageIn(input,evt,container) {
+    var files = evt.target.files; // FileList object
+    
+    // Empty the preview list
+    $(container).empty();
+
+    
+    let html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt" data-tool="tooltip" title="'+deleteImages+'" data-placement="bottom"></i></div>';
+    $(container).append(html);
+    $('[data-tool="tooltip"]').tooltip();
+    let tag = $(input);
+
+    $('.resetPicture').one('click',function() {
+        if (confirm(resetImgMsg)) {
+            tag.val("");
+            $(container).empty();
+            $('.tooltip:first').remove();
+        }
+    })
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+    // Only process image files.
+    if (!f.type.match('image.*')) {
+        $(this).val("");
+        alert(badFileType);
+        $(container).empty();
+        break;
+    }
+
+    var reader = new FileReader();
+
+    // Closure to capture the file information.
+    reader.onload = (function(theFile) {
+        return function(e) {
+        // Render thumbnail.
+        var span = document.createElement('span');
+        span.innerHTML = ['<a href="', e.target.result,'" data-lightbox="previewImage"><img class="thumb" src="', e.target.result,
+                            '" title="', escape(theFile.name), '" alt="Picture Preview"/></a>'].join('');
+        $(container).append(span, null);
+        };
+    })(f);
+
+    // Read in the image file as a data URL.
+    reader.readAsDataURL(f);
+    }
+}
