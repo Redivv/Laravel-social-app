@@ -33,6 +33,13 @@ class CultureController extends Controller
         }
     }
 
+    public function newItem(Request $request)
+    {
+        $kek = $request->all();
+
+        return response()->json(['action' => 'savedData'], 200);
+    }
+
 
 
     // Private Functions

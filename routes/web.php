@@ -131,5 +131,7 @@ Route::prefix('culture')->group(function(){
     Route::get('/search', 'CultureController@searchResults')->name('culture.searchResults');
     
     Route::put('/newCategory', 'CultureController@newCategory')->middleware('admin')->name('culture.newCategory');
+    
+    Route::put('/newItem', 'CultureController@newItem')->middleware('admin')->name('culture.newItem');
 });
 

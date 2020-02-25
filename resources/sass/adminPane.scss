@@ -182,8 +182,8 @@ main{
                         .thumb{
                             margin-right: 0.5rem;
                             margin-bottom: 1rem;
-                            max-width: 200px;
-                            max-height: 200px;
+                            max-width: 6rem;
+                            max-height: 6rem;
                         }
                     }
                     .friendsWallButtons{
@@ -211,7 +211,7 @@ main{
             padding: 0.5rem 1rem;
             text-align: right;
         }
-        #newCategoryForm{
+        #newCategoryForm,#newItemForm{
             padding: 0 0.5rem;
             label{
                 font-weight: bold;
@@ -232,15 +232,78 @@ main{
                     }
                 }
             }
-            .newCategoryButton{
+            .newCategoryButton,.newItemButton{
                 margin-top: 1rem;
                 background-color: $orange;
                 color: $white;
                 @include font-size (1.1rem);
                 font-weight: bold;
                 letter-spacing: 1px;
+                text-transform: uppercase;
                 &:hover{
                     background-color: $orange-hover;
+                }
+            }
+            #itemCategory{
+                width: 50%;
+            }
+            .noCategoryInfo{
+                width: 100%;
+                color: #6c757d;
+                @include font-size(1rem);
+                letter-spacing: 0.5px;
+                text-align: center;
+            }
+
+            .input-group-append{
+                width: 10%;
+                #addTagBtn{
+                    width: 100%;
+                    color: $white;
+                    background-color: $orange;
+                    &:hover{
+                        background-color: $orange-hover;
+                    }
+                }
+            }
+            #itemTags-out{
+                width: 100%;
+                margin-top: 0.5rem;
+                padding: 0.5rem;
+                .itemTag{
+                    background-color: $orange;
+                    border-radius: 20px;
+                    text-align: center;
+                    padding: 0.2rem 0;
+                    margin: 0 1rem;
+                    span{
+                        @include font-size(0.9rem);
+                        font-weight: bold;
+                        letter-spacing: 0.5px;
+                        color: $white;
+                    }
+                    &:hover{
+                        background-color: $orange-active-hover;
+                    }
+                }
+            }
+            #itemImages-out{
+                .resetPictureBox{
+                    text-align: right;
+                    i{
+                        cursor: pointer;
+                        @include font-size(1.1rem);
+                        &:hover{
+                            color:$orange;
+                        }
+                    }
+                }
+                width: 100%;
+                padding: 0.5rem;
+                img{
+                    max-width: 6rem;
+                    max-height: 6rem;
+                    margin: 0 1rem;
                 }
             }
         }

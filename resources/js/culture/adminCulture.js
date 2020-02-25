@@ -75,6 +75,23 @@ function main() {
         }
     });
 
+    $('#newItemForm').on('submit',function(e) {
+        e.preventDefault();
+
+        let categoryIsSelected      = $('#itemCategory option:selected').val().trim()   != 0;
+        let itemNameIsFilled        = $('#itemName').val().trim()  !== "";
+        let itemDescIsFilled        = $('#itemDesc').val().trim()  !== "";
+
+        if (categoryIsSelected && itemNameIsFilled && itemDescIsFilled) {
+
+            showSpinnerOverlay();
+            sendAjaxRequestToWithFormData(baseUrl+"/culture/newItem",this);
+            $(this)[0].reset();
+        }else{
+            alert(emptyFieldsMsg);
+        }
+    });
+
     $('.categoryAttrDelete>i:last').on('click',function() {
         deleteAttrForm(this);
     });
@@ -117,7 +134,10 @@ function main() {
     });
 
     let reviewCode = $('#itemReview').html();
-    $('#itemReview').summernote('code',reviewCode);
+    $('#itemReview').summernote({
+        code:reviewCode,
+        minHeight: 150  
+    });
 }
 
 function renderContent(selected) {

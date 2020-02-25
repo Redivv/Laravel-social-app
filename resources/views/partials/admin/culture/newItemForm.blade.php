@@ -2,7 +2,7 @@
     @method('put')
     <div class="form-group">
         <label class="d-block" for="itemCategory">{{__('admin.itemCategory')}}</label>
-        <select id="itemCategory" class="itemCategory" name="itemCategory">
+        <select id="itemCategory" class="itemCategory form-control" name="itemCategory">
             <option value="0" selected>-- {{__('admin.selectCategory')}} --</option>
             @foreach ($categories as $cat)
                 <option value="{{$cat->id}}" data-attrs="{{$cat->attributes}}">{{$cat->name}}</option>
@@ -14,17 +14,17 @@
         <input type="text" class="itemName form-control" name="itemName" id="itemName" required>
     </div>
     <div id="newItemAttributes" class="form-group">
-        <span class="noCategoryInfo">{{__('admin.selectCategory')}}</span>
+        <div class="noCategoryInfo">{{__('admin.selectCategory')}}</div>
     </div>
     <div class="form-group">
         <label class="d-block" for="itemTags">{{__('admin.itemTags')}}</label>
         <div class="input-group">
             <input class="itemTags form-control" id="itemTags">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="addTagBtn">{{__('searcher.add')}}</button>
+                <button class="btn" type="button" id="addTagBtn">{{__('searcher.add')}}</button>
             </div>
         </div>
-        <output class="row w-100" id="itemTags-out">
+        <output class="row" id="itemTags-out">
         </output>
     </div>
     <div class="form-group">
@@ -33,13 +33,13 @@
     </div>
     <div class="form-group">
         <label class="d-block" for="itemImages">{{__('admin.itemImages')}}</label>
-        <input type="file" class="itemImages form-control-file" id="itemImages" multiple accept="image/*">
+        <input type="file" name="itemImages[]" class="itemImages form-control-file" id="itemImages" multiple accept="image/*">
         <output id="itemImages-out"></output>
     </div>
     <div class="form-group itemReview-box">
         <label class="d-block" for="itemReview">{{__('admin.itemReview')}}</label>
-        <textarea class="itemReview form-control" id="itemReview">peni</textarea>
+        <textarea name="itemReview" class="itemReview form-control" id="itemReview">peni</textarea>
     </div>
 
-    <button class="btn btn-block newCategoryButton" type="submit">{{__('searcher.add')}}</button>
+    <button class="btn btn-block newItemButton" type="submit">{{__('searcher.add')}}</button>
 </form>

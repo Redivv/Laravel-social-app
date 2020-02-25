@@ -1357,8 +1357,8 @@ main .tabsContent #adminWideInfo-content #adminInfoForm .form-group #adminPictur
 main .tabsContent #adminWideInfo-content #adminInfoForm .form-group #adminPicture-preview .thumb {
   margin-right: 0.5rem;
   margin-bottom: 1rem;
-  max-width: 200px;
-  max-height: 200px;
+  max-width: 6rem;
+  max-height: 6rem;
 }
 
 main .tabsContent #adminWideInfo-content #adminInfoForm .form-group .friendsWallButtons {
@@ -1394,44 +1394,147 @@ main .tabsContent .returnBtn {
   text-align: right;
 }
 
-main .tabsContent #newCategoryForm {
+main .tabsContent #newCategoryForm,
+main .tabsContent #newItemForm {
   padding: 0 0.5rem;
 }
 
-main .tabsContent #newCategoryForm label {
+main .tabsContent #newCategoryForm label,
+main .tabsContent #newItemForm label {
   font-weight: bold;
   margin-bottom: 0.25rem;
   letter-spacing: 0.5px;
   font-size: 0.9rem;
 }
 
-main .tabsContent #newCategoryForm .attrBox {
+main .tabsContent #newCategoryForm .attrBox,
+main .tabsContent #newItemForm .attrBox {
   align-items: center;
 }
 
 main .tabsContent #newCategoryForm .attrBox .categoryAttrAppend i,
-main .tabsContent #newCategoryForm .attrBox .categoryAttrDelete i {
+main .tabsContent #newCategoryForm .attrBox .categoryAttrDelete i,
+main .tabsContent #newItemForm .attrBox .categoryAttrAppend i,
+main .tabsContent #newItemForm .attrBox .categoryAttrDelete i {
   font-size: 1rem;
   padding: 0.5rem;
   cursor: pointer;
 }
 
 main .tabsContent #newCategoryForm .attrBox .categoryAttrAppend i:hover,
-main .tabsContent #newCategoryForm .attrBox .categoryAttrDelete i:hover {
+main .tabsContent #newCategoryForm .attrBox .categoryAttrDelete i:hover,
+main .tabsContent #newItemForm .attrBox .categoryAttrAppend i:hover,
+main .tabsContent #newItemForm .attrBox .categoryAttrDelete i:hover {
   color: #f66103;
 }
 
-main .tabsContent #newCategoryForm .newCategoryButton {
+main .tabsContent #newCategoryForm .newCategoryButton,
+main .tabsContent #newCategoryForm .newItemButton,
+main .tabsContent #newItemForm .newCategoryButton,
+main .tabsContent #newItemForm .newItemButton {
   margin-top: 1rem;
   background-color: #f66103;
   color: #ffffff;
   font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-main .tabsContent #newCategoryForm .newCategoryButton:hover {
+main .tabsContent #newCategoryForm .newCategoryButton:hover,
+main .tabsContent #newCategoryForm .newItemButton:hover,
+main .tabsContent #newItemForm .newCategoryButton:hover,
+main .tabsContent #newItemForm .newItemButton:hover {
   background-color: #e26103;
+}
+
+main .tabsContent #newCategoryForm #itemCategory,
+main .tabsContent #newItemForm #itemCategory {
+  width: 50%;
+}
+
+main .tabsContent #newCategoryForm .noCategoryInfo,
+main .tabsContent #newItemForm .noCategoryInfo {
+  width: 100%;
+  color: #6c757d;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+main .tabsContent #newCategoryForm .input-group-append,
+main .tabsContent #newItemForm .input-group-append {
+  width: 10%;
+}
+
+main .tabsContent #newCategoryForm .input-group-append #addTagBtn,
+main .tabsContent #newItemForm .input-group-append #addTagBtn {
+  width: 100%;
+  color: #ffffff;
+  background-color: #f66103;
+}
+
+main .tabsContent #newCategoryForm .input-group-append #addTagBtn:hover,
+main .tabsContent #newItemForm .input-group-append #addTagBtn:hover {
+  background-color: #e26103;
+}
+
+main .tabsContent #newCategoryForm #itemTags-out,
+main .tabsContent #newItemForm #itemTags-out {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+}
+
+main .tabsContent #newCategoryForm #itemTags-out .itemTag,
+main .tabsContent #newItemForm #itemTags-out .itemTag {
+  background-color: #f66103;
+  border-radius: 20px;
+  text-align: center;
+  padding: 0.2rem 0;
+  margin: 0 1rem;
+}
+
+main .tabsContent #newCategoryForm #itemTags-out .itemTag span,
+main .tabsContent #newItemForm #itemTags-out .itemTag span {
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+}
+
+main .tabsContent #newCategoryForm #itemTags-out .itemTag:hover,
+main .tabsContent #newItemForm #itemTags-out .itemTag:hover {
+  background-color: #d22103;
+}
+
+main .tabsContent #newCategoryForm #itemImages-out,
+main .tabsContent #newItemForm #itemImages-out {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+main .tabsContent #newCategoryForm #itemImages-out .resetPictureBox,
+main .tabsContent #newItemForm #itemImages-out .resetPictureBox {
+  text-align: right;
+}
+
+main .tabsContent #newCategoryForm #itemImages-out .resetPictureBox i,
+main .tabsContent #newItemForm #itemImages-out .resetPictureBox i {
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+main .tabsContent #newCategoryForm #itemImages-out .resetPictureBox i:hover,
+main .tabsContent #newItemForm #itemImages-out .resetPictureBox i:hover {
+  color: #f66103;
+}
+
+main .tabsContent #newCategoryForm #itemImages-out img,
+main .tabsContent #newItemForm #itemImages-out img {
+  max-width: 6rem;
+  max-height: 6rem;
+  margin: 0 1rem;
 }
 
 main #showTabsMenu {
