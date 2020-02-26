@@ -19307,6 +19307,10 @@ iframe {
   margin-left: 0.5rem;
 }
 
+.note-group-select-from-files {
+  display: none !important;
+}
+
 main .pageLogo img {
   max-width: 18rem;
 }

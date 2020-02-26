@@ -7,6 +7,7 @@ use App\cultureItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class CultureController extends Controller
 {
@@ -37,7 +38,11 @@ class CultureController extends Controller
     public function newItem(Request $request)
     {
         $validatedData          =   $this->validateNewItemRequest($request);
-        $newItem                =   $this->createNewItemFromData($validatedData);
+        if (isset($validatedData['itemId'])) {
+            $newItem                = $this->editExistingItem($validatedData);
+        }else{
+            $newItem                =   $this->createNewItemFromData($validatedData);
+        }
 
         if ($this->wasNewItemAddedToDatabase($newItem)) {
             $this->tagNewItemWithData($newItem,$validatedData);
@@ -68,8 +73,10 @@ class CultureController extends Controller
             'itemTags.*'        => ['nullable','string'],
             'itemDesc'          => ['required','string'],
             'itemReview'        => ['nullable','string'],
-            'itemThumbnail'      => ['nullable', 'file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
-            'itemImages.*'      => ['nullable', 'file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg']
+            'itemThumbnail'     => ['nullable', 'file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
+            'itemImages.*'      => ['nullable', 'file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
+            'itemId'            => ['numeric','exists:culture_items,id'],
+            'noImages'          => ['filled', Rule::in(['true'])]
         ]);
         return $validatedRequest;
     }
@@ -133,6 +140,42 @@ class CultureController extends Controller
         }
     }
 
+    private function editExistingItem(Array $data) : cultureItem
+    {
+        $item = cultureItem::find($data['itemId']);
+
+        $item->category_id = intVal($data['itemCategory']);
+
+        $item->name          = $data['itemName'];
+        $item->name_slug     = Str::slug($data['itemName']);
+
+        $item->description = $data['itemDesc'];
+
+        if (isset($data['itemAttr'])) {
+            $item->attributes    = json_encode($data['itemAttr']);
+        }else{
+            $item->attributes    = null;
+        }
+
+        if(isset($data['itemThumbnail'])){
+            $item->thumbnail = $this->handleImages([$data['itemThumbnail']]);
+        }
+
+        if(isset($data['itemImages'])){
+            $item->pictures = $this->handleImages($data['itemImages']);
+        }elseif(isset($data['noImages'])){
+            $item->pictures = null;
+        }
+
+        if (isset($data['itemReview'])) {
+            $item->review = $data['itemReview'];
+        }else{
+            $item->review = null;
+        }
+
+        return $item;
+    }
+
     private function wasNewCategoryAddedToDatabase(cultureCategory $newCategory) : bool
     {
         return $newCategory->save();
@@ -145,6 +188,7 @@ class CultureController extends Controller
 
     private function tagNewItemWithData(cultureItem $newItem, array $data) : void
     {
+        $newItem->untag();
         if (isset($data['itemTags'])) {
             $newItem->tag($data['itemTags']);
         }

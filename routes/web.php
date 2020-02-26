@@ -99,6 +99,8 @@ Route::prefix('admin')->group(function(){
             Route::patch('list','AdminController@resolveListRequest')->name('adminAjaxList');
             Route::post('wideInfo', 'AdminController@wideInfo')->name('adminWideInfo');
 
+            Route::put('newPartners','AdminController@newPartners')->name('adminAjaxPartners');
+
             Route::get('pagiContent', 'AdminController@getPagi')->name('adminPagi');
             Route::get('searchList', 'AdminController@searchList')->name('adminSearch');
         });

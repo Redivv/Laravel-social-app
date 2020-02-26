@@ -422,6 +422,13 @@ class AdminController extends Controller
         }
     }
 
+    public function newPartners(Request $request)
+    {
+        if ($request->ajax()) {
+            return response()->json(['action' => 'savedData'], 200);
+        }
+    }
+
 
 
     // Private Functions 

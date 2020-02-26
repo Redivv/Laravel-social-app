@@ -11288,7 +11288,7 @@ $(document).ready(function () {
 });
 
 function main() {
-  Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addOnClickDeleteEventOn"])('#itemTags-out>.itemTag');
+  Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addOnClickDeleteEventOnRemove"])('#itemTags-out>.itemTag');
   $('#resetImages.resetPicture').on('click', function () {
     Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["clearImageInputTagAndPreviewContainer"])($('#itemImages'), '#itemImages-out');
   });
@@ -11342,6 +11342,11 @@ function main() {
       alert(emptyFieldsMsg);
     }
   });
+  $('#partnersForm').on('submit', function (e) {
+    e.preventDefault();
+    Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["showSpinnerOverlay"])();
+    Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["sendAjaxRequestToWithFormData"])(baseUrl + "/admin/ajax/newPartners", this);
+  });
   $('.categoryAttrDelete>i:last').on('click', function () {
     Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["deleteAttrForm"])(this);
   });
@@ -11384,6 +11389,7 @@ function main() {
     code: reviewCode,
     minHeight: 150
   });
+  $('.newPartnerBox>i').on('click', _cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewPartnerInput"]);
 }
 
 function renderContent(selected) {
@@ -11427,6 +11433,7 @@ function carryList(decided, target) {
     var editValue = prompt("Nowa Nazwa");
   } else {
     var editValue = "";
+    $(decided).siblings('input[name=elementType]').remove();
   }
 
   $('.spinnerOverlay').removeClass('d-none');
@@ -11475,7 +11482,7 @@ function carryList(decided, target) {
 /*!**************************************************!*\
   !*** ./resources/js/culture/cultureFunctions.js ***!
   \**************************************************/
-/*! exports provided: sendAjaxRequestToWithFormData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInput, addOnClickDeleteEventOn, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer */
+/*! exports provided: sendAjaxRequestToWithFormData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInput, addOnClickDeleteEventOnRemove, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer, addNewPartnerInput */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11487,10 +11494,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideSpinnerOverlay", function() { return hideSpinnerOverlay; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayCategoryAttrs", function() { return displayCategoryAttrs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewTagInput", function() { return addNewTagInput; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOnClickDeleteEventOn", function() { return addOnClickDeleteEventOn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOnClickDeleteEventOnRemove", function() { return addOnClickDeleteEventOnRemove; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "turnOnToolipsOn", function() { return turnOnToolipsOn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayAddedImageIn", function() { return displayAddedImageIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearImageInputTagAndPreviewContainer", function() { return clearImageInputTagAndPreviewContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewPartnerInput", function() { return addNewPartnerInput; });
 var attributesCount = 1;
 function sendAjaxRequestToWithFormData(url, form) {
   var formData = extractFormData(form);
@@ -11499,6 +11507,7 @@ function sendAjaxRequestToWithFormData(url, form) {
 function addNewAttrForm() {
   var html = createNewAttrInput();
   $('.newCultureAttributes').append(html);
+  $('.categoryAttr:last').focus();
   $('[data-tool=tooltip]').tooltip();
   $('.categoryAttrDelete>i:last').on('click', function () {
     deleteAttrForm(this);
@@ -11584,7 +11593,7 @@ function addNewTagInput(input) {
     $('#itemTags-out').append(html);
     clearInputsValue(input);
     turnOnToolipsOn('#itemTags-out>.itemTag:last');
-    addOnClickDeleteEventOn('#itemTags-out>.itemTag:last');
+    addOnClickDeleteEventOnRemove('#itemTags-out>.itemTag:last');
   }
 }
 
@@ -11593,13 +11602,28 @@ function createNewTagInput(tagName) {
   return newTagHtml;
 }
 
-function addOnClickDeleteEventOn(selector) {
-  $(selector).on('click', deleteClickedElement);
+function addOnClickDeleteEventOnRemove(selector) {
+  var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+
+  if (target !== "") {
+    $(selector).on('click', function () {
+      deleteTargetElement(target);
+    });
+  } else {
+    $(selector).on('click', deleteClickedElement);
+  }
 }
 
 function deleteClickedElement() {
   if (confirm(confirmMsg)) {
     $(this).remove();
+    $('.tooltip:first').remove();
+  }
+}
+
+function deleteTargetElement(selector) {
+  if (confirm(confirmMsg)) {
+    $(selector).remove();
     $('.tooltip:first').remove();
   }
 }
@@ -11655,6 +11679,23 @@ function clearImageInputTagAndPreviewContainer(tag, container) {
     $(container).html('<input type="hidden" name="noImages" value="true">');
     $('.tooltip:first').remove();
   }
+}
+function addNewPartnerInput() {
+  var html = createNewPartnerInput();
+  $(html).insertBefore('#newPartnerButton');
+  turnOnToolipsOn('.partnerDelete>i:last');
+  addOnClickDeleteEventOnRemove('.partnerDelete:last', '.partner:last');
+  $('.partnerThumb-input:last').on('change', function (evt) {
+    var containerId = $(this).prev().attr('id');
+    displayAddedImageIn(this, evt, '#' + containerId);
+  });
+}
+var newPartners = 0;
+
+function createNewPartnerInput() {
+  newPartners++;
+  var html = '<div class="form-group partner col">' + '<div class="partnerDelete"><i class="fas fa-times" data-tool="tooltip" title="' + deleteMsg + '"></i></div>' + '<output class="partnerThumb" id="partner' + newPartners + '-New"></output>' + '<input class="partnerThumb-input" type="file" name="partnersImages[]" required>' + '<input type="text" name="partnersNames[]" class="form-control" placeholder="Name" required>' + '<input type="text" name="partnersUrls[]" class="form-control mt-2" placeholder="Url" required>' + '</div>';
+  return html;
 }
 
 /***/ }),

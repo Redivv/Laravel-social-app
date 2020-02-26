@@ -9,6 +9,7 @@ export function sendAjaxRequestToWithFormData(url, form) {
 export function addNewAttrForm() {
     let html = createNewAttrInput();
     $('.newCultureAttributes').append(html);
+    $('.categoryAttr:last').focus();
     $('[data-tool=tooltip]').tooltip();
 
     $('.categoryAttrDelete>i:last').on('click', function () {
@@ -107,7 +108,7 @@ export function addNewTagInput(input) {
 
         turnOnToolipsOn('#itemTags-out>.itemTag:last');
 
-        addOnClickDeleteEventOn('#itemTags-out>.itemTag:last');
+        addOnClickDeleteEventOnRemove('#itemTags-out>.itemTag:last');
     }
 }
 
@@ -121,13 +122,26 @@ function createNewTagInput(tagName) {
     return newTagHtml;
 }
 
-export function addOnClickDeleteEventOn(selector) {
-    $(selector).on('click', deleteClickedElement);
+export function addOnClickDeleteEventOnRemove(selector,target = "") {
+    if (target !== "") {
+        $(selector).on('click', function() {
+            deleteTargetElement(target);
+        });
+    }else{
+        $(selector).on('click', deleteClickedElement);
+    }
 }
 
 function deleteClickedElement() {
     if (confirm(confirmMsg)) {
         $(this).remove();
+        $('.tooltip:first').remove();
+    }
+}
+
+function deleteTargetElement(selector) {
+    if (confirm(confirmMsg)) {
+        $(selector).remove();
         $('.tooltip:first').remove();
     }
 }
@@ -190,5 +204,31 @@ export function clearImageInputTagAndPreviewContainer(tag, container) {
         $(container).html('<input type="hidden" name="noImages" value="true">');
         $('.tooltip:first').remove();
     }
+}
+
+export function addNewPartnerInput() {
+    let html = createNewPartnerInput();
+    $(html).insertBefore('#newPartnerButton');
+    turnOnToolipsOn('.partnerDelete>i:last');
+    addOnClickDeleteEventOnRemove('.partnerDelete:last','.partner:last');
+
+    $('.partnerThumb-input:last').on('change',function (evt) {
+        let containerId = $(this).prev().attr('id');
+        displayAddedImageIn(this,evt,'#'+containerId);
+    });
+}
+
+var newPartners = 0;
+function createNewPartnerInput() {
+    newPartners++;
+    let html = 
+    '<div class="form-group partner col">'+
+        '<div class="partnerDelete"><i class="fas fa-times" data-tool="tooltip" title="'+deleteMsg+'"></i></div>'+
+        '<output class="partnerThumb" id="partner'+newPartners+'-New"></output>'+
+        '<input class="partnerThumb-input" type="file" name="partnersImages[]" required>'+
+        '<input type="text" name="partnersNames[]" class="form-control" placeholder="Name" required>'+
+        '<input type="text" name="partnersUrls[]" class="form-control mt-2" placeholder="Url" required>'+
+    '</div>';
+    return html;
 }
 

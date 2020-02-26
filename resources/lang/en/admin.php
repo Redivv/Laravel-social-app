@@ -63,7 +63,7 @@ return [
     'addNewAttr'                => 'Add New Attribute',
     'deleteAttrMsg'             => 'Delete Attribute',
     'emptyFields'               => "Form fields cannot be empty",
-    'cultureEditCategory'       => "Edit Category",,
+    'cultureEditCategory'       => "Edit Category",
     'cultureEditItem'           => "Edit Item",
     'change'                    => "Change",
     'back'                      => "Go Back",

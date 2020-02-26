@@ -10,8 +10,9 @@ import {
     addNewTagInput,
     displayAddedImageIn,
     turnOnToolipsOn,
-    addOnClickDeleteEventOn,
-    clearImageInputTagAndPreviewContainer
+    addOnClickDeleteEventOnRemove,
+    clearImageInputTagAndPreviewContainer,
+    addNewPartnerInput
 } from "./cultureFunctions";
 
 var pagiTarget = {
@@ -34,7 +35,7 @@ $(document).ready(function () {
 
 function main() {
 
-    addOnClickDeleteEventOn('#itemTags-out>.itemTag');
+    addOnClickDeleteEventOnRemove('#itemTags-out>.itemTag');
 
     $('#resetImages.resetPicture').on('click', function () {
         clearImageInputTagAndPreviewContainer($('#itemImages'), '#itemImages-out');
@@ -100,6 +101,14 @@ function main() {
         }
     });
 
+    $('#partnersForm').on('submit',function(e) {
+        e.preventDefault();
+
+        showSpinnerOverlay();
+        sendAjaxRequestToWithFormData(baseUrl+"/admin/ajax/newPartners",this);
+
+    });
+
     $('.categoryAttrDelete>i:last').on('click',function() {
         deleteAttrForm(this);
     });
@@ -150,6 +159,8 @@ function main() {
         code:reviewCode,
         minHeight: 150  
     });
+
+    $('.newPartnerBox>i').on('click',addNewPartnerInput);
 }
 
 function renderContent(selected) {
@@ -202,6 +213,7 @@ function carryList(decided, target) {
         var editValue = prompt("Nowa Nazwa");
     } else {
         var editValue = "";
+        $(decided).siblings('input[name=elementType]').remove();
     }
     $('.spinnerOverlay').removeClass('d-none');
     let elementId = $(decided).parent().serialize();

@@ -23,7 +23,7 @@
             {{__('admin.home')}}
         </a>
         <a id="cultureAdminLink" class="btn col-md-4 col-sm-12" href="{{route('adminCulture')}}">
-            {{__('app.culture')}}
+            {{__('app.culture')}} & {{__('app.partners')}}
         </a>
     </div>
     
@@ -35,21 +35,22 @@
                     {{__('admin.cultureAllCategories')}}
                 </a>
                 <hr>
-                <a class="nav-link creatingTab @if($elementType === "category") active @endif" id="cultureNewCategory" data-toggle="pill" href="#cultureNewCategory-content" role="tab"
-                    aria-controls="cultureNewCategory" aria-selected="true">
+                <a class="nav-link creatingTab @if($elementType === "category") active @endif" id="cultureNewCategory" data-toggle="pill" href="#cultureNewCategory-content" role="tab" aria-controls="cultureNewCategory" aria-selected="true">
                     @if($elementType === "category") 
                         {{__('admin.cultureEditCategory')}}
                     @else
                         {{__('admin.cultureAddCategory')}}
                     @endif
                 </a>
-                <a class="nav-link creatingTab @if($elementType === "item") active @endif" id="cultureNewItem" data-toggle="pill" href="#cultureNewItem-content" role="tab"
-                    aria-controls="cultureNewItem" aria-selected="true">
+                <a class="nav-link creatingTab @if($elementType === "item") active @endif" id="cultureNewItem" data-toggle="pill" href="#cultureNewItem-content" role="tab" aria-controls="cultureNewItem" aria-selected="true">
                     @if($elementType === "item")
                         {{__('admin.cultureEditItem')}}
                     @else
                         {{__('admin.cultureAddItem')}}
                     @endif
+                </a>
+                <a class="nav-link creatingTab" id="culturePartners" data-toggle="pill" href="#culturePartners-content" role="tab" aria-controls="culturePartners" aria-selected="true">
+                    {{__('app.partners')}}
                 </a>
             </div>
         </div>
@@ -61,6 +62,9 @@
                 </div>
                 <div class="tab-pane @if($elementType === "item") active @endif" id="cultureNewItem-content" role="tabpanel" aria-labelledby="cultureNewItem-tab">
                     @include('partials.admin.culture.newItemForm')
+                </div>
+                <div class="tab-pane" id="culturePartners-content" role="tabpanel" aria-labelledby="culturePartners-tab">
+                    @include('partials.admin.culture.partnersForm')
                 </div>
             </div>
         </div>
@@ -93,6 +97,7 @@
     var resetImgMsg         =  "{{__('activityWall.resetPictures')}}";
     var deleteImages        =  "{{__('activityWall.deleteImages')}}";
     var badFileType         =  "{{__('chat.badFileType')}}";
+    var deleteMsg           =  "{{__('admin.delete')}}";
 </script>
 
 <script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>

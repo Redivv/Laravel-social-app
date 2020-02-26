@@ -21,7 +21,7 @@
     </div>
     <div class="form-group">
         <label class="d-block" for="itemThumbnail">{{__('admin.itemThumbnail')}}</label>
-        <input type="file" name="itemThumbnail" class="itemThumbnail form-control-file" id="itemThumbnail" accept="image/*" required>
+        <input type="file" name="itemThumbnail" class="itemThumbnail form-control-file" id="itemThumbnail" accept="image/*" >
         <output id="itemThumbnail-out">
             <a href="{{asset('img/culture-pictures/'.json_decode($element->thumbnail)[0])}}" data-lightbox="previewThumb">
                 <img src="{{asset('img/culture-pictures/'.json_decode($element->thumbnail)[0])}}" alt="Item Thumbnail">
@@ -85,7 +85,7 @@
         <label class="d-block" for="itemReview">{{__('admin.itemReview')}}</label>
         <textarea name="itemReview" class="itemReview form-control" id="itemReview">{!!$element->review!!}</textarea>
     </div>
-
+    <input type="hidden" name="itemId" value="{{$element->id}}">
     <button class="btn btn-block newItemButton" type="submit">{{__('searcher.add')}}</button>
 </form>
 @else

@@ -25,7 +25,7 @@
             {{__('admin.home')}}
         </a>
         <a id="cultureAdminLink" class="btn col-md-4 col-sm-12" href="{{route('adminCulture')}}">
-            {{__('app.culture')}}
+            {{__('app.culture')}} & {{__('app.partners')}}
         </a>
     </div>
     <div class="row">

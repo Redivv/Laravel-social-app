@@ -307,6 +307,56 @@ main{
                 }
             }
         }
+        #partnersForm{
+            .partner{
+                .partnerDelete{
+                    text-align: right;
+                    padding: 0.5rem 0;
+                    i{
+                        cursor: pointer;
+                        @include font-size(1.1rem);
+                        &:hover{
+                            color: $orange;
+                        }
+                        padding: 0.5rem;
+                    }
+                }
+                text-align: center;
+                .partnerThumb{
+                    width: 100%;
+                    display: block;
+                    img{
+                        max-width: 5rem;
+                        max-height: 5rem;
+                    }
+                    .resetPictureBox{
+                        display: none !important;
+                    }
+                }
+                .partnerThumb-input{
+                    padding: 1rem 0;
+                }
+            }
+            .newPartnerBox{
+                display: flex;
+                align-content: center;
+                align-items: center;
+                justify-content: center;
+                i{
+                    padding: 0.5rem;
+                    cursor: pointer;
+                    @include font-size(1.2rem);
+                    &:hover{
+                        color: $orange;
+                    }
+                }
+            }
+            .form-btn{
+                @include font-size(1rem);
+                letter-spacing: 1px;
+                font-weight: bold;
+            }
+        }
     }
 
     #showTabsMenu{
