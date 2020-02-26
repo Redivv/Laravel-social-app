@@ -63,6 +63,7 @@ return [
     'deleteAttrMsg'             => 'Usuń Atrybut',
     'emptyFields'               => "Formularz nie może być pusty",
     'cultureEditCategory'       => "Edytuj Kategorię",
+    'cultureEditItem'           => "Edytuj Przedmiot",
     'change'                    => "Zmień",
     'back'                      => "Wróć",
     'itemName'                  => "Nazwa Przedmiotu",
@@ -70,5 +71,6 @@ return [
     'itemTags'                  => "Tagi",
     'itemImages'                => "Zdjęcia",
     'itemReview'                => "Recenzja",
-    'selectCategory'            => "Wybierz Kategorię"
+    'selectCategory'            => "Wybierz Kategorię",
+    'itemThumbnail'             => "Miniatura",
 ];

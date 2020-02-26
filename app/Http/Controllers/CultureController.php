@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\cultureCategory;
+use App\cultureItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -28,16 +29,20 @@ class CultureController extends Controller
             $newCategory        =  $this->createNewCategoryFromData($validatedData);
         }
 
-        if ($this->isNewCategoryAddedToDatabase($newCategory)) {
+        if ($this->wasNewCategoryAddedToDatabase($newCategory)) {
             return response()->json(['action' => 'savedData'], 200);
         }
     }
 
     public function newItem(Request $request)
     {
-        $kek = $request->all();
+        $validatedData          =   $this->validateNewItemRequest($request);
+        $newItem                =   $this->createNewItemFromData($validatedData);
 
-        return response()->json(['action' => 'savedData'], 200);
+        if ($this->wasNewItemAddedToDatabase($newItem)) {
+            $this->tagNewItemWithData($newItem,$validatedData);
+            return response()->json(['action' => 'savedData'], 200);
+        }
     }
 
 
@@ -49,7 +54,22 @@ class CultureController extends Controller
         $validatedRequest = $categoryData->validate([
             'categoryName'      =>  ['required','string'],
             'categoryAttr.*'    =>  ['required','string'],
-            'categoryId'        =>  ['exists:culture_categories,id']
+            'categoryId'        =>  ['numeric','exists:culture_categories,id']
+        ]);
+        return $validatedRequest;
+    }
+
+    private function validateNewItemRequest(Request $itemData) : array
+    {
+        $validatedRequest = $itemData->validate([
+            'itemCategory'      => ['required','numeric','exists:culture_categories,id'],
+            'itemName'          => ['required','string'],
+            'itemAttr.*'        => ['nullable','string'],
+            'itemTags.*'        => ['nullable','string'],
+            'itemDesc'          => ['required','string'],
+            'itemReview'        => ['nullable','string'],
+            'itemThumbnail'      => ['nullable', 'file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
+            'itemImages.*'      => ['nullable', 'file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg']
         ]);
         return $validatedRequest;
     }
@@ -64,6 +84,38 @@ class CultureController extends Controller
         $newCategory->user_id       = Auth::id();
 
         return $newCategory;
+    }
+
+    private function createNewItemFromData(Array $data) : cultureItem
+    {
+        $newItem = new cultureItem();
+
+        $newItem->category_id = intVal($data['itemCategory']);
+
+        $newItem->name          = $data['itemName'];
+        $newItem->name_slug     = Str::slug($data['itemName']);
+
+        $newItem->description = $data['itemDesc'];
+
+        if (isset($data['itemAttr'])) {
+            $newItem->attributes    = json_encode($data['itemAttr']);
+        }
+
+        if(isset($data['itemThumbnail'])){
+            $newItem->thumbnail = $this->handleImages([$data['itemThumbnail']]);
+        }
+
+        if(isset($data['itemImages'])){
+            $newItem->pictures = $this->handleImages($data['itemImages']);
+        }
+
+        if (isset($data['itemReview'])) {
+            $newItem->review = $data['itemReview'];
+        }
+
+        $newItem->user_id = Auth::id();
+
+        return $newItem;
     }
 
     private function editExistingCategory(Array $data) : cultureCategory
@@ -81,12 +133,32 @@ class CultureController extends Controller
         }
     }
 
-    private function isNewCategoryAddedToDatabase(cultureCategory $newCategory) : bool
+    private function wasNewCategoryAddedToDatabase(cultureCategory $newCategory) : bool
     {
-        if ($newCategory->save()) {
-            return true;
-        }else{
-            return false;
+        return $newCategory->save();
+    }
+
+    private function wasNewItemAddedToDatabase(cultureItem $newItem) : bool
+    {
+        return $newItem->save();
+    }
+
+    private function tagNewItemWithData(cultureItem $newItem, array $data) : void
+    {
+        if (isset($data['itemTags'])) {
+            $newItem->tag($data['itemTags']);
         }
+    }
+
+    private function handleImages(Array $images) : string
+    {
+        $pictures_json = array();
+        foreach ($images as $picture) {
+            $imageName = hash_file('haval160,4',$picture->getPathname()).'.'.$picture->getClientOriginalExtension();
+            $picture->move(public_path('img/culture-pictures'), $imageName);
+            $pictures_json[] = $imageName;
+        }
+        return json_encode($pictures_json);
+
     }
 }

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\City;
 use App\cultureCategory;
+use App\cultureItem;
 use Conner\Tagging\Model\Tag;
 
 use Carbon\Carbon;
@@ -50,12 +51,10 @@ class AdminController extends Controller
 
     public function culture(Request $request)
     {
-
         $itemCategories = cultureCategory::all();
 
         $request->validate([
             'elementType'   => Rule::in(['cultureCategory', 'cultureItem']),
-            'elementId'     => ['numeric']
         ]);
 
         $editingElement = null;
@@ -64,8 +63,18 @@ class AdminController extends Controller
         if ((isset($request->elementType))) {
             switch ($request->elementType) {
                 case 'cultureCategory':
+                    $request->validate([
+                        'elementId'   => ['numeric','exists:culture_categories,id'],
+                    ]);
                     $editingElement = cultureCategory::find($request->elementId);
                     $editingType    = "category";
+                    break;
+                case 'cultureItem':
+                    $request->validate([
+                        'elementId'   => ['numeric','exists:culture_items,id'],
+                    ]);
+                    $editingElement = cultureItem::find($request->elementId);
+                    $editingType    = "item";
                     break;
             }
         }

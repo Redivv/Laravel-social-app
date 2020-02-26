@@ -8,7 +8,10 @@ import {
     deleteAttrForm,
     displayCategoryAttrs,
     addNewTagInput,
-    displayAddedImageIn
+    displayAddedImageIn,
+    turnOnToolipsOn,
+    addOnClickDeleteEventOn,
+    clearImageInputTagAndPreviewContainer
 } from "./cultureFunctions";
 
 var pagiTarget = {
@@ -23,12 +26,19 @@ $(document).ready(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $('[data-tool=tooltip]').tooltip();
+    
+    turnOnToolipsOn('[data-tool=tooltip]');
 
     main();
 })
 
 function main() {
+
+    addOnClickDeleteEventOn('#itemTags-out>.itemTag');
+
+    $('#resetImages.resetPicture').on('click', function () {
+        clearImageInputTagAndPreviewContainer($('#itemImages'), '#itemImages-out');
+    });
 
     $('a.tab').one('click', function () {
         renderContent(this);
@@ -69,7 +79,6 @@ function main() {
         if (categoryNameIsFilled && firstAttributeIsFilled) {
             showSpinnerOverlay();
             sendAjaxRequestToWithFormData(baseUrl+"/culture/newCategory",this);
-            $(this)[0].reset();
         }else{
             alert(emptyFieldsMsg);
         }
@@ -86,7 +95,6 @@ function main() {
 
             showSpinnerOverlay();
             sendAjaxRequestToWithFormData(baseUrl+"/culture/newItem",this);
-            $(this)[0].reset();
         }else{
             alert(emptyFieldsMsg);
         }
@@ -111,6 +119,10 @@ function main() {
 
     $('#itemImages').change(function(evt){
         displayAddedImageIn(this,evt,'#itemImages-out');
+    });
+
+    $('#itemThumbnail').change(function(evt){
+        displayAddedImageIn(this,evt,'#itemThumbnail-out');
     });
     
     $( "#itemTags" ).autocomplete({

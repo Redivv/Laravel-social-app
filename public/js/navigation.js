@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -232,7 +232,7 @@ function denyFriend(selected) {
 
 /***/ }),
 
-/***/ 10:
+/***/ 9:
 /*!******************************************!*\
   !*** multi ./resources/js/navigation.js ***!
   \******************************************/

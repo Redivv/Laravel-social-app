@@ -1509,29 +1509,39 @@ main .tabsContent #newItemForm #itemTags-out .itemTag:hover {
 }
 
 main .tabsContent #newCategoryForm #itemImages-out,
-main .tabsContent #newItemForm #itemImages-out {
+main .tabsContent #newCategoryForm #itemThumbnail-out,
+main .tabsContent #newItemForm #itemImages-out,
+main .tabsContent #newItemForm #itemThumbnail-out {
   width: 100%;
   padding: 0.5rem;
 }
 
 main .tabsContent #newCategoryForm #itemImages-out .resetPictureBox,
-main .tabsContent #newItemForm #itemImages-out .resetPictureBox {
+main .tabsContent #newCategoryForm #itemThumbnail-out .resetPictureBox,
+main .tabsContent #newItemForm #itemImages-out .resetPictureBox,
+main .tabsContent #newItemForm #itemThumbnail-out .resetPictureBox {
   text-align: right;
 }
 
 main .tabsContent #newCategoryForm #itemImages-out .resetPictureBox i,
-main .tabsContent #newItemForm #itemImages-out .resetPictureBox i {
+main .tabsContent #newCategoryForm #itemThumbnail-out .resetPictureBox i,
+main .tabsContent #newItemForm #itemImages-out .resetPictureBox i,
+main .tabsContent #newItemForm #itemThumbnail-out .resetPictureBox i {
   cursor: pointer;
   font-size: 1.1rem;
 }
 
 main .tabsContent #newCategoryForm #itemImages-out .resetPictureBox i:hover,
-main .tabsContent #newItemForm #itemImages-out .resetPictureBox i:hover {
+main .tabsContent #newCategoryForm #itemThumbnail-out .resetPictureBox i:hover,
+main .tabsContent #newItemForm #itemImages-out .resetPictureBox i:hover,
+main .tabsContent #newItemForm #itemThumbnail-out .resetPictureBox i:hover {
   color: #f66103;
 }
 
 main .tabsContent #newCategoryForm #itemImages-out img,
-main .tabsContent #newItemForm #itemImages-out img {
+main .tabsContent #newCategoryForm #itemThumbnail-out img,
+main .tabsContent #newItemForm #itemImages-out img,
+main .tabsContent #newItemForm #itemThumbnail-out img {
   max-width: 6rem;
   max-height: 6rem;
   margin: 0 1rem;

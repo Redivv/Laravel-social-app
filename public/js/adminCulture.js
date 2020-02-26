@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11283,11 +11283,15 @@ $(document).ready(function () {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-  $('[data-tool=tooltip]').tooltip();
+  Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["turnOnToolipsOn"])('[data-tool=tooltip]');
   main();
 });
 
 function main() {
+  Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addOnClickDeleteEventOn"])('#itemTags-out>.itemTag');
+  $('#resetImages.resetPicture').on('click', function () {
+    Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["clearImageInputTagAndPreviewContainer"])($('#itemImages'), '#itemImages-out');
+  });
   $('a.tab').one('click', function () {
     renderContent(this);
   });
@@ -11321,7 +11325,6 @@ function main() {
     if (categoryNameIsFilled && firstAttributeIsFilled) {
       Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["showSpinnerOverlay"])();
       Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["sendAjaxRequestToWithFormData"])(baseUrl + "/culture/newCategory", this);
-      $(this)[0].reset();
     } else {
       alert(emptyFieldsMsg);
     }
@@ -11335,7 +11338,6 @@ function main() {
     if (categoryIsSelected && itemNameIsFilled && itemDescIsFilled) {
       Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["showSpinnerOverlay"])();
       Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["sendAjaxRequestToWithFormData"])(baseUrl + "/culture/newItem", this);
-      $(this)[0].reset();
     } else {
       alert(emptyFieldsMsg);
     }
@@ -11355,6 +11357,9 @@ function main() {
   });
   $('#itemImages').change(function (evt) {
     Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["displayAddedImageIn"])(this, evt, '#itemImages-out');
+  });
+  $('#itemThumbnail').change(function (evt) {
+    Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["displayAddedImageIn"])(this, evt, '#itemThumbnail-out');
   });
   $("#itemTags").autocomplete({
     source: function source(request, response) {
@@ -11470,7 +11475,7 @@ function carryList(decided, target) {
 /*!**************************************************!*\
   !*** ./resources/js/culture/cultureFunctions.js ***!
   \**************************************************/
-/*! exports provided: sendAjaxRequestToWithFormData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInput, displayAddedImageIn */
+/*! exports provided: sendAjaxRequestToWithFormData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInput, addOnClickDeleteEventOn, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11482,7 +11487,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideSpinnerOverlay", function() { return hideSpinnerOverlay; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayCategoryAttrs", function() { return displayCategoryAttrs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewTagInput", function() { return addNewTagInput; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOnClickDeleteEventOn", function() { return addOnClickDeleteEventOn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "turnOnToolipsOn", function() { return turnOnToolipsOn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayAddedImageIn", function() { return displayAddedImageIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearImageInputTagAndPreviewContainer", function() { return clearImageInputTagAndPreviewContainer; });
 var attributesCount = 1;
 function sendAjaxRequestToWithFormData(url, form) {
   var formData = extractFormData(form);
@@ -11574,9 +11582,9 @@ function addNewTagInput(input) {
   if (newTagValue !== "") {
     var html = createNewTagInput(newTagValue);
     $('#itemTags-out').append(html);
-    $(input).val('');
-    $('#itemTags-out>.itemTag:last').tooltip();
-    $('#itemTags-out>.itemTag:last').on('click', deleteClickedElement);
+    clearInputsValue(input);
+    turnOnToolipsOn('#itemTags-out>.itemTag:last');
+    addOnClickDeleteEventOn('#itemTags-out>.itemTag:last');
   }
 }
 
@@ -11585,11 +11593,23 @@ function createNewTagInput(tagName) {
   return newTagHtml;
 }
 
+function addOnClickDeleteEventOn(selector) {
+  $(selector).on('click', deleteClickedElement);
+}
+
 function deleteClickedElement() {
   if (confirm(confirmMsg)) {
     $(this).remove();
     $('.tooltip:first').remove();
   }
+}
+
+function turnOnToolipsOn(selector) {
+  $(selector).tooltip();
+}
+
+function clearInputsValue(input) {
+  $(input).val('');
 }
 
 function displayAddedImageIn(input, evt, container) {
@@ -11601,12 +11621,8 @@ function displayAddedImageIn(input, evt, container) {
   $(container).append(html);
   $('[data-tool="tooltip"]').tooltip();
   var tag = $(input);
-  $('.resetPicture').one('click', function () {
-    if (confirm(resetImgMsg)) {
-      tag.val("");
-      $(container).empty();
-      $('.tooltip:first').remove();
-    }
+  $('.resetPicture').on('click', function () {
+    clearImageInputTagAndPreviewContainer(tag, container);
   }); // Loop through the FileList and render image files as thumbnails.
 
   for (var i = 0, f; f = files[i]; i++) {
@@ -11633,10 +11649,17 @@ function displayAddedImageIn(input, evt, container) {
     reader.readAsDataURL(f);
   }
 }
+function clearImageInputTagAndPreviewContainer(tag, container) {
+  if (confirm(resetImgMsg)) {
+    tag.val("");
+    $(container).html('<input type="hidden" name="noImages" value="true">');
+    $('.tooltip:first').remove();
+  }
+}
 
 /***/ }),
 
-/***/ 8:
+/***/ 7:
 /*!****************************************************!*\
   !*** multi ./resources/js/culture/adminCulture.js ***!
   \****************************************************/

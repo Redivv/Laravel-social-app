@@ -43,9 +43,13 @@
                         {{__('admin.cultureAddCategory')}}
                     @endif
                 </a>
-                <a class="nav-link creatingTab" id="cultureNewItem" data-toggle="pill" href="#cultureNewItem-content" role="tab"
+                <a class="nav-link creatingTab @if($elementType === "item") active @endif" id="cultureNewItem" data-toggle="pill" href="#cultureNewItem-content" role="tab"
                     aria-controls="cultureNewItem" aria-selected="true">
-                    {{__('admin.cultureAddItem')}}
+                    @if($elementType === "item")
+                        {{__('admin.cultureEditItem')}}
+                    @else
+                        {{__('admin.cultureAddItem')}}
+                    @endif
                 </a>
             </div>
         </div>
@@ -55,7 +59,7 @@
                 <div class="tab-pane @if($elementType === "category") active @endif" id="cultureNewCategory-content" role="tabpanel" aria-labelledby="cultureNewCategory-tab">
                     @include('partials.admin.culture.newCategoryForm')
                 </div>
-                <div class="tab-pane" id="cultureNewItem-content" role="tabpanel" aria-labelledby="cultureNewItem-tab">
+                <div class="tab-pane @if($elementType === "item") active @endif" id="cultureNewItem-content" role="tabpanel" aria-labelledby="cultureNewItem-tab">
                     @include('partials.admin.culture.newItemForm')
                 </div>
             </div>
@@ -79,13 +83,13 @@
 
 @push('scripts')
 <script>
-    var __baseUrl           = "{{url('/')}}";
-    var savedChanges        = "{{__('profile.savedChanges')}}";
-    var deleteAttrMsg       = "{{__('admin.deleteAttrMsg')}}";
-    var emptyFieldsMsg      = "{{__('admin.emptyFields')}}"
-    var confirmMsg          = "{{__('admin.confirmMsg')}}";
-    var selectCategoryMsg   = "{{__('admin.selectCategory')}}";
-    var deleteHobby         = "{{__('searcher.deleteHobby')}}";
+    var __baseUrl           =  "{{url('/')}}";
+    var savedChanges        =  "{{__('profile.savedChanges')}}";
+    var deleteAttrMsg       =  "{{__('admin.deleteAttrMsg')}}";
+    var emptyFieldsMsg      =  "{{__('admin.emptyFields')}}"
+    var confirmMsg          =  "{{__('admin.confirmMsg')}}";
+    var selectCategoryMsg   =  "{{__('admin.selectCategory')}}";
+    var deleteHobby         =  "{{__('activityWall.deleteTags')}}";
     var resetImgMsg         =  "{{__('activityWall.resetPictures')}}";
     var deleteImages        =  "{{__('activityWall.deleteImages')}}";
     var badFileType         =  "{{__('chat.badFileType')}}";
