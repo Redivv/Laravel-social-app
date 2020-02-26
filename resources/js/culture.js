@@ -1,3 +1,5 @@
+import "lightbox2";
+
 $(document).ready(function(){
     console.log('ready');
     $('[data-tool="tooltip"]').tooltip();

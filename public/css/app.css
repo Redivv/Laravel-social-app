@@ -22941,7 +22941,6 @@ html {
 }
 
 .culture_page-container .advertisment-placeholder {
-  background-color: #f0f;
   min-height: 85vh;
 }
 
@@ -23033,7 +23032,6 @@ html {
 
 .culture_page-container .item-container .similar-entries .thumbnail:hover {
   text-decoration: none;
-  background-color: #a1a1a1;
 }
 
 .culture_page-container .item-container .similar-entries .thumbnail:hover .suggestedTitle {

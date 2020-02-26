@@ -10,12 +10,11 @@
 <div class="container-flex culture_page-container">
     <div class="row">
         <aside class="col-md-2 advertisment-placeholder">
-            ad
         </aside>
         <div class="col-md-8">
             <div class="container item-container">
-                <div class="row  centeredItems">
-                    <div class="col-md-2  thumbnail  itemBorder">
+                <section id="item_header" class="row  centeredItems">
+                    <figure class="col-md-2  thumbnail  itemBorder">
                         @if($pictures = json_decode($cultureItem->pictures))
                             <a href="{{asset('images/culture/'.$pictures[0])}}" data-lightbox="Item" data-title="picture">
                                 <img src="{{asset('images/culture/'.$pictures[0])}}" alt="thumbnail" class="img-thumbnail">
@@ -23,31 +22,35 @@
                         @else
                             <img src="images/culture/book.jpg" alt="brak zdjęcia" class="img-thumbnail">
                         @endif
-
-            
-                    </div>
+                    </figure>
                     <hgroup class="col-md-4  itemBorder">
                         <h3 class=" itemTitle">
                             {{$cultureItem->name}}
-                            {{-- O Obrotach Ceł Niebiańskch --}}
                         </h3>
-                        @if ($DecAttributes=json_decode($cultureItem->attributes))
-                            
-                        <h4 class=" itemAuthor">
-                            {{$DecAttributes[0]}}
-                        </h4>
-                        <h6 class=" itemDate">
-                            {{$DecAttributes[1]}}
-                        </h6>
+                        @if($catAttr=json_decode($cultureCategory))
+                            @if ($DecAttributes=json_decode($cultureItem->attributes))
+                                @foreach ($catAttr as $key=>$attr)
+                                    {{$key}}
+                                @endforeach
+
+                            <h4 class=" itemAuthor">
+                                {{$DecAttributes[0]}}
+                            </h4>
+                            <h6 class=" itemDate">
+                                {{$DecAttributes[1]}}
+                            </h6>
+                            @endif
                         @endif
                     </hgroup>
                     <div class="col-md-4  tagHolder  itemBorder container row">
-                        @foreach ($DecAttributes as $attribute)
-                            
-                            <div class=" col  tag">
-                                <p>#{{$attribute}}</p>
-                            </div>
-                        @endforeach
+                        @if($catAttr)
+                            @foreach ($DecAttributes as $attribute)
+                                
+                                <div class=" col  tag">
+                                    <p>#{{$attribute}}</p>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                     <div class="col-md-2 likeItem text-center ico ">
                         
@@ -69,10 +72,10 @@
 
                         @endauth
                     </div>
-                </div>
+                </section>
                 <hr>
                 <div class="row">
-                    <section class="col-md-12">
+                    <section id="description" class="col-md-12 description">
                         {{$cultureItem->description}}
                         {{-- Desc>
                         Mateusz Morawczyk po raz kolejny zaskakuje nas smiałością swoich twierdzeń podatkowych.
@@ -82,58 +85,61 @@
                         prodobrozmianizmu. --}}
                     </section>
                     {{--  --------------------------------------------------------------pictures --}}
-                    <section class="col-md-12  pictures row">
+                    <section id="picture_gallery" class="col-md-12 pictures row centeredItems">
                         
                         
                         @if ($pictures)
                         @foreach ($pictures as $picture)
-                                <div class="col-md-3 BookPicture">
-                                    @if ($loop->iteration == 4)   
+                                <div class="col BookPicture">
+                                    {{-- @if ($loop->iteration == 4)   
                                         <div class="mt-2"> 
                                             kek
-                                            {{-- <a class="morePhotos" href="{{route('viewPost',['post' => $cultureItem->id])}}" target="__blank">{{__('profile.remainingPhotos')}} ({{$loop->remaining+1}})</a> --}}
+                                            <a class="morePhotos" href="{{route('viewPost',['post' => $cultureItem->id])}}" target="__blank">{{__('profile.remainingPhotos')}} ({{$loop->remaining+1}})</a>
                                         </div>
                                     @break
-                                    @else
+                                    @else --}}
                                         <a href="{{asset('images/culture/'.$picture)}}" data-lightbox="post{{$cultureItem->id}}-Pictures">
                                             <img class="img-thumbnail" src="{{asset('images/culture/'.$picture)}}" alt="Culture Picture">
                                         </a>
-                                    @endif
+                                    {{-- @endif --}}
                                 </div>
                             @endforeach
                         @endif
                     </section>
                 </div>
                 <hr>
-                <section class="row  review">
+                <section id="item_review" class="row  review">
                     {{$cultureItem->review}}
                     
                 </section>
                 <hr>
-                <div class="row  similar-entries">
+                <section class="row  similar-entries">
                     <div class="col-md-12 simiarEntries center">
-                        {{__('culture.similarItems')}}:
+                        <h4>{{__('culture.similarItems')}}:</h4>
                     </div>
                     @foreach ($similarEntries as $entry)
                     <a class="col-md-4  thumbnail  itemBorder  itemBorder-left container row" href="{{asset('culture/'.$entry->name_slug)}}">
-                        <div class="col-md-12  nextThumbnail">
+                        <figure class="col nextThumbnail">
                             @if ($pic=json_decode($entry->pictures))  
                             <img src="{{asset('images/culture/'.$pic[0])}}" alt="kek" class="img-thumbnail img-thumbnail-small">
                             @else
                             <img src="{{asset('images/culture/book.jpg')}}" alt="kek" class="img-thumbnail img-thumbnail-small">
                             @endif
-                        </div>
-                        <div class="col  anotherItem">
+                        </figure>
+                        <figcaption class="col  anotherItem">
                             <h5 class="suggestedTitle">
                                 {{$entry->name}}
                             </h5>
-                        </div>
+                        </figcaption>
                     </a>
                     @endforeach
-                </div>
+                </section>
                 <hr>
                 <section class="row  comments">
                     comments
+
+                    <br>
+                    /coments
                 </section>
             </div>
         </div>

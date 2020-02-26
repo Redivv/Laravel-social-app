@@ -23,12 +23,12 @@ class CultureController extends Controller
     }
     public function item(cultureItem $id){
 
-        $categories = cultureCategory::select('id','name','attributes')->where('id','=',$id->category_id)->get();
+        $categories = cultureCategory::select('id','name','attributes')->where('id','=',$id->category_id)->first();
         
         $similarEntries= cultureItem::select('name','name_slug','pictures','category_id')
             ->where('id','!=',$id->id)
             ->where('category_id','=',$id->category_id)
-            ->get();
+            ->get(3);
         return view('cultureItem')->withcultureItem($id)->withcultureCategory($categories)->withSimilarEntries($similarEntries);
     }
 }

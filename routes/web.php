@@ -133,5 +133,3 @@ Route::prefix('culture')->group(function(){
         Route::patch('likeItem', 'HomeController@likeItem')->name('ajaxLikeItem');
     });
 });
-//Route::patch('culture/ajax/likeItem', 'HomeController@likeItem')->name('ajaxLikeItem');
-
