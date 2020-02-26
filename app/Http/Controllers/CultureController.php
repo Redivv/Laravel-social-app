@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\cultureItem;
 use App\cultureCategory;
-use App\cultureCimment;
+use App\cultureComment;
 
 
 class CultureController extends Controller
@@ -22,8 +22,13 @@ class CultureController extends Controller
         return view('cultureMainPage');
     }
     public function item(cultureItem $id){
-        //return($id);
-        $categories = cultureCategory::select('name','attributes')->where($id->category_id);
-        return view('cultureItem')->withcultureItem($id);
+
+        $categories = cultureCategory::select('id','name','attributes')->where('id','=',$id->category_id)->get();
+        
+        $similarEntries= cultureItem::select('name','name_slug','pictures','category_id')
+            ->where('id','!=',$id->id)
+            ->where('category_id','=',$id->category_id)
+            ->get();
+        return view('cultureItem')->withcultureItem($id)->withcultureCategory($categories)->withSimilarEntries($similarEntries);
     }
 }

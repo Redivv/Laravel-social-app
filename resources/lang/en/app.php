@@ -15,5 +15,6 @@ return [
     'profileEditTitle'  => 'Profile Edit',
     'verifyTitle'       => 'Email Address Verification',
     'resetPasswordTitle'=> 'Password Reset',
-    'culture'           => 'Culture'
+    'culture'           => 'Culture',
+    'cultureItem'       => 'Culture Item'
 ];

@@ -14,6 +14,10 @@ class cultureItem extends Model
     protected $guarded = [
         'id'
     ];
+    public function getRouteKeyName()
+    {
+        return 'name_slug';
+    }
 
     public function user()
     {

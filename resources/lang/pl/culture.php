@@ -10,6 +10,8 @@ return [
     'dateSort'                  => 'Utworzenie',
     'sugestionTag'              => 'Związane z :tag',
     'sugestionNew'              => 'Najnowsze',
-    'itemCompleted'             => 'Ukończono'
+    'itemCompleted'             => 'Ukończono',
+    'similarItems'              => 'Podobne produkty',
+    'likeItem'                  => 'Polub przedmiot'
 
 ];

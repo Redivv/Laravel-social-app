@@ -1,81 +1,109 @@
-.culture_advertisment-placeholder{
-    background-color: #f0f;
-    min-height: 85vh;
-}
-.culture_item-container{
-    margin-top: 1rem;
-    padding: 0rem;
-    .culture_itemTitle{
-        font-size: 2rem;
-        font-weight: bold;
-        color: #444;
-    }
-    .culture_itemAuthor{
-        font-size: 1rem;
-        font-weight: bold;
-        color: #f66103;
-    }
-    .culture_tagHolder{
-       // justify-content: center;
-        padding: 2rem 0rem;
-       // padding-bottom: 4rem;
-        .culture_tag{
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: $orange;
-            color: $white;
-            @include font-size(0.9rem);
-            border-radius: 50px;
-            margin: 0.2rem 0.1rem;
-            //margin-top: 0.0rem;
-            //margin-left: 0.1rem;
-            padding: 0rem 0.2rem;
-            height: 2rem;
-            &:hover{
-                background-color: $orange-active-hover;
-            }
-            p{
-                justify-content: center;
-                margin: 0rem;
-            }
-        }
-    }
-    .culture_itemBorder{
-        border-right: 1px solid #888;
-    }
-    .culture_itemBorder-left{
-        border-left: 1px solid #888;
-    }
-    .culture_centeredItems{
-        text-align: center;
-    }
-    .culture_likeBtn{
-        .likesCount{
-            background-color: $orange;
-            color: $white;
-            font-size: 0.9rem;
-            left: -0.8em;
-            top: 1em;
-        }
-    }
-    .active{
-        color: $orange;
-    }
-    .culture_pictures{
-        border-top: 1px dashed #888;
-        padding-top: 1rem;
-        margin-top: 1rem;
-    }
-    .culture_similar-entries{
-        
-        .culture_thumbnail{
-            justify-content: center;
-            .img-thumbnail-small{
-                height: 8rem;
-            }
-        }
-    }
+.culture_page-container{
 
+    .advertisment-placeholder{
+        background-color: #f0f;
+        min-height: 85vh;
+    }
+    .item-container{
+        margin-top: 1rem;
+        padding: 0rem;
+        .itemTitle{
+            font-size: 2rem;
+            font-weight: bold;
+            color: #444;
+        }
+        .itemAuthor{
+            font-size: 1rem;
+            font-weight: bold;
+            color: #f66103;
+        }
+        .tagHolder{
+            padding: 2rem 0rem;
+            .tag{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: $orange;
+                color: $white;
+                @include font-size(0.9rem);
+                border-radius: 50px;
+                margin: 0.2rem 0.1rem;
+                padding: 0rem 0.2rem;
+                height: 2rem;
+                &:hover{
+                    background-color: $orange-active-hover;
+                }
+                p{
+                    justify-content: center;
+                    margin: 0rem;
+                }
+            }
+        }
+        .itemBorder{
+            border-right: 1px solid #888;
+        }
+        .itemBorder-left{
+            border-left: 1px solid #888;
+        }
+        .centeredItems{
+            text-align: center;
+        }
+        .cultureLikeBtn{
+            .likesCount{
+                background-color: $orange;
+                color: $white;
+                font-size: 0.9rem;
+                left: -0.8em;
+                top: 1em;
+            }
+        }
+        .active{
+            color: $orange;
+        }
+        .pictures{
+            border-top: 1px dashed #888;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+        .similar-entries{
+            justify-content: center;
+            .simiarEntries{
+                text-align: center;
+            }
+            .thumbnail{
+                display: block;
+                justify-content: center;
+                &:hover{
+                    .suggestedTitle{
+                        color: $orange-active-hover;
+                    }
+                    text-decoration: none;
+                    background-color: $grey;
+                }
+                .nextThumbnail{
+                    justify-content: center;
+                    .img-thumbnail-small{
+                        margin: 0 25%;
+                        width: 50%;
+                    }
+                }
+                .anotherItem{
+
+                    .suggestedTitle{
+                        text-align: center;
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: #444;
+                    }
+                    .author{
+                        text-align: center;
+                        font-size: 1rem;
+                        font-weight: bold;
+                        color: $orange;
+                    }
+                }
+            }
+        }
+
+    }
 }

@@ -22940,34 +22940,33 @@ html {
   background-color: rgba(255, 140, 0, 0.7);
 }
 
-.culture_advertisment-placeholder {
+.culture_page-container .advertisment-placeholder {
   background-color: #f0f;
   min-height: 85vh;
 }
 
-.culture_item-container {
+.culture_page-container .item-container {
   margin-top: 1rem;
   padding: 0rem;
 }
 
-.culture_item-container .culture_itemTitle {
+.culture_page-container .item-container .itemTitle {
   font-size: 2rem;
   font-weight: bold;
   color: #444;
 }
 
-.culture_item-container .culture_itemAuthor {
+.culture_page-container .item-container .itemAuthor {
   font-size: 1rem;
   font-weight: bold;
   color: #f66103;
 }
 
-.culture_item-container .culture_tagHolder {
+.culture_page-container .item-container .tagHolder {
   padding: 2rem 0rem;
 }
 
-.culture_item-container .culture_tagHolder .culture_tag {
-  cursor: pointer;
+.culture_page-container .item-container .tagHolder .tag {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22980,28 +22979,28 @@ html {
   height: 2rem;
 }
 
-.culture_item-container .culture_tagHolder .culture_tag:hover {
+.culture_page-container .item-container .tagHolder .tag:hover {
   background-color: #d22103;
 }
 
-.culture_item-container .culture_tagHolder .culture_tag p {
+.culture_page-container .item-container .tagHolder .tag p {
   justify-content: center;
   margin: 0rem;
 }
 
-.culture_item-container .culture_itemBorder {
+.culture_page-container .item-container .itemBorder {
   border-right: 1px solid #888;
 }
 
-.culture_item-container .culture_itemBorder-left {
+.culture_page-container .item-container .itemBorder-left {
   border-left: 1px solid #888;
 }
 
-.culture_item-container .culture_centeredItems {
+.culture_page-container .item-container .centeredItems {
   text-align: center;
 }
 
-.culture_item-container .culture_likeBtn .likesCount {
+.culture_page-container .item-container .cultureLikeBtn .likesCount {
   background-color: #f66103;
   color: #ffffff;
   font-size: 0.9rem;
@@ -23009,22 +23008,59 @@ html {
   top: 1em;
 }
 
-.culture_item-container .active {
+.culture_page-container .item-container .active {
   color: #f66103;
 }
 
-.culture_item-container .culture_pictures {
+.culture_page-container .item-container .pictures {
   border-top: 1px dashed #888;
   padding-top: 1rem;
   margin-top: 1rem;
 }
 
-.culture_item-container .culture_similar-entries .culture_thumbnail {
+.culture_page-container .item-container .similar-entries {
   justify-content: center;
 }
 
-.culture_item-container .culture_similar-entries .culture_thumbnail .img-thumbnail-small {
-  height: 8rem;
+.culture_page-container .item-container .similar-entries .simiarEntries {
+  text-align: center;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail {
+  display: block;
+  justify-content: center;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail:hover {
+  text-decoration: none;
+  background-color: #a1a1a1;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail:hover .suggestedTitle {
+  color: #d22103;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail .nextThumbnail {
+  justify-content: center;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail .nextThumbnail .img-thumbnail-small {
+  margin: 0 25%;
+  width: 50%;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail .anotherItem .suggestedTitle {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #444;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail .anotherItem .author {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #f66103;
 }
 
 html {
