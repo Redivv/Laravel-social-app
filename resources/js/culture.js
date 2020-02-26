@@ -28,21 +28,23 @@ function likeItem(selected) {
     let itemId = $(selected).data('id');
     let url = base_url+"/culture/ajax/likeItem";
 
-    let currentAmount = $(selected).find('.likesAmount').html();
+    let currentAmount = $(selected).find('.likesCount').html();
+    console.log(currentAmount);
+    
     if ($(selected).hasClass('active')) {
 
         $(selected).removeClass('active');
-        $(selected).find('.likesAmount').html(parseInt(currentAmount)-1);
+        $(selected).find('.likesCount').html(parseInt(currentAmount)-1);
         if (currentAmount == 1) {
-            $(selected).find('.likesAmount').addClass('invisible');
+            $(selected).find('.likesCount').addClass('invisible');
         }
 
     }else{
         
         $(selected).addClass('active');
-        $(selected).find('.likesAmount').html(parseInt(currentAmount)+1);
+        $(selected).find('.likesCount').html(parseInt(currentAmount)+1);
         if (currentAmount == 0) {
-            $(selected).find('.likesAmount').removeClass('invisible');
+            $(selected).find('.likesCount').removeClass('invisible');
         }
     }
 
