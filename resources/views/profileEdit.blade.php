@@ -136,12 +136,6 @@
     <div class="profileDisclaimer">
         {{__('profile.disclaimer')}}
     </div>
-    <hr>
-    <form id="deleteUser" method="post" action="{{route('ProfileDelete')}}">
-        @csrf
-        @method('delete')
-        <button type="submit" class="btn">{{__('profile.deleteProfile')}}</button>
-    </form>
 </div>
 
 @include('partials.profile.tagPartnerModal')
@@ -159,18 +153,11 @@
     var delete_msg = "{{__('profile.deleteTag')}}";
     var base_url = "{{url('/')}}";
     var deletePartnerMsgs = "{{__('profile.deletePartnerMsgs')}}";
-    var deleteProfileMsg = "{{__('admin.confirmMsg')}}";
 
     $('#deletePartner').on('click', function () {
         if (confirm(deletePartnerMsgs)) {
             html = '<input type="hidden" name="deletePartner" value="true">';
             $('#deletePartner').parents('.userFriend').replaceWith(html);
-        }
-    });
-
-    $('#deleteUser').on('submit', function (e) {
-        if (!confirm(deleteProfileMsg)) {
-            e.preventDefault();
         }
     });
 

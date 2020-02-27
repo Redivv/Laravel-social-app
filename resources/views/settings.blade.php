@@ -64,9 +64,25 @@
                 <button class="btn submitButton" type="submit">{{__('settings.save')}}</button>
             </div>
         </form>
+        <hr>
+        <form id="deleteUser" method="post" action="{{route('ProfileDelete')}}">
+            @csrf
+            @method('delete')
+            <button type="submit" class="btn">{{__('profile.deleteProfile')}}</button>
+        </form>
         <div class="termsOfService row">
             <a class="termsOf-doc col-6" href="{{asset('files/Regulamin_portalu_Safo.pdf')}}" target="__blank">{{__('registeration.termsOfDoc1')}}</a>
             <a class="termsOf-doc col-6" href="{{asset('files/Polityka_prywatnosci.pdf')}}" target="__blank">{{__('profile.termsOfDoc2')}}</a>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $('#deleteUser').on('submit', function (e) {
+            if (!confirm("{{__('admin.confirmMsg')}}")) {
+                e.preventDefault();
+            }
+        });
+    </script>
+@endpush
