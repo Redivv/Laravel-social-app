@@ -12,7 +12,8 @@ import {
     turnOnToolipsOn,
     addOnClickDeleteEventOnRemove,
     clearImageInputTagAndPreviewContainer,
-    addNewPartnerInput
+    addNewPartnerInput,
+    deleteTargetElement
 } from "./cultureFunctions";
 
 var pagiTarget = {
@@ -36,6 +37,15 @@ $(document).ready(function () {
 function main() {
 
     addOnClickDeleteEventOnRemove('#itemTags-out>.itemTag');
+
+    $('.partnerDelete').on('click',function() {
+        deleteTargetElement($(this).parents('.partner'));
+    });
+
+    $('.partnerThumb-input').on('change',function (evt) {
+        let containerId = $(this).prev().attr('id');
+        displayAddedImageIn(this,evt,'#'+containerId);
+    });
 
     $('#resetImages.resetPicture').on('click', function () {
         clearImageInputTagAndPreviewContainer($('#itemImages'), '#itemImages-out');

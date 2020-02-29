@@ -11289,6 +11289,13 @@ $(document).ready(function () {
 
 function main() {
   Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addOnClickDeleteEventOnRemove"])('#itemTags-out>.itemTag');
+  $('.partnerDelete').on('click', function () {
+    Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["deleteTargetElement"])($(this).parents('.partner'));
+  });
+  $('.partnerThumb-input').on('change', function (evt) {
+    var containerId = $(this).prev().attr('id');
+    Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["displayAddedImageIn"])(this, evt, '#' + containerId);
+  });
   $('#resetImages.resetPicture').on('click', function () {
     Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["clearImageInputTagAndPreviewContainer"])($('#itemImages'), '#itemImages-out');
   });
@@ -11482,7 +11489,7 @@ function carryList(decided, target) {
 /*!**************************************************!*\
   !*** ./resources/js/culture/cultureFunctions.js ***!
   \**************************************************/
-/*! exports provided: sendAjaxRequestToWithFormData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInput, addOnClickDeleteEventOnRemove, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer, addNewPartnerInput */
+/*! exports provided: sendAjaxRequestToWithFormData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInput, addOnClickDeleteEventOnRemove, deleteTargetElement, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer, addNewPartnerInput */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11495,6 +11502,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayCategoryAttrs", function() { return displayCategoryAttrs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewTagInput", function() { return addNewTagInput; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOnClickDeleteEventOnRemove", function() { return addOnClickDeleteEventOnRemove; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTargetElement", function() { return deleteTargetElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "turnOnToolipsOn", function() { return turnOnToolipsOn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayAddedImageIn", function() { return displayAddedImageIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearImageInputTagAndPreviewContainer", function() { return clearImageInputTagAndPreviewContainer; });
@@ -11627,7 +11635,6 @@ function deleteTargetElement(selector) {
     $('.tooltip:first').remove();
   }
 }
-
 function turnOnToolipsOn(selector) {
   $(selector).tooltip();
 }

@@ -21,7 +21,9 @@ use App\Jobs\SendAdminNewsletter;
 use App\Jobs\SendAdminWideInfo;
 use App\Jobs\DeleteUser;
 use App\Jobs\HandleProfilePictureTicket;
+use App\Partner;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
 use Nahid\Talk\Facades\Talk;
 
 class AdminController extends Controller
@@ -52,6 +54,7 @@ class AdminController extends Controller
     public function culture(Request $request)
     {
         $itemCategories = cultureCategory::all();
+        $partners   = Partner::all();
 
         $request->validate([
             'elementType'   => Rule::in(['cultureCategory', 'cultureItem']),
@@ -78,7 +81,7 @@ class AdminController extends Controller
                     break;
             }
         }
-        return view('adminCulturePanel')->withElement($editingElement)->withElementType($editingType)->withCategories($itemCategories);
+        return view('adminCulturePanel')->withElement($editingElement)->withElementType($editingType)->withCategories($itemCategories)->withPartners($partners);
     }
 
     public function getTabContent(Request $request)
@@ -425,13 +428,91 @@ class AdminController extends Controller
     public function newPartners(Request $request)
     {
         if ($request->ajax()) {
+            $kek = $request->all();
+            $validatedData  = $this->validatePartnerData($request);
+
+            if ($validatedData) {
+                $this->managePartners($validatedData);
+            }
+
             return response()->json(['action' => 'savedData'], 200);
+
         }
     }
 
 
 
     // Private Functions 
+
+    private function validatePartnerData(Request $data) : Array
+    {
+       $validatedData = $data->validate([
+            'partnersNames.*'           => ['required','string'],
+            'partnersUrls.*'            => ['required','string','url'],
+            'partnersImages.*'          => ['required','file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
+            'existingPartners.*.id'     => ['exists:partners,id'],
+            'existingPartners.*.name'   => ['string'],
+            'existingPartners.*.url'    => ['string','url'],
+            'existingPartners.*.image'  => ['file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
+        ]);
+        return $validatedData;
+    }
+
+    private function areThreeArraysEqualInSize(Array $array1, Array $array2, Array $array3) : bool
+    {
+        if ( (sizeof($array1) == sizeof($array2)) && (sizeof($array3) == sizeof($array1)) ) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private function managePartners(Array $data) : void
+    {
+        if (isset($data['existingPartners'])) {
+            DB::table('partners')->whereNotIn('id',$data['existingPartners'])->delete();
+            foreach ($data['existingPartners'] as $key => $partner) {
+                $editingPartner = Partner::find($partner['id']);
+
+                $editingPartner->name = $partner['name'];
+                $editingPartner->url  = $partner['url'];
+
+                if (isset($partner['image'])) {
+                    $editingPartner->thumbnail = $this->savePartnerThumbnail($partner['image']);
+                }
+
+                $editingPartner->update();
+
+
+            }
+        }else{
+            DB::table('partners')->delete();
+        }
+        
+        if (isset($data['partnersNames']) && isset($data['partnersUrls']) && isset($data['partnersImages'])) {
+            if ($this->areThreeArraysEqualInSize($data['partnersNames'],$data['partnersUrls'],$data['partnersImages'])) {
+                foreach ($data['partnersNames'] as $key => $name) {
+                    $newPartner = new Partner;
+        
+                    $newPartner->name = $name;
+        
+                    $newPartner->url  = $data['partnersUrls'][$key];
+        
+                    $newPartner->thumbnail = $this->savePartnerThumbnail($data['partnersImages'][$key]);
+        
+                    $newPartner->save();
+                }
+            }
+        }
+    }
+
+    private function savePartnerThumbnail(UploadedFile $picture) : string
+    {
+        $imageName = hash_file('haval160,4',$picture->getPathname()).'.'.$picture->getClientOriginalExtension();
+        $picture->move(public_path('img/partner-pictures'), $imageName);
+        return $imageName;
+    }
+
 
     private function getProfileTickets(): array
     {

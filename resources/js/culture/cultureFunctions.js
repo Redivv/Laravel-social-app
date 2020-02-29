@@ -139,7 +139,7 @@ function deleteClickedElement() {
     }
 }
 
-function deleteTargetElement(selector) {
+export function deleteTargetElement(selector) {
     if (confirm(confirmMsg)) {
         $(selector).remove();
         $('.tooltip:first').remove();
