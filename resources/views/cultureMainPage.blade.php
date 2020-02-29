@@ -6,6 +6,7 @@
     </title>
 @endsection
 
+
 @section('content')
     <div class="container-fluid">
         <form id="cultureSearch" class="mx-auto" method="get" action="{{route('culture.searchResults')}}">
@@ -58,75 +59,88 @@
                 </a>
             </div>
         </form>
-        <section id="cultureSections">
-            <header>
-                <h3>
-                    {{__('culture.sections')}}
-                </h3>
-            </header>
-            <output id="sectionsOutput" class="row">
-                <a class="cultureSection col" href="#">
-                    <h4>
-                        Gry
-                    </h4>
-                </a>
-                <a class="cultureSection col" href="#">
-                    <h4>
-                        Filmy
-                    </h4>
-                </a>
-                <a class="cultureSection col" href="#">
-                    <h4>
-                        Książki
-                    </h4>
-                </a>
-            </output>
-        </section>
-        <section id="cultureSugestions" class="row">
-            <div id="variableSugestions" class="column col-md-6 col-sm-12 border-right">
-                <h4>{{__('culture.sugestionTag',['tag' => 'penis'])}}</h4>
-                <output class="sugestions-out" id="variableSugestions-out">
-                    <a class="cultureItem row" href="#">
-                        <div class="col-2 itemImg">
-                            <img src="{{asset('img/profile-pictures/default-picture.png')}}" alt="Item Image">
-                        </div>
-                        <div class="col-7 itemDesc">
-                            <h5 class="itemTitle">Penis</h5>
-                            <output class="itemAttrs row">
-                                <span class="itemAttr col">Strony: 105</span>
-                            </output>
-                        </div>
-                        <div class="col-3 itemButtons row">
-                            <button class="btn col-12 likeBtn">
-                                <i class="fas fa-fire"></i>
-                                <span class="badge likesAmount active">5</span>
-                            </button>
-                        </div>
-                    </a>
+        @if (count($categories) > 0)
+            <section id="cultureSections">
+                <header>
+                    <h3>
+                        {{__('culture.sections')}}
+                    </h3>
+                </header>
+                <output id="sectionsOutput" class="row">
+                    @foreach ($categories as $cat)
+                        <a class="cultureSection col" href="{{route('culture.searchResults')."?category=".$cat->name}}">
+                            <h4>
+                                {{__($cat->name)}}
+                            </h4>
+                        </a>
+                    @endforeach
                 </output>
-            </div>
-            <div id="newestSugestions" class="column col-md-6 col-sm-12">
-                <h4>{{__('culture.sugestionNew')}}</h4>
-                <output class="sugestions-out" id="newestSugestions-out">
-                    <a class="cultureItem row" href="#">
-                        <div class="col-2 itemImg">
-                            <img src="{{asset('img/profile-pictures/default-picture.png')}}" alt="Item Image">
-                        </div>
-                        <div class="col-7 itemDesc">
-                            <h5 class="itemTitle">Penis</h5>
-                            <output class="itemAttrs row">
-                                <span class="itemAttr col">Strony: 105</span>
-                            </output>
-                        </div>
-                        <div class="col-3 itemButtons row">
-                            <button class="btn col-12 likeBtn">
-                                <i class="fas fa-fire"></i>
-                            </button>
-                        </div>
-                    </a>
-                </output>
-            </div>
-        </section>
+            </section>
+        @endif
+        @if ( (count($suggest) > 0) && (count($new) > 0) )
+            <section id="cultureSugestions" class="row">
+                <div id="variableSugestions" class="column col-md-6 col-sm-12">
+                    <h4>{{__('culture.sugestionTag')}}</h4>
+                    <output class="sugestions-out" id="variableSugestions-out">
+                        @foreach ($suggest as $item)
+                            <a class="cultureItem row" href="#">
+                                <div class="col-4 itemImg">
+                                    <img src="{{asset('img/culture-pictures/'.json_decode($item->thumbnail)[0])}}" alt="Item Image">
+                                </div>
+                                <div class="col-6 itemDesc">
+                                    <h5 class="itemTitle">{{$item->name}}</h5>
+                                    <output class="itemAttrs row">
+                                        @if ( ($attrValues = json_decode($item->attributes)) && ($attrLabels = json_decode($item->category->attributes) ))
+                                            @foreach ($attrLabels as $key => $label)
+                                                @if ($attrValues[$key])
+                                                    <span class="itemAttr col">{{$label}}: {{$attrValues[$key]}}</span>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </output>
+                                </div>
+                                <div class="col-md-2 col-sm-12 itemButtons row">
+                                    <button class="btn col-12 likeBtn">
+                                        <i class="fas fa-fire"></i>
+                                        <span class="badge likesAmount active">5</span>
+                                    </button>
+                                </div>
+                            </a>
+                        @endforeach
+                    </output>
+                </div>
+                <div id="newestSugestions" class="column col-md-6 col-sm-12">
+                    <h4>{{__('culture.sugestionNew')}}</h4>
+                    <output class="sugestions-out" id="newestSugestions-out">
+                        @foreach ($new as $item)
+                            <a class="cultureItem row" href="#">
+                                <div class="col-4 itemImg">
+                                    <img src="{{asset('img/culture-pictures/'.json_decode($item->thumbnail)[0])}}" alt="Item Image">
+                                </div>
+                                <div class="col-6 itemDesc">
+                                    <h5 class="itemTitle">{{$item->name}}</h5>
+                                    <output class="itemAttrs row">
+                                        @if ( ($attrValues = json_decode($item->attributes)) && ($attrLabels = json_decode($item->category->attributes) ))
+                                            @foreach ($attrLabels as $key => $label)
+                                                @if ($attrValues[$key])
+                                                    <span class="itemAttr col">{{$label}}: {{$attrValues[$key]}}</span>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </output>
+                                </div>
+                                <div class="col-md-2 col-sm-12 mt-sm-1 itemButtons row">
+                                    <button class="btn col-12 likeBtn">
+                                        <i class="fas fa-fire"></i>
+                                        <span class="badge likesAmount active">5</span>
+                                    </button>
+                                </div>
+                            </a>
+                        @endforeach
+                    </output>
+                </div>
+            </section>
+        @endif
     </div>
 @endsection
 

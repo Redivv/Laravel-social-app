@@ -22671,7 +22671,12 @@ html {
 
 #cultureSearch {
   padding-top: 1rem;
-  width: 70%;
+}
+
+@media screen and (min-width: 767px) {
+  #cultureSearch {
+    width: 70%;
+  }
 }
 
 #cultureSearch .input-group input {
@@ -22734,6 +22739,12 @@ html {
   background-color: #e26103;
 }
 
+@media screen and (max-width: 767px) {
+  #cultureSearch #advancedSearch .input-group {
+    padding-bottom: 1rem;
+  }
+}
+
 #cultureSearch #advancedSearch .sortOptions .sortOptionBtn {
   background-color: #f66103;
   color: #ffffff;
@@ -22748,6 +22759,19 @@ html {
 #cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+@media screen and (max-width: 1060px) {
+  #cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
+    margin-right: 0rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
 }
 
 #cultureSearch #advancedSearch .sortOptions .sortOptionBtn input {
@@ -22866,6 +22890,12 @@ html {
   text-align: center;
 }
 
+@media screen and (min-width: 767px) {
+  #cultureSugestions .column:first-child {
+    border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
 #cultureSugestions .column h4 {
   font-size: calc(1.255rem + 0.06vw);
   font-weight: bold;
@@ -22878,8 +22908,11 @@ html {
   }
 }
 
-#cultureSugestions .column:first {
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+@media screen and (max-width: 767px) {
+  #cultureSugestions .column h4 {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 0.5rem;
+  }
 }
 
 #cultureSugestions .column .sugestions-out {

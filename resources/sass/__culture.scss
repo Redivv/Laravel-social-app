@@ -1,6 +1,9 @@
 #cultureSearch {
     padding-top: 1rem;
-    width: 70%;
+
+    @media screen and (min-width: $mobile-breakpoint) {
+        width: 70%;
+    }
 
     .input-group {
         input {
@@ -62,6 +65,9 @@
                     padding: 0.43rem 0;
                 }
             }
+            @media screen and (max-width: $mobile-breakpoint) {
+                padding-bottom: 1rem;
+            }
         }
 
         .sortOptions {
@@ -75,7 +81,18 @@
                     background-color: $orange-hover;
                 }
 
+
                 &:nth-child(2) {
+
+                    @media screen and (max-width: $breakpoint2 - 140) {
+                        margin-right: 0rem;
+                    }
+
+                    @media screen and (max-width: $mobile-breakpoint) {
+                        margin-left: 1rem;
+                        margin-right: 1rem;
+                    }
+
                     margin-left: 1rem;
                     margin-right: 1rem;
                 }
@@ -174,18 +191,23 @@
 
 #cultureSugestions {
     padding-top: 1rem;
-
     .column {
         text-align: center;
+
+        @media screen and (min-width: $mobile-breakpoint) {
+            &:first-child {
+                border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+            }
+        }
 
         h4 {
             @include font-size (1.3rem);
             font-weight: bold;
             letter-spacing: 0.7px;
-        }
-
-        &:first {
-            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            @media screen and (max-width: $mobile-breakpoint) {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                padding-bottom: 0.5rem;
+            }
         }
 
         .sugestions-out {

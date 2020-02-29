@@ -13,7 +13,20 @@ class CultureController extends Controller
 {
     public function index()
     {
-        return view('cultureMainPage');
+        $categories = cultureCategory::all();
+
+        $newestItems = cultureItem::orderBy('created_at','desc')->take(3)->get();
+
+        if (Auth::check()) {
+            $suggestedItems = cultureItem::withAnyTag(Auth::user()->tagNames())->inRandomOrder()->take(3)->get();
+            if (count($suggestedItems) < 1) {
+                $suggestedItems = cultureItem::inRandomOrder()->take(3)->get();
+            }
+        }else{
+            $suggestedItems = cultureItem::inRandomOrder()->take(3)->get();
+        }
+
+        return view('cultureMainPage')->withCategories($categories)->withNew($newestItems)->withSuggest($suggestedItems);
     }
 
     public function searchResults(Request $request)

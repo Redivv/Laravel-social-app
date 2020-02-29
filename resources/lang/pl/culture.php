@@ -8,7 +8,7 @@ return [
     'likesSort'                 => 'Polecenia',
     'alfaSort'                  => 'Nazwa',
     'dateSort'                  => 'Utworzenie',
-    'sugestionTag'              => 'Związane z :tag',
+    'sugestionTag'              => 'Związane z Twoimi zainteresowaniami',
     'sugestionNew'              => 'Najnowsze',
     'itemCompleted'             => 'Ukończono',
     'title'                     => 'Tytuł',

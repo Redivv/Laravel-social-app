@@ -8,7 +8,7 @@ return [
     'likesSort'                 => 'Likes',
     'alfaSort'                  => 'Name',
     'dateSort'                  => 'Creation',
-    'sugestionTag'              => 'Related to :tag',
+    'sugestionTag'              => 'Related to Your hobbies',
     'sugestionNew'              => 'Newest',
     'title'                     => 'Title',
     'tags'                      => 'Tags',
