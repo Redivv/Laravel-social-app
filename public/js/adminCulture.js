@@ -11361,11 +11361,11 @@ function main() {
   $('#itemTags').on('keydown', function (key) {
     if (key.which == 13 || key.keyCode == 13) {
       key.preventDefault();
-      Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewTagInput"])(this);
+      Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewTagInputFromIn"])(this);
     }
   });
   $('#addTagBtn').on('click', function () {
-    Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewTagInput"])($('#itemTags'));
+    Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewTagInputFromIn"])($('#itemTags'));
   });
   $('#itemImages').change(function (evt) {
     Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["displayAddedImageIn"])(this, evt, '#itemImages-out');
@@ -11489,7 +11489,7 @@ function carryList(decided, target) {
 /*!**************************************************!*\
   !*** ./resources/js/culture/cultureFunctions.js ***!
   \**************************************************/
-/*! exports provided: sendAjaxRequestToWithFormData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInput, addOnClickDeleteEventOnRemove, deleteTargetElement, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer, addNewPartnerInput */
+/*! exports provided: sendAjaxRequestToWithFormData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInputFromIn, addOnClickDeleteEventOnRemove, deleteTargetElement, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer, addNewPartnerInput */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11500,7 +11500,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showSpinnerOverlay", function() { return showSpinnerOverlay; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideSpinnerOverlay", function() { return hideSpinnerOverlay; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayCategoryAttrs", function() { return displayCategoryAttrs; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewTagInput", function() { return addNewTagInput; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewTagInputFromIn", function() { return addNewTagInputFromIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOnClickDeleteEventOnRemove", function() { return addOnClickDeleteEventOnRemove; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTargetElement", function() { return deleteTargetElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "turnOnToolipsOn", function() { return turnOnToolipsOn; });
@@ -11593,15 +11593,16 @@ function createAtrrInputsHtml(attrs) {
   return inputs;
 }
 
-function addNewTagInput(input) {
+function addNewTagInputFromIn(input, container) {
+  container = container || "#itemTags-out";
   var newTagValue = $(input).val().trim();
 
   if (newTagValue !== "") {
     var html = createNewTagInput(newTagValue);
-    $('#itemTags-out').append(html);
+    $(container).append(html);
     clearInputsValue(input);
-    turnOnToolipsOn('#itemTags-out>.itemTag:last');
-    addOnClickDeleteEventOnRemove('#itemTags-out>.itemTag:last');
+    turnOnToolipsOn(container + '>.itemTag:last');
+    addOnClickDeleteEventOnRemove(container + '>.itemTag:last');
   }
 }
 

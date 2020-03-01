@@ -22745,6 +22745,34 @@ html {
   }
 }
 
+#cultureSearch #advancedSearch #searchTags-out {
+  width: 100%;
+  padding: 0.5em;
+}
+
+#cultureSearch #advancedSearch #searchTags-out .itemTag {
+  color: #ffffff;
+  cursor: pointer;
+  background-color: #f66103;
+  padding: 0.2rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin: 0 0.2rem;
+}
+
+#cultureSearch #advancedSearch #searchTags-out .itemTag:hover {
+  background-color: #d22103;
+}
+
+@media screen and (max-width: 767px) {
+  #cultureSearch #advancedSearch #searchTags-out {
+    padding-bottom: 1rem;
+  }
+}
+
 #cultureSearch #advancedSearch .sortOptions .sortOptionBtn {
   background-color: #f66103;
   color: #ffffff;

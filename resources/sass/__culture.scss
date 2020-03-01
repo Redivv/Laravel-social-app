@@ -70,6 +70,29 @@
             }
         }
 
+        #searchTags-out{
+            width: 100%;
+            padding: 0.5em;
+            .itemTag{
+                color: $white;
+                cursor: pointer;
+                background-color: $orange;
+                padding: 0.2rem;
+                border-radius: 20px;
+                font-weight: bold;
+                @include font-size(1rem);
+                letter-spacing: 0.5px;
+                text-align: center;
+                margin: 0 0.2rem;
+                &:hover{
+                    background-color: $orange-active-hover;
+                }
+            }
+            @media screen and (max-width: $mobile-breakpoint) {
+                padding-bottom: 1rem;
+            }
+        }
+
         .sortOptions {
             .sortOptionBtn {
                 background-color: $orange;

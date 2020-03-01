@@ -9,6 +9,7 @@ return [
     'alfaSort'                  => 'Name',
     'dateSort'                  => 'Creation',
     'sugestionTag'              => 'Related to Your hobbies',
+    'sugestionLikes'            => 'Popular Items',
     'sugestionNew'              => 'Newest',
     'title'                     => 'Title',
     'tags'                      => 'Tags',

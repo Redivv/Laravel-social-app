@@ -9,6 +9,7 @@ return [
     'alfaSort'                  => 'Nazwa',
     'dateSort'                  => 'Utworzenie',
     'sugestionTag'              => 'Związane z Twoimi zainteresowaniami',
+    'sugestionLikes'            => 'Popularne przedmioty',
     'sugestionNew'              => 'Najnowsze',
     'itemCompleted'             => 'Ukończono',
     'title'                     => 'Tytuł',

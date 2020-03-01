@@ -97,18 +97,19 @@ function createAtrrInputsHtml(attrs) {
     return inputs;
 }
 
-export function addNewTagInput(input) {
+export function addNewTagInputFromIn(input,container) {
+    container = container || "#itemTags-out";
     let newTagValue = $(input).val().trim();
     if (newTagValue !== "") {
         let html = createNewTagInput(newTagValue);
 
-        $('#itemTags-out').append(html);
+        $(container).append(html);
 
         clearInputsValue(input);
 
-        turnOnToolipsOn('#itemTags-out>.itemTag:last');
+        turnOnToolipsOn(container+'>.itemTag:last');
 
-        addOnClickDeleteEventOnRemove('#itemTags-out>.itemTag:last');
+        addOnClickDeleteEventOnRemove(container+'>.itemTag:last');
     }
 }
 

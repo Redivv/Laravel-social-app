@@ -17,13 +17,16 @@
                 </div>
             </div>
             <div id="advancedSearch" class="form-group collapse row">
-                <div class="input-group col-md-6 col-sm-12 tagSearch">
-                    <input type="text" class="form-control" placeholder="{{__('culture.searchTags')}}" aria-label="Tag Name" aria-describedby="tag search button">
-                    <div class="input-group-append">
-                        <button class="btn" type="button">
-                            {{__('searcher.add')}}
-                        </button>
+                <div class="advancedTags col-md-6 col-sm-12 tagSearch">
+                    <div class="input-group">
+                        <input type="text" id="searchTags" class="form-control" name="searchTags[]" placeholder="{{__('culture.searchTags')}}" aria-label="Tag Name" aria-describedby="tag search button">
+                        <div class="input-group-append">
+                            <button class="btn" type="button">
+                                {{__('searcher.add')}}
+                            </button>
+                        </div>
                     </div>
+                    <output id="searchTags-out" class="row"></output>
                 </div>
                 <div class="col-md-6 col-sm-12 sortOptions row">
                     <label class="col btn sortOptionBtn active">
@@ -80,9 +83,9 @@
         @if ( (count($suggest) > 0) && (count($new) > 0) )
             <section id="cultureSugestions" class="row">
                 <div id="variableSugestions" class="column col-md-6 col-sm-12">
-                    <h4>{{__('culture.sugestionTag')}}</h4>
+                    <h4>{{__('culture.sugestion'.$suggest['type'])}}</h4>
                     <output class="sugestions-out" id="variableSugestions-out">
-                        @foreach ($suggest as $item)
+                        @foreach ($suggest['items'] as $item)
                             <a class="cultureItem row" href="#">
                                 <div class="col-4 itemImg">
                                     <img src="{{asset('img/culture-pictures/'.json_decode($item->thumbnail)[0])}}" alt="Item Image">
@@ -155,11 +158,14 @@
 
 @push('scripts')
 <script>
-    var baseUrl = "{{url('/')}}";
+    var baseUrl             = "{{url('/')}}";
+    var deleteHobby         =  "{{__('activityWall.deleteTags')}}";
+    var confirmMsg          =  "{{__('admin.confirmMsg')}}";
 </script>
-<script src="{{asset('js/culture.js')}}"></script>
 
 <script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
+
+<script src="{{asset('js/culture.js')}}"></script>
 
 <script defer>
     Echo.join('online')

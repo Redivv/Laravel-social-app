@@ -4,10 +4,9 @@ import {
     sendAjaxRequestToWithFormData,
     addNewAttrForm,
     showSpinnerOverlay,
-    hideSpinnerOverlay,
     deleteAttrForm,
     displayCategoryAttrs,
-    addNewTagInput,
+    addNewTagInputFromIn,
     displayAddedImageIn,
     turnOnToolipsOn,
     addOnClickDeleteEventOnRemove,
@@ -128,12 +127,12 @@ function main() {
     $('#itemTags').on('keydown',function(key){
         if (key.which == 13 || key.keyCode == 13) {
             key.preventDefault();
-            addNewTagInput(this);
+            addNewTagInputFromIn(this);
         }
     });
 
     $('#addTagBtn').on('click',function() {
-        addNewTagInput($('#itemTags'));
+        addNewTagInputFromIn($('#itemTags'));
     });
 
     $('#itemImages').change(function(evt){
