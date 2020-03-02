@@ -19,7 +19,7 @@
             <div id="advancedSearch" class="form-group collapse row">
                 <div class="advancedTags col-md-6 col-sm-12 tagSearch">
                     <div class="input-group">
-                        <input type="text" id="searchTags" class="form-control" name="searchTags[]" placeholder="{{__('culture.searchTags')}}" aria-label="Tag Name" aria-describedby="tag search button">
+                        <input type="text" id="searchTags" class="form-control" name="itemTags[]" placeholder="{{__('culture.searchTags')}}" aria-label="Tag Name" aria-describedby="tag search button">
                         <div class="input-group-append">
                             <button class="btn" type="button">
                                 {{__('searcher.add')}}
@@ -30,11 +30,11 @@
                 </div>
                 <div class="col-md-6 col-sm-12 sortOptions row">
                     <label class="col btn sortOptionBtn active">
-                        <input type="radio" name="options" id="lettersSort" value="lettersSort" autocomplete="off" checked>
+                        <input type="radio" name="options" id="likesSort" value="likesSort" autocomplete="off" checked>
                         {{__('culture.likesSort')}}
                     </label>
                     <label class="col btn sortOptionBtn">
-                        <input type="radio" name="options" id="likesSort" value="likesSort" autocomplete="off">
+                        <input type="radio" name="options" id="lettersSort" value="lettersSort" autocomplete="off">
                         {{__('culture.alfaSort')}}
                     </label>
                     <label class="col btn sortOptionBtn">
@@ -54,6 +54,7 @@
                         </div>
                     </div>
                 </div>
+                <button class="btn form-btn w-100" type="submit">{{__('searcher.search')}}</button>
             </div>
             <div class="togglerBox">
                 <a class="advancedSearchToggle" data-toggle="collapse" href="#advancedSearch" role="button" aria-expanded="false" aria-controls="collapseExample">

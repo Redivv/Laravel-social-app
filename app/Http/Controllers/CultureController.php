@@ -6,9 +6,11 @@ use App\cultureCategory;
 use App\cultureItem;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class CultureController extends Controller
 {
@@ -37,7 +39,11 @@ class CultureController extends Controller
 
     public function searchResults(Request $request)
     {
-        return view('cultureSearchResults');
+        $validatedRequest  =    $this->validateCultureSearch($request);
+        $kek = $validatedRequest->all();
+        $searchResults      =   $this->getCultureSearchResults($validatedRequest);
+
+        return view('cultureSearchResults')->withResults($searchResults);
     }
 
     public function newCategory(Request $request)
@@ -72,6 +78,72 @@ class CultureController extends Controller
 
 
     // Private Functions
+
+    private function validateCultureSearch(Request $data) : Request
+    {
+        $validOptions   = ["lettersSort","likesSort","dateSort"];
+        $validDirs      = ['asc','desc'];
+
+        $data->validate([
+            "titleName"         => ['present','string','nullable'],
+            'itemTags'          => ['present','array'],
+            'itemTags.*'        => ['string','nullable'],
+            'options'           => ['required','string',Rule::in($validOptions)],
+            'sortOptionsDir'    => ['required','string',Rule::in($validDirs)]
+        ]);
+
+        return $data;
+    }
+
+    private function getCultureSearchResults(Request $criteria) : LengthAwarePaginator
+    {
+        $kek = $criteria->all();
+        if(empty($criteria->titleName)){
+            $searchResults = cultureItem::select('*');
+        }else{
+            $searchResults = cultureItem::where('name_slug', 'like', Str::slug($criteria->titleName));
+        }
+
+        if (!empty($criteria->itemTags[0])) {
+            $searchResults = $searchResults->withAnyTag($criteria->itemTags);
+        }
+
+        if ($criteria->options === "likesSort") {
+            
+            $searchLikes = $searchResults->get();
+            
+            if ($criteria->sortOptionsDir == "asc") {
+
+                $searchLikes = $searchLikes->sortByDesc(function($item,$key){
+                    return $item->likeCount;
+                })->pluck('id')->toArray();
+            }else{
+                $searchLikes = $searchLikes->sortBy(function($item,$key){
+                    return $item->likeCount;
+                })->pluck('id')->toArray();
+            }
+
+            $orderedIds = implode(',',$searchLikes);
+
+            $searchResults = $searchResults
+                ->orderByRaw(\DB::raw("FIELD(culture_items.id, ".$orderedIds." )"))            
+                ->paginate(5);
+        }else{
+
+            switch ($criteria->options) {
+                case 'lettersSort':
+                    $searchResults = $searchResults->orderBy("name_slug",$criteria->sortOptionsDir);
+                    break;
+                case 'dateSort':
+                    $searchResults = $searchResults->orderBy("created_at",$criteria->sortOptionsDir);
+                    break;
+            }
+    
+            $searchResults = $searchResults->paginate(5);
+        }
+
+        return $searchResults;
+    }
 
     private function getMostLikedItemsTake(int $amount = 10): Collection
     {

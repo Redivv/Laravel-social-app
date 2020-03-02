@@ -104,6 +104,12 @@ $(document).ready(function () {
 });
 
 function main() {
+  $('li.hobby').on('click', function () {
+    if (confirm(deleteMsg)) {
+      $(this).remove();
+      $('.tooltip:last').remove();
+    }
+  });
   $('div.hobbyCriteria>button').on('click', function () {
     var hobby = $('input#hobby').val();
 

@@ -102,6 +102,8 @@ $(document).ready(function () {
 });
 
 function main() {
+  $('[data-tool=tooltip]').tooltip();
+  Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_0__["addOnClickDeleteEventOnRemove"])(".itemTag");
   $('input[type=radio][name=options]').click(function () {
     $('.sortOptionBtn').removeClass('active');
     $(this).parent().addClass('active');
@@ -115,7 +117,7 @@ function main() {
   $("#searchTags").autocomplete({
     source: function source(request, response) {
       $.ajax({
-        url: baseUrl + "/ajax/tag/autocompleteUser",
+        url: baseUrl + "/ajax/tag/autocompleteHobby",
         data: {
           term: request.term
         },
@@ -128,8 +130,7 @@ function main() {
         }
       });
     },
-    minLength: 1,
-    appendTo: '#tagUsers'
+    minLength: 1
   });
 }
 
