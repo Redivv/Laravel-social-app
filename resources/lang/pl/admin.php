@@ -61,5 +61,16 @@ return [
     'attrs'                     => 'Atrybuty',
     'addNewAttr'                => 'Dodaj Nowy Atrybut',
     'deleteAttrMsg'             => 'Usuń Atrybut',
-    'emptyFields'               => "Formularz nie może być pusty"
+    'emptyFields'               => "Formularz nie może być pusty",
+    'cultureEditCategory'       => "Edytuj Kategorię",
+    'cultureEditItem'           => "Edytuj Przedmiot",
+    'change'                    => "Zmień",
+    'back'                      => "Wróć",
+    'itemName'                  => "Nazwa Przedmiotu",
+    'itemCategory'              => "Kategoria",
+    'itemTags'                  => "Tagi",
+    'itemImages'                => "Zdjęcia",
+    'itemReview'                => "Recenzja",
+    'selectCategory'            => "Wybierz Kategorię",
+    'itemThumbnail'             => "Miniatura",
 ];

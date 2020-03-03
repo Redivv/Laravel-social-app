@@ -62,5 +62,16 @@ return [
     'attrs'                     => 'Attributes',
     'addNewAttr'                => 'Add New Attribute',
     'deleteAttrMsg'             => 'Delete Attribute',
-    'emptyFields'               => "Form fields cannot be empty"
+    'emptyFields'               => "Form fields cannot be empty",
+    'cultureEditCategory'       => "Edit Category",
+    'cultureEditItem'           => "Edit Item",
+    'change'                    => "Change",
+    'back'                      => "Go Back",
+    'itemName'                  => "Item's Name",
+    'itemCategory'              => "Category",
+    'itemTags'                  => "Tags",
+    'itemImages'                => "Images",
+    'itemReview'                => "Review",
+    'selectCategory'            => "Select Category",
+    'itemThumbnail'             => "Thumbnail",
 ];

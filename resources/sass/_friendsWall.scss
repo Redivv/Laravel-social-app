@@ -46,8 +46,8 @@
                 }
             }
             .thumb{
-                width: 9rem;
-                height: 9rem;
+                max-width: 9rem;
+                max-height: 9rem;
                 margin-left: 0.5rem;
                 margin-bottom: 0.5rem;
             }
@@ -721,8 +721,8 @@
                 }
             }
             .thumb{
-                width: 9rem;
-                height: 9rem;
+                max-width: 9rem;
+                max-height: 9rem;
                 margin-left: 0.5rem;
                 margin-bottom: 0.5rem;
             }

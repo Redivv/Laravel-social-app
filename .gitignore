@@ -17,5 +17,7 @@ yarn-error.log
 
 public/img/message-pictures
 public/img/profile-pictures
-*.jpg
 public/img/post-pictures
+public/img/partner-pictures
+public/img/email-pictures
+public/img/culture-pictures

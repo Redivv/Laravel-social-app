@@ -8,12 +8,14 @@ return [
     'likesSort'                 => 'Likes',
     'alfaSort'                  => 'Name',
     'dateSort'                  => 'Creation',
-    'sugestionTag'              => 'Related to :tag',
+    'sugestionTag'              => 'Related to Your hobbies',
+    'sugestionLikes'            => 'Popular Items',
     'sugestionNew'              => 'Newest',
     'title'                     => 'Title',
     'tags'                      => 'Tags',
     'searchMore'                => 'Keep Searching',
     'itemCompleted'             => 'Finished',
     'similarItems'              => 'Similar items',
-    'likeItem'                  => 'Like this item'
+    'likeItem'                  => 'Like this item',
+    'allCats'                   => 'All'
 ];

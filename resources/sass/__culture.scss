@@ -1,6 +1,9 @@
-#cultureSearch {
+.mx-auto#cultureSearch {
     padding-top: 1rem;
-    width: 70%;
+
+    @media screen and (min-width: $mobile-breakpoint) {
+        width: 70%;
+    }
 
     .input-group {
         input {
@@ -62,6 +65,32 @@
                     padding: 0.43rem 0;
                 }
             }
+            @media screen and (max-width: $mobile-breakpoint) {
+                padding-bottom: 1rem;
+            }
+        }
+
+        #searchTags-out{
+            width: 100%;
+            padding: 0.5em;
+            .itemTag{
+                color: $white;
+                cursor: pointer;
+                background-color: $orange;
+                padding: 0.2rem;
+                border-radius: 20px;
+                font-weight: bold;
+                @include font-size(1rem);
+                letter-spacing: 0.5px;
+                text-align: center;
+                margin: 0.2rem 0.2rem;
+                &:hover{
+                    background-color: $orange-active-hover;
+                }
+            }
+            @media screen and (max-width: $mobile-breakpoint) {
+                padding-bottom: 1rem;
+            }
         }
 
         .sortOptions {
@@ -75,7 +104,18 @@
                     background-color: $orange-hover;
                 }
 
+
                 &:nth-child(2) {
+
+                    @media screen and (max-width: $breakpoint2 - 140) {
+                        margin-right: 0rem;
+                    }
+
+                    @media screen and (max-width: $mobile-breakpoint) {
+                        margin-left: 1rem;
+                        margin-right: 1rem;
+                    }
+
                     margin-left: 1rem;
                     margin-right: 1rem;
                 }
@@ -145,6 +185,7 @@
         margin-top: 0.5rem;
 
         .cultureSection {
+            cursor: pointer;
             text-align: center;
             display: flex;
             align-items: center;
@@ -174,18 +215,23 @@
 
 #cultureSugestions {
     padding-top: 1rem;
-
     .column {
         text-align: center;
+
+        @media screen and (min-width: $mobile-breakpoint) {
+            &:first-child {
+                border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+            }
+        }
 
         h4 {
             @include font-size (1.3rem);
             font-weight: bold;
             letter-spacing: 0.7px;
-        }
-
-        &:first {
-            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            @media screen and (max-width: $mobile-breakpoint) {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                padding-bottom: 0.5rem;
+            }
         }
 
         .sugestions-out {
@@ -274,7 +320,8 @@
         }
     }
 }
-#cultureSearchMore{
+
+.collapse#cultureSearch{
     input{
         border-radius: 0;
     }
@@ -337,25 +384,64 @@
             }
         }
     }
-    .formSubmitBtn{
-        button{
-            @include font-size(0.9rem);
-            letter-spacing: 0.5px;
-            padding: 0.5rem 0.8rem;
-            background-color: $orange;
+
+    #searchTags-out{
+        width: 100%;
+        padding: 0.5em;
+        .itemTag{
             color: $white;
+            cursor: pointer;
+            background-color: $orange;
+            padding: 0.2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            @include font-size(1rem);
+            letter-spacing: 0.5px;
+            text-align: center;
+            margin: 0.2rem 0.2rem;
             &:hover{
-                background-color: $orange-hover;
+                background-color: $orange-active-hover;
             }
+        }
+        @media screen and (max-width: $mobile-breakpoint) {
+            padding-bottom: 1rem;
+        }
+    }
+}
+.cultureSection{
+    cursor: pointer;
+    &.active{
+        h3{
+            color: $orange;
         }
     }
 }
 
 #searchResultsOutput{
+    max-height: 60vh;
+    overflow-y: auto;
     display:block;
     width: 100%;
     padding: 1rem 0;
+    .adminButtons{
+        text-align: right;
+        form{
+            display: inline;
+        }
+        a,button{
+            display: inline;
+            color: black;
+            cursor: pointer;
+            padding: 0.5rem;
+            @include font-size(1rem);
+            &:hover{
+                color: $orange;
+            }
+        }
+    }
     .searchResult{
+        text-align: center;
+        justify-content: center;
         color: $black;
         text-decoration: none;
         width: 100%;
@@ -366,8 +452,8 @@
         .itemImage{
             text-align: center;
             img{
-                width: 3rem;
-                height: 3rem;
+                width: 4rem;
+                height: 4rem;
             }
         }
         .itemTitle{
@@ -417,19 +503,43 @@
                 }
             }
         }
+        .itemAttributes,.itemLikes{
+            @media screen and (max-width: $mobile-breakpoint) {
+                padding-top: 1rem;
+            }
+        }
         &:hover{
             background-color: $light-orange;
         }
     }
 }
+ul.pagination{
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+        
+        .page-item{
+
+            .page-link{
+                color:$black;
+            }
+
+            &.active{
+                .page-link{
+                    background-color: $orange;
+                    border-color: $orange;
+                    color: $white;
+                }
+            }
+        }
+    }
 
 .extraLinks{
-    padding: 2rem 1rem;
+    padding: 1rem 0rem;
     text-align: center;
-    position: absolute;
     bottom: 5%;
     left: 10%;
-    width: 80%;
+    width: 100%;
     a{
         h3{
             width: 100%;
@@ -462,3 +572,9 @@
 }
 
 
+.noSearchResults{
+    @include font-size(1.1rem);
+    @extend .text-muted;
+    letter-spacing: 0.5px;
+    text-align: center;
+}

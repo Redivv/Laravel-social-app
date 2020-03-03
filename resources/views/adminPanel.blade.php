@@ -25,7 +25,7 @@
             {{__('admin.home')}}
         </a>
         <a id="cultureAdminLink" class="btn col-md-4 col-sm-12" href="{{route('adminCulture')}}">
-            {{__('app.culture')}}
+            {{__('app.culture')}} & {{__('app.partners')}}
         </a>
     </div>
     <div class="row">
@@ -82,10 +82,10 @@
 
 @push('scripts')
 <script>
-    var __baseUrl = "{{url('/')}}";
-    var confirmMsg = "{{__('admin.confirmMsg')}}";
-    var noNotifications = "{{__('nav.noNotifications')}}";
-    var resetImgMsg = "{{__('activityWall.resetPictures')}}";
+    var __baseUrl           = "{{url('/')}}";
+    var confirmMsg          = "{{__('admin.confirmMsg')}}";
+    var noNotifications     = "{{__('nav.noNotifications')}}";
+    var resetImgMsg         = "{{__('activityWall.resetPictures')}}";
 
 </script>
 

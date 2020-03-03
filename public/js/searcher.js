@@ -104,6 +104,12 @@ $(document).ready(function () {
 });
 
 function main() {
+  $('li.hobby').on('click', function () {
+    if (confirm(deleteMsg)) {
+      $(this).remove();
+      $('.tooltip:last').remove();
+    }
+  });
   $('div.hobbyCriteria>button').on('click', function () {
     var hobby = $('input#hobby').val();
 
@@ -186,7 +192,9 @@ function likeUser(selected) {
     }
   });
   request.fail(function (xhr) {
-    alert(xhr.responseJSON.message);
+    $.each(xhr.responseJSON.errors, function (key, value) {
+      alert(value);
+    });
   });
 }
 
@@ -215,7 +223,9 @@ function addFriend(selected) {
 
   request.fail(function (xhr) {
     //we get our response as alert.
-    alert(xhr.responseJSON.message);
+    $.each(xhr.responseJSON.errors, function (key, value) {
+      alert(value);
+    });
   });
 }
 
@@ -245,7 +255,9 @@ function reportUser(selected) {
       }
     });
     request.fail(function (xhr) {
-      alert(xhr.responseJSON.message);
+      $.each(xhr.responseJSON.errors, function (key, value) {
+        alert(value);
+      });
     });
   }
 }

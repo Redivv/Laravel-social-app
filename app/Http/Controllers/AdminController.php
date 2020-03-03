@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\User;
 use App\City;
+use App\cultureCategory;
+use App\cultureItem;
 use Conner\Tagging\Model\Tag;
 
 use Carbon\Carbon;
@@ -19,6 +21,9 @@ use App\Jobs\SendAdminNewsletter;
 use App\Jobs\SendAdminWideInfo;
 use App\Jobs\DeleteUser;
 use App\Jobs\HandleProfilePictureTicket;
+use App\Partner;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
 use Nahid\Talk\Facades\Talk;
 
 class AdminController extends Controller
@@ -46,15 +51,43 @@ class AdminController extends Controller
         return view('adminPanel')->with('pictureTickets', $pictureTicketsAmount)->with('userTickets', $userTicketsAmount);
     }
 
-    public function culture()
+    public function culture(Request $request)
     {
-        return view('adminCulturePanel');
+        $itemCategories = cultureCategory::all();
+        $partners   = Partner::all();
+
+        $request->validate([
+            'elementType'   => Rule::in(['cultureCategory', 'cultureItem']),
+        ]);
+
+        $editingElement = null;
+        $editingType = null;
+
+        if ((isset($request->elementType))) {
+            switch ($request->elementType) {
+                case 'cultureCategory':
+                    $request->validate([
+                        'elementId'   => ['numeric','exists:culture_categories,id'],
+                    ]);
+                    $editingElement = cultureCategory::find($request->elementId);
+                    $editingType    = "category";
+                    break;
+                case 'cultureItem':
+                    $request->validate([
+                        'elementId'   => ['numeric','exists:culture_items,id'],
+                    ]);
+                    $editingElement = cultureItem::find($request->elementId);
+                    $editingType    = "item";
+                    break;
+            }
+        }
+        return view('adminCulturePanel')->withElement($editingElement)->withElementType($editingType)->withCategories($itemCategories)->withPartners($partners);
     }
 
     public function getTabContent(Request $request)
     {
         if ($request->ajax()) {
-            $validTargets = ['profileTicket', 'userTicket', 'userList', 'tagList', 'cityList','cultureItems','cultureCategories'];
+            $validTargets = ['profileTicket', 'userTicket', 'userList', 'tagList', 'cityList', 'cultureItems', 'cultureCategories'];
 
             $target = $request->validate([
                 'target'    => [
@@ -91,15 +124,10 @@ class AdminController extends Controller
                     $amount = null;
                     $html = view('partials.admin.cityListContent')->withElements($elements)->render();
                     break;
-                case 'cultureItems':
-                    // $elements = $this->getCities();
-                    $amount = null;
-                    $html = view('partials.admin.culture.cultureItemsContent')->render();
-                    break;
                 case 'cultureCategories':
-                    // $elements = $this->getCities();
+                    $elements = $this->getCultureCategories();
                     $amount = null;
-                    $html = view('partials.admin.culture.cultureCategoriesContent')->render();
+                    $html = view('partials.admin.culture.cultureCategoriesContent')->withElements($elements)->render();
                     break;
             }
             return response()->json(['status' => 'success', 'html' => $html, 'amount' => $amount], 200);
@@ -148,7 +176,7 @@ class AdminController extends Controller
                 ],
                 'target'       => [
                     'string',
-                    Rule::in(['userTicket', 'userList', 'tagList', 'cityList'])
+                    Rule::in(['userTicket', 'userList', 'tagList', 'cityList', 'cultureCategories'])
                 ]
             ]);
             $elementId = intVal(substr($request->elementId, 10));
@@ -181,6 +209,14 @@ class AdminController extends Controller
                     $selectedElement = User::find($elementId);
                     if ($selectedElement) {
                         $this->resolveUserList($selectedElement, $request->decision);
+                    } else {
+                        return response()->json(['status' => 'error'], 400);
+                    }
+                    break;
+                case 'cultureCategories':
+                    $selectedElement = cultureCategory::find($elementId);
+                    if ($selectedElement) {
+                        $this->resolveCultureCategory($selectedElement);
                     } else {
                         return response()->json(['status' => 'error'], 400);
                     }
@@ -389,6 +425,95 @@ class AdminController extends Controller
         }
     }
 
+    public function newPartners(Request $request)
+    {
+        if ($request->ajax()) {
+            $kek = $request->all();
+            $validatedData  = $this->validatePartnerData($request);
+
+            if ($validatedData) {
+                $this->managePartners($validatedData);
+            }
+
+            return response()->json(['action' => 'savedData'], 200);
+
+        }
+    }
+
+
+
+    // Private Functions 
+
+    private function validatePartnerData(Request $data) : Array
+    {
+       $validatedData = $data->validate([
+            'partnersNames.*'           => ['required','string'],
+            'partnersUrls.*'            => ['required','string','url'],
+            'partnersImages.*'          => ['required','file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
+            'existingPartners.*.id'     => ['exists:partners,id'],
+            'existingPartners.*.name'   => ['string'],
+            'existingPartners.*.url'    => ['string','url'],
+            'existingPartners.*.image'  => ['file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
+        ]);
+        return $validatedData;
+    }
+
+    private function areThreeArraysEqualInSize(Array $array1, Array $array2, Array $array3) : bool
+    {
+        if ( (sizeof($array1) == sizeof($array2)) && (sizeof($array3) == sizeof($array1)) ) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private function managePartners(Array $data) : void
+    {
+        if (isset($data['existingPartners'])) {
+            DB::table('partners')->whereNotIn('id',$data['existingPartners'])->delete();
+            foreach ($data['existingPartners'] as $key => $partner) {
+                $editingPartner = Partner::find($partner['id']);
+
+                $editingPartner->name = $partner['name'];
+                $editingPartner->url  = $partner['url'];
+
+                if (isset($partner['image'])) {
+                    $editingPartner->thumbnail = $this->savePartnerThumbnail($partner['image']);
+                }
+
+                $editingPartner->update();
+
+
+            }
+        }else{
+            DB::table('partners')->delete();
+        }
+        
+        if (isset($data['partnersNames']) && isset($data['partnersUrls']) && isset($data['partnersImages'])) {
+            if ($this->areThreeArraysEqualInSize($data['partnersNames'],$data['partnersUrls'],$data['partnersImages'])) {
+                foreach ($data['partnersNames'] as $key => $name) {
+                    $newPartner = new Partner;
+        
+                    $newPartner->name = $name;
+        
+                    $newPartner->url  = $data['partnersUrls'][$key];
+        
+                    $newPartner->thumbnail = $this->savePartnerThumbnail($data['partnersImages'][$key]);
+        
+                    $newPartner->save();
+                }
+            }
+        }
+    }
+
+    private function savePartnerThumbnail(UploadedFile $picture) : string
+    {
+        $imageName = hash_file('haval160,4',$picture->getPathname()).'.'.$picture->getClientOriginalExtension();
+        $picture->move(public_path('img/partner-pictures'), $imageName);
+        return $imageName;
+    }
+
+
     private function getProfileTickets(): array
     {
         $tickets = Auth::user()->notifications()->where('type', 'App\Notifications\NewProfilePicture')->take(5)->get();
@@ -472,6 +597,11 @@ class AdminController extends Controller
         return City::take(10)->get();
     }
 
+    private function getCultureCategories(): Collection
+    {
+        return cultureCategory::all();
+    }
+
     private function resolveProfileTicket(array $data, string $decision): void
     {
         $validUser = User::where('name', $data['user_name'])->where('pending_picture', $data['image'])->first();
@@ -544,5 +674,10 @@ class AdminController extends Controller
                 $city->update();
                 break;
         }
+    }
+
+    private function resolveCultureCategory(cultureCategory $category)
+    {
+        $category->delete();
     }
 }

@@ -8,13 +8,15 @@ return [
     'likesSort'                 => 'Polecenia',
     'alfaSort'                  => 'Nazwa',
     'dateSort'                  => 'Utworzenie',
-    'sugestionTag'              => 'Związane z :tag',
+    'sugestionTag'              => 'Związane z Twoimi zainteresowaniami',
+    'sugestionLikes'            => 'Popularne przedmioty',
     'sugestionNew'              => 'Najnowsze',
     'itemCompleted'             => 'Ukończono',
     'title'                     => 'Tytuł',
     'tags'                      => 'Tagi',
     'searchMore'                => 'Szukaj Dalej',
     'similarItems'              => 'Podobne produkty',
-    'likeItem'                  => 'Polub przedmiot'
+    'likeItem'                  => 'Polub przedmiot',
+    'allCats'                   => 'Wszystkie'
 
 ];

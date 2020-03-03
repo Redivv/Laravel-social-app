@@ -229,7 +229,9 @@ function main() {
                         
                         request.fail(function (xhr){
                             $('.spinnerOverlay').addClass('d-none'); 
-                            alert(xhr.responseJSON.message);
+                            $.each(xhr.responseJSON.errors,function(key,value) {
+                                alert(value);
+                            });
                         });
                     }
                 });
@@ -237,7 +239,9 @@ function main() {
         });
         
         request.fail(function (xhr){
-            alert(xhr.responseJSON.message);
+            $.each(xhr.responseJSON.errors,function(key,value) {
+                alert(value);
+            });
         });
     });
 
@@ -286,7 +290,9 @@ function main() {
             
             
             request.fail(function (xhr){
-                alert(xhr.responseJSON.message);
+                $.each(xhr.responseJSON.errors,function(key,value) {
+                    alert(value);
+                });
             });
 
         }
@@ -414,7 +420,9 @@ function main() {
                 
                 
                 request.fail(function (xhr){
-                    alert(xhr.responseJSON.message);
+                    $.each(xhr.responseJSON.errors,function(key,value) {
+                        alert(value);
+                    });
                     $('.spinnerOverlay').addClass('d-none');
                 });
             }else{
@@ -461,7 +469,9 @@ function main() {
             //if our request is unsuccesfull:
             request.fail(function (xhr){
                 //we get our response as alert.
-                alert(xhr.responseJSON.message);
+                $.each(xhr.responseJSON.errors,function(key,value) {
+                    alert(value);
+                });
             });
         }
     });
@@ -492,7 +502,9 @@ function main() {
             
             
             request.fail(function (xhr){
-                alert(xhr.responseJSON.message);
+                $.each(xhr.responseJSON.errors,function(key,value) {
+                    alert(value);
+                });
             });
         }
     });
@@ -547,7 +559,9 @@ function deletePost(selected) {
         
         request.fail(function (xhr){
             $('.spinnerOverlay').addClass('d-none');
-            alert(xhr.responseJSON.message);
+            $.each(xhr.responseJSON.errors,function(key,value) {
+                alert(value);
+            });
         });
     }
 }
@@ -584,7 +598,9 @@ function deleteComment(selected) {
         
         
         request.fail(function (xhr){
-            alert(xhr.responseJSON.message);
+            $.each(xhr.responseJSON.errors,function(key,value) {
+                alert(value);
+            });
         });
     }
 }
@@ -672,7 +688,9 @@ function getComments(selected) {
             
             
             request.fail(function (xhr){
-                alert(xhr.responseJSON.message);
+                $.each(xhr.responseJSON.errors,function(key,value) {
+                    alert(value);
+                });
             });
         }
 }
@@ -757,7 +775,9 @@ function addReplyForm(selected) {
             
             request.fail(function (xhr){
                 $('.ajaxSpinner').remove();
-                alert(xhr.responseJSON.message);
+                $.each(xhr.responseJSON.errors,function(key,value) {
+                    alert(value);
+                });
             });
         }else{
             alert(emptyCommentMsg);
@@ -828,7 +848,9 @@ function addComment(event, selected) {
             
             request.fail(function (xhr){
                 $('.ajaxSpinner').remove();
-                alert(xhr.responseJSON.message);
+                $.each(xhr.responseJSON.errors,function(key,value) {
+                    alert(value);
+                });
             });
         }else{
             alert(emptyCommentMsg);
@@ -888,7 +910,9 @@ function loadReplies(selected) {
     
     
     request.fail(function (xhr){
-        alert(xhr.responseJSON.message);
+        $.each(xhr.responseJSON.errors,function(key,value) {
+            alert(value);
+        });
     });
 }
 
@@ -955,7 +979,9 @@ function loadMoreComments(selected) {
     
     
     request.fail(function (xhr){
-        alert(xhr.responseJSON.message);
+        $.each(xhr.responseJSON.errors,function(key,value) {
+            alert(value);
+        });
     });
 }
 
@@ -1071,7 +1097,9 @@ function pagiPosts() {
         
         
         request.fail(function (xhr){
-            alert(xhr.responseJSON.message);
+            $.each(xhr.responseJSON.errors,function(key,value) {
+                alert(value);
+            });
         });
     }
 }
@@ -1118,7 +1146,9 @@ function refreshWall(selected) {
     
     
     request.fail(function (xhr){
-        alert(xhr.responseJSON.message);
+        $.each(xhr.responseJSON.errors,function(key,value) {
+            alert(value);
+        });
     });
 }
 

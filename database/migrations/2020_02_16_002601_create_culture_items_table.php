@@ -17,8 +17,9 @@ class CreateCultureItemsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('name_slug')->index();
-            $table->longText('attributes');
+            $table->longText('attributes')->nullable()->default(null);
 
+            $table->longText('thumbnail');
             $table->longText('pictures')->nullable()->default(null);
             $table->string('description');
             
