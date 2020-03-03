@@ -17,4 +17,5 @@ return [
     'resetPasswordTitle'=> 'Password Reset',
     'culture'           => 'Culture',
     'cultureSearch'     => 'Culture - Search',
+    'cultureItem'       => 'Culture Item'
 ];

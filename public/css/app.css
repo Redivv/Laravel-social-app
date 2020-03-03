@@ -22941,218 +22941,412 @@ html {
   background-color: rgba(255, 140, 0, 0.7);
 }
 
-.searchMoreToggle {
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  font-weight: bold;
-  cursor: pointer;
-  padding: 0.5rem;
+.culture_page-container .advertisment-placeholder {
+  min-height: 85vh;
 }
 
-.searchMoreToggle i {
-  margin-left: 0.5rem;
+.culture_page-container .item-container {
+  margin-top: 1rem;
+  padding: 0rem;
+}
+
+.culture_page-container .item-container .itemHeader .thumbnail .img-thumbnail {
+  height: 10rem;
+}
+
+.culture_page-container .item-container .itemTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #444;
+}
+
+.culture_page-container .item-container .itemAuthor {
+  font-size: 1rem;
+  font-weight: bold;
   color: #f66103;
 }
 
-.searchMoreToggle:hover i {
-  color: #e26103;
+.culture_page-container .item-container .tagHolder {
+  padding: 2rem 0rem;
 }
 
-#cultureSearchMore {
-  padding-top: 1rem;
-}
-
-#cultureSearchMore input {
-  border-radius: 0;
-}
-
-#cultureSearchMore .formTextFields label {
-  font-size: 0.9rem;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-}
-
-#cultureSearchMore .formTextFields .input-group-append button {
-  color: #ffffff;
-  border-radius: 0;
-  background-color: #f66103;
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
-}
-
-#cultureSearchMore .formTextFields .input-group-append button:hover {
-  background-color: #e26103;
-}
-
-#cultureSearchMore .formButtons .sortOptionBtn {
+.culture_page-container .item-container .tagHolder .tag {
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #f66103;
   color: #ffffff;
   font-size: 0.9rem;
-  letter-spacing: 0.7px;
+  border-radius: 50px;
+  margin: 0.2rem 0.1rem;
+  padding: 0rem 0.2rem;
+  height: 2rem;
 }
 
-#cultureSearchMore .formButtons .sortOptionBtn:hover {
-  background-color: #e26103;
-}
-
-#cultureSearchMore .formButtons .sortOptionBtn:nth-child(2) {
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
-#cultureSearchMore .formButtons .sortOptionBtn input {
-  display: none;
-}
-
-#cultureSearchMore .formButtons .sortOptionBtn.active {
-  background-color: #f22103;
-}
-
-#cultureSearchMore .formButtons .sortOptionBtn.active:hover {
+.culture_page-container .item-container .tagHolder .tag:hover {
   background-color: #d22103;
 }
 
-#cultureSearchMore .formButtons .sortOptionsDirBtn {
+.culture_page-container .item-container .tagHolder .tag p {
+  justify-content: center;
+  margin: 0rem;
+}
+
+.culture_page-container .item-container .itemBorder {
+  border-right: 1px solid #888;
+}
+
+.culture_page-container .item-container .itemBorder-left {
+  border-left: 1px solid #888;
+}
+
+.culture_page-container .item-container .centeredItems {
   text-align: center;
 }
 
-#cultureSearchMore .formButtons .sortOptionsDirBtn label {
-  font-size: 0.9 rem;
-  font-weight: bold;
-  cursor: pointer;
-  letter-spacing: 0.5px;
-}
-
-#cultureSearchMore .formSubmitBtn button {
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
-  padding: 0.5rem 0.8rem;
+.culture_page-container .item-container .cultureLikeBtn .likesCount {
   background-color: #f66103;
   color: #ffffff;
+  font-size: 0.9rem;
+  left: -0.8em;
+  top: 1em;
 }
 
-#cultureSearchMore .formSubmitBtn button:hover {
-  background-color: #e26103;
+.culture_page-container .item-container .active {
+  color: #f66103;
 }
 
-#searchResultsOutput {
+.culture_page-container .item-container .pictures {
+  border-top: 1px dashed #888;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.culture_page-container .item-container .similar-entries {
+  justify-content: center;
+}
+
+.culture_page-container .item-container .similar-entries .simiarEntries {
+  text-align: center;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail {
   display: block;
-  width: 100%;
-  padding: 1rem 0;
+  justify-content: center;
 }
 
-#searchResultsOutput .searchResult {
-  color: #000;
+.culture_page-container .item-container .similar-entries .thumbnail:hover {
   text-decoration: none;
-  width: 100%;
-  border-radius: 20px;
-  padding: 1rem 0.5rem;
-  align-items: center;
-  align-content: center;
 }
 
-#searchResultsOutput .searchResult .itemImage {
+.culture_page-container .item-container .similar-entries .thumbnail:hover .suggestedTitle {
+  color: #d22103;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail .nextThumbnail {
+  justify-content: center;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail .nextThumbnail .img-thumbnail-small {
+  margin: 0 25%;
+  width: 50%;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail .anotherItem .suggestedTitle {
   text-align: center;
-}
-
-#searchResultsOutput .searchResult .itemImage img {
-  width: 3rem;
-  height: 3rem;
-}
-
-#searchResultsOutput .searchResult .itemTitle {
-  letter-spacing: 0.5px;
+  font-size: 1.5rem;
   font-weight: bold;
+  color: #444;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail .anotherItem .author {
+  text-align: center;
   font-size: 1rem;
-}
-
-#searchResultsOutput .searchResult .itemAttributes .itemAttr {
-  padding: 0;
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
-  text-align: center;
-}
-
-#searchResultsOutput .searchResult .itemAttributes .itemAttr .attrTitle {
-  padding: 0;
-  font-size: 0.95rem;
   font-weight: bold;
-  letter-spacing: 0.8px;
-}
-
-#searchResultsOutput .searchResult .itemAttributes .itemAttr .attrValue {
-  padding: 0;
-}
-
-#searchResultsOutput .searchResult .itemLikes .likeBtn i {
-  font-size: 1.1rem;
-}
-
-#searchResultsOutput .searchResult .itemLikes .likeBtn:hover {
-  color: #f66103;
-}
-
-#searchResultsOutput .searchResult .itemLikes .likeBtn .badge {
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-}
-
-#searchResultsOutput .searchResult .itemLikes .likeBtn.active {
-  color: #f66103;
-}
-
-#searchResultsOutput .searchResult .itemLikes .likeBtn.active:hover {
-  color: #e26103;
-}
-
-#searchResultsOutput .searchResult:hover {
-  background-color: rgba(255, 140, 0, 0.7);
-}
-
-.extraLinks {
-  padding: 2rem 1rem;
-  text-align: center;
-  position: absolute;
-  bottom: 5%;
-  left: 10%;
-  width: 80%;
-}
-
-.extraLinks a {
-  color: #000;
-}
-
-.extraLinks a h3 {
-  width: 100%;
-  color: #000;
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-  font-weight: bold;
-}
-
-.extraLinks a:not(:last-child):after {
-  content: "";
-  width: 1rem;
-  height: 1rem;
-  background-color: #333333;
-  border-radius: 50%;
-  display: block;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.extraLinks a:hover {
-  color: #f66103;
-}
-
-.extraLinks a:hover h3 {
   color: #f66103;
 }
 
 html {
   font-size: 2vw;
   scroll-behavior: smooth;
+}
+
+#cultureSearch {
+  padding-top: 1rem;
+  width: 70%;
+}
+
+#cultureSearch .input-group input {
+  border-radius: 50px 0 0 50px;
+  font-style: italic;
+  font-size: 1.1rem;
+  padding: 0.5rem 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+#cultureSearch .input-group .input-group-append {
+  width: 5rem;
+}
+
+#cultureSearch .input-group .input-group-append button {
+  width: 100%;
+  border-radius: 0 50px 50px 0;
+  background-color: #f66103;
+  font-size: 1.05rem;
+}
+
+#cultureSearch .input-group .input-group-append button i {
+  color: #ffffff;
+}
+
+#cultureSearch .input-group .input-group-append button:hover {
+  background-color: #e26103;
+}
+
+#cultureSearch #advancedSearch {
+  padding: 0 1rem;
+  padding-top: 2rem;
+}
+
+#cultureSearch #advancedSearch .input-group input {
+  border-radius: 0;
+  font-style: normal;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  letter-spacing: 0.5px;
+}
+
+#cultureSearch #advancedSearch .input-group .input-group-append {
+  width: 4rem;
+}
+
+#cultureSearch #advancedSearch .input-group .input-group-append button {
+  border-radius: 0;
+  background-color: #f66103;
+  font-size: 0.9rem;
+  color: #ffffff;
+  letter-spacing: 1px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 0.43rem 0;
+}
+
+#cultureSearch #advancedSearch .input-group .input-group-append button:hover {
+  background-color: #e26103;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionBtn {
+  background-color: #f66103;
+  color: #ffffff;
+  font-size: 0.9rem;
+  letter-spacing: 0.7px;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:hover {
+  background-color: #e26103;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionBtn input {
+  display: none;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionBtn.active {
+  background-color: #f22103;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionBtn.active:hover {
+  background-color: #d22103;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionsDirBtn {
+  text-align: center;
+}
+
+#cultureSearch #advancedSearch .sortOptions .sortOptionsDirBtn label {
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+
+#cultureSearch .togglerBox {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+#cultureSearch .togglerBox .advancedSearchToggle {
+  display: block;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0.5rem;
+  margin: auto;
+  font-size: 1.1rem;
+  color: #000;
+}
+
+#cultureSearch .togglerBox .advancedSearchToggle i {
+  color: #f66103;
+}
+
+#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + div,
+#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .post .postDesc .postTags .toggleArrow + .postTaggedUser,
+.activity .activityPosts .postBox .post .postDesc .postTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + .postTaggedUser,
+#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags .toggleArrow + a,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
+#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags .toggleArrow + a,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
+#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .toggleArrow + .postTaggedUser,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + .postTaggedUser,
+#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags .toggleArrow + a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
+#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags .toggleArrow + a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a {
+  margin-top: -15%;
+}
+
+#cultureSections {
+  padding-top: 1rem;
+  padding: 0 5rem;
+}
+
+#cultureSections header > h3 {
+  text-align: center;
+  font-size: calc(1.275rem + 0.3vw);
+  font-weight: bold;
+  letter-spacing: 1.2px;
+}
+
+@media (min-width: 1200px) {
+  #cultureSections header > h3 {
+    font-size: 1.5rem;
+  }
+}
+
+#cultureSections #sectionsOutput {
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+#cultureSections #sectionsOutput .cultureSection {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  background-color: #f66103;
+  padding: 0.5rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+}
+
+#cultureSections #sectionsOutput .cultureSection h4 {
+  letter-spacing: 1px;
+  margin: 0;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+#cultureSections #sectionsOutput .cultureSection:nth-child(2) {
+  margin: 0 1rem;
+}
+
+#cultureSections #sectionsOutput .cultureSection:hover {
+  background-color: #e26103;
+}
+
+#cultureSugestions {
+  padding-top: 1rem;
+}
+
+#cultureSugestions .column {
+  text-align: center;
+}
+
+#cultureSugestions .column h4 {
+  font-size: calc(1.255rem + 0.06vw);
+  font-weight: bold;
+  letter-spacing: 0.7px;
+}
+
+@media (min-width: 1200px) {
+  #cultureSugestions .column h4 {
+    font-size: 1.3rem;
+  }
+}
+
+#cultureSugestions .column:first {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#cultureSugestions .column .sugestions-out {
+  display: block;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem {
+  align-items: center;
+  text-decoration: none;
+  color: unset;
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemImg img {
+  width: 4rem;
+  height: 4rem;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemDesc {
+  text-align: left;
+  padding-left: 0.5rem;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemDesc .itemTitle {
+  font-weight: bold;
+  font-size: 1.2rem;
+  letter-spacing: 1.5px;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemDesc .itemAttrs .itemAttr {
+  padding: 0;
+  letter-spacing: 0.5px;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn i {
+  font-size: calc(1.265rem + 0.18vw);
+}
+
+@media (min-width: 1200px) {
+  #cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn i {
+    font-size: 1.4rem;
+  }
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn:hover {
+  color: #f66103;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn .badge {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn.active {
+  color: #f66103;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn.active:hover {
+  color: #e26103;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem:hover {
+  background-color: rgba(255, 140, 0, 0.7);
 }
 
 div.cookie-consent,

@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Notifications\UserFlagged;
 use App\Post;
 use App\User;
+use App\cultureItem;
 use App\Notifications\SystemNotification;
 use App\Notifications\UserNotification;
 use App\Notifications\NewAdminPost;
@@ -461,6 +462,24 @@ class HomeController extends Controller
             }else{
                 $user->like();
                 $user->notify(new SystemNotification(__('nav.likeUser',[],$user->locale),'success','_user_profile','','', 'likeUser'));
+            }
+
+            return response()->json(['status' => 'success'], 200);
+        }
+    }
+    public function likeItem(Request $request)
+    {
+        if($request->ajax() && Auth::check()){
+            $request->validate([
+                'ItemId' => 'exists:cultureItem,id'
+            ]);
+
+            $item = cultureItem::find($request->itemId);
+
+            if ($item->liked()) {
+                $item->unlike();
+            }else{
+                $item->like();
             }
 
             return response()->json(['status' => 'success'], 200);

@@ -129,7 +129,10 @@ Route::get('searcher', 'SearchController@index')->name('searcher');
 Route::prefix('culture')->group(function(){
     Route::get('/', 'CultureController@index')->name('culture.mainPage');
     Route::get('/search', 'CultureController@searchResults')->name('culture.searchResults');
-    
     Route::put('/newCategory', 'CultureController@newCategory')->middleware('admin')->name('culture.newCategory');
-});
+    Route::get('{id}', "CultureController@item")->name('culture.read');
 
+    Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function(){
+        Route::patch('likeItem', 'HomeController@likeItem')->name('ajaxLikeItem');
+    });
+});

@@ -52,12 +52,14 @@
 
 // Scss related to culture
 @import '__culture';
+@import '_culture-item';
 
 html{
     font-size: 2vw;
     scroll-behavior: smooth;
 }
-
+// Scss related to culture
+@import '_culture';
 
 // Cookie Consent Styling
     div.cookie-consent{

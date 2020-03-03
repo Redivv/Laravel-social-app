@@ -13,6 +13,8 @@ return [
     'itemCompleted'             => 'Ukończono',
     'title'                     => 'Tytuł',
     'tags'                      => 'Tagi',
-    'searchMore'                => 'Szukaj Dalej'
+    'searchMore'                => 'Szukaj Dalej',
+    'similarItems'              => 'Podobne produkty',
+    'likeItem'                  => 'Polub przedmiot'
 
 ];

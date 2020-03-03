@@ -12,5 +12,8 @@ return [
     'sugestionNew'              => 'Newest',
     'title'                     => 'Title',
     'tags'                      => 'Tags',
-    'searchMore'                => 'Keep Searching'
+    'searchMore'                => 'Keep Searching',
+    'itemCompleted'             => 'Finished',
+    'similarItems'              => 'Similar items',
+    'likeItem'                  => 'Like this item'
 ];
