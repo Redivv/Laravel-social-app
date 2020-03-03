@@ -50,10 +50,10 @@
         </main>
         <footer id="footer" class="pt-2 pb-2">
             <span class="socialLinks">
-                <a href="https://www.facebook.com/fajna.lesbijka">
+                <a href="https://www.facebook.com/fajna.lesbijka" target="__blank">
                     <i class="fab fa-facebook-square"></i>
                 </a>
-                <a href="https://www.instagram.com/safo.com.pl/">
+                <a href="https://www.instagram.com/safo.com.pl/" target="__blank">
                     <i class="fab fa-instagram"></i>
                 </a>
             </span>
