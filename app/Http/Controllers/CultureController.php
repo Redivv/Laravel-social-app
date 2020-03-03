@@ -2,26 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\cultureCategory;
-use App\cultureItem;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
-
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 use App\cultureItem;
 use App\cultureCategory;
-use App\cultureComment;
 
 class CultureController extends Controller
 {
