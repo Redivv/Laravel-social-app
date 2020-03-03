@@ -7,6 +7,13 @@
     .item-container{
         margin-top: 1rem;
         padding: 0rem;
+        .itemHeader{
+            .thumbnail{
+                .img-thumbnail{
+                    height: 10rem;
+                }
+            }
+        }
         .itemTitle{
             font-size: 2rem;
             font-weight: bold;
@@ -20,6 +27,7 @@
         .tagHolder{
             padding: 2rem 0rem;
             .tag{
+                cursor: default;
                 display: flex;
                 align-items: center;
                 justify-content: center;

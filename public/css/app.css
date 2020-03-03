@@ -22949,6 +22949,10 @@ html {
   padding: 0rem;
 }
 
+.culture_page-container .item-container .itemHeader .thumbnail .img-thumbnail {
+  height: 10rem;
+}
+
 .culture_page-container .item-container .itemTitle {
   font-size: 2rem;
   font-weight: bold;
@@ -22966,6 +22970,7 @@ html {
 }
 
 .culture_page-container .item-container .tagHolder .tag {
+  cursor: default;
   display: flex;
   align-items: center;
   justify-content: center;

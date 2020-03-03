@@ -9,36 +9,40 @@
 @section('content')
 <div class="container-flex culture_page-container">
     <div class="row">
-        <aside class="col-md-2 advertisment-placeholder">
+        <aside class="col-md-1 advertisment-placeholder">
         </aside>
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="container item-container">
-                <section id="item_header" class="row  centeredItems">
+                <section id="item_header" class="row itemHeader centeredItems">
                     <figure class="col-md-2  thumbnail  itemBorder">
                         @if($pictures = json_decode($cultureItem->pictures))
                             <a href="{{asset('images/culture/'.$pictures[0])}}" data-lightbox="Item" data-title="picture">
                                 <img src="{{asset('images/culture/'.$pictures[0])}}" alt="thumbnail" class="img-thumbnail">
                             </a>
                         @else
-                            <img src="images/culture/book.jpg" alt="brak zdjęcia" class="img-thumbnail">
+                            <img src="{{asset('images/culture/book.jpg')}}" alt="brak zdjęcia" class="img-thumbnail">
                         @endif
                     </figure>
                     <hgroup class="col-md-4  itemBorder">
                         <h3 class=" itemTitle">
                             {{$cultureItem->name}}
                         </h3>
-                        @if($catAttr=json_decode($cultureCategory))
+                        @if($catAttr=json_decode($cultureCategory->attributes))
                             @if ($DecAttributes=json_decode($cultureItem->attributes))
-                                @foreach ($catAttr as $key=>$attr)
-                                    {{$key}}
-                                @endforeach
-
-                            <h4 class=" itemAuthor">
-                                {{$DecAttributes[0]}}
-                            </h4>
-                            <h6 class=" itemDate">
-                                {{$DecAttributes[1]}}
-                            </h6>
+                                @php
+                                    foreach ($catAttr as $key => $attr) {
+                                        if ($attr=='author') {
+                                            echo('<h4 class=" itemAuthor">');
+                                            echo($DecAttributes[$key]);
+                                            echo('</h4>');
+                                        }
+                                        if ($attr=='date') {
+                                         echo('<h4 class=" itemDate">');
+                                         echo($DecAttributes[$key]);
+                                         echo('</h4>');
+                                        }
+                                    }   
+                                @endphp
                             @endif
                         @endif
                     </hgroup>
@@ -143,8 +147,7 @@
                 </section>
             </div>
         </div>
-        <aside class="col-md-2  advertisment-placeholder">
-            ad
+        <aside class="col-md-1  advertisment-placeholder">
         </aside>
     </div>
 </div>

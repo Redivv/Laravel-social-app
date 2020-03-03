@@ -9,5 +9,8 @@ return [
     'alfaSort'                  => 'Name',
     'dateSort'                  => 'Creation',
     'sugestionTag'              => 'Related to :tag',
-    'sugestionNew'              => 'Newest'
+    'sugestionNew'              => 'Newest',
+    'itemCompleted'             => 'Finished',
+    'similarItems'              => 'Similar items',
+    'likeItem'                  => 'Like this item'
 ];
