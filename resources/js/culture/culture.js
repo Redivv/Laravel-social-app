@@ -39,50 +39,6 @@ function main() {
     $('.cultureLikeBtn').on('click',function() {
         likeItem(this);
     });
-}
-
-
-function likeItem(selected) {
-    let itemId = $(selected).data('id');
-    let url = base_url+"/culture/ajax/likeItem";
-
-    let currentAmount = $(selected).find('.likesCount').html();
-    console.log(currentAmount);
-    
-    if ($(selected).hasClass('active')) {
-
-        $(selected).removeClass('active');
-        $(selected).find('.likesCount').html(parseInt(currentAmount)-1);
-        if (currentAmount == 1) {
-            $(selected).find('.likesCount').addClass('invisible');
-        }
-
-    }else{
-        
-        $(selected).addClass('active');
-        $(selected).find('.likesCount').html(parseInt(currentAmount)+1);
-        if (currentAmount == 0) {
-            $(selected).find('.likesCount').removeClass('invisible');
-        }
-    }
-
-    var request = $.ajax({
-        method : 'post',
-        url: url,
-        data: {"_method": "patch", itemId:itemId}
-    });
-    
-    
-    request.fail(function (xhr){
-        alert(xhr.responseJSON.message);
-    $('.deleteItem').on('submit',function(e) {
-        e.preventDefault();
-        if (confirm(confirmMsg)) {
-            showSpinnerOverlay();
-            sendAjaxRequestToWithFormData(baseUrl+"/culture/deleteItem",this);
-            $(this).parents('.resultBox').remove();
-        }
-    });
     
     $('#searchTags').on('keydown',function(key){
         if (key.which == 13 || key.keyCode == 13) {
@@ -129,5 +85,50 @@ function likeItem(selected) {
             });
         },
         minLength: 1
+    });
+}
+
+
+function likeItem(selected) {
+    let itemId = $(selected).data('id');
+    let url = base_url+"/culture/ajax/likeItem";
+
+    let currentAmount = $(selected).find('.likesCount').html();
+    console.log(currentAmount);
+    
+    if ($(selected).hasClass('active')) {
+
+        $(selected).removeClass('active');
+        $(selected).find('.likesCount').html(parseInt(currentAmount)-1);
+        if (currentAmount == 1) {
+            $(selected).find('.likesCount').addClass('invisible');
+        }
+    }else{
+        
+        $(selected).addClass('active');
+        $(selected).find('.likesCount').html(parseInt(currentAmount)+1);
+        if (currentAmount == 0) {
+            $(selected).find('.likesCount').removeClass('invisible');
+        }
+    }
+
+    var request = $.ajax({
+        method : 'post',
+        url: url,
+        data: {"_method": "patch", itemId:itemId}
+    });
+    
+    
+    request.fail(function (xhr){
+        alert(xhr.responseJSON.message);
+        $('.deleteItem').on('submit',function(e) {
+            e.preventDefault();
+            if (confirm(confirmMsg)) {
+                showSpinnerOverlay();
+                sendAjaxRequestToWithFormData(baseUrl+"/culture/deleteItem",this);
+                $(this).parents('.resultBox').remove();
+                $(".tooltip:first").remove();
+            }
+        });
     });
 }

@@ -1,0 +1,32 @@
+#partners-out{
+    width: 100%;
+    padding: 1rem 0.5rem;
+    .partner{
+        display: flex;
+        align-content: center;
+        align-items: center;
+        text-align: center;
+        text-decoration: none;
+        color: $blac;
+        border-radius: 20px;
+        padding: 1rem;
+        &:hover{
+            background-color: $light-orange;
+        }
+        .partnerImg{
+            img{
+                width: 5rem;
+                height: 5rem;
+            }
+        }
+        .partnerName{
+            @include font-size(1.2rem);
+            padding-top: 0.5rem;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        &:not(:first-child){
+            margin-left: 1rem;
+        }
+    }
+}

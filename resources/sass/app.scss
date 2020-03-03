@@ -54,6 +54,9 @@
 @import '__culture';
 @import '_culture-item';
 
+// Scss related to partners
+@import '__partners';
+
 html{
     font-size: 2vw;
     scroll-behavior: smooth;

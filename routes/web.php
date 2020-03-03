@@ -17,6 +17,8 @@ Auth::routes(['verify' => true]);
 
 Route::get('logout', 'Auth\LoginController@logout');
 
+Route::get('partners', "CultureController@partners")->name('culture.partners');
+
 Route::get('setLocale/{locale}', "LocaleController@setLocale")->name('setLocale');
 
 Route::get('user/profile/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');

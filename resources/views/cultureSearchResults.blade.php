@@ -91,13 +91,13 @@
                 <div class="resultBox">
                     @if (auth()->user()->isAdmin())
                         <div class="col-12 adminButtons">
-                            <a href="{{route('adminCulture')."?elementType=cultureItem&elementId=".$item->id}}">
+                            <a href="{{route('adminCulture')."?elementType=cultureItem&elementId=".$item->id}}" data-tool="tooltip" title="{{__('admin.edit')}}" data-placement="bottom">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <form method="post" action="#" class="deleteItem">
                                 @method('delete')
                                 <input type="hidden" name="elementId" value="{{$item->id}}">
-                                <button class="btn" type="submit">
+                                <button class="btn" type="submit" data-tool="tooltip" title="{{__('admin.delete')}}" data-placement="bottom">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </form>

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\cultureItem;
 use App\cultureCategory;
+use App\Partner;
 
 class CultureController extends Controller
 {
@@ -89,6 +90,12 @@ class CultureController extends Controller
                 return response()->json(['action' => "deleteCultureItem"], 200);
             }
         }
+    }
+
+    public function partners()
+    {
+        $partners = Partner::all();
+        return view('partners')->withPartners($partners);
     }
 
 

@@ -49,6 +49,14 @@
             @yield('content')
         </main>
         <footer id="footer" class="pt-2 pb-2">
+            <span class="socialLinks">
+                <a href="https://www.facebook.com/fajna.lesbijka">
+                    <i class="fab fa-facebook-square"></i>
+                </a>
+                <a href="https://www.instagram.com/safo.com.pl/">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </span>
             <span>Copyright 2020 &copy Safo</span>
             <span class="localeOptions">
                 <a href="{{route('setLocale',['locale' => 'pl'])}}">

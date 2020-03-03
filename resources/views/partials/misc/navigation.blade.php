@@ -257,7 +257,7 @@
 
         <div class="collapse navbar-collapse" id="navbarMobile">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto text-center flex-row">
+            <ul class="navbar-nav mr-auto text-center row">
 
                 @guest
                 <li class="nav-item col">
@@ -281,6 +281,13 @@
                         <i class="fas fa-book-reader"></i>
                         <br>
                         {{__('app.culture')}}
+                    </a>
+                </li>
+                <li class="nav-item col navPartners">
+                    <a href="{{ route('culture.partners') }}" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <br>
+                        {{__('app.partners')}}
                     </a>
                 </li>
                 @auth
@@ -368,6 +375,11 @@
                 <li class="nav-item navCulture">
                     <a href="{{ route('culture.mainPage') }}" class="nav-link">
                         {{__('app.culture')}}
+                    </a>
+                </li>
+                <li class="nav-item navPartners">
+                    <a href="{{ route('culture.partners') }}" class="nav-link">
+                        {{__('app.partners')}}
                     </a>
                 </li>
 
