@@ -22670,17 +22670,17 @@ html {
   }
 }
 
-#cultureSearch {
+.mx-auto#cultureSearch {
   padding-top: 1rem;
 }
 
 @media screen and (min-width: 767px) {
-  #cultureSearch {
+  .mx-auto#cultureSearch {
     width: 70%;
   }
 }
 
-#cultureSearch .input-group input {
+.mx-auto#cultureSearch .input-group input {
   border-radius: 50px 0 0 50px;
   font-style: italic;
   font-size: 1.1rem;
@@ -22688,31 +22688,31 @@ html {
   letter-spacing: 0.5px;
 }
 
-#cultureSearch .input-group .input-group-append {
+.mx-auto#cultureSearch .input-group .input-group-append {
   width: 5rem;
 }
 
-#cultureSearch .input-group .input-group-append button {
+.mx-auto#cultureSearch .input-group .input-group-append button {
   width: 100%;
   border-radius: 0 50px 50px 0;
   background-color: #f66103;
   font-size: 1.05rem;
 }
 
-#cultureSearch .input-group .input-group-append button i {
+.mx-auto#cultureSearch .input-group .input-group-append button i {
   color: #ffffff;
 }
 
-#cultureSearch .input-group .input-group-append button:hover {
+.mx-auto#cultureSearch .input-group .input-group-append button:hover {
   background-color: #e26103;
 }
 
-#cultureSearch #advancedSearch {
+.mx-auto#cultureSearch #advancedSearch {
   padding: 0 1rem;
   padding-top: 2rem;
 }
 
-#cultureSearch #advancedSearch .input-group input {
+.mx-auto#cultureSearch #advancedSearch .input-group input {
   border-radius: 0;
   font-style: normal;
   font-size: 0.95rem;
@@ -22720,11 +22720,11 @@ html {
   letter-spacing: 0.5px;
 }
 
-#cultureSearch #advancedSearch .input-group .input-group-append {
+.mx-auto#cultureSearch #advancedSearch .input-group .input-group-append {
   width: 4rem;
 }
 
-#cultureSearch #advancedSearch .input-group .input-group-append button {
+.mx-auto#cultureSearch #advancedSearch .input-group .input-group-append button {
   border-radius: 0;
   background-color: #f66103;
   font-size: 0.9rem;
@@ -22736,22 +22736,22 @@ html {
   padding: 0.43rem 0;
 }
 
-#cultureSearch #advancedSearch .input-group .input-group-append button:hover {
+.mx-auto#cultureSearch #advancedSearch .input-group .input-group-append button:hover {
   background-color: #e26103;
 }
 
 @media screen and (max-width: 767px) {
-  #cultureSearch #advancedSearch .input-group {
+  .mx-auto#cultureSearch #advancedSearch .input-group {
     padding-bottom: 1rem;
   }
 }
 
-#cultureSearch #advancedSearch #searchTags-out {
+.mx-auto#cultureSearch #advancedSearch #searchTags-out {
   width: 100%;
   padding: 0.5em;
 }
 
-#cultureSearch #advancedSearch #searchTags-out .itemTag {
+.mx-auto#cultureSearch #advancedSearch #searchTags-out .itemTag {
   color: #ffffff;
   cursor: pointer;
   background-color: #f66103;
@@ -22764,74 +22764,74 @@ html {
   margin: 0.2rem 0.2rem;
 }
 
-#cultureSearch #advancedSearch #searchTags-out .itemTag:hover {
+.mx-auto#cultureSearch #advancedSearch #searchTags-out .itemTag:hover {
   background-color: #d22103;
 }
 
 @media screen and (max-width: 767px) {
-  #cultureSearch #advancedSearch #searchTags-out {
+  .mx-auto#cultureSearch #advancedSearch #searchTags-out {
     padding-bottom: 1rem;
   }
 }
 
-#cultureSearch #advancedSearch .sortOptions .sortOptionBtn {
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn {
   background-color: #f66103;
   color: #ffffff;
   font-size: 0.9rem;
   letter-spacing: 0.7px;
 }
 
-#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:hover {
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:hover {
   background-color: #e26103;
 }
 
-#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
   margin-left: 1rem;
   margin-right: 1rem;
 }
 
 @media screen and (max-width: 1060px) {
-  #cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
+  .mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
     margin-right: 0rem;
   }
 }
 
 @media screen and (max-width: 767px) {
-  #cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
+  .mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
     margin-left: 1rem;
     margin-right: 1rem;
   }
 }
 
-#cultureSearch #advancedSearch .sortOptions .sortOptionBtn input {
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn input {
   display: none;
 }
 
-#cultureSearch #advancedSearch .sortOptions .sortOptionBtn.active {
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn.active {
   background-color: #f22103;
 }
 
-#cultureSearch #advancedSearch .sortOptions .sortOptionBtn.active:hover {
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn.active:hover {
   background-color: #d22103;
 }
 
-#cultureSearch #advancedSearch .sortOptions .sortOptionsDirBtn {
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionsDirBtn {
   text-align: center;
 }
 
-#cultureSearch #advancedSearch .sortOptions .sortOptionsDirBtn label {
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionsDirBtn label {
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   letter-spacing: 0.5px;
 }
 
-#cultureSearch .togglerBox {
+.mx-auto#cultureSearch .togglerBox {
   margin-top: 1rem;
   text-align: center;
 }
 
-#cultureSearch .togglerBox .advancedSearchToggle {
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle {
   display: block;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -22842,23 +22842,23 @@ html {
   color: #000;
 }
 
-#cultureSearch .togglerBox .advancedSearchToggle i {
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle i {
   color: #f66103;
 }
 
-#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + div,
-#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .post .postDesc .postTags .toggleArrow + .postTaggedUser,
-.activity .activityPosts .postBox .post .postDesc .postTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + .postTaggedUser,
-#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags .toggleArrow + a,
-.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
-#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags .toggleArrow + a,
-.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
-#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .toggleArrow + .postTaggedUser,
-#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + .postTaggedUser,
-#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags .toggleArrow + a,
-#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
-#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags .toggleArrow + a,
-#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags #cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a {
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + div,
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .post .postDesc .postTags .toggleArrow + .postTaggedUser,
+.activity .activityPosts .postBox .post .postDesc .postTags .mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + .postTaggedUser,
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags .toggleArrow + a,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags .mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags .toggleArrow + a,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags .mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .toggleArrow + .postTaggedUser,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + .postTaggedUser,
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags .toggleArrow + a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags .mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags .toggleArrow + a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags .mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a {
   margin-top: -15%;
 }
 
@@ -22886,6 +22886,7 @@ html {
 }
 
 #cultureSections #sectionsOutput .cultureSection {
+  cursor: pointer;
   text-align: center;
   display: flex;
   align-items: center;
@@ -23025,21 +23026,21 @@ html {
   color: #e26103;
 }
 
-#cultureSearchMore {
+.collapse#cultureSearch {
   padding-top: 1rem;
 }
 
-#cultureSearchMore input {
+.collapse#cultureSearch input {
   border-radius: 0;
 }
 
-#cultureSearchMore .formTextFields label {
+.collapse#cultureSearch .formTextFields label {
   font-size: 0.9rem;
   font-weight: bold;
   letter-spacing: 0.5px;
 }
 
-#cultureSearchMore .formTextFields .input-group-append button {
+.collapse#cultureSearch .formTextFields .input-group-append button {
   color: #ffffff;
   border-radius: 0;
   background-color: #f66103;
@@ -23047,55 +23048,55 @@ html {
   letter-spacing: 0.5px;
 }
 
-#cultureSearchMore .formTextFields .input-group-append button:hover {
+.collapse#cultureSearch .formTextFields .input-group-append button:hover {
   background-color: #e26103;
 }
 
-#cultureSearchMore .formButtons .sortOptionBtn {
+.collapse#cultureSearch .formButtons .sortOptionBtn {
   background-color: #f66103;
   color: #ffffff;
   font-size: 0.9rem;
   letter-spacing: 0.7px;
 }
 
-#cultureSearchMore .formButtons .sortOptionBtn:hover {
+.collapse#cultureSearch .formButtons .sortOptionBtn:hover {
   background-color: #e26103;
 }
 
-#cultureSearchMore .formButtons .sortOptionBtn:nth-child(2) {
+.collapse#cultureSearch .formButtons .sortOptionBtn:nth-child(2) {
   margin-left: 1rem;
   margin-right: 1rem;
 }
 
-#cultureSearchMore .formButtons .sortOptionBtn input {
+.collapse#cultureSearch .formButtons .sortOptionBtn input {
   display: none;
 }
 
-#cultureSearchMore .formButtons .sortOptionBtn.active {
+.collapse#cultureSearch .formButtons .sortOptionBtn.active {
   background-color: #f22103;
 }
 
-#cultureSearchMore .formButtons .sortOptionBtn.active:hover {
+.collapse#cultureSearch .formButtons .sortOptionBtn.active:hover {
   background-color: #d22103;
 }
 
-#cultureSearchMore .formButtons .sortOptionsDirBtn {
+.collapse#cultureSearch .formButtons .sortOptionsDirBtn {
   text-align: center;
 }
 
-#cultureSearchMore .formButtons .sortOptionsDirBtn label {
+.collapse#cultureSearch .formButtons .sortOptionsDirBtn label {
   font-size: 0.9 rem;
   font-weight: bold;
   cursor: pointer;
   letter-spacing: 0.5px;
 }
 
-#cultureSearchMore #searchTags-out {
+.collapse#cultureSearch #searchTags-out {
   width: 100%;
   padding: 0.5em;
 }
 
-#cultureSearchMore #searchTags-out .itemTag {
+.collapse#cultureSearch #searchTags-out .itemTag {
   color: #ffffff;
   cursor: pointer;
   background-color: #f66103;
@@ -23108,14 +23109,22 @@ html {
   margin: 0.2rem 0.2rem;
 }
 
-#cultureSearchMore #searchTags-out .itemTag:hover {
+.collapse#cultureSearch #searchTags-out .itemTag:hover {
   background-color: #d22103;
 }
 
 @media screen and (max-width: 767px) {
-  #cultureSearchMore #searchTags-out {
+  .collapse#cultureSearch #searchTags-out {
     padding-bottom: 1rem;
   }
+}
+
+.cultureSection {
+  cursor: pointer;
+}
+
+.cultureSection.active h3 {
+  color: #f66103;
 }
 
 #searchResultsOutput {
@@ -23124,6 +23133,28 @@ html {
   display: block;
   width: 100%;
   padding: 1rem 0;
+}
+
+#searchResultsOutput .adminButtons {
+  text-align: right;
+}
+
+#searchResultsOutput .adminButtons form {
+  display: inline;
+}
+
+#searchResultsOutput .adminButtons a,
+#searchResultsOutput .adminButtons button {
+  display: inline;
+  color: black;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+#searchResultsOutput .adminButtons a:hover,
+#searchResultsOutput .adminButtons button:hover {
+  color: #f66103;
 }
 
 #searchResultsOutput .searchResult {

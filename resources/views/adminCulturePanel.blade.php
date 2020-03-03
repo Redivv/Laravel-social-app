@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="{{asset('css/adminPane.css')}}">
 @endpush
 
-@section('content')<div class="spinnerOverlay d-none">
+@section('content')
+<div class="spinnerOverlay d-none">
     <div class="spinner-border text-warning" role="status">
         <span class="sr-only">Loading...</span>
     </div>

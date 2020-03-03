@@ -9,6 +9,13 @@
 
 @section('content')
     <div class="container-fluid">
+        @if ($errors->any())
+        <div class="alert alert-danger mt-3" role="alert">
+            @foreach ($errors->all() as $error)
+                <div>{{$error}}</div>
+            @endforeach
+        </div>
+        @endif
         <form id="cultureSearch" class="mx-auto" method="get" action="{{route('culture.searchResults')}}">
             <div class="input-group">
                 <input type="text" name="titleName" class="form-control" placeholder="{{__('culture.searchName')}}" aria-label="Title Name" aria-describedby="search Button">
@@ -72,7 +79,7 @@
                 </header>
                 <output id="sectionsOutput" class="row">
                     @foreach ($categories as $cat)
-                        <a class="cultureSection col" href="{{route('culture.searchResults')."?category=".$cat->name}}">
+                        <a class="cultureSection col" data-category="{{$cat->name}}">
                             <h4>
                                 {{__($cat->name)}}
                             </h4>

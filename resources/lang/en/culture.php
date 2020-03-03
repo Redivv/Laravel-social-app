@@ -13,5 +13,6 @@ return [
     'sugestionNew'              => 'Newest',
     'title'                     => 'Title',
     'tags'                      => 'Tags',
-    'searchMore'                => 'Keep Searching'
+    'searchMore'                => 'Keep Searching',
+    'allCats'                   => 'All'
 ];

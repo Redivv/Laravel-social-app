@@ -1,4 +1,4 @@
-#cultureSearch {
+.mx-auto#cultureSearch {
     padding-top: 1rem;
 
     @media screen and (min-width: $mobile-breakpoint) {
@@ -185,6 +185,7 @@
         margin-top: 0.5rem;
 
         .cultureSection {
+            cursor: pointer;
             text-align: center;
             display: flex;
             align-items: center;
@@ -320,7 +321,8 @@
         }
     }
 }
-#cultureSearchMore{
+
+.collapse#cultureSearch{
     input{
         border-radius: 0;
     }
@@ -407,6 +409,14 @@
         }
     }
 }
+.cultureSection{
+    cursor: pointer;
+    &.active{
+        h3{
+            color: $orange;
+        }
+    }
+}
 
 #searchResultsOutput{
     max-height: 60vh;
@@ -414,6 +424,22 @@
     display:block;
     width: 100%;
     padding: 1rem 0;
+    .adminButtons{
+        text-align: right;
+        form{
+            display: inline;
+        }
+        a,button{
+            display: inline;
+            color: black;
+            cursor: pointer;
+            padding: 0.5rem;
+            @include font-size(1rem);
+            &:hover{
+                color: $orange;
+            }
+        }
+    }
     .searchResult{
         text-align: center;
         justify-content: center;

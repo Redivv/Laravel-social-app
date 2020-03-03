@@ -102,17 +102,50 @@ $(document).ready(function () {
 });
 
 function main() {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
   $('[data-tool=tooltip]').tooltip();
   Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_0__["addOnClickDeleteEventOnRemove"])(".itemTag");
   $('input[type=radio][name=options]').click(function () {
     $('.sortOptionBtn').removeClass('active');
     $(this).parent().addClass('active');
   });
+  $('.deleteItem').on('submit', function (e) {
+    e.preventDefault();
+
+    if (confirm(confirmMsg)) {
+      Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_0__["showSpinnerOverlay"])();
+      Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_0__["sendAjaxRequestToWithFormData"])(baseUrl + "/culture/deleteItem", this);
+      $(this).parents('.resultBox').remove();
+    }
+  });
   $('#searchTags').on('keydown', function (key) {
     if (key.which == 13 || key.keyCode == 13) {
       key.preventDefault();
       Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_0__["addNewTagInputFromIn"])(this, '#searchTags-out');
     }
+  });
+  $('.cultureSection').on('click', function (e) {
+    e.preventDefault();
+    var catName = $(this).data('category');
+
+    if (catName == "all") {
+      $('#searchCategory-data').remove();
+      $("#cultureSearch").submit();
+    }
+
+    var html = '<input id="searchCategory-data" type="hidden" name="searchCategory" value="' + catName + '">';
+
+    if ($('#searchCategory-data').length) {
+      $('#searchCategory-data').replaceWith(html);
+    } else {
+      $("#cultureSearch").prepend(html);
+    }
+
+    $("#cultureSearch").submit();
   });
   $("#searchTags").autocomplete({
     source: function source(request, response) {
@@ -201,9 +234,15 @@ function sendAjaxRequestToUrlWithData(url, data) {
 
 function receiveAjaxResponse(request) {
   request.done(function (response) {
-    if (response.action === 'savedData') {
-      displaySuccessInformation();
-      hideSpinnerOverlay();
+    switch (response.action) {
+      case 'savedData':
+        displaySuccessInformation();
+        hideSpinnerOverlay();
+        break;
+
+      default:
+        hideSpinnerOverlay();
+        break;
     }
   });
   request.fail(function (xhr) {

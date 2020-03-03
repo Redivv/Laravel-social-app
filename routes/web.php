@@ -135,5 +135,7 @@ Route::prefix('culture')->group(function(){
     Route::put('/newCategory', 'CultureController@newCategory')->middleware('admin')->name('culture.newCategory');
     
     Route::put('/newItem', 'CultureController@newItem')->middleware('admin')->name('culture.newItem');
+    
+    Route::delete('/deleteItem', 'CultureController@deleteItem')->middleware('admin')->name('culture.deleteItem');
 });
 

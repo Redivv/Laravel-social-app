@@ -7,11 +7,21 @@
 @endsection
 
 @section('content')
+<div class="spinnerOverlay d-none">
+    <div class="spinner-border text-warning" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div class="darkOverlay d-none"></div>
+
     <div class="container-fluid pt-3">
-        <span class="searchMoreToggle" data-toggle="collapse" data-target="#cultureSearchMore" aria-expanded="false" aria-controls="cultureSearchMore">
+        <span class="searchMoreToggle" data-toggle="collapse" data-target="#cultureSearch" aria-expanded="false" aria-controls="cultureSearch">
             {{__('culture.searchMore')}} <i class="fas fa-search"></i>
         </span>
-        <form class="collapse" id="cultureSearchMore" method="get" action="{{route('culture.searchResults')}}">
+        <form class="collapse" id="cultureSearch" method="get" action="{{route('culture.searchResults')}}">
+            @if (request('searchCategory'))
+                <input id="searchCategory-data" type="hidden" name="searchCategory" value="{{request('searchCategory')}}">
+            @endif
             <div class="formTextFields form-group row">
                 <div class="titleSearchBox col-md-7 col-sm-12">
                     <label for="titleSearch">
@@ -78,6 +88,21 @@
         <output id="searchResultsOutput">
             @if (count($results) > 0)
                 @foreach ($results as $item)
+                <div class="resultBox">
+                    @if (auth()->user()->isAdmin())
+                        <div class="col-12 adminButtons">
+                            <a href="{{route('adminCulture')."?elementType=cultureItem&elementId=".$item->id}}">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form method="post" action="#" class="deleteItem">
+                                @method('delete')
+                                <input type="hidden" name="elementId" value="{{$item->id}}">
+                                <button class="btn" type="submit">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </form>
+                        </div>
+                    @endif
                     <a class="searchResult row" href="#">
                         <div class="itemImage col-2">
                             <img src="{{asset('img/culture-pictures/'.json_decode($item->thumbnail)[0])}}" alt="">
@@ -109,6 +134,7 @@
                         </div>
                     </a>
                     <hr>
+                </div>
                 @endforeach
             @else
                 <div class="noSearchResults">{{__('chat.noResults')}}</div>
@@ -124,23 +150,22 @@
             $results = $results->appends($resultsAppend);
         @endphp
         {{$results->links()}}
-        <section class="extraLinks row">
-            <a href="#" class="col">
-                <h3>
-                    Gry
-                </h3>
-            </a>
-            <a href="#" class="col">
-                <h3>
-                    Filmy
-                </h3>
-            </a>
-            <a href="#" class="col">
-                <h3>
-                    Muzyka
-                </h3>
-            </a>
-        </section>
+        @if ($categories)
+            <section class="extraLinks row">
+                <a class="cultureSection col @if(!request('searchCategory')) active @endif" data-category="all">
+                    <h3>
+                        {{__('culture.allCats')}}
+                    </h3>
+                </a>
+                @foreach ($categories as $cat)
+                    <a class="cultureSection @if(request('searchCategory') == $cat->name) active @endif col" data-category="{{$cat->name}}">
+                        <h3>
+                            {{$cat->name}}
+                        </h3>
+                    </a>
+                @endforeach
+            </section>
+        @endif
     </div>
 @endsection
 
@@ -155,9 +180,10 @@
 
 @push('scripts')
 <script>
-    var baseUrl = "{{url('/')}}";
+    var baseUrl             = "{{url('/')}}";
     var deleteHobby         =  "{{__('activityWall.deleteTags')}}";
     var confirmMsg          =  "{{__('admin.confirmMsg')}}";
+    var savedChanges        =  "{{__('profile.savedChanges')}}";
 </script>
 <script src="{{asset('js/culture.js')}}"></script>
 

@@ -93,7 +93,7 @@ return [
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
     'numeric' => 'Pole :attribute musi być liczbą.',
-    'present' => 'The :attribute field must be present.',
+    'present' => 'Pole :attribute musi być obecne.',
     'regex' => 'The :attribute format is invalid.',
     'required' => 'Pole :attribute jest wymagane',
     'required_if' => 'The :attribute field is required when :other is :value.',

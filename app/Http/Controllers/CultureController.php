@@ -39,11 +39,13 @@ class CultureController extends Controller
 
     public function searchResults(Request $request)
     {
+        $categories = cultureCategory::all();
+
         $validatedRequest  =    $this->validateCultureSearch($request);
-        $kek = $validatedRequest->all();
+
         $searchResults      =   $this->getCultureSearchResults($validatedRequest);
 
-        return view('cultureSearchResults')->withResults($searchResults);
+        return view('cultureSearchResults')->withResults($searchResults)->withCategories($categories);
     }
 
     public function newCategory(Request $request)
@@ -75,6 +77,18 @@ class CultureController extends Controller
         }
     }
 
+    public function deleteItem(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->validate([
+                'elementId'     => ['required','numeric','exists:culture_items,id']
+            ]);
+            if (cultureItem::where('id',$request->elementId)->delete()) {
+                return response()->json(['action' => "deleteCultureItem"], 200);
+            }
+        }
+    }
+
 
 
     // Private Functions
@@ -83,13 +97,15 @@ class CultureController extends Controller
     {
         $validOptions   = ["lettersSort","likesSort","dateSort"];
         $validDirs      = ['asc','desc'];
+        $categoriesNames = cultureCategory::all()->pluck('name')->toArray();
 
         $data->validate([
             "titleName"         => ['present','string','nullable'],
             'itemTags'          => ['present','array'],
             'itemTags.*'        => ['string','nullable'],
             'options'           => ['required','string',Rule::in($validOptions)],
-            'sortOptionsDir'    => ['required','string',Rule::in($validDirs)]
+            'sortOptionsDir'    => ['required','string',Rule::in($validDirs)],
+            'searchCategory'    => ['string',Rule::in($categoriesNames)]
         ]);
 
         return $data;
@@ -97,14 +113,21 @@ class CultureController extends Controller
 
     private function getCultureSearchResults(Request $criteria) : LengthAwarePaginator
     {
-        $kek = $criteria->all();
+
         if(empty($criteria->titleName)){
             $searchResults = cultureItem::select('*');
         }else{
             $searchResults = cultureItem::where('name_slug', 'like', Str::slug($criteria->titleName));
         }
 
-        if (!empty($criteria->itemTags[0])) {
+        if (isset($criteria->searchCategory)) {
+            $kek = $criteria->all();
+            $catId = cultureCategory::where('name',$criteria->searchCategory)->get()->pluck('id')->toArray()[0];
+            
+            $searchResults = $searchResults->where("category_id",$catId);
+        }
+
+        if (isset($criteria->itemTags[1])) {
             $searchResults = $searchResults->withAnyTag($criteria->itemTags);
         }
 

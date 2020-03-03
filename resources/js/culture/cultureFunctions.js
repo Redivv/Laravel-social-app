@@ -51,9 +51,16 @@ function sendAjaxRequestToUrlWithData(url, data) {
 
 function receiveAjaxResponse(request) {
     request.done(function (response) {
-        if (response.action === 'savedData') {
-            displaySuccessInformation();
-            hideSpinnerOverlay();
+        switch (response.action) {
+            case 'savedData':
+                displaySuccessInformation();
+                hideSpinnerOverlay();
+                break;
+        
+            default:
+                hideSpinnerOverlay();
+                break;
+
         }
     });
     request.fail(function (xhr) {

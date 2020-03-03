@@ -1,6 +1,8 @@
 import {
     addNewTagInputFromIn,
-    addOnClickDeleteEventOnRemove
+    addOnClickDeleteEventOnRemove,
+    sendAjaxRequestToWithFormData,
+    showSpinnerOverlay
 } from "./cultureFunctions";
 $(document).ready(function(){
     main();
@@ -8,6 +10,12 @@ $(document).ready(function(){
 
 
 function main() {
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
     $('[data-tool=tooltip]').tooltip();
 
@@ -18,12 +26,38 @@ function main() {
         $(this).parent().addClass('active');
     });
 
+    $('.deleteItem').on('submit',function(e) {
+        e.preventDefault();
+        if (confirm(confirmMsg)) {
+            showSpinnerOverlay();
+            sendAjaxRequestToWithFormData(baseUrl+"/culture/deleteItem",this);
+            $(this).parents('.resultBox').remove();
+        }
+    });
     
     $('#searchTags').on('keydown',function(key){
         if (key.which == 13 || key.keyCode == 13) {
             key.preventDefault();
             addNewTagInputFromIn(this,'#searchTags-out');
         }
+    });
+
+    $('.cultureSection').on('click',function(e) {
+        e.preventDefault();
+        
+        let catName = $(this).data('category');
+        if (catName == "all") {
+            $('#searchCategory-data').remove();
+            $("#cultureSearch").submit();
+        }
+        let html = '<input id="searchCategory-data" type="hidden" name="searchCategory" value="'+catName+'">';
+
+        if ($('#searchCategory-data').length) {
+            $('#searchCategory-data').replaceWith(html);
+        }else{
+            $("#cultureSearch").prepend(html);
+        }
+        $("#cultureSearch").submit();
     });
 
     
