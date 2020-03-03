@@ -23009,33 +23009,21 @@ html {
   background-color: rgba(255, 140, 0, 0.7);
 }
 
-.culture_page-container .advertisment-placeholder {
-  min-height: 85vh;
-}
-
-.culture_page-container .item-container {
-  margin-top: 1rem;
-  padding: 0rem;
-}
-
-.culture_page-container .item-container .itemHeader .thumbnail .img-thumbnail {
-  height: 10rem;
-}
-
-.culture_page-container .item-container .itemTitle {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #444;
-}
-
-.culture_page-container .item-container .itemAuthor {
+.searchMoreToggle {
   font-size: 1rem;
+  letter-spacing: 0.5px;
   font-weight: bold;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.searchMoreToggle i {
+  margin-left: 0.5rem;
   color: #f66103;
 }
 
-.culture_page-container .item-container .tagHolder {
-  padding: 2rem 0rem;
+.searchMoreToggle:hover i {
+  color: #e26103;
 }
 
 .collapse#cultureSearch {
@@ -23048,117 +23036,16 @@ html {
 
 .collapse#cultureSearch .formTextFields label {
   font-size: 0.9rem;
-  left: -0.8em;
-  top: 1em;
-}
-
-.culture_page-container .item-container .active {
-  color: #f66103;
-}
-
-.culture_page-container .item-container .pictures {
-  border-top: 1px dashed #888;
-  padding-top: 1rem;
-  margin-top: 1rem;
-}
-
-.culture_page-container .item-container .similar-entries {
-  justify-content: center;
-}
-
-.culture_page-container .item-container .similar-entries .simiarEntries {
-  text-align: center;
-}
-
-.culture_page-container .item-container .similar-entries .thumbnail {
-  display: block;
-  justify-content: center;
-}
-
-.culture_page-container .item-container .similar-entries .thumbnail:hover {
-  text-decoration: none;
-}
-
-.culture_page-container .item-container .similar-entries .thumbnail:hover .suggestedTitle {
-  color: #d22103;
-}
-
-.culture_page-container .item-container .similar-entries .thumbnail .nextThumbnail {
-  justify-content: center;
-}
-
-.culture_page-container .item-container .similar-entries .thumbnail .nextThumbnail .img-thumbnail-small {
-  margin: 0 25%;
-  width: 50%;
-}
-
-.culture_page-container .item-container .similar-entries .thumbnail .anotherItem .suggestedTitle {
-  text-align: center;
-  font-size: 1.5rem;
   font-weight: bold;
-  color: #444;
-}
-
-.culture_page-container .item-container .similar-entries .thumbnail .anotherItem .author {
-  text-align: center;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #f66103;
-}
-
-html {
-  font-size: 2vw;
-  scroll-behavior: smooth;
-}
-
-#cultureSearch {
-  padding-top: 1rem;
-  width: 70%;
-}
-
-#cultureSearch .input-group input {
-  border-radius: 50px 0 0 50px;
-  font-style: italic;
-  font-size: 1.1rem;
-  padding: 0.5rem 1.5rem;
   letter-spacing: 0.5px;
 }
 
 .collapse#cultureSearch .formTextFields .input-group-append button {
   color: #ffffff;
-}
-
-#cultureSearch .input-group .input-group-append button:hover {
-  background-color: #e26103;
-}
-
-#cultureSearch #advancedSearch {
-  padding: 0 1rem;
-  padding-top: 2rem;
-}
-
-#cultureSearch #advancedSearch .input-group input {
-  border-radius: 0;
-  font-style: normal;
-  font-size: 0.95rem;
-  padding: 0.5rem 1rem;
-  letter-spacing: 0.5px;
-}
-
-#cultureSearch #advancedSearch .input-group .input-group-append {
-  width: 4rem;
-}
-
-#cultureSearch #advancedSearch .input-group .input-group-append button {
   border-radius: 0;
   background-color: #f66103;
   font-size: 0.9rem;
-  color: #ffffff;
-  letter-spacing: 1px;
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
-  padding: 0.43rem 0;
+  letter-spacing: 0.5px;
 }
 
 .collapse#cultureSearch .formTextFields .input-group-append button:hover {
@@ -23282,11 +23169,8 @@ html {
   align-content: center;
 }
 
-#cultureSections header > h3 {
+#searchResultsOutput .searchResult .itemImage {
   text-align: center;
-  font-size: calc(1.275rem + 0.3vw);
-  font-weight: bold;
-  letter-spacing: 1.2px;
 }
 
 #searchResultsOutput .searchResult .itemImage img {
@@ -23294,55 +23178,49 @@ html {
   height: 4rem;
 }
 
-#cultureSections #sectionsOutput {
-  justify-content: center;
-  margin-top: 0.5rem;
+#searchResultsOutput .searchResult .itemTitle {
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
-#cultureSections #sectionsOutput .cultureSection {
+#searchResultsOutput .searchResult .itemAttributes .itemAttr {
+  padding: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
   text-align: center;
-  display: flex;
-  align-items: center;
-  color: #ffffff;
-  background-color: #f66103;
-  padding: 0.5rem 2rem;
-  border-radius: 50px;
-  text-decoration: none;
 }
 
-#cultureSections #sectionsOutput .cultureSection h4 {
-  letter-spacing: 1px;
-  margin: 0;
-  width: 100%;
+#searchResultsOutput .searchResult .itemAttributes .itemAttr .attrTitle {
+  padding: 0;
+  font-size: 0.95rem;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+}
+
+#searchResultsOutput .searchResult .itemAttributes .itemAttr .attrValue {
+  padding: 0;
+}
+
+#searchResultsOutput .searchResult .itemLikes .likeBtn i {
   font-size: 1.1rem;
 }
 
-#cultureSections #sectionsOutput .cultureSection:nth-child(2) {
-  margin: 0 1rem;
+#searchResultsOutput .searchResult .itemLikes .likeBtn:hover {
+  color: #f66103;
 }
 
-#cultureSections #sectionsOutput .cultureSection:hover {
-  background-color: #e26103;
+#searchResultsOutput .searchResult .itemLikes .likeBtn .badge {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
 }
 
-#cultureSugestions {
-  padding-top: 1rem;
+#searchResultsOutput .searchResult .itemLikes .likeBtn.active {
+  color: #f66103;
 }
 
-#cultureSugestions .column {
-  text-align: center;
-}
-
-#cultureSugestions .column h4 {
-  font-size: calc(1.255rem + 0.06vw);
-  font-weight: bold;
-  letter-spacing: 0.7px;
-}
-
-@media (min-width: 1200px) {
-  #cultureSugestions .column h4 {
-    font-size: 1.3rem;
-  }
+#searchResultsOutput .searchResult .itemLikes .likeBtn.active:hover {
+  color: #e26103;
 }
 
 @media screen and (max-width: 767px) {
@@ -23378,6 +23256,454 @@ ul.pagination .page-item.active .page-link {
   bottom: 5%;
   left: 10%;
   width: 100%;
+}
+
+.extraLinks a {
+  color: #000;
+}
+
+.extraLinks a h3 {
+  width: 100%;
+  color: #000;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.extraLinks a:not(:last-child):after {
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  background-color: #333333;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.extraLinks a:hover {
+  color: #f66103;
+}
+
+.extraLinks a:hover h3 {
+  color: #f66103;
+}
+
+.noSearchResults {
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.culture_page-container .advertisment-placeholder {
+  min-height: 85vh;
+}
+
+.culture_page-container .item-container {
+  margin-top: 1rem;
+  padding: 0rem;
+}
+
+.culture_page-container .item-container .itemHeader .thumbnail .img-thumbnail {
+  height: 10rem;
+}
+
+.culture_page-container .item-container .itemTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #444;
+}
+
+.culture_page-container .item-container .itemAuthor {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #f66103;
+}
+
+.culture_page-container .item-container .tagHolder {
+  padding: 2rem 0rem;
+}
+
+.culture_page-container .item-container .tagHolder .tag {
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f66103;
+  color: #ffffff;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  margin: 0.2rem 0.1rem;
+  padding: 0rem 0.2rem;
+  height: 2rem;
+}
+
+.culture_page-container .item-container .tagHolder .tag:hover {
+  background-color: #d22103;
+}
+
+.culture_page-container .item-container .tagHolder .tag p {
+  justify-content: center;
+  margin: 0rem;
+}
+
+.culture_page-container .item-container .itemBorder {
+  border-right: 1px solid #888;
+}
+
+.culture_page-container .item-container .itemBorder-left {
+  border-left: 1px solid #888;
+}
+
+.culture_page-container .item-container .centeredItems {
+  text-align: center;
+}
+
+.culture_page-container .item-container .cultureLikeBtn .likesCount {
+  background-color: #f66103;
+  color: #ffffff;
+  font-size: 0.9rem;
+  left: -0.8em;
+  top: 1em;
+}
+
+.culture_page-container .item-container .active {
+  color: #f66103;
+}
+
+.culture_page-container .item-container .pictures {
+  border-top: 1px dashed #888;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.culture_page-container .item-container .similar-entries {
+  justify-content: center;
+}
+
+.culture_page-container .item-container .similar-entries .simiarEntries {
+  text-align: center;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail {
+  display: block;
+  justify-content: center;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail:hover {
+  text-decoration: none;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail:hover .suggestedTitle {
+  color: #d22103;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail .nextThumbnail {
+  justify-content: center;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail .nextThumbnail .img-thumbnail-small {
+  margin: 0 25%;
+  width: 50%;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail .anotherItem .suggestedTitle {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #444;
+}
+
+.culture_page-container .item-container .similar-entries .thumbnail .anotherItem .author {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #f66103;
+}
+
+html {
+  font-size: 2vw;
+  scroll-behavior: smooth;
+}
+
+.mx-auto#cultureSearch {
+  padding-top: 1rem;
+}
+
+@media screen and (min-width: 767px) {
+  .mx-auto#cultureSearch {
+    width: 70%;
+  }
+}
+
+.mx-auto#cultureSearch .input-group input {
+  border-radius: 50px 0 0 50px;
+  font-style: italic;
+  font-size: 1.1rem;
+  padding: 0.5rem 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.mx-auto#cultureSearch .input-group .input-group-append {
+  width: 5rem;
+}
+
+.mx-auto#cultureSearch .input-group .input-group-append button {
+  width: 100%;
+  border-radius: 0 50px 50px 0;
+  background-color: #f66103;
+  font-size: 1.05rem;
+}
+
+.mx-auto#cultureSearch .input-group .input-group-append button i {
+  color: #ffffff;
+}
+
+.mx-auto#cultureSearch .input-group .input-group-append button:hover {
+  background-color: #e26103;
+}
+
+.mx-auto#cultureSearch #advancedSearch {
+  padding: 0 1rem;
+  padding-top: 2rem;
+}
+
+.mx-auto#cultureSearch #advancedSearch .input-group input {
+  border-radius: 0;
+  font-style: normal;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  letter-spacing: 0.5px;
+}
+
+.mx-auto#cultureSearch #advancedSearch .input-group .input-group-append {
+  width: 4rem;
+}
+
+.mx-auto#cultureSearch #advancedSearch .input-group .input-group-append button {
+  border-radius: 0;
+  background-color: #f66103;
+  font-size: 0.9rem;
+  color: #ffffff;
+  letter-spacing: 1px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 0.43rem 0;
+}
+
+.mx-auto#cultureSearch #advancedSearch .input-group .input-group-append button:hover {
+  background-color: #e26103;
+}
+
+@media screen and (max-width: 767px) {
+  .mx-auto#cultureSearch #advancedSearch .input-group {
+    padding-bottom: 1rem;
+  }
+}
+
+.mx-auto#cultureSearch #advancedSearch #searchTags-out {
+  width: 100%;
+  padding: 0.5em;
+}
+
+.mx-auto#cultureSearch #advancedSearch #searchTags-out .itemTag {
+  color: #ffffff;
+  cursor: pointer;
+  background-color: #f66103;
+  padding: 0.2rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin: 0.2rem 0.2rem;
+}
+
+.mx-auto#cultureSearch #advancedSearch #searchTags-out .itemTag:hover {
+  background-color: #d22103;
+}
+
+@media screen and (max-width: 767px) {
+  .mx-auto#cultureSearch #advancedSearch #searchTags-out {
+    padding-bottom: 1rem;
+  }
+}
+
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn {
+  background-color: #f66103;
+  color: #ffffff;
+  font-size: 0.9rem;
+  letter-spacing: 0.7px;
+}
+
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:hover {
+  background-color: #e26103;
+}
+
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+@media screen and (max-width: 1060px) {
+  .mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
+    margin-right: 0rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn:nth-child(2) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn input {
+  display: none;
+}
+
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn.active {
+  background-color: #f22103;
+}
+
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionBtn.active:hover {
+  background-color: #d22103;
+}
+
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionsDirBtn {
+  text-align: center;
+}
+
+.mx-auto#cultureSearch #advancedSearch .sortOptions .sortOptionsDirBtn label {
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+
+.mx-auto#cultureSearch .togglerBox {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle {
+  display: block;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0.5rem;
+  margin: auto;
+  font-size: 1.1rem;
+  color: #000;
+}
+
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle i {
+  color: #f66103;
+}
+
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + div,
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .post .postDesc .postTags .toggleArrow + .postTaggedUser,
+.activity .activityPosts .postBox .post .postDesc .postTags .mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + .postTaggedUser,
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags .toggleArrow + a,
+.activity .activityPosts .postBox .postComments .commentsFeed .comment .commentContent .commentTags .mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle .activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags .toggleArrow + a,
+.activity .activityPosts .postBox .postComments .commentsFeed .reply .commentContent .commentTags .mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .toggleArrow + .postTaggedUser,
+#friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags .mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + .postTaggedUser,
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags .toggleArrow + a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .comment .commentContent .commentTags .mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a,
+.mx-auto#cultureSearch .togglerBox .advancedSearchToggle #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags .toggleArrow + a,
+#friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .reply .commentContent .commentTags .mx-auto#cultureSearch .togglerBox .advancedSearchToggle .toggleArrow + a {
+  margin-top: -15%;
+}
+
+#cultureSections {
+  padding-top: 1rem;
+  padding: 0 5rem;
+}
+
+#cultureSections header > h3 {
+  text-align: center;
+  font-size: calc(1.275rem + 0.3vw);
+  font-weight: bold;
+  letter-spacing: 1.2px;
+}
+
+@media (min-width: 1200px) {
+  #cultureSections header > h3 {
+    font-size: 1.5rem;
+  }
+}
+
+#cultureSections #sectionsOutput {
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+#cultureSections #sectionsOutput .cultureSection {
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  background-color: #f66103;
+  padding: 0.5rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+}
+
+#cultureSections #sectionsOutput .cultureSection h4 {
+  letter-spacing: 1px;
+  margin: 0;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+#cultureSections #sectionsOutput .cultureSection:nth-child(2) {
+  margin: 0 1rem;
+}
+
+#cultureSections #sectionsOutput .cultureSection:hover {
+  background-color: #e26103;
+}
+
+#cultureSugestions {
+  padding-top: 1rem;
+}
+
+#cultureSugestions .column {
+  text-align: center;
+}
+
+@media screen and (min-width: 767px) {
+  #cultureSugestions .column:first-child {
+    border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+#cultureSugestions .column h4 {
+  font-size: calc(1.255rem + 0.06vw);
+  font-weight: bold;
+  letter-spacing: 0.7px;
+}
+
+@media (min-width: 1200px) {
+  #cultureSugestions .column h4 {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #cultureSugestions .column h4 {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 0.5rem;
+  }
+}
+
+#cultureSugestions .column .sugestions-out {
+  display: block;
 }
 
 #cultureSugestions .column .sugestions-out .cultureItem {
@@ -23432,15 +23758,299 @@ ul.pagination .page-item.active .page-link {
   color: #f66103;
 }
 
-.noSearchResults {
-  font-size: 1.1rem;
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn.active:hover {
+  color: #e26103;
+}
+
+#cultureSugestions .column .sugestions-out .cultureItem:hover {
+  background-color: rgba(255, 140, 0, 0.7);
+}
+
+.searchMoreToggle {
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.searchMoreToggle i {
+  margin-left: 0.5rem;
+  color: #f66103;
+}
+
+.searchMoreToggle:hover i {
+  color: #e26103;
+}
+
+.collapse#cultureSearch {
+  padding-top: 1rem;
+}
+
+.collapse#cultureSearch input {
+  border-radius: 0;
+}
+
+.collapse#cultureSearch .formTextFields label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.collapse#cultureSearch .formTextFields .input-group-append button {
+  color: #ffffff;
+  border-radius: 0;
+  background-color: #f66103;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.collapse#cultureSearch .formTextFields .input-group-append button:hover {
+  background-color: #e26103;
+}
+
+.collapse#cultureSearch .formButtons .sortOptionBtn {
+  background-color: #f66103;
+  color: #ffffff;
+  font-size: 0.9rem;
+  letter-spacing: 0.7px;
+}
+
+.collapse#cultureSearch .formButtons .sortOptionBtn:hover {
+  background-color: #e26103;
+}
+
+.collapse#cultureSearch .formButtons .sortOptionBtn:nth-child(2) {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.collapse#cultureSearch .formButtons .sortOptionBtn input {
+  display: none;
+}
+
+.collapse#cultureSearch .formButtons .sortOptionBtn.active {
+  background-color: #f22103;
+}
+
+.collapse#cultureSearch .formButtons .sortOptionBtn.active:hover {
+  background-color: #d22103;
+}
+
+.collapse#cultureSearch .formButtons .sortOptionsDirBtn {
+  text-align: center;
+}
+
+.collapse#cultureSearch .formButtons .sortOptionsDirBtn label {
+  font-size: 0.9 rem;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+
+.collapse#cultureSearch #searchTags-out {
+  width: 100%;
+  padding: 0.5em;
+}
+
+.collapse#cultureSearch #searchTags-out .itemTag {
+  color: #ffffff;
+  cursor: pointer;
+  background-color: #f66103;
+  padding: 0.2rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin: 0.2rem 0.2rem;
+}
+
+.collapse#cultureSearch #searchTags-out .itemTag:hover {
+  background-color: #d22103;
+}
+
+@media screen and (max-width: 767px) {
+  .collapse#cultureSearch #searchTags-out {
+    padding-bottom: 1rem;
+  }
+}
+
+.cultureSection {
+  cursor: pointer;
+}
+
+.cultureSection.active h3 {
+  color: #f66103;
+}
+
+#searchResultsOutput {
+  max-height: 60vh;
+  overflow-y: auto;
+  display: block;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+#searchResultsOutput .adminButtons {
+  text-align: right;
+}
+
+#searchResultsOutput .adminButtons form {
+  display: inline;
+}
+
+#searchResultsOutput .adminButtons a,
+#searchResultsOutput .adminButtons button {
+  display: inline;
+  color: black;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+#searchResultsOutput .adminButtons a:hover,
+#searchResultsOutput .adminButtons button:hover {
+  color: #f66103;
+}
+
+#searchResultsOutput .searchResult {
+  text-align: center;
+  justify-content: center;
+  color: #000;
+  text-decoration: none;
+  width: 100%;
+  border-radius: 20px;
+  padding: 1rem 0.5rem;
+  align-items: center;
+  align-content: center;
+}
+
+#searchResultsOutput .searchResult .itemImage {
+  text-align: center;
+}
+
+#searchResultsOutput .searchResult .itemImage img {
+  width: 4rem;
+  height: 4rem;
+}
+
+#searchResultsOutput .searchResult .itemTitle {
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+#searchResultsOutput .searchResult .itemAttributes .itemAttr {
+  padding: 0;
+  font-size: 0.9rem;
   letter-spacing: 0.5px;
   text-align: center;
 }
 
-html {
-  font-size: 2vw;
-  scroll-behavior: smooth;
+#searchResultsOutput .searchResult .itemAttributes .itemAttr .attrTitle {
+  padding: 0;
+  font-size: 0.95rem;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+}
+
+#searchResultsOutput .searchResult .itemAttributes .itemAttr .attrValue {
+  padding: 0;
+}
+
+#searchResultsOutput .searchResult .itemLikes .likeBtn i {
+  font-size: 1.1rem;
+}
+
+#searchResultsOutput .searchResult .itemLikes .likeBtn:hover {
+  color: #f66103;
+}
+
+#searchResultsOutput .searchResult .itemLikes .likeBtn .badge {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+#searchResultsOutput .searchResult .itemLikes .likeBtn.active {
+  color: #f66103;
+}
+
+#searchResultsOutput .searchResult .itemLikes .likeBtn.active:hover {
+  color: #e26103;
+}
+
+@media screen and (max-width: 767px) {
+  #searchResultsOutput .searchResult .itemAttributes,
+  #searchResultsOutput .searchResult .itemLikes {
+    padding-top: 1rem;
+  }
+}
+
+#searchResultsOutput .searchResult:hover {
+  background-color: rgba(255, 140, 0, 0.7);
+}
+
+ul.pagination {
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+ul.pagination .page-item .page-link {
+  color: #000;
+}
+
+ul.pagination .page-item.active .page-link {
+  background-color: #f66103;
+  border-color: #f66103;
+  color: #ffffff;
+}
+
+.extraLinks {
+  padding: 1rem 0rem;
+  text-align: center;
+  bottom: 5%;
+  left: 10%;
+  width: 100%;
+}
+
+.extraLinks a {
+  color: #000;
+}
+
+.extraLinks a h3 {
+  width: 100%;
+  color: #000;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.extraLinks a:not(:last-child):after {
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  background-color: #333333;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.extraLinks a:hover {
+  color: #f66103;
+}
+
+.extraLinks a:hover h3 {
+  color: #f66103;
+}
+
+.noSearchResults {
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  text-align: center;
 }
 
 div.cookie-consent,

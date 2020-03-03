@@ -143,4 +143,3 @@ Route::prefix('culture')->group(function(){
     Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function(){
         Route::patch('likeItem', 'HomeController@likeItem')->name('ajaxLikeItem');
     });
-});

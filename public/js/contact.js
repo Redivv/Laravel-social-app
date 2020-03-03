@@ -11335,7 +11335,7 @@ function main() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Safo\resources\js\contact.js */"./resources/js/contact.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\contact.js */"./resources/js/contact.js");
 
 
 /***/ })

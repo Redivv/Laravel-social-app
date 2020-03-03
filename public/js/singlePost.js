@@ -12375,7 +12375,7 @@ function getUrlParameter(sParam) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Safo\resources\js\singlePost.js */"./resources/js/singlePost.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\singlePost.js */"./resources/js/singlePost.js");
 
 
 /***/ })

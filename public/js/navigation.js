@@ -239,7 +239,7 @@ function denyFriend(selected) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Safo\resources\js\navigation.js */"./resources/js/navigation.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\navigation.js */"./resources/js/navigation.js");
 
 
 /***/ })
