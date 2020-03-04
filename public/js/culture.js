@@ -11294,6 +11294,15 @@ function main() {
   $('.cultureLikeBtn').on('click', function () {
     likeItem(this);
   });
+  $('.deleteItem').on('submit', function (e) {
+    e.preventDefault();
+
+    if (confirm(confirmMsg)) {
+      Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["showSpinnerOverlay"])();
+      Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["sendAjaxRequestToWithFormData"])(baseUrl + "/culture/deleteItem", this);
+      $(this).parents('.resultBox').remove();
+    }
+  });
   $('#searchTags').on('keydown', function (key) {
     if (key.which == 13 || key.keyCode == 13) {
       key.preventDefault();

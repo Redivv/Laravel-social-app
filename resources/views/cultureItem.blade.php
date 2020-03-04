@@ -7,6 +7,13 @@
 @endsection
 
 @section('content')
+<div class="spinnerOverlay d-none">
+    <div class="spinner-border text-warning" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div class="darkOverlay d-none"></div>
+
 <div class="container-fluid culture_page-container">
     <div class="item-container">
         @auth
@@ -159,6 +166,8 @@
     <script>
         var base_url= "{{url('/')}}";
         var savedChanges        =  "{{__('profile.savedChanges')}}";
+        var deleteHobby         =  "{{__('activityWall.deleteTags')}}";
+        var confirmMsg          =  "{{__('admin.confirmMsg')}}";
     </script>
     <script src="{{asset('js/culture.js')}}"></script>
     <script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>

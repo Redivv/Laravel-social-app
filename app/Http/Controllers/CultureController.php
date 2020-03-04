@@ -54,7 +54,7 @@ class CultureController extends Controller
     public function item(cultureItem $cultureItem){
 
         $itemTags = $cultureItem->tagNames();
-        $similarEntries = cultureItem::withAnyTag($itemTags)->inRandomOrder()->take(10)->get()->sortByDesc(function($product) use ($itemTags){
+        $similarEntries = cultureItem::withAnyTag($itemTags)->whereNotIn('id',[$cultureItem->id])->inRandomOrder()->take(10)->get()->sortByDesc(function($product) use ($itemTags){
             return array_intersect($itemTags,$product->tagNames());
         })->take(4);
 
