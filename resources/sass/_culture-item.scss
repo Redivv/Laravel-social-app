@@ -1,31 +1,29 @@
 .culture_page-container{
-
-    .advertisment-placeholder{
-        //background-color: #f0f;
-        min-height: 85vh;
-    }
     .item-container{
         margin-top: 1rem;
         padding: 0rem;
         .itemHeader{
             .thumbnail{
-                .img-thumbnail{
-                    height: 10rem;
+                img{
+                    max-height: 10rem;
+                    max-width: 10rem;
                 }
             }
         }
         .itemTitle{
-            font-size: 2rem;
+            @include font-size(1.9rem);
             font-weight: bold;
             color: #444;
+            letter-spacing: 1px;
         }
-        .itemAuthor{
-            font-size: 1rem;
-            font-weight: bold;
-            color: #f66103;
+        .itemAttr{
+            @extend .text-muted;
+            @include font-size(1.4rem);
+            letter-spacing: 0.5px;
         }
         .tagHolder{
-            padding: 2rem 0rem;
+            padding: 0 1rem;
+            align-content: center;
             .tag{
                 cursor: default;
                 display: flex;
@@ -47,66 +45,131 @@
                 }
             }
         }
-        .itemBorder{
-            border-right: 1px solid #888;
-        }
-        .itemBorder-left{
-            border-left: 1px solid #888;
-        }
-        .centeredItems{
-            text-align: center;
-        }
-        .cultureLikeBtn{
-            .likesCount{
-                background-color: $orange;
-                color: $white;
-                font-size: 0.9rem;
-                left: -0.8em;
-                top: 1em;
+        .likeItem{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .cultureLikeBtn{
+                position: relative;
+                i{
+                    display: block;
+                }
+                .likesCount{
+                    background-color: $orange;
+                    color: $white;
+                    font-size: 0.9rem;
+                    position: absolute;
+                    top: unset;
+                    bottom: 0;
+                    right: -10%;
+                }
             }
         }
         .active{
             color: $orange;
         }
-        .pictures{
-            border-top: 1px dashed #888;
-            padding-top: 1rem;
-            margin-top: 1rem;
+        .description{
+            padding: 1rem;
+            p{
+                text-align: center;
+                @include font-size(1rem);
+                letter-spacing: 0.5px;
+            }
         }
-        .similar-entries{
-            justify-content: center;
-            .simiarEntries{
+        #picture_gallery{
+            .itemPicture{
+                text-align: center;
+                img{
+                    width: 7rem;
+                    height: 7rem;
+                    margin-top: 1rem;
+                }
+            }
+        }
+        #itemReview{
+            .noReview{
+                @extend .text-muted;
+                display: block;
+                width: 100%;
+                @include font-size(1.2rem);
+                letter-spacing: 1px;
+                font-weight: bold;
                 text-align: center;
             }
-            .thumbnail{
-                display: block;
-                justify-content: center;
+            .reviewBtn{
+                margin: auto;
+                background-color: $orange;
+                padding: 0.5rem 1rem;
+                h5{
+                    @include font-size(1.2rem);
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+                    color: $white;
+                    font-weight: bold;
+                    margin: 0;
+                }
                 &:hover{
-                    .suggestedTitle{
-                        color: $orange-active-hover;
-                    }
-                    text-decoration: none;
+                    background-color: $orange-hover;
                 }
-                .nextThumbnail{
+            }
+            #reviewModal{
+                padding-right: 0 !important;
+                .modal-dialog{
+                    max-width: 90vw;
+                }
+                .modal-body{
+                    @include font-size(1.1rem);
+                    img{
+                        @extend .img-fluid;
+                    }
+                }
+                #reviewModalLabel{
+                    @include font-size(1.4rem);
+                    letter-spacing: 0.5px;
+                }
+                .author{
+                    font-style: italic;
+                    font-weight: bold;
+                    padding-left: 1rem;
+                    @include font-size(1rem);
+                    letter-spacing: 1px;
+                }
+            }
+        }
+        .sectionTitle{
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 1rem 2rem;
+            padding-top: 0;
+            @include font-size(1.5rem);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .similar-entries{
+            text-align: center;
+            #simmilarItems{
+                .simmilarItem{
                     justify-content: center;
-                    .img-thumbnail-small{
-                        margin: 0 25%;
-                        width: 50%;
+                    align-items: center;
+                    align-content: center;
+                    color: $blac;
+                    text-decoration: none;
+                    padding: 0.5rem 0.25rem;
+                    border-radius: 20px;
+                    &:hover{
+                        background-color: $light-orange;
                     }
-                }
-                .anotherItem{
-
+                    .itemThumb{
+                        img{
+                            width: 7rem;
+                            height: 7rem;
+                        }
+                    }
                     .suggestedTitle{
-                        text-align: center;
-                        font-size: 1.5rem;
+                        @include font-size(1.2rem);
                         font-weight: bold;
-                        color: #444;
-                    }
-                    .author{
-                        text-align: center;
-                        font-size: 1rem;
-                        font-weight: bold;
-                        color: $orange;
+                        letter-spacing: 1px;
                     }
                 }
             }

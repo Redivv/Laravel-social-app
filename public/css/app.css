@@ -1024,7 +1024,10 @@ mark,
   content: "\2014\A0";
 }
 
-.img-fluid {
+.img-fluid,
+.culture_page-container .item-container #itemReview #reviewModal .modal-body img,
+.note-editor.note-frame .note-editing-area .note-editable img,
+.note-editor.note-airframe .note-editing-area .note-editable img {
   max-width: 100%;
   height: auto;
 }
@@ -12317,6 +12320,8 @@ a.text-dark:focus {
 }
 
 .text-muted,
+.culture_page-container .item-container #itemReview .noReview,
+.culture_page-container .item-container .itemAttr,
 .noSearchResults,
 #searchResultsOutput .searchResult .itemAttributes .itemAttr,
 #cultureSugestions .column .sugestions-out .cultureItem .itemDesc .itemAttrs,
@@ -19343,6 +19348,11 @@ iframe {
   display: none !important;
 }
 
+.note-editor.note-frame .note-editing-area .note-editable,
+.note-editor.note-airframe .note-editing-area .note-editable {
+  font-size: 1.1rem;
+}
+
 main .pageLogo img {
   max-width: 18rem;
 }
@@ -23327,33 +23337,43 @@ ul.pagination .page-item.active .page-link {
   text-align: center;
 }
 
-.culture_page-container .advertisment-placeholder {
-  min-height: 85vh;
-}
-
 .culture_page-container .item-container {
   margin-top: 1rem;
   padding: 0rem;
 }
 
-.culture_page-container .item-container .itemHeader .thumbnail .img-thumbnail {
-  height: 10rem;
+.culture_page-container .item-container .itemHeader .thumbnail img {
+  max-height: 10rem;
+  max-width: 10rem;
 }
 
 .culture_page-container .item-container .itemTitle {
-  font-size: 2rem;
+  font-size: calc(1.315rem + 0.78vw);
   font-weight: bold;
   color: #444;
+  letter-spacing: 1px;
 }
 
-.culture_page-container .item-container .itemAuthor {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #f66103;
+@media (min-width: 1200px) {
+  .culture_page-container .item-container .itemTitle {
+    font-size: 1.9rem;
+  }
+}
+
+.culture_page-container .item-container .itemAttr {
+  font-size: calc(1.265rem + 0.18vw);
+  letter-spacing: 0.5px;
+}
+
+@media (min-width: 1200px) {
+  .culture_page-container .item-container .itemAttr {
+    font-size: 1.4rem;
+  }
 }
 
 .culture_page-container .item-container .tagHolder {
-  padding: 2rem 0rem;
+  padding: 0 1rem;
+  align-content: center;
 }
 
 .culture_page-container .item-container .tagHolder .tag {
@@ -23379,78 +23399,157 @@ ul.pagination .page-item.active .page-link {
   margin: 0rem;
 }
 
-.culture_page-container .item-container .itemBorder {
-  border-right: 1px solid #888;
+.culture_page-container .item-container .likeItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.culture_page-container .item-container .itemBorder-left {
-  border-left: 1px solid #888;
+.culture_page-container .item-container .likeItem .cultureLikeBtn {
+  position: relative;
 }
 
-.culture_page-container .item-container .centeredItems {
-  text-align: center;
+.culture_page-container .item-container .likeItem .cultureLikeBtn i {
+  display: block;
 }
 
-.culture_page-container .item-container .cultureLikeBtn .likesCount {
+.culture_page-container .item-container .likeItem .cultureLikeBtn .likesCount {
   background-color: #f66103;
   color: #ffffff;
   font-size: 0.9rem;
-  left: -0.8em;
-  top: 1em;
+  position: absolute;
+  top: unset;
+  bottom: 0;
+  right: -10%;
 }
 
 .culture_page-container .item-container .active {
   color: #f66103;
 }
 
-.culture_page-container .item-container .pictures {
-  border-top: 1px dashed #888;
-  padding-top: 1rem;
+.culture_page-container .item-container .description {
+  padding: 1rem;
+}
+
+.culture_page-container .item-container .description p {
+  text-align: center;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.culture_page-container .item-container #picture_gallery .itemPicture {
+  text-align: center;
+}
+
+.culture_page-container .item-container #picture_gallery .itemPicture img {
+  width: 7rem;
+  height: 7rem;
   margin-top: 1rem;
 }
 
-.culture_page-container .item-container .similar-entries {
-  justify-content: center;
-}
-
-.culture_page-container .item-container .similar-entries .simiarEntries {
-  text-align: center;
-}
-
-.culture_page-container .item-container .similar-entries .thumbnail {
+.culture_page-container .item-container #itemReview .noReview {
   display: block;
-  justify-content: center;
-}
-
-.culture_page-container .item-container .similar-entries .thumbnail:hover {
-  text-decoration: none;
-}
-
-.culture_page-container .item-container .similar-entries .thumbnail:hover .suggestedTitle {
-  color: #d22103;
-}
-
-.culture_page-container .item-container .similar-entries .thumbnail .nextThumbnail {
-  justify-content: center;
-}
-
-.culture_page-container .item-container .similar-entries .thumbnail .nextThumbnail .img-thumbnail-small {
-  margin: 0 25%;
-  width: 50%;
-}
-
-.culture_page-container .item-container .similar-entries .thumbnail .anotherItem .suggestedTitle {
-  text-align: center;
-  font-size: 1.5rem;
+  width: 100%;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
   font-weight: bold;
-  color: #444;
+  text-align: center;
 }
 
-.culture_page-container .item-container .similar-entries .thumbnail .anotherItem .author {
-  text-align: center;
+.culture_page-container .item-container #itemReview .reviewBtn {
+  margin: auto;
+  background-color: #f66103;
+  padding: 0.5rem 1rem;
+}
+
+.culture_page-container .item-container #itemReview .reviewBtn h5 {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: bold;
+  margin: 0;
+}
+
+.culture_page-container .item-container #itemReview .reviewBtn:hover {
+  background-color: #e26103;
+}
+
+.culture_page-container .item-container #itemReview #reviewModal {
+  padding-right: 0 !important;
+}
+
+.culture_page-container .item-container #itemReview #reviewModal .modal-dialog {
+  max-width: 90vw;
+}
+
+.culture_page-container .item-container #itemReview #reviewModal .modal-body {
+  font-size: 1.1rem;
+}
+
+.culture_page-container .item-container #itemReview #reviewModal #reviewModalLabel {
+  font-size: calc(1.265rem + 0.18vw);
+  letter-spacing: 0.5px;
+}
+
+@media (min-width: 1200px) {
+  .culture_page-container .item-container #itemReview #reviewModal #reviewModalLabel {
+    font-size: 1.4rem;
+  }
+}
+
+.culture_page-container .item-container #itemReview #reviewModal .author {
+  font-style: italic;
+  font-weight: bold;
+  padding-left: 1rem;
   font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+.culture_page-container .item-container .sectionTitle {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 1rem 2rem;
+  padding-top: 0;
+  font-size: calc(1.275rem + 0.3vw);
   font-weight: bold;
-  color: #f66103;
+  letter-spacing: 1px;
+}
+
+@media (min-width: 1200px) {
+  .culture_page-container .item-container .sectionTitle {
+    font-size: 1.5rem;
+  }
+}
+
+.culture_page-container .item-container .similar-entries {
+  text-align: center;
+}
+
+.culture_page-container .item-container .similar-entries #simmilarItems .simmilarItem {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  color: #333333;
+  text-decoration: none;
+  padding: 0.5rem 0.25rem;
+  border-radius: 20px;
+}
+
+.culture_page-container .item-container .similar-entries #simmilarItems .simmilarItem:hover {
+  background-color: rgba(255, 140, 0, 0.7);
+}
+
+.culture_page-container .item-container .similar-entries #simmilarItems .simmilarItem .itemThumb img {
+  width: 7rem;
+  height: 7rem;
+}
+
+.culture_page-container .item-container .similar-entries #simmilarItems .simmilarItem .suggestedTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
 #partners-out {

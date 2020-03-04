@@ -135,13 +135,15 @@ Route::prefix('culture')->group(function(){
     Route::get('/search', 'CultureController@searchResults')->name('culture.searchResults');
     Route::put('/newCategory', 'CultureController@newCategory')->middleware('admin')->name('culture.newCategory');
     
-    Route::get('{id}', "CultureController@item")->name('culture.read');
+    Route::get('/{cultureItem}', "CultureController@item")->name('culture.read');
     
     Route::put('/newItem', 'CultureController@newItem')->middleware('admin')->name('culture.newItem');
     
     Route::delete('/deleteItem', 'CultureController@deleteItem')->middleware('admin')->name('culture.deleteItem');
-});
 
     Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function(){
+        Route::get('getReview', 'CultureController@getReview')->name('ajaxGetReview');
+
         Route::patch('likeItem', 'HomeController@likeItem')->name('ajaxLikeItem');
     });
+});

@@ -17,6 +17,9 @@ return [
     'searchMore'                => 'Szukaj Dalej',
     'similarItems'              => 'Podobne produkty',
     'likeItem'                  => 'Polub przedmiot',
-    'allCats'                   => 'Wszystkie'
+    'allCats'                   => 'Wszystkie',
+    'noReview'                  => 'Brak Recenzji',
+    'displayReview'             => 'Przeczytaj Recenzję',
+    'author'                    => 'Autor'
 
 ];

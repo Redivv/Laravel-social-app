@@ -105,7 +105,7 @@
                             </div>
                         @endif
                     @endauth
-                    <a class="searchResult row" href="#">
+                    <a class="searchResult row" href="{{route('culture.read',['cultureItem' => $item->name_slug])}}">
                         <div class="itemImage col-2">
                             <img src="{{asset('img/culture-pictures/'.json_decode($item->thumbnail)[0])}}" alt="">
                         </div>

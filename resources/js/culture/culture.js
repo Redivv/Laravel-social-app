@@ -4,30 +4,24 @@ import {
     addNewTagInputFromIn,
     addOnClickDeleteEventOnRemove,
     sendAjaxRequestToWithFormData,
+    getDataByAjaxFromUrlWithData,
     showSpinnerOverlay
 } from "./cultureFunctions";
 
 $(document).ready(function(){
-    console.log('ready');
-    $('[data-tool="tooltip"]').tooltip();
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    $('[data-tool="tooltip"]').tooltip();
     main();
 });
 
 
 function main() {
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    $('[data-tool=tooltip]').tooltip();
 
     addOnClickDeleteEventOnRemove(".itemTag");
 
@@ -65,7 +59,10 @@ function main() {
         $("#cultureSearch").submit();
     });
 
-    
+    $('#reviewModal').one('show.bs.modal',function(e) {
+       let itemId = $(e.relatedTarget).data('itemid');
+       getDataByAjaxFromUrlWithData(baseUrl+"/culture/ajax/getReview",itemId);
+    });
 
     $("#searchTags").autocomplete({
  

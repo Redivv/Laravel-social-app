@@ -94,7 +94,7 @@
                     <h4>{{__('culture.sugestion'.$suggest['type'])}}</h4>
                     <output class="sugestions-out" id="variableSugestions-out">
                         @foreach ($suggest['items'] as $item)
-                            <a class="cultureItem row" href="#">
+                            <a class="cultureItem row" href="{{route('culture.read',['cultureItem' => $item->name_slug])}}">
                                 <div class="col-4 itemImg">
                                     <img src="{{asset('img/culture-pictures/'.json_decode($item->thumbnail)[0])}}" alt="Item Image">
                                 </div>
@@ -124,7 +124,7 @@
                     <h4>{{__('culture.sugestionNew')}}</h4>
                     <output class="sugestions-out" id="newestSugestions-out">
                         @foreach ($new as $item)
-                            <a class="cultureItem row" href="#">
+                            <a class="cultureItem row" href="{{route('culture.read',['cultureItem' => $item->name_slug])}}">
                                 <div class="col-4 itemImg">
                                     <img src="{{asset('img/culture-pictures/'.json_decode($item->thumbnail)[0])}}" alt="Item Image">
                                 </div>

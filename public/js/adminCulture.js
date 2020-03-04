@@ -11489,12 +11489,13 @@ function carryList(decided, target) {
 /*!**************************************************!*\
   !*** ./resources/js/culture/cultureFunctions.js ***!
   \**************************************************/
-/*! exports provided: sendAjaxRequestToWithFormData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInputFromIn, addOnClickDeleteEventOnRemove, deleteTargetElement, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer, addNewPartnerInput */
+/*! exports provided: sendAjaxRequestToWithFormData, getDataByAjaxFromUrlWithData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInputFromIn, addOnClickDeleteEventOnRemove, deleteTargetElement, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer, addNewPartnerInput */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sendAjaxRequestToWithFormData", function() { return sendAjaxRequestToWithFormData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDataByAjaxFromUrlWithData", function() { return getDataByAjaxFromUrlWithData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewAttrForm", function() { return addNewAttrForm; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteAttrForm", function() { return deleteAttrForm; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showSpinnerOverlay", function() { return showSpinnerOverlay; });
@@ -11511,6 +11512,9 @@ var attributesCount = 1;
 function sendAjaxRequestToWithFormData(url, form) {
   var formData = extractFormData(form);
   sendAjaxRequestToUrlWithData(url, formData);
+}
+function getDataByAjaxFromUrlWithData(url, data) {
+  sendGetAjaxRequestToUrlWithData(url, data);
 }
 function addNewAttrForm() {
   var html = createNewAttrInput();
@@ -11548,6 +11552,17 @@ function sendAjaxRequestToUrlWithData(url, data) {
   receiveAjaxResponse(request);
 }
 
+function sendGetAjaxRequestToUrlWithData(url, data) {
+  var request = $.ajax({
+    method: 'get',
+    url: url,
+    data: {
+      data: data
+    }
+  });
+  receiveAjaxResponse(request);
+}
+
 function receiveAjaxResponse(request) {
   request.done(function (response) {
     switch (response.action) {
@@ -11555,6 +11570,9 @@ function receiveAjaxResponse(request) {
         displaySuccessInformation();
         hideSpinnerOverlay();
         break;
+
+      case 'displayReview':
+        $('#reviewModal').find('.modal-body').html(response.html);
 
       default:
         hideSpinnerOverlay();

@@ -330,5 +330,12 @@ iframe{
 }
 
 .note-group-select-from-files{
-    display:none !important;
+    display: none !important;
+}
+
+.note-editor.note-frame .note-editing-area .note-editable, .note-editor.note-airframe .note-editing-area .note-editable{
+    @include font-size(1.1rem);
+    img{
+        @extend .img-fluid;
+    }
 }

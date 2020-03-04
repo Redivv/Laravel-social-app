@@ -51,6 +51,24 @@ class CultureController extends Controller
         return view('cultureSearchResults')->withResults($searchResults)->withCategories($categories);
     }
 
+    public function item(cultureItem $cultureItem){
+
+        $itemTags = $cultureItem->tagNames();
+        $similarEntries = cultureItem::withAnyTag($itemTags)->inRandomOrder()->take(10)->get()->sortByDesc(function($product) use ($itemTags){
+            return array_intersect($itemTags,$product->tagNames());
+        })->take(4);
+
+        if (count($similarEntries) <= 0) {
+        
+            $similarEntries = cultureItem::where('id','!=',$cultureItem->id)
+                ->where('category_id','=',$cultureItem->category_id)
+                ->take(4)
+            ->get();
+        }
+
+        return view('cultureItem')->withCultureItem($cultureItem)->withSimilarEntries($similarEntries);
+    }
+
     public function newCategory(Request $request)
     {
         $validatedData      =  $this->validateNewCategoryRequest($request);
@@ -96,6 +114,19 @@ class CultureController extends Controller
     {
         $partners = Partner::all();
         return view('partners')->withPartners($partners);
+    }
+
+    public function getReview(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->validate([
+                'data'      => ['numeric','exists:culture_items,id']
+            ]);
+
+            $review = trim(cultureItem::find($request->data)->pluck('review')[0]);
+
+            return response()->json(['action' => 'displayReview','html' => $review], 200);
+        }
     }
 
 

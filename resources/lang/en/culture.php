@@ -17,5 +17,8 @@ return [
     'itemCompleted'             => 'Finished',
     'similarItems'              => 'Similar items',
     'likeItem'                  => 'Like this item',
-    'allCats'                   => 'All'
+    'allCats'                   => 'All',
+    'noReview'                  => 'No review yet',
+    'displayReview'             => 'Read a Review',
+    'author'                    => 'Author'
 ];

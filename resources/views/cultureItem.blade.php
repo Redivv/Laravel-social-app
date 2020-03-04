@@ -2,161 +2,164 @@
 
 @section('titleTag')
     <title>
-        {{__('app.cultureItem')}}
+        {{__('app.culture')}}   -    {{$cultureItem->name}}
     </title>
 @endsection
 
 @section('content')
-<div class="container-flex culture_page-container">
-    <div class="row">
-        <aside class="col-md-1 advertisment-placeholder">
-        </aside>
-        <div class="col-md-10">
-            <div class="container item-container">
-                <section id="item_header" class="row itemHeader centeredItems">
-                    <figure class="col-md-2  thumbnail  itemBorder">
-                        @if($pictures = json_decode($cultureItem->pictures))
-                            <a href="{{asset('images/culture/'.$pictures[0])}}" data-lightbox="Item" data-title="picture">
-                                <img src="{{asset('images/culture/'.$pictures[0])}}" alt="thumbnail" class="img-thumbnail">
+<div class="container-fluid culture_page-container">
+    <div class="item-container">
+        @auth
+            @if (auth()->user()->isAdmin())
+                <div class="col-12 adminButtons">
+                    <a href="{{route('adminCulture')."?elementType=cultureItem&elementId=".$cultureItem->id}}" data-tool="tooltip" title="{{__('admin.edit')}}" data-placement="bottom">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <form method="post" action="#" class="deleteItem">
+                        @method('delete')
+                        <input type="hidden" name="elementId" value="{{$cultureItem->id}}">
+                        <button class="btn" type="submit" data-tool="tooltip" title="{{__('admin.delete')}}" data-placement="bottom">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </form>
+                </div>
+            @endif
+        @endauth
+        <section id="item_header" class="row itemHeader text-center">
+            <figure class="col-md-2  thumbnail">
+                @if($thumb = json_decode($cultureItem->thumbnail)[0])
+                    <a href="{{asset('img/culture-pictures/'.$thumb)}}" data-lightbox="Item" data-title="{{$cultureItem->name}}">
+                        <img src="{{asset('img/culture-pictures/'.$thumb)}}" alt="thumbnail">
+                    </a>
+                @endif
+            </figure>
+            <hgroup class="col-md-4 row ">
+                <h3 class="col-12 itemTitle">
+                    {{$cultureItem->name}}
+                </h3>
+                @if ( ($attrLabels = json_decode($cultureItem->category->attributes)) && ($attrValues = json_decode($cultureItem->attributes)))
+                    @foreach ($attrLabels as $key => $label)
+                        @if ($attrValues[$key])
+                            <p class="col itemAttr">
+                                <span class="font-weight-bold">{{$label}}</span>: {{$attrValues[$key]}}
+                            </p>
+                        @endif
+                    @endforeach    
+                @endif
+            </hgroup>
+            <div class="col-md-4  tagHolder container row">
+                @if($tags = $cultureItem->tagNames())
+                    @foreach ($tags as $tag)
+                        <div class="col tag">
+                            <p># {{$tag}}</p>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+            <div class="col-md-2 likeItem text-center ico ">
+                @auth
+                    <button class="btn  cultureLikeBtn @if($cultureItem->liked()) active @endif" data-id="{{$cultureItem->id}}" data-tool="tooltip" title="{{__('culture.likeItem')}}" data-placement="bottom">
+                        <i class="fas fa-fire fa-5x"></i>
+                        <span class="badge badge-pill likesCount @if($cultureItem->likeCount<=0 ) invisible @endif">
+                            {{$cultureItem->likeCount}}
+                        </span>
+                    </button>
+                @else
+                <button class="btn cultureLikeBtn">
+                    <i class="fas fa-fire fa-5x"></i>
+                    <span class="badge badge-pill likesCount @if($cultureItem->likeCount <=0 ) invisible @endif">
+                        {{$cultureItem->likeCount}}
+                    </span>
+                </button>
+
+                @endauth
+            </div>
+        </section>
+        <div class="row">
+            <section id="description" class="col-md-12 description">
+                <p>
+                    {!!$cultureItem->description!!}
+                </p>
+            </section>
+            
+            <section id="picture_gallery" class="col-md-12 pictures row centeredItems">
+                @if ($pictures = json_decode($cultureItem->pictures))
+                @foreach ($pictures as $picture)
+                        <div class="col itemPicture">
+                            <a href="{{asset('img/culture-pictures/'.$picture)}}" data-lightbox="Item Pictures">
+                                <img  src="{{asset('img/culture-pictures/'.$picture)}}" alt="Culture Picture">
                             </a>
-                        @else
-                            <img src="{{asset('images/culture/book.jpg')}}" alt="brak zdjęcia" class="img-thumbnail">
+                        </div>
+                    @endforeach
+                @endif
+            </section>
+        </div>
+        <hr>
+        <section id="itemReview" class="row  review">
+            <h4 class="sectionTitle">
+                {{__('admin.itemReview')}}
+            </h4>
+            @if ($cultureItem->review)
+                <button type="button" class="btn reviewBtn" data-toggle="modal" data-target="#reviewModal" data-itemid="{{$cultureItem->id}}">
+                    <h5>{{__('culture.displayReview')}}</h5>
+                </button>
+                @include('partials.culture.reviewModal')
+            @else
+                <h5 class="noReview">
+                    {{__('culture.noReview')}}
+                </h5>
+            @endif
+        </section>
+        <hr>
+        <section class="similar-entries">
+            <h4 class="sectionTitle">{{__('culture.similarItems')}}</h4>
+            <output id="simmilarItems" class="row">
+                @foreach ($similarEntries as $entry)
+                <a class="simmilarItem col container row" href="{{route('culture.read',['cultureItem' => $entry->name_slug])}}">
+                    <figure class="col-12 itemThumb">
+                        @if ($pic = json_decode($entry->thumbnail)[0])  
+                            <img src="{{asset('img/culture-pictures/'.$pic)}}" alt="item thumbnail">
                         @endif
                     </figure>
-                    <hgroup class="col-md-4  itemBorder">
-                        <h3 class=" itemTitle">
-                            {{$cultureItem->name}}
-                        </h3>
-                        @if($catAttr=json_decode($cultureCategory->attributes))
-                            @if ($DecAttributes=json_decode($cultureItem->attributes))
-                                @php
-                                    foreach ($catAttr as $key => $attr) {
-                                        if ($attr=='author') {
-                                            echo('<h4 class=" itemAuthor">');
-                                            echo($DecAttributes[$key]);
-                                            echo('</h4>');
-                                        }
-                                        if ($attr=='date') {
-                                         echo('<h4 class=" itemDate">');
-                                         echo($DecAttributes[$key]);
-                                         echo('</h4>');
-                                        }
-                                    }   
-                                @endphp
-                            @endif
-                        @endif
-                    </hgroup>
-                    <div class="col-md-4  tagHolder  itemBorder container row">
-                        @if($catAttr)
-                            @foreach ($DecAttributes as $attribute)
-                                
-                                <div class=" col  tag">
-                                    <p>#{{$attribute}}</p>
-                                </div>
-                            @endforeach
-                        @endif
-                    </div>
-                    <div class="col-md-2 likeItem text-center ico ">
-                        
+                    <figcaption class="col-12">
+                        <h5 class="suggestedTitle">
+                            {{$entry->name}}
+                        </h5>
+                    </figcaption>
+                </a>
+                @endforeach
+            </output>
+        </section>
+        <hr>
+        <section class="row  comments">
+            comments
 
-                        @auth
-                            <button class="btn  cultureLikeBtn @if($cultureItem->liked()) active @endif" data-id="{{$cultureItem->id}}" data-tool="tooltip" title="{{__('culture.likeItem')}}" data-placement="bottom">
-                                <i class="fas fa-fire fa-5x"></i>
-                                <span class="badge badge-pill likesCount @if($cultureItem->likeCount<=0 ) invisible @endif">
-                                    {{$cultureItem->likeCount}}
-                                </span>
-                            </button>
-                        @else
-                        <button class="btn cultureLikeBtn">
-                            <i class="fas fa-fire fa-5x"></i>
-                            <span class="badge badge-pill likesCount @if($cultureItem->likeCount <=0 ) invisible @endif">
-                                {{$cultureItem->likeCount}}
-                            </span>
-                        </button>
-
-                        @endauth
-                    </div>
-                </section>
-                <hr>
-                <div class="row">
-                    <section id="description" class="col-md-12 description">
-                        {{$cultureItem->description}}
-                        {{-- Desc>
-                        Mateusz Morawczyk po raz kolejny zaskakuje nas smiałością swoich twierdzeń podatkowych.
-                        Szczerze to nie ma się czemu dziwić, gdyż maszyna państwowa a także cały model pięćsetpluscentryczny nie może się utrzymać
-                        przy obecnym poziomie opodatkowania.
-                        Czytelnikowi oczywiście nie jest mówione to w prost, aczkolwiek wywierany jest na nim mocny przekaz podprogowy a propo
-                        prodobrozmianizmu. --}}
-                    </section>
-                    {{--  --------------------------------------------------------------pictures --}}
-                    <section id="picture_gallery" class="col-md-12 pictures row centeredItems">
-                        
-                        
-                        @if ($pictures)
-                        @foreach ($pictures as $picture)
-                                <div class="col BookPicture">
-                                    {{-- @if ($loop->iteration == 4)   
-                                        <div class="mt-2"> 
-                                            kek
-                                            <a class="morePhotos" href="{{route('viewPost',['post' => $cultureItem->id])}}" target="__blank">{{__('profile.remainingPhotos')}} ({{$loop->remaining+1}})</a>
-                                        </div>
-                                    @break
-                                    @else --}}
-                                        <a href="{{asset('images/culture/'.$picture)}}" data-lightbox="post{{$cultureItem->id}}-Pictures">
-                                            <img class="img-thumbnail" src="{{asset('images/culture/'.$picture)}}" alt="Culture Picture">
-                                        </a>
-                                    {{-- @endif --}}
-                                </div>
-                            @endforeach
-                        @endif
-                    </section>
-                </div>
-                <hr>
-                <section id="item_review" class="row  review">
-                    {{$cultureItem->review}}
-                    
-                </section>
-                <hr>
-                <section class="row  similar-entries">
-                    <div class="col-md-12 simiarEntries center">
-                        <h4>{{__('culture.similarItems')}}:</h4>
-                    </div>
-                    @foreach ($similarEntries as $entry)
-                    <a class="col-md-4  thumbnail  itemBorder  itemBorder-left container row" href="{{asset('culture/'.$entry->name_slug)}}">
-                        <figure class="col nextThumbnail">
-                            @if ($pic=json_decode($entry->pictures))  
-                            <img src="{{asset('images/culture/'.$pic[0])}}" alt="kek" class="img-thumbnail img-thumbnail-small">
-                            @else
-                            <img src="{{asset('images/culture/book.jpg')}}" alt="kek" class="img-thumbnail img-thumbnail-small">
-                            @endif
-                        </figure>
-                        <figcaption class="col  anotherItem">
-                            <h5 class="suggestedTitle">
-                                {{$entry->name}}
-                            </h5>
-                        </figcaption>
-                    </a>
-                    @endforeach
-                </section>
-                <hr>
-                <section class="row  comments">
-                    comments
-
-                    <br>
-                    /coments
-                </section>
-            </div>
-        </div>
-        <aside class="col-md-1  advertisment-placeholder">
-        </aside>
+            <br>
+            /coments
+        </section>
     </div>
 </div>
 
+
 @endsection
+
+@push('styles')
+    <style>
+        .navCulture > .nav-link{
+            color: #f66103 !important;
+        }
+        .modal-backdrop{
+            z-index: 998 !important;
+        }
+    </style>
+    <link rel="stylesheet" href="{{asset("jqueryUi\jquery-ui.min.css")}}">
+@endpush
 
 @push('scripts')
     <script>
         var base_url= "{{url('/')}}";
+        var savedChanges        =  "{{__('profile.savedChanges')}}";
     </script>
     <script src="{{asset('js/culture.js')}}"></script>
+    <script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
 @endpush

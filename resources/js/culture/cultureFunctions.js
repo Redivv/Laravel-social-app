@@ -6,6 +6,10 @@ export function sendAjaxRequestToWithFormData(url, form) {
     sendAjaxRequestToUrlWithData(url, formData);
 }
 
+export function getDataByAjaxFromUrlWithData(url, data){
+    sendGetAjaxRequestToUrlWithData(url, data);
+}
+
 export function addNewAttrForm() {
     let html = createNewAttrInput();
     $('.newCultureAttributes').append(html);
@@ -49,6 +53,16 @@ function sendAjaxRequestToUrlWithData(url, data) {
     receiveAjaxResponse(request);
 }
 
+function sendGetAjaxRequestToUrlWithData(url, data) {
+    let request = $.ajax({
+        method: 'get',
+        url: url,
+        data: {data : data}
+    });
+    receiveAjaxResponse(request);
+}
+
+
 function receiveAjaxResponse(request) {
     request.done(function (response) {
         switch (response.action) {
@@ -56,7 +70,8 @@ function receiveAjaxResponse(request) {
                 displaySuccessInformation();
                 hideSpinnerOverlay();
                 break;
-        
+            case 'displayReview':
+                $('#reviewModal').find('.modal-body').html(response.html);
             default:
                 hideSpinnerOverlay();
                 break;

@@ -21,7 +21,7 @@ class CreateCultureItemsTable extends Migration
 
             $table->longText('thumbnail');
             $table->longText('pictures')->nullable()->default(null);
-            $table->string('description');
+            $table->longText('description');
             
             $table->longText('review')->nullable()->default(null);
 
