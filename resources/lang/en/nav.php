@@ -31,5 +31,6 @@ return [
     'partnerReq'                => ' want to share your relationship',
     'acceptedPartner'           => 'User :user accept your relationship request ',
     'deniedPartner'             => 'User :user reject your relationship request',
-    'adminDeletedPost'          => 'Administrator Deleted Your Post'
+    'adminDeletedPost'          => 'Administrator Deleted Your Post',
+    'newCultureItem'            => "A New Item Related To Your Hobbies Has Been Added"
 ]; 

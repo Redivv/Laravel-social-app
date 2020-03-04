@@ -30,7 +30,8 @@ function main() {
         $(this).parent().addClass('active');
     });
 
-    $('.cultureLikeBtn').on('click',function() {
+    $('.likeBtn').on('click',function(e) {
+        e.preventDefault();
         likeItem(this);
     });
 
@@ -40,6 +41,7 @@ function main() {
             showSpinnerOverlay();
             sendAjaxRequestToWithFormData(baseUrl+"/culture/deleteItem",this);
             $(this).parents('.resultBox').remove();
+            alert(savedChanges);
         }
     });
     
@@ -48,6 +50,11 @@ function main() {
             key.preventDefault();
             addNewTagInputFromIn(this,'#searchTags-out');
         }
+    });
+
+    $('#searchTags').next().find('.tagsBtn').on('click',function() {
+        let input = $(this).parent().prev();
+        addNewTagInputFromIn(input,'#searchTags-out');
     });
 
     $('.cultureSection').on('click',function(e) {
@@ -97,7 +104,7 @@ function main() {
 
 function likeItem(selected) {
     let itemId = $(selected).data('id');
-    let url = base_url+"/culture/ajax/likeItem";
+    let url = baseUrl+"/culture/ajax/likeItem";
 
     let currentAmount = $(selected).find('.likesCount').html();
     console.log(currentAmount);

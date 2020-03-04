@@ -28,7 +28,7 @@
                     <div class="input-group">
                         <input type="text" id="searchTags" class="form-control" name="itemTags[]" placeholder="{{__('culture.searchTags')}}" aria-label="Tag Name" aria-describedby="tag search button">
                         <div class="input-group-append">
-                            <button class="btn" type="button">
+                            <button class="btn tagsBtn" type="button">
                                 {{__('searcher.add')}}
                             </button>
                         </div>
@@ -111,9 +111,11 @@
                                     </output>
                                 </div>
                                 <div class="col-md-2 col-sm-12 itemButtons row">
-                                    <button class="btn col-12 likeBtn">
+                                    <button class="btn col-12 itemLikeBtn  @if(auth()->check()) likeBtn @if($item->liked()) active @endif @endif" data-id="{{$item->id}}" data-tool="tooltip" title="{{__('culture.likeItem')}}" data-placement="bottom">
                                         <i class="fas fa-fire"></i>
-                                        <span class="badge likesAmount active">5</span>
+                                        <span class="badge likesCount @if($item->likeCount<=0 ) invisible @endif">
+                                            {{$item->likeCount}}
+                                        </span>
                                     </button>
                                 </div>
                             </a>
@@ -141,9 +143,11 @@
                                     </output>
                                 </div>
                                 <div class="col-md-2 col-sm-12 mt-sm-1 itemButtons row">
-                                    <button class="btn col-12 likeBtn">
+                                    <button class="btn col-12 itemLikeBtn @if(auth()->check()) likeBtn @if($item->liked()) active @endif @endif" data-id="{{$item->id}}" data-tool="tooltip" title="{{__('culture.likeItem')}}" data-placement="bottom">
                                         <i class="fas fa-fire"></i>
-                                        <span class="badge likesAmount active">5</span>
+                                        <span class="badge likesCount @if($item->likeCount<=0 ) invisible @endif">
+                                            {{$item->likeCount}}
+                                        </span>
                                     </button>
                                 </div>
                             </a>

@@ -31,5 +31,6 @@ return [
     'partnerReq'                => ' chce zaproponować ogłoszenie waszego związku',
     'acceptedPartner'           => 'Użytkownik :user przyjął Twoją propozycję związku',
     'deniedPartner'             => 'Użytkownik :user odrzucił Twoją propozycję związku',
-    'adminDeletedPost'          => 'Administrator Usunął Twój Post'
+    'adminDeletedPost'          => 'Administrator Usunął Twój Post',
+    'newCultureItem'            => "Dodano Nowy Przedmiot Związany z Twoimi Zainteresowaniami"
 ]; 

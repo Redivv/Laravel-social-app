@@ -11291,7 +11291,8 @@ function main() {
     $('.sortOptionBtn').removeClass('active');
     $(this).parent().addClass('active');
   });
-  $('.cultureLikeBtn').on('click', function () {
+  $('.likeBtn').on('click', function (e) {
+    e.preventDefault();
     likeItem(this);
   });
   $('.deleteItem').on('submit', function (e) {
@@ -11301,6 +11302,7 @@ function main() {
       Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["showSpinnerOverlay"])();
       Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["sendAjaxRequestToWithFormData"])(baseUrl + "/culture/deleteItem", this);
       $(this).parents('.resultBox').remove();
+      alert(savedChanges);
     }
   });
   $('#searchTags').on('keydown', function (key) {
@@ -11308,6 +11310,10 @@ function main() {
       key.preventDefault();
       Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewTagInputFromIn"])(this, '#searchTags-out');
     }
+  });
+  $('#searchTags').next().find('.tagsBtn').on('click', function () {
+    var input = $(this).parent().prev();
+    Object(_cultureFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewTagInputFromIn"])(input, '#searchTags-out');
   });
   $('.cultureSection').on('click', function (e) {
     e.preventDefault();
@@ -11354,7 +11360,7 @@ function main() {
 
 function likeItem(selected) {
   var itemId = $(selected).data('id');
-  var url = base_url + "/culture/ajax/likeItem";
+  var url = baseUrl + "/culture/ajax/likeItem";
   var currentAmount = $(selected).find('.likesCount').html();
   console.log(currentAmount);
 

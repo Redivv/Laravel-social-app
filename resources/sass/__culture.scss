@@ -273,7 +273,7 @@
 
                 .itemButtons {
 
-                    .likeBtn{
+                    .itemLikeBtn{
                         i {
                             @include font-size(1.4rem);
                         }
@@ -423,22 +423,6 @@
     display:block;
     width: 100%;
     padding: 1rem 0;
-    .adminButtons{
-        text-align: right;
-        form{
-            display: inline;
-        }
-        a,button{
-            display: inline;
-            color: black;
-            cursor: pointer;
-            padding: 0.5rem;
-            @include font-size(1rem);
-            &:hover{
-                color: $orange;
-            }
-        }
-    }
     .searchResult{
         text-align: center;
         justify-content: center;
@@ -480,9 +464,9 @@
             }
         }
         .itemLikes{
-            .likeBtn{
+            .itemLikeBtn{
                 i {
-                    @include font-size(1.1rem);
+                    @include font-size(1.4rem);
                 }
 
                 &:hover {
@@ -490,7 +474,7 @@
                 }
 
                 .badge {
-                    @include font-size(0.9rem);
+                    @include font-size(1rem);
                     letter-spacing: 2px;
                 }
 
@@ -566,6 +550,23 @@ ul.pagination{
             h3{
                 color: $orange;
             }
+            color: $orange;
+        }
+    }
+}
+
+.adminButtons{
+    text-align: right;
+    form{
+        display: inline;
+    }
+    a,button{
+        display: inline;
+        color: black;
+        cursor: pointer;
+        padding: 0.5rem;
+        @include font-size(1rem);
+        &:hover{
             color: $orange;
         }
     }

@@ -65,7 +65,7 @@
             </div>
             <div class="col-md-2 likeItem text-center ico ">
                 @auth
-                    <button class="btn  cultureLikeBtn @if($cultureItem->liked()) active @endif" data-id="{{$cultureItem->id}}" data-tool="tooltip" title="{{__('culture.likeItem')}}" data-placement="bottom">
+                    <button class="btn likeBtn cultureLikeBtn @if($cultureItem->liked()) active @endif" data-id="{{$cultureItem->id}}" data-tool="tooltip" title="{{__('culture.likeItem')}}" data-placement="bottom">
                         <i class="fas fa-fire fa-5x"></i>
                         <span class="badge badge-pill likesCount @if($cultureItem->likeCount<=0 ) invisible @endif">
                             {{$cultureItem->likeCount}}
@@ -164,11 +164,11 @@
 
 @push('scripts')
     <script>
-        var base_url= "{{url('/')}}";
+        var baseUrl= "{{url('/')}}";
         var savedChanges        =  "{{__('profile.savedChanges')}}";
         var deleteHobby         =  "{{__('activityWall.deleteTags')}}";
         var confirmMsg          =  "{{__('admin.confirmMsg')}}";
     </script>
-    <script src="{{asset('js/culture.js')}}"></script>
     <script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
+    <script src="{{asset('js/culture.js')}}"></script>
 @endpush

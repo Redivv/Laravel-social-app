@@ -23019,30 +23019,30 @@ html {
   letter-spacing: 0.5px;
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn i {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .itemLikeBtn i {
   font-size: calc(1.265rem + 0.18vw);
 }
 
 @media (min-width: 1200px) {
-  #cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn i {
+  #cultureSugestions .column .sugestions-out .cultureItem .itemButtons .itemLikeBtn i {
     font-size: 1.4rem;
   }
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn:hover {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .itemLikeBtn:hover {
   color: #f66103;
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn .badge {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .itemLikeBtn .badge {
   font-size: 0.8rem;
   letter-spacing: 2px;
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn.active {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .itemLikeBtn.active {
   color: #f66103;
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn.active:hover {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .itemLikeBtn.active:hover {
   color: #e26103;
 }
 
@@ -23176,28 +23176,6 @@ html {
   padding: 1rem 0;
 }
 
-#searchResultsOutput .adminButtons {
-  text-align: right;
-}
-
-#searchResultsOutput .adminButtons form {
-  display: inline;
-}
-
-#searchResultsOutput .adminButtons a,
-#searchResultsOutput .adminButtons button {
-  display: inline;
-  color: black;
-  cursor: pointer;
-  padding: 0.5rem;
-  font-size: 1rem;
-}
-
-#searchResultsOutput .adminButtons a:hover,
-#searchResultsOutput .adminButtons button:hover {
-  color: #f66103;
-}
-
 #searchResultsOutput .searchResult {
   text-align: center;
   justify-content: center;
@@ -23243,24 +23221,30 @@ html {
   padding: 0;
 }
 
-#searchResultsOutput .searchResult .itemLikes .likeBtn i {
-  font-size: 1.1rem;
+#searchResultsOutput .searchResult .itemLikes .itemLikeBtn i {
+  font-size: calc(1.265rem + 0.18vw);
 }
 
-#searchResultsOutput .searchResult .itemLikes .likeBtn:hover {
+@media (min-width: 1200px) {
+  #searchResultsOutput .searchResult .itemLikes .itemLikeBtn i {
+    font-size: 1.4rem;
+  }
+}
+
+#searchResultsOutput .searchResult .itemLikes .itemLikeBtn:hover {
   color: #f66103;
 }
 
-#searchResultsOutput .searchResult .itemLikes .likeBtn .badge {
-  font-size: 0.9rem;
+#searchResultsOutput .searchResult .itemLikes .itemLikeBtn .badge {
+  font-size: 1rem;
   letter-spacing: 2px;
 }
 
-#searchResultsOutput .searchResult .itemLikes .likeBtn.active {
+#searchResultsOutput .searchResult .itemLikes .itemLikeBtn.active {
   color: #f66103;
 }
 
-#searchResultsOutput .searchResult .itemLikes .likeBtn.active:hover {
+#searchResultsOutput .searchResult .itemLikes .itemLikeBtn.active:hover {
   color: #e26103;
 }
 
@@ -23328,6 +23312,28 @@ ul.pagination .page-item.active .page-link {
 }
 
 .extraLinks a:hover h3 {
+  color: #f66103;
+}
+
+.adminButtons {
+  text-align: right;
+}
+
+.adminButtons form {
+  display: inline;
+}
+
+.adminButtons a,
+.adminButtons button {
+  display: inline;
+  color: black;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.adminButtons a:hover,
+.adminButtons button:hover {
   color: #f66103;
 }
 
@@ -23901,30 +23907,30 @@ html {
   letter-spacing: 0.5px;
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn i {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .itemLikeBtn i {
   font-size: calc(1.265rem + 0.18vw);
 }
 
 @media (min-width: 1200px) {
-  #cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn i {
+  #cultureSugestions .column .sugestions-out .cultureItem .itemButtons .itemLikeBtn i {
     font-size: 1.4rem;
   }
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn:hover {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .itemLikeBtn:hover {
   color: #f66103;
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn .badge {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .itemLikeBtn .badge {
   font-size: 0.8rem;
   letter-spacing: 2px;
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn.active {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .itemLikeBtn.active {
   color: #f66103;
 }
 
-#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .likeBtn.active:hover {
+#cultureSugestions .column .sugestions-out .cultureItem .itemButtons .itemLikeBtn.active:hover {
   color: #e26103;
 }
 
@@ -24058,28 +24064,6 @@ html {
   padding: 1rem 0;
 }
 
-#searchResultsOutput .adminButtons {
-  text-align: right;
-}
-
-#searchResultsOutput .adminButtons form {
-  display: inline;
-}
-
-#searchResultsOutput .adminButtons a,
-#searchResultsOutput .adminButtons button {
-  display: inline;
-  color: black;
-  cursor: pointer;
-  padding: 0.5rem;
-  font-size: 1rem;
-}
-
-#searchResultsOutput .adminButtons a:hover,
-#searchResultsOutput .adminButtons button:hover {
-  color: #f66103;
-}
-
 #searchResultsOutput .searchResult {
   text-align: center;
   justify-content: center;
@@ -24125,24 +24109,30 @@ html {
   padding: 0;
 }
 
-#searchResultsOutput .searchResult .itemLikes .likeBtn i {
-  font-size: 1.1rem;
+#searchResultsOutput .searchResult .itemLikes .itemLikeBtn i {
+  font-size: calc(1.265rem + 0.18vw);
 }
 
-#searchResultsOutput .searchResult .itemLikes .likeBtn:hover {
+@media (min-width: 1200px) {
+  #searchResultsOutput .searchResult .itemLikes .itemLikeBtn i {
+    font-size: 1.4rem;
+  }
+}
+
+#searchResultsOutput .searchResult .itemLikes .itemLikeBtn:hover {
   color: #f66103;
 }
 
-#searchResultsOutput .searchResult .itemLikes .likeBtn .badge {
-  font-size: 0.9rem;
+#searchResultsOutput .searchResult .itemLikes .itemLikeBtn .badge {
+  font-size: 1rem;
   letter-spacing: 2px;
 }
 
-#searchResultsOutput .searchResult .itemLikes .likeBtn.active {
+#searchResultsOutput .searchResult .itemLikes .itemLikeBtn.active {
   color: #f66103;
 }
 
-#searchResultsOutput .searchResult .itemLikes .likeBtn.active:hover {
+#searchResultsOutput .searchResult .itemLikes .itemLikeBtn.active:hover {
   color: #e26103;
 }
 
@@ -24210,6 +24200,28 @@ ul.pagination .page-item.active .page-link {
 }
 
 .extraLinks a:hover h3 {
+  color: #f66103;
+}
+
+.adminButtons {
+  text-align: right;
+}
+
+.adminButtons form {
+  display: inline;
+}
+
+.adminButtons a,
+.adminButtons button {
+  display: inline;
+  color: black;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.adminButtons a:hover,
+.adminButtons button:hover {
   color: #f66103;
 }
 

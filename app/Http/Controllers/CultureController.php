@@ -11,9 +11,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
+use App\Notifications\SystemNotification;
+
 use App\cultureItem;
 use App\cultureCategory;
 use App\Partner;
+use App\User;
 
 class CultureController extends Controller
 {
@@ -94,6 +97,13 @@ class CultureController extends Controller
 
         if ($this->wasNewItemAddedToDatabase($newItem)) {
             $this->tagNewItemWithData($newItem, $validatedData);
+
+            $users = User::withAnyTag($newItem->tagNames())->get();
+
+            foreach ($users as $taggedUser) {
+                $taggedUser->notify(new SystemNotification(__('nav.newCultureItem',[],$taggedUser->locale),'success','_culture_',$newItem->name_slug,'', 'cultItem'));
+            }
+
             return response()->json(['action' => 'savedData'], 200);
         }
     }
