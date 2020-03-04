@@ -89,20 +89,22 @@
             @if (count($results) > 0)
                 @foreach ($results as $item)
                 <div class="resultBox">
-                    @if (auth()->user()->isAdmin())
-                        <div class="col-12 adminButtons">
-                            <a href="{{route('adminCulture')."?elementType=cultureItem&elementId=".$item->id}}" data-tool="tooltip" title="{{__('admin.edit')}}" data-placement="bottom">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <form method="post" action="#" class="deleteItem">
-                                @method('delete')
-                                <input type="hidden" name="elementId" value="{{$item->id}}">
-                                <button class="btn" type="submit" data-tool="tooltip" title="{{__('admin.delete')}}" data-placement="bottom">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </form>
-                        </div>
-                    @endif
+                    @auth
+                        @if (auth()->user()->isAdmin())
+                            <div class="col-12 adminButtons">
+                                <a href="{{route('adminCulture')."?elementType=cultureItem&elementId=".$item->id}}" data-tool="tooltip" title="{{__('admin.edit')}}" data-placement="bottom">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form method="post" action="#" class="deleteItem">
+                                    @method('delete')
+                                    <input type="hidden" name="elementId" value="{{$item->id}}">
+                                    <button class="btn" type="submit" data-tool="tooltip" title="{{__('admin.delete')}}" data-placement="bottom">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        @endif
+                    @endauth
                     <a class="searchResult row" href="#">
                         <div class="itemImage col-2">
                             <img src="{{asset('img/culture-pictures/'.json_decode($item->thumbnail)[0])}}" alt="">
@@ -158,7 +160,7 @@
                     </h3>
                 </a>
                 @foreach ($categories as $cat)
-                    <a class="cultureSection @if(request('searchCategory') == $cat->name) active @endif col" data-category="{{$cat->name}}">
+                    <a class="cultureSection @if(request('searchCategory') == $cat->name_slug) active @endif col" data-category="{{$cat->name}}">
                         <h3>
                             {{$cat->name}}
                         </h3>

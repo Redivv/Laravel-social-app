@@ -130,8 +130,7 @@ class CultureController extends Controller
         }
 
         if (isset($criteria->searchCategory)) {
-            $kek = $criteria->all();
-            $catId = cultureCategory::where('name',$criteria->searchCategory)->get()->pluck('id')->toArray()[0];
+            $catId = cultureCategory::where('name_slug',$criteria->searchCategory)->get()->pluck('id')->toArray()[0];
             
             $searchResults = $searchResults->where("category_id",$catId);
         }
