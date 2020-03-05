@@ -57,7 +57,7 @@ class CommentController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
-                'data.0.value' => ['string','max:255'],
+                'data.0.value' => ['string'],
                 'postId'       => ['exists:posts,id','nullable','required_without:parentId'],
                 'parentId'     => ['exists:comments,id','required_without:postId'],
             ]);

@@ -15,7 +15,7 @@ class CreateCultureCommentsTable extends Migration
     {
         Schema::create('culture_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('message')->nullable()->default(null);
+            $table->longText('message')->nullable()->default(null);
             $table->unsignedBigInteger('author_id')->index();
             $table->unsignedBigInteger('item_id')->index();
             $table->unsignedBigInteger('parent_id')->nullable()->default(null)->index();
