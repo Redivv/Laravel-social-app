@@ -303,6 +303,7 @@ html{font-size: 16px !important;}
                     .postContent{
                         margin-top: 0.25rem;
                         @include font-size(1rem);
+                        word-wrap: break-word;
                     }
                     .postTags{
                         padding: 1rem 0.5rem;

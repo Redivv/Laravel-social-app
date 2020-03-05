@@ -335,6 +335,7 @@ iframe{
 
 .note-editor.note-frame .note-editing-area .note-editable, .note-editor.note-airframe .note-editing-area .note-editable{
     @include font-size(1.1rem);
+    word-wrap: break-word;
     img{
         @extend .img-fluid;
     }

@@ -18670,6 +18670,7 @@ body.lb-disable-scrolling {
 }
 
 .searcher .form #hobbyOutput ul .hobby span {
+  word-wrap: break-word;
   background: #f66103;
   color: #ffffff;
   padding: 0.2rem 0.5rem;
@@ -18762,6 +18763,7 @@ body.lb-disable-scrolling {
 }
 
 .searchResults-box .searchResult .data .description-box .description {
+  word-wrap: break-word;
   font-size: 1.1rem;
 }
 
@@ -19351,6 +19353,7 @@ iframe {
 .note-editor.note-frame .note-editing-area .note-editable,
 .note-editor.note-airframe .note-editing-area .note-editable {
   font-size: 1.1rem;
+  word-wrap: break-word;
 }
 
 main .pageLogo img {
@@ -19935,6 +19938,7 @@ html {
 .activity .activityPosts .postBox .post .postDesc .postContent {
   margin-top: 0.25rem;
   font-size: 1rem;
+  word-wrap: break-word;
 }
 
 .activity .activityPosts .postBox .post .postDesc .postTags {
@@ -20905,6 +20909,7 @@ html {
 }
 
 #friendsWall .friendsWall #postTaggedUsers .taggedUser label {
+  word-wrap: break-word;
   padding: 0.5rem 1rem;
   border-radius: 50px;
   background-color: #f66103;
@@ -21080,6 +21085,7 @@ html {
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postContent {
   margin-top: 0.25rem;
   font-size: 1rem;
+  word-wrap: break-word;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .post .postDesc .postTags {
@@ -21190,6 +21196,7 @@ html {
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments #commentUserTags .taggedUser label,
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed #replyForm #replyUsersTag .taggedUser label {
+  word-wrap: break-word;
   padding: 0.5rem 1rem;
   border-radius: 50px;
   background-color: #f66103;
@@ -21333,6 +21340,7 @@ html {
   display: block;
   width: 100%;
   font-size: 0.7rem;
+  word-wrap: break-word;
   font-weight: bold;
   letter-spacing: 1px;
   border-radius: 50px;
@@ -21410,10 +21418,12 @@ html {
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentContent .commentDesc {
+  word-wrap: break-word;
   font-size: 0.75rem;
 }
 
 #friendsWall .friendsWall #friendsWallFeed .postBox .postComments .commentsFeed .commentRepliesBox .commentContent .commentTags .taggedUserLabel {
+  word-wrap: break-word;
   font-size: 0.6rem;
 }
 
@@ -21858,6 +21868,7 @@ html {
 #tagUsersModal .modal-body #commentModalUserTagged .taggedUser span,
 #tagUsersModal .modal-body #commentModalUserTagged .commentTaggedUser label,
 #tagUsersModal .modal-body #commentModalUserTagged .commentTaggedUser span {
+  word-wrap: break-word;
   cursor: pointer;
   padding: 0.5rem 1rem;
   border-radius: 50px;
@@ -22581,6 +22592,7 @@ html {
 
 .chatBody .chat .chat-history ul li .my-message .messageText p,
 .chatBody .chat .chat-history ul li .other-message .messageText p {
+  word-wrap: break-word;
   margin: 0;
   padding: 0rem 1rem;
   font-size: 1rem;
@@ -22793,6 +22805,7 @@ html {
 }
 
 .mx-auto#cultureSearch #advancedSearch #searchTags-out .itemTag {
+  word-wrap: break-word;
   color: #ffffff;
   cursor: pointer;
   background-color: #f66103;
@@ -23138,6 +23151,7 @@ html {
 }
 
 .collapse#cultureSearch #searchTags-out .itemTag {
+  word-wrap: break-word;
   color: #ffffff;
   cursor: pointer;
   background-color: #f66103;
@@ -23218,6 +23232,7 @@ html {
 }
 
 #searchResultsOutput .searchResult .itemAttributes .itemAttr .attrValue {
+  word-wrap: break-word;
   padding: 0;
 }
 
@@ -23368,6 +23383,7 @@ ul.pagination .page-item.active .page-link {
 
 .culture_page-container .item-container .itemAttr {
   font-size: calc(1.265rem + 0.18vw);
+  word-wrap: break-word;
   letter-spacing: 0.5px;
 }
 
@@ -23438,6 +23454,7 @@ ul.pagination .page-item.active .page-link {
 }
 
 .culture_page-container .item-container .description p {
+  word-wrap: break-word;
   text-align: center;
   font-size: 1rem;
   letter-spacing: 0.5px;
@@ -23491,6 +23508,7 @@ ul.pagination .page-item.active .page-link {
 
 .culture_page-container .item-container #itemReview #reviewModal .modal-body {
   font-size: 1.1rem;
+  word-wrap: break-word;
 }
 
 .culture_page-container .item-container #itemReview #reviewModal #reviewModalLabel {
@@ -23681,6 +23699,7 @@ html {
 }
 
 .mx-auto#cultureSearch #advancedSearch #searchTags-out .itemTag {
+  word-wrap: break-word;
   color: #ffffff;
   cursor: pointer;
   background-color: #f66103;
@@ -24026,6 +24045,7 @@ html {
 }
 
 .collapse#cultureSearch #searchTags-out .itemTag {
+  word-wrap: break-word;
   color: #ffffff;
   cursor: pointer;
   background-color: #f66103;
@@ -24106,6 +24126,7 @@ html {
 }
 
 #searchResultsOutput .searchResult .itemAttributes .itemAttr .attrValue {
+  word-wrap: break-word;
   padding: 0;
 }
 

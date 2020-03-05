@@ -1488,6 +1488,7 @@ main .tabsContent #newItemForm #itemTags-out {
 
 main .tabsContent #newCategoryForm #itemTags-out .itemTag,
 main .tabsContent #newItemForm #itemTags-out .itemTag {
+  cursor: pointer;
   background-color: #f66103;
   border-radius: 20px;
   text-align: center;
@@ -1497,6 +1498,7 @@ main .tabsContent #newItemForm #itemTags-out .itemTag {
 
 main .tabsContent #newCategoryForm #itemTags-out .itemTag span,
 main .tabsContent #newItemForm #itemTags-out .itemTag span {
+  word-wrap: break-word;
   font-size: 0.9rem;
   font-weight: bold;
   letter-spacing: 0.5px;

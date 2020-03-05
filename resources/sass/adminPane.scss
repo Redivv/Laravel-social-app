@@ -271,12 +271,14 @@ main{
                 margin-top: 0.5rem;
                 padding: 0.5rem;
                 .itemTag{
+                    cursor: pointer;
                     background-color: $orange;
                     border-radius: 20px;
                     text-align: center;
                     padding: 0.2rem 0;
                     margin: 0 1rem;
                     span{
+                        word-wrap: break-word;
                         @include font-size(0.9rem);
                         font-weight: bold;
                         letter-spacing: 0.5px;

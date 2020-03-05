@@ -236,6 +236,7 @@
               border-radius: 20px;
               padding: 0.3rem 0;
               p{
+                word-wrap: break-word;
                 margin: 0;
                 padding: 0rem 1rem;
                 @include font-size(1rem);

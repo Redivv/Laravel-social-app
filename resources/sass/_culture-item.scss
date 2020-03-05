@@ -19,6 +19,7 @@
         .itemAttr{
             @extend .text-muted;
             @include font-size(1.4rem);
+            word-wrap: break-word;
             letter-spacing: 0.5px;
         }
         .tagHolder{
@@ -71,6 +72,7 @@
         .description{
             padding: 1rem;
             p{
+                word-wrap: break-word;
                 text-align: center;
                 @include font-size(1rem);
                 letter-spacing: 0.5px;
@@ -119,6 +121,7 @@
                 }
                 .modal-body{
                     @include font-size(1.1rem);
+                    word-wrap: break-word;
                     img{
                         @extend .img-fluid;
                     }
