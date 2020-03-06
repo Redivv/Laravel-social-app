@@ -91,7 +91,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
         DB::table('posts')->where('user_id',$this->id)->delete();
 
+        DB::table('culture_items')->where('user_id',$this->id)->delete();
+
         DB::table('comments')->where('author_id',$this->id)->delete();
+
+        DB::table('culture_comments')->where('author_id',$this->id)->delete();
 
         DB::table('friendships')->where('sender_id',$this->id)->orWhere('recipient_id',$this->id)->delete();
 
