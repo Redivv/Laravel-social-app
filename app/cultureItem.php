@@ -26,7 +26,7 @@ class cultureItem extends Model
 
     public function comments()
     {
-        return $this->hasMany('App\cultureComment')->whereNull('parent_id')->orderBy('created_at','desc');
+        return $this->hasMany('App\cultureComment', 'item_id', 'id')->whereNull('parent_id')->orderBy('created_at','desc')->take(5);
     }
 
     public function category()

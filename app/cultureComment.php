@@ -19,7 +19,7 @@ class cultureComment extends Model
         return $this->belongsTo('App\User', 'author_id', 'id');
     }
 
-    public function post()
+    public function item()
     {
         return $this->belongsTo('App\cultureItem', 'item_id', 'id');
     }

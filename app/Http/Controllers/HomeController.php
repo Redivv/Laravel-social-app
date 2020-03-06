@@ -345,14 +345,14 @@ class HomeController extends Controller
 
                 $post->delete();
                 
-                DB::table('likeable_like_counters')->where('likeable_id',$request->id)->delete();
-                DB::table('likeable_likes')->where('likeable_id',$request->id)->delete();
+                DB::table('likeable_like_counters')->where('likeable_type',"App\Post")->where('likeable_id',$request->id)->delete();
+                DB::table('likeable_likes')->where('likeable_type',"App\Post")->where('likeable_id',$request->id)->delete();
 
                 return response()->json(['status' => 'success'], 200);
             }elseif(Auth::user()->isAdmin()){
                 
-                DB::table('likeable_like_counters')->where('likeable_id',$request->id)->delete();
-                DB::table('likeable_likes')->where('likeable_id',$request->id)->delete();
+                DB::table('likeable_like_counters')->where('likeable_type',"App\Post")->where('likeable_id',$request->id)->delete();
+                DB::table('likeable_likes')->where('likeable_type',"App\Post")->where('likeable_id',$request->id)->delete();
 
                 $post->user->notify(new SystemNotification(__('nav.adminDeletedPost',[],$post->user->locale),'warning','_user_home','', '', 'deletedPost'));
                 $post->delete();

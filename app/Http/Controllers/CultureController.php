@@ -29,7 +29,7 @@ class CultureController extends Controller
         $suggestedItems = array();
         if (Auth::check()) {
             $suggestedItems['items'] = cultureItem::withAnyTag(Auth::user()->tagNames())->inRandomOrder()->take(3)->get();
-            if (count($suggestedItems) < 1) {
+            if (count($suggestedItems['items']) < 1) {
                 $suggestedItems['type']  = 'Likes';
                 $suggestedItems['items'] = $this->getMostLikedItemsTake(3);
             } else {

@@ -1284,6 +1284,7 @@ function addTagUser(selected) {
                 $('.taggedUser').on('click',function() {
                 if (confirm(deleteUserTag)) {
                     $(this).remove();
+                    $('.tooltip:first').remove();
                 } 
                 });
             }
@@ -1315,7 +1316,6 @@ function tagUsersComment(selected) {
 
         $(selected).parents('.input-group').next().html(taggedUsers);
     }
-    
 }
 
 function tagUsersPostModal(selected) {

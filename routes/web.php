@@ -60,8 +60,12 @@ Route::prefix('user')->group(function(){
         Route::delete('deletePost', 'HomeController@deletePost')->name('ajaxDeletePost');
         Route::patch('likePost', 'HomeController@likePost')->name('ajaxLikePost');
 
+        Route::get('getCultComments/{culture_item}', 'CommentController@getCultComments')->name('ajaxGetCultComments');
         Route::get('getComments/{post}', 'CommentController@getComments')->name('ajaxGetComments');
+
         Route::get('getReplies/{comment}', 'CommentController@getReplies')->name('ajaxGetReplies');
+        Route::get('getCultReplies/{culture_comment}', 'CommentController@getCultReplies')->name('ajaxGetCultReplies');
+
         Route::get('getMorePosts', 'HomeController@getMorePosts')->name('ajaxGetPosts');
         Route::put('newComment', 'CommentController@newComment')->name('ajaxNewComment');
         Route::patch('editComment', 'CommentController@editComment')->name('ajaxEditComment');
@@ -70,7 +74,9 @@ Route::prefix('user')->group(function(){
 
         Route::post('checkUser', 'HomeController@checkUser')->name('ajaxCheckUser');
         Route::get('getTaggedUsers/{post}', 'HomeController@getTagged')->name('ajaxGetTagged');
+
         Route::get('getCommentTaggedUsers/{comment}', 'CommentController@getTagged')->name('ajaxGetCommentTagged');
+        Route::get('getCultCommentTaggedUsers/{culture_comment}', 'CommentController@getCultTagged')->name('ajaxGetCultCommentTagged');
 
         Route::patch('likeUser', 'HomeController@likeUser')->name('ajaxLikeUser');
     });

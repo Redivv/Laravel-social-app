@@ -22,7 +22,7 @@
                     <a href="{{route('adminCulture')."?elementType=cultureItem&elementId=".$cultureItem->id}}" data-tool="tooltip" title="{{__('admin.edit')}}" data-placement="bottom">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <form method="post" action="#" class="deleteItem">
+                    <form method="cultureItem" action="#" class="deleteItem">
                         @method('delete')
                         <input type="hidden" name="elementId" value="{{$cultureItem->id}}">
                         <button class="btn" type="submit" data-tool="tooltip" title="{{__('admin.delete')}}" data-placement="bottom">
@@ -118,35 +118,51 @@
             @endif
         </section>
         <hr>
-        <section class="similar-entries">
-            <h4 class="sectionTitle">{{__('culture.similarItems')}}</h4>
-            <output id="simmilarItems" class="row">
-                @foreach ($similarEntries as $entry)
-                <a class="simmilarItem col container row" href="{{route('culture.read',['cultureItem' => $entry->name_slug])}}">
-                    <figure class="col-12 itemThumb">
-                        @if ($pic = json_decode($entry->thumbnail)[0])  
-                            <img src="{{asset('img/culture-pictures/'.$pic)}}" alt="item thumbnail">
-                        @endif
-                    </figure>
-                    <figcaption class="col-12">
-                        <h5 class="suggestedTitle">
-                            {{$entry->name}}
-                        </h5>
-                    </figcaption>
-                </a>
-                @endforeach
+        @if (count($similarEntries) > 0)
+            <section class="similar-entries">
+                <h4 class="sectionTitle">{{__('culture.similarItems')}}</h4>
+                <output id="simmilarItems" class="row">
+                    @foreach ($similarEntries as $entry)
+                    <a class="simmilarItem col container row" href="{{route('culture.read',['cultureItem' => $entry->name_slug])}}">
+                        <figure class="col-12 itemThumb">
+                            @if ($pic = json_decode($entry->thumbnail)[0])  
+                                <img src="{{asset('img/culture-pictures/'.$pic)}}" alt="item thumbnail">
+                            @endif
+                        </figure>
+                        <figcaption class="col-12">
+                            <h5 class="suggestedTitle">
+                                {{$entry->name}}
+                            </h5>
+                        </figcaption>
+                    </a>
+                    @endforeach
+                </output>
+            </section>
+            <hr>
+        @endif
+        <section class="row  itemComments">
+            <h4 class="sectionTitle">{{__('profile.comment')}}</h4>
+            <form class="commentsForm" data-id="{{$cultureItem->id}}" method="post">
+                <div class="input-group row">
+                    <input type="text" name="commentDesc" class="form-control commentsDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">
+                    <div class="input-group-append col-1 commentButtons">
+                        <i class="fas fa-user-tag commentUserTag" data-toggle="modal" data-target="#tagUsersModal" data-tool="tooltip" title="{{__('activityWall.tagUser')}}" data-placement="bottom"></i>
+                    </div>
+                </div>
+                <output id="commentUserTags" class="row"></output>
+            </form>
+            <output class="commentsFeed"  id="feed-{{$cultureItem->id}}">
+                @if(count($cultureItem->comments) > 0) 
+                    @include('partials.culture.itemComments')
+                @endif
             </output>
-        </section>
-        <hr>
-        <section class="row  comments">
-            comments
-
-            <br>
-            /coments
         </section>
     </div>
 </div>
 
+@include('partials.home.commentEditModal')
+
+@include('partials.home.tagUsersModal')
 
 @endsection
 
@@ -168,7 +184,37 @@
         var savedChanges        =  "{{__('profile.savedChanges')}}";
         var deleteHobby         =  "{{__('activityWall.deleteTags')}}";
         var confirmMsg          =  "{{__('admin.confirmMsg')}}";
+        var badFileType             =  "{{__('chat.badFileType')}}";
+        var deleteImages            =  "{{__('activityWall.deleteImages')}}";
+        var deleteTags              =  "{{__('activityWall.deleteTags')}}";
+        var deletePostMsg           =  "{{__('activityWall.deletePost')}}";
+        var emptyCommentMsg         =  "{{__('activityWall.emptyComment')}}";
+        var deleteCommentMsg        =  "{{__('activityWall.deleteComment')}}";
+        var userNotFound            =  "{{__('activityWall.noUserFound')}}";
+        var deleteUserTag           =  "{{__('activityWall.deleteTaggedUser')}}";
+        var emptyUser               =  "{{__('activityWall.emptyUser')}}";
+        var tagUserMessage          =  "{{__('activityWall.tagUser')}}";
     </script>
+
     <script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
+    <script src="{{asset('js/emoji.js')}}"></script>
+
     <script src="{{asset('js/culture.js')}}"></script>
+
+    <script>
+        $('.commentsDesc:first').emojioneArea({
+            pickerPosition: "top",
+            placeholder: "Napisz Komentarz",
+            inline: false,
+            events: {
+                keypress: function(editor,e) {
+                    if (e.keyCode == 13 || e.which == 13) {
+                        e.preventDefault();
+                        editor.parent().prev().val(this.getText());
+                        editor.parent().prev().parent().submit(); 
+                    }
+                }
+            }
+        });
+    </script>
 @endpush

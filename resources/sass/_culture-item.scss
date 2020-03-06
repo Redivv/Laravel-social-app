@@ -177,6 +177,274 @@
                 }
             }
         }
+        .itemComments{
+            .sectionTitle{
+                text-align: left;
+                .commentsCount{
+                    color: $orange;
+                }
+            }
+            .commentsForm{
+                width: 100%;
+                .input-group{
+                    padding: 0 5%;
+                    width: auto;
+                    .emojionearea-editor{
+                        min-height: unset;
+                    }
+                }
+            }
+            #commentUserTags{
+                padding: 0 2rem;
+                margin-top: 1rem;
+                margin-bottom: 0.5rem;
+                width: 100%;
+                .taggedUser{
+                    label{
+                        word-wrap: break-word;
+                        padding: 0.5rem 1rem;
+                        border-radius: 50px;
+                        background-color: $orange;
+                        color: $white;
+                        font-weight: bold;
+                        letter-spacing: 1px;
+                        @include font-size(0.75rem);
+                    }
+                }
+            }
+            .commentsDesc{
+                border-right: 0;
+            }
+            .commentButtons{
+                padding: 0;
+                border: 1px solid#CCC;
+                border-left-color: rgb(204, 204, 204);
+                border-left-style: solid;
+                border-left-width: 1px;
+                border-left: 0;
+                background: $white;
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+                align-content: center;
+                align-items: center;
+                i{
+                    cursor: pointer;
+                    color: #a1a1a1;
+                    margin: auto;
+                    @include font-size(0.9rem);
+                    transition: all 400ms ease-in-out;
+                    &:hover{
+                        color: #757575;
+                    }
+                }
+                @media screen and (min-width: $mobile-breakpoint) {
+                    max-width: 4%;
+                }
+            }
+            .commentsFeed{
+                display: block;
+                width: 100%;
+                padding: 1.5rem 0 3rem 0;
+                .ajaxSpinner{
+                    text-align: center;
+                }
+                .comment,.reply{
+                    padding: 0 3rem;
+                    @media screen and (max-width: $mobile-breakpoint) {
+                        padding: 0 1rem;
+                    }
+                    .commentProfilePicture{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        img{
+                            width: 4rem;
+                            height: 4rem;
+                            border-radius: 50%;
+                        }
+                    }
+                    .commentContent{
+                        .commentAuthor{
+                            .commentAuthorName{
+                                padding-left: 0;
+                                font-weight: bold;
+                                letter-spacing: 1.5px;
+                                @include font-size(1.1rem);
+                            }
+                            .commentAuthorButtons{
+                                text-align: right;
+                                i{
+                                    cursor: pointer;
+                                    @include font-size(1rem);
+                                    margin-left: 0.5rem;
+                                    padding:0.5rem;
+                                    &:hover{
+                                        color:$orange;
+                                    }
+                                }
+                            }
+                        }
+                        .commentDate{
+                            @extend .text-muted;
+                            @include font-size(0.7rem);
+                        }
+                        .commentDesc{
+                            @include font-size(1rem);
+                        }
+                        .commentTags{
+                            margin-top: 1rem;
+                            margin-bottom: 0.5rem;
+                            a{
+                                @extend div;
+                                text-align: center;
+                                text-decoration: none;
+                                margin-top: 0.5rem;
+                                @media screen and (max-width: $mobile-breakpoint) {
+                                    flex: 0 0 50%;
+                                    max-width: 50%;
+                                }
+                                @media screen and (max-width: $ultra-small) {
+                                    flex: 0 0 100%;
+                                    max-width: 100%;
+                                }
+                                span{
+                                    display: block;
+                                    width: 100%;
+                                    @include font-size (0.8rem);
+                                    word-wrap: break-word;
+                                    font-weight: bold;
+                                    letter-spacing: 1px;
+                                    border-radius: 50px;
+                                    padding: 0.3rem;
+                                    background-color: $orange;
+                                    color: $white;
+                                    &:hover{
+                                        background-color: $orange-hover;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .commentUserButtons{
+                        padding: 0;
+                        text-align: left;
+                        i{
+                            cursor: pointer;
+                            margin-left: 0.5rem;
+                            @include font-size(1.1rem);
+                            color: $black;
+                            &:hover{
+                                color: $orange;
+                            }
 
+                            &.active{
+                                color: $orange;
+                            }
+                        }
+                        .likesCount{
+                            @include font-size(1rem);
+                            background: transparent;
+                            color: $red;
+                        }
+                    }
+                }
+                #replyForm{
+                    margin-top: 2rem;
+                    margin-bottom: 1rem;
+                    padding: 0 1rem;
+                    @media screen and (min-width: $mobile-breakpoint) {
+                        width: 70%;
+                        margin-left: 5rem;
+                    }
+                    #replyUsersTag{
+                        @extend #commentUserTags;
+                    }
+                    .emojionearea .emojionearea-editor{
+                        min-height: unset;
+                    }
+                }
+                .commentRepliesBox{
+                    .spinner-border{
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        font-size: 0.8rem;
+                    }
+                    .commentProfilePicture{
+                        img{
+                            width: 2.5rem;
+                            height: 2.5rem;
+                            border-radius: 50%;
+                        }
+                    }
+                    .commentContent{
+                        .commentAuthor{
+                            .commentAuthorName{
+                                padding-left: 0;
+                                @include font-size(0.9rem);
+                            }
+                            .commentAuthorButtons{
+                                i{
+                                    @include font-size(0.8rem);
+                                    margin-left: 0.3rem;
+                                }
+                            }
+                        }
+                        .commentDate{
+                            @include font-size(0.6rem);
+                        }
+                        .commentDesc{
+                            word-wrap: break-word;
+                            @include font-size(0.85rem);
+                        }
+                        .commentTags{
+                            .taggedUserLabel{
+                                word-wrap: break-word;
+                                @include font-size (0.7rem);
+                            }
+                        }
+                    }
+                    .commentUserButtons{
+                        i{
+                            margin-left: 0.3rem;
+                            @include font-size(1rem);
+                        }
+                        .likesCount{
+                            @include font-size(0.75rem);
+                            background: transparent;
+                            color: $red;
+                        }
+                    }
+                    .repliesMoreBtn{
+                        background-color: $orange;
+                        color: $white;
+                        @include font-size(0.7rem);
+                        font-weight: bold;
+                        padding: 0.4rem;
+                        margin: 2% 0 2% 5%;
+                        .repliesCount{
+                            @include font-size(0.5rem);
+                            color: $white;
+                            background: $orange;
+                            top: 0.3rem;
+                            right: 0.2rem;
+                        }
+                    }
+                }
+                .commentsMoreBtn{
+                    background-color: $orange;
+                    color: $white;
+                    @include font-size(1rem);
+                    padding: 0.6rem;
+                    font-weight: bold;
+                    margin: 2% 0 2% 5%;
+                    .commentsMoreCount{
+                        @include font-size(0.65rem);
+                        color: $white;
+                        background: $orange;
+                        top: 0.3rem;
+                        right: 0.2rem;
+                    }
+                }
+            }
+        }
     }
 }

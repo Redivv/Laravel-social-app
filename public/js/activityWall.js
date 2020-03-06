@@ -12347,6 +12347,7 @@ function addTagUser(selected) {
         $('.taggedUser').on('click', function () {
           if (confirm(deleteUserTag)) {
             $(this).remove();
+            $('.tooltip:first').remove();
           }
         });
       }
