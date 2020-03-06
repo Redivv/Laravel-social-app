@@ -169,8 +169,6 @@ class CommentController extends Controller
     {
         if ($request->ajax()) {
 
-            $kek = $request->all();
-
             if ($request->commentType === "culture") {
                 $request->validate([
                     'data.0.value' => ['string'],
@@ -231,7 +229,7 @@ class CommentController extends Controller
                     if ($taggedUsers) {
                         if ($taggedUsers[1]['name'] != 'noTags') {
                             foreach ($taggedUsersArray as $taggedUser) {
-                                $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_user_home_post_',$post->id, '#com-'.$newComment->id, 'tagCom'));
+                                $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_user_home_post_',$comment->post->id, '#com-'.$comment->id, 'tagCom'));
                             }
                         }
                     }
