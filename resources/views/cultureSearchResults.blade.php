@@ -106,10 +106,10 @@
                         @endif
                     @endauth
                     <a class="searchResult row" href="{{route('culture.read',['cultureItem' => $item->name_slug])}}">
-                        <div class="itemImage col-2">
+                        <div class="itemImage col-md-2 col-sm-6">
                             <img src="{{asset('img/culture-pictures/'.json_decode($item->thumbnail)[0])}}" alt="">
                         </div>
-                        <div class="itemTitle col-2">
+                        <div class="itemTitle col-md-2 col-sm-6">
                             {{$item->name}}
                         </div>
                         <div class="itemAttributes col-md-6 col-sm-12  row">
@@ -189,9 +189,12 @@
     var confirmMsg          =  "{{__('admin.confirmMsg')}}";
     var savedChanges        =  "{{__('profile.savedChanges')}}";
 </script>
-<script src="{{asset('js/culture.js')}}"></script>
 
 <script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
+
+<script src="{{asset('js/culture.js')}}"></script>
+
+<script src="{{asset('js/emoji.js')}}"></script>
 
 <script defer>
     Echo.join('online')

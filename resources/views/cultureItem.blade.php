@@ -57,9 +57,9 @@
             <div class="col-md-4  tagHolder container row">
                 @if($tags = $cultureItem->tagNames())
                     @foreach ($tags as $tag)
-                        <div class="col tag">
+                        <a class="col tag" data-tool="tooltip" title="{{__('culture.searchTag')}}" data-placement="bottom" href="{{route('culture.searchResults').'?titleName=&itemTags[]=&itemTags[]='.$tag.'&options=likesSort&sortOptionsDir=desc'}}">
                             <p># {{$tag}}</p>
-                        </div>
+                        </a>
                     @endforeach
                 @endif
             </div>

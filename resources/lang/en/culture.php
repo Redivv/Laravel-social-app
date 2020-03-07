@@ -20,5 +20,6 @@ return [
     'allCats'                   => 'All',
     'noReview'                  => 'No review yet',
     'displayReview'             => 'Read a Review',
-    'author'                    => 'Author'
+    'author'                    => 'Author',
+    'searchTag'                 => "Search By Tag"
 ];

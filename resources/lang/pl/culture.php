@@ -20,6 +20,6 @@ return [
     'allCats'                   => 'Wszystkie',
     'noReview'                  => 'Brak Recenzji',
     'displayReview'             => 'Przeczytaj Recenzję',
-    'author'                    => 'Autor'
-
+    'author'                    => 'Autor',
+    'searchTag'                 => "Wyszukaj Po Tagu"
 ];

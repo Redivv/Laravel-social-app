@@ -23520,7 +23520,6 @@ html {
 
 #cultureSections {
   padding-top: 1rem;
-  padding: 0 5rem;
 }
 
 #cultureSections header > h3 {
@@ -23551,6 +23550,7 @@ html {
   padding: 0.5rem 2rem;
   border-radius: 50px;
   text-decoration: none;
+  margin: 0.5rem;
 }
 
 #cultureSections #sectionsOutput .cultureSection h4 {
@@ -23558,10 +23558,6 @@ html {
   margin: 0;
   width: 100%;
   font-size: 1.1rem;
-}
-
-#cultureSections #sectionsOutput .cultureSection:nth-child(2) {
-  margin: 0 1rem;
 }
 
 #cultureSections #sectionsOutput .cultureSection:hover {
@@ -23912,16 +23908,8 @@ ul.pagination .page-item.active .page-link {
   font-weight: bold;
 }
 
-.extraLinks a:not(:last-child):after {
-  content: "";
-  width: 1rem;
-  height: 1rem;
-  background-color: #333333;
-  border-radius: 50%;
-  display: block;
-  position: absolute;
-  right: 0;
-  top: 0;
+.extraLinks a:not(:last-child) {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .extraLinks a:hover {
@@ -24001,7 +23989,8 @@ ul.pagination .page-item.active .page-link {
 }
 
 .culture_page-container .item-container .tagHolder .tag {
-  cursor: default;
+  text-decoration: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24750,7 +24739,6 @@ html {
 
 #cultureSections {
   padding-top: 1rem;
-  padding: 0 5rem;
 }
 
 #cultureSections header > h3 {
@@ -24781,6 +24769,7 @@ html {
   padding: 0.5rem 2rem;
   border-radius: 50px;
   text-decoration: none;
+  margin: 0.5rem;
 }
 
 #cultureSections #sectionsOutput .cultureSection h4 {
@@ -24788,10 +24777,6 @@ html {
   margin: 0;
   width: 100%;
   font-size: 1.1rem;
-}
-
-#cultureSections #sectionsOutput .cultureSection:nth-child(2) {
-  margin: 0 1rem;
 }
 
 #cultureSections #sectionsOutput .cultureSection:hover {
@@ -25142,16 +25127,8 @@ ul.pagination .page-item.active .page-link {
   font-weight: bold;
 }
 
-.extraLinks a:not(:last-child):after {
-  content: "";
-  width: 1rem;
-  height: 1rem;
-  background-color: #333333;
-  border-radius: 50%;
-  display: block;
-  position: absolute;
-  right: 0;
-  top: 0;
+.extraLinks a:not(:last-child) {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .extraLinks a:hover {

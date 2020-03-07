@@ -12,12 +12,14 @@
                         {{$comment->user->name}}
                     </a>
                 </div>
-                @if(auth()->user()->id == $comment->user->id)
-                    <div class="col-5 commentAuthorButtons">
-                        <i data-id="{{$comment->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.editComment')}}"></i>
-                        <i data-id="{{$comment->id}}" class="fas commentDelete fa-times" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deleteComment')}}"></i>
-                    </div>
-                @endif
+                @auth
+                    @if(auth()->user()->id == $comment->user->id)
+                        <div class="col-5 commentAuthorButtons">
+                            <i data-id="{{$comment->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.editComment')}}"></i>
+                            <i data-id="{{$comment->id}}" class="fas commentDelete fa-times" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deleteComment')}}"></i>
+                        </div>
+                    @endif
+                @endauth
             </div>
             <div class="col-12 commentDate">{{$comment->created_at->diffForHumans()}}</div>
             <div class="col-12 commentDesc">
@@ -45,11 +47,13 @@
             </div>
         </div>
         <div class="col-12 commentUserButtons">
-            <i class="fas fa-fire likeCommentButton @if($comment->liked()){{"active"}}@endif" data-id="{{$comment->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}"></i>
+            <i class="fas fa-fire @if(auth()->check()) likeCommentButton @endif @if($comment->liked()){{"active"}}@endif" data-id="{{$comment->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}"></i>
             <span class="badge likesCount badge-pill badge-warning">
                 @if($comment->likeCount != 0){{$comment->likeCount}}@endif
             </span>
-            <i class="fas fa-reply replyButton" data-id="{{$comment->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.reply')}}"></i>
+            @if(auth()->check())
+                <i class="fas fa-reply replyButton" data-id="{{$comment->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.reply')}}"></i>
+            @endif
         </div>
     </div>
 
@@ -69,12 +73,14 @@
                                 {{$comment->replies[0]->user->name}}
                         </a>
                     </div>
-                    @if(auth()->user()->id == $comment->replies[0]->user->id)
-                        <div class="col-5 commentAuthorButtons">
-                            <i data-id="{{$comment->replies[0]->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.editComment')}}"></i>
-                            <i data-id="{{$comment->replies[0]->id}}" class="fas replyDelete commentDelete fa-times" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deleteComment')}}"></i>
-                        </div>
-                    @endif
+                    @auth
+                        @if(auth()->user()->id == $comment->replies[0]->user->id)
+                            <div class="col-5 commentAuthorButtons">
+                                <i data-id="{{$comment->replies[0]->id}}" class="fas commentEdit fa-edit" data-toggle="modal" data-target="#commentEditModal" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.editComment')}}"></i>
+                                <i data-id="{{$comment->replies[0]->id}}" class="fas replyDelete commentDelete fa-times" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deleteComment')}}"></i>
+                            </div>
+                        @endif
+                    @endauth
                 </div>
                 <div class="col-12 commentDate">{{$comment->replies[0]->created_at->diffForHumans()}}</div>
                 <div class="col-12 commentDesc">
@@ -102,7 +108,7 @@
                 </div>
             </div>
             <div class="col-12 commentUserButtons">
-                <i class="fas fa-fire likeCommentButton @if($comment->replies[0]->liked()){{"active"}}@endif" data-id="{{$comment->replies[0]->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}"></i>
+                <i class="fas fa-fire @if(auth()->check()) likeCommentButton @endif @if($comment->replies[0]->liked()){{"active"}}@endif" data-id="{{$comment->replies[0]->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}"></i>
                 <span class="badge likesCount badge-pill badge-warning">
                     @if($comment->replies[0]->likeCount != 0){{$comment->replies[0]->likeCount}}@endif
                 </span>

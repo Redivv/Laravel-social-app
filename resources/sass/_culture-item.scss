@@ -26,7 +26,8 @@
             padding: 0 1rem;
             align-content: center;
             .tag{
-                cursor: default;
+                text-decoration: none;
+                cursor: pointer;
                 display: flex;
                 align-items: center;
                 justify-content: center;

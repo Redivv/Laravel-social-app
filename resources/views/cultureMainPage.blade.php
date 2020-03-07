@@ -179,6 +179,8 @@
 
 <script src="{{asset('js/culture.js')}}"></script>
 
+<script src="{{asset('js/emoji.js')}}"></script>
+
 <script defer>
     Echo.join('online')
         .joining((user) => {
