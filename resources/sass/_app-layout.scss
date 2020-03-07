@@ -18,6 +18,12 @@ iframe{
     max-width: unset !important;
 }
 #navbarMobile{
+    .navbar-nav{
+        flex-direction: unset;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
     @media screen and (min-width: $mobile-breakpoint) {
         display: none !important;
     }
@@ -290,6 +296,20 @@ iframe{
 }
 
 #footer{
+    .socialLinks{
+        left: 2%;
+        position: absolute;
+        a{
+            margin-left: 1rem;
+            color: $white;
+            padding: 0.5rem;
+            padding-bottom: 0;
+            @include font-size(1.4rem);
+            &:hover{
+                color: $orange;
+            }
+        }
+    }
     background-color: $black;
     color: $white;
     position: absolute;
@@ -303,7 +323,20 @@ iframe{
         right: 2%;
         position: absolute;
         img{
+            padding: 0.5rem;
             margin-left: 0.5rem;
         }
+    }
+}
+
+.note-group-select-from-files{
+    display: none !important;
+}
+
+.note-editor.note-frame .note-editing-area .note-editable, .note-editor.note-airframe .note-editing-area .note-editable{
+    @include font-size(1.1rem);
+    word-wrap: break-word;
+    img{
+        @extend .img-fluid;
     }
 }

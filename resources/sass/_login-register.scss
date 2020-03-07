@@ -73,7 +73,8 @@ main{
                 background-color: $orange-hover;
             }
             @media screen and (max-width: $mobile-breakpoint) {
-                width: 17rem;
+                margin: 1rem auto 0 auto;
+                width: 15rem;
             }
         }
     }
@@ -174,8 +175,9 @@ main{
 }
 
 .profile-picture{
-    width: 100px;
-    height: 100px;
+    width: 7rem;
+    height: 8rem;
+    padding: 1rem 0;
     border-radius: 50%;
 }
 

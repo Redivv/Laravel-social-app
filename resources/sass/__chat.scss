@@ -225,8 +225,8 @@
               display: block;
               width: 100%;
               img{
-                width: 10rem;
-                height: 10rem;
+                max-width: 10rem;
+                max-height: 10rem;
               }
             }
             .messageText{
@@ -236,6 +236,7 @@
               border-radius: 20px;
               padding: 0.3rem 0;
               p{
+                word-wrap: break-word;
                 margin: 0;
                 padding: 0rem 1rem;
                 @include font-size(1rem);
@@ -288,8 +289,8 @@
           overflow-y: auto;
           overflow-x: hidden;
           img{
-            width: 5rem;
-            height: 5rem;
+            max-width: 5rem;
+            max-height: 5rem;
             margin-left: 0.5rem;
           }
         }

@@ -4,7 +4,7 @@
   <div class="darkOverlay d-none"></div>
 
   <div class="container p-0 clearfix chatBody row">
-    @include('partials.peoplelist')
+    @include('partials.chat.peoplelist')
 
     <div class="chat col-9">
       <div class="chat-header clearfix">

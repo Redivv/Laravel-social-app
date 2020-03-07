@@ -77,7 +77,7 @@ return [
         'array' => 'The :attribute must not have more than :value items.',
     ],
     'max' => [
-        'numeric' => 'The :attribute may not be greater than :max.',
+        'numeric' => 'Pole nie może być większe niż :max.',
         'file' => 'Plik nie może ważyć więcej niż :max kilobajtów.',
         'string' => ':attribute nie może być dłuższy niż :max znaków',
         'array' => 'The :attribute may not have more than :max items.',
@@ -93,7 +93,7 @@ return [
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
     'numeric' => 'Pole :attribute musi być liczbą.',
-    'present' => 'The :attribute field must be present.',
+    'present' => 'Pole :attribute musi być obecne.',
     'regex' => 'The :attribute format is invalid.',
     'required' => 'Pole :attribute jest wymagane',
     'required_if' => 'The :attribute field is required when :other is :value.',

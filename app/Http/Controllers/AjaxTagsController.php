@@ -30,7 +30,7 @@ class AjaxTagsController extends Controller
                 return response()->json(['status' => 'repeat'],400);
             }else{
                 //else we render html partial using user tag array
-                $html = view('partials.tagListEdit')->withTags(array('tag' => $data['tag']))->render();
+                $html = view('partials.profile.tagListEdit')->withTags(array('tag' => $data['tag']))->render();
                 //and return response using json, that includes status(succes) and our html, with code 200 (succes)
                 return response()->json(['status' => 'success', 'html' => $html],200);
             }

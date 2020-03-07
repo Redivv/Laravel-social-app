@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Notifications\UserFlagged;
 use App\Post;
 use App\User;
+use App\cultureItem;
 use App\Notifications\SystemNotification;
 use App\Notifications\UserNotification;
 use App\Notifications\NewAdminPost;
@@ -68,7 +69,7 @@ class HomeController extends Controller
             })->take(5)->get();
         }
         if ($request->ajax()) {
-            $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
+            $html = view('partials.home.friendsWallPosts')->withPosts($posts)->render();
             return response()->json(['status' => 'success', 'html' => $html], 200);
         }
 
@@ -140,7 +141,7 @@ class HomeController extends Controller
                 $stopPagi = true;
             }
 
-            $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
+            $html = view('partials.home.friendsWallPosts')->withPosts($posts)->render();
 
             return response()->json(['status' => 'success', 'html' => $html, 'stopPagi' => $stopPagi], 200);
         }
@@ -167,7 +168,7 @@ class HomeController extends Controller
     public function getPost(Request $request, Post $post)
     {
         if ($request->ajax()) {
-            $html = view('partials.postEditForm')->withPost($post)->render();
+            $html = view('partials.home.postEditForm')->withPost($post)->render();
             return response()->json(['status' => 'success', 'html' => $html], 200);
         }
     }
@@ -234,16 +235,20 @@ class HomeController extends Controller
             
             if ($post->save()) {
                 $posts = [$post];
-                $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
+                $html = view('partials.home.friendsWallPosts')->withPosts($posts)->render();
                 if ($post->type == "AdminPost") {
                     $users = User::whereNotIn('id',[Auth::id()])->get();
                     Notification::send($users, new NewAdminPost($author,$post->id));
                 }else{
                     $friends = Auth::user()->getFriends();
-                    Notification::send($friends, new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2'), 'newPost'.$post->id));
+                    foreach ($friends as $friend) {
+                        $friend->notify(new UserNotification($author, '_user_home_post_',$post->id, '', __('nav.userNot2',[],$friend->locale), 'newPost'.$post->id));
+                    }
                 }
                 if ($taggedUsers) {
-                    Notification::send($taggedUsersArray, new SystemNotification(__('nav.taggedInPost'),'success','_user_home_post_',$post->id, '', 'tagPost'));
+                    foreach ($taggedUsersArray as $taggedUser) {
+                        $taggedUser->notify(new SystemNotification(__('nav.taggedInPost',[],$taggedUser->locale),'success','_user_home_post_',$post->id, '', 'tagPost'));
+                    }
                 }
                 return response()->json(['status' => 'success', 'html' => $html], 200);
             }
@@ -312,10 +317,12 @@ class HomeController extends Controller
             
             if ($post->update()) {
                 $posts = [$post];
-                $html = view('partials.friendsWallPosts')->withPosts($posts)->render();
+                $html = view('partials.home.friendsWallPosts')->withPosts($posts)->render();
 
                 if ($taggedUsers) {
-                    Notification::send($taggedUsersArray, new SystemNotification(__('nav.taggedInPost'),'success','_user_home_post_',$post->id, '', 'tagPost'));
+                    foreach ($taggedUsersArray as $taggedUser) {
+                        $taggedUser->notify(new SystemNotification(__('nav.taggedInPost',[],$taggedUser->locale),'success','_user_home_post_',$post->id, '', 'tagPost'));
+                    }
                 }
                 
                 return response()->json(['status' => 'success', 'html' => $html], 200);
@@ -338,16 +345,16 @@ class HomeController extends Controller
 
                 $post->delete();
                 
-                DB::table('likeable_like_counters')->where('likeable_id',$request->id)->delete();
-                DB::table('likeable_likes')->where('likeable_id',$request->id)->delete();
+                DB::table('likeable_like_counters')->where('likeable_type',"App\Post")->where('likeable_id',$request->id)->delete();
+                DB::table('likeable_likes')->where('likeable_type',"App\Post")->where('likeable_id',$request->id)->delete();
 
                 return response()->json(['status' => 'success'], 200);
             }elseif(Auth::user()->isAdmin()){
                 
-                DB::table('likeable_like_counters')->where('likeable_id',$request->id)->delete();
-                DB::table('likeable_likes')->where('likeable_id',$request->id)->delete();
+                DB::table('likeable_like_counters')->where('likeable_type',"App\Post")->where('likeable_id',$request->id)->delete();
+                DB::table('likeable_likes')->where('likeable_type',"App\Post")->where('likeable_id',$request->id)->delete();
 
-                $post->user->notify(new SystemNotification(__('nav.adminDeletedPost'),'warning','_user_home','', '', 'deletedPost'));
+                $post->user->notify(new SystemNotification(__('nav.adminDeletedPost',[],$post->user->locale),'warning','_user_home','', '', 'deletedPost'));
                 $post->delete();
                 return response()->json(['status' => 'success'], 200);
             }
@@ -400,7 +407,7 @@ class HomeController extends Controller
                     $post->like();
     
                     if ($post->user_id != Auth::id()) {
-                        $post->user->notify(new SystemNotification(__('nav.likePostNot'),'info','_user_home_post_',$post->id, '', 'likePost'));
+                        $post->user->notify(new SystemNotification(__('nav.likePostNot',[],$post->user->locale),'info','_user_home_post_',$post->id, '', 'likePost'));
                     }
                 }
                 return response()->json(['status' => 'success'], 200);
@@ -429,7 +436,7 @@ class HomeController extends Controller
                 $users = User::whereIn('name',$taggedUsers)->get();
 
                 if (count($users) > 0) {
-                    $taggedUsersHtml = view('partials.wallTaggedUsers')->withTaggedUsers($users)->render();
+                    $taggedUsersHtml = view('partials.home.wallTaggedUsers')->withTaggedUsers($users)->render();
                 }else{
                     return response()->json(['status' => 'error'], 400);
                 }
@@ -454,7 +461,25 @@ class HomeController extends Controller
                 $user->unlike();
             }else{
                 $user->like();
-                $user->notify(new SystemNotification(__('nav.likeUser'),'success','_user_profile','','', 'likeUser'));
+                $user->notify(new SystemNotification(__('nav.likeUser',[],$user->locale),'success','_user_profile','','', 'likeUser'));
+            }
+
+            return response()->json(['status' => 'success'], 200);
+        }
+    }
+    public function likeItem(Request $request)
+    {
+        if($request->ajax() && Auth::check()){
+            $request->validate([
+                'ItemId' => 'exists:cultureItem,id'
+            ]);
+
+            $item = cultureItem::find($request->itemId);
+
+            if ($item->liked()) {
+                $item->unlike();
+            }else{
+                $item->like();
             }
 
             return response()->json(['status' => 'success'], 200);

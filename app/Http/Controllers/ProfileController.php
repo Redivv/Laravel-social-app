@@ -127,7 +127,7 @@ class ProfileController extends Controller
                         $partner->partner_id = null;
                         $partner->relationship_status = 0;
                         if($partner->update()){
-                            $partner->notify(new SystemNotification(__('nav.deletedPartner', ['user' => $user->name]),'danger','_user_profile_',$user->name,'','userDeletedPartner'));
+                            $partner->notify(new SystemNotification(__('nav.deletedPartner', ['user' => $user->name],$partner->locale),'danger','_user_profile_',$user->name,'','userDeletedPartner'));
                         }
 
                         $user->partner_id = null;
@@ -144,7 +144,7 @@ class ProfileController extends Controller
                                 $partner->partner_id = null;
                                 $partner->relationship_status = 0;
                                 if($partner->update()){
-                                    $partner->notify(new SystemNotification(__('nav.deletedPartner', ['user' => $user->name]),'danger','_user_profile_',$user->name,'','userDeletedPartner'));
+                                    $partner->notify(new SystemNotification(__('nav.deletedPartner', ['user' => $user->name],$partner->locale),'danger','_user_profile_',$user->name,'','userDeletedPartner'));
                                 }
                             }
 
@@ -167,7 +167,7 @@ class ProfileController extends Controller
                             $partner->relationship_status = 0;
                             
                             if($partner->update()){
-                                $partner->notify(new SystemNotification(__('nav.deletedPartner', ['user' => $user->name]),'danger','_user_profile_',$user->name,'','userDeletedPartner'));
+                                $partner->notify(new SystemNotification(__('nav.deletedPartner', ['user' => $user->name],$partner->locale),'danger','_user_profile_',$user->name,'','userDeletedPartner'));
                             }
 
                             $user->partner_id = null;
@@ -185,7 +185,7 @@ class ProfileController extends Controller
                         $partner->partner_id = null;
                         $partner->relationship_status = 0;
                         if($partner->update()){
-                            $partner->notify(new SystemNotification(__('nav.deletedPartner', ['user' => $user->name]),'danger','_user_profile_',$user->name,'','userDeletedPartner'));
+                            $partner->notify(new SystemNotification(__('nav.deletedPartner', ['user' => $user->name],$partner->locale),'danger','_user_profile_',$user->name,'','userDeletedPartner'));
                         }
 
                         $user->partner_id = null;
@@ -261,7 +261,7 @@ class ProfileController extends Controller
             if(Auth::check() || $user->hidden_status == 0){
 
                 $tags = $user->tagNames();
-                $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
+                $user->notify(new SystemNotification(__('nav.seenYourProfile',[],$user->locale),'info','_user_profile','','','userSeenProfile'));
 
                 $friends = count($user->getFriends());
 
@@ -275,7 +275,7 @@ class ProfileController extends Controller
                     $user->city_id=null;
                     $user->birth_year=null;
                     $user->relationship_status = null;
-                    $user->notify(new SystemNotification(__('nav.seenYourProfile'),'info','_user_profile','','','userSeenProfile'));
+                    $user->notify(new SystemNotification(__('nav.seenYourProfile',[],$user->locale),'info','_user_profile','','','userSeenProfile'));
 
                     $posts = null;
 

@@ -1,6 +1,6 @@
 <?php
 return [
-    'tagUser'           => 'Oznacz Znajomego',
+    'tagUser'           => 'Oznacz Użytkownika',
     'addImage'          => 'Wybierz Zdjęcia',
     'createPost'        => 'Dodaj Post',
     'noContent'         => 'Brak Treści',

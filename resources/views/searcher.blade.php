@@ -49,10 +49,10 @@
                             <ul class="row list-group list-group-horizontal">
                                 @if (request()->has('hobby'))
                                     @foreach (request('hobby') as $hobby)
-                                        <span class="hobby mr-4">
-                                            <li>{{str_replace('-',' ',$hobby)}}</li>
+                                        <li class="hobby mr-4" data-tool="tooltip" data-placement="bottom" title="{{__('searcher.deleteHobby')}}">
+                                            <span>{{str_replace('-',' ',$hobby)}}</span>
                                             <input type="hidden" value="{{$hobby}}" name="hobby[]">
-                                        </span>
+                                        </li>
                                     @endforeach
                                 @endif
                             </ul>
@@ -131,11 +131,11 @@
         </form>
         <hr>
         @if ($results)
-            @include('partials.search_results')
+            @include('partials.searcher.search_results')
         @elseif ($resultsVar && count($resultsVar) > 0)
-            @include('partials.variable_results')
+            @include('partials.searcher.variable_results')
         @else
-            @include('partials.error')
+            @include('partials.searcher.error')
         @endif
     </div>
 @endsection

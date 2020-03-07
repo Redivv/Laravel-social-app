@@ -148,7 +148,8 @@
         </div>        
     </main>
 
-    <footer class="additionalLinks">
+    <footer class="additionalLinks row">
+        <a href="{{route('culture.mainPage')}}" class="btn">{{__('registeration.cultureLink')}}</a>
         <a href="{{route('searcher')}}" class="btn">{{__('registeration.searcherLink')}}</a>
     </footer>
 @endsection

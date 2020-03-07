@@ -287,10 +287,12 @@
                     });
                 }
             });
-
-
-            request.fail(function (xhr) {
-                alert(xhr.responseJSON.message);
+            
+            
+            request.fail(function (xhr){
+                $.each(xhr.responseJSON.errors,function(key,value) {
+                    alert(value);
+                });
                 $('#friends-searchOut').html("");
             });
         }

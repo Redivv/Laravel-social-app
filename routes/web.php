@@ -17,7 +17,9 @@ Auth::routes(['verify' => true]);
 
 Route::get('logout', 'Auth\LoginController@logout');
 
-Route::get('searcher', 'SearchController@index')->name('searcher');
+Route::get('partners', "CultureController@partners")->name('culture.partners');
+
+Route::get('setLocale/{locale}', "LocaleController@setLocale")->name('setLocale');
 
 Route::get('user/profile/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');
 Route::patch('user/profile/edit', 'ProfileController@update')->middleware('auth')->name('ProfileUpdate');
@@ -59,8 +61,12 @@ Route::prefix('user')->group(function(){
         Route::delete('deletePost', 'HomeController@deletePost')->name('ajaxDeletePost');
         Route::patch('likePost', 'HomeController@likePost')->name('ajaxLikePost');
 
+        Route::get('getCultComments/{culture_item}', 'CommentController@getCultComments')->name('ajaxGetCultComments');
         Route::get('getComments/{post}', 'CommentController@getComments')->name('ajaxGetComments');
+
         Route::get('getReplies/{comment}', 'CommentController@getReplies')->name('ajaxGetReplies');
+        Route::get('getCultReplies/{culture_comment}', 'CommentController@getCultReplies')->name('ajaxGetCultReplies');
+
         Route::get('getMorePosts', 'HomeController@getMorePosts')->name('ajaxGetPosts');
         Route::put('newComment', 'CommentController@newComment')->name('ajaxNewComment');
         Route::patch('editComment', 'CommentController@editComment')->name('ajaxEditComment');
@@ -69,7 +75,9 @@ Route::prefix('user')->group(function(){
 
         Route::post('checkUser', 'HomeController@checkUser')->name('ajaxCheckUser');
         Route::get('getTaggedUsers/{post}', 'HomeController@getTagged')->name('ajaxGetTagged');
+
         Route::get('getCommentTaggedUsers/{comment}', 'CommentController@getTagged')->name('ajaxGetCommentTagged');
+        Route::get('getCultCommentTaggedUsers/{culture_comment}', 'CommentController@getCultTagged')->name('ajaxGetCultCommentTagged');
 
         Route::patch('likeUser', 'HomeController@likeUser')->name('ajaxLikeUser');
     });
@@ -92,12 +100,15 @@ Route::prefix('user')->group(function(){
 Route::prefix('admin')->group(function(){
     Route::middleware(['verified'])->group(function () {
         Route::get('home', 'AdminController@index')->middleware('verified')->name('adminHome');
+        Route::get('culture', 'AdminController@culture')->middleware('verified')->name('adminCulture');
 
         Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
             Route::get('tab', 'AdminController@getTabContent')->name('adminAjaxTab');
             Route::patch('ticket','AdminController@resolveTicket')->name('adminAjaxTicket');
             Route::patch('list','AdminController@resolveListRequest')->name('adminAjaxList');
             Route::post('wideInfo', 'AdminController@wideInfo')->name('adminWideInfo');
+
+            Route::put('newPartners','AdminController@newPartners')->name('adminAjaxPartners');
 
             Route::get('pagiContent', 'AdminController@getPagi')->name('adminPagi');
             Route::get('searchList', 'AdminController@searchList')->name('adminSearch');
@@ -123,5 +134,23 @@ Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
    Route::get('message/searchConvo', "AjaxMessageController@searchConvo")->name('message.search');
 });
 
-Route::get('setLocale/{locale}', "LocaleController@setLocale")->name('setLocale');
 
+Route::get('searcher', 'SearchController@index')->name('searcher');
+
+Route::prefix('culture')->group(function(){
+    Route::get('/', 'CultureController@index')->name('culture.mainPage');
+    Route::get('/search', 'CultureController@searchResults')->name('culture.searchResults');
+    Route::put('/newCategory', 'CultureController@newCategory')->middleware('admin')->name('culture.newCategory');
+    
+    Route::get('/{cultureItem}', "CultureController@item")->name('culture.read');
+    
+    Route::put('/newItem', 'CultureController@newItem')->middleware('admin')->name('culture.newItem');
+    
+    Route::delete('/deleteItem', 'CultureController@deleteItem')->middleware('admin')->name('culture.deleteItem');
+
+    Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function(){
+        Route::get('getReview', 'CultureController@getReview')->name('ajaxGetReview');
+
+        Route::patch('likeItem', 'HomeController@likeItem')->name('ajaxLikeItem');
+    });
+});

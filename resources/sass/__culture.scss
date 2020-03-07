@@ -1,0 +1,569 @@
+.mx-auto#cultureSearch {
+    padding-top: 1rem;
+
+    @media screen and (min-width: $mobile-breakpoint) {
+        width: 70%;
+    }
+
+    .input-group {
+        input {
+            border-radius: 50px 0 0 50px;
+            font-style: italic;
+            @include font-size(1.1rem);
+            padding: 0.5rem 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group-append {
+            width: 5rem;
+
+            button {
+                width: 100%;
+                border-radius: 0 50px 50px 0;
+                background-color: $orange;
+                @include font-size (1.05rem);
+
+                i {
+                    color: $white;
+                }
+
+                &:hover {
+                    background-color: $orange-hover;
+                }
+            }
+        }
+    }
+
+    #advancedSearch {
+        padding: 0 1rem;
+        padding-top: 2rem;
+
+        .input-group {
+            input {
+                border-radius: 0;
+                font-style: normal;
+                @include font-size(0.95rem);
+                padding: 0.5rem 1rem;
+                letter-spacing: 0.5px;
+            }
+
+            .input-group-append {
+                width: 4rem;
+
+                button {
+                    border-radius: 0;
+                    background-color: $orange;
+                    @include font-size (0.9rem);
+                    color: $white;
+
+                    &:hover {
+                        background-color: $orange-hover;
+                    }
+
+                    letter-spacing: 1px;
+                    height: max-content;
+                    padding: 0.43rem 0;
+                }
+            }
+            @media screen and (max-width: $mobile-breakpoint) {
+                padding-bottom: 1rem;
+            }
+        }
+
+        #searchTags-out{
+            width: 100%;
+            padding: 0.5em;
+            .itemTag{
+                word-wrap: break-word;
+                color: $white;
+                cursor: pointer;
+                background-color: $orange;
+                padding: 0.2rem;
+                border-radius: 20px;
+                font-weight: bold;
+                @include font-size(1rem);
+                letter-spacing: 0.5px;
+                text-align: center;
+                margin: 0.2rem 0.2rem;
+                &:hover{
+                    background-color: $orange-active-hover;
+                }
+            }
+            @media screen and (max-width: $mobile-breakpoint) {
+                padding-bottom: 1rem;
+            }
+        }
+
+        .sortOptions {
+            .sortOptionBtn {
+                background-color: $orange;
+                color: $white;
+                @include font-size (0.9rem);
+                letter-spacing: 0.7px;
+
+                &:hover {
+                    background-color: $orange-hover;
+                }
+
+
+                &:nth-child(2) {
+
+                    @media screen and (max-width: $breakpoint2 - 140) {
+                        margin-right: 0rem;
+                    }
+
+                    @media screen and (max-width: $mobile-breakpoint) {
+                        margin-left: 1rem;
+                        margin-right: 1rem;
+                    }
+
+                    margin-left: 1rem;
+                    margin-right: 1rem;
+                }
+
+                input {
+                    display: none;
+                }
+
+                &.active {
+                    background-color: $orange-active;
+
+                    &:hover {
+                        background-color: $orange-active-hover;
+                    }
+                }
+            }
+
+            .sortOptionsDirBtn {
+                text-align: center;
+
+                label {
+                    @include font-size (1rem);
+                    font-weight: bold;
+                    cursor: pointer;
+                    letter-spacing: 0.5px;
+                }
+            }
+        }
+    }
+
+    .togglerBox {
+        margin-top: 1rem;
+        text-align: center;
+
+        .advancedSearchToggle {
+            display: block;
+            width: max-content;
+            padding: 0.5rem;
+            margin: auto;
+            @include font-size(1.1rem);
+            color: $black;
+
+            i {
+                color: $orange;
+            }
+
+            .toggleArrow+div {
+                margin-top: -15%;
+            }
+        }
+    }
+}
+
+#cultureSections {
+    padding-top: 1rem;
+    header>h3 {
+        text-align: center;
+        @include font-size(1.5rem);
+        font-weight: bold;
+        letter-spacing: 1.2px;
+    }
+
+    #sectionsOutput {
+        justify-content: center;
+        margin-top: 0.5rem;
+
+        .cultureSection {
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            color: $white;
+            background-color: $orange;
+            padding: 0.5rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            margin: 0.5rem;
+
+            h4 {
+                letter-spacing: 1px;
+                margin: 0;
+                width: 100%;
+                @include font-size (1.1rem);
+            }
+
+            &:hover {
+                background-color: $orange-hover;
+            }
+        }
+    }
+}
+
+#cultureSugestions {
+    padding-top: 1rem;
+    .column {
+        text-align: center;
+
+        @media screen and (min-width: $mobile-breakpoint) {
+            &:first-child {
+                border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+            }
+        }
+
+        h4 {
+            @include font-size (1.3rem);
+            font-weight: bold;
+            letter-spacing: 0.7px;
+            @media screen and (max-width: $mobile-breakpoint) {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                padding-bottom: 0.5rem;
+            }
+        }
+
+        .sugestions-out {
+            display: block;
+
+            .cultureItem {
+                align-items: center;
+                text-decoration: none;
+                color: unset;
+                padding: 1rem 1.5rem;
+                border-radius: 20px;
+
+                .itemImg {
+                    img {
+                        width: 4rem;
+                        height: 4rem;
+                    }
+                }
+
+                .itemDesc {
+                    .itemTitle {
+                        font-weight: bold;
+                        @include font-size(1.2rem);
+                        letter-spacing: 1.5px;
+                    }
+
+                    text-align: left;
+                    padding-left: 0.5rem;
+
+                    .itemAttrs {
+                        @extend .text-muted;
+
+                        .itemAttr {
+                            padding: 0;
+                            letter-spacing: 0.5px;
+                        }
+                    }
+                }
+
+                .itemButtons {
+
+                    .itemLikeBtn{
+                        i {
+                            @include font-size(1.4rem);
+                        }
+
+                        &:hover {
+                            color: $orange;
+                        }
+
+                        .badge {
+                            @include font-size(0.8rem);
+                            letter-spacing: 2px;
+                        }
+
+                        &.active {
+                            color: $orange;
+
+                            &:hover {
+                                color: $orange-hover;
+                            }
+                        }
+                    }
+                }
+
+                &:hover {
+                    background-color: $light-orange;
+                }
+            }
+        }
+    }
+}
+.searchMoreToggle{
+    @include font-size (1rem);
+    letter-spacing: 0.5px;
+    font-weight: bold;
+    cursor: pointer;
+    i{
+        margin-left: 0.5rem;
+        color: $orange;
+    }
+    padding: 0.5rem;
+    &:hover{
+        i{
+            color: $orange-hover;
+        }
+    }
+}
+
+.collapse#cultureSearch{
+    input{
+        border-radius: 0;
+    }
+    padding-top: 1rem;
+    .formTextFields{
+        label{
+            @include font-size(0.9rem);
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        .input-group-append{
+            button{
+                color: $white;
+                border-radius: 0;
+                background-color: $orange;
+                @include font-size(0.9rem);
+                letter-spacing: 0.5px;
+                &:hover{
+                    background-color: $orange-hover;
+                }
+            }
+        }
+    }
+    .formButtons {
+        .sortOptionBtn {
+            background-color: $orange;
+            color: $white;
+            @include font-size (0.9rem);
+            letter-spacing: 0.7px;
+
+            &:hover {
+                background-color: $orange-hover;
+            }
+
+            &:nth-child(2) {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+
+            input {
+                display: none;
+            }
+
+            &.active {
+                background-color: $orange-active;
+
+                &:hover {
+                    background-color: $orange-active-hover;
+                }
+            }
+        }
+
+        .sortOptionsDirBtn {
+            text-align: center;
+            label {
+                @include font-size (0.9 rem);
+                font-weight: bold;
+                cursor: pointer;
+                letter-spacing: 0.5px;
+            }
+        }
+    }
+
+    #searchTags-out{
+        width: 100%;
+        padding: 0.5em;
+        .itemTag{
+            word-wrap: break-word;
+            color: $white;
+            cursor: pointer;
+            background-color: $orange;
+            padding: 0.2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            @include font-size(1rem);
+            letter-spacing: 0.5px;
+            text-align: center;
+            margin: 0.2rem 0.2rem;
+            &:hover{
+                background-color: $orange-active-hover;
+            }
+        }
+        @media screen and (max-width: $mobile-breakpoint) {
+            padding-bottom: 1rem;
+        }
+    }
+}
+.cultureSection{
+    cursor: pointer;
+    &.active{
+        h3{
+            color: $orange;
+        }
+    }
+}
+
+#searchResultsOutput{
+    max-height: 60vh;
+    overflow-y: auto;
+    display:block;
+    width: 100%;
+    padding: 1rem 0;
+    .searchResult{
+        text-align: center;
+        justify-content: center;
+        color: $black;
+        text-decoration: none;
+        width: 100%;
+        border-radius: 20px;
+        padding: 1rem 0.5rem;
+        align-items: center;
+        align-content: center;
+        .itemImage{
+            text-align: center;
+            img{
+                width: 4rem;
+                height: 4rem;
+            }
+        }
+        .itemTitle{
+            letter-spacing: 0.5px;
+            font-weight: bold;
+            @include font-size(1rem);
+        }
+        .itemAttributes{
+            .itemAttr{
+                padding: 0;
+                @extend .text-muted;
+                @include font-size (0.9rem);
+                letter-spacing: 0.5px;
+                text-align: center;
+                .attrTitle{
+                    padding: 0;
+                    @include font-size (0.95rem);
+                    font-weight: bold;
+                    letter-spacing: 0.8px;
+                }
+                .attrValue{
+                    word-wrap: break-word;
+                    padding: 0;
+                }
+            }
+        }
+        .itemLikes{
+            .itemLikeBtn{
+                i {
+                    @include font-size(1.4rem);
+                }
+
+                &:hover {
+                    color: $orange;
+                }
+
+                .badge {
+                    @include font-size(1rem);
+                    letter-spacing: 2px;
+                }
+
+                &.active {
+                    color: $orange;
+
+                    &:hover {
+                        color: $orange-hover;
+                    }
+                }
+            }
+        }
+        .itemAttributes,.itemLikes{
+            @media screen and (max-width: $mobile-breakpoint) {
+                padding-top: 1rem;
+            }
+        }
+        &:hover{
+            background-color: $light-orange;
+        }
+    }
+}
+ul.pagination{
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+        
+        .page-item{
+
+            .page-link{
+                color:$black;
+            }
+
+            &.active{
+                .page-link{
+                    background-color: $orange;
+                    border-color: $orange;
+                    color: $white;
+                }
+            }
+        }
+    }
+
+.extraLinks{
+    padding: 2rem 0rem;
+    text-align: center;
+    bottom: 5%;
+    left: 10%;
+    width: 100%;
+    a{
+        h3{
+            width: 100%;
+            color: $black;
+            @include font-size (1.1rem);
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        &:not(:last-child){
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        color: $black;
+        &:hover{
+            h3{
+                color: $orange;
+            }
+            color: $orange;
+        }
+    }
+}
+
+.adminButtons{
+    text-align: right;
+    form{
+        display: inline;
+    }
+    a,button{
+        display: inline;
+        color: black;
+        cursor: pointer;
+        padding: 0.5rem;
+        @include font-size(1rem);
+        &:hover{
+            color: $orange;
+        }
+    }
+}
+
+
+.noSearchResults{
+    @include font-size(1.1rem);
+    @extend .text-muted;
+    letter-spacing: 0.5px;
+    text-align: center;
+}

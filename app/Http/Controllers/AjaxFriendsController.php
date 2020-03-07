@@ -70,7 +70,7 @@ class AjaxFriendsController extends Controller
                             $request->delete();
                         }
 
-                        $user->notify(new SystemNotification(__('nav.acceptedPartner', ['user' => $you->name]),'success','_user_profile_',$you->name,'','userAcceptedPartner'));
+                        $user->notify(new SystemNotification(__('nav.acceptedPartner', ['user' => $you->name],$user->locale),'success','_user_profile_',$you->name,'','userAcceptedPartner'));
             
                         $yourFriends = $you->getFriends()->reject(function ($friend,$key) use ($user){
                             return $friend->id == $user->id;
@@ -93,11 +93,15 @@ class AjaxFriendsController extends Controller
                         $post2->tagged_users = json_encode([$you->name,$user->name]);
         
                         if ($post->save()) {
-                            Notification::send($yourFriends, new UserNotification($you, '_user_home_post_',$post->id, '', __('nav.userNot6',['user' => $user->name]), 'newPost'.$post->id));
+                            foreach ($yourFriends as $user) {
+                                $user->notify(new UserNotification($you, '_user_home_post_',$post->id, '', __('nav.userNot6',['user' => $user->name],$user->locale), 'newPost'.$post->id));
+                            }
                         }
 
                         if ($post2->save()) {
-                            Notification::send($userFriends, new UserNotification($user, '_user_home_post_',$post2->id, '', __('nav.userNot6',['user' => $you->name]), 'newPost'.$post2->id));
+                            foreach ($userFriends as $user) {
+                                $user->notify(new UserNotification($user, '_user_home_post_',$post2->id, '', __('nav.userNot6',['user' => $you->name],$user->locale), 'newPost'.$post2->id));
+                            }
                         }
                     }
                 }
@@ -128,11 +132,15 @@ class AjaxFriendsController extends Controller
                 $post2->tagged_users = json_encode([$you->name,$user->name]);
 
                 if ($post->save()) {
-                    Notification::send($yourFriends, new UserNotification($you, '_user_home_post_',$post->id, '', __('nav.userNot5',['user' => $user->name]), 'newPost'.$post->id));
+                    foreach ($yourFriends as $user) {
+                        $user->notify(new UserNotification($you, '_user_home_post_',$post->id, '', __('nav.userNot5',['user' => $user->name],$user->locale), 'newPost'.$post->id));
+                    }
                 }
 
                 if ($post2->save()) {
-                    Notification::send($userFriends, new UserNotification($user, '_user_home_post_',$post2->id, '', __('nav.userNot5',['user' => $you->name]), 'newPost'.$post2->id));
+                    foreach ($userFriends as $user) {
+                        $user->notify(new UserNotification($user, '_user_home_post_',$post2->id, '', __('nav.userNot5',['user' => $you->name],$user->locale), 'newPost'.$post2->id));
+                    }
                 }
 
                 return response()->json(['status' => 'success'],200);
@@ -159,7 +167,7 @@ class AjaxFriendsController extends Controller
                 }
 
                 if ($user->update()) {
-                    $user->notify(new SystemNotification(__('nav.deniedPartner', ['user' => $you->name]),'danger','_user_profile_',$you->name,'','userDeniedPartner'));
+                    $user->notify(new SystemNotification(__('nav.deniedPartner', ['user' => $you->name], $user->locale),'danger','_user_profile_',$you->name,'','userDeniedPartner'));
                 }
             }else{
                 $you = Auth::user();

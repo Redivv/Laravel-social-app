@@ -12,8 +12,11 @@ return [
     'profile'           => 'Profile',
     'settings'          => "Settings",
     'contact'           => 'Contact with administration',
-
     'profileEditTitle'  => 'Profile Edit',
     'verifyTitle'       => 'Email Address Verification',
-    'resetPasswordTitle'=> 'Password Reset'
+    'resetPasswordTitle'=> 'Password Reset',
+    'culture'           => 'Culture',
+    'cultureSearch'     => 'Culture - Search',
+    'cultureItem'       => 'Culture Item',
+    'partners'          => "Partners"
 ];

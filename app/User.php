@@ -7,8 +7,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Hootlex\Friendships\Traits\Friendable;
 
-use Carbon\Carbon;
-
 use Conner\Tagging\Taggable;
 use App\Notifications\UserDeleted;
 use Illuminate\Support\Facades\DB;
@@ -92,16 +90,19 @@ class User extends Authenticatable implements MustVerifyEmail
         DB::table('likeable_likes')->where('user_id', $this->id)->delete();
 
         DB::table('posts')->where('user_id', $this->id)->delete();
-
-        DB::table('comments')->where('author_id', $this->id)->delete();
+        DB::table('culture_items')->where('user_id',$this->id)->delete();
 
         DB::table('friendships')->where('sender_id', $this->id)->orWhere('recipient_id', $this->id)->delete();
+
+        DB::table('comments')->where('author_id',$this->id)->delete();
+
+        DB::table('culture_comments')->where('author_id',$this->id)->delete();
 
         DB::table('users')->where('id', $this->partner_id)->update(['partner_id' => null]);
 
         DB::table('banned_users')->insert(['email' => $this->email]);
 
-        $this->notify(new UserDeleted($this->name));
+        $this->notify(new UserDeleted($this->name,$this->locale));
         $this->delete();
         return true;
     }

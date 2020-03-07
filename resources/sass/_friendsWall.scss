@@ -46,8 +46,8 @@
                 }
             }
             .thumb{
-                width: 9rem;
-                height: 9rem;
+                max-width: 9rem;
+                max-height: 9rem;
                 margin-left: 0.5rem;
                 margin-bottom: 0.5rem;
             }
@@ -66,6 +66,7 @@
             width: 100%;
             .taggedUser{
                 label{
+                    word-wrap: break-word;
                     padding: 0.5rem 1rem;
                     border-radius: 50px;
                     background-color: $orange;
@@ -291,6 +292,7 @@
                         width: 100%;
                         .taggedUser{
                             label{
+                                word-wrap: break-word;
                                 padding: 0.5rem 1rem;
                                 border-radius: 50px;
                                 background-color: $orange;
@@ -340,13 +342,9 @@
                                 align-items: center;
                                 justify-content: center;
                                 img{
-                                    width: 40px;
-                                    height: 40px;
+                                    width: 3rem;
+                                    height: 3rem;
                                     border-radius: 50%;
-                                    @media screen and (max-width: $mobile-breakpoint) {
-                                        width: 35px;
-                                        height: 35px;
-                                    }
                                 }
                             }
                             .commentContent{
@@ -396,6 +394,7 @@
                                             display: block;
                                             width: 100%;
                                             @include font-size (0.7rem);
+                                            word-wrap: break-word;
                                             font-weight: bold;
                                             letter-spacing: 1px;
                                             border-radius: 50px;
@@ -470,10 +469,12 @@
                                     @include font-size(0.5rem);
                                 }
                                 .commentDesc{
+                                    word-wrap: break-word;
                                     @include font-size(0.75rem);
                                 }
                                 .commentTags{
                                     .taggedUserLabel{
+                                        word-wrap: break-word;
                                         @include font-size (0.6rem);
                                     }
                                 }
@@ -722,8 +723,8 @@
                 }
             }
             .thumb{
-                width: 9rem;
-                height: 9rem;
+                max-width: 9rem;
+                max-height: 9rem;
                 margin-left: 0.5rem;
                 margin-bottom: 0.5rem;
             }
@@ -772,6 +773,7 @@
                 text-decoration: none;
                 cursor: pointer;
                 label,span{
+                    word-wrap: break-word;
                     cursor: pointer;
                     padding: 0.5rem 1rem;
                     border-radius: 50px;

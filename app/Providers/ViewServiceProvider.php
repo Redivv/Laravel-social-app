@@ -27,7 +27,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         // Using class based composers...
         View::composer(
-            'partials.navigation', 'App\Http\View\Composers\NavigationComposer'
+            'partials.misc.navigation', 'App\Http\View\Composers\NavigationComposer'
         );
     }
 }

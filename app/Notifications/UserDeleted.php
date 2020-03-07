@@ -12,15 +12,17 @@ class UserDeleted extends Notification
     use Queueable;
 
     public $user_name;
+    public $locale;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(string $user_name)
+    public function __construct(string $user_name, string $locale)
     {
         $this->user_name = $user_name;
+        $this->locale    = $locale;
     }
 
     /**
@@ -43,10 +45,10 @@ class UserDeleted extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                ->subject(__('admin.deletedUser-subject'))
-                ->greeting(__('admin.deletedUser-greet',['user' => $this->user_name]))
-                ->line(__('admin.deletedUser-message'))
-                ->line(__('admin.deletedUser-messageInfo'));
+                ->subject(__('admin.deletedUser-subject',[],$this->locale))
+                ->greeting(__('admin.deletedUser-greet',['user' => $this->user_name],$this->locale))
+                ->line(__('admin.deletedUser-message',[],$this->locale))
+                ->line(__('admin.deletedUser-messageInfo',[],$this->locale));
     }
 
     /**

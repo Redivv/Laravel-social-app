@@ -105,7 +105,9 @@ function likeUser(selected) {
     
     
     request.fail(function (xhr){
-        alert(xhr.responseJSON.message);
+        $.each(xhr.responseJSON.errors,function(key,value) {
+            alert(value);
+        });
     });
 }
 
@@ -136,7 +138,9 @@ function reportUser(selected) {
             
             
             request.fail(function (xhr){
-                alert(xhr.responseJSON.message);
+                $.each(xhr.responseJSON.errors,function(key,value) {
+                    alert(value);
+                });
             });
         }
 }
@@ -159,7 +163,9 @@ function addFriend(selected){
     
     request.fail(function (xhr){
         
-        alert(xhr.responseJSON.message);
+        $.each(xhr.responseJSON.errors,function(key,value) {
+            alert(value);
+        });
     });
 }
 
@@ -184,7 +190,9 @@ function fetchContent(button) {
     
     
     request.fail(function (xhr){
-        alert(xhr.responseJSON.message);
+        $.each(xhr.responseJSON.errors,function(key,value) {
+            alert(value);
+        });
     });
 }
 
@@ -259,7 +267,9 @@ function pagiPosts(selected) {
         
         
         request.fail(function (xhr){
-            alert(xhr.responseJSON.message);
+            $.each(xhr.responseJSON.errors,function(key,value) {
+                alert(value);
+            });
         });
     }
 }
@@ -288,7 +298,9 @@ function deletePost(selected) {
         
         request.fail(function (xhr){
             $('.spinnerOverlay').addClass('d-none');
-            alert(xhr.responseJSON.message);
+            $.each(xhr.responseJSON.errors,function(key,value) {
+                alert(value);
+            });
         });
     }
 }

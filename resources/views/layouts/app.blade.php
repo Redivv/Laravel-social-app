@@ -12,7 +12,7 @@
         </script>
         <script data-ad-client="ca-pub-1435964054112470" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
-        @include('partials.favicon')
+        @include('partials.misc.favicon')
         
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,12 +43,20 @@
         @stack('styles')
     </head>
     <body>
-        @include('partials.navigation')
+        @include('partials.misc.navigation')
         @yield('floatingPopUps')
         <main>
             @yield('content')
         </main>
         <footer id="footer" class="pt-2 pb-2">
+            <span class="socialLinks">
+                <a href="https://www.facebook.com/fajna.lesbijka" target="__blank">
+                    <i class="fab fa-facebook-square"></i>
+                </a>
+                <a href="https://www.instagram.com/safo.com.pl/" target="__blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </span>
             <span>Copyright 2020 &copy Safo</span>
             <span class="localeOptions">
                 <a href="{{route('setLocale',['locale' => 'pl'])}}">
