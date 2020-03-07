@@ -99,7 +99,7 @@ class AdminController extends Controller
             switch ($target['target']) {
                 case 'profileTicket':
                     $validTickets = $this->getProfileTickets();
-                    $amount = $this -> countProfileTickets();
+                    $amount = count($validTickets);
                     $html = view('partials.admin.profileTicketContent')->withTickets($validTickets)->render();
                     break;
                 case 'userTicket':
