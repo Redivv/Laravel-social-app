@@ -105,8 +105,8 @@ class AdminController extends Controller
                 case 'userTicket':
                     $validTickets = $this->getUserTickets();
                     $inactiveUsers = $this->getInactiveUsers();
-                    $amount = $this->countUserTickets();
-                    $amount = $amount + $this->countInactiveUsers();
+                    $amount = count($validTickets);
+                    $amount = $amount + count($inactiveUsers);
                     $html = view('partials.admin.userTicketContent')->withTickets($validTickets)->withUsers($inactiveUsers)->render();
                     break;
                 case 'userList':
