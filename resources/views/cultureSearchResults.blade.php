@@ -115,7 +115,7 @@
                         <div class="itemAttributes col-md-6 col-sm-12  row">
                             @if ( ($attrValues = json_decode($item->attributes)) && ($attrLabels = json_decode($item->category->attributes) ))
                                 @foreach ($attrLabels as $key => $label)
-                                    @if ($attrValues[$key])
+                                    @if (isset($attrValues[$key]))
                                     <div class="itemAttr col row">
                                         <span class="attrTitle col-12">
                                             {{$label}}
