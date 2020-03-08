@@ -193,6 +193,7 @@
                     width: auto;
                     .emojionearea-editor{
                         min-height: unset;
+                        @include font-size(1rem);
                     }
                 }
             }

@@ -241,9 +241,13 @@
                 border-radius: 20px;
 
                 .itemImg {
+                    text-align: center;
                     img {
                         width: 4rem;
                         height: 4rem;
+                    }
+                    @media screen and (max-width: $mobile-breakpoint) {
+                        margin-bottom: 1rem;
                     }
                 }
 
@@ -257,6 +261,11 @@
                     text-align: left;
                     padding-left: 0.5rem;
 
+                    @media screen and (max-width: $mobile-breakpoint) {
+                        text-align: center;
+                        padding: 0;
+                    }
+
                     .itemAttrs {
                         @extend .text-muted;
 
@@ -265,6 +274,9 @@
                             padding: 0.5rem 0.25rem;
                             letter-spacing: 0.5px;
                         }
+                    }
+                    @media screen and (max-width: $mobile-breakpoint) {
+                        margin-bottom: 1rem;
                     }
                 }
 

@@ -15,6 +15,7 @@ use App\Notifications\SystemNotification;
 
 use App\cultureItem;
 use App\cultureCategory;
+use App\Jobs\newCultureItemNotifications;
 use App\Partner;
 use App\User;
 
@@ -98,11 +99,9 @@ class CultureController extends Controller
         if ($this->wasNewItemAddedToDatabase($newItem)) {
             $this->tagNewItemWithData($newItem, $validatedData);
 
-            $users = User::withAnyTag($newItem->tagNames())->get();
+            $users = User::all();
 
-            foreach ($users as $taggedUser) {
-                $taggedUser->notify(new SystemNotification(__('nav.newCultureItem',[],$taggedUser->locale),'success','_culture_',$newItem->name_slug,'', 'cultItem'));
-            }
+            newCultureItemNotifications::dispatch($users,$newItem);
 
             return response()->json(['action' => 'savedData'], 200);
         }

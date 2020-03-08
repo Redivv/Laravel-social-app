@@ -95,10 +95,10 @@
                     <output class="sugestions-out" id="variableSugestions-out">
                         @foreach ($suggest['items'] as $item)
                             <a class="cultureItem row" href="{{route('culture.read',['cultureItem' => $item->name_slug])}}">
-                                <div class="col-4 itemImg">
+                                <div class="col-md-4 col-sm-12 itemImg">
                                     <img src="{{asset('img/culture-pictures/'.json_decode($item->thumbnail)[0])}}" alt="Item Image">
                                 </div>
-                                <div class="col-6 itemDesc">
+                                <div class="col-md-6 col-sm-12 itemDesc">
                                     <h5 class="itemTitle">{{$item->name}}</h5>
                                     <output class="itemAttrs row">
                                         @if ( ($attrValues = json_decode($item->attributes)) && ($attrLabels = json_decode($item->category->attributes) ))
@@ -127,10 +127,10 @@
                     <output class="sugestions-out" id="newestSugestions-out">
                         @foreach ($new as $item)
                             <a class="cultureItem row" href="{{route('culture.read',['cultureItem' => $item->name_slug])}}">
-                                <div class="col-4 itemImg">
+                                <div class="col-md-4 col-sm-12 mb-sm-2 itemImg">
                                     <img src="{{asset('img/culture-pictures/'.json_decode($item->thumbnail)[0])}}" alt="Item Image">
                                 </div>
-                                <div class="col-6 itemDesc">
+                                <div class="col-md-6 col-sm-12 mb-sm-2 itemDesc">
                                     <h5 class="itemTitle">{{$item->name}}</h5>
                                     <output class="itemAttrs row">
                                         @if ( ($attrValues = json_decode($item->attributes)) && ($attrLabels = json_decode($item->category->attributes) ))
