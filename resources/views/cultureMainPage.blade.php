@@ -104,7 +104,7 @@
                                         @if ( ($attrValues = json_decode($item->attributes)) && ($attrLabels = json_decode($item->category->attributes) ))
                                             @foreach ($attrLabels as $key => $label)
                                                 @if (isset($attrValues[$key]))
-                                                    <span class="itemAttr col">{{$label}}: {{$attrValues[$key]}}</span>
+                                                    <span class="itemAttr col"><span class="font-weight-bold">{{$label}}</span>: {{$attrValues[$key]}}</span>
                                                 @endif
                                             @endforeach
                                         @endif
@@ -136,7 +136,7 @@
                                         @if ( ($attrValues = json_decode($item->attributes)) && ($attrLabels = json_decode($item->category->attributes) ))
                                             @foreach ($attrLabels as $key => $label)
                                                 @if (isset($attrValues[$key]))
-                                                    <span class="itemAttr col">{{$label}}: {{$attrValues[$key]}}</span>
+                                                    <span class="itemAttr col"><span class="font-weight-bold">{{$label}}</span>: {{$attrValues[$key]}}</span>
                                                 @endif
                                             @endforeach
                                         @endif

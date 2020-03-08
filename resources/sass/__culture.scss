@@ -261,7 +261,8 @@
                         @extend .text-muted;
 
                         .itemAttr {
-                            padding: 0;
+                            text-align: center;
+                            padding: 0.5rem 0.25rem;
                             letter-spacing: 0.5px;
                         }
                     }
