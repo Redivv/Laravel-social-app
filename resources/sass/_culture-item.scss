@@ -21,6 +21,11 @@
             @include font-size(1.4rem);
             word-wrap: break-word;
             letter-spacing: 0.5px;
+            .attrLabel{
+                @extend .text-muted;
+                margin-bottom: 0;
+                @include font-size(1.5rem);
+            }
         }
         .tagHolder{
             padding: 0 1rem;

@@ -1,5 +1,5 @@
 .mx-auto#cultureSearch {
-    padding-top: 1rem;
+    padding-top: 0.5rem;
 
     @media screen and (min-width: $mobile-breakpoint) {
         width: 70%;
@@ -36,7 +36,7 @@
 
     #advancedSearch {
         padding: 0 1rem;
-        padding-top: 2rem;
+        padding-top: 1rem;
 
         .input-group {
             input {
@@ -171,7 +171,7 @@
 }
 
 #cultureSections {
-    padding-top: 1rem;
+    padding-top: 0.5rem;
     header>h3 {
         text-align: center;
         @include font-size(1.5rem);
@@ -210,7 +210,7 @@
 }
 
 #cultureSugestions {
-    padding-top: 1rem;
+    padding-top: 0.5rem;
     .column {
         text-align: center;
 
@@ -253,6 +253,7 @@
 
                 .itemDesc {
                     .itemTitle {
+                        margin-bottom: 0;
                         font-weight: bold;
                         @include font-size(1.2rem);
                         letter-spacing: 1.5px;
@@ -273,6 +274,11 @@
                             text-align: center;
                             padding: 0.5rem 0.25rem;
                             letter-spacing: 0.5px;
+                            @include font-size(0.9rem);
+                            .attrLabel{
+                                margin-bottom: 0;
+                                @include font-size(1rem);
+                            }
                         }
                     }
                     @media screen and (max-width: $mobile-breakpoint) {
@@ -334,7 +340,7 @@
     input{
         border-radius: 0;
     }
-    padding-top: 1rem;
+    padding-top: 0.5rem;
     .formTextFields{
         label{
             @include font-size(0.9rem);
@@ -500,7 +506,7 @@
         }
         .itemAttributes,.itemLikes{
             @media screen and (max-width: $mobile-breakpoint) {
-                padding-top: 1rem;
+                padding-top: 0.5rem;
             }
         }
         &:hover{

@@ -296,7 +296,14 @@ iframe{
 }
 
 #footer{
+    span{
+        width: 33.33%;
+        @media screen and (max-width: $ultra-small) {
+            text-align: center !important;
+        }
+    }
     .socialLinks{
+        text-align: left;
         left: 2%;
         position: absolute;
         a{
@@ -320,6 +327,7 @@ iframe{
     align-items: center;
     text-align: center;
     .localeOptions{
+        text-align: right;
         right: 2%;
         position: absolute;
         img{

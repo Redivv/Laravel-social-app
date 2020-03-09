@@ -109,17 +109,17 @@
                         <div class="itemImage col-md-2 col-sm-6">
                             <img src="{{asset('img/culture-pictures/'.json_decode($item->thumbnail)[0])}}" alt="">
                         </div>
-                        <div class="itemTitle col-md-2 col-sm-6">
+                        <h5 class="itemTitle col-md-2 col-sm-6">
                             {{$item->name}}
-                        </div>
+                        </h5>
                         <div class="itemAttributes col-md-6 col-sm-12  row">
                             @if ( ($attrValues = json_decode($item->attributes)) && ($attrLabels = json_decode($item->category->attributes) ))
                                 @foreach ($attrLabels as $key => $label)
                                     @if (isset($attrValues[$key]))
                                     <div class="itemAttr col row">
-                                        <span class="attrTitle col-12">
+                                        <h6 class="attrTitle col-12">
                                             {{$label}}
-                                        </span>
+                                        </h6>
                                         <span class="attrValue col-12">
                                             {{$attrValues[$key]}}
                                         </span>

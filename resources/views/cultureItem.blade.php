@@ -47,9 +47,10 @@
                 @if ( ($attrLabels = json_decode($cultureItem->category->attributes)) && ($attrValues = json_decode($cultureItem->attributes)))
                     @foreach ($attrLabels as $key => $label)
                         @if (isset($attrValues[$key]))
-                            <p class="col itemAttr">
-                                <span class="font-weight-bold">{{$label}}</span>: {{$attrValues[$key]}}
-                            </p>
+                            <span class="col itemAttr">
+                                <h4 class="attrLabel font-weight-bold">{{$label}}</h4>
+                                {{$attrValues[$key]}}
+                            </span>
                         @endif
                     @endforeach    
                 @endif
