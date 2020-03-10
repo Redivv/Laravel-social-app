@@ -71,5 +71,17 @@
             </div> 
         </div>
     @endforeach
-    {{$results->appends(['username' => request('username') ?? '', 'age-min' => request('age-min') ?? '', 'age-max' => request('age-max') ?? '', 'sortOptions_crit' => request('sortOptions_crit') ?? '', 'sortOptions_dir' => request('sortOptions_dir') ?? '', 'city' => request('city') ?? '','hobby' => request('hobby') ?? ''])->links()}}
+    @php
+        $inputs = [
+            'username' => request('username') ?? '',
+            'age-min' => request('age-min') ?? '', 
+            'age-max' => request('age-max') ?? '',
+            'hobby' => request('hobby') ?? null, 
+            'sortOptions_crit' => request('sortOptions_crit') ?? '', 
+            'sortOptions_dir' => request('sortOptions_dir') ?? '', 
+            'city' => request('city') ?? ''
+        ];
+        $results = $results->appends($inputs)
+    @endphp
+    {{$results->links()}}
 </div>

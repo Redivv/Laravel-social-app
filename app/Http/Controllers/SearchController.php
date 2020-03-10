@@ -69,7 +69,7 @@ class SearchController extends Controller
                     'string',
                     Rule::in(['asc', 'desc']),
                 ],
-                'hobby.*'                   => ['distinct','string','max:255'],
+                'hobby.*'                   => ['distinct','string','nullable','max:255'],
                 'activeOnly'                => [Rule::in(['on'])]
             ]);
         }elseif ($request_data->input('age-min') !== null && $request_data->input('age-max') === null ) {
@@ -85,7 +85,7 @@ class SearchController extends Controller
                     'string',
                     Rule::in(['asc', 'desc']),
                 ],
-                'hobby.*'                   => ['distinct','string','max:255'],
+                'hobby.*'                   => ['distinct','string','nullable','max:255'],
                 'activeOnly'                => [Rule::in(['on'])]
             ]);
         }else{
@@ -102,7 +102,7 @@ class SearchController extends Controller
                     'string',
                     Rule::in(['asc', 'desc']),
                 ],
-                'hobby.*'                   => ['distinct','string','max:255'],
+                'hobby.*'                   => ['distinct','string','nullable','max:255'],
                 'activeOnly'                => [Rule::in(['on'])]
             ]);
         }

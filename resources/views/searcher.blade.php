@@ -8,6 +8,10 @@
 
 @section('content')
 
+{{-- @if ($errors->any())
+    {{dd($errors->all())}}
+@endif --}}
+
 <div class="spinnerOverlay d-none">
     <div class="spinner-border text-warning" role="status">
             <span class="sr-only">Loading...</span>
