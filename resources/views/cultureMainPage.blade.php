@@ -105,7 +105,7 @@
                                             @foreach ($attrLabels as $key => $label)
                                                 @if (isset($attrValues[$key]))
                                                 <span class="itemAttr col">
-                                                    <h6 class="attrLabel font-weight-bold">{{$label}}</h6>
+                                                    <h6 class="attrLabel font-weight-bold">{{__($label)}}</h6>
                                                     {{$attrValues[$key]}}
                                                 </span>
                                                 @endif
@@ -140,7 +140,7 @@
                                             @foreach ($attrLabels as $key => $label)
                                                 @if (isset($attrValues[$key]))
                                                     <span class="itemAttr col">
-                                                        <h6 class="attrLabel font-weight-bold">{{$label}}</h6>
+                                                        <h6 class="attrLabel font-weight-bold">{{__($label)}}</h6>
                                                         {{$attrValues[$key]}}
                                                     </span>
                                                 @endif

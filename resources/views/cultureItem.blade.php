@@ -48,7 +48,7 @@
                     @foreach ($attrLabels as $key => $label)
                         @if (isset($attrValues[$key]))
                             <span class="col itemAttr">
-                                <h4 class="attrLabel font-weight-bold">{{$label}}</h4>
+                                <h4 class="attrLabel font-weight-bold">{{__($label)}}</h4>
                                 {{$attrValues[$key]}}
                             </span>
                         @endif

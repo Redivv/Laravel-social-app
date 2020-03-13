@@ -118,7 +118,7 @@
                                     @if (isset($attrValues[$key]))
                                     <div class="itemAttr col row">
                                         <h6 class="attrTitle col-12">
-                                            {{$label}}
+                                            {{__($label)}}
                                         </h6>
                                         <span class="attrValue col-12">
                                             {{$attrValues[$key]}}

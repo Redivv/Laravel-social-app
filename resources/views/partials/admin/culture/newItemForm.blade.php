@@ -39,7 +39,11 @@
                     <label class="d-block" for="itemAttr{{$key}}-new">
                         {{$attr}}
                     </label>
-                    <input value="{{$itemAttrs[$key]}}" class="itemAttr form-control col-6" name="itemAttr[]" id="itemAttr{{$key}}-new">
+                    @if (isset($itemAttrs[$key]))
+                        <input value="{{$itemAttrs[$key]}}" class="itemAttr form-control col-6" name="itemAttr[]" id="itemAttr{{$key}}-new">
+                    @else
+                    <input class="itemAttr form-control col-6" name="itemAttr[]" id="itemAttr{{$key}}-new">
+                    @endif
                 </div>
             @endforeach
         @endif
