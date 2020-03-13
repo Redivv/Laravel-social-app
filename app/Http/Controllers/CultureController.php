@@ -131,9 +131,7 @@ class CultureController extends Controller
             $request->validate([
                 'data'      => ['numeric','exists:culture_items,id']
             ]);
-
-            $review = trim(cultureItem::find($request->data)->pluck('review')[0]);
-
+            $review = trim(cultureItem::find($request->data)->review);
             return response()->json(['action' => 'displayReview','html' => $review], 200);
         }
     }
