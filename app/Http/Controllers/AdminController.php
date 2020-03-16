@@ -428,12 +428,9 @@ class AdminController extends Controller
     public function newPartners(Request $request)
     {
         if ($request->ajax()) {
-            $kek = $request->all();
             $validatedData  = $this->validatePartnerData($request);
 
-            if ($validatedData) {
-                $this->managePartners($validatedData);
-            }
+            $this->managePartners($validatedData);
 
             return response()->json(['action' => 'savedData'], 200);
 
@@ -470,7 +467,7 @@ class AdminController extends Controller
     private function managePartners(Array $data) : void
     {
         if (isset($data['existingPartners'])) {
-            DB::table('partners')->whereNotIn('id',$data['existingPartners'])->delete();
+            DB::table('partners')->whereNotIn('id',array_keys($data['existingPartners']))->delete();
             foreach ($data['existingPartners'] as $key => $partner) {
                 $editingPartner = Partner::find($partner['id']);
 
