@@ -79,7 +79,7 @@
                 </header>
                 <output id="sectionsOutput" class="row">
                     @foreach ($categories as $cat)
-                        <a class="cultureSection col" data-category="{{$cat->name_slug}}">
+                        <a class="cultureSection col" data-category="{{$cat->name}}">
                             <h4>
                                 {{__($cat->name)}}
                             </h4>
