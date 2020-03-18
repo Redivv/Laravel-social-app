@@ -2,5 +2,7 @@
     "Autor": "Author",
     "Wydawnictwo": "Publisher",
     "Rok":"Year",
-    "Gatunek":"Genre"
+    "Gatunek":"Genre",
+    "Literatura": "Literature",
+    "Filmy":    "Movies"
 }

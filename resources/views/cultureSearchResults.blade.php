@@ -164,7 +164,7 @@
                 @foreach ($categories as $cat)
                     <a class="cultureSection @if(request('searchCategory') == $cat->name_slug) active @endif col" data-category="{{$cat->name}}">
                         <h3>
-                            {{$cat->name}}
+                            {{__($cat->name)}}
                         </h3>
                     </a>
                 @endforeach
