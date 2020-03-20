@@ -47,7 +47,7 @@
                         <label for="hobby">{{__('searcher.hobby')}}</label>
                         <div class="hobbyCriteria input-group">
                             <input type="text" class="form-control" id="hobby">
-                            <button class="btn button rounded-0" type="button">{{__('searcher.add')}}</button>
+                            <button class="btn" type="button">{{__('searcher.add')}}</button>
                         </div>
                         <output id="hobbyOutput">
                             <ul class="row list-group list-group-horizontal">

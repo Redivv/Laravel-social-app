@@ -26,6 +26,8 @@ mix.js('resources/js/startup/app.js', 'public/js')
     .js('resources/js/culture/adminCulture.js', 'public/js')
     .js('resources/js/culture/culture.js', 'public/js')
 
+    .js('resources/js/blog/blog.js', 'public/js')
+
     .js('resources/js/navigation.js', 'public/js')
 
     .js('resources/js/activityWall.js', 'public/js')

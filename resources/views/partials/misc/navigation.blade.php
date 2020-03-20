@@ -276,6 +276,13 @@
                         {{ __('app.searcher') }}
                     </a>
                 </li>
+                <li class="nav-item col navBlog">
+                    <a href="{{ route('blog.mainPage') }}" class="nav-link">
+                        <i class="fas fa-paragraph"></i>
+                        <br>
+                        {{__('app.blog')}}
+                    </a>
+                </li>
                 <li class="nav-item col navCulture">
                     <a href="{{ route('culture.mainPage') }}" class="nav-link">
                         <i class="fas fa-book-reader"></i>
@@ -372,6 +379,11 @@
                     </a>
                 </li>
                 @endauth
+                <li class="nav-item navBlog">
+                    <a href="{{ route('blog.mainPage') }}" class="nav-link">
+                        {{__('app.blog')}}
+                    </a>
+                </li>
                 <li class="nav-item navCulture">
                     <a href="{{ route('culture.mainPage') }}" class="nav-link">
                         {{__('app.culture')}}

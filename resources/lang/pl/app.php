@@ -17,5 +17,6 @@ return [
     'resetPasswordTitle'=> 'Zresetuj Hasło',
     'culture'           => 'Kultura',
     'cultureSearch'     => 'Kultura - Wyszukiwanie',
-    'partners'          => "Partnerzy"
+    'partners'          => "Partnerzy",
+    'blog'              => "Blog"
 ];

@@ -1,61 +1,47 @@
-// Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 @import url('https://fonts.googleapis.com/css?family=Righteous');
 
-// Variables
+
 @import 'variables';
 
-// Bootstrap
+
 @import '~bootstrap/scss/bootstrap';
 @import "~rfs/scss";
 
 
-//Font Awesome
 @import '~@fortawesome/fontawesome-free/scss/brands';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
-//Emojionearea
 @import '~emojione/extras/css/emojione.css';
 @import '~emojionearea/dist/emojionearea.css';
 
-//LightBox
 @import "~lightbox2/dist/css/lightbox";
 
-// Custom scss:
-
-//Searcher
 @import 'searcher';
 
-// Scss related to app layout
 @import 'app-layout';
 
-// Scss related to login & register sites
 @import 'login-register';
 
-//Scss related do profile layout
 @import 'profile-layout';
 @import 'profileEdit-layout';
 
-//Scss related do friends wall
 @import 'friendsWall';
 
-// Scss related to settings
 @import 'settings';
 
-// Scss related to contact
 @import 'contact';
 
-// Scss related to chat
 @import '__chat';
 
-// Scss related to culture
 @import '__culture';
 @import '_culture-item';
 
-// Scss related to partners
 @import '__partners';
+
+@import '__blog';
 
 html{
     font-size: 2vw;
@@ -64,51 +50,49 @@ html{
 // Scss related to culture
 @import '_culture';
 
-// Cookie Consent Styling
-    div.cookie-consent{
-        padding: 1% 0;
-        width: 100%;
+div.cookie-consent{
+    padding: 1% 0;
+    width: 100%;
+    position: fixed;
+    text-align: center;
+    color:#385d7a;
+    background-color:#e2f0fb;
+    border-color:#d6e9f9;
+    margin: 2rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    button{
+        @extend .btn;
+        @extend .btn-primary;
+        @extend .ml-3;
+    }
+}   
+
+.spinnerOverlay,.darkOverlay{
+    top: 0;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:rgba(0,0,0,0.8);
+    .spinner-border{
         position: fixed;
-        text-align: center;
-        color:#385d7a;
-        background-color:#e2f0fb;
-        border-color:#d6e9f9;
-        margin: 2rem auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        bottom: 0;
-        button{
-            @extend .btn;
-            @extend .btn-primary;
-            @extend .ml-3;
-        }
-    }   
+        top: 50%;
+        width: 5rem;
+        height: 5rem;
+        font-size: 1.5rem;
+    }
+}
 
-    // Loading Spinner
-    .spinnerOverlay,.darkOverlay{
-        top: 0;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-        height: 100%;
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background:rgba(0,0,0,0.8);
-        .spinner-border{
-            position: fixed;
-            top: 50%;
-            width: 5rem;
-            height: 5rem;
-            font-size: 1.5rem;
-        }
-    }
-
-    .modal{
-        z-index: 999;
-    }
-    .modal-backdrop{
-        z-index: 998;
-    }
+.modal{
+    z-index: 999;
+}
+.modal-backdrop{
+    z-index: 998;
+}

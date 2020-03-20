@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'Auth\RegisterController@showRegistrationForm');
+Route::get('/', 'BlogController@index')->name('blog.mainPage');
+
+Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 
 Auth::routes(['verify' => true]);
 

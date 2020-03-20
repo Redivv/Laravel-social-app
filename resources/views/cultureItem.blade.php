@@ -143,15 +143,17 @@
         @endif
         <section class="row  itemComments">
             <h4 class="sectionTitle">{{__('profile.comment')}}</h4>
-            <form class="commentsForm" data-id="{{$cultureItem->id}}" method="post">
-                <div class="input-group row">
-                    <input type="text" name="commentDesc" class="form-control commentsDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">
-                    <div class="input-group-append col-1 commentButtons">
-                        <i class="fas fa-user-tag commentUserTag" data-toggle="modal" data-target="#tagUsersModal" data-tool="tooltip" title="{{__('activityWall.tagUser')}}" data-placement="bottom"></i>
+            @auth
+                <form class="commentsForm" data-id="{{$cultureItem->id}}" method="post">
+                    <div class="input-group row">
+                        <input type="text" name="commentDesc" class="form-control commentsDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">
+                        <div class="input-group-append col-1 commentButtons">
+                            <i class="fas fa-user-tag commentUserTag" data-toggle="modal" data-target="#tagUsersModal" data-tool="tooltip" title="{{__('activityWall.tagUser')}}" data-placement="bottom"></i>
+                        </div>
                     </div>
-                </div>
-                <output id="commentUserTags" class="row"></output>
-            </form>
+                    <output id="commentUserTags" class="row"></output>
+                </form>
+            @endauth
             <output class="commentsFeed"  id="feed-{{$cultureItem->id}}">
                 @if(count($cultureItem->comments) > 0) 
                     @include('partials.culture.itemComments')

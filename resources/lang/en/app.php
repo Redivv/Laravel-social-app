@@ -18,5 +18,6 @@ return [
     'culture'           => 'Culture',
     'cultureSearch'     => 'Culture - Search',
     'cultureItem'       => 'Culture Item',
-    'partners'          => "Partners"
+    'partners'          => "Partners",
+    'blog'              => "Blog"
 ];
