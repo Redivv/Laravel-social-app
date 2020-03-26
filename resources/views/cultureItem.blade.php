@@ -2,7 +2,7 @@
 
 @section('titleTag')
     <title>
-        {{__('app.culture')}}   -    {{$cultureItem->name}}
+        Safo | {{__('app.culture')}}   -    {{$cultureItem->name}}
     </title>
 @endsection
 

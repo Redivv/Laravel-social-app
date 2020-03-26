@@ -2,7 +2,7 @@
 
 @section('titleTag')
     <title>
-        {{__('app.blog')}}
+        Safo | {{__('app.blog')}}
     </title>
 @endsection
 
@@ -45,6 +45,10 @@
                             <a href="#" class="postTag col" data-tool="tooltip" title="{{__('culture.searchTag')}}" data-placement="bottom">Penisy</a>
                         </output>
                         <a href="#" class="postReadMoreBtn">{{__('blog.readMore')}} <i class="fas fa-chevron-right"></i></a>
+                        <button class="btn likePostButton" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}">
+                            <i class="fas fa-fire likeIcon"></i>
+                            <span class="likesAmount">5</span>
+                        </button>
                     </footer>
                 </article>
                 <hr>
@@ -71,6 +75,10 @@
                             <a href="#" class="postTag col" data-tool="tooltip" title="{{__('culture.searchTag')}}" data-placement="bottom">Penisy</a>
                         </output>
                         <a href="#" class="postReadMoreBtn">{{__('blog.readMore')}} <i class="fas fa-chevron-right"></i></a>
+                        <button class="btn likePostButton" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}">
+                            <i class="fas fa-fire likeIcon"></i>
+                            <span class="likesAmount">5</span>
+                        </button>
                     </footer>
                 </article>
                 <hr>
@@ -97,6 +105,10 @@
                             <a href="#" class="postTag col" data-tool="tooltip" title="{{__('culture.searchTag')}}" data-placement="bottom">Penisy</a>
                         </output>
                         <a href="#" class="postReadMoreBtn">{{__('blog.readMore')}} <i class="fas fa-chevron-right"></i></a>
+                        <button class="btn likePostButton" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}">
+                            <i class="fas fa-fire likeIcon"></i>
+                            <span class="likesAmount">5</span>
+                        </button>
                     </footer>
                 </article>
                 <hr>

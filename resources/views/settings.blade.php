@@ -2,7 +2,7 @@
 
 @section('titleTag')
     <title>
-        {{__('app.settings')}}
+        Safo | {{__('app.settings')}}
     </title>
 @endsection
 

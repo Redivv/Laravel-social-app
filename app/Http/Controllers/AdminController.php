@@ -84,6 +84,39 @@ class AdminController extends Controller
         return view('adminCulturePanel')->withElement($editingElement)->withElementType($editingType)->withCategories($itemCategories)->withPartners($partners);
     }
 
+    public function blog(Request $request)
+    {
+        $itemCategories = cultureCategory::all();
+        $partners   = Partner::all();
+
+        $request->validate([
+            'elementType'   => Rule::in(['cultureCategory', 'cultureItem']),
+        ]);
+
+        $editingElement = null;
+        $editingType = null;
+
+        if ((isset($request->elementType))) {
+            switch ($request->elementType) {
+                case 'cultureCategory':
+                    $request->validate([
+                        'elementId'   => ['numeric','exists:culture_categories,id'],
+                    ]);
+                    $editingElement = cultureCategory::find($request->elementId);
+                    $editingType    = "category";
+                    break;
+                case 'cultureItem':
+                    $request->validate([
+                        'elementId'   => ['numeric','exists:culture_items,id'],
+                    ]);
+                    $editingElement = cultureItem::find($request->elementId);
+                    $editingType    = "item";
+                    break;
+            }
+        }
+        return view('adminBlogPanel')->withElement($editingElement)->withElementType($editingType)->withCategories($itemCategories)->withPartners($partners);
+    }
+
     public function getTabContent(Request $request)
     {
         if ($request->ajax()) {

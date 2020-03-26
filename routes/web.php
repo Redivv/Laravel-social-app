@@ -11,21 +11,17 @@
 |
 */
 
-Route::get('/', 'BlogController@index')->name('blog.mainPage');
-
-Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 
 Auth::routes(['verify' => true]);
-
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::get('logout', 'Auth\LoginController@logout');
-
-Route::get('partners', "CultureController@partners")->name('culture.partners');
-
 Route::get('setLocale/{locale}', "LocaleController@setLocale")->name('setLocale');
 
-Route::get('user/profile/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');
-Route::patch('user/profile/edit', 'ProfileController@update')->middleware('auth')->name('ProfileUpdate');
-Route::delete('user/profile/delete', 'ProfileController@delete')->middleware('auth')->name('ProfileDelete');
+Route::prefix('user/profile')->group(function(){
+    Route::get('/edit','ProfileController@edit')->middleware('auth')->name('ProfileEdition');
+    Route::patch('/edit', 'ProfileController@update')->middleware('auth')->name('ProfileUpdate');
+    Route::delete('/delete', 'ProfileController@delete')->middleware('auth')->name('ProfileDelete');
+});
 
 Route::middleware(['verified'])->group(function () {
     
@@ -48,7 +44,6 @@ Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
     Route::put('tag/addNew', 'AjaxTagsController@addNew');
     Route::delete('tag/deleteTag', 'AjaxTagsController@deleteTag');
 });
-
 
 Route::prefix('user')->group(function(){
     Route::get('home', 'HomeController@index')->name('home');
@@ -103,6 +98,7 @@ Route::prefix('admin')->group(function(){
     Route::middleware(['verified'])->group(function () {
         Route::get('home', 'AdminController@index')->middleware('verified')->name('adminHome');
         Route::get('culture', 'AdminController@culture')->middleware('verified')->name('adminCulture');
+        Route::get('blog', 'AdminController@blog')->middleware('verified')->name('adminBlog');
 
         Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
             Route::get('tab', 'AdminController@getTabContent')->name('adminAjaxTab');
@@ -120,12 +116,12 @@ Route::prefix('admin')->group(function(){
     
 });
 
-Route::get('message', 'MessageController@index')->name('message.app');
-Route::get('message/{user}', 'MessageController@chatHistory')->name('message.read');
-Route::delete('message/{id}', 'MessageController@deleteConversation')->name('conversation.delete');
-Route::patch('message/{id}', 'MessageController@blockConversation')->name('conversation.block');
-
-
+Route::prefix('message')->group(function(){
+    Route::get('/', 'MessageController@index')->name('message.app');
+    Route::get('/{user}', 'MessageController@chatHistory')->name('message.read');
+    Route::delete('/{id}', 'MessageController@deleteConversation')->name('conversation.delete');
+    Route::patch('/{id}', 'MessageController@blockConversation')->name('conversation.block');
+});
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
    Route::get('message/getMore/{pagi}','AjaxMessageController@pagiConversations')->name('message.pagi');
    Route::get('message/get/{id}','AjaxMessageController@ajaxGetMessage')->name('message.get');
@@ -135,9 +131,6 @@ Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
 
    Route::get('message/searchConvo', "AjaxMessageController@searchConvo")->name('message.search');
 });
-
-
-Route::get('searcher', 'SearchController@index')->name('searcher');
 
 Route::prefix('culture')->group(function(){
     Route::get('/', 'CultureController@index')->name('culture.mainPage');
@@ -156,3 +149,14 @@ Route::prefix('culture')->group(function(){
         Route::patch('likeItem', 'HomeController@likeItem')->name('ajaxLikeItem');
     });
 });
+
+Route::get('searcher', 'SearchController@index')->name('searcher');
+
+Route::get('partners', "CultureController@partners")->name('culture.partners');
+
+
+Route::get('/', 'BlogController@index')->name('blog.mainPage');
+Route::prefix('blog')->group(function(){
+    Route::get('/post-title', 'BlogController@item');
+});
+

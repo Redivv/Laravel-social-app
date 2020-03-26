@@ -2,7 +2,7 @@
 
 @section('titleTag')
 <title>
-    {{__('app.adminDashboard')}}
+    Safo | {{__('app.adminDashboard')}}
 </title>
 @endsection
 
@@ -21,11 +21,14 @@
 
 <div id="adminPane" class="container-fluid">
     <div class="adminLinks row">
-        <a id="homeAdminLink" class="btn col-md-4 col-sm-12" href="{{route('adminHome')}}">
+        <a id="homeAdminLink" class="btn col-md-3 col-sm-12" href="{{route('adminHome')}}">
             {{__('admin.home')}}
         </a>
-        <a id="cultureAdminLink" class="btn col-md-4 col-sm-12" href="{{route('adminCulture')}}">
+        <a id="cultureAdminLink" class="btn col-md-3 col-sm-12" href="{{route('adminCulture')}}">
             {{__('app.culture')}} & {{__('app.partners')}}
+        </a>
+        <a id="cultureAdminLink" class="btn col-md-3 col-sm-12" href="{{route('adminBlog')}}">
+            {{__('app.blog')}}
         </a>
     </div>
     <div class="row">

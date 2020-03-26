@@ -2,7 +2,7 @@
 
 @section('titleTag')
     <title>
-        {{__('app.resetPasswordTitle')}}
+        Safo | {{__('app.resetPasswordTitle')}}
     </title>
 @endsection
 

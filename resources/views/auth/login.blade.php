@@ -2,7 +2,7 @@
 
 @section('titleTag')
     <title>
-        {{config('app.name','Safo')}}
+        Safo | {{config('app.name','Safo')}}
     </title>
 @endsection
 

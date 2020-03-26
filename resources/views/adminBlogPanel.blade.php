@@ -34,41 +34,25 @@
     <div class="row">
         <div class="tabsPills col-md-4">
             <div class="nav flex-column nav-pills" id="pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link tab" id="cultureCategories" data-toggle="pill" href="#cultureCategories-content" role="tab"
-                    aria-controls="cultureCategories" aria-selected="true">
-                    {{__('admin.cultureAllCategories')}}
+                <a class="nav-link tab" id="blogPosts" data-toggle="pill" href="#blogPosts-content" role="tab"
+                    aria-controls="blogPosts" aria-selected="true">
+                    {{__('admin.blogAllPosts')}}
                 </a>
                 <hr>
-                <a class="nav-link creatingTab @if($elementType === "category") active @endif" id="cultureNewCategory" data-toggle="pill" href="#cultureNewCategory-content" role="tab" aria-controls="cultureNewCategory" aria-selected="true">
-                    @if($elementType === "category") 
-                        {{__('admin.cultureEditCategory')}}
+                <a class="nav-link creatingTab @if($elementType === "post") active @endif" id="blogNewPost" data-toggle="pill" href="#blogNewPost-content" role="tab" aria-controls="blogNewPost" aria-selected="true">
+                    @if($elementType === "post")
+                        {{__('admin.blogEditPost')}}
                     @else
-                        {{__('admin.cultureAddCategory')}}
+                        {{__('admin.blogAddPost')}}
                     @endif
-                </a>
-                <a class="nav-link creatingTab @if($elementType === "item") active @endif" id="cultureNewItem" data-toggle="pill" href="#cultureNewItem-content" role="tab" aria-controls="cultureNewItem" aria-selected="true">
-                    @if($elementType === "item")
-                        {{__('admin.cultureEditItem')}}
-                    @else
-                        {{__('admin.cultureAddItem')}}
-                    @endif
-                </a>
-                <a class="nav-link creatingTab" id="culturePartners" data-toggle="pill" href="#culturePartners-content" role="tab" aria-controls="culturePartners" aria-selected="true">
-                    {{__('app.partners')}}
                 </a>
             </div>
         </div>
         <div class="tabsContent pt-2 pb-2 overflow-auto col-md-8 col-sm-12">
             <div class="tab-content" id="tabContent">
-                <div class="tab-pane" id="cultureCategories-content" role="tabpanel" aria-labelledby="cultureCategories-tab"></div>
-                <div class="tab-pane @if($elementType === "category") active @endif" id="cultureNewCategory-content" role="tabpanel" aria-labelledby="cultureNewCategory-tab">
-                    @include('partials.admin.culture.newCategoryForm')
-                </div>
-                <div class="tab-pane @if($elementType === "item") active @endif" id="cultureNewItem-content" role="tabpanel" aria-labelledby="cultureNewItem-tab">
-                    @include('partials.admin.culture.newItemForm')
-                </div>
-                <div class="tab-pane" id="culturePartners-content" role="tabpanel" aria-labelledby="culturePartners-tab">
-                    @include('partials.admin.culture.partnersForm')
+                <div class="tab-pane" id="blogPosts-content" role="tabpanel" aria-labelledby="blogPosts-tab"></div>
+                <div class="tab-pane @if($elementType === "item") active @endif" id="blogNewPost-content" role="tabpanel" aria-labelledby="blogNewPost-tab">
+                    @include('partials.admin.blog.newPostForm')
                 </div>
             </div>
         </div>
