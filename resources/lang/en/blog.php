@@ -6,5 +6,6 @@ return [
     'likes'             => 'Likes',
     'searchTags'        => 'Search Tags',
     'authors'           => 'Search Authors',
-    'categories'        => "Search Categories"
+    'categories'        => "Search Categories",
+    'noPosts'           => 'No posts'
 ];

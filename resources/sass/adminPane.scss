@@ -211,7 +211,7 @@ main{
             padding: 0.5rem 1rem;
             text-align: right;
         }
-        #newCategoryForm,#newItemForm{
+        #newCategoryForm,#newItemForm,#newPostForm{
             padding: 0 0.5rem;
             label{
                 font-weight: bold;
@@ -232,7 +232,7 @@ main{
                     }
                 }
             }
-            .newCategoryButton,.newItemButton{
+            .newCategoryButton,.newItemButton,.newPostButton{
                 margin-top: 1rem;
                 background-color: $orange;
                 color: $white;
@@ -266,11 +266,11 @@ main{
                     }
                 }
             }
-            #itemTags-out{
+            #itemTags-out,#postTags-out{
                 width: 100%;
                 margin-top: 0.5rem;
                 padding: 0.5rem;
-                .itemTag{
+                .itemTag,.postTag{
                     cursor: pointer;
                     background-color: $orange;
                     border-radius: 20px;
@@ -289,7 +289,7 @@ main{
                     }
                 }
             }
-            #itemImages-out,#itemThumbnail-out{
+            #itemImages-out,#itemThumbnail-out,#postThumbnail-out{
                 .resetPictureBox{
                     text-align: right;
                     i{
@@ -303,8 +303,8 @@ main{
                 width: 100%;
                 padding: 0.5rem;
                 img{
-                    max-width: 6rem;
-                    max-height: 6rem;
+                    max-width: 8rem;
+                    max-height: 8rem;
                     margin: 0 1rem;
                 }
             }

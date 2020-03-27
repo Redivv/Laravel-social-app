@@ -33,5 +33,7 @@ return [
     'deniedPartner'             => 'Użytkownik :user odrzucił Twoją propozycję związku',
     'adminDeletedPost'          => 'Administrator Usunął Twój Post',
     'newCultureItem'            => "Dodano Nowy Przedmiot do Działu Kultura",
-    'newCultureItemTag'         => "Dodano Nowy Przedmiot Związany z Twoimi Zainteresowaniami"
+    'newCultureItemTag'         => "Dodano Nowy Przedmiot Związany z Twoimi Zainteresowaniami",
+    'newCultureItem'            => "Na Blogu Pojawił Sie Nowy Wpis",
+    'newCultureItemTag'         => "Na Blogu Pojawił Sie Nowy Wpis Związany z Twoimi Zainteresowaniami"
 ]; 

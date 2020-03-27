@@ -83,10 +83,8 @@
                 text-align: right;
                 .postTags{
                     padding: 0 0.5rem 1rem 0.5rem;
-                    width: 100%;
-                    display: block;
                     .postTag{
-                        display: block;
+                        margin: 0.5rem 0.25rem;
                         width: 100%;
                         text-decoration: none;
                         padding: 0.25rem 0.5rem;
@@ -249,11 +247,8 @@
         text-align: right;
         .postTags{
             padding: 0 0.5rem 1rem 0.5rem;
-            width: 100%;
-            display: block;
             .postTag{
-                display: block;
-                width: 100%;
+                margin: 0.5rem 0.25rem;
                 text-decoration: none;
                 padding: 0.25rem 0.5rem;
                 color: $white;

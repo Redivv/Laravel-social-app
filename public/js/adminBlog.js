@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11261,10 +11261,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ "./resources/js/contact.js":
-/*!*********************************!*\
-  !*** ./resources/js/contact.js ***!
-  \*********************************/
+/***/ "./resources/js/blog/adminBlog.js":
+/*!****************************************!*\
+  !*** ./resources/js/blog/adminBlog.js ***!
+  \****************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11272,70 +11272,438 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lightbox2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js");
 /* harmony import */ var lightbox2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lightbox2__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _blogFunctions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./blogFunctions */ "./resources/js/blog/blogFunctions.js");
 
+
+var pagiTarget = {};
+var pagiCount = {};
 $(document).ready(function () {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_1__["turnOnToolipsOn"])('[data-tool=tooltip]');
   main();
-  $('[data-tool="tooltip"]').tooltip();
 });
 
 function main() {
-  $('#EmailContent').emojioneArea({
-    pickerPosition: "bottom",
-    placeholder: descPlaceholder
+  Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_1__["addOnClickDeleteEventOnRemove"])('#postTags-out>.postTag');
+  $('#resetImages.resetPicture').on('click', function () {
+    Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_1__["clearImageInputTagAndPreviewContainer"])($('#postImages'), '#postImages-out');
   });
-  $('#EmailAttachments').change(function (evt) {
-    var files = evt.target.files; // FileList object
-    // Empty the preview list
-
-    $('#EmailAttachmentsOut').empty();
-    var html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt" data-tool="tooltip" title="' + deleteImages + '" data-placement="bottom"></i></div>';
-    $('#EmailAttachmentsOut').append(html);
-    $('[data-tool="tooltip"]').tooltip();
-    var tag = $(this);
-    $('.resetPicture').one('click', function () {
-      if (confirm(resetImgMsg)) {
-        tag.val("");
-        $('#EmailAttachmentsOut').empty();
-        $('.tooltip:first').remove();
-      }
-    }); // Loop through the FileList and render image files as thumbnails.
-
-    for (var i = 0, f; f = files[i]; i++) {
-      // Only process image files.
-      if (!f.type.match('image.*')) {
-        $(this).val("");
-        alert(badFileType);
-        $('#EmailAttachmentsOut').empty();
-        break;
-      }
-
-      var reader = new FileReader(); // Closure to capture the file information.
-
-      reader.onload = function (theFile) {
-        return function (e) {
-          // Render thumbnail.
-          var span = document.createElement('span');
-          span.innerHTML = ['<a href="', e.target.result, '" data-lightbox="newPost"><img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '" alt="Picture Preview"/></a>'].join('');
-          $('#EmailAttachmentsOut').append(span, null);
-        };
-      }(f); // Read in the image file as a data URL.
-
-
-      reader.readAsDataURL(f);
+  $('a.tab').one('click', function () {
+    renderContent(this);
+  });
+  $('#showTabsMenu').on('click', function () {
+    if ($('.tabsPills').hasClass('show')) {
+      $('.tabsPills').removeClass('show');
+      $('.friendsList').removeClass('show');
+      $(this).html('<i class="fas fa-arrow-left"></i>');
+      setTimeout(function () {
+        $('.darkOverlay').addClass('d-none');
+      }, 900);
+    } else {
+      $('.tabsPills').addClass('show');
+      $('.darkOverlay').removeClass('d-none');
+      $(this).html('<i class="fas fa-times"></i>');
+      $('.darkOverlay').one('click', function () {
+        $('.tabsPills').removeClass('show');
+        $('#showTabsMenu').html('<i class="fas fa-arrow-left"></i>');
+        setTimeout(function () {
+          $('.darkOverlay').addClass('d-none');
+        }, 900);
+      });
     }
+  });
+  $('#newPostForm').on('submit', function (e) {
+    e.preventDefault();
+    var categoryIsSelected = $('#postCategory').val().trim() !== "";
+    var postNameIsFilled = $('#postName').val().trim() !== "";
+    var postDescIsFilled = $('#postDesc').val().trim() !== "";
+
+    if (categoryIsSelected && postNameIsFilled && postDescIsFilled) {
+      Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_1__["showSpinnerOverlay"])();
+      Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_1__["sendAjaxRequestToWithFormData"])(baseUrl + "/blog/newPost", this);
+    } else {
+      alert(emptyFieldsMsg);
+    }
+  });
+  $('#postTags').on('keydown', function (key) {
+    if (key.which == 13 || key.keyCode == 13) {
+      key.preventDefault();
+      Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewTagInputFromIn"])(this);
+    }
+  });
+  $('#addTagBtn').on('click', function () {
+    Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewTagInputFromIn"])($('#postTags'));
+  });
+  $('#postThumbnail').change(function (evt) {
+    Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_1__["displayAddedImageIn"])(this, evt, '#postThumbnail-out');
+  });
+  $("#postTags").autocomplete({
+    source: function source(request, response) {
+      $.ajax({
+        url: __baseUrl + "/ajax/tag/autocompleteHobby",
+        data: {
+          term: request.term
+        },
+        dataType: "json",
+        success: function success(data) {
+          var resp = $.map(data, function (obj) {
+            return obj.name;
+          });
+          response(resp);
+        }
+      });
+    },
+    minLength: 1
+  });
+  var reviewCode = $('#postDesc').html();
+  $('#postDesc').summernote({
+    code: reviewCode,
+    minHeight: 150
+  });
+}
+
+function renderContent(selected) {
+  var targetId = $(selected).attr('id');
+  var url = __baseUrl + '/admin/ajax/tab';
+  $(document).one("ajaxSend", function () {
+    var html = ' <div class="spinner-border text-dark" role="status">' + '<span class="sr-only">Loading...</span>' + '</div>';
+    $('#' + targetId + '-content').html(html);
+  });
+  var request = $.ajax({
+    method: 'get',
+    url: url,
+    data: {
+      target: targetId
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      $('#' + targetId + '-content').html(response.html);
+      $('button.listBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (confirm(confirmMsg)) {
+          carryList(this, targetId);
+        }
+      });
+    }
+  });
+  request.fail(function (xhr) {
+    $.each(xhr.responseJSON.errors, function (key, value) {
+      alert(value);
+    });
+    $('#' + targetId + '-content').html('');
+  });
+}
+
+function carryList(decided, target) {
+  var decision = $(decided).attr('name');
+
+  if (decision == 'edit') {
+    var editValue = prompt("Nowa Nazwa");
+  } else {
+    var editValue = "";
+    $(decided).siblings('input[name=elementType]').remove();
+  }
+
+  $('.spinnerOverlay').removeClass('d-none');
+  var elementId = $(decided).parent().serialize();
+  var request = $.ajax({
+    method: 'post',
+    url: __baseUrl + '/admin/ajax/list',
+    data: {
+      "_method": "PATCH",
+      elementId: elementId,
+      decision: decision,
+      editValue: editValue,
+      target: target
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {
+      switch (decision) {
+        case 'delete':
+          $(decided).parent().parent().parent().remove();
+          $('.spinnerOverlay').addClass('d-none');
+          break;
+
+        case 'edit':
+          $(decided).parent().parent().prev().prev().html(editValue);
+          $('.spinnerOverlay').addClass('d-none');
+
+        default:
+          $(decided).addClass('alreadySent');
+          $('.spinnerOverlay').addClass('d-none');
+          break;
+      }
+    }
+  });
+  request.fail(function (xhr) {
+    $.each(xhr.responseJSON.errors, function (key, value) {
+      alert(value);
+    });
+    $('.spinnerOverlay').addClass('d-none');
   });
 }
 
 /***/ }),
 
-/***/ 13:
-/*!***************************************!*\
-  !*** multi ./resources/js/contact.js ***!
-  \***************************************/
+/***/ "./resources/js/blog/blogFunctions.js":
+/*!********************************************!*\
+  !*** ./resources/js/blog/blogFunctions.js ***!
+  \********************************************/
+/*! exports provided: sendAjaxRequestToWithFormData, getDataByAjaxFromUrlWithData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInputFromIn, addOnClickDeleteEventOnRemove, deleteTargetElement, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer, addNewPartnerInput */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sendAjaxRequestToWithFormData", function() { return sendAjaxRequestToWithFormData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDataByAjaxFromUrlWithData", function() { return getDataByAjaxFromUrlWithData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewAttrForm", function() { return addNewAttrForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteAttrForm", function() { return deleteAttrForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showSpinnerOverlay", function() { return showSpinnerOverlay; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hideSpinnerOverlay", function() { return hideSpinnerOverlay; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayCategoryAttrs", function() { return displayCategoryAttrs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewTagInputFromIn", function() { return addNewTagInputFromIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOnClickDeleteEventOnRemove", function() { return addOnClickDeleteEventOnRemove; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTargetElement", function() { return deleteTargetElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "turnOnToolipsOn", function() { return turnOnToolipsOn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayAddedImageIn", function() { return displayAddedImageIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearImageInputTagAndPreviewContainer", function() { return clearImageInputTagAndPreviewContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewPartnerInput", function() { return addNewPartnerInput; });
+var attributesCount = 1;
+function sendAjaxRequestToWithFormData(url, form) {
+  var formData = extractFormData(form);
+  sendAjaxRequestToUrlWithData(url, formData);
+}
+function getDataByAjaxFromUrlWithData(url, data) {
+  sendGetAjaxRequestToUrlWithData(url, data);
+}
+function addNewAttrForm() {
+  var html = createNewAttrInput();
+  $('.newCultureAttributes').append(html);
+  $('.categoryAttr:last').focus();
+  $('[data-tool=tooltip]').tooltip();
+  $('.categoryAttrDelete>i:last').on('click', function () {
+    deleteAttrForm(this);
+  });
+}
+
+function createNewAttrInput() {
+  attributesCount += 1;
+  var html = '<div class="attrBox additionalAttr row mt-2">' + '<input class="categoryAttr form-control col-md-6" name="categoryAttr[]" id="categoryAttr' + attributesCount + '">' + '<span class="categoryAttrDelete col">' + '<i class="fas fa-times" data-tool="tooltip" title="' + deleteAttrMsg + '" data-placement="bottom"></i>' + '</span>' + '</div>';
+  return html;
+}
+
+function deleteAttrForm(button) {
+  $(button).parents('.attrBox').remove();
+  $('.tooltip').remove();
+}
+
+function extractFormData(form) {
+  return new FormData(form);
+}
+
+function sendAjaxRequestToUrlWithData(url, data) {
+  var request = $.ajax({
+    method: 'post',
+    url: url,
+    processData: false,
+    contentType: false,
+    data: data
+  });
+  receiveAjaxResponse(request);
+}
+
+function sendGetAjaxRequestToUrlWithData(url, data) {
+  var request = $.ajax({
+    method: 'get',
+    url: url,
+    data: {
+      data: data
+    }
+  });
+  receiveAjaxResponse(request);
+}
+
+function receiveAjaxResponse(request) {
+  request.done(function (response) {
+    switch (response.action) {
+      case 'savedData':
+        displaySuccessInformation();
+        hideSpinnerOverlay();
+        break;
+
+      default:
+        hideSpinnerOverlay();
+        break;
+    }
+  });
+  request.fail(function (xhr) {
+    $.each(xhr.responseJSON.errors, function (key, value) {
+      alert(value);
+    });
+    hideSpinnerOverlay();
+  });
+}
+
+function showSpinnerOverlay() {
+  $('.spinnerOverlay:first').removeClass('d-none');
+}
+function hideSpinnerOverlay() {
+  $('.spinnerOverlay:first').addClass('d-none');
+}
+
+function displaySuccessInformation() {
+  alert(savedChanges);
+}
+
+function displayCategoryAttrs() {
+  var html = createAtrrInputsHtml($('select#postCategory option:selected').data('attrs'));
+  $('#newpostAttributes').html(html);
+}
+
+function createAtrrInputsHtml(attrs) {
+  var inputs = "";
+
+  if (attrs) {
+    $.each(attrs, function (key, value) {
+      inputs += '<div class="attrBox">' + '<label class="d-block" for="postAttr' + key + '-new">' + value + '</label>' + '<input class="postAttr form-control col-6" name="postAttr[]" id="postAttr' + key + '-new">' + '</div>';
+    });
+  } else {
+    inputs = '<span class="noCategoryInfo">' + selectCategoryMsg + '</span>';
+  }
+
+  return inputs;
+}
+
+function addNewTagInputFromIn(input, container) {
+  container = container || "#postTags-out";
+  var newTagValue = $(input).val().trim();
+
+  if (newTagValue !== "") {
+    var html = createNewTagInput(newTagValue);
+    $(container).append(html);
+    clearInputsValue(input);
+    turnOnToolipsOn(container + '>.postTag:last');
+    addOnClickDeleteEventOnRemove(container + '>.postTag:last');
+  }
+}
+
+function createNewTagInput(tagName) {
+  var newTagHtml = '<div class="col postTag" data-tool="tooltip" data-placement="bottom" title="' + deleteHobby + '">' + '<span>' + tagName + '</span>' + '<input type="hidden" name="postTags[]" value="' + tagName + '">' + '</div>';
+  return newTagHtml;
+}
+
+function addOnClickDeleteEventOnRemove(selector) {
+  var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+
+  if (target !== "") {
+    $(selector).on('click', function () {
+      deleteTargetElement(target);
+    });
+  } else {
+    $(selector).on('click', deleteClickedElement);
+  }
+}
+
+function deleteClickedElement() {
+  if (confirm(confirmMsg)) {
+    $(this).remove();
+    $('.tooltip:first').remove();
+  }
+}
+
+function deleteTargetElement(selector) {
+  if (confirm(confirmMsg)) {
+    $(selector).remove();
+    $('.tooltip:first').remove();
+  }
+}
+function turnOnToolipsOn(selector) {
+  $(selector).tooltip();
+}
+
+function clearInputsValue(input) {
+  $(input).val('');
+}
+
+function displayAddedImageIn(input, evt, container) {
+  var files = evt.target.files; // FileList object
+  // Empty the preview list
+
+  $(container).empty();
+  var html = '<div class="resetPictureBox"><i class="resetPicture fas fa-trash-alt" data-tool="tooltip" title="' + deleteImages + '" data-placement="bottom"></i></div>';
+  $(container).append(html);
+  $('[data-tool="tooltip"]').tooltip();
+  var tag = $(input);
+  $('.resetPicture').on('click', function () {
+    clearImageInputTagAndPreviewContainer(tag, container);
+  }); // Loop through the FileList and render image files as thumbnails.
+
+  for (var i = 0, f; f = files[i]; i++) {
+    // Only process image files.
+    if (!f.type.match('image.*')) {
+      $(this).val("");
+      alert(badFileType);
+      $(container).empty();
+      break;
+    }
+
+    var reader = new FileReader(); // Closure to capture the file information.
+
+    reader.onload = function (theFile) {
+      return function (e) {
+        // Render thumbnail.
+        var span = document.createElement('span');
+        span.innerHTML = ['<a href="', e.target.result, '" data-lightbox="previewImage"><img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '" alt="Picture Preview"/></a>'].join('');
+        $(container).append(span, null);
+      };
+    }(f); // Read in the image file as a data URL.
+
+
+    reader.readAsDataURL(f);
+  }
+}
+function clearImageInputTagAndPreviewContainer(tag, container) {
+  if (confirm(resetImgMsg)) {
+    tag.val("");
+    $(container).html('<input type="hidden" name="noImages" value="true">');
+    $('.tooltip:first').remove();
+  }
+}
+function addNewPartnerInput() {
+  var html = createNewPartnerInput();
+  $(html).insertBefore('#newPartnerButton');
+  turnOnToolipsOn('.partnerDelete>i:last');
+  addOnClickDeleteEventOnRemove('.partnerDelete:last', '.partner:last');
+  $('.partnerThumb-input:last').on('change', function (evt) {
+    var containerId = $(this).prev().attr('id');
+    displayAddedImageIn(this, evt, '#' + containerId);
+  });
+}
+var newPartners = 0;
+
+function createNewPartnerInput() {
+  newPartners++;
+  var html = '<div class="form-group partner col">' + '<div class="partnerDelete"><i class="fas fa-times" data-tool="tooltip" title="' + deleteMsg + '"></i></div>' + '<output class="partnerThumb" id="partner' + newPartners + '-New"></output>' + '<input class="partnerThumb-input" type="file" name="partnersImages[]" required>' + '<input type="text" name="partnersNames[]" class="form-control" placeholder="Name" required>' + '<input type="text" name="partnersUrls[]" class="form-control mt-2" placeholder="Url" required>' + '</div>';
+  return html;
+}
+
+/***/ }),
+
+/***/ 9:
+/*!**********************************************!*\
+  !*** multi ./resources/js/blog/adminBlog.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\contact.js */"./resources/js/contact.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Projects\Portal_Spol\resources\js\blog\adminBlog.js */"./resources/js/blog/adminBlog.js");
 
 
 /***/ })

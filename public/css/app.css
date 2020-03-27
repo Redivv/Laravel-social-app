@@ -26268,12 +26268,10 @@ ul.pagination .page-item.active .page-link {
 
 .blogFeed .blogFeed-posts .blogFeed-post .postFooter .postTags {
   padding: 0 0.5rem 1rem 0.5rem;
-  width: 100%;
-  display: block;
 }
 
 .blogFeed .blogFeed-posts .blogFeed-post .postFooter .postTags .postTag {
-  display: block;
+  margin: 0.5rem 0.25rem;
   width: 100%;
   text-decoration: none;
   padding: 0.25rem 0.5rem;
@@ -26472,13 +26470,10 @@ ul.pagination .page-item.active .page-link {
 
 #blogFeed-singlePost .postFooter .postTags {
   padding: 0 0.5rem 1rem 0.5rem;
-  width: 100%;
-  display: block;
 }
 
 #blogFeed-singlePost .postFooter .postTags .postTag {
-  display: block;
-  width: 100%;
+  margin: 0.5rem 0.25rem;
   text-decoration: none;
   padding: 0.25rem 0.5rem;
   color: #ffffff;

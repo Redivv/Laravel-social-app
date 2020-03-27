@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\blogCategory;
+use App\blogPost;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -90,29 +92,18 @@ class AdminController extends Controller
         $partners   = Partner::all();
 
         $request->validate([
-            'elementType'   => Rule::in(['cultureCategory', 'cultureItem']),
+            'elementType'   => Rule::in(['blogPost']),
         ]);
 
         $editingElement = null;
         $editingType = null;
 
         if ((isset($request->elementType))) {
-            switch ($request->elementType) {
-                case 'cultureCategory':
-                    $request->validate([
-                        'elementId'   => ['numeric','exists:culture_categories,id'],
-                    ]);
-                    $editingElement = cultureCategory::find($request->elementId);
-                    $editingType    = "category";
-                    break;
-                case 'cultureItem':
-                    $request->validate([
-                        'elementId'   => ['numeric','exists:culture_items,id'],
-                    ]);
-                    $editingElement = cultureItem::find($request->elementId);
-                    $editingType    = "item";
-                    break;
-            }
+            $request->validate([
+                'elementId'   => ['numeric','exists:blog_posts,id'],
+            ]);
+            $editingElement = blogPost::find($request->elementId);
+            $editingType    = "post";
         }
         return view('adminBlogPanel')->withElement($editingElement)->withElementType($editingType)->withCategories($itemCategories)->withPartners($partners);
     }
@@ -120,7 +111,7 @@ class AdminController extends Controller
     public function getTabContent(Request $request)
     {
         if ($request->ajax()) {
-            $validTargets = ['profileTicket', 'userTicket', 'userList', 'tagList', 'cityList', 'cultureItems', 'cultureCategories'];
+            $validTargets = ['profileTicket', 'userTicket', 'userList', 'tagList', 'cityList', 'cultureItems', 'cultureCategories','blogCategories'];
 
             $target = $request->validate([
                 'target'    => [
@@ -161,6 +152,11 @@ class AdminController extends Controller
                     $elements = $this->getCultureCategories();
                     $amount = null;
                     $html = view('partials.admin.culture.cultureCategoriesContent')->withElements($elements)->render();
+                    break;
+                case 'blogCategories':
+                    $elements = $this->getBlogCategories();
+                    $amount = null;
+                    $html = view('partials.admin.blog.blogCategoriesContent')->withElements($elements)->render();
                     break;
             }
             return response()->json(['status' => 'success', 'html' => $html, 'amount' => $amount], 200);
@@ -209,7 +205,7 @@ class AdminController extends Controller
                 ],
                 'target'       => [
                     'string',
-                    Rule::in(['userTicket', 'userList', 'tagList', 'cityList', 'cultureCategories'])
+                    Rule::in(['userTicket', 'userList', 'tagList', 'cityList', 'cultureCategories','blogCategories'])
                 ]
             ]);
             $elementId = intVal(substr($request->elementId, 10));
@@ -250,6 +246,14 @@ class AdminController extends Controller
                     $selectedElement = cultureCategory::find($elementId);
                     if ($selectedElement) {
                         $this->resolveCultureCategory($selectedElement);
+                    } else {
+                        return response()->json(['status' => 'error'], 400);
+                    }
+                    break;
+                case 'blogCategories':
+                    $selectedElement = blogCategory::find($elementId);
+                    if ($selectedElement) {
+                        $this->resolveBlogCategory($selectedElement, $request->decision, $request->editValue);
                     } else {
                         return response()->json(['status' => 'error'], 400);
                     }
@@ -630,6 +634,11 @@ class AdminController extends Controller
         return cultureCategory::all();
     }
 
+    private function getBlogCategories(): Collection
+    {
+        return blogCategory::all();
+    }
+
     private function resolveProfileTicket(array $data, string $decision): void
     {
         $validUser = User::where('name', $data['user_name'])->where('pending_picture', $data['image'])->first();
@@ -707,5 +716,20 @@ class AdminController extends Controller
     private function resolveCultureCategory(cultureCategory $category)
     {
         $category->delete();
+    }
+
+    private function resolveBlogCategory(blogCategory $category, string $decision, ?string $edit)
+    {
+        switch ($decision) {
+            case 'delete':
+                $category->delete();
+                break;
+
+            case 'edit':
+                $category->name = Str::title($edit);
+                $category->name_slug = Str::slug($edit);
+                $category->update();
+                break;
+        }
     }
 }

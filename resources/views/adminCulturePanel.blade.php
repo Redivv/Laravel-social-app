@@ -26,7 +26,7 @@
         <a id="cultureAdminLink" class="btn col-md-3 col-sm-12" href="{{route('adminCulture')}}">
             {{__('app.culture')}} & {{__('app.partners')}}
         </a>
-        <a id="cultureAdminLink" class="btn col-md-3 col-sm-12" href="{{route('adminBlog')}}">
+        <a id="blogAdminLink" class="btn col-md-3 col-sm-12" href="{{route('adminBlog')}}">
             {{__('app.blog')}}
         </a>
     </div>

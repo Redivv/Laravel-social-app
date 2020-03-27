@@ -26,7 +26,7 @@
         <a id="cultureAdminLink" class="btn col-md-3 col-sm-12" href="{{route('adminCulture')}}">
             {{__('app.culture')}} & {{__('app.partners')}}
         </a>
-        <a id="cultureAdminLink" class="btn col-md-3 col-sm-12" href="{{route('adminBlog')}}">
+        <a id="blogAdminLink" class="btn col-md-3 col-sm-12" href="{{route('adminBlog')}}">
             {{__('app.blog')}}
         </a>
     </div>
@@ -34,9 +34,9 @@
     <div class="row">
         <div class="tabsPills col-md-4">
             <div class="nav flex-column nav-pills" id="pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link tab" id="blogPosts" data-toggle="pill" href="#blogPosts-content" role="tab"
-                    aria-controls="blogPosts" aria-selected="true">
-                    {{__('admin.blogAllPosts')}}
+                <a class="nav-link tab" id="blogCategories" data-toggle="pill" href="#blogCategories-content" role="tab"
+                    aria-controls="blogCategories" aria-selected="true">
+                    {{__('admin.cultureAllCategories')}}
                 </a>
                 <hr>
                 <a class="nav-link creatingTab @if($elementType === "post") active @endif" id="blogNewPost" data-toggle="pill" href="#blogNewPost-content" role="tab" aria-controls="blogNewPost" aria-selected="true">
@@ -50,8 +50,8 @@
         </div>
         <div class="tabsContent pt-2 pb-2 overflow-auto col-md-8 col-sm-12">
             <div class="tab-content" id="tabContent">
-                <div class="tab-pane" id="blogPosts-content" role="tabpanel" aria-labelledby="blogPosts-tab"></div>
-                <div class="tab-pane @if($elementType === "item") active @endif" id="blogNewPost-content" role="tabpanel" aria-labelledby="blogNewPost-tab">
+                <div class="tab-pane" id="blogCategories-content" role="tabpanel" aria-labelledby="blogCategories-tab"></div>
+                <div class="tab-pane @if($elementType === "post") active @endif" id="blogNewPost-content" role="tabpanel" aria-labelledby="blogNewPost-tab">
                     @include('partials.admin.blog.newPostForm')
                 </div>
             </div>
@@ -66,7 +66,7 @@
 
 @push('styles')
     <style>
-        #cultureAdminLink{
+        #blogAdminLink{
             background-color: #f22103;
         }
     </style>
@@ -89,7 +89,7 @@
 </script>
 
 <script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
-<script src="{{asset('js/adminCulture.js')}}"></script>
+<script src="{{asset('js/adminBlog.js')}}"></script>
 
 <script defer>
 

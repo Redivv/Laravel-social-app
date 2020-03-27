@@ -15,56 +15,80 @@
 <div class="darkOverlay d-none"></div>
 
 <div class="container-fluid px-5 py-3">
-    <article id="blogFeed-singlePost">
-        <header class="postHeader row">
-            <div class="postTitle col-12">
-                <h1>Tutuł Posta</h1>
-            </div>
-            <div class="postDetails col-12">
-                <h2 class="postAuthor"><a href="#">To ja Byłem</a></h2>
-                <h3 class="postDate">2 dni temu</h3>
-            </div>
-        </header>
-        <main class="postContent">
-            <a href="https://via.placeholder.com/728x90.png?text=Visit   +WhoIsHostingThis.com+Buyers+Guide" data-lightbox="postThumbnail" data-title="Post">
-                <img class="postThumbnail" src="https://via.placeholder.com/728x90.png?text=Visit   +WhoIsHostingThis.com+Buyers+Guide" alt="Post Thumbnail">
-            </a>
-            <p class="postDesc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla vero nostrum recusandae optio, tempore dignissimos blanditiis deleniti corrupti excepturi minus reprehenderit tempora aliquid id, quod amet aliquam, quos quaerat assumenda! Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem nobis rem provident ipsa, tenetur sequi dolor officiis! Quibusdam aliquid, recusandae accusantium officia debitis veritatis beatae tempore! Perspiciatis debitis quaerat error?
-            </p>
-        </main>
-        <footer class="postFooter">
-            <output class="postTags row">
-                <a href="#" class="postTag col" data-tool="tooltip" title="{{__('culture.searchTag')}}" data-placement="bottom">Penisy</a>
-            </output>
-            <button class="btn likePostButton" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}">
-                <i class="fas fa-fire likeIcon"></i>
-                <span class="likesAmount">5</span>
-            </button>
-            <hr>
-            <div class="commentsBox">
-                <header>
-                    <h4>Komentarze</h4>
-                </header>
-                @auth
-                    <form class="commentsForm" data-id="" method="post">
-                        <div class="input-group row">
-                            <input type="text" name="commentDesc" class="form-control commentsDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">
-                            <div class="input-group-append col-1 commentButtons">
-                                <i class="fas fa-user-tag commentUserTag" data-toggle="modal" data-target="#tagUsersModal" data-tool="tooltip" title="{{__('activityWall.tagUser')}}" data-placement="bottom"></i>
-                            </div>
-                        </div>
-                        <output id="commentUserTags" class="row"></output>
-                    </form>
-                @endauth
-                <output class="commentsFeed"  id="feed-1">
-                    {{-- @if(count($cultureItem->comments) > 0) 
-                        @include('partials.blog.postComments')
-                    @endif --}}
+    @if ($post)
+        <article id="blogFeed-singlePost">
+            @auth
+                @if (auth()->user()->isAdmin())
+                    <div class="col-12 adminButtons">
+                        <a href="{{route('adminBlog')."?elementType=blogPost&elementId=".$post->id}}" data-tool="tooltip" title="{{__('admin.edit')}}" data-placement="bottom">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <form method="post" action="#" class="deletePost">
+                            @method('delete')
+                            <input type="hidden" name="elementId" value="{{$post->id}}">
+                            <button class="btn" type="submit" data-tool="tooltip" title="{{__('admin.delete')}}" data-placement="bottom">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </form>
+                    </div>
+                @endif
+            @endauth
+            <header class="postHeader row">
+                <div class="postTitle col-12">
+                    <h1>{{$post->name}}</h1>
+                </div>
+                <div class="postDetails col-12">
+                    <h2 class="postAuthor"><a href="{{route('ProfileOtherView',['user' => $post->user->name])}}" target="__blank">{{$post->user->name}}</a></h2>
+                    <h3 class="postDate">{{$post->created_at->diffForHumans()}}</h3>
+                </div>
+            </header>
+            <main class="postContent">
+                @if ($thumb = json_decode($post->thumbnail)[0])
+                    <a href="{{asset('img/blog-pictures/'.$thumb)}}" data-lightbox="postThumbnail" data-title="Post">
+                        <img class="postThumbnail" src="{{asset('img/blog-pictures/'.$thumb)}}" alt="Post Thumbnail">
+                    </a>
+                @endif
+                <main class="postDesc">
+                    {!!$post->description!!}
+                </main>
+            </main>
+            <footer class="postFooter">
+                <output class="postTags row">
+                    @if (count($post->tagNames()) > 0)
+                        @foreach ($post->tagNames() as $tag)
+                            <a href="#" class="postTag col" data-tool="tooltip" title="{{__('culture.searchTag')}}" data-placement="bottom">{{$tag}}</a>
+                        @endforeach
+                    @endif
                 </output>
-            </div>
-        </footer>
-    </article>
+                <button class="btn likePostButton @auth likeBtn @endauth" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}">
+                    <i class="fas fa-fire likeIcon"></i>
+                    <span class="likesAmount">5</span>
+                </button>
+                <hr>
+                <div class="commentsBox">
+                    <header>
+                        <h4>Komentarze</h4>
+                    </header>
+                    @auth
+                        <form class="commentsForm" data-id="" method="post">
+                            <div class="input-group row">
+                                <input type="text" name="commentDesc" class="form-control commentsDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">
+                                <div class="input-group-append col-1 commentButtons">
+                                    <i class="fas fa-user-tag commentUserTag" data-toggle="modal" data-target="#tagUsersModal" data-tool="tooltip" title="{{__('activityWall.tagUser')}}" data-placement="bottom"></i>
+                                </div>
+                            </div>
+                            <output id="commentUserTags" class="row"></output>
+                        </form>
+                    @endauth
+                    <output class="commentsFeed"  id="feed-1">
+                        {{-- @if(count($cultureItem->comments) > 0) 
+                            @include('partials.blog.postComments')
+                        @endif --}}
+                    </output>
+                </div>
+            </footer>
+        </article>
+    @endif
 </div>
 
 @endsection

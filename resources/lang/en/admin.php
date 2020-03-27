@@ -55,7 +55,6 @@ return [
     'writeProfile'              => "Hi there. I can see that you didn't change your profile picture. If you are expiriencing difficulties we can talk about them here.",
     'home'                      => "Managing the Site",
     'cultureAllCategories'      => 'All Categories',
-    'blogAllPosts'              => 'All Posts',
     'cultureAllItems'           => 'All Items',
     'cultureAddItem'            => 'Add New Item',
     'blogAddPost'               => 'Add New Post',
@@ -76,4 +75,6 @@ return [
     'itemReview'                => "Review",
     'selectCategory'            => "Select Category",
     'itemThumbnail'             => "Thumbnail",
+    "postName"                  => "Post Title",
+    'postsCount'                => "Amount of Posts"
 ];

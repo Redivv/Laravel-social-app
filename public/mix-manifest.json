@@ -2,6 +2,7 @@
     "/chat/js/talk.js": "/chat/js/talk.js",
     "/js/activityWall.js": "/js/activityWall.js",
     "/js/admin.js": "/js/admin.js",
+    "/js/adminBlog.js": "/js/adminBlog.js",
     "/js/adminCulture.js": "/js/adminCulture.js",
     "/js/app.js": "/js/app.js",
     "/css/adminPane.css": "/css/adminPane.css",

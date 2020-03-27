@@ -54,7 +54,6 @@ return [
     'writeProfile'              => 'Cześć. Widzę, że nadal nie masz zdjęcia profilowego. Jeśli masz jakieś trudności możemy tutaj o tym porozmawiać',
     'home'                      => 'Zarządzanie Serwisem',
     'cultureAllCategories'      => 'Wszystkie Kategorie',
-    'blogAllPosts'              => 'Wszystkie Posty',
     'cultureAllItems'           => 'Wszystkie Przedmioty',
     'cultureAddItem'            => 'Dodaj Nowy Przedmiot',
     'blogAddPost'               => 'Dodaj Nowy Post',
@@ -76,4 +75,6 @@ return [
     'itemReview'                => "Recenzja",
     'selectCategory'            => "Wybierz Kategorię",
     'itemThumbnail'             => "Miniatura",
+    "postName"                  => "Tytuł Posta",
+    'postsCount'                => "Liczba Postów"
 ];

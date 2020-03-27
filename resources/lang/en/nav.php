@@ -33,5 +33,7 @@ return [
     'deniedPartner'             => 'User :user reject your relationship request',
     'adminDeletedPost'          => 'Administrator Deleted Your Post',
     'newCultureItem'            => "A New Item Has Been Added To Culture Section",
-    'newCultureItemTag'         => "A New Item Related To Your Hobbies Has Been Added"
+    'newCultureItemTag'         => "A New Item Related To Your Hobbies Has Been Added",
+    'newCultureItem'            => "A New Post Has Been Added To The Blog",
+    'newCultureItemTag'         => "A New Post Related To Your Hobbies Has Been Added To The Blog"
 ]; 

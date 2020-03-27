@@ -6,5 +6,6 @@ return [
     'likes'             => 'Polecenia',
     'searchTags'        => 'Szukaj Tagów',
     'authors'           => 'Szukaj Autorów',
-    'categories'        => "Szukaj Działów"
+    'categories'        => "Szukaj Działów",
+    'noPosts'           => 'Brak Postów'
 ];

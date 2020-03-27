@@ -157,6 +157,8 @@ Route::get('partners', "CultureController@partners")->name('culture.partners');
 
 Route::get('/', 'BlogController@index')->name('blog.mainPage');
 Route::prefix('blog')->group(function(){
-    Route::get('/post-title', 'BlogController@item');
+    Route::get('/{blogPost}', 'BlogController@post')->name('blog.post');
+    Route::put('/newPost', 'BlogController@newPost')->name('blog.newPost');
+    Route::delete('/deletePost', 'BlogController@deletePost')->name('blog.deletePost');
 });
 
