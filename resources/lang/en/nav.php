@@ -34,6 +34,6 @@ return [
     'adminDeletedPost'          => 'Administrator Deleted Your Post',
     'newCultureItem'            => "A New Item Has Been Added To Culture Section",
     'newCultureItemTag'         => "A New Item Related To Your Hobbies Has Been Added",
-    'newCultureItem'            => "A New Post Has Been Added To The Blog",
-    'newCultureItemTag'         => "A New Post Related To Your Hobbies Has Been Added To The Blog"
+    'newBlogPost'               => "A New Post Has Been Added To The Blog",
+    'newBlogPostTag'            => "A New Post Related To Your Hobbies Has Been Added To The Blog"
 ]; 

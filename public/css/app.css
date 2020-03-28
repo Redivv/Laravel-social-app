@@ -26193,6 +26193,16 @@ ul.pagination .page-item.active .page-link {
   margin-left: 0.5rem;
 }
 
+.blogFeed .blogFeed-sortBtns .sortBtnDir {
+  color: #333333;
+  padding: 0.25rem 1rem;
+  font-size: 1rem;
+}
+
+.blogFeed .blogFeed-sortBtns .sortBtnDir:hover {
+  color: #f66103;
+}
+
 .blogFeed .blogFeed-posts {
   overflow-y: auto;
   overflow-x: hidden;
@@ -26332,6 +26342,13 @@ ul.pagination .page-item.active .page-link {
   background-color: #e26103;
 }
 
+@media screen and (max-width: 992px) {
+  .blogFeed {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
 .blogExtraPanes {
   padding-top: 0.5rem;
 }
@@ -26361,19 +26378,39 @@ ul.pagination .page-item.active .page-link {
 }
 
 .blogExtraPanes .blogWidget .widgetContent .tagCriteria #tagName {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
 }
 
 .blogExtraPanes .blogWidget .widgetContent .tagCriteria .addTagButton {
   background-color: #f66103;
   color: #ffffff;
   letter-spacing: 1px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   border-radius: 0;
 }
 
 .blogExtraPanes .blogWidget .widgetContent .tagCriteria .addTagButton:hover {
   background-color: #e26103;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #searchTags {
+  padding: 0 0.25rem;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #searchTags .postTag {
+  font-size: 0.9rem;
+  word-wrap: break-word;
+  margin: 0.5rem 0.25rem;
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  color: #ffffff;
+  background-color: #f66103;
+  cursor: pointer;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #searchTags .postTag:hover {
+  background-color: #d22103;
 }
 
 .blogExtraPanes .blogWidget .widgetContent .widgetAuthor,
@@ -26406,6 +26443,52 @@ ul.pagination .page-item.active .page-link {
 
 .blogExtraPanes .blogWidget .widgetFooter .widgetBtn:hover {
   background-color: #e26103;
+}
+
+@media screen and (max-width: 992px) {
+  .blogExtraPanes {
+    position: fixed;
+    right: -100%;
+    max-width: 50%;
+    transition: right 1s linear;
+    background: #f8fafc;
+    z-index: 1001;
+    overflow-y: auto;
+    padding: 0.5rem;
+    border: solid 3px #a1a1a1;
+    border-right: 0;
+    top: 10%;
+    height: 80%;
+  }
+
+  .blogExtraPanes.show {
+    right: 0;
+  }
+}
+
+#showSearchMenu {
+  font-size: calc(1.275rem + 0.3vw);
+  position: fixed;
+  top: 80%;
+  color: #ffffff;
+  background: #f66103;
+  z-index: 1002;
+  cursor: pointer;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  left: -100%;
+  border-radius: 0 50% 50% 0;
+}
+
+@media (min-width: 1200px) {
+  #showSearchMenu {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #showSearchMenu {
+    left: 0;
+  }
 }
 
 #blogFeed-singlePost {

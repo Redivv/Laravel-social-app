@@ -118,6 +118,26 @@ function main() {
         },
         minLength: 1
     });
+    
+    $( "#postCategory" ).autocomplete({
+ 
+        source: function(request, response) {
+            $.ajax({
+                url: __baseUrl+"/ajax/tag/autocompleteCategory",
+                data: {
+                    term : request.term
+                },
+                dataType: "json",
+                success: function(data){
+                    var resp = $.map(data,function(obj){
+                    return obj.name;
+                }); 
+                response(resp);
+                }
+            });
+        },
+        minLength: 1
+    });
 
     let reviewCode = $('#postDesc').html();
     $('#postDesc').summernote({

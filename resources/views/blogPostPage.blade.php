@@ -2,7 +2,7 @@
 
 @section('titleTag')
     <title>
-        Safo | Post-Title
+        Safo | {{$post->name}}
     </title>
 @endsection
 

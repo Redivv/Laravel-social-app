@@ -36,7 +36,6 @@ function main() {
     $('#showTabsMenu').on('click', function () {
         if ($('.tabsPills').hasClass('show')) {
             $('.tabsPills').removeClass('show');
-            $('.friendsList').removeClass('show');
             $(this).html('<i class="fas fa-arrow-left"></i>');
             setTimeout(function () {
                 $('.darkOverlay').addClass('d-none');

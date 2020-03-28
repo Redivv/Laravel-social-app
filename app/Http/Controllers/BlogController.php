@@ -15,7 +15,8 @@ class BlogController extends Controller
 {
     public function index(){
         $posts = blogPost::all();
-        return view('blogMainPage')->withPosts($posts);
+        $categories = blogCategory::all();
+        return view('blogMainPage')->withPosts($posts)->withCats($categories);
     }
 
     public function post(blogPost $blogPost)

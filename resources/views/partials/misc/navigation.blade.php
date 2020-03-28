@@ -1,13 +1,13 @@
 <nav id="navBar" class="navbar navbar-expand-md navbar-light bg-white shadow-sm nav-bar-height">
-    <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
+    <div class="container-fluid row mx-auto">
+        <a class="col-2 navbar-brand text-center" href="{{ url('/') }}">
             <!-- url should be changed: /user/home   -->
             <!-- {{ config('app.name', 'default') }} -->
             <img src="/img/safo_logo.jpg" height="50px" alt="Safo">
         </a>
         @auth
-        <ul class="navbar-nav ml-auto mr-auto navMobile">
-            <div class="navbarIcons position-relative">
+        <ul class="col-9 navbar-nav ml-auto mr-auto navMobile">
+            <div class="navbarIcons position-relative justify-content-center">
 
                 <li class="nav-item">
 
@@ -248,7 +248,7 @@
             </div>
         </ul>
         @endauth
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMobile"
+        <button class="col-1 navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMobile"
             aria-controls="navbarMobile" aria-expanded="false" aria-label="{{ __('app.toggle_nav') }}"
             style="margin:auto">
             <span class="navbar-toggler-icon"></span>
@@ -361,35 +361,35 @@
         </div>
 
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="col-10 collapse navbar-collapse row text-center" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
+            <ul class="col-7 navbar-nav mr-auto row p-0">
 
                 <!-- Authentication Links -->
-                <li class="nav-item navSearcher">
+                <li class="col nav-item navSearcher">
                     <a href="{{ url('/searcher') }}" class="nav-link">{{ __('app.searcher') }}</a>
                 </li>
                 @auth
-                <li class="nav-item navHome">
+                <li class="col nav-item navHome">
                     <a href="{{ route('home') }}" class="nav-link">{{__('app.dashboard')}}</a>
                 </li>
-                <li class="nav-item navChat">
+                <li class="col nav-item navChat">
                     <a href="{{ url('/message') }}" class="nav-link">
                         {{__('app.chat')}}
                     </a>
                 </li>
                 @endauth
-                <li class="nav-item navBlog">
+                <li class="col nav-item navBlog">
                     <a href="{{ route('blog.mainPage') }}" class="nav-link">
                         {{__('app.blog')}}
                     </a>
                 </li>
-                <li class="nav-item navCulture">
+                <li class="col nav-item navCulture">
                     <a href="{{ route('culture.mainPage') }}" class="nav-link">
                         {{__('app.culture')}}
                     </a>
                 </li>
-                <li class="nav-item navPartners">
+                <li class="col nav-item navPartners">
                     <a href="{{ route('culture.partners') }}" class="nav-link">
                         {{__('app.partners')}}
                     </a>
@@ -399,7 +399,7 @@
 
             @auth
             <!-- Navbar notification icons -->
-            <ul class="navbar-nav ml-auto pr-5 navDesc">
+            <ul class="col-3 navbar-nav ml-auto navDesc justify-content-center p-0">
                 <div class="navbarIcons position-relative">
 
                     <li class="nav-item">
@@ -642,7 +642,7 @@
             @endauth
 
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav">
+            <ul class="col-2 navbar-nav justify-content-center p-0">
                 <!-- Authentication Links -->
                 @guest
                 <li class="nav-item">

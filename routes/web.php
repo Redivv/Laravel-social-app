@@ -41,6 +41,7 @@ Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
     Route::get('tag/autocompleteHobby', 'AjaxTagsController@autocompleteHobby');
     Route::get('tag/autocompleteCity', 'AjaxTagsController@autocompleteCity');
     Route::get('tag/autocompleteUser', 'AjaxTagsController@autocompleteUser');
+    Route::get('tag/autocompleteCategory', 'AjaxTagsController@autocompleteCategory');
     Route::put('tag/addNew', 'AjaxTagsController@addNew');
     Route::delete('tag/deleteTag', 'AjaxTagsController@deleteTag');
 });

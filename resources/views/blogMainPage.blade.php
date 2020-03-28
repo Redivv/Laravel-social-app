@@ -20,6 +20,8 @@
             <header class="blogFeed-sortBtns">
                 <a class="sortBtn active" href="#">{{__('blog.dateAdded')}}</a>
                 <a class="sortBtn" href="#">{{__('blog.likes')}}</a>
+                <a class="sortBtnDir" href="#" data-tool="tooltip" title="{{__('blog.sortAsc')}}" data-placement="bottom"><i class="fas fa-sort-amount-up-alt"></i></a>
+                <a class="sortBtnDir" href="#" data-tool="tooltip" title="{{__('blog.sortDesc')}}" data-placement="bottom"><i class="fas fa-sort-amount-down-alt"></i></a>
             </header>
             <output class="blogFeed-posts">
                 @if (count($posts) > 0)
@@ -96,7 +98,7 @@
                             <input id="tagName" type="text" class="form-control">
                             <button class="btn addTagButton" type="button">{{__('searcher.add')}}</button>
                         </div>
-                        <output></output>
+                        <output class="row" id="searchTags"></output>
                     </form>
                 </main>
                 <footer class="widgetFooter">
@@ -104,53 +106,26 @@
                 </footer>
             </div>
 
-            <div id="authorsWidget" class="blogWidget">
-                <header class="widgetHeader">
-                    <span>{{__('blog.authors')}}</span>
-                </header>
-                <main class="widgetContent row">
-                    <span class="col widgetAuthor">
-                        <a href="#">Autor</a>
-                    </span>
-                    <span class="col widgetAuthor">
-                        <a href="#">Autor</a>
-                    </span>
-                    <span class="col widgetAuthor">
-                        <a href="#">Autor</a>
-                    </span>
-                </main>
-            </div>
-
-            <div id="categoriesWidget" class="blogWidget">
-                <header class="widgetHeader">
-                    <span>{{__('blog.categories')}}</span>
-                </header>
-                <main class="widgetContent row">
-                    <span class="col widgetCategory">
-                        <a href="#">Dział</a>
-                    </span>
-                    <span class="col widgetCategory">
-                        <a href="#">Dział</a>
-                    </span>
-                    <span class="col widgetCategory">
-                        <a href="#">Dział</a>
-                    </span>
-                    <span class="col widgetCategory">
-                        <a href="#">Dział</a>
-                    </span>
-                    <span class="col widgetCategory">
-                        <a href="#">Dział</a>
-                    </span>
-                    <span class="col widgetCategory">
-                        <a href="#">Dział</a>
-                    </span>
-                </main>
-            </div>
+            @if (count($cats) > 0)
+                <div id="categoriesWidget" class="blogWidget">
+                    <header class="widgetHeader">
+                        <span>{{__('blog.categories')}}</span>
+                    </header>
+                    <main class="widgetContent row">
+                        @foreach ($cats as $cat)
+                            <span class="col widgetCategory">
+                                <a href="#">{{$cat->name}}</a>
+                            </span>
+                        @endforeach
+                    </main>
+                </div>
+            @endif
 
             <div id="calendar">
                 Kalendarz
             </div>
         </aside>
+        <span id="showSearchMenu"><i class="fas fa-search"></i></span>
     </div>
 </div>
 
@@ -177,6 +152,29 @@
 <script src="{{asset('js/blog.js')}}"></script>
 
 <script src="{{asset('js/emoji.js')}}"></script>
+
+<script>
+    
+    $( "#tagName" ).autocomplete({
+ 
+        source: function(request, response) {
+            $.ajax({
+                url: baseUrl+"/ajax/tag/autocompleteHobby",
+                data: {
+                    term : request.term
+                },
+                dataType: "json",
+                success: function(data){
+                    var resp = $.map(data,function(obj){
+                    return obj.name;
+                }); 
+                response(resp);
+                }
+            });
+        },
+        minLength: 1
+    });
+</script>
 
 <script defer>
     Echo.join('online')

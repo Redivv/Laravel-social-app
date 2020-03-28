@@ -26,6 +26,14 @@
                 margin-left: 0.5rem;
             }
         }
+        .sortBtnDir{
+            color: $blac;
+            padding: 0.25rem 1rem;
+            @include font-size(1rem);
+            &:hover{
+                color: $orange;
+            }
+        }
     }
     .blogFeed-posts{
         overflow-y: auto;
@@ -135,6 +143,10 @@
             }
         }
     }
+    @media screen and (max-width: $breakpoint1) {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
 
 .blogExtraPanes{
@@ -158,16 +170,33 @@
             .tagCriteria{
                 padding-top: 0.5rem;
                 #tagName{
-                    @include font-size(0.75rem);
+                    @include font-size(0.9rem);
                 }
                 .addTagButton{
                     background-color: $orange;
                     color: $white;
                     letter-spacing: 1px;
-                    @include font-size(0.75rem);
+                    @include font-size(0.8rem);
                     border-radius: 0;
                     &:hover{
                         background-color: $orange-hover;
+                    }
+                }
+            }
+            #searchTags{
+                padding: 0 0.25rem;
+                .postTag{
+                    @include font-size(0.9rem);
+                    word-wrap: break-word;
+                    margin: 0.5rem 0.25rem;
+                    text-align: center;
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 20px;
+                    color: $white;
+                    background-color: $orange;
+                    cursor: pointer;
+                    &:hover{
+                        background-color: $orange-active-hover;
                     }
                 }
             }
@@ -197,6 +226,39 @@
                 display: block;
             }
         }
+    }
+    @media screen and (max-width: $breakpoint1) {
+        position: fixed;
+        right: -100%;
+        max-width: 50%;
+        transition:right 1s linear;
+        background:$laravel-grey;
+        z-index: 1001;
+        overflow-y: auto;
+        padding: 0.5rem;
+        border: solid 3px $grey;
+        border-right: 0;
+        top: 10%;
+        height: 80%;
+        &.show{
+            right: 0;
+        }
+    }
+}
+
+#showSearchMenu{
+    @include font-size (1.5rem);
+    position: fixed;
+    top: 80%;
+    color:$white;
+    background:$orange;
+    z-index: 1002;
+    cursor: pointer;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    left: -100%;
+    border-radius: 0 50% 50% 0;
+    @media screen and (max-width: $mobile-breakpoint) {
+        left: 0;
     }
 }
 

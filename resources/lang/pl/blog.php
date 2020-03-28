@@ -5,7 +5,8 @@ return [
     'dateAdded'         => 'Data Dodania',
     'likes'             => 'Polecenia',
     'searchTags'        => 'Szukaj Tagów',
-    'authors'           => 'Szukaj Autorów',
-    'categories'        => "Szukaj Działów",
-    'noPosts'           => 'Brak Postów'
+    'categories'        => "Działy",
+    'noPosts'           => 'Brak Postów',
+    'sortAsc'           => "Sortuj Posty Rosnąco",
+    'sortDesc'          => "Sortuj Posty Malejąco"
 ];

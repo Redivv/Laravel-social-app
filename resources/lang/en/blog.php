@@ -5,7 +5,8 @@ return [
     'dateAdded'         => 'Date Added',
     'likes'             => 'Likes',
     'searchTags'        => 'Search Tags',
-    'authors'           => 'Search Authors',
-    'categories'        => "Search Categories",
-    'noPosts'           => 'No posts'
+    'categories'        => "Categories",
+    'noPosts'           => 'No posts',
+    'sortAsc'           => "Sort Posts Asceding",
+    'sortDesc'          => "Sort Posts Descending"
 ];

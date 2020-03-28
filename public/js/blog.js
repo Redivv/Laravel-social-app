@@ -11296,6 +11296,35 @@ function main() {
       $(".tooltip:first").remove();
     }
   });
+  $('#tagName').on('keydown', function (key) {
+    if (key.which == 13 || key.keyCode == 13) {
+      key.preventDefault();
+      Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewTagInputFromIn"])(this, '#searchTags');
+    }
+  });
+  $('.addTagButton').on('click', function () {
+    Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_1__["addNewTagInputFromIn"])($('#tagName'), '#searchTags');
+  });
+  $('#showSearchMenu').on('click', function () {
+    if ($('.blogExtraPanes').hasClass('show')) {
+      $('.blogExtraPanes').removeClass('show');
+      $(this).html('<i class="fas fa-search"></i>');
+      setTimeout(function () {
+        $('.darkOverlay').addClass('d-none');
+      }, 900);
+    } else {
+      $('.blogExtraPanes').addClass('show');
+      $('.darkOverlay').removeClass('d-none');
+      $(this).html('<i class="fas fa-times"></i>');
+      $('.darkOverlay').one('click', function () {
+        $('.blogExtraPanes').removeClass('show');
+        $('#showSearchMenu').html('<i class="fas fa-search"></i>');
+        setTimeout(function () {
+          $('.darkOverlay').addClass('d-none');
+        }, 900);
+      });
+    }
+  });
 }
 
 /***/ }),

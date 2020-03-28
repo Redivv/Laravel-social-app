@@ -34,6 +34,6 @@ return [
     'adminDeletedPost'          => 'Administrator Usunął Twój Post',
     'newCultureItem'            => "Dodano Nowy Przedmiot do Działu Kultura",
     'newCultureItemTag'         => "Dodano Nowy Przedmiot Związany z Twoimi Zainteresowaniami",
-    'newCultureItem'            => "Na Blogu Pojawił Sie Nowy Wpis",
-    'newCultureItemTag'         => "Na Blogu Pojawił Sie Nowy Wpis Związany z Twoimi Zainteresowaniami"
+    'newBlogPost'               => "Na Blogu Pojawił Sie Nowy Wpis",
+    'newBlogPostTag'            => "Na Blogu Pojawił Sie Nowy Wpis Związany z Twoimi Zainteresowaniami"
 ]; 

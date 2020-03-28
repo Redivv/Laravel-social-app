@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\blogCategory;
 use Illuminate\Support\Str;
 use Auth;
 
@@ -86,6 +88,19 @@ class AjaxTagsController extends Controller
         $search = $request->get('term');
     
         $result = User::where('name', 'LIKE', $search.'%')->whereNotIn('id',[Auth::id()])->get();
+
+        return response()->json($result);
+            
+    } 
+
+    public function autocompleteCategory(Request $request)
+    {
+        $request->validate([
+            'term'  =>  ['required', 'string', 'max:255']
+        ]);
+        $search = $request->get('term');
+    
+        $result = blogCategory::where('name_slug', 'LIKE', $search.'%')->get();
 
         return response()->json($result);
             
