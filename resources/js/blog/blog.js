@@ -1,4 +1,8 @@
 import "lightbox2";
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interaction from "@fullcalendar/interaction";
+import plLocale from "@fullcalendar/core/locales/pl";
 
 import {
     addNewTagInputFromIn,
@@ -20,6 +24,30 @@ $(document).ready(function() {
 });
 
 function main() {
+
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new Calendar(calendarEl, {
+        plugins: [ dayGridPlugin,interaction ],
+        locale: "pl",
+        locales: [plLocale],
+        events: JSON.parse(events),
+        firstDay: 1,
+        defaultView: 'dayGridMonth',
+        
+        eventClick: function(info) {
+            
+            info.jsEvent.preventDefault(); // don't let the browser navigate
+
+            if (info.event.url) {
+                window.open(info.event.url,"_blank");
+            }
+        }
+    });
+
+    calendar.render();
+        
+
     $('[data-tool="tooltip"]').tooltip();
 
     

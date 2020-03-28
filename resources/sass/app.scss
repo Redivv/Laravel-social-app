@@ -19,6 +19,9 @@
 
 @import "~lightbox2/dist/css/lightbox";
 
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+
 @import 'searcher';
 
 @import 'app-layout';

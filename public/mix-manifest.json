@@ -6,7 +6,6 @@
     "/js/adminCulture.js": "/js/adminCulture.js",
     "/js/app.js": "/js/app.js",
     "/css/adminPane.css": "/css/adminPane.css",
-    "/css/app.css": "/css/app.css",
     "/js/blog.js": "/js/blog.js",
     "/js/contact.js": "/js/contact.js",
     "/js/culture.js": "/js/culture.js",
@@ -15,5 +14,6 @@
     "/js/profile.js": "/js/profile.js",
     "/js/register.js": "/js/register.js",
     "/js/searcher.js": "/js/searcher.js",
-    "/js/singlePost.js": "/js/singlePost.js"
+    "/js/singlePost.js": "/js/singlePost.js",
+    "/css/app.css": "/css/app.css"
 }

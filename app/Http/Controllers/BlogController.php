@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\blogCategory;
 use App\blogPost;
 use App\Jobs\newBlogPostNotifications;
@@ -16,7 +17,18 @@ class BlogController extends Controller
     public function index(){
         $posts = blogPost::all();
         $categories = blogCategory::all();
-        return view('blogMainPage')->withPosts($posts)->withCats($categories);
+
+        $events = [
+            0 => [
+                'title' => 'Event Title1',
+                'start' => '2020-03-17T13:13:55.008',
+                'end'   => '2020-03-19T13:13:55.008',
+                'url'   => 'http://google.com/'
+            ]
+        ];
+        $events = json_encode($events);
+
+        return view('blogMainPage')->withEvents($events)->withPosts($posts)->withCats($categories);
     }
 
     public function post(blogPost $blogPost)

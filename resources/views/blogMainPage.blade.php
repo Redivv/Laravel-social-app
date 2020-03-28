@@ -122,7 +122,7 @@
             @endif
 
             <div id="calendar">
-                Kalendarz
+                
             </div>
         </aside>
         <span id="showSearchMenu"><i class="fas fa-search"></i></span>
@@ -138,6 +138,7 @@
         }
     </style>
     <link rel="stylesheet" href="{{asset("jqueryUi\jquery-ui.min.css")}}">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 @endpush
 
 @push('scripts')
@@ -145,6 +146,7 @@
     var baseUrl             = "{{url('/')}}";
     var deleteHobby         =  "{{__('activityWall.deleteTags')}}";
     var confirmMsg          =  "{{__('admin.confirmMsg')}}";
+    var events = '{!!$events!!}';
 </script>
 
 <script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
@@ -152,6 +154,8 @@
 <script src="{{asset('js/blog.js')}}"></script>
 
 <script src="{{asset('js/emoji.js')}}"></script>
+
+
 
 <script>
     
