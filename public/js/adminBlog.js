@@ -11474,7 +11474,7 @@ function carryList(decided, target) {
 /*!********************************************!*\
   !*** ./resources/js/blog/blogFunctions.js ***!
   \********************************************/
-/*! exports provided: sendAjaxRequestToWithFormData, getDataByAjaxFromUrlWithData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInputFromIn, addOnClickDeleteEventOnRemove, deleteTargetElement, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer, addNewPartnerInput */
+/*! exports provided: sendAjaxRequestToWithFormData, getDataByAjaxFromUrlWithData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInputFromIn, addOnClickDeleteEventOnRemove, deleteTargetElement, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11492,7 +11492,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "turnOnToolipsOn", function() { return turnOnToolipsOn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayAddedImageIn", function() { return displayAddedImageIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearImageInputTagAndPreviewContainer", function() { return clearImageInputTagAndPreviewContainer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewPartnerInput", function() { return addNewPartnerInput; });
 var attributesCount = 1;
 function sendAjaxRequestToWithFormData(url, form) {
   var formData = extractFormData(form);
@@ -11693,23 +11692,6 @@ function clearImageInputTagAndPreviewContainer(tag, container) {
     $(container).html('<input type="hidden" name="noImages" value="true">');
     $('.tooltip:first').remove();
   }
-}
-function addNewPartnerInput() {
-  var html = createNewPartnerInput();
-  $(html).insertBefore('#newPartnerButton');
-  turnOnToolipsOn('.partnerDelete>i:last');
-  addOnClickDeleteEventOnRemove('.partnerDelete:last', '.partner:last');
-  $('.partnerThumb-input:last').on('change', function (evt) {
-    var containerId = $(this).prev().attr('id');
-    displayAddedImageIn(this, evt, '#' + containerId);
-  });
-}
-var newPartners = 0;
-
-function createNewPartnerInput() {
-  newPartners++;
-  var html = '<div class="form-group partner col">' + '<div class="partnerDelete"><i class="fas fa-times" data-tool="tooltip" title="' + deleteMsg + '"></i></div>' + '<output class="partnerThumb" id="partner' + newPartners + '-New"></output>' + '<input class="partnerThumb-input" type="file" name="partnersImages[]" required>' + '<input type="text" name="partnersNames[]" class="form-control" placeholder="Name" required>' + '<input type="text" name="partnersUrls[]" class="form-control mt-2" placeholder="Url" required>' + '</div>';
-  return html;
 }
 
 /***/ }),

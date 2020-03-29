@@ -27284,6 +27284,11 @@ ul.pagination .page-item.active .page-link {
   text-align: right;
 }
 
+.blogFeed .blogFeed-sortBtns #sortRange {
+  display: inline-block;
+  width: unset;
+}
+
 .blogFeed .blogFeed-sortBtns .sortBtn {
   text-decoration: none;
   color: #ffffff;
@@ -27319,6 +27324,14 @@ ul.pagination .page-item.active .page-link {
 
 .blogFeed .blogFeed-sortBtns .sortBtnDir:hover {
   color: #f66103;
+}
+
+.blogFeed .blogFeed-sortBtns .sortBtnDir.active {
+  color: #f66103;
+}
+
+.blogFeed .blogFeed-sortBtns .sortBtnDir.active:hover {
+  color: #e26103;
 }
 
 .blogFeed .blogFeed-posts {

@@ -13,15 +13,44 @@
     </div>
 </div>
 <div class="darkOverlay d-none"></div>
-
 <div class="container-fluid">
     <div class="row">
         <main class="col-9 blogFeed">
             <header class="blogFeed-sortBtns">
-                <a class="sortBtn active" href="#">{{__('blog.dateAdded')}}</a>
-                <a class="sortBtn" href="#">{{__('blog.likes')}}</a>
-                <a class="sortBtnDir" href="#" data-tool="tooltip" title="{{__('blog.sortAsc')}}" data-placement="bottom"><i class="fas fa-sort-amount-up-alt"></i></a>
-                <a class="sortBtnDir" href="#" data-tool="tooltip" title="{{__('blog.sortDesc')}}" data-placement="bottom"><i class="fas fa-sort-amount-down-alt"></i></a>
+                <form id="sortForm" class="d-inline" method="GET" action="{{route('blog.mainPage')}}">
+                    @if (request('sortCrit') == "likes")
+                        <select class="form-control" id="sortRange" name="sortRange">
+                            <option value="week">kek</option>
+                            <option value="month">kew</option>
+                            <option value="all">kurw</option>
+                        </select>
+                    @endif
+                    <div class="btn-group-toggle d-inline" data-toggle="buttons">
+                        <label class="btn sortBtn @if(request('sortCrit') != 'likes') active @endif">
+                          <input type="radio" name="sortCrit" value="date" autocomplete="off" @if(request('sortCrit') != 'likes') checked @endif> {{__('blog.dateAdded')}}
+                        </label>
+                        <label class="btn sortBtn @if(request('sortCrit') == 'likes') active @endif">
+                          <input type="radio" name="sortCrit" value="likes" autocomplete="off" @if(request('sortCrit') == 'likes') checked @endif"> {{__('blog.likes')}}
+                        </label>
+                      </div>
+
+                      @if (request('postTags'))
+                        @foreach (request('postTags') as $tag)
+                            <input type="hidden" name="postTags[]" value="{{$tag}}">
+                        @endforeach
+                      @elseif(request('postCategory'))
+                        <input type="hidden" name="postCategory" value="{{request('postCategory')}}">
+                      @endif
+
+                      <div class="btn-group-toggle d-inline" data-toggle="buttons">
+                        <label class="btn sortBtnDir @if(request('sortDir') == 'asc') active @endif">
+                          <input type="radio" name="sortDir" value="asc" autocomplete="off" @if(request('sortDir') == 'asc') checked @endif data-tool="tooltip" title="{{__('blog.sortAsc')}}" data-placement="bottom"><i class="fas fa-sort-amount-up-alt"></i>
+                        </label>
+                        <label class="btn sortBtnDir @if(request('sortDir') != 'asc') active @endif">
+                          <input type="radio" name="sortDir" value="desc" autocomplete="off" @if(request('sortDir') != 'asc') checked @endif data-tool="tooltip" title="{{__('blog.sortDesc')}}" data-placement="bottom"><i class="fas fa-sort-amount-down-alt"></i>
+                        </label>
+                      </div>
+                </form>
             </header>
             <output class="blogFeed-posts">
                 @if (count($posts) > 0)
@@ -71,9 +100,9 @@
                                     @endif
                                 </output>
                                 <a href="{{route('blog.post',['blogPost' => $post->name_slug])}}" class="postReadMoreBtn">{{__('blog.readMore')}} <i class="fas fa-chevron-right"></i></a>
-                                <button class="btn likePostButton @auth likeBtn @endauth" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}">
+                                <button class="btn likePostButton @auth likeBtn @endauth @if($post->likeCount > 0) active @endif" data-id="{{$post->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}">
                                     <i class="fas fa-fire likeIcon"></i>
-                                    <span class="likesAmount">5</span>
+                                    <span class="likesAmount @if($post->likeCount == 0) d-none @endif">{{$post->likeCount}}</span>
                                 </button>
                             </footer>
                             <hr>
@@ -93,16 +122,25 @@
                     <span>{{__('blog.searchTags')}}</span>
                 </header>
                 <main class="widgetContent">
-                    <form id="searchWidget-form">
+                    <form id="searchWidget-form" method="GET" action="{{route('blog.mainPage')}}">
                         <div class="tagCriteria input-group">
                             <input id="tagName" type="text" class="form-control">
                             <button class="btn addTagButton" type="button">{{__('searcher.add')}}</button>
                         </div>
-                        <output class="row" id="searchTags"></output>
+                        <output class="row" id="searchTags">
+                            @if (request('postTags'))
+                                @foreach (request('postTags') as $tag)
+                                    <div class="col postTag" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deleteTags')}}">
+                                        <span>{{$tag}}</span>
+                                        <input type="hidden" name="postTags[]" value="{{$tag}}">
+                                    </div>
+                                @endforeach
+                            @endif
+                        </output>
                     </form>
                 </main>
                 <footer class="widgetFooter">
-                    <button class="btn widgetBtn" type="submit">{{__('searcher.search')}}</button>
+                    <button class="btn widgetBtn" form="searchWidget-form" type="submit">{{__('searcher.search')}}</button>
                 </footer>
             </div>
 
@@ -111,12 +149,12 @@
                     <header class="widgetHeader">
                         <span>{{__('blog.categories')}}</span>
                     </header>
-                    <main class="widgetContent row">
-                        @foreach ($cats as $cat)
-                            <span class="col widgetCategory">
-                                <a href="#">{{$cat->name}}</a>
-                            </span>
-                        @endforeach
+                    <main class="widgetContent">
+                        <form class="row" action="{{route('blog.mainPage')}}" method="GET">
+                            @foreach ($cats as $cat)
+                                <button class="col widgetCategory btn btn-link" type="submit" name="postCategory" value="{{$cat->id}}">{{$cat->name}}</button>
+                            @endforeach
+                        </form>
                     </main>
                 </div>
             @endif

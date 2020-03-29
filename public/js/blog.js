@@ -23901,6 +23901,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var pagi = 1;
 
 $(document).ready(function () {
   $.ajaxSetup({
@@ -23912,6 +23913,11 @@ $(document).ready(function () {
 });
 
 function main() {
+  $('.likeBtn').on('click', likePost);
+  $('.blogFeed-posts:first').on('scroll', function () {
+    pagiPosts(this);
+  });
+  Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_5__["addOnClickDeleteEventOnRemove"])('.postTag');
   var calendarEl = document.getElementById('calendar');
   var calendar = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_1__["Calendar"](calendarEl, {
     plugins: [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_2__["default"], _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_3__["default"]],
@@ -23929,6 +23935,9 @@ function main() {
     }
   });
   calendar.render();
+  $('input[type=radio],select').change(function () {
+    $('#sortForm').submit();
+  });
   $('[data-tool="tooltip"]').tooltip();
   $('.deletePost').on('submit', function (e) {
     e.preventDefault();
@@ -23971,13 +23980,103 @@ function main() {
   });
 }
 
+function likePost() {
+  var url = baseUrl + '/blog/likePost';
+  var button = $(this);
+  var likesAmountElement = $(button).children('.likesAmount');
+  var id = $(this).data('id');
+  $('.tooltip:first').remove();
+
+  if ($(button).hasClass('active')) {
+    $(button).removeClass('active');
+    var likeAmount = parseInt($(likesAmountElement).html()) - 1;
+    $(likesAmountElement).html(likeAmount);
+
+    if (likeAmount == 0) {
+      $(likesAmountElement).addClass('d-none');
+    }
+  } else {
+    $(button).addClass('active');
+
+    var _likeAmount = parseInt($(likesAmountElement).html()) + 1;
+
+    $(likesAmountElement).html(_likeAmount);
+
+    if ($(likesAmountElement).hasClass('d-none')) {
+      $(likesAmountElement).removeClass('d-none');
+    }
+  }
+
+  var request = $.ajax({
+    method: "post",
+    url: url,
+    data: {
+      "_method": "patch",
+      id: id
+    }
+  });
+  request.done(function (response) {
+    if (response.status === 'success') {}
+  });
+  request.fail(function (xhr) {
+    alert(xhr.responseJson.message);
+  });
+}
+
+function pagiPosts(el) {
+  if ($(el).scrollTop() + $(el).innerHeight() >= $(el)[0].scrollHeight - 100) {
+    $(el).off('scroll');
+    pagi++;
+    var url = $(location).attr('href');
+
+    if (url.indexOf('?') == -1) {
+      url = url + "?pagi=" + pagi;
+    } else {
+      url = url + "&pagi=" + pagi;
+    }
+
+    var request = $.ajax({
+      method: 'get',
+      url: url
+    });
+    request.done(function (response) {
+      if (response.status === 'success') {
+        $('.blogFeed-posts:first').append(response.html);
+        $('[data-tool="tooltip"]').tooltip();
+        $('.deletePost').off('submit');
+        $('.deletePost').on('submit', function (e) {
+          e.preventDefault();
+
+          if (confirm(confirmMsg)) {
+            Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_5__["showSpinnerOverlay"])();
+            Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_5__["sendAjaxRequestToWithFormData"])(baseUrl + "/blog/deletePost", this);
+            $(this).parents('.blogFeed-post').remove();
+            $(".tooltip:first").remove();
+          }
+        });
+        $('.likeBtn').off('click');
+        $('.likeBtn').on('click', likePost);
+
+        if (response.stop) {
+          $('.blogFeed-posts:first').on('scroll', function () {
+            pagiPosts(this);
+          });
+        }
+      }
+    });
+    request.fail(function (xhr) {
+      alert(xhr.responseJson.message);
+    });
+  }
+}
+
 /***/ }),
 
 /***/ "./resources/js/blog/blogFunctions.js":
 /*!********************************************!*\
   !*** ./resources/js/blog/blogFunctions.js ***!
   \********************************************/
-/*! exports provided: sendAjaxRequestToWithFormData, getDataByAjaxFromUrlWithData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInputFromIn, addOnClickDeleteEventOnRemove, deleteTargetElement, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer, addNewPartnerInput */
+/*! exports provided: sendAjaxRequestToWithFormData, getDataByAjaxFromUrlWithData, addNewAttrForm, deleteAttrForm, showSpinnerOverlay, hideSpinnerOverlay, displayCategoryAttrs, addNewTagInputFromIn, addOnClickDeleteEventOnRemove, deleteTargetElement, turnOnToolipsOn, displayAddedImageIn, clearImageInputTagAndPreviewContainer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23995,7 +24094,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "turnOnToolipsOn", function() { return turnOnToolipsOn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayAddedImageIn", function() { return displayAddedImageIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearImageInputTagAndPreviewContainer", function() { return clearImageInputTagAndPreviewContainer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewPartnerInput", function() { return addNewPartnerInput; });
 var attributesCount = 1;
 function sendAjaxRequestToWithFormData(url, form) {
   var formData = extractFormData(form);
@@ -24196,23 +24294,6 @@ function clearImageInputTagAndPreviewContainer(tag, container) {
     $(container).html('<input type="hidden" name="noImages" value="true">');
     $('.tooltip:first').remove();
   }
-}
-function addNewPartnerInput() {
-  var html = createNewPartnerInput();
-  $(html).insertBefore('#newPartnerButton');
-  turnOnToolipsOn('.partnerDelete>i:last');
-  addOnClickDeleteEventOnRemove('.partnerDelete:last', '.partner:last');
-  $('.partnerThumb-input:last').on('change', function (evt) {
-    var containerId = $(this).prev().attr('id');
-    displayAddedImageIn(this, evt, '#' + containerId);
-  });
-}
-var newPartners = 0;
-
-function createNewPartnerInput() {
-  newPartners++;
-  var html = '<div class="form-group partner col">' + '<div class="partnerDelete"><i class="fas fa-times" data-tool="tooltip" title="' + deleteMsg + '"></i></div>' + '<output class="partnerThumb" id="partner' + newPartners + '-New"></output>' + '<input class="partnerThumb-input" type="file" name="partnersImages[]" required>' + '<input type="text" name="partnersNames[]" class="form-control" placeholder="Name" required>' + '<input type="text" name="partnersUrls[]" class="form-control mt-2" placeholder="Url" required>' + '</div>';
-  return html;
 }
 
 /***/ }),

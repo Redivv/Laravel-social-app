@@ -60,9 +60,9 @@
                         @endforeach
                     @endif
                 </output>
-                <button class="btn likePostButton @auth likeBtn @endauth" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}">
+                <button class="btn likePostButton @auth likeBtn @endauth @if($post->likeCount > 0) active @endif" data-id="{{$post->id}}" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.like')}}">
                     <i class="fas fa-fire likeIcon"></i>
-                    <span class="likesAmount">5</span>
+                    <span class="likesAmount @if($post->likeCount == 0) d-none @endif">{{$post->likeCount}}</span>
                 </button>
                 <hr>
                 <div class="commentsBox">

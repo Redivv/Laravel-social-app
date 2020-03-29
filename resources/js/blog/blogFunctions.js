@@ -227,29 +227,3 @@ export function clearImageInputTagAndPreviewContainer(tag, container) {
     }
 }
 
-export function addNewPartnerInput() {
-    let html = createNewPartnerInput();
-    $(html).insertBefore('#newPartnerButton');
-    turnOnToolipsOn('.partnerDelete>i:last');
-    addOnClickDeleteEventOnRemove('.partnerDelete:last','.partner:last');
-
-    $('.partnerThumb-input:last').on('change',function (evt) {
-        let containerId = $(this).prev().attr('id');
-        displayAddedImageIn(this,evt,'#'+containerId);
-    });
-}
-
-var newPartners = 0;
-function createNewPartnerInput() {
-    newPartners++;
-    let html = 
-    '<div class="form-group partner col">'+
-        '<div class="partnerDelete"><i class="fas fa-times" data-tool="tooltip" title="'+deleteMsg+'"></i></div>'+
-        '<output class="partnerThumb" id="partner'+newPartners+'-New"></output>'+
-        '<input class="partnerThumb-input" type="file" name="partnersImages[]" required>'+
-        '<input type="text" name="partnersNames[]" class="form-control" placeholder="Name" required>'+
-        '<input type="text" name="partnersUrls[]" class="form-control mt-2" placeholder="Url" required>'+
-    '</div>';
-    return html;
-}
-

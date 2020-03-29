@@ -3,6 +3,10 @@
     .blogFeed-sortBtns{
         padding-bottom: 0.5rem;
         text-align: right;
+        #sortRange{
+            display: inline-block;
+            width: unset;
+        }
         .sortBtn{
             @extend .btn;
             text-decoration: none;
@@ -32,6 +36,12 @@
             @include font-size(1rem);
             &:hover{
                 color: $orange;
+            }
+            &.active{
+                color:$orange;
+                &:hover{
+                    color: $orange-hover;
+                }
             }
         }
     }
