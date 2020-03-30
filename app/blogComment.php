@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Conner\Likeable\Likeable;
 use Illuminate\Database\Eloquent\Model;
 
 class blogComment extends Model

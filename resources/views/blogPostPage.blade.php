@@ -67,10 +67,10 @@
                 <hr>
                 <div class="commentsBox">
                     <header>
-                        <h4>Komentarze</h4>
+                        <h4>{{__('profile.comment')}}</h4>
                     </header>
                     @auth
-                        <form class="commentsForm" data-id="" method="post">
+                        <form class="commentsForm" data-id="{{$post->id}}" method="post">
                             <div class="input-group row">
                                 <input type="text" name="commentDesc" class="form-control commentsDesc col-11" placeholder="Napisz Komentarz" aria-label="Napisz Komentarz">
                                 <div class="input-group-append col-1 commentButtons">
@@ -80,16 +80,20 @@
                             <output id="commentUserTags" class="row"></output>
                         </form>
                     @endauth
-                    <output class="commentsFeed"  id="feed-1">
-                        {{-- @if(count($cultureItem->comments) > 0) 
+                    <output class="commentsFeed"  id="commentsFeed">
+                        @if(count($post->comments) > 0) 
                             @include('partials.blog.postComments')
-                        @endif --}}
+                        @endif
                     </output>
                 </div>
             </footer>
         </article>
     @endif
 </div>
+
+@include('partials.home.commentEditModal')
+
+@include('partials.home.tagUsersModal')
 
 @endsection
 
@@ -104,9 +108,20 @@
 
 @push('scripts')
 <script>
-    var baseUrl             = "{{url('/')}}";
+    var baseUrl= "{{url('/')}}";
+    var savedChanges        =  "{{__('profile.savedChanges')}}";
     var deleteHobby         =  "{{__('activityWall.deleteTags')}}";
     var confirmMsg          =  "{{__('admin.confirmMsg')}}";
+    var badFileType             =  "{{__('chat.badFileType')}}";
+    var deleteImages            =  "{{__('activityWall.deleteImages')}}";
+    var deleteTags              =  "{{__('activityWall.deleteTags')}}";
+    var deletePostMsg           =  "{{__('activityWall.deletePost')}}";
+    var emptyCommentMsg         =  "{{__('activityWall.emptyComment')}}";
+    var deleteCommentMsg        =  "{{__('activityWall.deleteComment')}}";
+    var userNotFound            =  "{{__('activityWall.noUserFound')}}";
+    var deleteUserTag           =  "{{__('activityWall.deleteTaggedUser')}}";
+    var emptyUser               =  "{{__('activityWall.emptyUser')}}";
+    var tagUserMessage          =  "{{__('activityWall.tagUser')}}";
 </script>
 
 <script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>

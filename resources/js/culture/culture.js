@@ -607,7 +607,6 @@ function loadMoreComments(selected) {
 function tagUsersPostModal(selected) {
     if (!$('#taggedUsers').find('#tagSpinner').length) {
         let taggedUsers = $('#taggedUsers').html().trim();
-        console.log (taggedUsers);
         $('#tagUsersModal').modal('hide');
 
         let output;

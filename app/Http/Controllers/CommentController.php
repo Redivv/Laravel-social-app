@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\blogComment;
+use App\blogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,6 +37,14 @@ class CommentController extends Controller
                 ]);
 
                 $newComment = new cultureComment;
+            }elseif($request->commentType === "blog"){
+                $request->validate([
+                    'data.0.value' => ['string'],
+                    'itemId'       => ['exists:blog_posts,id','nullable','required_without:parentId'],
+                    'parentId'     => ['exists:blog_comments,id','required_without:itemId'],
+                ]);
+
+                $newComment = new blogComment;
             }else{
                 $request->validate([
                     'data.0.value' => ['string'],
@@ -87,6 +97,25 @@ class CommentController extends Controller
                     }
 
                     $html = view('partials.culture.ajaxCommentReply')->withComment($newComment)->render();
+                }elseif(($request->commentType === "blog")){
+                    $parentComment = blogComment::find($request->parentId);
+                    
+                    $newComment->post_id = $parentComment->post_id;
+                    $newComment->parent_id = $parentComment->id;
+                    
+                    $newComment->save();
+
+                    if ($parentComment->author_id != Auth::id()) {
+                        $parentComment->user->notify(new SystemNotification(__('nav.replyNot',[],$parentComment->user->locale),'info','_blog_',$parentComment->post->name_slug,'#com-'.$parentComment->id, 'newBlogRep'));
+                    }
+
+                    if ($taggedUsers) {
+                        foreach ($taggedUsersArray as $taggedUser) {
+                            $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_blog_',$parentComment->post->name_slug,'#com-'.$parentComment->id, 'tagBlogCom'));
+                        }
+                    }
+
+                    $html = view('partials.blog.ajaxCommentReply')->withComment($newComment)->render();
                 }else{
                     $parentComment = Comment::find($request->parentId);
 
@@ -122,7 +151,7 @@ class CommentController extends Controller
                     $newComment->save();
 
                     if ($item->user_id != Auth::id()) {
-                        $item->user->notify(new SystemNotification(__('nav.commentNot',[],$item->user->locale),'info','_culture_',$newComment->item->name_slug,'#com-'.$newComment->id, 'newCultCom'));
+                        $item->user->notify(new SystemNotification(__('nav.commentCultNot',[],$item->user->locale),'info','_culture_',$newComment->item->name_slug,'#com-'.$newComment->id, 'newCultCom'));
                     }
                     
                     if ($taggedUsers) {
@@ -134,6 +163,26 @@ class CommentController extends Controller
                     }
 
                     $html = view('partials.culture.ajaxCommentSingle')->withComments([$newComment])->render();
+                }elseif($request->commentType === "blog"){
+                    $item = blogPost::find($request->itemId);
+                    
+                    $newComment->post_id = $request->itemId;  
+                    
+                    $newComment->save();
+
+                    if ($item->author_id != Auth::id()) {
+                        $item->user->notify(new SystemNotification(__('nav.commentNot',[],$item->user->locale),'info','_blog_',$newComment->post->name_slug,'#com-'.$newComment->id, 'newBlogCom'));
+                    }
+                    
+                    if ($taggedUsers) {
+                        if ($taggedUsers[1]['name'] != 'noTags') {
+                            foreach ($taggedUsersArray as $taggedUser) {
+                                $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_blog_',$item->name_slug, '#com-'.$newComment->id, 'tagCultCom'));
+                            }
+                        }
+                    }
+
+                    $html = view('partials.blog.ajaxCommentSingle')->withComments([$newComment])->render();
                 }else{
                     $post = Post::find($request->postId);
     
@@ -176,6 +225,13 @@ class CommentController extends Controller
                 ]);
 
                 $comment = cultureComment::where('id',$request->commentId)->where('author_id',Auth::id())->first();
+            }elseif($request->commentType === "blog"){
+                $request->validate([
+                    'data.0.value' => ['string'],
+                    'commentId'    => ['exists:blog_comments,id','nullable']
+                ]);
+
+                $comment = blogComment::where('id',$request->commentId)->where('author_id',Auth::id())->first();
             }else{
                 $request->validate([
                     'data.0.value' => ['string'],
@@ -223,6 +279,16 @@ class CommentController extends Controller
                             }
                         }
                     }
+                }elseif($request->commentType === "blog"){
+                    $html = view('partials.blog.ajaxCommentSingle')->withComments([$comment])->render();
+                    
+                    if ($taggedUsers) {
+                        if ($taggedUsers[1]['name'] != 'noTags') {
+                            foreach ($taggedUsersArray as $taggedUser) {
+                                $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_blog_',$comment->post->name_slug, '#com-'.$comment->id, 'tagBlogCom'));
+                            }
+                        }
+                    }
                 }else{
                     $html = view('partials.home.ajaxWallCommentSingle')->withComments([$comment])->render();
                     
@@ -253,6 +319,18 @@ class CommentController extends Controller
     
                     DB::table('likeable_like_counters')->where('likeable_type',"App\cultureComment")->where('likeable_id',$request->id)->delete();
                     DB::table('likeable_likes')->where('likeable_type',"App\cultureComment")->where('likeable_id',$request->id)->delete();
+    
+                    return response()->json(['status' => 'success'], 200);
+                }
+            }elseif($request->commentType === "blog"){
+                $request->validate([
+                    'id'    => ['required','exists:blog_comments']
+                ]);
+                
+                if(blogComment::where('id',$request->id)->where('author_id',Auth::id())->delete()){
+    
+                    DB::table('likeable_like_counters')->where('likeable_type',"App\blogComment")->where('likeable_id',$request->id)->delete();
+                    DB::table('likeable_likes')->where('likeable_type',"App\blogComment")->where('likeable_id',$request->id)->delete();
     
                     return response()->json(['status' => 'success'], 200);
                 }
@@ -294,6 +372,23 @@ class CommentController extends Controller
                     }
                 }
                 return response()->json(['status' => 'success'], 200);
+            }elseif($request->commentType === "blog"){
+                $request->validate([
+                    'commentId' => 'exists:blog_comments,id'
+                ]);
+
+                $comment = blogComment::find($request->commentId);
+    
+                if ($comment->liked()) {
+                    $comment->unlike();
+                }else{
+                    $comment->like();
+
+                    if ($comment->author_id != Auth::id()) {
+                        $comment->user->notify(new SystemNotification(__('nav.likeComNot',[],$comment->user->locale),'info','_blog_',$comment->item->name_slug,'#com-'.$comment->id, 'likeBlogCom'));
+                    }
+                }
+                return response()->json(['status' => 'success'], 200);
             }else{
                 $request->validate([
                     'commentId' => 'exists:comments,id'
@@ -320,6 +415,23 @@ class CommentController extends Controller
             }
         }
 
+    }
+
+    public function getBlogComments(Request $request, blogPost $blog_post)
+    {
+        if ($request->ajax()) {
+
+            $request->validate([
+                'pagi'  => 'numeric'
+            ]);
+
+            $commentsAmount = count($blog_post->comments);
+
+            $comments = blogComment::where('post_id',$blog_post->id)->whereNull('parent_id')->take(5)->skip(5*$request->pagi)->orderBy('created_at','desc')->get();
+
+            $html = view('partials.blog.ajaxItemComments')->withComments($comments)->withId($blog_post->id)->withPagi($request->pagi+1)->withCommentsAmount($commentsAmount - count($comments))->render();
+            return response()->json(['status' => 'success', 'html' => $html], 200);
+        }
     }
 
     public function getCultComments(Request $request, cultureItem $culture_item)
@@ -356,6 +468,21 @@ class CommentController extends Controller
         }
     }
 
+    public function getBlogReplies(Request $request, blogComment $blog_comment)
+    {
+        if ($request->ajax()) {
+
+            $request->validate([
+                'pagi'  => 'numeric'
+            ]);
+
+            $replies = blogComment::where('parent_id',$blog_comment->id)->take(5)->skip(5*$request->pagi)->orderBy('created_at','desc')->get();
+
+            $html = view('partials.blog.ajaxCommentReplies')->withReplies($replies)->withId($blog_comment->id)->withPagi($request->pagi+1)->render();
+            return response()->json(['status' => 'success', 'html' => $html], 200);
+        }
+    }
+
     public function getCultReplies(Request $request, cultureComment $culture_comment)
     {
         if ($request->ajax()) {
@@ -366,7 +493,7 @@ class CommentController extends Controller
 
             $replies = cultureComment::where('parent_id',$culture_comment->id)->take(5)->skip(5*$request->pagi)->orderBy('created_at','desc')->get();
 
-            $html = view('partials.culture.ajaxCommentReply')->withReplies($replies)->withId($culture_comment->id)->withPagi($request->pagi+1)->render();
+            $html = view('partials.culture.ajaxCommentReplies')->withReplies($replies)->withId($culture_comment->id)->withPagi($request->pagi+1)->render();
             return response()->json(['status' => 'success', 'html' => $html], 200);
         }
     }
@@ -381,7 +508,7 @@ class CommentController extends Controller
 
             $replies = Comment::where('parent_id',$comment->id)->take(5)->skip(5*$request->pagi)->orderBy('created_at','desc')->get();
 
-            $html = view('partials..home.wallReplies')->withReplies($replies)->withId($comment->id)->withPagi($request->pagi+1)->render();
+            $html = view('partials.home.wallReplies')->withReplies($replies)->withId($comment->id)->withPagi($request->pagi+1)->render();
             return response()->json(['status' => 'success', 'html' => $html], 200);
         }
     }
@@ -391,6 +518,26 @@ class CommentController extends Controller
         if ($request->ajax()) {
 
             if($taggedUsers = json_decode($culture_comment->tagged_users)){
+                $users = User::whereIn('name',$taggedUsers)->get();
+
+                if (count($users) > 0) {
+                    $taggedUsersHtml = view('partials.home.wallTaggedUsers')->withTaggedUsers($users)->render();
+                }else{
+                    return response()->json(['status' => 'error'], 400);
+                }
+
+                return response()->json(['status' => 'success', 'html' => $taggedUsersHtml], 200);
+            }else{
+                return response()->json(['status' => 'success', 'html' => ''], 200);
+            }
+        }
+    }
+    
+    public function getBlogTagged(Request $request, blogComment $blog_comment)
+    {
+        if ($request->ajax()) {
+
+            if($taggedUsers = json_decode($blog_comment->tagged_users)){
                 $users = User::whereIn('name',$taggedUsers)->get();
 
                 if (count($users) > 0) {

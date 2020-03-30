@@ -1,4 +1,4 @@
-@foreach($cultureItem->comments as $comment)
+@foreach($post->comments as $comment)
     <div id="com-{{$comment->id}}" class="comment row">
         <div class="col-2 commentProfilePicture">
             <a href="{{route('ProfileOtherView',['user' => $comment->user->name])}}">
@@ -126,8 +126,8 @@
 @endforeach
 
 
-@if (count($cultureItem->comments) == 5)
-<button type="button" data-id="{{$cultureItem->name_slug}}" data-pagi="@if(!isset($pagi)){{"1"}}@else {{$pagi}} @endif" class="btn commentsMoreBtn">
+@if (count($post->comments) == 5)
+<button type="button" data-id="{{$post->name_slug}}" data-pagi="@if(!isset($pagi)){{"1"}}@else {{$pagi}} @endif" class="btn commentsMoreBtn">
     {{__('activityWall.moreComments')}}
     <i class="ml-1 fas fa-sort-down"></i>
 </button>

@@ -61,9 +61,11 @@ Route::prefix('user')->group(function(){
 
         Route::get('getCultComments/{culture_item}', 'CommentController@getCultComments')->name('ajaxGetCultComments');
         Route::get('getComments/{post}', 'CommentController@getComments')->name('ajaxGetComments');
+        Route::get('getBlogComments/{blog_post}', 'CommentController@getBlogComments')->name('ajaxGetBlogComments');
 
         Route::get('getReplies/{comment}', 'CommentController@getReplies')->name('ajaxGetReplies');
         Route::get('getCultReplies/{culture_comment}', 'CommentController@getCultReplies')->name('ajaxGetCultReplies');
+        Route::get('getBlogReplies/{blog_comment}', 'CommentController@getBlogReplies')->name('ajaxGetBlogReplies');
 
         Route::get('getMorePosts', 'HomeController@getMorePosts')->name('ajaxGetPosts');
         Route::put('newComment', 'CommentController@newComment')->name('ajaxNewComment');
@@ -76,6 +78,7 @@ Route::prefix('user')->group(function(){
 
         Route::get('getCommentTaggedUsers/{comment}', 'CommentController@getTagged')->name('ajaxGetCommentTagged');
         Route::get('getCultCommentTaggedUsers/{culture_comment}', 'CommentController@getCultTagged')->name('ajaxGetCultCommentTagged');
+        Route::get('getBlogCommentTaggedUsers/{blog_comment}', 'CommentController@getBlogTagged')->name('ajaxGetBlogCommentTagged');
 
         Route::patch('likeUser', 'HomeController@likeUser')->name('ajaxLikeUser');
     });

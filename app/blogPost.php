@@ -36,6 +36,6 @@ class blogPost extends Model
 
     public function comments()
     {
-        return $this->hasMany('App\blogComment')->whereNull('parent_id')->orderBy('created_at','desc');
+        return $this->hasMany('App\blogComment', 'post_id','id')->whereNull('parent_id')->orderBy('created_at','desc')->take(5);
     }
 }

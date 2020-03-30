@@ -193,8 +193,6 @@
 
 <script src="{{asset('js/emoji.js')}}"></script>
 
-
-
 <script>
     
     $( "#tagName" ).autocomplete({

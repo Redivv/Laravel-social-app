@@ -18,6 +18,7 @@ return [
     'adminWideInfoHeader'       => 'Message from administration',
     'replyNot'                  => 'Somebody anserw on your comment',
     'commentNot'                => 'There is new comment on your post',
+    'commentCultNot'            => 'There is new comment on your item',
     'likePostNot'               => 'Somebody like your post',
     'likeComNot'                => 'Somebody like your comment',
     'taggedInPost'              => 'Somebody tag you in post',
