@@ -34,9 +34,11 @@
     <div class="row">
         <div class="tabsPills col-md-4">
             <div class="nav flex-column nav-pills" id="pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link tab" id="blogCategories" data-toggle="pill" href="#blogCategories-content" role="tab"
-                    aria-controls="blogCategories" aria-selected="true">
+                <a class="nav-link tab" id="blogCategories" data-toggle="pill" href="#blogCategories-content" role="tab" aria-controls="blogCategories" aria-selected="true">
                     {{__('admin.cultureAllCategories')}}
+                </a>
+                <a class="nav-link tab" id="blogEvents" data-toggle="pill" href="#blogEvents-content" role="tab" aria-controls="blogEvents" aria-selected="true">
+                    {{__('admin.cultureAllEvents')}}
                 </a>
                 <hr>
                 <a class="nav-link creatingTab @if($elementType === "post") active @endif" id="blogNewPost" data-toggle="pill" href="#blogNewPost-content" role="tab" aria-controls="blogNewPost" aria-selected="true">
@@ -46,13 +48,24 @@
                         {{__('admin.blogAddPost')}}
                     @endif
                 </a>
+                <a class="nav-link creatingTab @if($elementType === "event") active @endif" id="blogNewEvent" data-toggle="pill" href="#blogNewEvent-content" role="tab" aria-controls="blogNewEvent" aria-selected="true">
+                    @if($elementType === "event")
+                        {{__('admin.blogEditEvent')}}
+                    @else
+                        {{__('admin.blogAddEvent')}}
+                    @endif
+                </a>
             </div>
         </div>
         <div class="tabsContent pt-2 pb-2 overflow-auto col-md-8 col-sm-12">
             <div class="tab-content" id="tabContent">
                 <div class="tab-pane" id="blogCategories-content" role="tabpanel" aria-labelledby="blogCategories-tab"></div>
+                <div class="tab-pane" id="blogEvents-content" role="tabpanel" aria-labelledby="blogEvents-tab"></div>
                 <div class="tab-pane @if($elementType === "post") active @endif" id="blogNewPost-content" role="tabpanel" aria-labelledby="blogNewPost-tab">
                     @include('partials.admin.blog.newPostForm')
+                </div>
+                <div class="tab-pane @if($elementType === "event") active @endif" id="blogNewEvent-content" role="tabpanel" aria-labelledby="blogNewEvent-tab">
+                    @include('partials.admin.blog.newEventForm')
                 </div>
             </div>
         </div>

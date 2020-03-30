@@ -111,7 +111,7 @@ class AdminController extends Controller
     public function getTabContent(Request $request)
     {
         if ($request->ajax()) {
-            $validTargets = ['profileTicket', 'userTicket', 'userList', 'tagList', 'cityList', 'cultureItems', 'cultureCategories','blogCategories'];
+            $validTargets = ['profileTicket', 'userTicket', 'userList', 'tagList', 'cityList', 'cultureItems', 'cultureCategories','blogCategories','blogEvents'];
 
             $target = $request->validate([
                 'target'    => [
@@ -157,6 +157,11 @@ class AdminController extends Controller
                     $elements = $this->getBlogCategories();
                     $amount = null;
                     $html = view('partials.admin.blog.blogCategoriesContent')->withElements($elements)->render();
+                    break;
+                case 'blogEvents':
+                    $elements = $this->getBlogEvents();
+                    $amount = null;
+                    $html = view('partials.admin.blog.blogEventsContent')->withElements($elements)->render();
                     break;
             }
             return response()->json(['status' => 'success', 'html' => $html, 'amount' => $amount], 200);
@@ -637,6 +642,11 @@ class AdminController extends Controller
     private function getBlogCategories(): Collection
     {
         return blogCategory::all();
+    }
+
+    private function getBlogEvents(): Collection
+    {
+        return cultureCategory::all();
     }
 
     private function resolveProfileTicket(array $data, string $decision): void
