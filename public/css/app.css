@@ -27490,7 +27490,7 @@ ul.pagination .page-item.active .page-link {
   border: 1px solid #e3e3e3;
   border-radius: 4px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   text-align: center;
 }
 
@@ -27529,11 +27529,11 @@ ul.pagination .page-item.active .page-link {
 }
 
 .blogExtraPanes .blogWidget .widgetContent #searchTags .postTag {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   word-wrap: break-word;
-  margin: 0.5rem 0.25rem;
+  margin: 0.2rem 0.125rem;
   text-align: center;
-  padding: 0.25rem 0.5rem;
+  padding: 0.125rem 0.25rem;
   border-radius: 20px;
   color: #ffffff;
   background-color: #f66103;
@@ -27551,6 +27551,10 @@ ul.pagination .page-item.active .page-link {
   letter-spacing: 1px;
   text-decoration: none;
   padding: 0.25rem 0.5rem;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #calendar {
+  margin-top: 0.25rem;
 }
 
 .blogExtraPanes .blogWidget .widgetContent #calendar .fc-toolbar {
