@@ -163,6 +163,7 @@ Route::get('/', 'BlogController@index')->name('blog.mainPage');
 Route::prefix('blog')->group(function(){
     Route::get('/{blogPost}', 'BlogController@post')->name('blog.post');
     Route::put('/newPost', 'BlogController@newPost')->name('blog.newPost');
+    Route::put('/newEvent', 'BlogController@newEvent')->name('blog.newEvent');
     Route::delete('/deletePost', 'BlogController@deletePost')->name('blog.deletePost');
     Route::patch('/likePost', "BlogController@likePost");
 });

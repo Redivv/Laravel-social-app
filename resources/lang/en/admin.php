@@ -80,5 +80,8 @@ return [
     'selectCategory'            => "Select Category",
     'itemThumbnail'             => "Thumbnail",
     "postName"                  => "Post Title",
-    'postsCount'                => "Amount of Posts"
+    'postsCount'                => "Amount of Posts",
+    'eventName'                 => "Event Title",
+    'eventSTART'                => "Event Start",
+    'eventSTOP'                 => "Event Stop"
 ];

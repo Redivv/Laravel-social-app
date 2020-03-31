@@ -15,6 +15,7 @@ use App\User;
 use App\City;
 use App\cultureCategory;
 use App\cultureItem;
+use App\Event;
 use Conner\Tagging\Model\Tag;
 
 use Carbon\Carbon;
@@ -92,18 +93,26 @@ class AdminController extends Controller
         $partners   = Partner::all();
 
         $request->validate([
-            'elementType'   => Rule::in(['blogPost']),
+            'elementType'   => Rule::in(['blogPost','event']),
         ]);
 
         $editingElement = null;
         $editingType = null;
 
         if ((isset($request->elementType))) {
-            $request->validate([
-                'elementId'   => ['numeric','exists:blog_posts,id'],
-            ]);
-            $editingElement = blogPost::find($request->elementId);
-            $editingType    = "post";
+            if ($request->elementType == "blogPost") {
+                $request->validate([
+                    'elementId'   => ['numeric','exists:blog_posts,id'],
+                ]);
+                $editingElement = blogPost::find($request->elementId);
+                $editingType    = "post";
+            }else{
+                $request->validate([
+                    'elementId'   => ['numeric','exists:events,id'],
+                ]);
+                $editingElement = Event::find($request->elementId);
+                $editingType    = "event";
+            }
         }
         return view('adminBlogPanel')->withElement($editingElement)->withElementType($editingType)->withCategories($itemCategories)->withPartners($partners);
     }
@@ -210,7 +219,7 @@ class AdminController extends Controller
                 ],
                 'target'       => [
                     'string',
-                    Rule::in(['userTicket', 'userList', 'tagList', 'cityList', 'cultureCategories','blogCategories'])
+                    Rule::in(['userTicket', 'userList', 'tagList', 'cityList', 'cultureCategories','blogCategories','blogEvents'])
                 ]
             ]);
             $elementId = intVal(substr($request->elementId, 10));
@@ -259,6 +268,13 @@ class AdminController extends Controller
                     $selectedElement = blogCategory::find($elementId);
                     if ($selectedElement) {
                         $this->resolveBlogCategory($selectedElement, $request->decision, $request->editValue);
+                    } else {
+                        return response()->json(['status' => 'error'], 400);
+                    }
+                case 'blogEvents':
+                    $selectedElement = Event::find($elementId);
+                    if ($selectedElement) {
+                        $this->resolveBlogEvent($selectedElement);
                     } else {
                         return response()->json(['status' => 'error'], 400);
                     }
@@ -646,7 +662,7 @@ class AdminController extends Controller
 
     private function getBlogEvents(): Collection
     {
-        return cultureCategory::all();
+        return Event::where( 'starts_at','>',Carbon::now()->subMonths((3))->toDateTimeString() )->get();
     }
 
     private function resolveProfileTicket(array $data, string $decision): void
@@ -726,6 +742,11 @@ class AdminController extends Controller
     private function resolveCultureCategory(cultureCategory $category)
     {
         $category->delete();
+    }
+
+    private function resolveBlogEvent(Event $event)
+    {
+        $event->delete();
     }
 
     private function resolveBlogCategory(blogCategory $category, string $decision, ?string $edit)

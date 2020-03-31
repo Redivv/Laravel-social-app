@@ -8,5 +8,6 @@ return [
     'categories'        => "Działy",
     'noPosts'           => 'Brak Postów',
     'sortAsc'           => "Sortuj Posty Rosnąco",
-    'sortDesc'          => "Sortuj Posty Malejąco"
+    'sortDesc'          => "Sortuj Posty Malejąco",
+    'calendar'        => "Nadchodzące Wydarzenia"
 ];

@@ -36,5 +36,6 @@ return [
     'newCultureItem'            => "A New Item Has Been Added To Culture Section",
     'newCultureItemTag'         => "A New Item Related To Your Hobbies Has Been Added",
     'newBlogPost'               => "A New Post Has Been Added To The Blog",
-    'newBlogPostTag'            => "A New Post Related To Your Hobbies Has Been Added To The Blog"
+    'newBlogPostTag'            => "A New Post Related To Your Hobbies Has Been Added To The Blog",
+    'newEvent'                  => "A New Event Has Been Added to the Calendar"
 ]; 

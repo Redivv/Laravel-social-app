@@ -11329,6 +11329,18 @@ function main() {
       alert(emptyFieldsMsg);
     }
   });
+  $('#newEventForm').on('submit', function (e) {
+    e.preventDefault();
+    var eventNameIsFilled = $('#eventName').val().trim() !== "";
+    var eventURLIsFilled = $('#eventURL').val().trim() !== "";
+
+    if (eventNameIsFilled && eventURLIsFilled) {
+      Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_1__["showSpinnerOverlay"])();
+      Object(_blogFunctions__WEBPACK_IMPORTED_MODULE_1__["sendAjaxRequestToWithFormData"])(baseUrl + "/blog/newEvent", this);
+    } else {
+      alert(emptyFieldsMsg);
+    }
+  });
   $('#postTags').on('keydown', function (key) {
     if (key.which == 13 || key.keyCode == 13) {
       key.preventDefault();

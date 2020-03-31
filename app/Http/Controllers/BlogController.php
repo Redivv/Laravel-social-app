@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 
 use App\blogCategory;
 use App\blogPost;
+use App\Event;
 use App\Jobs\newBlogPostNotifications;
+use App\Jobs\newEventPostNotifications;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -28,18 +30,22 @@ class BlogController extends Controller
             $categories = blogCategory::all();
 
             $posts = $this->getSortResults($request);
+
+            $events = Event::where( 'starts_at','>',Carbon::now()->subMonths((3))->toDateTimeString() )->get();
     
-            $events = [
-                0 => [
-                    'title' => 'Event Title1',
-                    'start' => '2020-03-17T13:13:55.008',
-                    'end'   => '2020-03-19T13:13:55.008',
-                    'url'   => 'http://google.com/'
-                ]
-            ];
-            $events = json_encode($events);
+            $eventsJson = [];
+
+            foreach ($events as $event) {
+                $eventsJson[] = [
+                    'title' => $event->name,
+                    'start' => $event->starts_at,
+                    'end'   => $event->ends_at,
+                    'url'   => $event->url
+                ];
+            }
+            $eventsJson = json_encode($eventsJson);
     
-            return view('blogMainPage')->withEvents($events)->withPosts($posts)->withCats($categories);
+            return view('blogMainPage')->withEvents($eventsJson)->withPosts($posts)->withCats($categories);
         }
     }
 
@@ -165,6 +171,80 @@ class BlogController extends Controller
         return view('blogPostPage')->withPost($blogPost);
     }
 
+    public function newEvent(Request $request)
+    {
+        $validatedData          =   $this->validateNewEventData($request);
+        if (isset($validatedData['eventId'])) {
+            $newEvent                = $this->editExistingEvent($validatedData);
+        } else {
+            $newEvent                =   $this->createNewEventFromData($validatedData);
+        }
+
+        if ($this->wasNewEventAddedToDatabase($newEvent)) {
+
+            $users = User::all();
+
+            if (!isset($validatedData['eventId'])) {
+                newEventPostNotifications::dispatch($users,$newEvent);
+            }
+
+            return response()->json(['action' => 'savedData'], 200);
+        }
+    }
+
+    private function validateNewEventData(Request $postData): array
+    {
+        $validatedRequest = $postData->validate([
+            'eventName'         => ['string','required'],
+            'eventURL'          => ['string','url','required'],
+            'eventSTART.date'   => ['string','date_format:Y-m-d','required'],
+            'eventSTART.time'   => ['string','date_format:H:i','required'],
+            'eventSTOP.date'    => ['string','date_format:Y-m-d','required'],
+            'eventSTOP.time'    => ['string','date_format:H:i','required'],
+            'eventId'           => ['exists:events,id','numeric']
+        ]);
+        return $validatedRequest;
+    }
+
+    private function createNewEventFromData(array $data): Event
+    {
+        $newEvent = new Event();
+        
+        $newEvent->name = $data['eventName'];
+        
+        $newEvent->url = $data['eventURL'];
+
+        $eventSTART = new Carbon($data['eventSTART']['date'].' '.$data['eventSTART']['time']);
+        $eventSTOP = new Carbon($data['eventSTOP']['date'].' '.$data['eventSTOP']['time']);
+
+        $newEvent->starts_at    = $eventSTART->toDateTimeString();
+        $newEvent->ends_at      = $eventSTOP->toDateTimeString();
+
+        return $newEvent;
+    }
+
+    private function editExistingEvent(array $data): Event
+    {
+        $event = Event::find($data['eventId']);
+        
+        $event->name = $data['eventName'];
+        
+        $event->url = $data['eventURL'];
+
+        $eventSTART = new Carbon($data['eventSTART']['date'].' '.$data['eventSTART']['time']);
+        $eventSTOP = new Carbon($data['eventSTOP']['date'].' '.$data['eventSTOP']['time']);
+
+        $event->starts_at    = $eventSTART->toDateTimeString();
+        $event->ends_at      = $eventSTOP->toDateTimeString();
+
+        return $event;
+    }
+
+    private function wasNewEventAddedToDatabase(Event $newEvent): bool
+    {
+        return $newEvent->save();
+    }
+
     public function newPost(Request $request)
     {
         $validatedData          =   $this->validateNewPostData($request);
@@ -179,7 +259,9 @@ class BlogController extends Controller
 
             $users = User::all();
 
-            newBlogPostNotifications::dispatch($users,$newPost);
+            if (!isset($validatedData['postId'])) {
+                newBlogPostNotifications::dispatch($users,$newPost);
+            }
 
             return response()->json(['action' => 'savedData'], 200);
         }

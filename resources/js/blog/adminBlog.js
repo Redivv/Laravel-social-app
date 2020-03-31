@@ -84,6 +84,21 @@ function main() {
         }
     });
 
+    $('#newEventForm').on('submit',function(e) {
+        e.preventDefault();
+
+        let eventNameIsFilled       = $('#eventName').val().trim()  !== "";
+        let eventURLIsFilled        = $('#eventURL').val().trim()  !== "";
+
+        if (eventNameIsFilled && eventURLIsFilled) {
+
+            showSpinnerOverlay();
+            sendAjaxRequestToWithFormData(baseUrl+"/blog/newEvent",this);
+        }else{
+            alert(emptyFieldsMsg);
+        }
+    });
+
     $('#postTags').on('keydown',function(key){
         if (key.which == 13 || key.keyCode == 13) {
             key.preventDefault();

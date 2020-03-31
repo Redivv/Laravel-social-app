@@ -2,7 +2,8 @@
 
 namespace App\Jobs;
 
-use App\cultureItem;
+use App\blogPost;
+use App\Event;
 use App\Notifications\SystemNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -11,11 +12,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class newCultureItemNotifications implements ShouldQueue
+class newEventPostNotifications implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $newItem;
+    protected $newEvent;
     protected $users;
 
     public $tries = 2;
@@ -25,10 +26,10 @@ class newCultureItemNotifications implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Collection $users, cultureItem $newItem)
+    public function __construct(Collection $users, Event $newEvent)
     {
         $this->users = $users;
-        $this->newItem = $newItem;
+        $this->newEvent = $newEvent;
     }
 
     /**
@@ -39,11 +40,7 @@ class newCultureItemNotifications implements ShouldQueue
     public function handle()
     {
         foreach ($this->users as $user) {
-            if (empty(array_intersect($user->tagNames(),$this->newItem->tagNames()))) {
-                $user->notify(new SystemNotification(__('nav.newCultureItem',[],$user->locale),'success','_culture_',$this->newItem->name_slug,'', 'cultItem'.$this->newItem->id));
-            }else{
-                $user->notify(new SystemNotification(__('nav.newCultureItemTag',[],$user->locale),'success','_culture_',$this->newItem->name_slug,'', 'cultTagItem'.$this->newItem->id));
-            }
+            $user->notify(new SystemNotification(__('nav.newEvent',[],$user->locale),'success','_blog','','', 'blogEvent'.$this->newEvent->id));
         }
     }
 }

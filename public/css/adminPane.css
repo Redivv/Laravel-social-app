@@ -1396,13 +1396,15 @@ main .tabsContent .returnBtn {
 
 main .tabsContent #newCategoryForm,
 main .tabsContent #newItemForm,
-main .tabsContent #newPostForm {
+main .tabsContent #newPostForm,
+main .tabsContent #newEventForm {
   padding: 0 0.5rem;
 }
 
 main .tabsContent #newCategoryForm label,
 main .tabsContent #newItemForm label,
-main .tabsContent #newPostForm label {
+main .tabsContent #newPostForm label,
+main .tabsContent #newEventForm label {
   font-weight: bold;
   margin-bottom: 0.25rem;
   letter-spacing: 0.5px;
@@ -1411,7 +1413,8 @@ main .tabsContent #newPostForm label {
 
 main .tabsContent #newCategoryForm .attrBox,
 main .tabsContent #newItemForm .attrBox,
-main .tabsContent #newPostForm .attrBox {
+main .tabsContent #newPostForm .attrBox,
+main .tabsContent #newEventForm .attrBox {
   align-items: center;
 }
 
@@ -1420,7 +1423,9 @@ main .tabsContent #newCategoryForm .attrBox .categoryAttrDelete i,
 main .tabsContent #newItemForm .attrBox .categoryAttrAppend i,
 main .tabsContent #newItemForm .attrBox .categoryAttrDelete i,
 main .tabsContent #newPostForm .attrBox .categoryAttrAppend i,
-main .tabsContent #newPostForm .attrBox .categoryAttrDelete i {
+main .tabsContent #newPostForm .attrBox .categoryAttrDelete i,
+main .tabsContent #newEventForm .attrBox .categoryAttrAppend i,
+main .tabsContent #newEventForm .attrBox .categoryAttrDelete i {
   font-size: 1rem;
   padding: 0.5rem;
   cursor: pointer;
@@ -1431,7 +1436,9 @@ main .tabsContent #newCategoryForm .attrBox .categoryAttrDelete i:hover,
 main .tabsContent #newItemForm .attrBox .categoryAttrAppend i:hover,
 main .tabsContent #newItemForm .attrBox .categoryAttrDelete i:hover,
 main .tabsContent #newPostForm .attrBox .categoryAttrAppend i:hover,
-main .tabsContent #newPostForm .attrBox .categoryAttrDelete i:hover {
+main .tabsContent #newPostForm .attrBox .categoryAttrDelete i:hover,
+main .tabsContent #newEventForm .attrBox .categoryAttrAppend i:hover,
+main .tabsContent #newEventForm .attrBox .categoryAttrDelete i:hover {
   color: #f66103;
 }
 
@@ -1443,7 +1450,10 @@ main .tabsContent #newItemForm .newItemButton,
 main .tabsContent #newItemForm .newPostButton,
 main .tabsContent #newPostForm .newCategoryButton,
 main .tabsContent #newPostForm .newItemButton,
-main .tabsContent #newPostForm .newPostButton {
+main .tabsContent #newPostForm .newPostButton,
+main .tabsContent #newEventForm .newCategoryButton,
+main .tabsContent #newEventForm .newItemButton,
+main .tabsContent #newEventForm .newPostButton {
   margin-top: 1rem;
   background-color: #f66103;
   color: #ffffff;
@@ -1461,19 +1471,24 @@ main .tabsContent #newItemForm .newItemButton:hover,
 main .tabsContent #newItemForm .newPostButton:hover,
 main .tabsContent #newPostForm .newCategoryButton:hover,
 main .tabsContent #newPostForm .newItemButton:hover,
-main .tabsContent #newPostForm .newPostButton:hover {
+main .tabsContent #newPostForm .newPostButton:hover,
+main .tabsContent #newEventForm .newCategoryButton:hover,
+main .tabsContent #newEventForm .newItemButton:hover,
+main .tabsContent #newEventForm .newPostButton:hover {
   background-color: #e26103;
 }
 
 main .tabsContent #newCategoryForm #itemCategory,
 main .tabsContent #newItemForm #itemCategory,
-main .tabsContent #newPostForm #itemCategory {
+main .tabsContent #newPostForm #itemCategory,
+main .tabsContent #newEventForm #itemCategory {
   width: 50%;
 }
 
 main .tabsContent #newCategoryForm .noCategoryInfo,
 main .tabsContent #newItemForm .noCategoryInfo,
-main .tabsContent #newPostForm .noCategoryInfo {
+main .tabsContent #newPostForm .noCategoryInfo,
+main .tabsContent #newEventForm .noCategoryInfo {
   width: 100%;
   color: #6c757d;
   font-size: 1rem;
@@ -1483,13 +1498,15 @@ main .tabsContent #newPostForm .noCategoryInfo {
 
 main .tabsContent #newCategoryForm .input-group-append,
 main .tabsContent #newItemForm .input-group-append,
-main .tabsContent #newPostForm .input-group-append {
+main .tabsContent #newPostForm .input-group-append,
+main .tabsContent #newEventForm .input-group-append {
   width: 10%;
 }
 
 main .tabsContent #newCategoryForm .input-group-append #addTagBtn,
 main .tabsContent #newItemForm .input-group-append #addTagBtn,
-main .tabsContent #newPostForm .input-group-append #addTagBtn {
+main .tabsContent #newPostForm .input-group-append #addTagBtn,
+main .tabsContent #newEventForm .input-group-append #addTagBtn {
   width: 100%;
   color: #ffffff;
   background-color: #f66103;
@@ -1497,7 +1514,8 @@ main .tabsContent #newPostForm .input-group-append #addTagBtn {
 
 main .tabsContent #newCategoryForm .input-group-append #addTagBtn:hover,
 main .tabsContent #newItemForm .input-group-append #addTagBtn:hover,
-main .tabsContent #newPostForm .input-group-append #addTagBtn:hover {
+main .tabsContent #newPostForm .input-group-append #addTagBtn:hover,
+main .tabsContent #newEventForm .input-group-append #addTagBtn:hover {
   background-color: #e26103;
 }
 
@@ -1506,7 +1524,9 @@ main .tabsContent #newCategoryForm #postTags-out,
 main .tabsContent #newItemForm #itemTags-out,
 main .tabsContent #newItemForm #postTags-out,
 main .tabsContent #newPostForm #itemTags-out,
-main .tabsContent #newPostForm #postTags-out {
+main .tabsContent #newPostForm #postTags-out,
+main .tabsContent #newEventForm #itemTags-out,
+main .tabsContent #newEventForm #postTags-out {
   width: 100%;
   margin-top: 0.5rem;
   padding: 0.5rem;
@@ -1523,7 +1543,11 @@ main .tabsContent #newItemForm #postTags-out .postTag,
 main .tabsContent #newPostForm #itemTags-out .itemTag,
 main .tabsContent #newPostForm #itemTags-out .postTag,
 main .tabsContent #newPostForm #postTags-out .itemTag,
-main .tabsContent #newPostForm #postTags-out .postTag {
+main .tabsContent #newPostForm #postTags-out .postTag,
+main .tabsContent #newEventForm #itemTags-out .itemTag,
+main .tabsContent #newEventForm #itemTags-out .postTag,
+main .tabsContent #newEventForm #postTags-out .itemTag,
+main .tabsContent #newEventForm #postTags-out .postTag {
   cursor: pointer;
   background-color: #f66103;
   border-radius: 20px;
@@ -1543,7 +1567,11 @@ main .tabsContent #newItemForm #postTags-out .postTag span,
 main .tabsContent #newPostForm #itemTags-out .itemTag span,
 main .tabsContent #newPostForm #itemTags-out .postTag span,
 main .tabsContent #newPostForm #postTags-out .itemTag span,
-main .tabsContent #newPostForm #postTags-out .postTag span {
+main .tabsContent #newPostForm #postTags-out .postTag span,
+main .tabsContent #newEventForm #itemTags-out .itemTag span,
+main .tabsContent #newEventForm #itemTags-out .postTag span,
+main .tabsContent #newEventForm #postTags-out .itemTag span,
+main .tabsContent #newEventForm #postTags-out .postTag span {
   word-wrap: break-word;
   font-size: 0.9rem;
   font-weight: bold;
@@ -1562,7 +1590,11 @@ main .tabsContent #newItemForm #postTags-out .postTag:hover,
 main .tabsContent #newPostForm #itemTags-out .itemTag:hover,
 main .tabsContent #newPostForm #itemTags-out .postTag:hover,
 main .tabsContent #newPostForm #postTags-out .itemTag:hover,
-main .tabsContent #newPostForm #postTags-out .postTag:hover {
+main .tabsContent #newPostForm #postTags-out .postTag:hover,
+main .tabsContent #newEventForm #itemTags-out .itemTag:hover,
+main .tabsContent #newEventForm #itemTags-out .postTag:hover,
+main .tabsContent #newEventForm #postTags-out .itemTag:hover,
+main .tabsContent #newEventForm #postTags-out .postTag:hover {
   background-color: #d22103;
 }
 
@@ -1574,7 +1606,10 @@ main .tabsContent #newItemForm #itemThumbnail-out,
 main .tabsContent #newItemForm #postThumbnail-out,
 main .tabsContent #newPostForm #itemImages-out,
 main .tabsContent #newPostForm #itemThumbnail-out,
-main .tabsContent #newPostForm #postThumbnail-out {
+main .tabsContent #newPostForm #postThumbnail-out,
+main .tabsContent #newEventForm #itemImages-out,
+main .tabsContent #newEventForm #itemThumbnail-out,
+main .tabsContent #newEventForm #postThumbnail-out {
   width: 100%;
   padding: 0.5rem;
 }
@@ -1587,7 +1622,10 @@ main .tabsContent #newItemForm #itemThumbnail-out .resetPictureBox,
 main .tabsContent #newItemForm #postThumbnail-out .resetPictureBox,
 main .tabsContent #newPostForm #itemImages-out .resetPictureBox,
 main .tabsContent #newPostForm #itemThumbnail-out .resetPictureBox,
-main .tabsContent #newPostForm #postThumbnail-out .resetPictureBox {
+main .tabsContent #newPostForm #postThumbnail-out .resetPictureBox,
+main .tabsContent #newEventForm #itemImages-out .resetPictureBox,
+main .tabsContent #newEventForm #itemThumbnail-out .resetPictureBox,
+main .tabsContent #newEventForm #postThumbnail-out .resetPictureBox {
   text-align: right;
 }
 
@@ -1599,7 +1637,10 @@ main .tabsContent #newItemForm #itemThumbnail-out .resetPictureBox i,
 main .tabsContent #newItemForm #postThumbnail-out .resetPictureBox i,
 main .tabsContent #newPostForm #itemImages-out .resetPictureBox i,
 main .tabsContent #newPostForm #itemThumbnail-out .resetPictureBox i,
-main .tabsContent #newPostForm #postThumbnail-out .resetPictureBox i {
+main .tabsContent #newPostForm #postThumbnail-out .resetPictureBox i,
+main .tabsContent #newEventForm #itemImages-out .resetPictureBox i,
+main .tabsContent #newEventForm #itemThumbnail-out .resetPictureBox i,
+main .tabsContent #newEventForm #postThumbnail-out .resetPictureBox i {
   cursor: pointer;
   font-size: 1.1rem;
 }
@@ -1612,7 +1653,10 @@ main .tabsContent #newItemForm #itemThumbnail-out .resetPictureBox i:hover,
 main .tabsContent #newItemForm #postThumbnail-out .resetPictureBox i:hover,
 main .tabsContent #newPostForm #itemImages-out .resetPictureBox i:hover,
 main .tabsContent #newPostForm #itemThumbnail-out .resetPictureBox i:hover,
-main .tabsContent #newPostForm #postThumbnail-out .resetPictureBox i:hover {
+main .tabsContent #newPostForm #postThumbnail-out .resetPictureBox i:hover,
+main .tabsContent #newEventForm #itemImages-out .resetPictureBox i:hover,
+main .tabsContent #newEventForm #itemThumbnail-out .resetPictureBox i:hover,
+main .tabsContent #newEventForm #postThumbnail-out .resetPictureBox i:hover {
   color: #f66103;
 }
 
@@ -1624,7 +1668,10 @@ main .tabsContent #newItemForm #itemThumbnail-out img,
 main .tabsContent #newItemForm #postThumbnail-out img,
 main .tabsContent #newPostForm #itemImages-out img,
 main .tabsContent #newPostForm #itemThumbnail-out img,
-main .tabsContent #newPostForm #postThumbnail-out img {
+main .tabsContent #newPostForm #postThumbnail-out img,
+main .tabsContent #newEventForm #itemImages-out img,
+main .tabsContent #newEventForm #itemThumbnail-out img,
+main .tabsContent #newEventForm #postThumbnail-out img {
   max-width: 8rem;
   max-height: 8rem;
   margin: 0 1rem;

@@ -55,7 +55,7 @@ return [
     'home'                      => 'Zarządzanie Serwisem',
     'cultureAllCategories'      => 'Wszystkie Kategorie',
     'cultureAllItems'           => 'Wszystkie Przedmioty',
-    'cultureAllEvents'          => 'Wszystkie Wydarzenia',
+    'cultureAllEvents'          => 'Lista Aktualnych Wydarzeń',
     'cultureAddItem'            => 'Dodaj Nowy Przedmiot',
     'blogAddPost'               => 'Dodaj Nowy Post',
     'blogAddEvent'              => 'Dodaj Nowe Wydarzenie',
@@ -79,5 +79,9 @@ return [
     'selectCategory'            => "Wybierz Kategorię",
     'itemThumbnail'             => "Miniatura",
     "postName"                  => "Tytuł Posta",
-    'postsCount'                => "Liczba Postów"
+    'postsCount'                => "Liczba Postów",
+    'eventName'                 => "Tytuł Wydarzenia",
+    'eventURL'                  => "Link Wydarzenia",
+    'eventSTART'                => "Początek Wydarzenia",
+    'eventSTOP'                 => "Koniec Wydarzenia"
 ];

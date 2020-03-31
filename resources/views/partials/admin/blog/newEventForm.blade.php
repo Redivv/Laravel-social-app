@@ -1,86 +1,71 @@
-@if ($elementType === "post" && $element)
-<div class="returnBtn">
-    <a class="btn form-btn" href="{{route('adminBlog')}}">
-      {{__('admin.back')}}
-    </a>
-</div>
-<form id="newPostForm" method="post" enctype="multipart/form-data">
-    @method('put')
-    <div class="form-group">
-        <label for="postName">{{__('admin.postName')}}</label>
-        <input type="text" class="postName form-control" name="postName" id="postName" value="{{$element->name}}" required>
+@if ($elementType === "event" && $element)
+    <div class="returnBtn">
+        <a class="btn form-btn" href="{{route('adminBlog')}}">
+        {{__('admin.back')}}
+        </a>
     </div>
-    <div class="form-group">
-        <label class="d-block" for="postCategory">{{__('admin.itemCategory')}}</label>
-        <input id="postCategory" class="postCategory form-control" name="postCategory" value="{{$element->category->name}}">
-    </div>
-    <div class="form-group">
-        <label class="d-block" for="postThumbnail">{{__('admin.itemThumbnail')}}</label>
-        <input type="file" name="postThumbnail" class="postThumbnail form-control-file" id="postThumbnail" accept="image/*" >
-        <output id="postThumbnail-out">
-            <a href="{{asset('img/blog-pictures/'.json_decode($element->thumbnail)[0])}}" data-lightbox="previewThumb">
-                <img src="{{asset('img/blog-pictures/'.json_decode($element->thumbnail)[0])}}" alt="Post Thumbnail">
-            </a>
-        </output>
-    </div>
-    <div class="form-group">
-        <label class="d-block" for="postTags">{{__('admin.itemTags')}}</label>
-        <div class="input-group">
-            <input class="postTags form-control" id="postTags" name="postTags[]">
-            <div class="input-group-append">
-                <button class="btn" type="button" id="addTagBtn">{{__('searcher.add')}}</button>
-            </div>
+    <form id="newEventForm" method="post" enctype="multipart/form-data">
+        @method('put')
+        <div class="form-group">
+            <label for="eventName">{{__('admin.eventName')}}</label>
+            <input type="text" class="eventName form-control" name="eventName" id="eventName" value="{{$element->name}}" required>
         </div>
-        <output class="row" id="postTags-out">
-            @if ($tags = $element->tagNames())
-                @foreach ($tags as $tag)
-                <div class="col postTag" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deleteTags')}}">
-                    <span>{{$tag}}</span>
-                    <input type="hidden" name="postTags[]" value="{{$tag}}">
-                </div>
-                @endforeach
-            @endif
-        </output>
-    </div>
-    <div class="form-group postDesc-box">
-        <label class="d-block" for="postDesc">{{__('profile.desc')}}</label>
-        <textarea name="postDesc" class="postDesc form-control" id="postDesc">{!!$element->description!!}</textarea>
-    </div>
-    <input type="hidden" name="postId" value="{{$element->id}}">
-    <button class="btn btn-block newPostButton" type="submit">{{__('searcher.add')}}</button>
-</form>
-@else
-<form id="newPostForm" method="post" enctype="multipart/form-data">
-    @method('put')
-    <div class="form-group">
-        <label for="postName">{{__('admin.postName')}}</label>
-        <input type="text" class="postName form-control" name="postName" id="postName" required>
-    </div>
-    <div class="form-group">
-        <label class="d-block" for="postCategory">{{__('admin.itemCategory')}}</label>
-        <input id="postCategory" class="postCategory form-control" name="postCategory" required>
-    </div>
-    <div class="form-group">
-        <label class="d-block" for="postThumbnail">{{__('admin.itemThumbnail')}}</label>
-        <input type="file" name="postThumbnail" class="postThumbnail form-control-file" id="postThumbnail" accept="image/*" required>
-        <output id="postThumbnail-out"></output>
-    </div>
-    <div class="form-group">
-        <label class="d-block" for="postTags">{{__('admin.itemTags')}}</label>
-        <div class="input-group">
-            <input class="postTags form-control" id="postTags" name="postTags[]">
-            <div class="input-group-append">
-                <button class="btn" type="button" id="addTagBtn">{{__('searcher.add')}}</button>
-            </div>
+        <div class="form-group">
+            <label class="d-block" for="eventURL">{{__('admin.itemCategory')}}</label>
+            <input id="eventURL" class="eventURL form-control" name="eventURL" value="{{$element->url}}">
         </div>
-        <output class="row" id="postTags-out">
-        </output>
-    </div>
-    <div class="form-group postDesc-box">
-        <label class="d-block" for="postDesc">{{__('profile.desc')}}</label>
-        <textarea name="postDesc" class="postDesc form-control" id="postDesc" required></textarea>
-    </div>
 
-    <button class="btn btn-block newPostButton" type="submit">{{__('searcher.add')}}</button>
-</form>
+        @php
+            $start = explode(" ",$element->starts_at);
+            $stop = explode(" ",$element->ends_at);
+        @endphp
+        <div class="form-group">
+            <label class="d-block" for="eventSTART">{{__('admin.eventSTART')}}</label>
+            <div class="input-group">
+                <input type="date" name="eventSTART[date]" class="form-control" required value="{{$start[0]}}">
+                <input type="time" name="eventSTART[time]" class="form-control" required value="{{substr($start[1],0,-3)}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="d-block" for="eventSTOP">{{__('admin.eventSTOP')}}</label>
+            <div class="input-group">
+                <input type="date" name="eventSTOP[date]" class="form-control" required value="{{$stop[0]}}">
+                <input type="time" name="eventSTOP[time]" class="form-control" required value="{{substr($stop[1],0,-3)}}">
+            </div>
+        </div>
+
+        <input type="hidden" name="eventId" value="{{$element->id}}">
+        
+        <button class="btn btn-block newPostButton" type="submit">{{__('searcher.add')}}</button>
+    </form>
+@else
+    <form id="newEventForm" method="post">
+        @method('put')
+        <div class="form-group">
+            <label for="eventName">{{__('admin.eventName')}}</label>
+            <input type="text" class="eventName form-control" name="eventName" id="eventName" required>
+        </div>
+        <div class="form-group">
+            <label class="d-block" for="eventURL">{{__('admin.eventURL')}}</label>
+            <input id="eventURL" class="eventURL form-control" name="eventURL" required>
+        </div>
+
+        <div class="form-group">
+            <label class="d-block" for="eventSTART">{{__('admin.eventSTART')}}</label>
+            <div class="input-group">
+                <input type="date" name="eventSTART[date]" class="form-control" required>
+                <input type="time" name="eventSTART[time]" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="d-block" for="eventSTOP">{{__('admin.eventSTOP')}}</label>
+            <div class="input-group">
+                <input type="date" name="eventSTOP[date]" class="form-control" required>
+                <input type="time" name="eventSTOP[time]" class="form-control" required>
+            </div>
+        </div>
+
+
+        <button class="btn btn-block newPostButton" type="submit">{{__('searcher.add')}}</button>
+    </form>
 @endif

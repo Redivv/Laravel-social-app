@@ -87,12 +87,12 @@ class CommentController extends Controller
                     $newComment->save();
 
                     if ($parentComment->author_id != Auth::id()) {
-                        $parentComment->user->notify(new SystemNotification(__('nav.replyNot',[],$parentComment->user->locale),'info','_culture_',$parentComment->item->name_slug,'#com-'.$parentComment->id, 'newCultRep'));
+                        $parentComment->user->notify(new SystemNotification(__('nav.replyNot',[],$parentComment->user->locale),'info','_culture_',$parentComment->item->name_slug,'#com-'.$parentComment->id, 'newCultRep'.$parentComment->item->id));
                     }
 
                     if ($taggedUsers) {
                         foreach ($taggedUsersArray as $taggedUser) {
-                            $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_culture_',$parentComment->item->name_slug,'#com-'.$parentComment->id, 'tagCultCom'));
+                            $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_culture_',$parentComment->item->name_slug,'#com-'.$parentComment->id, 'tagCultCom'.$parentComment->item->id));
                         }
                     }
 
@@ -106,12 +106,12 @@ class CommentController extends Controller
                     $newComment->save();
 
                     if ($parentComment->author_id != Auth::id()) {
-                        $parentComment->user->notify(new SystemNotification(__('nav.replyNot',[],$parentComment->user->locale),'info','_blog_',$parentComment->post->name_slug,'#com-'.$parentComment->id, 'newBlogRep'));
+                        $parentComment->user->notify(new SystemNotification(__('nav.replyNot',[],$parentComment->user->locale),'info','_blog_',$parentComment->post->name_slug,'#com-'.$parentComment->id, 'newBlogRep'.$parentComment->post->id));
                     }
 
                     if ($taggedUsers) {
                         foreach ($taggedUsersArray as $taggedUser) {
-                            $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_blog_',$parentComment->post->name_slug,'#com-'.$parentComment->id, 'tagBlogCom'));
+                            $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_blog_',$parentComment->post->name_slug,'#com-'.$parentComment->id, 'tagBlogCom'.$parentComment->post->id));
                         }
                     }
 
@@ -127,12 +127,12 @@ class CommentController extends Controller
                         $newComment->save();
     
                         if ($parentComment->author_id != Auth::id()) {
-                            $parentComment->user->notify(new SystemNotification(__('nav.replyNot',[],$parentComment->user->locale),'info','_user_home_post_',$parentComment->post->id,'#com-'.$parentComment->id, 'newRep'));
+                            $parentComment->user->notify(new SystemNotification(__('nav.replyNot',[],$parentComment->user->locale),'info','_user_home_post_',$parentComment->post->id,'#com-'.$parentComment->id, 'newRep'.$parentComment->post->id));
                         }
     
                         if ($taggedUsers) {
                             foreach ($taggedUsersArray as $taggedUser) {
-                                $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_user_home_post_',$parentComment->post->id,'#com-'.$parentComment->id, 'tagCom'));
+                                $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_user_home_post_',$parentComment->post->id,'#com-'.$parentComment->id, 'tagCom'.$parentComment->post->id));
                             }
                         }
     
@@ -151,13 +151,13 @@ class CommentController extends Controller
                     $newComment->save();
 
                     if ($item->user_id != Auth::id()) {
-                        $item->user->notify(new SystemNotification(__('nav.commentCultNot',[],$item->user->locale),'info','_culture_',$newComment->item->name_slug,'#com-'.$newComment->id, 'newCultCom'));
+                        $item->user->notify(new SystemNotification(__('nav.commentCultNot',[],$item->user->locale),'info','_culture_',$newComment->item->name_slug,'#com-'.$newComment->id, 'newCultCom'.$newComment->item->id));
                     }
                     
                     if ($taggedUsers) {
                         if ($taggedUsers[1]['name'] != 'noTags') {
                             foreach ($taggedUsersArray as $taggedUser) {
-                                $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_culture_',$item->name_slug, '#com-'.$newComment->id, 'tagCultCom'));
+                                $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_culture_',$item->name_slug, '#com-'.$newComment->id, 'tagCultCom'.$newComment->item->id));
                             }
                         }
                     }
@@ -171,13 +171,13 @@ class CommentController extends Controller
                     $newComment->save();
 
                     if ($item->author_id != Auth::id()) {
-                        $item->user->notify(new SystemNotification(__('nav.commentNot',[],$item->user->locale),'info','_blog_',$newComment->post->name_slug,'#com-'.$newComment->id, 'newBlogCom'));
+                        $item->user->notify(new SystemNotification(__('nav.commentNot',[],$item->user->locale),'info','_blog_',$newComment->post->name_slug,'#com-'.$newComment->id, 'newBlogCom'.$newComment->post->id));
                     }
                     
                     if ($taggedUsers) {
                         if ($taggedUsers[1]['name'] != 'noTags') {
                             foreach ($taggedUsersArray as $taggedUser) {
-                                $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_blog_',$item->name_slug, '#com-'.$newComment->id, 'tagCultCom'));
+                                $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_blog_',$item->name_slug, '#com-'.$newComment->id, 'tagCultCom'.$newComment->post->id));
                             }
                         }
                     }
@@ -193,13 +193,13 @@ class CommentController extends Controller
                         $newComment->save();
     
                         if ($post->user_id != Auth::id()) {
-                            $post->user->notify(new SystemNotification(__('nav.commentNot',[],$post->user->locale),'info','_user_home_post_',$newComment->post->id,'#com-'.$newComment->id, 'newCom'));
+                            $post->user->notify(new SystemNotification(__('nav.commentNot',[],$post->user->locale),'info','_user_home_post_',$newComment->post->id,'#com-'.$newComment->id, 'newCom'.$newComment->post->id));
                         }
                         
                         if ($taggedUsers) {
                             if ($taggedUsers[1]['name'] != 'noTags') {
                                 foreach ($taggedUsersArray as $taggedUser) {
-                                    $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_user_home_post_',$post->id, '#com-'.$newComment->id, 'tagCom'));
+                                    $taggedUser->notify(new SystemNotification(__('nav.taggedInComment',[],$taggedUser->locale),'success','_user_home_post_',$post->id, '#com-'.$newComment->id, 'tagCom'.$newComment->post->id));
                                 }
                             }
                         }

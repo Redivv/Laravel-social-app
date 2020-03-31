@@ -251,6 +251,12 @@ function main() {
     
         var calendar = new Calendar(calendarEl, {
             plugins: [ dayGridPlugin,interaction ],
+            header:{
+                left:   'title',
+                center: '',
+                right:  'prev,next'
+            },
+            aspectRatio: 1,
             locale: "pl",
             locales: [plLocale],
             events: JSON.parse(events),

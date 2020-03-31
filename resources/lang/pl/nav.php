@@ -36,5 +36,6 @@ return [
     'newCultureItem'            => "Dodano Nowy Przedmiot do Działu Kultura",
     'newCultureItemTag'         => "Dodano Nowy Przedmiot Związany z Twoimi Zainteresowaniami",
     'newBlogPost'               => "Na Blogu Pojawił Sie Nowy Wpis",
-    'newBlogPostTag'            => "Na Blogu Pojawił Sie Nowy Wpis Związany z Twoimi Zainteresowaniami"
+    'newBlogPostTag'            => "Na Blogu Pojawił Sie Nowy Wpis Związany z Twoimi Zainteresowaniami",
+    'newEvent'                  => "Dodano Nowe Wydarzenie do Kalendarza"
 ]; 

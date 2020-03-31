@@ -97,7 +97,9 @@ class CultureController extends Controller
 
             $users = User::all();
 
-            newCultureItemNotifications::dispatch($users,$newItem);
+            if (!isset($validatedData['itemId'])) {
+                newCultureItemNotifications::dispatch($users,$newItem);
+            }
 
             return response()->json(['action' => 'savedData'], 200);
         }

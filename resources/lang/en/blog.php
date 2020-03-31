@@ -8,5 +8,6 @@ return [
     'categories'        => "Categories",
     'noPosts'           => 'No posts',
     'sortAsc'           => "Sort Posts Asceding",
-    'sortDesc'          => "Sort Posts Descending"
+    'sortDesc'          => "Sort Posts Descending",
+    'calendar'          => "Upcoming Events"
 ];

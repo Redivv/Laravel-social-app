@@ -24,5 +24,6 @@ return [
     'termsOfDoc1'               => 'Terms of Service',
     'termsOfDoc2'               => 'Privacy policy',
     'mailInfo'                  => 'After registering it is required to verify email address via link send in a message. Messages typically come after a few minutes up to an hour.',
-    'cultureLink'               => 'Check out our cultural base'
+    'cultureLink'               => 'Check out our cultural base',
+    'blogLink'                  => 'Read Our Blog'
 ];

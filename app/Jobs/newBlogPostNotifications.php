@@ -40,9 +40,9 @@ class newBlogPostNotifications implements ShouldQueue
     {
         foreach ($this->users as $user) {
             if (empty(array_intersect($user->tagNames(),$this->newPost->tagNames()))) {
-                $user->notify(new SystemNotification(__('nav.newBlogPost',[],$user->locale),'success','_blog_',$this->newPost->name_slug,'', 'blogPost'));
+                $user->notify(new SystemNotification(__('nav.newBlogPost',[],$user->locale),'success','_blog_',$this->newPost->name_slug,'', 'blogPost'.$this->newPost->id));
             }else{
-                $user->notify(new SystemNotification(__('nav.newBlogPostTag',[],$user->locale),'success','_blog_',$this->newPost->name_slug,'', 'blogTagPost'));
+                $user->notify(new SystemNotification(__('nav.newBlogPostTag',[],$user->locale),'success','_blog_',$this->newPost->name_slug,'', 'blogTagPost'.$this->newPost->id));
             }
         }
     }

@@ -27549,13 +27549,63 @@ ul.pagination .page-item.active .page-link {
   font-size: 0.85rem;
   font-weight: bold;
   letter-spacing: 1px;
-  margin-top: 0.25rem;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
 }
 
-.blogExtraPanes .blogWidget .widgetContent .widgetAuthor a,
-.blogExtraPanes .blogWidget .widgetContent .widgetCategory a {
-  text-decoration: none;
-  padding: 0.5rem;
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-toolbar {
+  margin-bottom: 0.5rem;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-toolbar h2 {
+  font-size: 1rem;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-toolbar .fc-button-group {
+  font-size: 0.65rem;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-toolbar .fc-button-group button {
+  display: flex;
+  align-items: center;
+  background-color: #f66103;
+  border-color: #f66103;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-toolbar .fc-button-group button:hover {
+  background-color: #e26103;
+  border-color: #e26103;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-view-container {
+  font-size: 0.7rem;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-view-container .fc-scroller {
+  overflow-y: auto;
+  max-height: 25vh;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-view-container .fc-event-container .fc-event {
+  background-color: #f66103;
+  border-color: #f66103;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-view-container .fc-event-container .fc-event:hover {
+  background-color: #f22103;
+  border-color: #f22103;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-view-container .fc-event-container .fc-time {
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-view-container .fc-event-container .fc-title {
+  font-size: 0.6rem;
+  letter-spacing: 0.5px;
 }
 
 .blogExtraPanes .blogWidget .widgetFooter {

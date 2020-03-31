@@ -214,10 +214,56 @@
                 @include font-size(0.85rem);
                 font-weight: bold;
                 letter-spacing: 1px;
-                margin-top: 0.25rem;
-                a{
-                    text-decoration: none;
-                    padding: 0.5rem;
+                text-decoration: none;
+                padding: 0.25rem 0.5rem;
+            }
+
+            #calendar{
+                .fc-toolbar{
+                    margin-bottom: 0.5rem;
+                    h2{
+                        @include font-size(1rem);
+                        text-transform: capitalize;
+                        letter-spacing: 0.5px;
+                    }
+                    .fc-button-group{
+                        @include font-size(0.65rem);
+                        button{
+                            display: flex;
+                            align-items: center;
+                            background-color: $orange;
+                            border-color: $orange;
+                            &:hover{
+                                background-color: $orange-hover;
+                                border-color: $orange-hover;
+                            }
+                        }
+                    }
+                }
+                .fc-view-container{
+                    @include font-size(0.7rem);
+                    .fc-scroller{
+                        overflow-y: auto;
+                        max-height: 25vh;
+                    }
+                    .fc-event-container{
+                        .fc-event{
+                            background-color: $orange;
+                            border-color: $orange;
+                            &:hover{
+                                background-color: $orange-active;
+                                border-color: $orange-active;
+                            }
+                        }
+                        .fc-time{
+                            @include font-size(0.65rem);
+                            letter-spacing: 1px;
+                        }
+                        .fc-title{
+                            @include font-size(0.6rem);
+                            letter-spacing: 0.5px;
+                        }
+                    }
                 }
             }
         }
@@ -254,6 +300,7 @@
             right: 0;
         }
     }
+
 }
 
 #showSearchMenu{

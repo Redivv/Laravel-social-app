@@ -24092,6 +24092,12 @@ function main() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_1__["Calendar"](calendarEl, {
       plugins: [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_2__["default"], _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_3__["default"]],
+      header: {
+        left: 'title',
+        center: '',
+        right: 'prev,next'
+      },
+      aspectRatio: 1,
       locale: "pl",
       locales: [_fullcalendar_core_locales_pl__WEBPACK_IMPORTED_MODULE_4___default.a],
       events: JSON.parse(events),

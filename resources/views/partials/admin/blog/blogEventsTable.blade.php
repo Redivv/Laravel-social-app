@@ -2,31 +2,29 @@
     <thead class="thead-light">
         <tr>
             <th scope="col">{{__('admin.tagListTable1')}}</th>
-            <th scope="col">{{__('admin.attrs')}}</th>
-            <th scope="col">{{__('admin.cityListTable2')}}</th>
+            <th scope="col">{{__('admin.eventSTART')}}</th>
+            <th scope="col">{{__('admin.eventSTOP')}}</th>
+            <th scope="col">{{__('admin.eventURL')}}</th>
             <th scope="col">
                 {{__('admin.profileTicketTable3')}}
             </th>
         </tr>
     </thead>
-    <tbody id="cityList-table">
+    <tbody id="eventList-table">
         @foreach ($elements as $element)
             <tr>
                 <th scope="row">{{$element->name}}</th>
+                <td> {{$element->starts_at}} </td>
+                <td>{{$element->ends_at}}</td>
                 <td>
-                    @if ($attrs = json_decode($element->attributes))
-                        @foreach ($attrs as $attribute)
-                            {{__($attribute)}}@if ($loop->remaining > 0) , @endif
-                        @endforeach
-                    @endif
+                    <a href="{{$element->url}}">{{$element->url}}</a>
                 </td>
-                <td>{{$element->created_at->diffForHumans()}}</td>
                 <td>
                     <form class="adminForm d-inline">
-                        <button type="submit" class="btn form-btn">
+                        <a type="submit" class="btn form-btn" href="{{route('adminBlog')."?elementType=event&elementId=".$element->id}}">
                             {{__('admin.edit')}} 
-                        </button>
-                        <input type="hidden" name="elementType" value="cultureCategory">
+                        </a>
+                        <input type="hidden" name="elementType" value="event">
                         <input type="hidden" name="elementId"   value="{{$element->id}}">
                         <button name="delete" type="submit" class="btn form-btn listBtn deleteBtn">
                             {{__('admin.delete')}} 

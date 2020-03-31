@@ -159,8 +159,13 @@
                 </div>
             @endif
 
-            <div id="calendar">
-                
+            <div class="blogWidget">
+                <header class="widgetHeader">
+                    <span>{{__('blog.calendar')}}</span>
+                </header>
+                <main class="widgetContent">
+                    <div id="calendar"></div>
+                </main>
             </div>
         </aside>
         <span id="showSearchMenu"><i class="fas fa-search"></i></span>
