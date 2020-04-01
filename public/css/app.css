@@ -27290,6 +27290,13 @@ u {
   padding-left: 15px;
 }
 
+@media screen and (max-width: 992px) {
+  #blogContainer .blogFeed {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
 #blogContainer .blogExtraPanes {
   flex: 0 0 25%;
   max-width: 25%;
@@ -27297,6 +27304,27 @@ u {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
+}
+
+@media screen and (max-width: 992px) {
+  #blogContainer .blogExtraPanes {
+    position: fixed;
+    right: -100%;
+    max-width: 50%;
+    transition: right 1s linear;
+    background: #f8fafc;
+    z-index: 1001;
+    overflow-y: auto;
+    padding: 0.5rem;
+    border: solid 3px #a1a1a1;
+    border-right: 0;
+    top: 5%;
+    height: 85%;
+  }
+
+  #blogContainer .blogExtraPanes.show {
+    right: 0;
+  }
 }
 
 #blogContainer:first-of-type(u) {
@@ -27504,13 +27532,6 @@ u {
 .blogFeed .blogFeed-posts .blogFeed-post .postFooter .postReadMoreBtn:hover {
   color: #ffffff;
   background-color: #e26103;
-}
-
-@media screen and (max-width: 992px) {
-  .blogFeed {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
 }
 
 .blogExtraPanes {
@@ -27730,27 +27751,6 @@ u {
 
 .blogExtraPanes #eventsWidget > .widgetContent {
   max-height: 40vh;
-}
-
-@media screen and (max-width: 992px) {
-  .blogExtraPanes {
-    position: fixed;
-    right: -100%;
-    max-width: 50%;
-    transition: right 1s linear;
-    background: #f8fafc;
-    z-index: 1001;
-    overflow-y: auto;
-    padding: 0.5rem;
-    border: solid 3px #a1a1a1;
-    border-right: 0;
-    top: 10%;
-    height: 80%;
-  }
-
-  .blogExtraPanes.show {
-    right: 0;
-  }
 }
 
 #showSearchMenu {

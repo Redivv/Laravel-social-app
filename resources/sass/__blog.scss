@@ -9,6 +9,10 @@ u{
         width: 100%;
         padding-right: 15px;
         padding-left: 15px;
+        @media screen and (max-width: $breakpoint1) {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
     }
     .blogExtraPanes{
         flex: 0 0 25%;
@@ -17,6 +21,23 @@ u{
         width: 100%;
         padding-right: 15px;
         padding-left: 15px;
+        @media screen and (max-width: $breakpoint1) {
+            position: fixed;
+            right: -100%;
+            max-width: 50%;
+            transition:right 1s linear;
+            background:$laravel-grey;
+            z-index: 1001;
+            overflow-y: auto;
+            padding: 0.5rem;
+            border: solid 3px $grey;
+            border-right: 0;
+            top: 5%;
+            height: 85%;
+            &.show{
+                right: 0;
+            }
+        }
     }
     &:first-of-type(u){
         flex: 0 0 25%;
@@ -181,10 +202,6 @@ u{
                 }
             }
         }
-    }
-    @media screen and (max-width: $breakpoint1) {
-        flex: 0 0 100%;
-        max-width: 100%;
     }
 }
 
@@ -376,23 +393,6 @@ u{
     
     #eventsWidget>.widgetContent{
         max-height: 40vh;
-    }
-    @media screen and (max-width: $breakpoint1) {
-        position: fixed;
-        right: -100%;
-        max-width: 50%;
-        transition:right 1s linear;
-        background:$laravel-grey;
-        z-index: 1001;
-        overflow-y: auto;
-        padding: 0.5rem;
-        border: solid 3px $grey;
-        border-right: 0;
-        top: 10%;
-        height: 80%;
-        &.show{
-            right: 0;
-        }
     }
 
 }
