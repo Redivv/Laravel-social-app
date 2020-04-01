@@ -434,7 +434,7 @@ u{
     padding: 0.5rem 1rem 0.5rem 0.5rem;
     left: -100%;
     border-radius: 0 50% 50% 0;
-    @media screen and (max-width: $mobile-breakpoint) {
+    @media screen and (max-width: $breakpoint1) {
         left: 0;
     }
 }

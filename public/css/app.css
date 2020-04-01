@@ -27803,7 +27803,7 @@ u {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 992px) {
   #showSearchMenu {
     left: 0;
   }
