@@ -24092,9 +24092,18 @@ function main() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_1__["Calendar"](calendarEl, {
       plugins: [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_2__["default"], _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_3__["default"]],
+      customButtons: {
+        listButton: {
+          text: listText,
+          click: function click() {
+            $('#calendar').addClass('d-none');
+            $('#eventsList').removeClass('d-none');
+          }
+        }
+      },
       header: {
         left: 'title',
-        center: '',
+        center: 'listButton',
         right: 'prev,next'
       },
       aspectRatio: 1,
@@ -24112,6 +24121,10 @@ function main() {
       }
     });
     calendar.render();
+    $('#calendarButton').on('click', function () {
+      $('#calendar').removeClass('d-none');
+      $('#eventsList').addClass('d-none');
+    });
   }
 
   $('input[type=radio],select').change(function () {

@@ -9,5 +9,8 @@ return [
     'noPosts'           => 'Brak Postów',
     'sortAsc'           => "Sortuj Posty Rosnąco",
     'sortDesc'          => "Sortuj Posty Malejąco",
-    'calendar'        => "Nadchodzące Wydarzenia"
+    'calendar'          => "Nadchodzące Wydarzenia",
+    'eventsList'        => "Lista",
+    'eventCalendar'     => "Kalendarz",
+    'noEvents'          => "Nie ma Nadchodzących Wydarzeń"
 ];

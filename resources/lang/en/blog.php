@@ -9,5 +9,8 @@ return [
     'noPosts'           => 'No posts',
     'sortAsc'           => "Sort Posts Asceding",
     'sortDesc'          => "Sort Posts Descending",
-    'calendar'          => "Upcoming Events"
+    'calendar'          => "Upcoming Events",
+    'eventsList'        => "List",
+    'eventCalendar'     => "Calendar",
+    'noEvents'          => "There are no Upcoming Events"
 ];

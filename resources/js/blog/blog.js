@@ -251,9 +251,18 @@ function main() {
     
         var calendar = new Calendar(calendarEl, {
             plugins: [ dayGridPlugin,interaction ],
+            customButtons: {
+              listButton: {
+                text: listText,
+                click: function() {
+                    $('#calendar').addClass('d-none');
+                    $('#eventsList').removeClass('d-none');
+                }
+              }
+            },
             header:{
                 left:   'title',
-                center: '',
+                center: 'listButton',
                 right:  'prev,next'
             },
             aspectRatio: 1,
@@ -274,6 +283,11 @@ function main() {
         });
     
         calendar.render();
+
+        $('#calendarButton').on('click',function() {
+            $('#calendar').removeClass('d-none');
+            $('#eventsList').addClass('d-none');
+        });
     }
 
     $('input[type=radio],select').change(function() {

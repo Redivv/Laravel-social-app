@@ -662,7 +662,7 @@ class AdminController extends Controller
 
     private function getBlogEvents(): Collection
     {
-        return Event::where( 'starts_at','>',Carbon::now()->subMonths((3))->toDateTimeString() )->get();
+        return Event::where( 'starts_at','>',Carbon::now()->toDateTimeString() )->get();
     }
 
     private function resolveProfileTicket(array $data, string $decision): void

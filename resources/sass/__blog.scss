@@ -176,6 +176,7 @@
             letter-spacing: 1px;
         }
         .widgetContent{
+            overflow-y: auto;
             padding: 0 0.25rem;
             .tagCriteria{
                 padding-top: 0.5rem;
@@ -240,13 +241,18 @@
                             }
                         }
                     }
+                    .fc-listButton-button{
+                        @include font-size(0.85rem);
+                        opacity: 1;
+                        background-color: $orange;
+                        border-color: $orange;
+                        &:hover{
+                            background-color: $orange-hover;
+                        }
+                    }
                 }
                 .fc-view-container{
                     @include font-size(0.7rem);
-                    .fc-scroller{
-                        overflow-y: auto;
-                        max-height: 25vh;
-                    }
                     .fc-event-container{
                         .fc-event{
                             background-color: $orange;
@@ -267,6 +273,52 @@
                     }
                 }
             }
+            #eventsList{
+                padding-top: 0.5rem;
+                #calendarButton{
+                    @include font-size(0.85rem);
+                    background-color: $orange;
+                    color: $white;
+                    &:hover{
+                        background-color: $orange-hover;
+                    }
+                }
+                .noEventsText{
+                    @include font-size(1.1rem);
+                    padding-top:1rem;
+                    letter-spacing: 0.5px;
+                    @extend .text-muted;
+
+                }
+                ul{
+                    padding: 0;
+                    padding-top:0.5rem;
+                    margin: 0;
+                    text-align: left;
+                    a{
+                        display: block;
+                        padding: 0.5rem 0.75rem;
+                        border-radius: 20px;
+                        text-decoration: none;
+                        .event{
+                            .eventTime{
+                                @extend .text-muted;
+                                @include font-size(0.8rem);
+                                letter-spacing: 0.5px;
+                            }
+                            .eventTitle{
+                                @include font-size(1rem);
+                                font-weight: bold;
+                                letter-spacing: 1px;
+                                color: $black;
+                            }
+                        }
+                        &:hover{
+                            background-color: $light-orange;
+                        }
+                    }
+                }
+            }
         }
         .widgetFooter{
             padding: 0.5rem 1rem;
@@ -283,6 +335,18 @@
                 display: block;
             }
         }
+    }
+    
+    #searchWidget>.widgetContent{
+        max-height: 11vh;
+    }
+    
+    #categoriesWidget>.widgetContent{
+        max-height: 8vh;
+    }
+    
+    #eventsWidget>.widgetContent{
+        max-height: 40vh;
     }
     @media screen and (max-width: $breakpoint1) {
         position: fixed;

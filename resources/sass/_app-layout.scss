@@ -12,10 +12,10 @@ body{
 
 iframe{
     display: block;
-    margin: 0.5rem 0 !important;
+    margin: auto !important;
+    max-width: 100%;
     width: 100% !important;
     min-width: unset !important;
-    max-width: unset !important;
 }
 #navbarMobile{
     .navbar-nav{

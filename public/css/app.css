@@ -15315,6 +15315,8 @@ a.text-dark:focus {
 #blogFeed-singlePost .postFooter .commentsBox .commentsFeed .comment .commentContent .commentDate,
 #blogFeed-singlePost .postFooter .commentsBox .commentsFeed .reply .commentContent .commentDate,
 #blogFeed-singlePost .postHeader .postDetails .postDate,
+.blogExtraPanes .blogWidget .widgetContent #eventsList ul a .event .eventTime,
+.blogExtraPanes .blogWidget .widgetContent #eventsList .noEventsText,
 .blogFeed .blogFeed-posts .blogFeed-post .postHeader .postDetails .postDate,
 .culture_page-container .item-container .itemComments .commentsFeed .comment .commentContent .commentDate,
 .culture_page-container .item-container .itemComments .commentsFeed .reply .commentContent .commentDate,
@@ -21881,10 +21883,10 @@ body {
 
 iframe {
   display: block;
-  margin: 0.5rem 0 !important;
+  margin: auto !important;
+  max-width: 100%;
   width: 100% !important;
   min-width: unset !important;
-  max-width: unset !important;
 }
 
 #navbarMobile .navbar-nav {
@@ -27501,6 +27503,7 @@ ul.pagination .page-item.active .page-link {
 }
 
 .blogExtraPanes .blogWidget .widgetContent {
+  overflow-y: auto;
   padding: 0 0.25rem;
 }
 
@@ -27583,13 +27586,19 @@ ul.pagination .page-item.active .page-link {
   border-color: #e26103;
 }
 
-.blogExtraPanes .blogWidget .widgetContent #calendar .fc-view-container {
-  font-size: 0.7rem;
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-toolbar .fc-listButton-button {
+  font-size: 0.85rem;
+  opacity: 1;
+  background-color: #f66103;
+  border-color: #f66103;
 }
 
-.blogExtraPanes .blogWidget .widgetContent #calendar .fc-view-container .fc-scroller {
-  overflow-y: auto;
-  max-height: 25vh;
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-toolbar .fc-listButton-button:hover {
+  background-color: #e26103;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #calendar .fc-view-container {
+  font-size: 0.7rem;
 }
 
 .blogExtraPanes .blogWidget .widgetContent #calendar .fc-view-container .fc-event-container .fc-event {
@@ -27612,6 +27621,56 @@ ul.pagination .page-item.active .page-link {
   letter-spacing: 0.5px;
 }
 
+.blogExtraPanes .blogWidget .widgetContent #eventsList {
+  padding-top: 0.5rem;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #eventsList #calendarButton {
+  font-size: 0.85rem;
+  background-color: #f66103;
+  color: #ffffff;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #eventsList #calendarButton:hover {
+  background-color: #e26103;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #eventsList .noEventsText {
+  font-size: 1.1rem;
+  padding-top: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #eventsList ul {
+  padding: 0;
+  padding-top: 0.5rem;
+  margin: 0;
+  text-align: left;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #eventsList ul a {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 20px;
+  text-decoration: none;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #eventsList ul a .event .eventTime {
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #eventsList ul a .event .eventTitle {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #000;
+}
+
+.blogExtraPanes .blogWidget .widgetContent #eventsList ul a:hover {
+  background-color: rgba(255, 140, 0, 0.7);
+}
+
 .blogExtraPanes .blogWidget .widgetFooter {
   padding: 0.5rem 1rem;
 }
@@ -27628,6 +27687,18 @@ ul.pagination .page-item.active .page-link {
 
 .blogExtraPanes .blogWidget .widgetFooter .widgetBtn:hover {
   background-color: #e26103;
+}
+
+.blogExtraPanes #searchWidget > .widgetContent {
+  max-height: 11vh;
+}
+
+.blogExtraPanes #categoriesWidget > .widgetContent {
+  max-height: 8vh;
+}
+
+.blogExtraPanes #eventsWidget > .widgetContent {
+  max-height: 40vh;
 }
 
 @media screen and (max-width: 992px) {

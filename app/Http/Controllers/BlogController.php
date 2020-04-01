@@ -31,7 +31,7 @@ class BlogController extends Controller
 
             $posts = $this->getSortResults($request);
 
-            $events = Event::where( 'starts_at','>',Carbon::now()->subMonths((3))->toDateTimeString() )->get();
+            $events = Event::where( 'starts_at','>',Carbon::now()->toDateTimeString() )->get();
     
             $eventsJson = [];
 
@@ -45,7 +45,7 @@ class BlogController extends Controller
             }
             $eventsJson = json_encode($eventsJson);
     
-            return view('blogMainPage')->withEvents($eventsJson)->withPosts($posts)->withCats($categories);
+            return view('blogMainPage')->withEvents($eventsJson)->withEventsList($events)->withPosts($posts)->withCats($categories);
         }
     }
 

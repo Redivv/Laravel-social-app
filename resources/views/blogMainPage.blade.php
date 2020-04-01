@@ -88,7 +88,7 @@
                                     </a>
                                 @endif
                                 <main class="postDesc">
-                                    {!!Str::words($post->description,20,'...')!!}
+                                    {!!Str::words($post->description,50,'...')!!}
                                 </main>
                             </main>
                             <footer class="postFooter">
@@ -159,12 +159,31 @@
                 </div>
             @endif
 
-            <div class="blogWidget">
+            <div id="eventsWidget" class="blogWidget">
                 <header class="widgetHeader">
                     <span>{{__('blog.calendar')}}</span>
                 </header>
                 <main class="widgetContent">
                     <div id="calendar"></div>
+                    <div id="eventsList" class="d-none">
+                        <button class="btn" id="calendarButton">
+                            {{__('blog.eventCalendar')}}
+                        </button>
+                        @if (count($eventsList) > 0)
+                            <ul>
+                                @foreach ($eventsList as $event)
+                                    <a href="{{$event->url}}">
+                                        <li class="event row">
+                                            <span class="eventTime col-12">{{str_replace('-','.',substr($event->starts_at,0,-3))}} -- {{str_replace('-','.',substr($event->ends_at,0,-3))}}</span>
+                                            <span class="eventTitle col-12">{{$event->name}}</span>
+                                        </li>
+                                    </a>
+                                @endforeach
+                            </ul>
+                        @else
+                            <div class="noEventsText">{{__('blog.noEvents')}}</div>
+                        @endif
+                    </div>
                 </main>
             </div>
         </aside>
@@ -190,6 +209,7 @@
     var deleteHobby         =  "{{__('activityWall.deleteTags')}}";
     var confirmMsg          =  "{{__('admin.confirmMsg')}}";
     var events = '{!!$events!!}';
+    var listText = "{{__('blog.eventsList')}}";
 </script>
 
 <script src="{{asset("jqueryUi\jquery-ui.min.js")}}"></script>
