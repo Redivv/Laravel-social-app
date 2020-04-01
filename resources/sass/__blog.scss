@@ -39,13 +39,39 @@ u{
             }
         }
     }
-    &:first-of-type(u){
+    u:first-of-type{
+        display: block;
         flex: 0 0 25%;
         max-width: 25%;
         position: relative;
         width: 100%;
         padding-right: 15px;
         padding-left: 15px;
+        .blogExtraPanes:first-of-type{
+            flex: 0 0 100%;
+            max-width: 100%;
+            position: relative;
+            width: 100%;
+            padding-right: 0;
+            padding-left: 0;
+            @media screen and (max-width: $breakpoint1) {
+                position: fixed;
+                right: -100%;
+                max-width: 50%;
+                transition:right 1s linear;
+                background:$laravel-grey;
+                z-index: 1001;
+                overflow-y: auto;
+                padding: 0.5rem;
+                border: solid 3px $grey;
+                border-right: 0;
+                top: 5%;
+                height: 85%;
+                &.show{
+                    right: 0;
+                }
+            }
+        }
     }
 }
 .blogFeed{

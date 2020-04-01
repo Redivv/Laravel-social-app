@@ -27327,13 +27327,44 @@ u {
   }
 }
 
-#blogContainer:first-of-type(u) {
+#blogContainer u:first-of-type {
+  display: block;
   flex: 0 0 25%;
   max-width: 25%;
   position: relative;
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
+}
+
+#blogContainer u:first-of-type .blogExtraPanes:first-of-type {
+  flex: 0 0 100%;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+@media screen and (max-width: 992px) {
+  #blogContainer u:first-of-type .blogExtraPanes:first-of-type {
+    position: fixed;
+    right: -100%;
+    max-width: 50%;
+    transition: right 1s linear;
+    background: #f8fafc;
+    z-index: 1001;
+    overflow-y: auto;
+    padding: 0.5rem;
+    border: solid 3px #a1a1a1;
+    border-right: 0;
+    top: 5%;
+    height: 85%;
+  }
+
+  #blogContainer u:first-of-type .blogExtraPanes:first-of-type.show {
+    right: 0;
+  }
 }
 
 .blogFeed {
