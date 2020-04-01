@@ -14,7 +14,7 @@
 </div>
 <div class="darkOverlay d-none"></div>
 <div class="container-fluid">
-    <div class="row">
+    <div id="blogContainer" class="row">
         <main class="col-9 blogFeed">
             <header class="blogFeed-sortBtns">
                 <form id="sortForm" class="d-inline" method="GET" action="{{route('blog.mainPage')}}">

@@ -27277,6 +27277,37 @@ ul.pagination .page-item.active .page-link {
   margin-left: 1rem;
 }
 
+u {
+  text-decoration: none !important;
+}
+
+#blogContainer .blogFeed {
+  flex: 0 0 75%;
+  max-width: 75%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+#blogContainer .blogExtraPanes {
+  flex: 0 0 25%;
+  max-width: 25%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+#blogContainer:first-of-type(u) {
+  flex: 0 0 25%;
+  max-width: 25%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
 .blogFeed {
   padding-top: 0.5rem;
 }
