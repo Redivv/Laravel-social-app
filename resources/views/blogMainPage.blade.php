@@ -15,7 +15,7 @@
 <div class="darkOverlay d-none"></div>
 <div class="container-fluid">
     <div id="blogContainer" class="row">
-        <main class="col-9 blogFeed">
+        <main class="blogFeed">
             <header class="blogFeed-sortBtns">
                 <form id="sortForm" class="d-inline" method="GET" action="{{route('blog.mainPage')}}">
                     @if (request('sortCrit') == "likes")
@@ -115,7 +115,7 @@
                 @endif
             </output>
         </main>
-        <aside class="col-3 blogExtraPanes">
+        <aside class="blogExtraPanes">
 
             <div id="searchWidget" class="blogWidget">
                 <header class="widgetHeader">
