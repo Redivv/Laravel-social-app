@@ -10,6 +10,10 @@ body{
     padding-bottom: 2.25rem !important;
 }
 
+.navbar{
+    padding: 0.25rem;
+}
+
 iframe{
     display: block;
     margin: auto !important;
@@ -61,6 +65,8 @@ iframe{
     }
     .navMobile{
         display: none;
+        padding-right: 0;
+        padding-left: 30px;
         @media screen and (max-width: $mobile-breakpoint) {
             display: flex;
         }
