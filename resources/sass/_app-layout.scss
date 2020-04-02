@@ -41,6 +41,7 @@ iframe{
         .navbar-toggler{
             margin-left: auto;
             padding: 0.5rem 0.25rem;
+            border: 0;
         }
     }
     .dropdown-menu{
@@ -66,7 +67,7 @@ iframe{
     .navMobile{
         display: none;
         padding-right: 0;
-        padding-left: 30px;
+        padding-left: 15px;
         @media screen and (max-width: $mobile-breakpoint) {
             display: flex;
         }
