@@ -24,7 +24,7 @@ u{
         @media screen and (max-width: $breakpoint1) {
             position: fixed;
             right: -100%;
-            max-width: 50%;
+            max-width: 80%;
             transition:right 1s linear;
             background:$laravel-grey;
             z-index: 1001;
@@ -57,7 +57,7 @@ u{
             @media screen and (max-width: $breakpoint1) {
                 position: fixed;
                 right: -100%;
-                max-width: 50%;
+                max-width: 80%;
                 transition:right 1s linear;
                 background:$laravel-grey;
                 z-index: 1001;

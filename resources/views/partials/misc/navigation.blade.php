@@ -259,16 +259,6 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto text-center row">
 
-                @guest
-                <li class="nav-item col">
-                    <a class="nav-link" href="{{ route('login') }}">
-                        <i class="fas fa-sign-in-alt"></i>
-                        <br>
-                        {{ __('app.login') }}
-                    </a>
-                </li>
-                @endguest
-
                 <li class="nav-item col navSearcher">
                     <a href="{{ url('/searcher') }}" class="nav-link">
                         <i class="fas fa-search"></i>
@@ -313,6 +303,13 @@
                     </a>
                 </li>
                 @else
+                <li class="nav-item col">
+                    <a class="nav-link" href="{{ route('login') }}">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <br>
+                        {{ __('app.login') }}
+                    </a>
+                </li>
                 <li class="nav-item col">
                     <a class="nav-link" href="{{ route('register') }}">
                         <i class="fas fa-female"></i>
