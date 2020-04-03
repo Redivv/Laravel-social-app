@@ -30,5 +30,6 @@ return [
     'deleteHobby'           => 'Delete criteria',
     'advancedSearchToggle'  => 'Additional criteria',
     'likes'                 => 'Likes',
-    'activeOnly'            => "Only active users"
+    'activeOnly'            => "Only active users",
+    'lastActive'            => "Last Active"
 ];

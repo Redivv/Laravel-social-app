@@ -10,5 +10,6 @@ return [
     'admins'                        => 'Admins',
     'mailSent'                      => 'Thank you for your message',
     'emailAttachments'              => 'Attachments',
-    'chat'                          => 'Chat with Administrator'
+    'chat'                          => 'Chat with Administrator',
+    'mainEmail'                     => 'Main Administration Email'
 ];

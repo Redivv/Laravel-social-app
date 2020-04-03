@@ -16,7 +16,7 @@
         
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Stworzony przez kobietę dla kobiet. Poznacie tutaj nowe osoby i zobaczycie aktualności LGBT - filmy, książki czy wiadomości ze świata.">
+        <meta name="description" content="Lesbijski portal społecznościowy- stworzony przez kobietę dla kobiet. Zależy nam na autentyczności, dlatego bądźcie sobą! Tutaj możecie dzielić się Waszym życiem, doświadczeniem, pomóc osobom w coming-oucie czy podnieść na duchu w ciężkich chwilach. Zobaczycie też aktualności LGBT - filmy, książki czy wiadomości ze świata.">
         <meta name=”robots” content="index, nofollow">
         <meta name="author" content="Jakub Rajca">
         <meta name="copyright" content="Maja Jędrzejek">

@@ -15,30 +15,37 @@
             </div>
         @endif
 
-        <form method="post" class="mt-4" id="contactForm" enctype="multipart/form-data">
-            @csrf
-            <legend>
-                <h3>
-                    {{__('contact.formLegend')}}
-                </h3>
-            </legend>
-            <div class="form-group">
-              <label for="EmailSubject"><h4>{{__('contact.emailSubject')}}</h4></label>
-              <input required type="text" class="form-control" id="EmailSubject" name="EmailSubject" placeholder="{{__('contact.emailSubjectPlaceholder')}}">
-            </div>
-            <div class="form-group">
-              <label for="EmailContent"><h4>{{__('contact.emailContent')}}</h4></label>
-              <textarea required class="form-control" id="EmailContent" name="EmailContent" placeholder="{{__('contact.emailContentPlaceholder')}}" rows="3"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="EmailAttachments"><h4>{{__('contact.emailAttachments')}}</h4></label>
-                <input class="form-control-file" type="file" name="EmailAttachments[]" id="EmailAttachments" multiple accept="image/*">
-            </div>
-            <output id="EmailAttachmentsOut"></output>
-            <div class="form-group row mt-2">
-                <button class="btn contactSubmitButton" type="submit">{{__('contact.send')}}</button>
-            </div>
-        </form>
+        @auth
+            <form method="post" class="mt-4" id="contactForm" enctype="multipart/form-data">
+                @csrf
+                <legend>
+                    <h3>
+                        {{__('contact.formLegend')}}
+                    </h3>
+                </legend>
+                <div class="form-group">
+                <label for="EmailSubject"><h4>{{__('contact.emailSubject')}}</h4></label>
+                <input required type="text" class="form-control" id="EmailSubject" name="EmailSubject" placeholder="{{__('contact.emailSubjectPlaceholder')}}">
+                </div>
+                <div class="form-group">
+                <label for="EmailContent"><h4>{{__('contact.emailContent')}}</h4></label>
+                <textarea required class="form-control" id="EmailContent" name="EmailContent" placeholder="{{__('contact.emailContentPlaceholder')}}" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="EmailAttachments"><h4>{{__('contact.emailAttachments')}}</h4></label>
+                    <input class="form-control-file" type="file" name="EmailAttachments[]" id="EmailAttachments" multiple accept="image/*">
+                </div>
+                <output id="EmailAttachmentsOut"></output>
+                <div class="form-group row mt-2">
+                    <button class="btn contactSubmitButton" type="submit">{{__('contact.send')}}</button>
+                </div>
+            </form>
+            @else
+            <article id="adminEmailAddress">
+                <h2>{{__('contact.mainEmail')}}</h2>
+                <a href="mailto:administracja@safo.com.pl">administracja@safo.com.pl</a>
+            </article>
+        @endauth
 
         @if (count($admins) > 0)
             <div class="container mb-3">
@@ -69,6 +76,14 @@
         @endif
     </div>
 @endsection
+
+@push('styles')
+    <style>
+        .navContact > .nav-link{
+            color: #f66103 !important;
+        }
+    </style>
+@endpush
 
 @push('scripts')
 

@@ -10,5 +10,6 @@ return [
     'admins'                        => 'Administratorzy',
     'mailSent'                      => 'Dziękujemy za wysłanie wiadomości',
     'emailAttachments'              => 'Załączone Zdjęcia',
-    'chat'                          => 'Porozmawiaj z Administratorem'
+    'chat'                          => 'Porozmawiaj z Administratorem',
+    'mainEmail'                     => 'Główny Adres Email Administracji'
 ];

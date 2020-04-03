@@ -70,40 +70,50 @@
                                 <option value="name">{{__('searcher.username')}}</option>
                                 <option value="created_at">{{__('searcher.registerDate')}}</option>
                                 <option value="likes" selected>{{__('searcher.likes')}}</option>
+                                <option value="updated_at">{{__('searcher.lastActive')}}</option>
                             @elseif (request('sortOptions_crit') == 'created_at')
                                 <option value="birth_year">{{__('searcher.age')}}</option>
                                 <option value="name">{{__('searcher.username')}}</option>
                                 <option value="created_at" selected>{{__('searcher.registerDate')}}</option>
                                 <option value="likes">{{__('searcher.likes')}}</option>
+                                <option value="updated_at">{{__('searcher.lastActive')}}</option>
                             @elseif(request('sortOptions_crit') == 'name')
                                 <option value="birth_year">{{__('searcher.age')}}</option>
                                 <option value="name" selected>{{__('searcher.username')}}</option>
                                 <option value="created_at">{{__('searcher.registerDate')}}</option>
                                 <option value="likes">{{__('searcher.likes')}}</option>
+                                <option value="updated_at">{{__('searcher.lastActive')}}</option>
+                            @elseif(request('sortOptions_crit') == 'updated_at')
+                                <option value="birth_year">{{__('searcher.age')}}</option>
+                                <option value="name">{{__('searcher.username')}}</option>
+                                <option value="created_at">{{__('searcher.registerDate')}}</option>
+                                <option value="likes">{{__('searcher.likes')}}</option>
+                                <option value="updated_at" selected>{{__('searcher.lastActive')}}</option>
                             @else
                                 <option value="birth_year" selected>{{__('searcher.age')}}</option>
                                 <option value="name">{{__('searcher.username')}}</option>
                                 <option value="created_at">{{__('searcher.registerDate')}}</option>
                                 <option value="likes">{{__('searcher.likes')}}</option>
+                                <option value="updated_at">{{__('searcher.lastActive')}}</option>
                             @endif
                         </select>
                         <div class="text-center">
                             @if (request('sortOptions_dir') == 'asc')
                                 <div class="text-center form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio1" value="desc">
+                                    <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio1" checked value="asc">
                                     <label class="form-check-label" for="inlineRadio1">{{__('searcher.asc')}}</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio2" checked value="asc">
+                                    <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio2" value="desc">
                                     <label class="form-check-label" for="inlineRadio2">{{__('searcher.desc')}}</label>
                                 </div>
                             @else
                                 <div class="text-center form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio1" checked value="desc">
+                                    <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio1" value="asc">
                                     <label class="form-check-label" for="inlineRadio1">{{__('searcher.asc')}}</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio2" value="asc">
+                                    <input class="form-check-input" type="radio" name="sortOptions_dir" id="inlineRadio2" checked value="desc">
                                     <label class="form-check-label" for="inlineRadio2">{{__('searcher.desc')}}</label>
                                 </div>
                             @endif

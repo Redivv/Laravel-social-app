@@ -30,5 +30,6 @@ return [
     'deleteHobby'           => 'Usuń Kryterium',
     'advancedSearchToggle'  => 'Dodatkowe Kryteria',
     'likes'                 => 'Polecenia',
-    'activeOnly'            => "Tylko Aktywni Użytkownicy"
+    'activeOnly'            => "Tylko Aktywni Użytkownicy",
+    'lastActive'            => "Ostatnio Aktywny"
 ];

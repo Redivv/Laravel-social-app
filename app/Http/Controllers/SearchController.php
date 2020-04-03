@@ -63,7 +63,7 @@ class SearchController extends Controller
                 'city'                      => ['string','nullable','exists:cities,name'],
                 'sortOptions_crit'          => [
                     'string',
-                    Rule::in(['birth_year', 'name','created_at','likes']),
+                    Rule::in(['birth_year', 'name','created_at','likes','updated_at']),
                 ],
                 'sortOptions_dir'           => [
                     'string',
@@ -79,7 +79,7 @@ class SearchController extends Controller
                 'city'                      => ['string','nullable','exists:cities,name'],
                 'sortOptions_crit'          => [
                     'string',
-                    Rule::in(['birth_year', 'name','created_at','likes']),
+                    Rule::in(['birth_year', 'name','created_at','likes','updated_at']),
                 ],
                 'sortOptions_dir'           => [
                     'string',
@@ -96,7 +96,7 @@ class SearchController extends Controller
                 'city'                      => ['string','nullable','exists:cities,name'],
                 'sortOptions_crit'          => [
                     'string',
-                    Rule::in(['birth_year', 'name','created_at','likes']),
+                    Rule::in(['birth_year', 'name','created_at','likes','updated_at']),
                 ],
                 'sortOptions_dir'           => [
                     'string',
@@ -151,11 +151,11 @@ class SearchController extends Controller
             
             if ($validated_data['sortOptions_dir'] == "asc") {
 
-                $searchLikes = $searchLikes->sortByDesc(function($user,$key){
+                $searchLikes = $searchLikes->sortBy(function($user,$key){
                     return $user->likeCount;
                 })->pluck('id')->toArray();
             }else{
-                $searchLikes = $searchLikes->sortBy(function($user,$key){
+                $searchLikes = $searchLikes->sortByDesc(function($user,$key){
                     return $user->likeCount;
                 })->pluck('id')->toArray();
             }
@@ -166,6 +166,9 @@ class SearchController extends Controller
                 ->orderByRaw(\DB::raw("FIELD(users.id, ".$orderedIds." )"))            
                 ->paginate(5);
         }else{
+            if ($validated_data['sortOptions_crit'] == "birth_year") {
+                $validated_data['sortOptions_dir'] == "asc" ? $validated_data['sortOptions_dir'] = "desc" : $validated_data['sortOptions_dir'] = "asc";
+            }
             $resultsCount = count($search_results->get());
             $search_results = $search_results->orderBy('users.'.$validated_data['sortOptions_crit'], $validated_data['sortOptions_dir'])->paginate(5);
         }

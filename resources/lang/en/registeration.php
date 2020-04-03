@@ -15,7 +15,7 @@ return [
     'verificationInfo3'         => 'click here to get email again',
     'newMail'                   => 'New email has been sent',
     'infoAlert'                 => 'In Safo we care about authenticity so you need to upload a profile picture that visibly presents users face and it will be sent to the administration. Account without a profile picture, or a acceptation request will be deleted after 4 days.',
-    'testimonial'               => 'Created by women for womans. We care about authenticity so be yourself! Here you can share your life, experience, help people with coming-out or just help with hard times.You will also see news from LGBT word- movies, books or news form world.',
+    'testimonial'               => "Lesbian social networking site - created by women for womens. We care about authenticity, so be yourself! Here you can share your life, experience, help people get out or just help in hard times. You'll also see news from the words LGBT - movies, books or news from the world.",
     'joinUs'                    => 'Join our community',
     'loginLink1'                => 'You have account? ',
     'loginLink2'                => 'Loggin',

@@ -15,7 +15,7 @@ return [
     'verificationInfo3'         => 'kliknij tutaj aby wysłać go ponownie',
     'newMail'                   => 'Wysłano nowy link aktywacyjny',
     'infoAlert'                 => 'W serwisie Safo zależy nam na autentyczności użytkowników. Każdy nowy użytkownik musi przesłać swoje zdjęcie profilowe zawierające widoczną twarz użytkownika. Nowe zdjęcia profilowe będą przesyłane do administracji w celu akceptacji. Konta bez zdjęcia profilowego, lub bez zgłoszenia zostaną usunięte po upływie 4 dni.',
-    'testimonial'               => 'Stworzony przez kobietę dla kobiet. Zależy nam na autentyczności, dlatego bądźcie sobą! Tutaj możecie dzielić się Waszym życiem, doświadczeniem, pomóc osobom w coming-oucie czy podnieść na duchu w ciężkich chwilach. Zobaczycie też aktualności LGBT - filmy, książki czy wiadomości ze świata.',
+    'testimonial'               => 'Lesbijski portal społecznościowy- stworzony przez kobietę dla kobiet. Zależy nam na autentyczności, dlatego bądźcie sobą! Tutaj możecie dzielić się Waszym życiem, doświadczeniem, pomóc osobom w coming-oucie czy podnieść na duchu w ciężkich chwilach. Zobaczycie też aktualności LGBT - filmy, książki czy wiadomości ze świata.',
     'joinUs'                    => 'Dołącz Do Naszej Społeczności',
     'loginLink1'                => 'Masz Już Konto?',
     'loginLink2'                => 'Zaloguj Się',

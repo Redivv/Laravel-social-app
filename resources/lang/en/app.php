@@ -12,6 +12,7 @@ return [
     'profile'           => 'Profile',
     'settings'          => "Settings",
     'contact'           => 'Contact with administration',
+    'contactNav'        => 'Contact',
     'profileEditTitle'  => 'Profile Edit',
     'verifyTitle'       => 'Email Address Verification',
     'resetPasswordTitle'=> 'Password Reset',

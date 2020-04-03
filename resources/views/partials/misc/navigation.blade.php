@@ -303,6 +303,13 @@
                     </a>
                 </li>
                 @else
+                <li class="nav-item col navContact">
+                    <a class="nav-link" href="{{ route('ContactPage') }}">
+                        <i class="fas fa-envelope"></i>
+                        <br>
+                        {{ __('app.contactNav') }}
+                    </a>
+                </li>
                 <li class="nav-item col">
                     <a class="nav-link" href="{{ route('login') }}">
                         <i class="fas fa-sign-in-alt"></i>
@@ -391,6 +398,13 @@
                         {{__('app.partners')}}
                     </a>
                 </li>
+                @guest
+                <li class="col nav-item navContact">
+                    <a href="{{ route('ContactPage') }}" class="nav-link">
+                        {{__('app.contactNav')}}
+                    </a>
+                </li>
+                @endguest
 
             </ul>
 
