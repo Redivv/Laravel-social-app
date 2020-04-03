@@ -25,5 +25,6 @@ return [
     'termsOfDoc2'               => 'Politykę Prywatności',
     'mailInfo'                  => 'Po rejestracji wymagane jest potwierdzenie maila za pomocą linku w wiadomości wysłanej nad podany adres. Maile przychodzą w czasie od kilku minut do maksymalnie godziny',
     'cultureLink'               => 'Przejrzyj Naszą Bazę Kulturalną',
-    'blogLink'                  => 'Poczytaj Naszego Bloga'
+    'blogLink'                  => 'Poczytaj Naszego <br> Bloga',
+    'contactLink'               => "Skontaktuj się <br> z Nami"
 ];

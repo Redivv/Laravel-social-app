@@ -92,11 +92,11 @@ Route::prefix('user')->group(function(){
     Route::get('settings', 'SettingsController@index')->middleware('auth')->name('SettingsPage');
     Route::patch('settings', 'SettingsController@updateSettings')->middleware('auth')->name('SettingsUpdate');
 
-    Route::get('contactAdministration', 'ContactController@index')->name('ContactPage');
     Route::post('contactAdministration', 'ContactController@sendMail')->middleware('auth')->name('ContactSendMail');
 
     Route::patch('readNotifications', 'ProfileController@readNotifications')->middleware('auth')->name('readNotifications');
 });
+Route::get('contactAdministration', 'ContactController@index')->name('ContactPage');
 
 Route::prefix('admin')->group(function(){
     Route::middleware(['verified'])->group(function () {

@@ -150,8 +150,9 @@
 
     <footer class="additionalLinks row">
         <a href="{{route('culture.mainPage')}}" class="btn">{{__('registeration.cultureLink')}}</a>
-        <a href="{{route('blog.mainPage')}}" class="btn">{{__('registeration.blogLink')}}</a>
+        <a href="{{route('blog.mainPage')}}" class="btn">{!!__('registeration.blogLink')!!}</a>
         <a href="{{route('searcher')}}" class="btn">{{__('registeration.searcherLink')}}</a>
+        <a href="{{route('ContactPage')}}" class="btn">{!!__('registeration.contactLink')!!}</a>
     </footer>
 @endsection
 
