@@ -7,9 +7,9 @@ u{
         max-width: 75%;
         position: relative;
         width: 100%;
-        padding-right: 15px;
-        padding-left: 15px;
-        @media screen and (max-width: $breakpoint1) {
+        padding-right: 0;
+        padding-left: 0;
+        @media screen and (max-width: $breakpoint1+100) {
             flex: 0 0 100%;
             max-width: 100%;
         }
@@ -21,7 +21,7 @@ u{
         width: 100%;
         padding-right: 15px;
         padding-left: 15px;
-        @media screen and (max-width: $breakpoint1) {
+        @media screen and (max-width: $breakpoint1+100) {
             position: fixed;
             right: -100%;
             max-width: 80%;
@@ -32,8 +32,8 @@ u{
             padding: 0.5rem;
             border: solid 3px $grey;
             border-right: 0;
-            top: 5%;
-            height: 85%;
+            top: 2%;
+            height: 95%;
             &.show{
                 right: 0;
             }
@@ -54,7 +54,7 @@ u{
             width: 100%;
             padding-right: 0;
             padding-left: 0;
-            @media screen and (max-width: $breakpoint1) {
+            @media screen and (max-width: $breakpoint1+100) {
                 position: fixed;
                 right: -100%;
                 max-width: 80%;
@@ -82,8 +82,10 @@ u{
         #sortRange{
             display: inline-block;
             width: unset;
+            margin-top: 0.25rem;
         }
         .sortBtn{
+            margin-top: 0.25rem;
             @extend .btn;
             text-decoration: none;
             color: $white;
@@ -124,7 +126,13 @@ u{
     .blogFeed-posts{
         overflow-y: auto;
         overflow-x: hidden;
-        max-height: 77vh;
+        max-height: 70vh;
+        @media screen and (max-width: $breakpoint1+100) {
+            max-height: 64vh;
+        }
+        @media screen and (max-width: $mobile-breakpoint) {
+            max-height: 67vh;
+        }
         padding: 1rem 0.5rem;
         padding-top: 0;
         width: 100%;
@@ -189,6 +197,9 @@ u{
                         text-align: center;
                         letter-spacing: 1px;
                         word-wrap: break-word;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                         &:hover{
                             background-color: $orange-hover;
                         }
@@ -278,6 +289,9 @@ u{
                     color: $white;
                     background-color: $orange;
                     cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     &:hover{
                         background-color: $orange-active-hover;
                     }
@@ -434,7 +448,7 @@ u{
     padding: 0.5rem 1rem 0.5rem 0.5rem;
     left: -100%;
     border-radius: 0 50% 50% 0;
-    @media screen and (max-width: $breakpoint1) {
+    @media screen and (max-width: $breakpoint1+100) {
         left: 0;
     }
 }
@@ -497,6 +511,9 @@ u{
                 text-align: center;
                 letter-spacing: 1px;
                 word-wrap: break-word;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 &:hover{
                     background-color: $orange-hover;
                 }

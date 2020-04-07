@@ -13,19 +13,19 @@
     </div>
 </div>
 <div class="darkOverlay d-none"></div>
-<div class="container-fluid">
+<div class="container-fluid px-2">
     <div id="blogContainer" class="row">
         <main class="blogFeed">
             <header class="blogFeed-sortBtns">
                 <form id="sortForm" class="d-inline" method="GET" action="{{route('blog.mainPage')}}">
-                    @if (request('sortCrit') == "likes")
-                        <select class="form-control" id="sortRange" name="sortRange">
-                            <option value="week">kek</option>
-                            <option value="month">kew</option>
-                            <option value="all">kurw</option>
-                        </select>
-                    @endif
-                    <div class="btn-group-toggle d-inline" data-toggle="buttons">
+                    <div class="btn-group-toggle" data-toggle="buttons">
+                        @if (request('sortCrit') == "likes")
+                            <select class="form-control" id="sortRange" name="sortRange">
+                                <option value="week">{{__('blog.weekSort')}}</option>
+                                <option value="month">{{__('blog.monthSort')}}</option>
+                                <option value="all">{{__('blog.allSort')}}</option>
+                            </select>
+                        @endif
                         <label class="btn sortBtn @if(request('sortCrit') != 'likes') active @endif">
                           <input type="radio" name="sortCrit" value="date" autocomplete="off" @if(request('sortCrit') != 'likes') checked @endif> {{__('blog.dateAdded')}}
                         </label>
@@ -42,7 +42,7 @@
                         <input type="hidden" name="postCategory" value="{{request('postCategory')}}">
                       @endif
 
-                      <div class="btn-group-toggle d-inline" data-toggle="buttons">
+                      <div class="btn-group-toggle mt-1" data-toggle="buttons">
                         <label class="btn sortBtnDir @if(request('sortDir') == 'asc') active @endif">
                           <input type="radio" name="sortDir" value="asc" autocomplete="off" @if(request('sortDir') == 'asc') checked @endif data-tool="tooltip" title="{{__('blog.sortAsc')}}" data-placement="bottom"><i class="fas fa-sort-amount-up-alt"></i>
                         </label>

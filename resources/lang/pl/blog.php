@@ -12,5 +12,8 @@ return [
     'calendar'          => "Nadchodzące Wydarzenia",
     'eventsList'        => "Lista",
     'eventCalendar'     => "Kalendarz",
-    'noEvents'          => "Nie ma Nadchodzących Wydarzeń"
+    'noEvents'          => "Nie ma Nadchodzących Wydarzeń",
+    'weekSort'          => "Ostatni Tydzień",
+    'monthSort'         => "Ostatni Miesiąc",
+    'allSort'           => "Wszystkie",
 ];

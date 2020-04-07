@@ -12,5 +12,8 @@ return [
     'calendar'          => "Upcoming Events",
     'eventsList'        => "List",
     'eventCalendar'     => "Calendar",
-    'noEvents'          => "There are no Upcoming Events"
+    'noEvents'          => "There are no Upcoming Events",
+    'weekSort'          => "Last Week",
+    'monthSort'         => "Last Month",
+    'allSort'           => "All",
 ];
