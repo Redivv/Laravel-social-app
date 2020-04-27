@@ -21,9 +21,9 @@
                     <div class="btn-group-toggle" data-toggle="buttons">
                         @if (request('sortCrit') == "likes")
                             <select class="form-control" id="sortRange" name="sortRange">
-                                <option value="week">{{__('blog.weekSort')}}</option>
-                                <option value="month">{{__('blog.monthSort')}}</option>
-                                <option value="all">{{__('blog.allSort')}}</option>
+                                <option value="week" @if(request('sortRange') == "week") selected @endif>{{__('blog.weekSort')}}</option>
+                                <option value="month" @if(request('sortRange') == "month") selected @endif>{{__('blog.monthSort')}}</option>
+                                <option value="all" @if(request('sortRange') == "all") selected @endif>{{__('blog.allSort')}}</option>
                             </select>
                         @endif
                         <label class="btn sortBtn @if(request('sortCrit') != 'likes') active @endif">

@@ -76,23 +76,31 @@
                                 @endif
                                 @break
                             @default
-                                @php
-                                    $regex = '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#';
-                                    preg_match_all($regex, e($post->desc), $postLinks);
-                                    if (isset($postLinks)) {
-                                        $embedLinks = array();
-                                        foreach ($postLinks[0] as $link) {
+                            @php
+                                $regex = '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#';
+                                preg_match_all($regex, e($post->desc), $postLinks);
+                                if (isset($postLinks)) {
+                                    $embedLinks = array();
+                                    foreach ($postLinks[0] as $link) {
+                                        try {
                                             $data = CachedEmbed::create($link);
-                                            if ($data->code) {
+                                        } catch (Exception $e) {
+                                            $data = null;
+                                        } finally{
+                                            if (!$data) {
+                                                $html = "<a href='".$link."' target='__blank'>".$link."</a>";
+                                                $embedLinks[] = $html;
+                                            } else if ($data->code) {
                                                 $embedLinks[] = $data->code;
                                             }else{
                                                 $html = "<a href='".$link."' target='__blank'>".$link."</a>";
                                                 $embedLinks[] = $html;
                                             }
                                         }
-                                        echo nl2br(preg_replace_array($regex, $embedLinks, e($post->desc)));
                                     }
-                                @endphp
+                                    echo nl2br(preg_replace_array($regex, $embedLinks, e($post->desc)));
+                                }
+                            @endphp
                         @endswitch
                     </div>
                     @if ($post->type == "default")

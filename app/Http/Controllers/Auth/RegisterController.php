@@ -60,8 +60,8 @@ class RegisterController extends Controller
     {
         $data['birth_year'] = intVal($data['birth_year']);
         return Validator::make($data, [
-            'name'              => ['required', 'string', 'alpha_dash', 'unique:users', 'max:255'],
-            'email'             => ['required', 'string', 'email', 'max:255', 'unique:users', new NotBanned],
+            'name'              => ['required', 'string', 'alpha_dash', 'unique:users,name', 'max:255'],
+            'email'             => ['required', 'string', 'email', 'max:255', 'unique:users,email', new NotBanned],
             'password'          => ['required', 'string', 'min:8', 'confirmed'],
             'birth_year'        => ['required', 'integer', 'between:1950,'.intVal(date('Y')-18)],
             'profile-picture'   => ['required','file','image','max:10000', 'mimes:jpeg,png,jpg,gif,svg'],

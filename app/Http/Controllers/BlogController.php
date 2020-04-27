@@ -156,6 +156,8 @@ class BlogController extends Controller
                             return $post->likeCount;
                         });
                     }
+                }else{
+                    $posts = $posts->take(5)->get();
                 }
             }else{
                 $posts = $posts->take(5)->get();

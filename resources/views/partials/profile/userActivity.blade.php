@@ -89,12 +89,20 @@
                                     if (isset($postLinks)) {
                                         $embedLinks = array();
                                         foreach ($postLinks[0] as $link) {
-                                            $data = CachedEmbed::create($link);
-                                            if ($data->code) {
-                                                $embedLinks[] = $data->code;
-                                            }else{
-                                                $html = "<a href='".$link."' target='__blank'>".$link."</a>";
-                                                $embedLinks[] = $html;
+                                            try {
+                                                $data = CachedEmbed::create($link);
+                                            } catch (Exception $e) {
+                                                $data = null;
+                                            } finally{
+                                                if (!$data) {
+                                                    $html = "<a href='".$link."' target='__blank'>".$link."</a>";
+                                                    $embedLinks[] = $html;
+                                                } else if ($data->code) {
+                                                    $embedLinks[] = $data->code;
+                                                }else{
+                                                    $html = "<a href='".$link."' target='__blank'>".$link."</a>";
+                                                    $embedLinks[] = $html;
+                                                }
                                             }
                                         }
                                         echo nl2br(preg_replace_array($regex, $embedLinks, e($post->desc)));

@@ -385,7 +385,7 @@ class CommentController extends Controller
                     $comment->like();
 
                     if ($comment->author_id != Auth::id()) {
-                        $comment->user->notify(new SystemNotification(__('nav.likeComNot',[],$comment->user->locale),'info','_blog_',$comment->item->name_slug,'#com-'.$comment->id, 'likeBlogCom'));
+                        $comment->user->notify(new SystemNotification(__('nav.likeComNot',[],$comment->user->locale),'info','_blog_',$comment->post->name_slug,'#com-'.$comment->id, 'likeBlogCom'));
                     }
                 }
                 return response()->json(['status' => 'success'], 200);
