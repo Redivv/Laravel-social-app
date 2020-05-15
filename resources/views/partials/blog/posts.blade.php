@@ -33,7 +33,7 @@
                 </a>
             @endif
             <main class="postDesc">
-                {!!Str::words($post->description,20,'...')!!}
+                {!!Str::words(strip_tags($post->description),50,'...')!!}
             </main>
         </main>
         <footer class="postFooter">
