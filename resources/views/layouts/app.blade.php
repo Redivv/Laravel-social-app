@@ -10,7 +10,7 @@
 
             gtag('config', 'UA-157589744-1');
         </script>
-        <script data-ad-client="ca-pub-1435964054112470" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script data-ad-client="ca-pub-2738699172205892" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
         @include('partials.misc.favicon')
         
