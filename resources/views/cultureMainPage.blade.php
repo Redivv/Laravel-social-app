@@ -162,7 +162,7 @@
                 </div>
             </section>
         @endif
-        <div class="d-flex justify-content-center align-items-center">
+        <div class="container-fluid" style="padding: 0 10%">
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- Culture MainAd -->
             <ins class="adsbygoogle"
