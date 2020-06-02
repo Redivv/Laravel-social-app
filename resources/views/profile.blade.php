@@ -232,6 +232,7 @@
 @endpush
 
 @push('scripts')
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         var base_url                = "{{url('/')}}";
         var reportUser              = "{{__('searcher.reportUser')}}";

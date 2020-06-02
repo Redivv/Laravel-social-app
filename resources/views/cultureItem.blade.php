@@ -119,6 +119,17 @@
             @endif
         </section>
         <hr>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Culture Item Ad -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-2738699172205892"
+            data-ad-slot="4244792455"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
         @if (count($similarEntries) > 0)
             <section class="similar-entries">
                 <h4 class="sectionTitle">{{__('culture.similarItems')}}</h4>

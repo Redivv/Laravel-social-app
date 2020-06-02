@@ -50,6 +50,18 @@
                 <span class="likesAmount @if($post->likeCount == 0) d-none @endif">{{$post->likeCount}}</span>
             </button>
         </footer>
+        @if (($loop->index + 3) % 4 === 0 )
+            <!-- Blog Ads -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-2738699172205892"
+                data-ad-slot="5560623993"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        @endif
         <hr>
     </article>
 @endforeach
