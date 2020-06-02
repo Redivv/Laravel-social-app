@@ -34,7 +34,7 @@
                         {{__('culture.tags')}}
                     </label>
                     <div class="input-group tagSearch">
-                        <input id="searchTags" type="text" class="form-control" name="itemTags[]" placeholder="{{__('culture.searchTags')}}" aria-label="Tag Name" aria-describedby="tag search button">
+                        <input id="searchTags" type="text" class="form-control" placeholder="{{__('culture.searchTags')}}" aria-label="Tag Name" aria-describedby="tag search button">
                         <div class="input-group-append">
                             <button class="btn tagsBtn" type="button">
                                 {{__('searcher.add')}}
@@ -42,14 +42,16 @@
                         </div>
                     </div>
                     <output id="searchTags-out" class="row">
-                        @foreach (request('itemTags') as $tag)
-                            @if ($tag)
-                                <div class="col itemTag" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deleteTags')}}">
-                                    <span>{{$tag}}</span>
-                                    <input type="hidden" name="itemTags[]" value="{{$tag}}">
-                                </div>
-                            @endif
-                        @endforeach
+                        @if (request('itemTags'))
+                            @foreach (request('itemTags') as $tag)
+                                @if ($tag)
+                                    <div class="col itemTag" data-tool="tooltip" data-placement="bottom" title="{{__('activityWall.deleteTags')}}">
+                                        <span>{{$tag}}</span>
+                                        <input type="hidden" name="itemTags[]" value="{{$tag}}">
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endif
                     </output>
                 </div>
             </div>
@@ -147,7 +149,7 @@
         @php
             $resultsAppend = [
                 'titleName' => request('titleName') ?? '',
-                'itemTags' => request('itemTags') ?? '',
+                'itemTags' => request('itemTags') ?? null,
                 'options' => request('options') ?? '',
                 'sortOptionsDir' => request('sortOptionsDir') ?? '',
             ];

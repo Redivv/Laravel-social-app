@@ -131,6 +131,18 @@
                     </a>
                 </footer>
             </article>
+            @if (($loop->index + 4) % 4 === 0 )
+                <!-- Profile Ads -->
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-2738699172205892"
+                    data-ad-slot="2100671381"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            @endif
             <hr>
         </div>
     @endforeach

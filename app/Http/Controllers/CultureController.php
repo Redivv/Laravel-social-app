@@ -23,17 +23,17 @@ class CultureController extends Controller
 
         $newestItems = cultureItem::orderBy('created_at', 'desc')->take(3)->get();
 
-        $suggestedItems = array();
+        $suggestedItems = [];
         if (Auth::check()) {
             $suggestedItems['items'] = cultureItem::withAnyTag(Auth::user()->tagNames())->inRandomOrder()->take(3)->get();
             if (count($suggestedItems['items']) < 1) {
-                $suggestedItems['type']  = 'Likes';
+                $suggestedItems['type'] = 'Likes';
                 $suggestedItems['items'] = $this->getMostLikedItemsTake(3);
             } else {
-                $suggestedItems['type']  = 'Tag';
+                $suggestedItems['type'] = 'Tag';
             }
         } else {
-            $suggestedItems['type']  = 'Likes';
+            $suggestedItems['type'] = 'Likes';
             $suggestedItems['items'] = $this->getMostLikedItemsTake(3);
         }
 
@@ -44,24 +44,23 @@ class CultureController extends Controller
     {
         $categories = cultureCategory::all();
 
-        $validatedRequest  =    $this->validateCultureSearch($request);
+        $validatedRequest = $this->validateCultureSearch($request);
 
-        $searchResults      =   $this->getCultureSearchResults($validatedRequest);
+        $searchResults = $this->getCultureSearchResults($validatedRequest);
 
         return view('cultureSearchResults')->withResults($searchResults)->withCategories($categories);
     }
 
-    public function item(cultureItem $cultureItem){
-
+    public function item(cultureItem $cultureItem)
+    {
         $itemTags = $cultureItem->tagNames();
-        $similarEntries = cultureItem::withAnyTag($itemTags)->whereNotIn('id',[$cultureItem->id])->inRandomOrder()->take(10)->get()->sortByDesc(function($product) use ($itemTags){
-            return array_intersect($itemTags,$product->tagNames());
+        $similarEntries = cultureItem::withAnyTag($itemTags)->whereNotIn('id', [$cultureItem->id])->inRandomOrder()->take(10)->get()->sortByDesc(function ($product) use ($itemTags) {
+            return array_intersect($itemTags, $product->tagNames());
         })->take(4);
 
         if (count($similarEntries) <= 0) {
-        
-            $similarEntries = cultureItem::where('id','!=',$cultureItem->id)
-                ->where('category_id','=',$cultureItem->category_id)
+            $similarEntries = cultureItem::where('id', '!=', $cultureItem->id)
+                ->where('category_id', '=', $cultureItem->category_id)
                 ->take(4)
             ->get();
         }
@@ -71,11 +70,11 @@ class CultureController extends Controller
 
     public function newCategory(Request $request)
     {
-        $validatedData      =  $this->validateNewCategoryRequest($request);
+        $validatedData = $this->validateNewCategoryRequest($request);
         if (isset($validatedData['categoryId'])) {
-            $newCategory        = $this->editExistingCategory($validatedData);
+            $newCategory = $this->editExistingCategory($validatedData);
         } else {
-            $newCategory        =  $this->createNewCategoryFromData($validatedData);
+            $newCategory = $this->createNewCategoryFromData($validatedData);
         }
 
         if ($this->wasNewCategoryAddedToDatabase($newCategory)) {
@@ -85,11 +84,11 @@ class CultureController extends Controller
 
     public function newItem(Request $request)
     {
-        $validatedData          =   $this->validateNewItemRequest($request);
+        $validatedData = $this->validateNewItemRequest($request);
         if (isset($validatedData['itemId'])) {
-            $newItem                = $this->editExistingItem($validatedData);
+            $newItem = $this->editExistingItem($validatedData);
         } else {
-            $newItem                =   $this->createNewItemFromData($validatedData);
+            $newItem = $this->createNewItemFromData($validatedData);
         }
 
         if ($this->wasNewItemAddedToDatabase($newItem)) {
@@ -98,7 +97,7 @@ class CultureController extends Controller
             $users = User::all();
 
             if (!isset($validatedData['itemId'])) {
-                newCultureItemNotifications::dispatch($users,$newItem);
+                newCultureItemNotifications::dispatch($users, $newItem);
             }
 
             return response()->json(['action' => 'savedData'], 200);
@@ -109,10 +108,10 @@ class CultureController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
-                'elementId'     => ['required','numeric','exists:culture_items,id']
+                'elementId' => ['required','numeric','exists:culture_items,id'],
             ]);
-            if (cultureItem::where('id',$request->elementId)->delete()) {
-                return response()->json(['action' => "deleteCultureItem"], 200);
+            if (cultureItem::where('id', $request->elementId)->delete()) {
+                return response()->json(['action' => 'deleteCultureItem'], 200);
             }
         }
     }
@@ -120,6 +119,7 @@ class CultureController extends Controller
     public function partners()
     {
         $partners = Partner::all();
+
         return view('partners')->withPartners($partners);
     }
 
@@ -127,30 +127,28 @@ class CultureController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
-                'data'      => ['numeric','exists:culture_items,id']
+                'data' => ['numeric','exists:culture_items,id'],
             ]);
             $review = trim(cultureItem::find($request->data)->review);
+
             return response()->json(['action' => 'displayReview','html' => $review], 200);
         }
     }
-
-
 
     // Private Functions
 
     private function validateCultureSearch(Request $data) : Request
     {
-        $validOptions   = ["lettersSort","likesSort","dateSort"];
-        $validDirs      = ['asc','desc'];
+        $validOptions = ['lettersSort','likesSort','dateSort'];
+        $validDirs = ['asc','desc'];
         $categoriesNames = cultureCategory::all()->pluck('name')->toArray();
 
         $data->validate([
-            "titleName"         => ['present','string','nullable'],
-            'itemTags'          => ['present','array'],
-            'itemTags.*'        => ['string','nullable'],
-            'options'           => ['required','string',Rule::in($validOptions)],
-            'sortOptionsDir'    => ['required','string',Rule::in($validDirs)],
-            'searchCategory'    => ['string',Rule::in($categoriesNames)]
+            'titleName' => ['present','string','nullable'],
+            'itemTags.*' => ['string','nullable'],
+            'options' => ['required','string',Rule::in($validOptions)],
+            'sortOptionsDir' => ['required','string',Rule::in($validDirs)],
+            'searchCategory' => ['string',Rule::in($categoriesNames)],
         ]);
 
         return $data;
@@ -158,54 +156,52 @@ class CultureController extends Controller
 
     private function getCultureSearchResults(Request $criteria) : LengthAwarePaginator
     {
-
-        if(empty($criteria->titleName)){
+        if (empty($criteria->titleName)) {
             $searchResults = cultureItem::select('*');
-        }else{
+        } else {
             $searchResults = cultureItem::where('name_slug', 'like', Str::slug($criteria->titleName));
         }
 
         if (isset($criteria->searchCategory)) {
-            $catId = cultureCategory::where('name_slug',$criteria->searchCategory)->get()->pluck('id')->toArray()[0];
-            
-            $searchResults = $searchResults->where("category_id",$catId);
+            $catId = cultureCategory::where('name_slug', $criteria->searchCategory)->get()->pluck('id')->toArray()[0];
+
+            $searchResults = $searchResults->where('category_id', $catId);
         }
 
-        if (isset($criteria->itemTags[1])) {
+        if (isset($criteria->itemTags[0])) {
             $searchResults = $searchResults->withAnyTag($criteria->itemTags);
         }
 
-        if ($criteria->options === "likesSort") {
-            
+        if ($criteria->options === 'likesSort') {
             $searchLikes = $searchResults->get();
-            
-            if ($criteria->sortOptionsDir == "asc") {
 
-                $searchLikes = $searchLikes->sortByDesc(function($item,$key){
+            if ($criteria->sortOptionsDir == 'asc') {
+                $searchLikes = $searchLikes->sortByDesc(function ($item, $key) {
                     return $item->likeCount;
                 })->pluck('id')->toArray();
-            }else{
-                $searchLikes = $searchLikes->sortBy(function($item,$key){
+            } else {
+                $searchLikes = $searchLikes->sortBy(function ($item, $key) {
                     return $item->likeCount;
                 })->pluck('id')->toArray();
             }
 
-            $orderedIds = implode(',',$searchLikes);
+            $orderedIds = implode(',', $searchLikes);
 
             $searchResults = $searchResults
-                ->orderByRaw(\DB::raw("FIELD(culture_items.id, ".$orderedIds." )"))            
+                ->orderByRaw(\DB::raw('FIELD(culture_items.id, ' . $orderedIds . ' )'))
                 ->paginate(5);
-        }else{
-
+        } else {
             switch ($criteria->options) {
                 case 'lettersSort':
-                    $searchResults = $searchResults->orderBy("name_slug",$criteria->sortOptionsDir);
+                    $searchResults = $searchResults->orderBy('name_slug', $criteria->sortOptionsDir);
+
                     break;
                 case 'dateSort':
-                    $searchResults = $searchResults->orderBy("created_at",$criteria->sortOptionsDir);
+                    $searchResults = $searchResults->orderBy('created_at', $criteria->sortOptionsDir);
+
                     break;
             }
-    
+
             $searchResults = $searchResults->paginate(5);
         }
 
@@ -218,6 +214,7 @@ class CultureController extends Controller
         $mostLikedItems = $allItems->sortByDesc(function ($item, $key) {
             return $item->likeCount;
         })->take($amount);
+
         return $mostLikedItems;
     }
 
@@ -225,28 +222,30 @@ class CultureController extends Controller
     {
         $validatedRequest = $categoryData->validate(
             [
-                'categoryName'      =>  ['required', 'string'],
-                'categoryAttr.*'    =>  ['required', 'string'],
-                'categoryId'        =>  ['numeric', 'exists:culture_categories,id']
+                'categoryName' => ['required', 'string'],
+                'categoryAttr.*' => ['required', 'string'],
+                'categoryId' => ['numeric', 'exists:culture_categories,id'],
             ]
         );
+
         return $validatedRequest;
     }
 
     private function validateNewItemRequest(Request $itemData): array
     {
         $validatedRequest = $itemData->validate([
-            'itemCategory'      => ['required', 'numeric', 'exists:culture_categories,id'],
-            'itemName'          => ['required', 'string'],
-            'itemAttr.*'        => ['nullable', 'string'],
-            'itemTags.*'        => ['nullable', 'string'],
-            'itemDesc'          => ['required', 'string'],
-            'itemReview'        => ['nullable', 'string'],
-            'itemThumbnail'     => ['nullable', 'file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
-            'itemImages.*'      => ['nullable', 'file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
-            'itemId'            => ['numeric', 'exists:culture_items,id'],
-            'noImages'          => ['filled', Rule::in(['true'])]
+            'itemCategory' => ['required', 'numeric', 'exists:culture_categories,id'],
+            'itemName' => ['required', 'string'],
+            'itemAttr.*' => ['nullable', 'string'],
+            'itemTags.*' => ['nullable', 'string'],
+            'itemDesc' => ['required', 'string'],
+            'itemReview' => ['nullable', 'string'],
+            'itemThumbnail' => ['nullable', 'file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
+            'itemImages.*' => ['nullable', 'file', 'image', 'max:10000', 'mimes:jpeg,png,jpg,gif,svg'],
+            'itemId' => ['numeric', 'exists:culture_items,id'],
+            'noImages' => ['filled', Rule::in(['true'])],
         ]);
+
         return $validatedRequest;
     }
 
@@ -254,10 +253,10 @@ class CultureController extends Controller
     {
         $newCategory = new cultureCategory();
 
-        $newCategory->name          = $data['categoryName'];
-        $newCategory->name_slug     = Str::slug($data['categoryName']);
-        $newCategory->attributes    = json_encode($data['categoryAttr']);
-        $newCategory->user_id       = Auth::id();
+        $newCategory->name = $data['categoryName'];
+        $newCategory->name_slug = Str::slug($data['categoryName']);
+        $newCategory->attributes = json_encode($data['categoryAttr']);
+        $newCategory->user_id = Auth::id();
 
         return $newCategory;
     }
@@ -268,13 +267,13 @@ class CultureController extends Controller
 
         $newItem->category_id = intVal($data['itemCategory']);
 
-        $newItem->name          = $data['itemName'];
-        $newItem->name_slug     = Str::slug($data['itemName']);
+        $newItem->name = $data['itemName'];
+        $newItem->name_slug = Str::slug($data['itemName']);
 
         $newItem->description = $data['itemDesc'];
 
         if (isset($data['itemAttr'])) {
-            $newItem->attributes    = json_encode($data['itemAttr']);
+            $newItem->attributes = json_encode($data['itemAttr']);
         }
 
         if (isset($data['itemThumbnail'])) {
@@ -299,10 +298,10 @@ class CultureController extends Controller
         $existingCategory = cultureCategory::find($data['categoryId']);
 
         if ($existingCategory) {
-            $existingCategory->name          = $data['categoryName'];
-            $existingCategory->name_slug     = Str::slug($data['categoryName']);
-            $existingCategory->attributes    = json_encode($data['categoryAttr']);
-            $existingCategory->user_id       = Auth::id();
+            $existingCategory->name = $data['categoryName'];
+            $existingCategory->name_slug = Str::slug($data['categoryName']);
+            $existingCategory->attributes = json_encode($data['categoryAttr']);
+            $existingCategory->user_id = Auth::id();
 
             return $existingCategory;
         }
@@ -314,15 +313,15 @@ class CultureController extends Controller
 
         $item->category_id = intVal($data['itemCategory']);
 
-        $item->name          = $data['itemName'];
-        $item->name_slug     = Str::slug($data['itemName']);
+        $item->name = $data['itemName'];
+        $item->name_slug = Str::slug($data['itemName']);
 
         $item->description = $data['itemDesc'];
 
         if (isset($data['itemAttr'])) {
-            $item->attributes    = json_encode($data['itemAttr']);
+            $item->attributes = json_encode($data['itemAttr']);
         } else {
-            $item->attributes    = null;
+            $item->attributes = null;
         }
 
         if (isset($data['itemThumbnail'])) {
@@ -364,12 +363,13 @@ class CultureController extends Controller
 
     private function handleImages(array $images): string
     {
-        $pictures_json = array();
+        $pictures_json = [];
         foreach ($images as $picture) {
             $imageName = hash_file('haval160,4', $picture->getPathname()) . '.' . $picture->getClientOriginalExtension();
             $picture->move(public_path('img/culture-pictures'), $imageName);
             $pictures_json[] = $imageName;
         }
+
         return json_encode($pictures_json);
     }
 }

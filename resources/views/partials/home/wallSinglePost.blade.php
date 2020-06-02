@@ -261,6 +261,17 @@
                 @include('partials.home.wallComments')
             </output>
         </div>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Wall Single Ad -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-2738699172205892"
+            data-ad-slot="6487812418"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
         <hr>
     </div>
 @endif

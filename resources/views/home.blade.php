@@ -101,6 +101,7 @@
 @endpush
 
 @push('scripts')
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
     var badFileType             =  "{{__('chat.badFileType')}}";
     var deleteImages            =  "{{__('activityWall.deleteImages')}}";

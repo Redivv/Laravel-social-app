@@ -129,6 +129,18 @@
             </form>
             <output class="commentsFeed"  id="feed-{{$post->id}}"></output>
         </div>
+        @if (($loop->index + 4) % 4 === 0 )
+            <!-- Feed Ads -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-2738699172205892"
+                data-ad-slot="4675751883"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        @endif
         <hr>
     </div>
 @endforeach

@@ -26,7 +26,7 @@
             <div id="advancedSearch" class="form-group collapse row">
                 <div class="advancedTags col-md-6 col-sm-12 tagSearch">
                     <div class="input-group">
-                        <input type="text" id="searchTags" class="form-control" name="itemTags[]" placeholder="{{__('culture.searchTags')}}" aria-label="Tag Name" aria-describedby="tag search button">
+                        <input type="text" id="searchTags" class="form-control" placeholder="{{__('culture.searchTags')}}" aria-label="Tag Name" aria-describedby="tag search button">
                         <div class="input-group-append">
                             <button class="btn tagsBtn" type="button">
                                 {{__('searcher.add')}}
@@ -162,6 +162,17 @@
                 </div>
             </section>
         @endif
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Culture MainAd -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-2738699172205892"
+            data-ad-slot="4655570588"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 @endsection
 

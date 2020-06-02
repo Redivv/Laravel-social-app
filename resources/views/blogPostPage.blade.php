@@ -64,6 +64,17 @@
                     <i class="fas fa-fire likeIcon"></i>
                     <span class="likesAmount @if($post->likeCount == 0) d-none @endif">{{$post->likeCount}}</span>
                 </button>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- BlogPost Ad -->
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-2738699172205892"
+                    data-ad-slot="2990247070"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
                 <hr>
                 <div class="commentsBox">
                     <header>
